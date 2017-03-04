@@ -35,10 +35,12 @@ namespace 软件系统客户端模版
         {
             label_status.Visible = false;
 
-            UserClient.JsonSettings.FileSavePath = Application.StartupPath + @"\settings.txt";
+            UserClient.JsonSettings.FileSavePath = Application.StartupPath + @"\JsonSettings.txt";
             UserClient.JsonSettings.LoadSettings();//根据实际实际情况选中解密算法，默认采用DES加密解密算法
 
             label_version.Text = "版本：" + UserClient.CurrentVersion.ToString();
+            label2.Text = CommonLibrary.Resource.StringResouce.SoftName;
+            label_copyright.Text = $"本软件著作权归{CommonLibrary.Resource.StringResouce.SoftCopyRight}所有";
         }
 
         private void FormLogin_Shown(object sender, EventArgs e)

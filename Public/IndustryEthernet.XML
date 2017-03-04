@@ -693,6 +693,12 @@
             </summary>
             <param name="str"></param>
         </member>
+        <member name="M:IndustryEthernet.Net_Socket_Server.SendAllClients(System.Byte[])">
+            <summary>
+            服务端用于发送所有数据到所有的客户端
+            </summary>
+            <param name="data">需要群发客户端的字节数据</param>
+        </member>
         <member name="F:IndustryEthernet.Net_Socket_Server.LogReacord">
             <summary>
             日志存储类，用来存储日志信息

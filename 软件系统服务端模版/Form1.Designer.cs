@@ -42,6 +42,7 @@
             this.维护切换ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.消息发送ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.一键断开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.账户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.版本号说明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +53,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.账户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -117,30 +117,37 @@
             // 版本控制ToolStripMenuItem
             // 
             this.版本控制ToolStripMenuItem.Name = "版本控制ToolStripMenuItem";
-            this.版本控制ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.版本控制ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.版本控制ToolStripMenuItem.Text = "版本控制";
             this.版本控制ToolStripMenuItem.Click += new System.EventHandler(this.版本控制ToolStripMenuItem_Click);
             // 
             // 维护切换ToolStripMenuItem
             // 
             this.维护切换ToolStripMenuItem.Name = "维护切换ToolStripMenuItem";
-            this.维护切换ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.维护切换ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.维护切换ToolStripMenuItem.Text = "维护切换";
             this.维护切换ToolStripMenuItem.Click += new System.EventHandler(this.维护切换ToolStripMenuItem_Click);
             // 
             // 消息发送ToolStripMenuItem
             // 
             this.消息发送ToolStripMenuItem.Name = "消息发送ToolStripMenuItem";
-            this.消息发送ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.消息发送ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.消息发送ToolStripMenuItem.Text = "消息发送";
             this.消息发送ToolStripMenuItem.Click += new System.EventHandler(this.消息发送ToolStripMenuItem_Click);
             // 
             // 一键断开ToolStripMenuItem
             // 
             this.一键断开ToolStripMenuItem.Name = "一键断开ToolStripMenuItem";
-            this.一键断开ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.一键断开ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.一键断开ToolStripMenuItem.Text = "一键断开";
             this.一键断开ToolStripMenuItem.Click += new System.EventHandler(this.一键断开ToolStripMenuItem_Click);
+            // 
+            // 账户管理ToolStripMenuItem
+            // 
+            this.账户管理ToolStripMenuItem.Name = "账户管理ToolStripMenuItem";
+            this.账户管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.账户管理ToolStripMenuItem.Text = "账户管理";
+            this.账户管理ToolStripMenuItem.Click += new System.EventHandler(this.账户管理ToolStripMenuItem_Click);
             // 
             // 关于ToolStripMenuItem
             // 
@@ -233,15 +240,9 @@
             this.listBox1.ItemHeight = 17;
             this.listBox1.Location = new System.Drawing.Point(10, 60);
             this.listBox1.Name = "listBox1";
+            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.listBox1.Size = new System.Drawing.Size(216, 344);
             this.listBox1.TabIndex = 8;
-            // 
-            // 账户管理ToolStripMenuItem
-            // 
-            this.账户管理ToolStripMenuItem.Name = "账户管理ToolStripMenuItem";
-            this.账户管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
-            this.账户管理ToolStripMenuItem.Text = "账户管理";
-            this.账户管理ToolStripMenuItem.Click += new System.EventHandler(this.账户管理ToolStripMenuItem_Click);
             // 
             // Form1
             // 

@@ -130,12 +130,17 @@ namespace 软件系统服务端模版
             fm.Dispose();
             MaintenanceInitialization();
         }
+        
 
         private void 消息发送ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //测试发送字节数据
+            //net_socket_server.SendAllClients(BitConverter.GetBytes(12345678));
             //将消息群发给所有的客户端，并使用消息弹窗的方式显示
-            FormInputAndAction fiaa = new FormInputAndAction(m =>{
-                  net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗消息 + m); return true;});
+            FormInputAndAction fiaa = new FormInputAndAction(m =>
+            {
+                net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗消息 + m); return true;
+            });
             fiaa.ShowDialog();
             fiaa.Dispose();
         }
@@ -149,10 +154,8 @@ namespace 软件系统服务端模版
         private void 关于软件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BasicFramework.FormAbout fm = new BasicFramework.FormAbout(
-                "您的软件名称", 
-                UserServer.ServerSettings.SystemVersion, 
-                2017, 
-                "某某某");
+                CommonLibrary.Resource.StringResouce.SoftName, UserServer.ServerSettings.SystemVersion, 
+                2017, CommonLibrary.Resource.StringResouce.SoftCopyRight);
             fm.ShowDialog();
             fm.Dispose();
         }
@@ -360,6 +363,11 @@ namespace 软件系统服务端模版
                 net_soft_update_Server.log_record.ClearLogText();
                 net_simplify_server.SendMessage(object1, "成功");
             }
+            else if (head_code == CommonHeadCode.SimplifyHeadCode.注册账号)
+            {
+                bool result = UserServer.ServerAccounts.AddNewAccount(object2.Substring(4));
+                net_simplify_server.SendMessage(object1, result ? "1" : "0");
+            }
             else
             {
                 net_simplify_server.SendMessage(object1, object2);
@@ -397,7 +405,8 @@ namespace 软件系统服务端模版
         {
             //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字符串都会到此处处理
             string head_code = object2.Substring(0, 4);
-
+            byte[] result = Convert.FromBase64String(object2.Substring(4));
+            
         }
 
         private void Net_socket_server_AcceptByte(HuTcpState object1, byte[] object2)
@@ -447,6 +456,6 @@ namespace 软件系统服务端模版
 
         #endregion
 
-        
+        private Log_Record log = new Log_Record();
     }
 }

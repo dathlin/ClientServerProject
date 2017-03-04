@@ -53,18 +53,12 @@ namespace 软件系统服务端模版
     public class UserAccountEx : UserAccount
     {
         /// <summary>
-        /// 示例，扩展一个手机号的属性
+        /// 用户的年龄
         /// </summary>
-        public string Phone { get; set; } = "";
-        public override void DeepCopy<T>(T account)
-        {
-            base.DeepCopy<T>(account);
-            UserAccountEx accountex = account as UserAccountEx;
-            if (accountex != null)
-            {
-                //所有新增的属性在此进行复制
-                accountex.Phone = Phone;
-            }
-        }
+        public int Age { get; set; } = 0;
+        /// <summary>
+        /// 用户的家庭住址
+        /// </summary>
+        public string HomeAddress { get; set; } = "";
     }
 }

@@ -83,7 +83,7 @@ namespace 软件系统客户端模版
             {
                 UserClient.JsonSettings.IsNewVersionRunning = false;
                 UserClient.JsonSettings.SaveSettings();
-                日志查看ToolStripMenuItem_Click(null, new EventArgs());
+                更新日志ToolStripMenuItem_Click(null, new EventArgs());
             }
 
             //根据权限使能菜单
@@ -127,7 +127,8 @@ namespace 软件系统客户端模版
 
         private void 关于本软件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormAbout fa = new FormAbout("软件系统", UserClient.CurrentVersion, 2017, "张三");
+            FormAbout fa = new FormAbout(Resource.StringResouce.SoftName, 
+                UserClient.CurrentVersion, 2017, Resource.StringResouce.SoftCopyRight);
             fa.ShowDialog();
             fa.Dispose();
         }
@@ -165,6 +166,14 @@ namespace 软件系统客户端模版
             FormLog flg = new FormLog(net_simplify_client);
             flg.ShowDialog();
             flg.Dispose();
+        }
+
+        private void 注册账号ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormRegisterAccount fra = new FormRegisterAccount(net_simplify_client))
+            {
+                fra.ShowDialog();
+            }
         }
 
         private void 账户管理ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -249,6 +258,10 @@ namespace 软件系统客户端模版
         private void Net_socket_client_AcceptByte(HuTcpState object1, byte[] object2)
         {
             //接收到服务器发来的字节数据
+            if (IsHandleCreated) Invoke(new Action(() =>
+            {
+                MessageBox.Show(BitConverter.ToInt32(object2, 0).ToString());
+            }));
         }
 
         private void Net_socket_client_LoginSuccess()
@@ -285,8 +298,7 @@ namespace 软件系统客户端模版
 
 
         #region 同步网络客户端类
-
-
+        
         //=========================================================================================
         //
         //    在本界面任意地方调用net_simplify_client.ReadFromServer("[指令头]")即可获取服务器数据
@@ -300,8 +312,8 @@ namespace 软件系统客户端模版
         private Net_Simplify_Client net_simplify_client = new Net_Simplify_Client(
             new System.Net.IPEndPoint(System.Net.IPAddress.Parse(UserClient.ServerIp), 
                 CommonLibrary.CommonLibrary.Port_Second_Net));
-
-
         #endregion
+
+        
     }
 }

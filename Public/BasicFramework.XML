@@ -246,10 +246,127 @@
             存储数据到文件
             </summary>
         </member>
+        <member name="T:BasicFramework.SoftMail">
+            <summary>
+            软件的邮箱类，用于发送邮箱数据，连续发送10次失败则禁止发送
+            </summary>
+        </member>
+        <member name="P:BasicFramework.SoftMail.SoftMailSendFailedCount">
+            <summary>
+            系统连续发送失败的次数，为了不影响系统，连续三次失败就禁止发送
+            </summary>
+        </member>
+        <member name="F:BasicFramework.SoftMail.MailSystem163">
+            <summary>
+            系统提供一个默认的163邮箱发送账号，只要更改接收地址即可发送服务，可能会被拦截
+            </summary>
+        </member>
+        <member name="F:BasicFramework.SoftMail.MailSystemQQ">
+            <summary>
+            系统提供一个默认的QQ邮箱发送账号，只要更改接收地址即可发送服务，发送成功概率比较高
+            </summary>
+        </member>
+        <member name="M:BasicFramework.SoftMail.#ctor(System.Action{System.Net.Mail.SmtpClient},System.String,System.String)">
+            <summary>
+            实例化一个邮箱发送类，需要指定初始化信息
+            </summary>
+            <param name="mailIni">初始化的方法</param>
+            <param name="addr_From">发送地址，应该和账户匹配</param>
+            <param name="addr_to">邮件接收地址</param>
+        </member>
+        <member name="P:BasicFramework.SoftMail.smtpClient">
+            <summary>
+            系统的邮件发送客户端
+            </summary>
+        </member>
+        <member name="P:BasicFramework.SoftMail.MailFromAddress">
+            <summary>
+            发送邮件的地址
+            </summary>
+        </member>
+        <member name="P:BasicFramework.SoftMail.MailSendAddress">
+            <summary>
+            邮件发送的地址
+            </summary>
+        </member>
+        <member name="M:BasicFramework.SoftMail.SendMail(System.Exception)">
+            <summary>
+            发生BUG至邮件地址，需要提前指定发送地址，否则失败
+            </summary>
+            <param name="ex">异常的BUG，同样试用兼容类型</param>
+            <returns>是否发送成功，内容不正确会被视为垃圾邮件</returns>
+        </member>
+        <member name="M:BasicFramework.SoftMail.SendMail(System.String,System.String)">
+            <summary>
+            发送邮件至地址，需要提前指定发送地址，否则失败
+            </summary>
+            <param name="subject">邮件主题</param>
+            <param name="body">邮件内容</param>
+            <returns>是否发送成功，内容不正确会被视为垃圾邮件</returns>
+        </member>
+        <member name="M:BasicFramework.SoftMail.SendMail(System.Exception,System.String)">
+            <summary>
+            发生BUG至邮件地址，需要提前指定发送地址，否则失败
+            </summary>
+            <param name="ex">异常的BUG，同样试用兼容类型</param>
+            <param name="addtion">额外信息</param>
+            <returns>是否发送成功，内容不正确会被视为垃圾邮件</returns>
+        </member>
+        <member name="M:BasicFramework.SoftMail.SendMail(System.String,System.String,System.String)">
+            <summary>
+            发送邮件的方法，默认发送别名，优先级，是否HTML
+            </summary>
+            <param name="addr_to">接收地址</param>
+            <param name="subject">邮件主题</param>
+            <param name="body">邮件内容</param>
+            <returns>是否发送成功，内容不正确会被视为垃圾邮件</returns>
+        </member>
+        <member name="M:BasicFramework.SoftMail.SendMail(System.String,System.String,System.String[],System.String,System.String,System.Net.Mail.MailPriority,System.Boolean)">
+            <summary>
+            发送邮件的方法，需要提供完整的参数信息
+            </summary>
+            <param name="addr_from">发送地址</param>
+            <param name="name">发送别名</param>
+            <param name="addr_to">接收地址</param>
+            <param name="subject">邮件主题</param>
+            <param name="body">邮件内容</param>
+            <param name="priority">优先级</param>
+            <param name="isHtml">邮件内容是否是HTML语言</param>
+            <returns>发生是否成功，内容不正确会被视为垃圾邮件</returns>
+        </member>
+        <member name="T:BasicFramework.SoftPaint">
+            <summary>
+            静态类，包含了几个常用的画图方法，获取字符串，绘制小三角等
+            </summary>
+        </member>
         <member name="T:BasicFramework.SoftSqlOperate">
             <summary>
             数据库操作的相关类，包含了常用的方法，避免大量的重复代码
             </summary>
+        </member>
+        <member name="M:BasicFramework.SoftSqlOperate.ExecuteSql(System.String,System.String)">
+            <summary>
+            普通的执行SQL语句，并返回影响行数，该方法应该放到try-catch代码块中
+            </summary>
+            <param name="conStr">数据库的连接字符串</param>
+            <param name="cmdStr">sql语句，适合插入，更新，删除</param>
+            <returns>返回受影响的行数</returns>
+        </member>
+        <member name="M:BasicFramework.SoftSqlOperate.ExecuteSelectTable(System.String,System.String)">
+            <summary>
+            选择数据表的执行SQL语句，并返回影响行数，该方法应该放到try-catch代码块中
+            </summary>
+            <param name="conStr">数据库的连接字符串</param>
+            <param name="cmdStr">sql语句，适合插入，更新，删除</param>
+            <returns>结果数据表</returns>
+        </member>
+        <member name="M:BasicFramework.SoftSqlOperate.ExecuteSelectEnumerable``1(System.String,System.String)">
+            <summary>
+            选择指定类型数据集合执行SQL语句，并返回影响行数，该方法应该放到try-catch代码块中
+            </summary>
+            <param name="conStr">数据库的连接字符串</param>
+            <param name="cmdStr">sql语句，适合插入，更新，删除</param>
+            <returns>结果数据集合</returns>
         </member>
         <member name="T:BasicFramework.ISqlDataType">
             <summary>
@@ -261,6 +378,16 @@
             根据sdr对象初始化数据的方法
             </summary>
             <param name="sdr"></param>
+        </member>
+        <member name="T:BasicFramework.SoftUserControls">
+            <summary>
+            一个用来管理多个用户控件显示的类
+            </summary>
+        </member>
+        <member name="P:BasicFramework.SoftUserControls.CurrentControl">
+            <summary>
+            当前的窗口
+            </summary>
         </member>
         <member name="T:BasicFramework.UserClock">
             <summary>
@@ -682,6 +809,13 @@
             </summary>
             <param name="ex"></param>
         </member>
+        <member name="M:BasicFramework.SoftBasic.GetExceptionMessage(System.Exception)">
+            <summary>
+            获取一个异常的完整错误信息
+            </summary>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
         <member name="F:BasicFramework.SoftBasic.FrameworkVersion">
             <summary>
             本框架的版本号
@@ -830,6 +964,11 @@
             用户客户端存储本地JSON数据的类，包含了所有需要存储的信息
             </summary>
         </member>
+        <member name="M:BasicFramework.JsonSettings.#ctor">
+            <summary>
+            实例化一个设置的对象
+            </summary>
+        </member>
         <member name="P:BasicFramework.JsonSettings.IsNewVersionRunning">
             <summary>
             指示系统是否是更新后第一次运行
@@ -850,14 +989,19 @@
             参数文件的存储路径
             </summary>
         </member>
+        <member name="P:BasicFramework.JsonSettings.SystemInfo">
+            <summary>
+            当前计算机的机器码，用来判定参数是否是正确的
+            </summary>
+        </member>
         <member name="M:BasicFramework.JsonSettings.LoadSettings">
             <summary>
-            加载系统的设置信息，程序刚运行时就应该加载数据
+            使用默认的加密算法加载系统的设置信息，程序刚运行时就应该加载数据
             </summary>
         </member>
         <member name="M:BasicFramework.JsonSettings.LoadSettings(System.Converter{System.String,System.String})">
             <summary>
-            使用自定义的加密规则加载系统的设置信息，程序刚运行时就应该加载数据
+            使用自定义的解密规则加载系统的设置信息，程序刚运行时就应该加载数据
             </summary>
         </member>
         <member name="M:BasicFramework.JsonSettings.SaveSettings">
@@ -925,6 +1069,11 @@
             该用户上次登录的IP地址
             </summary>
         </member>
+        <member name="P:BasicFramework.UserAccount.LoginFailedCount">
+            <summary>
+            该用户连续登录失败的计数，可以用来连续五次失败禁止账户登录
+            </summary>
+        </member>
         <member name="P:BasicFramework.UserAccount.UserNameText">
             <summary>
             用于存储的名称
@@ -935,11 +1084,24 @@
             用于存储的名称
             </summary>
         </member>
-        <member name="M:BasicFramework.UserAccount.DeepCopy``1(``0)">
+        <member name="M:BasicFramework.UserAccount.DeepCopy``1">
             <summary>
-            深度拷贝当前账户的信息
+            深度拷贝当前的账户信息
             </summary>
-            <param name="account"></param>
+            <typeparam name="T">返回的类型，应该为继承后的类型</typeparam>
+            <returns>新的对象</returns>
+        </member>
+        <member name="M:BasicFramework.UserAccount.ToString">
+            <summary>
+            获取账号的用户名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BasicFramework.UserAccount.ToJsonString">
+            <summary>
+            获取本账号的JSON字符串，用于在网络中数据传输
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:BasicFramework.AccountGrade">
             <summary>
@@ -972,6 +1134,12 @@
             </summary>
             <param name="grade">等级数据</param>
             <returns>等级描述</returns>
+        </member>
+        <member name="M:BasicFramework.AccountGrade.GetDescription">
+            <summary>
+            获取权限的数组
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:BasicFramework.AccountGrade.GetDescription(System.Converter{System.Int32,System.String},System.Int32)">
             <summary>
@@ -1032,6 +1200,26 @@
             <param name="code">需要驗證的密碼</param>
             <param name="ipAddress">登录的ip地址</param>
             <returns>驗證結果對象</returns>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.AddNewAccount(System.String)">
+            <summary>
+            新增一个账户，如果账户名称已经存在，则返回False，注册成功返回True
+            </summary>
+            <param name="json_account">账户对象的JSON表示方式</param>
+            <returns>成功True，失败False</returns>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.AddNewAccount(`0)">
+            <summary>
+            新增一个账户，如果账户名称已经存在，则返回False，注册成功返回True
+            </summary>
+            <param name="account">账户对象</param>
+            <returns>成功True，失败False</returns>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.DeleteAccount(System.String)">
+            <summary>
+            删除一个账户信息，
+            </summary>
+            <param name="name"></param>
         </member>
         <member name="M:BasicFramework.ServerAccounts`1.CheckAccountJson(System.String,System.String,System.String)">
             <summary>
@@ -1146,6 +1334,12 @@
             </summary>
             <param name="encrypt">数据加密的方法，必须用户指定</param>
             <returns>是否成功授权</returns>
+        </member>
+        <member name="M:BasicFramework.SoftAuthorize.GetInfo">
+            <summary>
+            获取本计算机唯一的机器码
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:BasicFramework.MD5Code">
             <summary>

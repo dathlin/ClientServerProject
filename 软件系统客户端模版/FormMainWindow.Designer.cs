@@ -65,6 +65,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label_Announcement = new System.Windows.Forms.Label();
+            this.注册账号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -143,7 +144,8 @@
             this.更改公告ToolStripMenuItem,
             this.日志查看ToolStripMenuItem,
             this.账户管理ToolStripMenuItem,
-            this.远程更新ToolStripMenuItem});
+            this.远程更新ToolStripMenuItem,
+            this.注册账号ToolStripMenuItem});
             this.管理员ToolStripMenuItem.Name = "管理员ToolStripMenuItem";
             this.管理员ToolStripMenuItem.Size = new System.Drawing.Size(84, 31);
             this.管理员ToolStripMenuItem.Text = "管理员";
@@ -285,6 +287,7 @@
             this.listBox1.ItemHeight = 17;
             this.listBox1.Location = new System.Drawing.Point(11, 166);
             this.listBox1.Name = "listBox1";
+            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.listBox1.Size = new System.Drawing.Size(200, 225);
             this.listBox1.TabIndex = 12;
             // 
@@ -409,6 +412,13 @@
             this.label_Announcement.Text = "[公告]";
             this.label_Announcement.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // 注册账号ToolStripMenuItem
+            // 
+            this.注册账号ToolStripMenuItem.Name = "注册账号ToolStripMenuItem";
+            this.注册账号ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.注册账号ToolStripMenuItem.Text = "注册账号";
+            this.注册账号ToolStripMenuItem.Click += new System.EventHandler(this.注册账号ToolStripMenuItem_Click);
+            // 
             // FormMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -476,6 +486,7 @@
         private System.Windows.Forms.Label label_Announcement;
         private System.Windows.Forms.Label label_factory;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ToolStripMenuItem 注册账号ToolStripMenuItem;
     }
 }
 
