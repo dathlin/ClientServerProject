@@ -190,8 +190,19 @@ namespace 软件系统客户端模版
 
         private void 远程更新ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //暂不支持，期待下个版本
-            MessageBox.Show("暂不支持该特性");
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Multiselect = true;
+                if(ofd.ShowDialog()==DialogResult.OK)
+                {
+                    using (FormFileOperate fUpload = new FormFileOperate(new System.Net.IPEndPoint(
+                        System.Net.IPAddress.Parse(UserClient.ServerIp),CommonLibrary.CommonLibrary.Port_Update_Remote),
+                        ofd.FileNames, "", "", ""))
+                    {
+                        fUpload.ShowDialog();
+                    }
+                }
+            }
         }
 
         #endregion
