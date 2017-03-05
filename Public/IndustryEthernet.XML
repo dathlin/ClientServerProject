@@ -183,6 +183,11 @@
             网络访问中的超时时间，单位：毫秒，默认值2200
             </summary>
         </member>
+        <member name="P:IndustryEthernet.SocketBase.KeyToken">
+            <summary>
+            该网络通信验证类的身份令牌
+            </summary>
+        </member>
         <member name="M:IndustryEthernet.SocketBase.ThreadPoolCheckConnect(System.Object)">
             <summary>
             检查超时的子线程
@@ -308,16 +313,6 @@
         <member name="T:IndustryEthernet.Hu_Net_Protocol">
             <summary>
             服务器客户端约定的暗号协议
-            </summary>
-        </member>
-        <member name="F:IndustryEthernet.Hu_Net_Protocol.HU_APP_ID">
-            <summary>
-            异步通信唯一识别的暗号代码为16个Byte字符组
-            </summary>
-        </member>
-        <member name="F:IndustryEthernet.Hu_Net_Protocol.HU_Simplify_Net">
-            <summary>
-            同步通信中用于识别的唯一的暗号代码
             </summary>
         </member>
         <member name="P:IndustryEthernet.Hu_Net_Protocol.HU_Protocol_Check_Secends">

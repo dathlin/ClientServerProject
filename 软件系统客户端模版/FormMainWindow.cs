@@ -119,7 +119,7 @@ namespace 软件系统客户端模版
                 p => {
                     JObject json = new JObject();json.Add(UserAccount.UserNameText, UserClient.UserAccount.UserName);
                     json.Add(UserAccount.PasswordText, p);
-                    return net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.密码修改 + json.ToString()).IsSuccess;
+                    return UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.密码修改 + json.ToString()).IsSuccess;
                 }, 6, 8);
             fpm.ShowDialog();
             fpm.Dispose();
@@ -155,7 +155,7 @@ namespace 软件系统客户端模版
 
         private void 更改公告ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormInputAndAction fiaa = new FormInputAndAction(str => net_simplify_client.ReadFromServer(
+            FormInputAndAction fiaa = new FormInputAndAction(str => UserClient.Net_simplify_client.ReadFromServer(
                 CommonHeadCode.SimplifyHeadCode.更新公告 + str).IsSuccess,UserClient.Announcement);
             fiaa.ShowDialog();
             fiaa.Dispose();
@@ -163,14 +163,14 @@ namespace 软件系统客户端模版
 
         private void 日志查看ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormLog flg = new FormLog(net_simplify_client);
+            FormLog flg = new FormLog(UserClient.Net_simplify_client);
             flg.ShowDialog();
             flg.Dispose();
         }
 
         private void 注册账号ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FormRegisterAccount fra = new FormRegisterAccount(net_simplify_client))
+            using (FormRegisterAccount fra = new FormRegisterAccount(UserClient.Net_simplify_client))
             {
                 fra.ShowDialog();
             }
@@ -180,10 +180,10 @@ namespace 软件系统客户端模版
         {
             FormAccountManage fam = new FormAccountManage(() =>
             {
-                OperateResultString result = net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户信息);
+                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户信息);
                 if (result.IsSuccess) return result.Content;
                 else return result.ToMessageShowString();
-            },m => net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更细账户信息 + m).IsSuccess);
+            },m => UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更细账户信息 + m).IsSuccess);
             fam.ShowDialog();
             fam.Dispose();
         }
@@ -215,6 +215,7 @@ namespace 软件系统客户端模版
         {
             try
             {
+                net_socket_client.KeyToken = CommonHeadCode.KeyToken;//新增的身份令牌
                 net_socket_client.EndPointServer = new System.Net.IPEndPoint(
                     System.Net.IPAddress.Parse(UserClient.ServerIp),
                     CommonLibrary.CommonLibrary.Port_Main_Net);
@@ -305,24 +306,6 @@ namespace 软件系统客户端模版
             }));
         }
 
-        #endregion
-
-
-        #region 同步网络客户端类
-        
-        //=========================================================================================
-        //
-        //    在本界面任意地方调用net_simplify_client.ReadFromServer("[指令头]")即可获取服务器数据
-        //    处理结果之前先进行判定，具体参照示例
-        //
-        //=========================================================================================
-
-        /// <summary>
-        /// 用于界面请求访问服务器数据所用
-        /// </summary>
-        private Net_Simplify_Client net_simplify_client = new Net_Simplify_Client(
-            new System.Net.IPEndPoint(System.Net.IPAddress.Parse(UserClient.ServerIp), 
-                CommonLibrary.CommonLibrary.Port_Second_Net));
         #endregion
 
         

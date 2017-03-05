@@ -205,7 +205,6 @@ namespace 软件系统服务端模版
                 //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
                 //只放置exe和dll组件，必须放置：软件自动更新.exe
                 net_soft_update_Server.FileUpdatePath = @"C:\ClientFiles";
-                //根据指定端口启动服务，需要自己指定，本处为示例
                 net_soft_update_Server.AutoUpdateEngineStart(CommonLibrary.CommonLibrary.Port_Update_Net);
             }
             catch (Exception ex)
@@ -230,7 +229,6 @@ namespace 软件系统服务端模版
             {
                 net_file_update.FilesPath = @"C:\ClientFiles";//服务器客户端需要更新的路径，与上述一致
                 net_file_update.log_record.log_save_path = Application.StartupPath + @"\update_file_log.txt";
-                //需要指定启动端口，本次为示例
                 net_file_update.Server_Start(CommonLibrary.CommonLibrary.Port_Update_Remote);
             }
             catch (Exception ex)
@@ -252,10 +250,10 @@ namespace 软件系统服务端模版
         {
             try
             {
+                net_simplify_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
                 net_simplify_server.log_record.log_save_path = Application.StartupPath + @"\simplify_log.txt";
                 net_simplify_server.ReceiveStringEvent += Net_simplify_server_ReceiveStringEvent;
                 net_simplify_server.ReceivedBytesEvent += Net_simplify_server_ReceivedBytesEvent;
-                //应该指定特殊的端口，此处为示例
                 net_simplify_server.Server_Start(CommonLibrary.CommonLibrary.Port_Second_Net);
             }
             catch (Exception ex)
@@ -385,6 +383,7 @@ namespace 软件系统服务端模版
         {
             try
             {
+                net_socket_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
                 net_socket_server.LogReacord.log_save_path = Application.StartupPath + @"\net_log.txt";
                 net_socket_server.IsSaveLogClientLineChange = true;
                 net_socket_server.ClientOnline += Net_socket_server_ClientOnline;
@@ -392,7 +391,6 @@ namespace 软件系统服务端模版
                 net_socket_server.MessageAlerts += Net_socket_server_MessageAlerts;
                 net_socket_server.AcceptByte += Net_socket_server_AcceptByte;
                 net_socket_server.AcceptString += Net_socket_server_AcceptString;
-                //测试端口，应根据实际使用时指定
                 net_socket_server.SocketStart(CommonLibrary.CommonLibrary.Port_Main_Net);
             }
             catch (Exception ex)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using IndustryEthernet;
 
 
 namespace 软件系统客户端模版
@@ -55,5 +56,16 @@ namespace 软件系统客户端模版
         /// 当前系统的登录账户
         /// </summary>
         public static BasicFramework.UserAccount UserAccount { get; set; } = new BasicFramework.UserAccount();
+
+
+        /// <summary>
+        /// 用于访问服务器数据的网络对象类，必须修改这个端口参数，否则运行失败
+        /// </summary>
+        public static Net_Simplify_Client Net_simplify_client = new Net_Simplify_Client(
+            new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
+                CommonLibrary.CommonLibrary.Port_Second_Net))
+        {
+            KeyToken = CommonLibrary.CommonHeadCode.KeyToken,
+        };
     }
 }

@@ -11,6 +11,12 @@ namespace CommonLibrary
     public class CommonHeadCode
     {
         /// <summary>
+        /// 用于同步和异步的网络的身份令牌，提升安全性
+        /// </summary>
+        public static Guid KeyToken { get; set; } = new Guid("1275BB9A-14B2-4A96-9673-B0AF0463D474");
+
+
+        /// <summary>
         /// 同步通信的头说明，以字母A开头
         /// </summary>
         public class SimplifyHeadCode

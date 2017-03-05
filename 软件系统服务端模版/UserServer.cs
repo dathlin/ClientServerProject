@@ -53,10 +53,6 @@ namespace 软件系统服务端模版
     public class UserAccountEx : UserAccount
     {
         /// <summary>
-        /// 账户的设备管理类别
-        /// </summary>
-        public string Group { get; set; } = "";
-        /// <summary>
         /// 用户的年龄
         /// </summary>
         public int Age { get; set; } = 0;

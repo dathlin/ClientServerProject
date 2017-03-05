@@ -127,11 +127,7 @@ namespace 软件系统客户端模版
 
         #region 账户验证的逻辑块
 
-        /// <summary>
-        /// 用于访问服务器数据的网络对象类，必须修改这个端口参数，否则运行失败
-        /// </summary>
-        private Net_Simplify_Client net_simplify_client = new Net_Simplify_Client(
-            new System.Net.IPEndPoint(System.Net.IPAddress.Parse(UserClient.ServerIp), CommonLibrary.CommonLibrary.Port_Second_Net));
+        
 
         /// <summary>
         /// 用于验证的后台线程
@@ -169,7 +165,7 @@ namespace 软件系统客户端模版
             Thread.Sleep(200);
 
             //请求指令头数据，该数据需要更具实际情况更改
-            OperateResultString result = net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.维护检查);
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.维护检查);
             if(result.IsSuccess)
             {
                 //例如返回结果为1说明允许登录，0则说明服务器处于维护中，并将信息显示
@@ -195,7 +191,7 @@ namespace 软件系统客户端模版
             //延时
             Thread.Sleep(200);
 
-            result = net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.更新检查);
+            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.更新检查);
             if (result.IsSuccess)
             {
                 //服务器应该返回服务器的版本号
@@ -234,7 +230,7 @@ namespace 软件系统客户端模版
             json.Add(BasicFramework.UserAccount.UserNameText, new Newtonsoft.Json.Linq.JValue(textBox_userName.Text));
             json.Add(BasicFramework.UserAccount.PasswordText, new Newtonsoft.Json.Linq.JValue(textBox_password.Text));
 
-            result = net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.账户检查+json.ToString());
+            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.账户检查+json.ToString());
             if (result.IsSuccess)
             {
                 //服务器应该返回账户的信息
@@ -273,7 +269,7 @@ namespace 软件系统客户端模版
             Thread.Sleep(200);
 
 
-            result = net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.参数下载);
+            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.参数下载);
             if(result.IsSuccess)
             {
                 //服务器返回初始化的数据，此处进行数据的提取，有可能包含了多个数据
