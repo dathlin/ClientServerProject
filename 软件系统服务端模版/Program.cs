@@ -30,7 +30,8 @@ namespace 软件系统服务端模版
                     return;
                 }
             }
-
+            //设置应用程序的线程池数量，防止服务器端卡死状态，根据内存及CPU进行更改
+            System.Threading.ThreadPool.SetMaxThreads(1000, 256);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
