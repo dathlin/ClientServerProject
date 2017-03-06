@@ -49,6 +49,7 @@ namespace CommonLibrary
             public static string 所有客户端在线信息 { get; } = "H001";
             public static string 关闭所有客户端 { get; } = "H002";
             public static string 弹窗消息 { get; } = "H003";
+            public static string 时间推送 { get; } = "H004";
         }
 
 

@@ -59,6 +59,10 @@ namespace 软件系统客户端模版
             label_times.Text = UserClient.UserAccount.LoginFrequency.ToString();
             label_address.Text = UserClient.UserAccount.LastLoginIpAddress;
 
+            //状态栏设置
+            toolStripStatusLabel_time.Alignment = ToolStripItemAlignment.Right;
+            statusStrip1.LayoutStyle = ToolStripLayoutStyle.StackWithOverflow;
+
             //绑定事件，仅执行一次，不能放到show方法里
             net_socket_client.MessageAlerts += Net_socket_client_MessageAlerts;
             net_socket_client.LoginFailed += Net_socket_client_LoginFailed;
@@ -254,16 +258,25 @@ namespace 软件系统客户端模版
                     Close();
                 }));
             }
-            else if(head_code==CommonHeadCode.SimplifyHeadCode.更新公告)
+            else if (head_code == CommonHeadCode.SimplifyHeadCode.更新公告)
             {
                 //此处应用到了同步类的指令头
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
                     UserClient.Announcement = object2.Substring(4);
-                    label_Announcement.Text= object2.Substring(4);
+                    label_Announcement.Text = object2.Substring(4);
                     FormPopup fpp = new FormPopup(object2.Substring(4), Color.DodgerBlue, 10000);
                     fpp.Show();
                 }));
+            }
+            else if (head_code == CommonHeadCode.MultiNetHeadCode.时间推送)
+            {
+                //收到服务器更新时间
+                UserClient.DateTimeServer = Convert.ToDateTime(object2.Substring(4));
+                if (IsHandleCreated) Invoke(new Action(() =>
+                 {
+                     toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm");
+                 }));
             }
         }
 

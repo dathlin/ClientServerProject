@@ -69,7 +69,7 @@ namespace 软件系统服务端模版
             UserServer.ServerSettings.LoadByFile();
             toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
             //加载账户信息
-            UserServer.ServerAccounts.FileSavePath= Application.StartupPath + @"\accounts.txt";
+            UserServer.ServerAccounts.FileSavePath = Application.StartupPath + @"\accounts.txt";
             UserServer.ServerAccounts.LoadByFile();
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -92,8 +92,10 @@ namespace 软件系统服务端模版
         private void Form1_Shown(object sender, EventArgs e)
         {
             IsWindowShow = true;
+            //维护初始化
             MaintenanceInitialization();
-
+            //时间引擎初始化
+            TimeTickInitilization();
             Refresh();
             启动服务器ToolStripMenuItem.PerformClick();
         }
@@ -130,7 +132,7 @@ namespace 软件系统服务端模版
             fm.Dispose();
             MaintenanceInitialization();
         }
-        
+
 
         private void 消息发送ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -154,7 +156,7 @@ namespace 软件系统服务端模版
         private void 关于软件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BasicFramework.FormAbout fm = new BasicFramework.FormAbout(
-                CommonLibrary.Resource.StringResouce.SoftName, UserServer.ServerSettings.SystemVersion, 
+                CommonLibrary.Resource.StringResouce.SoftName, UserServer.ServerSettings.SystemVersion,
                 2017, CommonLibrary.Resource.StringResouce.SoftCopyRight);
             fm.ShowDialog();
             fm.Dispose();
@@ -301,7 +303,7 @@ namespace 软件系统服务端模版
                 Newtonsoft.Json.Linq.JObject json = Newtonsoft.Json.Linq.JObject.Parse(object2.Substring(4));
                 //提取账户，密码
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
-                string password= SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
+                string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
                 net_simplify_server.SendMessage(object1, UserServer.ServerAccounts.CheckAccountJson(
                     name, password, ((System.Net.IPEndPoint)(object1._WorkSocket.RemoteEndPoint)).Address.ToString()));
             }
@@ -334,7 +336,7 @@ namespace 软件系统服务端模版
                 UserServer.ServerAccounts.UpdatePassword(name, password);
                 net_simplify_server.SendMessage(object1, "成功");
             }
-            else if(head_code== CommonHeadCode.SimplifyHeadCode.网络日志查看)
+            else if (head_code == CommonHeadCode.SimplifyHeadCode.网络日志查看)
             {
                 net_simplify_server.SendMessage(object1, net_socket_server.LogReacord.GetLogText());
             }
@@ -404,7 +406,7 @@ namespace 软件系统服务端模版
             //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字符串都会到此处处理
             string head_code = object2.Substring(0, 4);
             byte[] result = Convert.FromBase64String(object2.Substring(4));
-            
+
         }
 
         private void Net_socket_server_AcceptByte(HuTcpState object1, byte[] object2)
@@ -432,6 +434,9 @@ namespace 软件系统服务端模版
 
         private void Net_socket_server_ClientOnline(HuTcpState object1)
         {
+            //上线后回发一条时间推送的数据
+            net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.时间推送 + DateTime.Now.ToString("O"));
+            //触发上下线功能
             Net_socket_clients_change(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" +
                         object1._Login_Alias + " 上线");
         }
@@ -453,6 +458,51 @@ namespace 软件系统服务端模版
         }
 
         #endregion
+
+        #region 后台计数线程
+        //=============================================================================
+        //后台计数的线程
+
+        public void TimeTickInitilization()
+        {
+            toolStripStatusLabel_time.Alignment = ToolStripItemAlignment.Right;
+            statusStrip1.LayoutStyle = ToolStripLayoutStyle.StackWithOverflow;
+            toolStripStatusLabel_time.ForeColor = Color.Purple;//紫色
+
+            Thread thread = new Thread(new ThreadStart(ThreadTimeTick));
+            thread.IsBackground = true;
+            thread.Start();
+        }
+
+        public void ThreadTimeTick()
+        {
+            Thread.Sleep(300);//加一个微小的延时
+            int second = DateTime.Now.Second - 1;
+            Action DTimeShow = delegate
+              {
+                  toolStripStatusLabel_time.Text = DateTime.Now.ToString();
+              };
+
+            while (IsWindowShow)
+            {
+                while (DateTime.Now.Second == second)
+                {
+                    Thread.Sleep(20);
+                }
+                second = DateTime.Now.Second;
+                if (IsWindowShow && IsHandleCreated) Invoke(DTimeShow);
+                //每隔一分钟将时间发送给所有客户端，格式为标准时间
+                if (second == 0)
+                {
+                    net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.时间推送 +
+                        DateTime.Now.ToString("O"));
+                }
+            }
+        }
+
+
+        #endregion
+
 
         private Log_Record log = new Log_Record();
     }

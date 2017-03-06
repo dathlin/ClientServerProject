@@ -53,6 +53,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.toolStripStatusLabel_time = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -62,7 +63,8 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
-            this.toolStripStatusLabel_version});
+            this.toolStripStatusLabel_version,
+            this.toolStripStatusLabel_time});
             this.statusStrip1.Location = new System.Drawing.Point(0, 408);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(758, 22);
@@ -244,6 +246,12 @@
             this.listBox1.Size = new System.Drawing.Size(216, 344);
             this.listBox1.TabIndex = 8;
             // 
+            // toolStripStatusLabel_time
+            // 
+            this.toolStripStatusLabel_time.Name = "toolStripStatusLabel_time";
+            this.toolStripStatusLabel_time.Size = new System.Drawing.Size(32, 17);
+            this.toolStripStatusLabel_time.Text = "时间";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -298,6 +306,7 @@
         private System.Windows.Forms.ToolStripMenuItem 关于软件ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 版本号说明ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 账户管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_time;
     }
 }
 

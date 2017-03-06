@@ -57,6 +57,11 @@ namespace 软件系统客户端模版
         /// </summary>
         public static BasicFramework.UserAccount UserAccount { get; set; } = new BasicFramework.UserAccount();
 
+        /// <summary>
+        /// 服务器的时间，该时间与服务器同步，每隔10秒钟，防止客户端串改单机时间，可以作为各种时间条件判定
+        /// </summary>
+        public static DateTime DateTimeServer { get; set; } = DateTime.Now;
+
 
         /// <summary>
         /// 用于访问服务器数据的网络对象类，必须修改这个端口参数，否则运行失败

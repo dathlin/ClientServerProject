@@ -41,6 +41,7 @@
             this.日志查看ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.账户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.远程更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.注册账号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,7 +66,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label_Announcement = new System.Windows.Forms.Label();
-            this.注册账号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripStatusLabel_time = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -79,7 +80,8 @@
             this.toolStripStatusLabel_Version,
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel_status,
-            this.toolStripStatusLabel4});
+            this.toolStripStatusLabel4,
+            this.toolStripStatusLabel_time});
             this.statusStrip1.Location = new System.Drawing.Point(0, 454);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(921, 22);
@@ -177,6 +179,13 @@
             this.远程更新ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.远程更新ToolStripMenuItem.Text = "远程更新";
             this.远程更新ToolStripMenuItem.Click += new System.EventHandler(this.远程更新ToolStripMenuItem_Click);
+            // 
+            // 注册账号ToolStripMenuItem
+            // 
+            this.注册账号ToolStripMenuItem.Name = "注册账号ToolStripMenuItem";
+            this.注册账号ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.注册账号ToolStripMenuItem.Text = "注册账号";
+            this.注册账号ToolStripMenuItem.Click += new System.EventHandler(this.注册账号ToolStripMenuItem_Click);
             // 
             // 设置ToolStripMenuItem
             // 
@@ -412,12 +421,12 @@
             this.label_Announcement.Text = "[公告]";
             this.label_Announcement.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // 注册账号ToolStripMenuItem
+            // toolStripStatusLabel_time
             // 
-            this.注册账号ToolStripMenuItem.Name = "注册账号ToolStripMenuItem";
-            this.注册账号ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
-            this.注册账号ToolStripMenuItem.Text = "注册账号";
-            this.注册账号ToolStripMenuItem.Click += new System.EventHandler(this.注册账号ToolStripMenuItem_Click);
+            this.toolStripStatusLabel_time.ForeColor = System.Drawing.Color.Green;
+            this.toolStripStatusLabel_time.Name = "toolStripStatusLabel_time";
+            this.toolStripStatusLabel_time.Size = new System.Drawing.Size(44, 17);
+            this.toolStripStatusLabel_time.Text = "时间：";
             // 
             // FormMainWindow
             // 
@@ -487,6 +496,7 @@
         private System.Windows.Forms.Label label_factory;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ToolStripMenuItem 注册账号ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_time;
     }
 }
 
