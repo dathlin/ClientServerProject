@@ -352,21 +352,61 @@
             <param name="cmdStr">sql语句，适合插入，更新，删除</param>
             <returns>返回受影响的行数</returns>
         </member>
+        <member name="M:BasicFramework.SoftSqlOperate.ExecuteSql(System.Data.SqlClient.SqlConnection,System.String)">
+            <summary>
+            普通的执行SQL语句，并返回影响行数，该方法应该放到try-catch代码块中
+            </summary>
+            <param name="conn">数据库的连接对象</param>
+            <param name="cmdStr">sql语句，适合插入，更新，删除</param>
+            <returns>返回受影响的行数</returns>
+        </member>
         <member name="M:BasicFramework.SoftSqlOperate.ExecuteSelectTable(System.String,System.String)">
             <summary>
-            选择数据表的执行SQL语句，并返回影响行数，该方法应该放到try-catch代码块中
+            选择数据表的执行SQL语句，并返回最终数据表，该方法应该放到try-catch代码块中
             </summary>
             <param name="conStr">数据库的连接字符串</param>
-            <param name="cmdStr">sql语句，适合插入，更新，删除</param>
+            <param name="cmdStr">sql语句，选择数据表的语句</param>
+            <returns>结果数据表</returns>
+        </member>
+        <member name="M:BasicFramework.SoftSqlOperate.ExecuteSelectTable(System.Data.SqlClient.SqlConnection,System.String)">
+            <summary>
+            选择数据表的执行SQL语句，并返回最终数据表，该方法应该放到try-catch代码块中
+            </summary>
+            <param name="conn">数据库连接对象</param>
+            <param name="cmdStr">sql语句，选择数据表的语句</param>
             <returns>结果数据表</returns>
         </member>
         <member name="M:BasicFramework.SoftSqlOperate.ExecuteSelectEnumerable``1(System.String,System.String)">
             <summary>
-            选择指定类型数据集合执行SQL语句，并返回影响行数，该方法应该放到try-catch代码块中
+            选择指定类型数据集合执行SQL语句，并返回指定类型的数据集合，该方法应该放到try-catch代码块中
             </summary>
             <param name="conStr">数据库的连接字符串</param>
-            <param name="cmdStr">sql语句，适合插入，更新，删除</param>
+            <param name="cmdStr">sql语句，选择数据表的语句</param>
             <returns>结果数据集合</returns>
+        </member>
+        <member name="M:BasicFramework.SoftSqlOperate.ExecuteSelectEnumerable``1(System.Data.SqlClient.SqlConnection,System.String)">
+            <summary>
+            选择指定类型数据集合执行SQL语句，并返回指定类型的数据集合，该方法应该放到try-catch代码块中
+            </summary>
+            <param name="conn">数据库的连接对象</param>
+            <param name="cmdStr">sql语句，选择数据表的语句</param>
+            <returns>结果数据集合</returns>
+        </member>
+        <member name="M:BasicFramework.SoftSqlOperate.ExecuteSelectObject``1(System.String,System.String)">
+            <summary>
+            更新指定类型数据执行SQL语句，并返回指定类型的数据集合，该方法应该放到try-catch代码块中
+            </summary>
+            <param name="conStr">数据库的连接字符串</param>
+            <param name="cmdStr">sql语句，选择数据表的语句</param>
+            <returns>结果数据</returns>
+        </member>
+        <member name="M:BasicFramework.SoftSqlOperate.ExecuteSelectObject``1(System.Data.SqlClient.SqlConnection,System.String)">
+            <summary>
+            更新指定类型数据执行SQL语句，并返回指定类型的数据集合，该方法应该放到try-catch代码块中
+            </summary>
+            <param name="conn">数据库的连接对象</param>
+            <param name="cmdStr">sql语句，选择数据表的语句</param>
+            <returns>结果数据</returns>
         </member>
         <member name="T:BasicFramework.ISqlDataType">
             <summary>
