@@ -62,6 +62,7 @@ namespace 软件系统客户端模版
             //状态栏设置
             toolStripStatusLabel_time.Alignment = ToolStripItemAlignment.Right;
             statusStrip1.LayoutStyle = ToolStripLayoutStyle.StackWithOverflow;
+            toolStripStatusLabel1.Text = $"本软件著作权归{Resource.StringResouce.SoftCopyRight}所有";
 
             //绑定事件，仅执行一次，不能放到show方法里
             net_socket_client.MessageAlerts += Net_socket_client_MessageAlerts;
