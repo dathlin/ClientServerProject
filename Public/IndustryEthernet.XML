@@ -1348,6 +1348,35 @@
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
+        <member name="T:IndustryEthernet.FormMatterRemind">
+            <summary>
+            用于稍微耗时事件处理时的消息框提醒
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.FormMatterRemind.#ctor(System.String,System.Action)">
+            <summary>
+            实例化一个耗时处理的对象
+            </summary>
+            <param name="description">需要显示的文本描述</param>
+            <param name="action">需要操作的方法</param>
+        </member>
+        <member name="F:IndustryEthernet.FormMatterRemind.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.FormMatterRemind.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:IndustryEthernet.FormMatterRemind.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:IndustryEthernet.FormFileOperate">
             <summary>
             用于文件上传或下载的窗口
