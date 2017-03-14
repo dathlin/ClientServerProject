@@ -207,6 +207,7 @@ namespace 软件系统服务端模版
                 net_soft_update_Server.log_record.log_save_path = Application.StartupPath + @"\update_log.txt";
                 //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
                 //只放置exe和dll组件，必须放置：软件自动更新.exe
+                net_soft_update_Server.KeyToken = CommonHeadCode.KeyToken;
                 net_soft_update_Server.FileUpdatePath = @"C:\ClientFiles";
                 net_soft_update_Server.AutoUpdateEngineStart(CommonLibrary.CommonLibrary.Port_Update_Net);
             }
@@ -232,6 +233,7 @@ namespace 软件系统服务端模版
             {
                 net_file_update.FilesPath = @"C:\ClientFiles";//服务器客户端需要更新的路径，与上述一致
                 net_file_update.log_record.log_save_path = Application.StartupPath + @"\update_file_log.txt";
+                net_file_update.KeyToken = CommonHeadCode.KeyToken;
                 net_file_update.Server_Start(CommonLibrary.CommonLibrary.Port_Update_Remote);
             }
             catch (Exception ex)
