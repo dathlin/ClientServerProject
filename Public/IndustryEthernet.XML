@@ -106,7 +106,7 @@
             是否连接成功
             </summary>
         </member>
-        <member name="P:IndustryEthernet.InfoTcp.worksocket">
+        <member name="P:IndustryEthernet.InfoTcp.Worksocket">
             <summary>
             连接的socket
             </summary>
@@ -1257,20 +1257,22 @@
             上传或下载的控件
             </summary>
         </member>
-        <member name="M:IndustryEthernet.FileOperateControl.#ctor(System.Net.IPEndPoint,System.String,System.String,System.String,System.String)">
+        <member name="M:IndustryEthernet.FileOperateControl.#ctor(System.Guid,System.Net.IPEndPoint,System.String,System.String,System.String,System.String)">
             <summary>
             上传的实例化方法
             </summary>
+            <param name="token">网络令牌</param>
             <param name="endpoint">服务器的端口地址</param>
             <param name="filepath">完整的文件路径</param>
             <param name="factory">文件所属的工厂</param>
             <param name="group">文件所属的分类</param>
             <param name="id">文件所属的设备ID</param>
         </member>
-        <member name="M:IndustryEthernet.FileOperateControl.#ctor(System.Net.IPEndPoint,System.String,System.String)">
+        <member name="M:IndustryEthernet.FileOperateControl.#ctor(System.Guid,System.Net.IPEndPoint,System.String,System.String)">
             <summary>
             下载的实例化方法
             </summary>
+            <param name="token">网络令牌</param>
             <param name="endpoint">服务器的端口地址</param>
             <param name="filepath">服务器的文件路径</param>
             <param name="savepath">本地保存的路径</param>
@@ -1382,15 +1384,25 @@
             用于文件上传或下载的窗口
             </summary>
         </member>
-        <member name="M:IndustryEthernet.FormFileOperate.#ctor(System.Net.IPEndPoint,System.String[],System.String,System.String,System.String)">
+        <member name="M:IndustryEthernet.FormFileOperate.#ctor(System.Guid,System.Net.IPEndPoint,System.String[],System.String,System.String,System.String)">
             <summary>
             实例化一个文件上传的窗口
             </summary>
+            <param name="token">网络令牌</param>
+            <param name="endpoint">服务器远程地址</param>
+            <param name="files">等待上传的文件数组</param>
+            <param name="factory">工厂大类</param>
+            <param name="group">分类</param>
+            <param name="id">设备序号</param>
         </member>
-        <member name="M:IndustryEthernet.FormFileOperate.#ctor(System.Net.IPEndPoint,System.String[],System.String)">
+        <member name="M:IndustryEthernet.FormFileOperate.#ctor(System.Guid,System.Net.IPEndPoint,System.String[],System.String)">
             <summary>
             实例化一个文件下载的窗口
             </summary>
+            <param name="token">网络令牌</param>
+            <param name="endpoint">服务器的远程地址</param>
+            <param name="files">等待下载的文件</param>
+            <param name="savepath">保存路径</param>
         </member>
         <member name="P:IndustryEthernet.FormFileOperate.is_down_file">
             <summary>
