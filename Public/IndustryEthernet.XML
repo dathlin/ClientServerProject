@@ -607,6 +607,12 @@
             商用限制1000个，最小10个
             </summary>
         </member>
+        <member name="P:IndustryEthernet.Net_Socket_Server.FormatClientOnline">
+            <summary>
+            客户端在线信息显示的格式化文本，如果自定义，必须#开头，
+            示例："#IP:{0} Name:{1}"
+            </summary>
+        </member>
         <member name="P:IndustryEthernet.Net_Socket_Server.AllClients">
             <summary>
             所有客户端的在线信息，使用#符号分隔开来

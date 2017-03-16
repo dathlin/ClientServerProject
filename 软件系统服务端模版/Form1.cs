@@ -390,6 +390,7 @@ namespace 软件系统服务端模版
             {
                 net_socket_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
                 net_socket_server.LogReacord.log_save_path = Application.StartupPath + @"\net_log.txt";
+                net_socket_server.FormatClientOnline = "#IP:{0} Name:{1}";//必须为#开头，具体格式可由自身需求确定
                 net_socket_server.IsSaveLogClientLineChange = true;
                 net_socket_server.ClientOnline += Net_socket_server_ClientOnline;
                 net_socket_server.ClientOffline += Net_socket_server_ClientOffline;
