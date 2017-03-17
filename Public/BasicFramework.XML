@@ -208,6 +208,254 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:BasicFramework.UserAccount">
+            <summary>
+             本系統的用账户类，包含了一些常用的数据信息，如果你想添加额外属性，请继承此类
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.UserName">
+            <summary>
+            用戶名稱，該信息是唯一的，不允許重複的
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.Password">
+            <summary>
+            用户登录的密码
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.Factory">
+            <summary>
+            账户所属的工厂名称或类别名称
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.Grade">
+            <summary>
+            用户的权限等级，目前配置了4个等级
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.RegisterTime">
+            <summary>
+            该用户的注册日期，一旦注册，应该固定
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.LoginEnable">
+            <summary>
+            该用户是否允许登录
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.ForbidMessage">
+            <summary>
+            该用户不允许被登录的原因
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.LoginFrequency">
+            <summary>
+            该用户自注册以来登录的次数
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.LastLoginTime">
+            <summary>
+            该用户上次登录的时间
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.LastLoginIpAddress">
+            <summary>
+            该用户上次登录的IP地址
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.LoginFailedCount">
+            <summary>
+            该用户连续登录失败的计数，可以用来连续五次失败禁止账户登录
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.UserNameText">
+            <summary>
+            用于存储的名称
+            </summary>
+        </member>
+        <member name="P:BasicFramework.UserAccount.PasswordText">
+            <summary>
+            用于存储的名称
+            </summary>
+        </member>
+        <member name="M:BasicFramework.UserAccount.DeepCopy``1">
+            <summary>
+            深度拷贝当前的账户信息
+            </summary>
+            <typeparam name="T">返回的类型，应该为继承后的类型</typeparam>
+            <returns>新的对象</returns>
+        </member>
+        <member name="M:BasicFramework.UserAccount.ToString">
+            <summary>
+            获取账号的用户名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BasicFramework.UserAccount.ToJsonString">
+            <summary>
+            获取本账号的JSON字符串，用于在网络中数据传输
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BasicFramework.AccountGrade">
+            <summary>
+            账户的等级
+            </summary>
+        </member>
+        <member name="P:BasicFramework.AccountGrade.SuperAdministrator">
+            <summary>
+            超级管理员
+            </summary>
+        </member>
+        <member name="P:BasicFramework.AccountGrade.Admin">
+            <summary>
+            管理员
+            </summary>
+        </member>
+        <member name="P:BasicFramework.AccountGrade.Technology">
+            <summary>
+            技术员
+            </summary>
+        </member>
+        <member name="P:BasicFramework.AccountGrade.General">
+            <summary>
+            一般
+            </summary>
+        </member>
+        <member name="M:BasicFramework.AccountGrade.GetDescription(System.Int32)">
+            <summary>
+            获取对应等级的文本描述
+            </summary>
+            <param name="grade">等级数据</param>
+            <returns>等级描述</returns>
+        </member>
+        <member name="M:BasicFramework.AccountGrade.GetDescription">
+            <summary>
+            获取权限的数组
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BasicFramework.AccountGrade.GetDescription(System.Converter{System.Int32,System.String},System.Int32)">
+            <summary>
+            获取对应等级的文本描述
+            </summary>
+            <param name="grade">等级数据</param>
+            <param name="converter">用户自定义的转化名称</param>
+            <returns>等级描述</returns>
+        </member>
+        <member name="T:BasicFramework.ServerAccounts`1">
+            <summary>
+            服务器的账户管理类，如果你采用这种方式存储，必须仔细阅读说明手册
+            </summary>
+            <typeparam name="T">账户类，该类必须派生自UserAccount类</typeparam>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.#ctor">
+            <summary>
+            初始化構造方法
+            </summary>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            初始化構造方法，将添加几个初始化账户
+            </summary>
+        </member>
+        <member name="P:BasicFramework.ServerAccounts`1.FileSavePath">
+            <summary>
+            所有的帳戶信息存儲的位置，只有設置了才進行保存
+            </summary>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.UpdatePassword(System.String,System.String)">
+            <summary>
+            更新指定账户的密码
+            </summary>
+            <param name="name"></param>
+            <param name="password"></param>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.WhereAccounts(System.Func{`0,System.Boolean})">
+            <summary>
+            筛选特定的账户信息
+            </summary>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.ConvertAll``1(System.Converter{`0,``0})">
+            <summary>
+            将所有账户信息转换成另一种元素，并返回列表
+            </summary>
+            <typeparam name="TResult">目标类型</typeparam>
+            <param name="converter">转换方法</param>
+            <returns>转换后的结果列表</returns>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.CheckAccount(System.String,System.String,System.String)">
+            <summary>
+            檢查帳戶信息，並返回有說明的帳戶對象
+            </summary>
+            <param name="name">需要驗證的信息</param>
+            <param name="code">需要驗證的密碼</param>
+            <param name="ipAddress">登录的ip地址</param>
+            <returns>驗證結果對象</returns>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.AddNewAccount(System.String)">
+            <summary>
+            新增一个账户，如果账户名称已经存在，则返回False，注册成功返回True
+            </summary>
+            <param name="json_account">账户对象的JSON表示方式</param>
+            <returns>成功True，失败False</returns>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.AddNewAccount(`0)">
+            <summary>
+            新增一个账户，如果账户名称已经存在，则返回False，注册成功返回True
+            </summary>
+            <param name="account">账户对象</param>
+            <returns>成功True，失败False</returns>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.DeleteAccount(System.String)">
+            <summary>
+            删除一个账户信息，
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.CheckAccountJson(System.String,System.String,System.String)">
+            <summary>
+            檢查帳戶並返回帳戶對象的JSON字符串
+            </summary>
+            <param name="name">登录的用户名</param>
+            <param name="code">登录的密码</param>
+            <param name="ipAddress">检查的客户端的登录的ip地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.GetAllAccountsJson">
+            <summary>
+            獲取所有的帳戶的JSON字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.LoadAllAccountsJson(System.String)">
+            <summary>
+            從所有帳戶的JSON字符串加載帳戶
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.SaveFile">
+            <summary>
+            使用Base64编码將所有的帳戶信息保存到文件
+            </summary>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.SaveFile(System.Converter{System.String,System.String})">
+            <summary>
+            使用自定义的加密方法将所有帳戶信息保存到文件
+            </summary>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.LoadByFile">
+            <summary>
+            使用Base64编码從文件加載所有的帳戶
+            </summary>
+        </member>
+        <member name="M:BasicFramework.ServerAccounts`1.LoadByFile(System.Converter{System.String,System.String})">
+            <summary>
+            使用自定义的解密方法加載所有的帳戶
+            </summary>
+        </member>
         <member name="T:BasicFramework.SoftAnimation">
             <summary>
             系统框架支持的一些常用的动画特效
@@ -334,9 +582,151 @@
             <param name="isHtml">邮件内容是否是HTML语言</param>
             <returns>发生是否成功，内容不正确会被视为垃圾邮件</returns>
         </member>
+        <member name="T:BasicFramework.Paintdata">
+            <summary>
+            包含整型和字符串描述的数据类型
+            </summary>
+        </member>
+        <member name="P:BasicFramework.Paintdata.Count">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:BasicFramework.Paintdata.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="T:BasicFramework.GraphicRender">
+            <summary>
+            图形的呈现方式
+            </summary>
+        </member>
+        <member name="F:BasicFramework.GraphicRender.Histogram">
+            <summary>
+            直方图
+            </summary>
+        </member>
+        <member name="F:BasicFramework.GraphicRender.Piechart">
+            <summary>
+            饼图
+            </summary>
+        </member>
+        <member name="F:BasicFramework.GraphicRender.Linegraph">
+            <summary>
+            折线图
+            </summary>
+        </member>
         <member name="T:BasicFramework.SoftPaint">
             <summary>
             静态类，包含了几个常用的画图方法，获取字符串，绘制小三角等
+            </summary>
+        </member>
+        <member name="M:BasicFramework.SoftPaint.GetGraphicFromArray(BasicFramework.Paintdata[],System.Int32,System.Int32,BasicFramework.GraphicRender)">
+            <summary>
+            根据数据生成一个可视化的图形
+            </summary>
+            <param name="array">数据集合</param>
+            <param name="width">需要绘制图形的宽度</param>
+            <param name="height">需要绘制图形的高度</param>
+            <param name="graphic">指定绘制成什么样子的图形</param>
+            <returns>返回一个bitmap对象</returns>
+        </member>
+        <member name="T:BasicFramework.ServerSettings">
+            <summary>
+            服务器的常用参数保存，包含了版本号，公告，是否允许登录，不能登录说明
+            </summary>
+        </member>
+        <member name="P:BasicFramework.ServerSettings.SystemVersion">
+            <summary>
+            系统的版本号，可以用来验证版本更新的依据
+            初始化1.0.0
+            </summary>
+        </member>
+        <member name="P:BasicFramework.ServerSettings.Announcement">
+            <summary>
+            系统的公告信息，默认为测试公告
+            </summary>
+        </member>
+        <member name="P:BasicFramework.ServerSettings.Can_Account_Login">
+            <summary>
+            是否允许账户登录
+            超级管理员账户除外
+            </summary>
+        </member>
+        <member name="P:BasicFramework.ServerSettings.Account_Forbidden_Reason">
+            <summary>
+            不允许登录系统的原因
+            </summary>
+        </member>
+        <member name="P:BasicFramework.ServerSettings.FileSavePath">
+            <summary>
+            文件存储的路径
+            </summary>
+        </member>
+        <member name="M:BasicFramework.ServerSettings.LoadByFile">
+            <summary>
+            加载存储的信息，程序刚运行时加载一次即可
+            </summary>
+        </member>
+        <member name="M:BasicFramework.ServerSettings.SaveToFile">
+            <summary>
+            在服务器退出之前进行保存
+            </summary>
+        </member>
+        <member name="T:BasicFramework.JsonSettings">
+            <summary>
+            用户客户端存储本地JSON数据的类，包含了所有需要存储的信息
+            </summary>
+        </member>
+        <member name="M:BasicFramework.JsonSettings.#ctor">
+            <summary>
+            实例化一个设置的对象
+            </summary>
+        </member>
+        <member name="P:BasicFramework.JsonSettings.IsNewVersionRunning">
+            <summary>
+            指示系统是否是更新后第一次运行
+            </summary>
+        </member>
+        <member name="P:BasicFramework.JsonSettings.LoginName">
+            <summary>
+            上次系统登录的用户名
+            </summary>
+        </member>
+        <member name="P:BasicFramework.JsonSettings.Password">
+            <summary>
+            上次系统登录的密码
+            </summary>
+        </member>
+        <member name="P:BasicFramework.JsonSettings.FileSavePath">
+            <summary>
+            参数文件的存储路径
+            </summary>
+        </member>
+        <member name="P:BasicFramework.JsonSettings.SystemInfo">
+            <summary>
+            当前计算机的机器码，用来判定参数是否是正确的
+            </summary>
+        </member>
+        <member name="M:BasicFramework.JsonSettings.LoadSettings">
+            <summary>
+            使用默认的加密算法加载系统的设置信息，程序刚运行时就应该加载数据
+            </summary>
+        </member>
+        <member name="M:BasicFramework.JsonSettings.LoadSettings(System.Converter{System.String,System.String})">
+            <summary>
+            使用自定义的解密规则加载系统的设置信息，程序刚运行时就应该加载数据
+            </summary>
+        </member>
+        <member name="M:BasicFramework.JsonSettings.SaveSettings">
+            <summary>
+            使用默认的加密规则，将所有的参数进行存储
+            </summary>
+        </member>
+        <member name="M:BasicFramework.JsonSettings.SaveSettings(System.Converter{System.String,System.String})">
+            <summary>
+            使用指定的加密规则加密密码，然后将所有的参数进行存储
             </summary>
         </member>
         <member name="T:BasicFramework.SoftSqlOperate">
@@ -955,351 +1345,6 @@
         <member name="P:BasicFramework.ServerArraySave`1.FileSavePath">
             <summary>
             文件存储的路径
-            </summary>
-        </member>
-        <member name="T:BasicFramework.ServerSettings">
-            <summary>
-            服务器的常用参数保存，包含了版本号，公告，是否允许登录，不能登录说明
-            </summary>
-        </member>
-        <member name="P:BasicFramework.ServerSettings.SystemVersion">
-            <summary>
-            系统的版本号，可以用来验证版本更新的依据
-            初始化1.0.0
-            </summary>
-        </member>
-        <member name="P:BasicFramework.ServerSettings.Announcement">
-            <summary>
-            系统的公告信息，默认为测试公告
-            </summary>
-        </member>
-        <member name="P:BasicFramework.ServerSettings.Can_Account_Login">
-            <summary>
-            是否允许账户登录
-            超级管理员账户除外
-            </summary>
-        </member>
-        <member name="P:BasicFramework.ServerSettings.Account_Forbidden_Reason">
-            <summary>
-            不允许登录系统的原因
-            </summary>
-        </member>
-        <member name="P:BasicFramework.ServerSettings.FileSavePath">
-            <summary>
-            文件存储的路径
-            </summary>
-        </member>
-        <member name="M:BasicFramework.ServerSettings.LoadByFile">
-            <summary>
-            加载存储的信息，程序刚运行时加载一次即可
-            </summary>
-        </member>
-        <member name="M:BasicFramework.ServerSettings.SaveToFile">
-            <summary>
-            在服务器退出之前进行保存
-            </summary>
-        </member>
-        <member name="T:BasicFramework.JsonSettings">
-            <summary>
-            用户客户端存储本地JSON数据的类，包含了所有需要存储的信息
-            </summary>
-        </member>
-        <member name="M:BasicFramework.JsonSettings.#ctor">
-            <summary>
-            实例化一个设置的对象
-            </summary>
-        </member>
-        <member name="P:BasicFramework.JsonSettings.IsNewVersionRunning">
-            <summary>
-            指示系统是否是更新后第一次运行
-            </summary>
-        </member>
-        <member name="P:BasicFramework.JsonSettings.LoginName">
-            <summary>
-            上次系统登录的用户名
-            </summary>
-        </member>
-        <member name="P:BasicFramework.JsonSettings.Password">
-            <summary>
-            上次系统登录的密码
-            </summary>
-        </member>
-        <member name="P:BasicFramework.JsonSettings.FileSavePath">
-            <summary>
-            参数文件的存储路径
-            </summary>
-        </member>
-        <member name="P:BasicFramework.JsonSettings.SystemInfo">
-            <summary>
-            当前计算机的机器码，用来判定参数是否是正确的
-            </summary>
-        </member>
-        <member name="M:BasicFramework.JsonSettings.LoadSettings">
-            <summary>
-            使用默认的加密算法加载系统的设置信息，程序刚运行时就应该加载数据
-            </summary>
-        </member>
-        <member name="M:BasicFramework.JsonSettings.LoadSettings(System.Converter{System.String,System.String})">
-            <summary>
-            使用自定义的解密规则加载系统的设置信息，程序刚运行时就应该加载数据
-            </summary>
-        </member>
-        <member name="M:BasicFramework.JsonSettings.SaveSettings">
-            <summary>
-            使用默认的加密规则，将所有的参数进行存储
-            </summary>
-        </member>
-        <member name="M:BasicFramework.JsonSettings.SaveSettings(System.Converter{System.String,System.String})">
-            <summary>
-            使用指定的加密规则加密密码，然后将所有的参数进行存储
-            </summary>
-        </member>
-        <member name="T:BasicFramework.UserAccount">
-            <summary>
-             本系統的用账户类，包含了一些常用的数据信息，如果你想添加额外属性，请继承此类
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.UserName">
-            <summary>
-            用戶名稱，該信息是唯一的，不允許重複的
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.Password">
-            <summary>
-            用户登录的密码
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.Factory">
-            <summary>
-            账户所属的工厂名称或类别名称
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.Grade">
-            <summary>
-            用户的权限等级，目前配置了4个等级
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.RegisterTime">
-            <summary>
-            该用户的注册日期，一旦注册，应该固定
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.LoginEnable">
-            <summary>
-            该用户是否允许登录
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.ForbidMessage">
-            <summary>
-            该用户不允许被登录的原因
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.LoginFrequency">
-            <summary>
-            该用户自注册以来登录的次数
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.LastLoginTime">
-            <summary>
-            该用户上次登录的时间
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.LastLoginIpAddress">
-            <summary>
-            该用户上次登录的IP地址
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.LoginFailedCount">
-            <summary>
-            该用户连续登录失败的计数，可以用来连续五次失败禁止账户登录
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.UserNameText">
-            <summary>
-            用于存储的名称
-            </summary>
-        </member>
-        <member name="P:BasicFramework.UserAccount.PasswordText">
-            <summary>
-            用于存储的名称
-            </summary>
-        </member>
-        <member name="M:BasicFramework.UserAccount.DeepCopy``1">
-            <summary>
-            深度拷贝当前的账户信息
-            </summary>
-            <typeparam name="T">返回的类型，应该为继承后的类型</typeparam>
-            <returns>新的对象</returns>
-        </member>
-        <member name="M:BasicFramework.UserAccount.ToString">
-            <summary>
-            获取账号的用户名
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:BasicFramework.UserAccount.ToJsonString">
-            <summary>
-            获取本账号的JSON字符串，用于在网络中数据传输
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:BasicFramework.AccountGrade">
-            <summary>
-            账户的等级
-            </summary>
-        </member>
-        <member name="P:BasicFramework.AccountGrade.SuperAdministrator">
-            <summary>
-            超级管理员
-            </summary>
-        </member>
-        <member name="P:BasicFramework.AccountGrade.Admin">
-            <summary>
-            管理员
-            </summary>
-        </member>
-        <member name="P:BasicFramework.AccountGrade.Technology">
-            <summary>
-            技术员
-            </summary>
-        </member>
-        <member name="P:BasicFramework.AccountGrade.General">
-            <summary>
-            一般
-            </summary>
-        </member>
-        <member name="M:BasicFramework.AccountGrade.GetDescription(System.Int32)">
-            <summary>
-            获取对应等级的文本描述
-            </summary>
-            <param name="grade">等级数据</param>
-            <returns>等级描述</returns>
-        </member>
-        <member name="M:BasicFramework.AccountGrade.GetDescription">
-            <summary>
-            获取权限的数组
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:BasicFramework.AccountGrade.GetDescription(System.Converter{System.Int32,System.String},System.Int32)">
-            <summary>
-            获取对应等级的文本描述
-            </summary>
-            <param name="grade">等级数据</param>
-            <param name="converter">用户自定义的转化名称</param>
-            <returns>等级描述</returns>
-        </member>
-        <member name="T:BasicFramework.ServerAccounts`1">
-            <summary>
-            服务器的账户管理类，如果你采用这种方式存储，必须仔细阅读说明手册
-            </summary>
-            <typeparam name="T">账户类，该类必须派生自UserAccount类</typeparam>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.#ctor">
-            <summary>
-            初始化構造方法
-            </summary>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            初始化構造方法，将添加几个初始化账户
-            </summary>
-        </member>
-        <member name="P:BasicFramework.ServerAccounts`1.FileSavePath">
-            <summary>
-            所有的帳戶信息存儲的位置，只有設置了才進行保存
-            </summary>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.UpdatePassword(System.String,System.String)">
-            <summary>
-            更新指定账户的密码
-            </summary>
-            <param name="name"></param>
-            <param name="password"></param>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.WhereAccounts(System.Func{`0,System.Boolean})">
-            <summary>
-            筛选特定的账户信息
-            </summary>
-            <param name="selector"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.ConvertAll``1(System.Converter{`0,``0})">
-            <summary>
-            将所有账户信息转换成另一种元素，并返回列表
-            </summary>
-            <typeparam name="TResult">目标类型</typeparam>
-            <param name="converter">转换方法</param>
-            <returns>转换后的结果列表</returns>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.CheckAccount(System.String,System.String,System.String)">
-            <summary>
-            檢查帳戶信息，並返回有說明的帳戶對象
-            </summary>
-            <param name="name">需要驗證的信息</param>
-            <param name="code">需要驗證的密碼</param>
-            <param name="ipAddress">登录的ip地址</param>
-            <returns>驗證結果對象</returns>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.AddNewAccount(System.String)">
-            <summary>
-            新增一个账户，如果账户名称已经存在，则返回False，注册成功返回True
-            </summary>
-            <param name="json_account">账户对象的JSON表示方式</param>
-            <returns>成功True，失败False</returns>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.AddNewAccount(`0)">
-            <summary>
-            新增一个账户，如果账户名称已经存在，则返回False，注册成功返回True
-            </summary>
-            <param name="account">账户对象</param>
-            <returns>成功True，失败False</returns>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.DeleteAccount(System.String)">
-            <summary>
-            删除一个账户信息，
-            </summary>
-            <param name="name"></param>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.CheckAccountJson(System.String,System.String,System.String)">
-            <summary>
-            檢查帳戶並返回帳戶對象的JSON字符串
-            </summary>
-            <param name="name">登录的用户名</param>
-            <param name="code">登录的密码</param>
-            <param name="ipAddress">检查的客户端的登录的ip地址</param>
-            <returns></returns>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.GetAllAccountsJson">
-            <summary>
-            獲取所有的帳戶的JSON字符串
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.LoadAllAccountsJson(System.String)">
-            <summary>
-            從所有帳戶的JSON字符串加載帳戶
-            </summary>
-            <param name="json"></param>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.SaveFile">
-            <summary>
-            使用Base64编码將所有的帳戶信息保存到文件
-            </summary>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.SaveFile(System.Converter{System.String,System.String})">
-            <summary>
-            使用自定义的加密方法将所有帳戶信息保存到文件
-            </summary>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.LoadByFile">
-            <summary>
-            使用Base64编码從文件加載所有的帳戶
-            </summary>
-        </member>
-        <member name="M:BasicFramework.ServerAccounts`1.LoadByFile(System.Converter{System.String,System.String})">
-            <summary>
-            使用自定义的解密方法加載所有的帳戶
             </summary>
         </member>
         <member name="T:BasicFramework.SoftAuthorize">
