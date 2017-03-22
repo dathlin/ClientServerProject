@@ -195,18 +195,16 @@ namespace 软件系统客户端模版
 
         private void 远程更新ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog ofd = new OpenFileDialog())
+            if (UserClient.UserAccount.UserName == "admin")
             {
-                ofd.Multiselect = true;
-                if(ofd.ShowDialog()==DialogResult.OK)
+                using (FormUpdateRemote fur = new FormUpdateRemote())
                 {
-                    using (FormFileOperate fUpload = new FormFileOperate(CommonHeadCode.KeyToken,new System.Net.IPEndPoint(
-                        System.Net.IPAddress.Parse(UserClient.ServerIp),CommonLibrary.CommonLibrary.Port_Update_Remote),
-                        ofd.FileNames, "", "", ""))
-                    {
-                        fUpload.ShowDialog();
-                    }
+                    fur.ShowDialog();
                 }
+            }
+            else
+            {
+                MessageBox.Show("权限不足！");
             }
         }
 

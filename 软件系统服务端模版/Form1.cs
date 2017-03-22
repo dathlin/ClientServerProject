@@ -339,6 +339,18 @@ namespace 软件系统服务端模版
                 UserServer.ServerAccounts.UpdatePassword(name, password);
                 net_simplify_server.SendMessage(object1, "成功");
             }
+            else if (head_code == CommonHeadCode.SimplifyHeadCode.更新版本号)
+            {
+                try
+                {
+                    UserServer.ServerSettings.SystemVersion = new SystemVersion(object2.Substring(4));
+                    UserServer.ServerSettings.SaveToFile();
+                }
+                catch
+                {
+
+                }
+            }
             else if (head_code == CommonHeadCode.SimplifyHeadCode.网络日志查看)
             {
                 net_simplify_server.SendMessage(object1, net_socket_server.LogReacord.GetLogText());
@@ -507,7 +519,9 @@ namespace 软件系统服务端模版
 
         #endregion
 
-
+        /// <summary>
+        /// 还未有其他什么用途
+        /// </summary>
         private Log_Record log = new Log_Record();
     }
 }

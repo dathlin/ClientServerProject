@@ -88,6 +88,12 @@
     <Compile Include="FormRegisterAccount.Designer.cs">
       <DependentUpon>FormRegisterAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormUpdateRemote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUpdateRemote.Designer.cs">
+      <DependentUpon>FormUpdateRemote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserClient.cs" />
@@ -105,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormRegisterAccount.resx">
       <DependentUpon>FormRegisterAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUpdateRemote.resx">
+      <DependentUpon>FormUpdateRemote.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -184,35 +184,7 @@ namespace 软件系统客户端模版
                 return;
             }
 
-            //版本验证
-            if (IsHandleCreated) Invoke(message_show, "正在验证版本...");
-            else return;
-
-            //延时
-            Thread.Sleep(200);
-
-            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.更新检查);
-            if (result.IsSuccess)
-            {
-                //服务器应该返回服务器的版本号
-                BasicFramework.SystemVersion sv = new BasicFramework.SystemVersion(result.Content);
-                if (UserClient.CurrentVersion != sv)
-                {
-                    //保存新版本信息
-                    UserClient.JsonSettings.IsNewVersionRunning = true;
-                    UserClient.JsonSettings.SaveSettings();
-                    //和当前系统版本号不一致，启动更新
-                    if (IsHandleCreated) Invoke(start_update);
-                    return;
-                }
-            }
-            else
-            {
-                //访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Message);
-                if (IsHandleCreated) Invoke(thread_finish);
-                return;
-            }
+            
 
             //检查账户
             if (IsHandleCreated) Invoke(message_show, "正在检查账户...");
@@ -256,6 +228,53 @@ namespace 软件系统客户端模版
             UserClient.JsonSettings.LoginName = textBox_userName.Text;
             UserClient.JsonSettings.Password = checkBox_remeber.Checked ? textBox_password.Text : "";
             UserClient.JsonSettings.SaveSettings();
+
+
+            //版本验证
+            if (IsHandleCreated) Invoke(message_show, "正在验证版本...");
+            else return;
+
+            //延时
+            Thread.Sleep(200);
+
+            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.更新检查);
+            if (result.IsSuccess)
+            {
+                //服务器应该返回服务器的版本号
+                BasicFramework.SystemVersion sv = new BasicFramework.SystemVersion(result.Content);
+                //系统账户跳过低版本检测
+                if (UserClient.UserAccount.UserName != "admin")
+                {
+                    if (UserClient.CurrentVersion != sv)
+                    {
+                        //保存新版本信息
+                        UserClient.JsonSettings.IsNewVersionRunning = true;
+                        UserClient.JsonSettings.SaveSettings();
+                        //和当前系统版本号不一致，启动更新
+                        if (IsHandleCreated) Invoke(start_update);
+                        return;
+                    }
+                }
+                else
+                {
+                    if (UserClient.CurrentVersion < sv)
+                    {
+                        //保存新版本信息
+                        UserClient.JsonSettings.IsNewVersionRunning = true;
+                        UserClient.JsonSettings.SaveSettings();
+                        //和当前系统版本号不一致，启动更新
+                        if (IsHandleCreated) Invoke(start_update);
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                //访问失败
+                if (IsHandleCreated) Invoke(message_show, result.Message);
+                if (IsHandleCreated) Invoke(thread_finish);
+                return;
+            }
 
 
             //================================================================================
