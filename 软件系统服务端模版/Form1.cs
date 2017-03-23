@@ -345,10 +345,11 @@ namespace 软件系统服务端模版
                 {
                     UserServer.ServerSettings.SystemVersion = new SystemVersion(object2.Substring(4));
                     UserServer.ServerSettings.SaveToFile();
+                    net_simplify_server.SendMessage(object1, "1");
                 }
                 catch
                 {
-
+                    net_simplify_server.SendMessage(object1, "0");
                 }
             }
             else if (head_code == CommonHeadCode.SimplifyHeadCode.网络日志查看)
