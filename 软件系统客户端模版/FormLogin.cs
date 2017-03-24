@@ -150,6 +150,7 @@ namespace 软件系统客户端模版
                 try
                 {
                     System.Diagnostics.Process.Start(update_file_name);
+                    Environment.Exit(0);//退出系统
                 }
                 catch
                 {
