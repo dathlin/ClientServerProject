@@ -345,6 +345,7 @@ namespace 软件系统服务端模版
                 {
                     UserServer.ServerSettings.SystemVersion = new SystemVersion(object2.Substring(4));
                     UserServer.ServerSettings.SaveToFile();
+                    toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
                     net_simplify_server.SendMessage(object1, "1");
                 }
                 catch
