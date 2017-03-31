@@ -10,6 +10,10 @@ namespace 软件系统客户端模版
     static class Program
     {
         /// <summary>
+        /// 指示了应用程序退出时的代码
+        /// </summary>
+        public static int QuitCode { get; set; } = 0;
+        /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
@@ -39,11 +43,19 @@ namespace 软件系统客户端模版
 
             //===================================================================
             //运行主窗口之前先进行账户的验证
+            P1:
+
             FormLogin login = new FormLogin();
             if (login.ShowDialog() == DialogResult.OK)
             {
                 login.Dispose();
-                Application.Run(new FormMainWindow());
+                FormMainWindow fmw = new FormMainWindow();
+                Application.Run(fmw);
+                if (QuitCode == 1)
+                {
+                    //继续显示登录窗口
+                    goto P1;
+                }
             }
             else
             {

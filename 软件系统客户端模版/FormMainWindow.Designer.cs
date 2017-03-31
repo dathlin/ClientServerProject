@@ -35,6 +35,7 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_status = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel_time = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.管理员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更改公告ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,7 +67,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label_Announcement = new System.Windows.Forms.Label();
-            this.toolStripStatusLabel_time = new System.Windows.Forms.ToolStripStatusLabel();
+            this.linkLabel_logout = new System.Windows.Forms.LinkLabel();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -125,6 +126,13 @@
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
             this.toolStripStatusLabel4.Size = new System.Drawing.Size(84, 17);
             this.toolStripStatusLabel4.Text = "    温馨提示：";
+            // 
+            // toolStripStatusLabel_time
+            // 
+            this.toolStripStatusLabel_time.ForeColor = System.Drawing.Color.Green;
+            this.toolStripStatusLabel_time.Name = "toolStripStatusLabel_time";
+            this.toolStripStatusLabel_time.Size = new System.Drawing.Size(44, 17);
+            this.toolStripStatusLabel_time.Text = "时间：";
             // 
             // menuStrip1
             // 
@@ -236,6 +244,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.linkLabel_logout);
             this.panel1.Controls.Add(this.label_factory);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label7);
@@ -421,12 +430,16 @@
             this.label_Announcement.Text = "[公告]";
             this.label_Announcement.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // toolStripStatusLabel_time
+            // linkLabel_logout
             // 
-            this.toolStripStatusLabel_time.ForeColor = System.Drawing.Color.Green;
-            this.toolStripStatusLabel_time.Name = "toolStripStatusLabel_time";
-            this.toolStripStatusLabel_time.Size = new System.Drawing.Size(44, 17);
-            this.toolStripStatusLabel_time.Text = "时间：";
+            this.linkLabel_logout.AutoSize = true;
+            this.linkLabel_logout.Location = new System.Drawing.Point(188, 1);
+            this.linkLabel_logout.Name = "linkLabel_logout";
+            this.linkLabel_logout.Size = new System.Drawing.Size(32, 17);
+            this.linkLabel_logout.TabIndex = 16;
+            this.linkLabel_logout.TabStop = true;
+            this.linkLabel_logout.Text = "注销";
+            this.linkLabel_logout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_logout_LinkClicked);
             // 
             // FormMainWindow
             // 
@@ -497,6 +510,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ToolStripMenuItem 注册账号ToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_time;
+        private System.Windows.Forms.LinkLabel linkLabel_logout;
     }
 }
 

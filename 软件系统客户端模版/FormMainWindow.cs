@@ -208,6 +208,12 @@ namespace 软件系统客户端模版
             }
         }
 
+        private void linkLabel_logout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Program.QuitCode = 1;
+            Close();
+        }
+
         #endregion
 
         #region 异步网络块
@@ -318,8 +324,9 @@ namespace 软件系统客户端模版
             }));
         }
 
+
         #endregion
 
-        
+       
     }
 }
