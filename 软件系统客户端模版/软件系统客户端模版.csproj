@@ -136,6 +136,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DatabaseSupport\" />
     <Folder Include="UIControls\" />
     <Folder Include="UserControls\" />
   </ItemGroup>

@@ -76,6 +76,9 @@ namespace 软件系统客户端模版
             label_Announcement.Text = UserClient.Announcement;
 
             toolStripStatusLabel_Version.Text = UserClient.CurrentVersion.ToString();
+
+            //初始化窗口
+            MainRenderInitialization();
         }
         private void FormMainWindow_Shown(object sender, EventArgs e)
         {
@@ -327,6 +330,46 @@ namespace 软件系统客户端模版
 
         #endregion
 
-       
+        #region 主界面管理块
+        /// <summary>
+        /// 所有在主界面显示的控件集
+        /// </summary>
+        private List<UserControl> all_main_render = new List<UserControl>();
+        /// <summary>
+        /// 正在显示的子界面
+        /// </summary>
+        private UserControl CurrentRender { get; set; } = null;
+        /// <summary>
+        /// 主界面的初始化
+        /// </summary>
+        private void MainRenderInitialization()
+        {
+            //将所有的子集控件添加进去
+        }
+
+        private void SetShowRenderControl(UserControl control)
+        {
+            if(!ReferenceEquals(CurrentRender,control))
+            {
+                CurrentRender = control;
+                all_main_render.ForEach(c => c.Visible = false);
+                control.Visible = true;
+            }
+        }
+        private void SetShowRenderControl(Type typeControl)
+        {
+            UserControl control = null;
+            foreach(var c in all_main_render)
+            {
+                if(c.GetType()==typeControl)
+                {
+                    control = c;
+                    break;
+                }
+            }
+            if (control != null) SetShowRenderControl(control);
+        }
+
+        #endregion
     }
 }
