@@ -136,6 +136,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="UIControls\" />
     <Folder Include="UserControls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
