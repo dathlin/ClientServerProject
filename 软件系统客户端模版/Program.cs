@@ -54,6 +54,7 @@ namespace 软件系统客户端模版
                 if (QuitCode == 1)
                 {
                     //继续显示登录窗口
+                    QuitCode = 0;
                     goto P1;
                 }
             }
