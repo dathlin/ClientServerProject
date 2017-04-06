@@ -96,6 +96,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIControls\ShareFilesRender.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ShareFilesRender.Designer.cs">
+      <DependentUpon>ShareFilesRender.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserClient.cs" />
     <EmbeddedResource Include="FormDownloading.resx">
       <DependentUpon>FormDownloading.cs</DependentUpon>
@@ -124,6 +130,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UIControls\ShareFilesRender.resx">
+      <DependentUpon>ShareFilesRender.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -136,7 +145,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UIControls\" />
     <Folder Include="UserControls\" />
   </ItemGroup>
   <ItemGroup>

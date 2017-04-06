@@ -29,7 +29,11 @@ namespace CommonLibrary
         /// 用于软件远程更新的端口，此处随机定义了一个数据
         /// </summary>
         public static int Port_Update_Remote { get; } = 26435;
-        
+        /// <summary>
+        /// 共享文件的端口号
+        /// </summary>
+        public static int Port_Share_File { get; } = 34261;
+
         #endregion
 
         

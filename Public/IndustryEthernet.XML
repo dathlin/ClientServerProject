@@ -19,19 +19,9 @@
             文件的大小
             </summary>
         </member>
-        <member name="P:IndustryEthernet.File_Save.FileFacory">
+        <member name="P:IndustryEthernet.File_Save.FileTag">
             <summary>
-            文件所属的工厂大类
-            </summary>
-        </member>
-        <member name="P:IndustryEthernet.File_Save.FileGroup">
-            <summary>
-            文件的类别
-            </summary>
-        </member>
-        <member name="P:IndustryEthernet.File_Save.FileId">
-            <summary>
-            文件所属的设备ID号
+            用于用户自定义的标识
             </summary>
         </member>
         <member name="P:IndustryEthernet.File_Save.UploadName">
@@ -57,6 +47,134 @@
         <member name="P:IndustryEthernet.File_Save.FileDownloadTimes">
             <summary>
             文件被下载的次数
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.File_Save.FileExc">
+            <summary>
+            文件的后缀名
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.File_Save.GetTextFromFileSize">
+            <summary>
+            获取大小
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:IndustryEthernet.SimpleShareFileServer">
+            <summary>
+            一个简单的共享文件类，配合下载控件和上传窗口一起使用
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.SimpleShareFileServer.File_head_download">
+            <summary>
+            文件的下载指令头
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.SimpleShareFileServer.File_head_upload">
+            <summary>
+            文件的上传指令头
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.SimpleShareFileServer.File_head_delete">
+            <summary>
+            文件删除的指令头
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.#ctor(System.Func{System.Collections.Generic.List{IndustryEthernet.File_Save},System.String},System.Func{System.String,System.Collections.Generic.List{IndustryEthernet.File_Save}})">
+            <summary>
+            生成对象，需要指定存储规则
+            </summary>
+            <param name="toJsonString">获取字符串的规则</param>
+            <param name="toListArray">从字符串转化成对象数据</param>
+        </member>
+        <member name="P:IndustryEthernet.SimpleShareFileServer.FileSavePath">
+            <summary>
+            临时文件存储的路径
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.File_Count">
+            <summary>
+            返回所有文件的数量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.AddNew(IndustryEthernet.File_Save)">
+            <summary>
+            新增一个文件对象
+            </summary>
+            <param name="file"></param>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.DeleteOne(System.String)">
+            <summary>
+            根据文件名称，删除一个文件对象
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.DownloadTimesAdd(System.String)">
+            <summary>
+            追加一个文件对象的下载数据
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.IsFileExsist(System.String)">
+            <summary>
+            判断文件对对象管理中是否存在
+            </summary>
+            <param name="filename"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.GetHuFileFromFileName(System.String)">
+            <summary>
+            根据
+            </summary>
+            <param name="filename"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.ToJsonString">
+            <summary>
+            获取JSON字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.SaveLocalFile">
+            <summary>
+            将所有数据进行保存
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.ReadFromFile">
+            <summary>
+            从文件中加载数据信息
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.SimpleShareFileServer.File_save_path">
+            <summary>
+            文件的存储路径
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.FileEngineStart(System.Int32)">
+            <summary>
+            启动服务
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.ReceiveCallback(System.IAsyncResult)">
+            <summary>
+            在收到客户端下载完毕的消息后选中关闭本次连接
+            </summary>
+            <param name="ar"></param>
+        </member>
+        <member name="T:IndustryEthernet.SimpleShareFileServer.NoticeClient">
+            <summary>
+            提醒客户端的委托
+            </summary>
+        </member>
+        <member name="E:IndustryEthernet.SimpleShareFileServer.FileChange">
+            <summary>
+            当服务器文件变化时，有文件删除或是添加时，触发的事件，可以选中通知客户端刷新数据
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.SimpleShareFileServer.OnFileChange">
+            <summary>
+            刷新客户端的文件信息
             </summary>
         </member>
         <member name="T:IndustryEthernet.Net_File_Server">
@@ -1258,6 +1376,53 @@
             日志存储快
             </summary>
         </member>
+        <member name="T:IndustryEthernet.FileItemShow">
+            <summary>
+            文件显示的子控件类
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.FileItemShow.#ctor(System.String,System.Int32,System.Func{System.Boolean})">
+            <summary>
+            生成一个文件对象的显示控件
+            </summary>
+            <param name="serverIp">服务器的IP地址</param>
+            <param name="serverPort">服务器的端口号</param>
+            <param name="deleteCheck">用户自定义的删除确认委托，可用于验证权限及密码</param>
+        </member>
+        <member name="P:IndustryEthernet.FileItemShow.ServerIp">
+            <summary>
+            服务器的IP地址
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.FileItemShow.ServerPort">
+            <summary>
+            服务器的端口号
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.FileItemShow.SetFile(IndustryEthernet.File_Save,System.Func{System.Boolean})">
+            <summary>
+            设置文件数据
+            </summary>
+            <param name="file">文件的信息对象</param>
+            <param name="deleteEnable">删除控件的使能委托</param>
+        </member>
+        <member name="F:IndustryEthernet.FileItemShow.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.FileItemShow.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:IndustryEthernet.FileItemShow.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
         <member name="T:IndustryEthernet.FileOperateControl">
             <summary>
             上传或下载的控件
@@ -1430,6 +1595,597 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:IndustryEthernet.FormSimplyFileUpload">
+            <summary>
+            用于文件上传的类
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.FormSimplyFileUpload.#ctor(System.String,System.Int32,System.String)">
+            <summary>
+            实例化一个文件上传的窗口
+            </summary>
+            <param name="serverIp">服务器的IP地址</param>
+            <param name="serverPort">服务器的端口号</param>
+            <param name="uploadName">文件上传人的名称</param>
+        </member>
+        <member name="P:IndustryEthernet.FormSimplyFileUpload.ServerIp">
+            <summary>
+            服务器的IP地址
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.FormSimplyFileUpload.ServerPort">
+            <summary>
+            服务器的端口号
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.FormSimplyFileUpload.UploadName">
+            <summary>
+            文件长传人的名称
+            </summary>
+        </member>
+        <member name="F:IndustryEthernet.FormSimplyFileUpload.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:IndustryEthernet.FormSimplyFileUpload.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:IndustryEthernet.FormSimplyFileUpload.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:IndustryEthernet.Properties.Resources">
+            <summary>
+              一个强类型的资源类，用于查找本地化的字符串等。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.ResourceManager">
+            <summary>
+              返回此类使用的缓存的 ResourceManager 实例。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.Culture">
+            <summary>
+              使用此强类型资源类，为所有资源查找
+              重写当前线程的 CurrentUICulture 属性。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources._7z">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources._class">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.ai">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.aiff">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.arj">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.asc">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.asp">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.audio">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.avi">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.bin">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.bmp">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.bz2">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.c">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.cdr">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.cfc">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.cfm">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.chm">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.conf">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.cpp">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.cs">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.css">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.csv">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.deb">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.divx">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.doc">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.docx">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.dot">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.eml">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.enc">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.eps">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.exe">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.f4v">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.file">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.flv">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.gif">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.gz">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.hlp">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.htm">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.html">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.ics">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.image">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.iso">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.jar">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.java">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.jpg">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.js">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.jsp">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.lua">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.m">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.mm">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.mov">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.mp3">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.mpg">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.msi">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.odc">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.odf">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.odg">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.odi">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.odp">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.ods">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.odt">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.ogg">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.pdf">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.perl">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.pgp">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.php">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.pl">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.png">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.ppt">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.ps">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.psd">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.py">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.ram">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.rar">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.rb">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.rm">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.rpm">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.rtf">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.ruby">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.sig">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.sql">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.svg">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.swf">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.sxc">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.sxd">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.sxi">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.sxw">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.tar">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.tex">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.tgz">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.tif">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.ttf">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.txt">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.vb">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.vcf">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.vdo">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.video">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.vsd">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.wav">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.wma">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.xls">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.xml">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.xpi">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.xul">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.xvid">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:IndustryEthernet.Properties.Resources.zip">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
         <member name="T:IndustryEthernet.SerialSupport.CRC">

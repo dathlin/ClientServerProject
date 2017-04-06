@@ -51,6 +51,8 @@ namespace CommonLibrary
             public static string 关闭所有客户端 { get; } = "H002";
             public static string 弹窗消息 { get; } = "H003";
             public static string 时间推送 { get; } = "H004";
+            public static string 文件数量 { get; } = "HA00";
+            public static string 初始化数据 { get; } = "HA01";
         }
 
 

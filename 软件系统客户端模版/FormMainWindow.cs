@@ -277,14 +277,23 @@ namespace 软件系统客户端模版
                     fpp.Show();
                 }));
             }
-            else if (head_code == CommonHeadCode.MultiNetHeadCode.时间推送)
+            else if (head_code == CommonHeadCode.MultiNetHeadCode.初始化数据)
             {
-                //收到服务器更新时间
-                UserClient.DateTimeServer = Convert.ToDateTime(object2.Substring(4));
+                //收到服务器的数据
+                JObject json = JObject.Parse(object2.Substring(4));
+                UserClient.DateTimeServer = json["Time"].ToObject<DateTime>();
+                label_file_count.Text = json["FileCount"].ToObject<int>().ToString();
                 if (IsHandleCreated) Invoke(new Action(() =>
                  {
                      toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm");
                  }));
+            }
+            else if(head_code==CommonHeadCode.MultiNetHeadCode.文件数量)
+            {
+                if (IsHandleCreated) Invoke(new Action(() =>
+                {
+                    label_file_count.Text = object2.Substring(4);
+                }));
             }
         }
 

@@ -10,6 +10,7 @@ using IndustryEthernet;
 using System.Threading;
 using CommonLibrary;
 using BasicFramework;
+using Newtonsoft.Json.Linq;
 
 
 //============================================================================
@@ -112,6 +113,7 @@ namespace 软件系统服务端模版
                 Net_Socket_Server_Initialization();
                 Net_SoftUpdate_Server_Initialization();
                 Net_File_Update_Initialization();
+                Simple_File_Initiaization();
                 启动服务器ToolStripMenuItem.Text = "已启动";
                 启动服务器ToolStripMenuItem.BackColor = Color.LimeGreen;
                 IsSystemStart = true;
@@ -452,8 +454,13 @@ namespace 软件系统服务端模版
 
         private void Net_socket_server_ClientOnline(HuTcpState object1)
         {
-            //上线后回发一条时间推送的数据
-            net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.时间推送 + DateTime.Now.ToString("O"));
+            //上线后回发一条数据初始化信息
+            JObject json = new JObject
+            {
+                { "Time", new JValue(DateTime.Now) },
+                { "FileCount", new JValue(net_simple_file_server.File_Count()) }
+            };
+            net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据 + json.ToString());
             //触发上下线功能
             Net_socket_clients_change(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" +
                         object1._Login_Alias + " 上线");
@@ -520,6 +527,40 @@ namespace 软件系统服务端模版
 
 
         #endregion
+
+        #region 共享文件下载块
+
+        private SimpleShareFileServer net_simple_file_server { get; set; } = null;
+
+        private void Simple_File_Initiaization()
+        {
+            try
+            {
+                net_simple_file_server = new SimpleShareFileServer(
+                    list => JArray.FromObject(list).ToString(),
+                    str => JArray.Parse(str).ToObject<List<File_Save>>());
+                //文件信息存储路径
+                net_simple_file_server.FileSavePath = Application.StartupPath + @"\files.txt";
+                //文件存储路径
+                net_simple_file_server.File_save_path = Application.StartupPath + @"\Files";
+                net_simple_file_server.FileChange += Net_simple_file_server_FileChange;
+                net_simple_file_server.FileEngineStart(CommonLibrary.CommonLibrary.Port_Share_File);
+            }
+            catch(Exception ex)
+            {
+                SoftBasic.ShowExceptionMessage(ex);
+            }
+        }
+
+        private void Net_simple_file_server_FileChange()
+        {
+            //将文件数据发送给客户端
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.文件数量 + net_simple_file_server.File_Count());
+        }
+
+
+        #endregion
+
 
         /// <summary>
         /// 还未有其他什么用途
