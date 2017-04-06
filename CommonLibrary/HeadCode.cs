@@ -31,6 +31,7 @@ namespace CommonLibrary
             public static string 更新公告 { get; } = "A008";
             public static string 注册账号 { get; } = "A009";
             public static string 更新版本号 { get; } = "A010";
+            public static string 请求文件列表 { get; } = "AA01";
 
 
 

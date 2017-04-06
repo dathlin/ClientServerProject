@@ -50,6 +50,8 @@
             this.更新日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.版本号说明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label_file_count = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.linkLabel_logout = new System.Windows.Forms.LinkLabel();
             this.label_factory = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -68,8 +70,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label_Announcement = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label_file_count = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -146,7 +146,7 @@
             this.关于ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(921, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(921, 35);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -159,41 +159,41 @@
             this.远程更新ToolStripMenuItem,
             this.注册账号ToolStripMenuItem});
             this.管理员ToolStripMenuItem.Name = "管理员ToolStripMenuItem";
-            this.管理员ToolStripMenuItem.Size = new System.Drawing.Size(84, 29);
+            this.管理员ToolStripMenuItem.Size = new System.Drawing.Size(84, 31);
             this.管理员ToolStripMenuItem.Text = "管理员";
             // 
             // 更改公告ToolStripMenuItem
             // 
             this.更改公告ToolStripMenuItem.Name = "更改公告ToolStripMenuItem";
-            this.更改公告ToolStripMenuItem.Size = new System.Drawing.Size(164, 30);
+            this.更改公告ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.更改公告ToolStripMenuItem.Text = "更改公告";
             this.更改公告ToolStripMenuItem.Click += new System.EventHandler(this.更改公告ToolStripMenuItem_Click);
             // 
             // 日志查看ToolStripMenuItem
             // 
             this.日志查看ToolStripMenuItem.Name = "日志查看ToolStripMenuItem";
-            this.日志查看ToolStripMenuItem.Size = new System.Drawing.Size(164, 30);
+            this.日志查看ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.日志查看ToolStripMenuItem.Text = "日志查看";
             this.日志查看ToolStripMenuItem.Click += new System.EventHandler(this.日志查看ToolStripMenuItem_Click);
             // 
             // 账户管理ToolStripMenuItem
             // 
             this.账户管理ToolStripMenuItem.Name = "账户管理ToolStripMenuItem";
-            this.账户管理ToolStripMenuItem.Size = new System.Drawing.Size(164, 30);
+            this.账户管理ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.账户管理ToolStripMenuItem.Text = "账户管理";
             this.账户管理ToolStripMenuItem.Click += new System.EventHandler(this.账户管理ToolStripMenuItem_Click);
             // 
             // 远程更新ToolStripMenuItem
             // 
             this.远程更新ToolStripMenuItem.Name = "远程更新ToolStripMenuItem";
-            this.远程更新ToolStripMenuItem.Size = new System.Drawing.Size(164, 30);
+            this.远程更新ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.远程更新ToolStripMenuItem.Text = "远程更新";
             this.远程更新ToolStripMenuItem.Click += new System.EventHandler(this.远程更新ToolStripMenuItem_Click);
             // 
             // 注册账号ToolStripMenuItem
             // 
             this.注册账号ToolStripMenuItem.Name = "注册账号ToolStripMenuItem";
-            this.注册账号ToolStripMenuItem.Size = new System.Drawing.Size(164, 30);
+            this.注册账号ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.注册账号ToolStripMenuItem.Text = "注册账号";
             this.注册账号ToolStripMenuItem.Click += new System.EventHandler(this.注册账号ToolStripMenuItem_Click);
             // 
@@ -202,13 +202,13 @@
             this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.修改密码ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
-            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
+            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(64, 31);
             this.设置ToolStripMenuItem.Text = "设置";
             // 
             // 修改密码ToolStripMenuItem
             // 
             this.修改密码ToolStripMenuItem.Name = "修改密码ToolStripMenuItem";
-            this.修改密码ToolStripMenuItem.Size = new System.Drawing.Size(164, 30);
+            this.修改密码ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.修改密码ToolStripMenuItem.Text = "修改密码";
             this.修改密码ToolStripMenuItem.Click += new System.EventHandler(this.修改密码ToolStripMenuItem_Click);
             // 
@@ -219,27 +219,27 @@
             this.更新日志ToolStripMenuItem,
             this.版本号说明ToolStripMenuItem});
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(64, 31);
             this.关于ToolStripMenuItem.Text = "关于";
             // 
             // 关于本软件ToolStripMenuItem
             // 
             this.关于本软件ToolStripMenuItem.Name = "关于本软件ToolStripMenuItem";
-            this.关于本软件ToolStripMenuItem.Size = new System.Drawing.Size(184, 30);
+            this.关于本软件ToolStripMenuItem.Size = new System.Drawing.Size(184, 32);
             this.关于本软件ToolStripMenuItem.Text = "关于本软件";
             this.关于本软件ToolStripMenuItem.Click += new System.EventHandler(this.关于本软件ToolStripMenuItem_Click);
             // 
             // 更新日志ToolStripMenuItem
             // 
             this.更新日志ToolStripMenuItem.Name = "更新日志ToolStripMenuItem";
-            this.更新日志ToolStripMenuItem.Size = new System.Drawing.Size(184, 30);
+            this.更新日志ToolStripMenuItem.Size = new System.Drawing.Size(184, 32);
             this.更新日志ToolStripMenuItem.Text = "更新日志";
             this.更新日志ToolStripMenuItem.Click += new System.EventHandler(this.更新日志ToolStripMenuItem_Click);
             // 
             // 版本号说明ToolStripMenuItem
             // 
             this.版本号说明ToolStripMenuItem.Name = "版本号说明ToolStripMenuItem";
-            this.版本号说明ToolStripMenuItem.Size = new System.Drawing.Size(184, 30);
+            this.版本号说明ToolStripMenuItem.Size = new System.Drawing.Size(184, 32);
             this.版本号说明ToolStripMenuItem.Text = "版本号说明";
             this.版本号说明ToolStripMenuItem.Click += new System.EventHandler(this.版本号说明ToolStripMenuItem_Click);
             // 
@@ -267,10 +267,31 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel1.Location = new System.Drawing.Point(697, 33);
+            this.panel1.Location = new System.Drawing.Point(697, 35);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(224, 421);
+            this.panel1.Size = new System.Drawing.Size(224, 419);
             this.panel1.TabIndex = 2;
+            // 
+            // label_file_count
+            // 
+            this.label_file_count.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_file_count.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label_file_count.Location = new System.Drawing.Point(82, 143);
+            this.label_file_count.Name = "label_file_count";
+            this.label_file_count.Size = new System.Drawing.Size(129, 17);
+            this.label_file_count.TabIndex = 18;
+            this.label_file_count.Text = "0";
+            this.label_file_count.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label_file_count.Click += new System.EventHandler(this.label_file_count_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(8, 143);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(68, 17);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "文件数量：";
             // 
             // linkLabel_logout
             // 
@@ -321,7 +342,7 @@
             this.listBox1.Location = new System.Drawing.Point(11, 183);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBox1.Size = new System.Drawing.Size(200, 208);
+            this.listBox1.Size = new System.Drawing.Size(200, 242);
             this.listBox1.TabIndex = 12;
             // 
             // label_address
@@ -444,25 +465,6 @@
             this.label_Announcement.TabIndex = 3;
             this.label_Announcement.Text = "[公告]";
             this.label_Announcement.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(8, 143);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(68, 17);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "文件数量：";
-            // 
-            // label_file_count
-            // 
-            this.label_file_count.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label_file_count.Location = new System.Drawing.Point(82, 143);
-            this.label_file_count.Name = "label_file_count";
-            this.label_file_count.Size = new System.Drawing.Size(129, 17);
-            this.label_file_count.TabIndex = 18;
-            this.label_file_count.Text = "0";
-            this.label_file_count.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // FormMainWindow
             // 

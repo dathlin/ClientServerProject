@@ -19,6 +19,7 @@ using Newtonsoft.Json.Linq;
 //    版权所有  胡少林
 //    授权说明  模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
 //    说明      JSON组件引用自james newton-king，遵循MIT授权协议
+//    说明      文件的图标来源于,感谢作者的无私分享
 //============================================================================
 
 
@@ -386,6 +387,10 @@ namespace 软件系统服务端模版
             {
                 bool result = UserServer.ServerAccounts.AddNewAccount(object2.Substring(4));
                 net_simplify_server.SendMessage(object1, result ? "1" : "0");
+            }
+            else if(head_code == CommonHeadCode.SimplifyHeadCode.请求文件列表)
+            {
+                net_simplify_server.SendMessage(object1, net_simple_file_server.ToJsonString());
             }
             else
             {
