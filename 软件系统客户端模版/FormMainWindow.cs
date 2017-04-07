@@ -19,6 +19,7 @@ using System.Threading;
 //    版权所有  胡少林
 //    授权说明  模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
 //    说明      JSON组件引用自james newton-king，遵循MIT授权协议
+//    说明      文件的图标来源于http://fileicons.chromefans.org/,感谢作者的无私分享
 //============================================================================
 
 
@@ -282,10 +283,10 @@ namespace 软件系统客户端模版
                 //收到服务器的数据
                 JObject json = JObject.Parse(object2.Substring(4));
                 UserClient.DateTimeServer = json["Time"].ToObject<DateTime>();
-                label_file_count.Text = json["FileCount"].ToObject<int>().ToString();
                 if (IsHandleCreated) Invoke(new Action(() =>
                  {
                      toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm");
+                     label_file_count.Text = json["FileCount"].ToObject<int>().ToString();
                  }));
             }
             else if(head_code==CommonHeadCode.MultiNetHeadCode.文件数量)
@@ -373,9 +374,10 @@ namespace 软件系统客户端模版
 
             UIControls_Files = new UIControls.ShareFilesRender()
             {
-                Parent = this,
-                Dock = DockStyle.Fill,
+                Parent = this,//决定了放在哪个界面显示，此处仅仅是测试
                 Visible = true,
+                Location = new Point(100, 100),
+                //Dock = DockStyle.Fill,
             };
             all_main_render.Add(UIControls_Files);
         }

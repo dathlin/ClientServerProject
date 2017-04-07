@@ -17,6 +17,8 @@ namespace 软件系统客户端模版.UIControls
         public ShareFilesRender()
         {
             InitializeComponent();
+
+            DoubleBuffered = true;
         }
 
         private void userButton_upload_Click(object sender, EventArgs e)
@@ -78,11 +80,14 @@ namespace 软件系统客户端模版.UIControls
                             }
                         });
                     panel2.Controls.Add(item);
+                    item.BackColor = Color.White;
+                    item.BorderStyle = BorderStyle.FixedSingle;
+                    item.SetFile(m, () => m.UploadName == UserClient.UserAccount.UserName);
                     item.Location = new Point(2, location_y);
-                    item.Size = new Size(panel2.Width - 20, item.Size.Height);
+                    item.Size = new Size(panel2.Width - 4, item.Size.Height);
                     item.Anchor = (AnchorStyles)(AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
 
-                    location_y += item.Height + 2;
+                    location_y += item.Height + 4;
                     FilesControls.Push(item);
                 }
             }
@@ -121,10 +126,13 @@ namespace 软件系统客户端模版.UIControls
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             //搜索时触发的数据
-            if(string.IsNullOrEmpty(textBox1.Text))
+            if(!string.IsNullOrEmpty(textBox1.Text))
             {
                 string pattern = textBox1.Text;
-                SetFilesShow(Cache_Files.Where(f => f.FileName.Contains(pattern) || f.FileNote.Contains(pattern)).ToList());
+                SetFilesShow(Cache_Files.Where(f => 
+                f.FileName.Contains(pattern) || 
+                f.FileNote.Contains(pattern) ||
+                f.UploadName.Contains(pattern)).ToList());
             }
             else
             {
