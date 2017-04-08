@@ -85,6 +85,14 @@ namespace CommonLibrary
         /// 代号描述的文本
         /// </summary>
         public string Description { get; set; } = string.Empty;
+        /// <summary>
+        /// 过去描述
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return Description;
+        }
     }
     
 }
