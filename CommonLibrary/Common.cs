@@ -40,5 +40,51 @@ namespace CommonLibrary
     }
 
 
+    /// <summary>
+    /// 选项类，包含了所有的标识和文本的对应关系
+    /// </summary>
+    public class BasicOptions
+    {
+        /// <summary>
+        /// 测试，用于生成数据状态的信息存储
+        /// </summary>
+        public static readonly List<BasicOptions> test = new List<BasicOptions>()
+        {
+            new BasicOptions(0,"测试一"),
+            new BasicOptions(1,"测试二"),
+            new BasicOptions(2,"测试三"),
+        };
+
+
+
+
+
+
+        /// <summary>
+        /// 实例化一个对象
+        /// </summary>
+        public BasicOptions()
+        {
+
+        }
+        /// <summary>
+        /// 根据信息实例化一个选项对象
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="des"></param>
+        public BasicOptions(int code, string des)
+        {
+            IntegerCode = code;
+            Description = des;
+        }
+        /// <summary>
+        /// 整数的代号
+        /// </summary>
+        public int IntegerCode { get; set; } = 0;
+        /// <summary>
+        /// 代号描述的文本
+        /// </summary>
+        public string Description { get; set; } = string.Empty;
+    }
     
 }
