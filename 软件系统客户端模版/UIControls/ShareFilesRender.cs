@@ -84,8 +84,9 @@ namespace 软件系统客户端模版.UIControls
                     item.BorderStyle = BorderStyle.FixedSingle;
                     item.SetFile(m, () => m.UploadName == UserClient.UserAccount.UserName);
                     item.Location = new Point(2, location_y);
-                    item.Size = new Size(panel2.Width - 4, item.Size.Height);
-                    item.Anchor = (AnchorStyles)(AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+                    int width = panel2.VerticalScroll.Visible ? panel2.Width - 4 - SystemInformation.VerticalScrollBarWidth : panel2.Width - 4;
+                    item.Size = new Size(width, item.Size.Height);
+                    item.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 
                     location_y += item.Height + 4;
                     FilesControls.Push(item);
