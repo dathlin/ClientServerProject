@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.Threading;
 using Newtonsoft.Json.Linq;
 using HslCommunication;
-using HslCommunication.Enthernet;
 
 namespace 软件系统客户端模版
 {
