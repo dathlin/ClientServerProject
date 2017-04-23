@@ -6,7 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using IndustryEthernet;
+using HslCommunication;
+using HslCommunication.Enthernet;
 using CommonLibrary;
 
 namespace 软件系统客户端模版

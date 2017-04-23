@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using IndustryEthernet;
+using HslCommunication.Enthernet;
 
 
 namespace 软件系统客户端模版

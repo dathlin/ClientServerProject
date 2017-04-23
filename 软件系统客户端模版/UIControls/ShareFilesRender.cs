@@ -6,8 +6,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using IndustryEthernet;
 using Newtonsoft.Json.Linq;
+using HslCommunication.Enthernet;
+using HslCommunication;
 
 
 namespace 软件系统客户端模版.UIControls

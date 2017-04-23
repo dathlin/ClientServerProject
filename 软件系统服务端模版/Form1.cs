@@ -6,7 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using IndustryEthernet;
+using HslCommunication;
+using HslCommunication.Enthernet;
 using System.Threading;
 using CommonLibrary;
 using BasicFramework;
@@ -206,12 +207,12 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_soft_update_Server.log_record.log_save_path = Application.StartupPath + @"\update_log.txt";
+                net_soft_update_Server.LogHelper.LogSaveFileName = Application.StartupPath + @"\update_log.txt";
                 //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
                 //只放置exe和dll组件，必须放置：软件自动更新.exe
                 net_soft_update_Server.KeyToken = CommonHeadCode.KeyToken;
                 net_soft_update_Server.FileUpdatePath = @"C:\ClientFiles";
-                net_soft_update_Server.AutoUpdateEngineStart(CommonLibrary.CommonLibrary.Port_Update_Net);
+                net_soft_update_Server.ServerStart(CommonLibrary.CommonLibrary.Port_Update_Net);
             }
             catch (Exception ex)
             {
@@ -233,10 +234,10 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_file_update.FilesPath = @"C:\ClientFiles";//服务器客户端需要更新的路径，与上述一致
-                net_file_update.log_record.log_save_path = Application.StartupPath + @"\update_file_log.txt";
+                net_file_update.FilesPath = Application.StartupPath + @"\ClientFiles";//服务器客户端需要更新的路径，与上述一致
+                net_file_update.LogHelper.LogSaveFileName = Application.StartupPath + @"\update_file_log.txt";
                 net_file_update.KeyToken = CommonHeadCode.KeyToken;
-                net_file_update.Server_Start(CommonLibrary.CommonLibrary.Port_Update_Remote);
+                net_file_update.ServerStart(CommonLibrary.CommonLibrary.Port_Update_Remote);
             }
             catch (Exception ex)
             {
@@ -258,10 +259,10 @@ namespace 软件系统服务端模版
             try
             {
                 net_simplify_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
-                net_simplify_server.log_record.log_save_path = Application.StartupPath + @"\simplify_log.txt";
+                net_simplify_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\simplify_log.txt";
                 net_simplify_server.ReceiveStringEvent += Net_simplify_server_ReceiveStringEvent;
                 net_simplify_server.ReceivedBytesEvent += Net_simplify_server_ReceivedBytesEvent;
-                net_simplify_server.Server_Start(CommonLibrary.CommonLibrary.Port_Second_Net);
+                net_simplify_server.ServerStart(CommonLibrary.CommonLibrary.Port_Second_Net);
             }
             catch (Exception ex)
             {
@@ -310,7 +311,7 @@ namespace 软件系统服务端模版
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
                 net_simplify_server.SendMessage(object1, UserServer.ServerAccounts.CheckAccountJson(
-                    name, password, ((System.Net.IPEndPoint)(object1._WorkSocket.RemoteEndPoint)).Address.ToString()));
+                    name, password, ((System.Net.IPEndPoint)(object1.WorkSocket.RemoteEndPoint)).Address.ToString()));
             }
             else if (head_code == CommonHeadCode.SimplifyHeadCode.更新公告)
             {
@@ -357,29 +358,29 @@ namespace 软件系统服务端模版
             }
             else if (head_code == CommonHeadCode.SimplifyHeadCode.网络日志查看)
             {
-                net_simplify_server.SendMessage(object1, net_socket_server.LogReacord.GetLogText());
+                net_simplify_server.SendMessage(object1, net_socket_server.LogHelper.GetLogText());
             }
             else if (head_code == CommonHeadCode.SimplifyHeadCode.网络日志清空)
             {
-                net_socket_server.LogReacord.ClearLogText();
+                net_socket_server.LogHelper.ClearLogText();
                 net_simplify_server.SendMessage(object1, "成功");
             }
             else if (head_code == CommonHeadCode.SimplifyHeadCode.同步日志查看)
             {
-                net_simplify_server.SendMessage(object1, net_simplify_server.log_record.GetLogText());
+                net_simplify_server.SendMessage(object1, net_simplify_server.LogHelper.GetLogText());
             }
             else if (head_code == CommonHeadCode.SimplifyHeadCode.同步日志清空)
             {
-                net_simplify_server.log_record.ClearLogText();
+                net_simplify_server.LogHelper.ClearLogText();
                 net_simplify_server.SendMessage(object1, "成功");
             }
             else if (head_code == CommonHeadCode.SimplifyHeadCode.更新日志查看)
             {
-                net_simplify_server.SendMessage(object1, net_soft_update_Server.log_record.GetLogText());
+                net_simplify_server.SendMessage(object1, net_soft_update_Server.LogHelper.GetLogText());
             }
             else if (head_code == CommonHeadCode.SimplifyHeadCode.更新日志清空)
             {
-                net_soft_update_Server.log_record.ClearLogText();
+                net_soft_update_Server.LogHelper.ClearLogText();
                 net_simplify_server.SendMessage(object1, "成功");
             }
             else if (head_code == CommonHeadCode.SimplifyHeadCode.注册账号)
@@ -409,7 +410,7 @@ namespace 软件系统服务端模版
             try
             {
                 net_socket_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
-                net_socket_server.LogReacord.log_save_path = Application.StartupPath + @"\net_log.txt";
+                net_socket_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\net_log.txt";
                 net_socket_server.FormatClientOnline = "#IP:{0} Name:{1}";//必须为#开头，具体格式可由自身需求确定
                 net_socket_server.IsSaveLogClientLineChange = true;
                 net_socket_server.ClientOnline += Net_socket_server_ClientOnline;
@@ -417,7 +418,7 @@ namespace 软件系统服务端模版
                 net_socket_server.MessageAlerts += Net_socket_server_MessageAlerts;
                 net_socket_server.AcceptByte += Net_socket_server_AcceptByte;
                 net_socket_server.AcceptString += Net_socket_server_AcceptString;
-                net_socket_server.SocketStart(CommonLibrary.CommonLibrary.Port_Main_Net);
+                net_socket_server.ServerStart(CommonLibrary.CommonLibrary.Port_Main_Net);
             }
             catch (Exception ex)
             {
@@ -549,7 +550,7 @@ namespace 软件系统服务端模版
                 //文件存储路径
                 net_simple_file_server.File_save_path = Application.StartupPath + @"\Files";
                 net_simple_file_server.FileChange += Net_simple_file_server_FileChange;
-                net_simple_file_server.FileEngineStart(CommonLibrary.CommonLibrary.Port_Share_File);
+                net_simple_file_server.ServerStart(CommonLibrary.CommonLibrary.Port_Share_File);
             }
             catch(Exception ex)
             {
@@ -570,6 +571,6 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 还未有其他什么用途
         /// </summary>
-        private Log_Record log = new Log_Record();
+        private HslLogHelper LogHelper = new HslLogHelper();
     }
 }

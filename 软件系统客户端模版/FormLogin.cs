@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using IndustryEthernet;
 using Newtonsoft.Json.Linq;
+using HslCommunication;
+using HslCommunication.Enthernet;
 
 namespace 软件系统客户端模版
 {
@@ -180,7 +181,7 @@ namespace 软件系统客户端模版
             else
             {
                 //访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Message);
+                if (IsHandleCreated) Invoke(message_show, result.Error.Message);
                 if (IsHandleCreated) Invoke(thread_finish);
                 return;
             }
@@ -220,7 +221,7 @@ namespace 软件系统客户端模版
             else
             {
                 //访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Message);
+                if (IsHandleCreated) Invoke(message_show, result.Error.Message);
                 if (IsHandleCreated) Invoke(thread_finish);
                 return;
             }
@@ -272,7 +273,7 @@ namespace 软件系统客户端模版
             else
             {
                 //访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Message);
+                if (IsHandleCreated) Invoke(message_show, result.Error.Message);
                 if (IsHandleCreated) Invoke(thread_finish);
                 return;
             }
@@ -301,7 +302,7 @@ namespace 软件系统客户端模版
             else
             {
                 //访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Message);
+                if (IsHandleCreated) Invoke(message_show, result.Error.Message);
                 if (IsHandleCreated) Invoke(thread_finish);
                 return;
             }

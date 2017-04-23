@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using BasicFramework;
-using IndustryEthernet;
 using Newtonsoft.Json.Linq;
 using CommonLibrary;
 using System.Threading;
+using HslCommunication;
+using HslCommunication.Enthernet;
 
 
 //============================================================================
@@ -172,14 +173,14 @@ namespace 软件系统客户端模版
 
         private void 日志查看ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormLog flg = new FormLog(UserClient.Net_simplify_client);
+            FormLog flg = new FormLog();
             flg.ShowDialog();
             flg.Dispose();
         }
 
         private void 注册账号ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FormRegisterAccount fra = new FormRegisterAccount(UserClient.Net_simplify_client))
+            using (FormRegisterAccount fra = new FormRegisterAccount())
             {
                 fra.ShowDialog();
             }

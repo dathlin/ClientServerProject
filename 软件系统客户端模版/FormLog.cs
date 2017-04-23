@@ -6,17 +6,20 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using IndustryEthernet;
 using CommonLibrary;
+
+using HslCommunication;
+using HslCommunication.Enthernet;
+
 
 namespace 软件系统客户端模版
 {
     public partial class FormLog : Form
     {
-        public FormLog(Net_Simplify_Client client)
+        public FormLog()
         {
             InitializeComponent();
-            net_simplify_client = client;
+            net_simplify_client = UserClient.Net_simplify_client;
         }
 
         private Net_Simplify_Client net_simplify_client = null;

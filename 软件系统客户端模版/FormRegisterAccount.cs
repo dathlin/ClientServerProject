@@ -6,17 +6,18 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using IndustryEthernet;
+using HslCommunication.Enthernet;
+using HslCommunication;
 
 namespace 软件系统客户端模版
 {
     public partial class FormRegisterAccount : Form
     {
-        public FormRegisterAccount(Net_Simplify_Client client)
+        public FormRegisterAccount()
         {
             InitializeComponent();
 
-            net_client = client;
+            net_client = UserClient.Net_simplify_client;
         }
         
         private void FormRegisterAccount_Load(object sender, EventArgs e)
