@@ -180,7 +180,7 @@ namespace 软件系统客户端模版
             else
             {
                 //访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Error.Message);
+                if (IsHandleCreated) Invoke(message_show, result.Message);
                 if (IsHandleCreated) Invoke(thread_finish);
                 return;
             }
@@ -220,7 +220,7 @@ namespace 软件系统客户端模版
             else
             {
                 //访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Error.Message);
+                if (IsHandleCreated) Invoke(message_show, result.Message);
                 if (IsHandleCreated) Invoke(thread_finish);
                 return;
             }
@@ -272,7 +272,7 @@ namespace 软件系统客户端模版
             else
             {
                 //访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Error.Message);
+                if (IsHandleCreated) Invoke(message_show, result.Message);
                 if (IsHandleCreated) Invoke(thread_finish);
                 return;
             }
@@ -301,7 +301,7 @@ namespace 软件系统客户端模版
             else
             {
                 //访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Error.Message);
+                if (IsHandleCreated) Invoke(message_show, result.Message);
                 if (IsHandleCreated) Invoke(thread_finish);
                 return;
             }
