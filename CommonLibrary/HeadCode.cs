@@ -19,6 +19,7 @@ namespace CommonLibrary
         /// <summary>
         /// 同步通信的头说明，以字母A开头
         /// </summary>
+        [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Auto)]
         public class SimplifyHeadCode
         {
             public static string 维护检查 { get; } = "A001";//A开始的表明是系统相关的
