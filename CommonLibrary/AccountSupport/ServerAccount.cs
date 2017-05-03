@@ -14,14 +14,14 @@ namespace CommonLibrary
     public class ServerAccounts<T> where T : UserAccount, new()
     {
         /// <summary>
-        /// 初始化構造方法
+        /// 初始化构造方法
         /// </summary>
         public ServerAccounts()
         {
 
         }
         /// <summary>
-        /// 初始化構造方法，将添加几个初始化账户
+        /// 初始化构造方法，将添加几个初始化账户
         /// </summary>
         public ServerAccounts(IEnumerable<T> accounts)
         {
@@ -226,7 +226,7 @@ namespace CommonLibrary
         }
 
         /// <summary>
-        /// 使用Base64编码將所有的帳戶信息保存到文件
+        /// 使用Base64编码将所有的账户信息保存到文件
         /// </summary>
         public void SaveFile()
         {
@@ -236,6 +236,7 @@ namespace CommonLibrary
         /// <summary>
         /// 使用自定义的加密方法将所有账户信息保存到文件
         /// </summary>
+        /// <param name="encrypt">加密的方式</param>
         public void SaveFile(Converter<string, string> encrypt)
         {
             if (FileSavePath != "")

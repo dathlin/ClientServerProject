@@ -38,12 +38,20 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountSupport\FormAccountManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountSupport\FormAccountManage.designer.cs">
+      <DependentUpon>FormAccountManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="AccountSupport\ServerAccount.cs" />
     <Compile Include="AccountSupport\UserAccount.cs" />
     <Compile Include="Common.cs" />
@@ -55,6 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AccountSupport\FormAccountManage.resx">
+      <DependentUpon>FormAccountManage.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
