@@ -8,10 +8,10 @@ using Newtonsoft.Json.Linq;
 namespace CommonLibrary
 {
     /// <summary>
-    /// 服务器的账户管理类，如果你采用这种方式存储，必须仔细阅读说明手册
+    /// 服务器的账户管理类，如果你采用这种方式存储，请参照本项目事例
     /// </summary>
     /// <typeparam name="T">账户类，该类必须派生自UserAccount类</typeparam>
-    public class ServerAccounts<T> where T : UserAccount, new()
+    public class ServerAccounts<T> : HslCommunication.BasicFramework.SoftFileSaveBase where T : UserAccount, new()
     {
         /// <summary>
         /// 初始化构造方法
@@ -27,11 +27,6 @@ namespace CommonLibrary
         {
             all_list_accounts.AddRange(accounts);
         }
-
-        /// <summary>
-        /// 所有的帳戶信息存儲的位置，只有設置了才進行保存
-        /// </summary>
-        public string FileSavePath { get; set; } = "";
 
         private List<T> all_list_accounts = new List<T>();
 
@@ -129,15 +124,8 @@ namespace CommonLibrary
         /// <returns>成功True，失败False</returns>
         public bool AddNewAccount(string json_account)
         {
-            try
-            {
-                T account = JObject.Parse(json_account).ToObject<T>();
-                return AddNewAccount(account);
-            }
-            catch
-            {
-                return false;
-            }
+            T account = JObject.Parse(json_account).ToObject<T>();
+            return AddNewAccount(account);
         }
         /// <summary>
         /// 新增一个账户，如果账户名称已经存在，则返回False，注册成功返回True
@@ -218,72 +206,46 @@ namespace CommonLibrary
                 {
                     all_list_accounts = JArray.Parse(json).ToObject<List<T>>();
                 }
-                catch
+                catch(Exception ex)
                 {
-
-                }
-            }
-        }
-
-        /// <summary>
-        /// 使用Base64编码将所有的账户信息保存到文件
-        /// </summary>
-        public void SaveFile()
-        {
-            SaveFile(m => Convert.ToBase64String(Encoding.Unicode.GetBytes(m)));
-        }
-
-        /// <summary>
-        /// 使用自定义的加密方法将所有账户信息保存到文件
-        /// </summary>
-        /// <param name="encrypt">加密的方式</param>
-        public void SaveFile(Converter<string, string> encrypt)
-        {
-            if (FileSavePath != "")
-            {
-                string result = GetAllAccountsJson();
-                StreamWriter sw = new StreamWriter(FileSavePath, false, Encoding.Default);
-                sw.Write(encrypt(result));
-                sw.Flush();
-                sw.Dispose();
-            }
-        }
-
-        /// <summary>
-        /// 使用Base64编码从文件加载所有的账户
-        /// </summary>
-        public void LoadByFile()
-        {
-            LoadByFile(m => Encoding.Unicode.GetString(Convert.FromBase64String(m)));
-        }
-        /// <summary>
-        /// 使用自定义的解密方法加载所有的账户
-        /// </summary>
-        public void LoadByFile(Converter<string, string> decrypt)
-        {
-            if (FileSavePath != "")
-            {
-                if (File.Exists(FileSavePath))
-                {
-                    StreamReader sr = new StreamReader(FileSavePath, Encoding.Default);
-                    string result = sr.ReadToEnd();
-                    sr.Close();
-                    sr.Dispose();
-                    result = decrypt(result);
-                    LoadAllAccountsJson(result);
+                    LogHelper.LogSave(Resource.StringResouce.AccountLoadFailed, ex);
                 }
             }
         }
 
 
-        /**************************************************************
-         * 
-         *    日志记录块，保存运行中的所有的异常信息，方便追踪系统异常
-         * 
-         *************************************************************/
+
+
+
         /// <summary>
-        /// 日志记录对象
+        /// 从字符串加载数据内容
         /// </summary>
-        public HslCommunication.Enthernet.HslLogHelper LogHelper { get; set; }
+        /// <param name="content"></param>
+        public override void LoadByString(string content)
+        {
+            LoadAllAccountsJson(content);
+        }
+        /// <summary>
+        /// 获取需要保存的数据内容
+        /// </summary>
+        /// <returns></returns>
+        public override string ToSaveString()
+        {
+            return GetAllAccountsJson();
+        }
+        /// <summary>
+        /// 使用加密规则从文件加载
+        /// </summary>
+        public override void LoadByFile()
+        {
+            LoadByFile(m => m);
+        }
+        /// <summary>
+        /// 使用加密规则保存到文件
+        /// </summary>
+        public override void SaveToFile()
+        {
+            SaveToFile(m => m);
+        }
     }
 }

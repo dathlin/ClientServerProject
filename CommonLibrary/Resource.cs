@@ -17,6 +17,10 @@ namespace CommonLibrary
         {
             public static string SoftName { get; } = "你的软件系统";
             public static string SoftCopyRight { get; } = "版权归属人";
+
+
+
+            public const string AccountLoadFailed = "新增账户失败"; 
         }
     }
 }

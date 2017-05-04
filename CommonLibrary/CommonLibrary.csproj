@@ -52,8 +52,33 @@
     <Compile Include="AccountSupport\FormAccountManage.designer.cs">
       <DependentUpon>FormAccountManage.cs</DependentUpon>
     </Compile>
+    <Compile Include="AccountSupport\FormMaintenance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountSupport\FormMaintenance.designer.cs">
+      <DependentUpon>FormMaintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountSupport\FormPasswordModify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountSupport\FormPasswordModify.designer.cs">
+      <DependentUpon>FormPasswordModify.cs</DependentUpon>
+    </Compile>
     <Compile Include="AccountSupport\ServerAccount.cs" />
     <Compile Include="AccountSupport\UserAccount.cs" />
+    <Compile Include="BasicSupport\FormUpdateLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSupport\FormUpdateLog.designer.cs">
+      <DependentUpon>FormUpdateLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BasicSupport\FormVersionControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSupport\FormVersionControl.designer.cs">
+      <DependentUpon>FormVersionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BasicSupport\SoftSettings.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="HeadCode.cs" />
     <Compile Include="OrderSupport\ClassGoods.cs" />
@@ -68,7 +93,20 @@
     <EmbeddedResource Include="AccountSupport\FormAccountManage.resx">
       <DependentUpon>FormAccountManage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AccountSupport\FormMaintenance.resx">
+      <DependentUpon>FormMaintenance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccountSupport\FormPasswordModify.resx">
+      <DependentUpon>FormPasswordModify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BasicSupport\FormUpdateLog.resx">
+      <DependentUpon>FormUpdateLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BasicSupport\FormVersionControl.resx">
+      <DependentUpon>FormVersionControl.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

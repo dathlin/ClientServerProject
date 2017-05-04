@@ -1,4 +1,6 @@
-﻿namespace 软件系统客户端模版
+﻿using HslCommunication.Controls;
+
+namespace 软件系统客户端模版
 {
     partial class FormLogin
     {
@@ -33,7 +35,7 @@
             this.textBox_userName = new System.Windows.Forms.TextBox();
             this.textBox_password = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.userButton_login = new BasicFramework.UserButton();
+            this.userButton_login = new UserButton();
             this.label_version = new System.Windows.Forms.Label();
             this.label_copyright = new System.Windows.Forms.Label();
             this.label_status = new System.Windows.Forms.Label();
@@ -181,7 +183,7 @@
         private System.Windows.Forms.TextBox textBox_userName;
         private System.Windows.Forms.TextBox textBox_password;
         private System.Windows.Forms.Label label3;
-        private BasicFramework.UserButton userButton_login;
+        private UserButton userButton_login;
         private System.Windows.Forms.Label label_version;
         private System.Windows.Forms.Label label_copyright;
         private System.Windows.Forms.Label label_status;

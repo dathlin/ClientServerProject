@@ -32,10 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BasicFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Public\BasicFramework.dll</HintPath>
-    </Reference>
     <Reference Include="CommonLibrary">
       <HintPath>..\CommonLibrary\bin\Debug\CommonLibrary.dll</HintPath>
     </Reference>

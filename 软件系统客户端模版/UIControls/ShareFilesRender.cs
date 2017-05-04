@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using HslCommunication.Enthernet;
 using HslCommunication;
-
+using CommonLibrary;
 
 namespace 软件系统客户端模版.UIControls
 {
@@ -25,7 +25,7 @@ namespace 软件系统客户端模版.UIControls
         private void userButton_upload_Click(object sender, EventArgs e)
         {
             //上传数据，先对权限进行验证
-            if(UserClient.UserAccount.Grade<BasicFramework.AccountGrade.Technology)
+            if(UserClient.UserAccount.Grade<AccountGrade.Technology)
             {
                 MessageBox.Show("权限不够！");
                 return;

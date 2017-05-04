@@ -36,7 +36,10 @@ namespace CommonLibrary
 
         #endregion
 
-        
+        /// <summary>
+        /// 整个系统的加密解密密码
+        /// </summary>
+        public const string Security = "qwertyui";
     }
 
 

@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Threading;
 using Newtonsoft.Json.Linq;
 using HslCommunication;
+using CommonLibrary;
+using HslCommunication.BasicFramework;
 
 namespace 软件系统客户端模版
 {
@@ -36,7 +38,7 @@ namespace 软件系统客户端模版
             label_status.Visible = false;
 
             UserClient.JsonSettings.FileSavePath = Application.StartupPath + @"\JsonSettings.txt";
-            UserClient.JsonSettings.LoadSettings();//根据实际实际情况选中解密算法，默认采用DES加密解密算法
+            UserClient.JsonSettings.LoadByFile();//根据实际实际情况选中解密算法，默认采用DES加密解密算法
 
             label_version.Text = "版本：" + UserClient.CurrentVersion.ToString();
             label2.Text = CommonLibrary.Resource.StringResouce.SoftName;
@@ -200,14 +202,14 @@ namespace 软件系统客户端模版
 
             //包装数据
             Newtonsoft.Json.Linq.JObject json = new Newtonsoft.Json.Linq.JObject();
-            json.Add(BasicFramework.UserAccount.UserNameText, new Newtonsoft.Json.Linq.JValue(textBox_userName.Text));
-            json.Add(BasicFramework.UserAccount.PasswordText, new Newtonsoft.Json.Linq.JValue(textBox_password.Text));
+            json.Add(UserAccount.UserNameText, new Newtonsoft.Json.Linq.JValue(textBox_userName.Text));
+            json.Add(UserAccount.PasswordText, new Newtonsoft.Json.Linq.JValue(textBox_password.Text));
 
             result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.账户检查+json.ToString());
             if (result.IsSuccess)
             {
                 //服务器应该返回账户的信息
-                BasicFramework.UserAccount account = JObject.Parse(result.Content).ToObject<BasicFramework.UserAccount>();
+                UserAccount account = JObject.Parse(result.Content).ToObject<UserAccount>();
                 if(!account.LoginEnable)
                 {
                     //不允许登录
@@ -228,7 +230,7 @@ namespace 软件系统客户端模版
             //登录成功，进行保存用户名称和密码
             UserClient.JsonSettings.LoginName = textBox_userName.Text;
             UserClient.JsonSettings.Password = checkBox_remeber.Checked ? textBox_password.Text : "";
-            UserClient.JsonSettings.SaveSettings();
+            UserClient.JsonSettings.SaveToFile();
 
 
             //版本验证
@@ -242,7 +244,7 @@ namespace 软件系统客户端模版
             if (result.IsSuccess)
             {
                 //服务器应该返回服务器的版本号
-                BasicFramework.SystemVersion sv = new BasicFramework.SystemVersion(result.Content);
+                SystemVersion sv = new SystemVersion(result.Content);
                 //系统账户跳过低版本检测
                 if (UserClient.UserAccount.UserName != "admin")
                 {
@@ -250,7 +252,7 @@ namespace 软件系统客户端模版
                     {
                         //保存新版本信息
                         UserClient.JsonSettings.IsNewVersionRunning = true;
-                        UserClient.JsonSettings.SaveSettings();
+                        UserClient.JsonSettings.SaveToFile();
                         //和当前系统版本号不一致，启动更新
                         if (IsHandleCreated) Invoke(start_update);
                         return;
@@ -262,7 +264,7 @@ namespace 软件系统客户端模版
                     {
                         //保存新版本信息
                         UserClient.JsonSettings.IsNewVersionRunning = true;
-                        UserClient.JsonSettings.SaveSettings();
+                        UserClient.JsonSettings.SaveToFile();
                         //和当前系统版本号不一致，启动更新
                         if (IsHandleCreated) Invoke(start_update);
                         return;
@@ -295,7 +297,7 @@ namespace 软件系统客户端模版
                 //服务器返回初始化的数据，此处进行数据的提取，有可能包含了多个数据
                 json = Newtonsoft.Json.Linq.JObject.Parse(result.Content);
                 //例如公告数据
-                UserClient.Announcement = BasicFramework.SoftBasic.GetValueFromJsonObject(json, nameof(UserClient.Announcement), "");
+                UserClient.Announcement = SoftBasic.GetValueFromJsonObject(json, nameof(UserClient.Announcement), "");
 
             }
             else

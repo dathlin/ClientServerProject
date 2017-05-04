@@ -9,8 +9,8 @@ using System.Windows.Forms;
 using HslCommunication.Enthernet;
 using System.Threading;
 using CommonLibrary;
-using BasicFramework;
 using Newtonsoft.Json.Linq;
+using HslCommunication.BasicFramework;
 
 
 //============================================================================
@@ -77,7 +77,7 @@ namespace 软件系统服务端模版
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             //密码验证的示例，此处关闭窗口验证
-            BasicFramework.FormPasswordCheck fpc = new BasicFramework.FormPasswordCheck("123456");
+            FormPasswordCheck fpc = new FormPasswordCheck("123456");
             if (fpc.ShowDialog() == DialogResult.OK)
             {
                 IsWindowShow = false;
@@ -122,7 +122,7 @@ namespace 软件系统服务端模版
 
         private void 版本控制ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BasicFramework.FormVersionControl fvc = new BasicFramework.FormVersionControl(UserServer.ServerSettings);
+            FormVersionControl fvc = new FormVersionControl(UserServer.ServerSettings);
             fvc.ShowDialog();
             fvc.Dispose();
             toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
@@ -130,7 +130,7 @@ namespace 软件系统服务端模版
 
         private void 维护切换ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BasicFramework.FormMaintenance fm = new BasicFramework.FormMaintenance(UserServer.ServerSettings);
+            FormMaintenance fm = new FormMaintenance(UserServer.ServerSettings);
             fm.ShowDialog();
             fm.Dispose();
             MaintenanceInitialization();
@@ -158,9 +158,9 @@ namespace 软件系统服务端模版
 
         private void 关于软件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BasicFramework.FormAbout fm = new BasicFramework.FormAbout(
-                CommonLibrary.Resource.StringResouce.SoftName, UserServer.ServerSettings.SystemVersion,
-                2017, CommonLibrary.Resource.StringResouce.SoftCopyRight);
+            FormAbout fm = new FormAbout(
+                Resource.StringResouce.SoftName, UserServer.ServerSettings.SystemVersion,
+                2017, Resource.StringResouce.SoftCopyRight);
             fm.ShowDialog();
             fm.Dispose();
         }
@@ -175,7 +175,7 @@ namespace 软件系统服务端模版
 
         private void 版本号说明ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BasicFramework.FormAboutVersion fav = new BasicFramework.FormAboutVersion(UserServer.ServerSettings.SystemVersion);
+            FormAboutVersion fav = new FormAboutVersion(UserServer.ServerSettings.SystemVersion);
             fav.ShowDialog();
             fav.Dispose();
         }
@@ -215,7 +215,7 @@ namespace 软件系统服务端模版
             }
             catch (Exception ex)
             {
-                BasicFramework.SoftBasic.ShowExceptionMessage(ex);
+                SoftBasic.ShowExceptionMessage(ex);
             }
         }
 
@@ -240,7 +240,7 @@ namespace 软件系统服务端模版
             }
             catch (Exception ex)
             {
-                BasicFramework.SoftBasic.ShowExceptionMessage(ex);
+                SoftBasic.ShowExceptionMessage(ex);
             }
         }
         #endregion
@@ -265,7 +265,7 @@ namespace 软件系统服务端模版
             }
             catch (Exception ex)
             {
-                BasicFramework.SoftBasic.ShowExceptionMessage(ex);
+                SoftBasic.ShowExceptionMessage(ex);
             }
         }
         /// <summary>
@@ -305,7 +305,7 @@ namespace 软件系统服务端模版
             else if (head_code == CommonHeadCode.SimplifyHeadCode.账户检查)
             {
                 //此处使用的是组件自带的验证的方式，如果使用SQL数据库，另行验证
-                Newtonsoft.Json.Linq.JObject json = Newtonsoft.Json.Linq.JObject.Parse(object2.Substring(4));
+                JObject json = JObject.Parse(object2.Substring(4));
                 //提取账户，密码
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
@@ -421,7 +421,7 @@ namespace 软件系统服务端模版
             }
             catch (Exception ex)
             {
-                BasicFramework.SoftBasic.ShowExceptionMessage(ex);
+                SoftBasic.ShowExceptionMessage(ex);
             }
         }
 
@@ -570,6 +570,6 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 还未有其他什么用途
         /// </summary>
-        private HslLogHelper LogHelper = new HslLogHelper();
+        private SoftLogHelper LogHelper { get; set; }
     }
 }

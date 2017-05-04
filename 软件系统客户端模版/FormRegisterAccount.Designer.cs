@@ -1,4 +1,6 @@
-﻿namespace 软件系统客户端模版
+﻿using HslCommunication.Controls;
+
+namespace 软件系统客户端模版
 {
     partial class FormRegisterAccount
     {
@@ -38,7 +40,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.userButton_login = new BasicFramework.UserButton();
+            this.userButton_login = new UserButton();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
@@ -201,7 +203,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label6;
-        private BasicFramework.UserButton userButton_login;
+        private UserButton userButton_login;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
     }

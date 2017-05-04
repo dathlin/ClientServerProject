@@ -1,4 +1,6 @@
-﻿namespace 软件系统客户端模版
+﻿using HslCommunication.Controls;
+
+namespace 软件系统客户端模版
 {
     partial class FormUpdateRemote
     {
@@ -29,10 +31,10 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.userButton_file = new BasicFramework.UserButton();
+            this.userButton_file = new UserButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.userButton_version = new BasicFramework.UserButton();
+            this.userButton_version = new UserButton();
             this.SuspendLayout();
             // 
             // label1
@@ -116,9 +118,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private BasicFramework.UserButton userButton_file;
+        private UserButton userButton_file;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
-        private BasicFramework.UserButton userButton_version;
+        private UserButton userButton_version;
     }
 }

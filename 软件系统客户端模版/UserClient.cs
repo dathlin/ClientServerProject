@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HslCommunication.Enthernet;
-
+using HslCommunication.BasicFramework;
+using CommonLibrary;
 
 namespace 软件系统客户端模版
 {
@@ -15,11 +16,11 @@ namespace 软件系统客户端模版
 
     public class UserClient
     {
-        public static BasicFramework.JsonSettings JsonSettings = new BasicFramework.JsonSettings();
+        public static JsonSettings JsonSettings = new JsonSettings();
         /// <summary>
         /// 本软件的当前版本，用来验证更新的关键依据
         /// </summary>
-        public static BasicFramework.SystemVersion CurrentVersion { get; } = new BasicFramework.SystemVersion("1.0.0");
+        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0");
 
         /// <summary>
         /// 服务器的IP地址，默认为127.0.0.1，可用于单机调试
@@ -29,20 +30,17 @@ namespace 软件系统客户端模版
         /// <summary>
         /// 所有版本更新信息的对象
         /// </summary>
-        public static BasicFramework.ClassSystemVersion HistoryVersions { get; } = new BasicFramework.ClassSystemVersion()
+        public static List<VersionInfo> HistoryVersions { get; } = new List<VersionInfo>
         {
-            Versions = new List<BasicFramework.VersionInfo>()
-            {
                 //写入所有的历史版本信息，这样就能在更新日志的界面查看到信息
-                new BasicFramework.VersionInfo()
+                new VersionInfo()
                 {
-                    VersionNum=new BasicFramework.SystemVersion("1.0.0"),
+                    VersionNum=new SystemVersion("1.0.0"),
                     ReleaseDate=new DateTime(2017,1,1),//该版本发布的日期
                     UpdateDetails=new StringBuilder("1.本系统第一版本正式发布使用。"+Environment.NewLine+
                         "2.提供了多客户端用时在线的功能。"+Environment.NewLine+
                         "3.需要用户自行添加"),
                 },
-            },
         };
 
 
@@ -55,7 +53,7 @@ namespace 软件系统客户端模版
         /// <summary>
         /// 当前系统的登录账户
         /// </summary>
-        public static BasicFramework.UserAccount UserAccount { get; set; } = new BasicFramework.UserAccount();
+        public static UserAccount UserAccount { get; set; } = new UserAccount();
 
         /// <summary>
         /// 服务器的时间，该时间与服务器同步，每隔10秒钟，防止客户端串改单机时间，可以作为各种时间条件判定
@@ -70,7 +68,7 @@ namespace 软件系统客户端模版
             new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
                 CommonLibrary.CommonLibrary.Port_Second_Net))
         {
-            KeyToken = CommonLibrary.CommonHeadCode.KeyToken,
+            KeyToken = CommonHeadCode.KeyToken,
         };
     }
 }

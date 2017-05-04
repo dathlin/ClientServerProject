@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CommonLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BasicFramework;
 
 //=========================================================================================
 //
@@ -49,6 +49,7 @@ namespace 软件系统服务端模版
 
     /// <summary>
     /// 一个扩展的用户账户示例，代替服务器和客户端的账户类即可
+    /// 也可以直接在源代码中扩展
     /// </summary>
     public class UserAccountEx : UserAccount
     {

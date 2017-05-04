@@ -1,4 +1,6 @@
-﻿namespace CommonLibrary
+﻿using HslCommunication.Controls;
+
+namespace CommonLibrary
 {
     partial class FormAccountManage
     {
@@ -30,8 +32,8 @@
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.userButton2 = new BasicFramework.UserButton();
-            this.userButton1 = new BasicFramework.UserButton();
+            this.userButton2 = new UserButton();
+            this.userButton1 = new UserButton();
             this.SuspendLayout();
             // 
             // textBox1

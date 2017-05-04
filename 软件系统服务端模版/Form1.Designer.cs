@@ -15,7 +15,7 @@
         {
             //紧急存储数据
             UserServer.ServerSettings.SaveToFile();
-            UserServer.ServerAccounts.SaveFile();
+            UserServer.ServerAccounts.SaveToFile();
 
             if (disposing && (components != null))
             {
