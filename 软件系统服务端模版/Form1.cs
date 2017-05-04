@@ -64,6 +64,11 @@ namespace 软件系统服务端模版
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //初始化日志工具
+            LogHelper = new SoftLogHelper()
+            {
+                LogSaveFileName = Application.StartupPath + @"\log.txt",
+            };
             //保存路径初始化
             UserServer.ServerSettings.FileSavePath = Application.StartupPath + @"\settings.txt";
             //加载参数
@@ -73,22 +78,24 @@ namespace 软件系统服务端模版
             //加载账户信息
             UserServer.ServerAccounts.FileSavePath = Application.StartupPath + @"\accounts.txt";
             UserServer.ServerAccounts.LoadByFile();
+            UserServer.ServerAccounts.LogHelper = LogHelper;
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             //密码验证的示例，此处关闭窗口验证
-            FormPasswordCheck fpc = new FormPasswordCheck("123456");
-            if (fpc.ShowDialog() == DialogResult.OK)
+            using (FormPasswordCheck fpc = new FormPasswordCheck("123456"))
             {
-                IsWindowShow = false;
-                Thread.Sleep(20);
+                if (fpc.ShowDialog() == DialogResult.OK)
+                {
+                    IsWindowShow = false;
+                    Thread.Sleep(20);
+                }
+                else
+                {
+                    //取消关闭
+                    e.Cancel = true;
+                }
             }
-            else
-            {
-                //取消关闭
-                e.Cancel = true;
-            }
-
             //紧急数据的保存已经放置到dispose方法中，即时发生BUG或直接关机，也能存储数据
         }
         private void Form1_Shown(object sender, EventArgs e)
@@ -122,18 +129,20 @@ namespace 软件系统服务端模版
 
         private void 版本控制ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormVersionControl fvc = new FormVersionControl(UserServer.ServerSettings);
-            fvc.ShowDialog();
-            fvc.Dispose();
-            toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
+            using (FormVersionControl fvc = new FormVersionControl(UserServer.ServerSettings))
+            {
+                fvc.ShowDialog();
+                toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
+            }
         }
 
         private void 维护切换ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormMaintenance fm = new FormMaintenance(UserServer.ServerSettings);
-            fm.ShowDialog();
-            fm.Dispose();
-            MaintenanceInitialization();
+            using (FormMaintenance fm = new FormMaintenance(UserServer.ServerSettings))
+            {
+                fm.ShowDialog();
+                MaintenanceInitialization();
+            }
         }
 
 
@@ -142,12 +151,14 @@ namespace 软件系统服务端模版
             //测试发送字节数据
             //net_socket_server.SendAllClients(BitConverter.GetBytes(12345678));
             //将消息群发给所有的客户端，并使用消息弹窗的方式显示
-            FormInputAndAction fiaa = new FormInputAndAction(m =>
+            using (FormInputAndAction fiaa = new FormInputAndAction(
+                m =>
+                {
+                 net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗消息 + m); return true;
+                }))
             {
-                net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗消息 + m); return true;
-            });
-            fiaa.ShowDialog();
-            fiaa.Dispose();
+                fiaa.ShowDialog();
+            }
         }
 
         private void 一键断开ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -158,26 +169,29 @@ namespace 软件系统服务端模版
 
         private void 关于软件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormAbout fm = new FormAbout(
+            using (FormAbout fm = new FormAbout(
                 Resource.StringResouce.SoftName, UserServer.ServerSettings.SystemVersion,
-                2017, Resource.StringResouce.SoftCopyRight);
-            fm.ShowDialog();
-            fm.Dispose();
+                2017, Resource.StringResouce.SoftCopyRight))
+            {
+                fm.ShowDialog();
+            }
         }
         private void 账户管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //该部分比较复杂，需要对委托，匿名委托概念比较清晰
-            FormAccountManage fam = new FormAccountManage(() => UserServer.ServerAccounts.GetAllAccountsJson(),
-                m => { UserServer.ServerAccounts.LoadAllAccountsJson(m); return true; });
-            fam.ShowDialog();
-            fam.Dispose();
+            using (FormAccountManage fam = new FormAccountManage(() => UserServer.ServerAccounts.GetAllAccountsJson(),
+                m => { UserServer.ServerAccounts.LoadAllAccountsJson(m); return true; }))
+            {
+                fam.ShowDialog();
+            }
         }
 
         private void 版本号说明ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormAboutVersion fav = new FormAboutVersion(UserServer.ServerSettings.SystemVersion);
-            fav.ShowDialog();
-            fav.Dispose();
+            using (FormAboutVersion fav = new FormAboutVersion(UserServer.ServerSettings.SystemVersion))
+            {
+                fav.ShowDialog();
+            }
         }
         private void MaintenanceInitialization()
         {
@@ -227,7 +241,7 @@ namespace 软件系统服务端模版
         /// </summary>
         private Net_File_Server net_file_update = new Net_File_Server();
         /// <summary>
-        /// 软件异地更新的初始化，如不需要可以不启动，该功能需要稳定性测试
+        /// 软件异地更新的初始化，如不需要可以不启动，该功能支持发送客户端文件至服务器实现覆盖更新
         /// </summary>
         private void Net_File_Update_Initialization()
         {

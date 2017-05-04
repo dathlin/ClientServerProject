@@ -1,4 +1,6 @@
-﻿namespace 软件系统客户端模版.UIControls
+﻿using HslCommunication.Controls;
+
+namespace 软件系统客户端模版.UIControls
 {
     partial class ShareFilesRender
     {
@@ -31,8 +33,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.userButton_refresh = new BasicFramework.UserButton();
-            this.userButton_upload = new BasicFramework.UserButton();
+            this.userButton_refresh = new UserButton();
+            this.userButton_upload = new UserButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -134,7 +136,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private BasicFramework.UserButton userButton_refresh;
-        private BasicFramework.UserButton userButton_upload;
+        private UserButton userButton_refresh;
+        private UserButton userButton_upload;
     }
 }

@@ -6,12 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using BasicFramework;
 using Newtonsoft.Json.Linq;
 using CommonLibrary;
 using System.Threading;
 using HslCommunication;
 using HslCommunication.Enthernet;
+using HslCommunication.BasicFramework;
 
 
 //============================================================================
@@ -92,7 +92,7 @@ namespace 软件系统客户端模版
             if(UserClient.JsonSettings.IsNewVersionRunning)
             {
                 UserClient.JsonSettings.IsNewVersionRunning = false;
-                UserClient.JsonSettings.SaveSettings();
+                UserClient.JsonSettings.SaveToFile();
                 更新日志ToolStripMenuItem_Click(null, new EventArgs());
             }
 
@@ -149,7 +149,7 @@ namespace 软件系统客户端模版
             if (UserClient.JsonSettings.IsNewVersionRunning)
             {
                 UserClient.JsonSettings.IsNewVersionRunning = false;
-                UserClient.JsonSettings.SaveSettings();
+                UserClient.JsonSettings.SaveToFile();
             }
             FormUpdateLog ful = new FormUpdateLog(UserClient.HistoryVersions);
             ful.ShowDialog();

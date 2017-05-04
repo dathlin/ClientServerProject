@@ -1,4 +1,6 @@
-﻿namespace 软件系统客户端模版
+﻿using HslCommunication.Controls;
+
+namespace 软件系统客户端模版
 {
     partial class FormLog
     {
@@ -29,12 +31,12 @@
         private void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.userButton_login = new BasicFramework.UserButton();
-            this.userButton1 = new BasicFramework.UserButton();
-            this.userButton2 = new BasicFramework.UserButton();
-            this.userButton3 = new BasicFramework.UserButton();
-            this.userButton4 = new BasicFramework.UserButton();
-            this.userButton5 = new BasicFramework.UserButton();
+            this.userButton_login = new UserButton();
+            this.userButton1 = new UserButton();
+            this.userButton2 = new UserButton();
+            this.userButton3 = new UserButton();
+            this.userButton4 = new UserButton();
+            this.userButton5 = new UserButton();
             this.SuspendLayout();
             // 
             // textBox1
@@ -165,11 +167,11 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox1;
-        private BasicFramework.UserButton userButton_login;
-        private BasicFramework.UserButton userButton1;
-        private BasicFramework.UserButton userButton2;
-        private BasicFramework.UserButton userButton3;
-        private BasicFramework.UserButton userButton4;
-        private BasicFramework.UserButton userButton5;
+        private UserButton userButton_login;
+        private UserButton userButton1;
+        private UserButton userButton2;
+        private UserButton userButton3;
+        private UserButton userButton4;
+        private UserButton userButton5;
     }
 }
