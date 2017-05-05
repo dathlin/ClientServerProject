@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HslCommunication.BasicFramework;
 
 namespace CommonLibrary
 {
     public class CommonLibrary
     {
+        static CommonLibrary()
+        {
+            //初始化模版的版本号
+            //预计第一个正式发行的版本为1.1.0 日期为2017-05-10
+            SoftBasic.FrameworkVersion = new SystemVersion("1.0.3");
+
+        }
+
+
         #region 公用端口设计块
 
         //======================================================================================

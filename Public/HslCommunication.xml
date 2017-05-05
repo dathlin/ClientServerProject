@@ -1587,6 +1587,12 @@
             当接收到字节数据的时候,触发此事件
             </summary>
         </member>
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.ThreadPoolLogin(System.Object)">
+            <summary>
+            登录后的处理方法
+            </summary>
+            <param name="obj"></param>
+        </member>
         <member name="M:HslCommunication.Enthernet.Net_Socket_Server.Send(HslCommunication.Enthernet.HuTcpState,System.String)">
             <summary>
             服务器端用于数据发送文本的方法
@@ -1618,7 +1624,7 @@
             基于TCP通信的客户端核心类
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Client.stateone">
+        <member name="F:HslCommunication.Enthernet.Net_Socket_Client.stateone">
             <summary>
             客户端的核心连接块
             </summary>
@@ -1633,12 +1639,12 @@
             重连接失败的次数
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Client.Is_Client_Connecting">
+        <member name="F:HslCommunication.Enthernet.Net_Socket_Client.Is_Client_Connecting">
             <summary>
             指示客户端是否处于正在连接服务器中
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Client.lock_connecting">
+        <member name="F:HslCommunication.Enthernet.Net_Socket_Client.lock_connecting">
             <summary>
             登录服务器的判断锁
             </summary>
@@ -1651,6 +1657,11 @@
         <member name="P:HslCommunication.Enthernet.Net_Socket_Client.EndPointServer">
             <summary>
             远程服务器的IP地址和端口
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.Net_Socket_Client.DelayTime">
+            <summary>
+            系统与服务器的延时时间，单位毫秒
             </summary>
         </member>
         <member name="E:HslCommunication.Enthernet.Net_Socket_Client.LoginSuccess">

@@ -17,7 +17,7 @@ namespace CommonLibrary
 
 
         /// <summary>
-        /// 同步通信的头说明，以字母A开头
+        /// 同步通信的头说明，以字母A开头，后面接B,C,D,E,F
         /// </summary>
         [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Auto)]
         public class SimplifyHeadCode
@@ -32,7 +32,7 @@ namespace CommonLibrary
             public static string 更新公告 { get; } = "A008";
             public static string 注册账号 { get; } = "A009";
             public static string 更新版本号 { get; } = "A010";
-            public static string 请求文件列表 { get; } = "AA01";
+            public static string 请求文件列表 { get; } = "A011";
 
 
 

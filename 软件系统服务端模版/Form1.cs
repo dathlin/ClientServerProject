@@ -89,6 +89,9 @@ namespace 软件系统服务端模版
                 {
                     IsWindowShow = false;
                     Thread.Sleep(20);
+                    //关闭网络引擎
+                    net_socket_server.ServerClose();
+                    net_simple_file_server.ServerClose();
                 }
                 else
                 {
@@ -298,25 +301,53 @@ namespace 软件系统服务端模版
         /// <param name="object2">消息数据，应该使用指令头+数据组成</param>
         private void Net_simplify_server_ReceiveStringEvent(HuStateOne object1, string object2)
         {
-            //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作
             //必须返回结果，调用SendMessage(object1,[实际数据]);
-            string head_code = object2.Substring(0, 4);
-            if (head_code == CommonHeadCode.SimplifyHeadCode.维护检查)
+            if(object2.StartsWith("A"))
+            {
+                DataProcessingWithStartA(object1, object2);
+            }
+            else if(object2.StartsWith("B"))
+            {
+                DataProcessingWithStartB(object1, object2);
+            }
+            else
+            {
+                net_simplify_server.SendMessage(object1, object2);
+            }
+        }
+
+
+        /****************************************************************************************************
+         * 
+         * 
+         *    数据处理中心，同步信息中的所有的细节处理均要到此处来处理
+         * 
+         * 
+         ****************************************************************************************************/
+        /// <summary>
+        /// A指令块，处理系统基础运行的消息
+        /// </summary>
+        /// <param name="object1"></param>
+        /// <param name="object2"></param>
+        private void DataProcessingWithStartA(HuStateOne object1, string object2)
+        {
+            string headCode = object2.Substring(0, 4);
+            if (headCode == CommonHeadCode.SimplifyHeadCode.维护检查)
             {
                 net_simplify_server.SendMessage(object1, UserServer.ServerSettings.Can_Account_Login ? "1" : "0" +
                     UserServer.ServerSettings.Account_Forbidden_Reason);
             }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.更新检查)
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.更新检查)
             {
                 net_simplify_server.SendMessage(object1, UserServer.ServerSettings.SystemVersion.ToString());
             }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.参数下载)
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.参数下载)
             {
                 Newtonsoft.Json.Linq.JObject json = new Newtonsoft.Json.Linq.JObject();
                 json.Add(nameof(UserServer.ServerSettings.Announcement), new Newtonsoft.Json.Linq.JValue(UserServer.ServerSettings.Announcement));
                 net_simplify_server.SendMessage(object1, json.ToString());
             }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.账户检查)
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.账户检查)
             {
                 //此处使用的是组件自带的验证的方式，如果使用SQL数据库，另行验证
                 JObject json = JObject.Parse(object2.Substring(4));
@@ -326,25 +357,25 @@ namespace 软件系统服务端模版
                 net_simplify_server.SendMessage(object1, UserServer.ServerAccounts.CheckAccountJson(
                     name, password, ((System.Net.IPEndPoint)(object1.WorkSocket.RemoteEndPoint)).Address.ToString()));
             }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.更新公告)
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.更新公告)
             {
                 UserServer.ServerSettings.Announcement = object2.Substring(4);
                 //通知所有客户端更新公告
                 net_socket_server.SendAllClients(object2);
                 net_simplify_server.SendMessage(object1, "成功");
             }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.获取账户信息)
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.获取账户信息)
             {
                 //返回服务器的账户信息
                 net_simplify_server.SendMessage(object1, UserServer.ServerAccounts.GetAllAccountsJson());
             }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.更细账户信息)
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.更细账户信息)
             {
                 //更新服务器的账户信息
                 UserServer.ServerAccounts.LoadAllAccountsJson(object2.Substring(4));
                 net_simplify_server.SendMessage(object1, "成功");
             }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.密码修改)
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.密码修改)
             {
                 //更新服务器的账户密码
                 //此处使用的是组件自带的验证的方式，如果使用SQL数据库，另行验证
@@ -355,7 +386,7 @@ namespace 软件系统服务端模版
                 UserServer.ServerAccounts.UpdatePassword(name, password);
                 net_simplify_server.SendMessage(object1, "成功");
             }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.更新版本号)
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.更新版本号)
             {
                 try
                 {
@@ -369,39 +400,12 @@ namespace 软件系统服务端模版
                     net_simplify_server.SendMessage(object1, "0");
                 }
             }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.网络日志查看)
-            {
-                net_simplify_server.SendMessage(object1, net_socket_server.LogHelper.GetLogText());
-            }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.网络日志清空)
-            {
-                net_socket_server.LogHelper.ClearLogText();
-                net_simplify_server.SendMessage(object1, "成功");
-            }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.同步日志查看)
-            {
-                net_simplify_server.SendMessage(object1, net_simplify_server.LogHelper.GetLogText());
-            }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.同步日志清空)
-            {
-                net_simplify_server.LogHelper.ClearLogText();
-                net_simplify_server.SendMessage(object1, "成功");
-            }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.更新日志查看)
-            {
-                net_simplify_server.SendMessage(object1, net_soft_update_Server.LogHelper.GetLogText());
-            }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.更新日志清空)
-            {
-                net_soft_update_Server.LogHelper.ClearLogText();
-                net_simplify_server.SendMessage(object1, "成功");
-            }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.注册账号)
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.注册账号)
             {
                 bool result = UserServer.ServerAccounts.AddNewAccount(object2.Substring(4));
                 net_simplify_server.SendMessage(object1, result ? "1" : "0");
             }
-            else if(head_code == CommonHeadCode.SimplifyHeadCode.请求文件列表)
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.请求文件列表)
             {
                 net_simplify_server.SendMessage(object1, net_simple_file_server.ToJsonString());
             }
@@ -410,6 +414,51 @@ namespace 软件系统服务端模版
                 net_simplify_server.SendMessage(object1, object2);
             }
         }
+
+        /// <summary>
+        /// B指令块，处理日志相关的消息
+        /// </summary>
+        /// <param name="object1"></param>
+        /// <param name="object2"></param>
+        private void DataProcessingWithStartB(HuStateOne object1, string object2)
+        {
+            string headCode = object2.Substring(0, 4);
+            if (headCode == CommonHeadCode.SimplifyHeadCode.网络日志查看)
+            {
+                net_simplify_server.SendMessage(object1, net_socket_server.LogHelper.GetLogText());
+            }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.网络日志清空)
+            {
+                net_socket_server.LogHelper.ClearLogText();
+                net_simplify_server.SendMessage(object1, "成功");
+            }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.同步日志查看)
+            {
+                net_simplify_server.SendMessage(object1, net_simplify_server.LogHelper.GetLogText());
+            }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.同步日志清空)
+            {
+                net_simplify_server.LogHelper.ClearLogText();
+                net_simplify_server.SendMessage(object1, "成功");
+            }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.更新日志查看)
+            {
+                net_simplify_server.SendMessage(object1, net_soft_update_Server.LogHelper.GetLogText());
+            }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.更新日志清空)
+            {
+                net_soft_update_Server.LogHelper.ClearLogText();
+                net_simplify_server.SendMessage(object1, "成功");
+            }
+            else
+            {
+                net_simplify_server.SendMessage(object1, object2);
+            }
+        }
+
+
+
+
         #endregion
 
         #region 异步数据传送引擎
@@ -582,7 +631,7 @@ namespace 软件系统服务端模版
 
 
         /// <summary>
-        /// 还未有其他什么用途
+        /// 用来记录一般的事物日志
         /// </summary>
         private SoftLogHelper LogHelper { get; set; }
     }
