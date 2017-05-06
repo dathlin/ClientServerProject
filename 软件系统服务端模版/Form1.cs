@@ -91,7 +91,7 @@ namespace 软件系统服务端模版
                     Thread.Sleep(20);
                     //关闭网络引擎
                     net_socket_server.ServerClose();
-                    net_simple_file_server.ServerClose();
+                    net_simplify_server.ServerClose();
                 }
                 else
                 {
@@ -227,7 +227,7 @@ namespace 软件系统服务端模版
                 //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
                 //只放置exe和dll组件，必须放置：软件自动更新.exe
                 net_soft_update_Server.KeyToken = CommonHeadCode.KeyToken;
-                net_soft_update_Server.FileUpdatePath = @"C:\ClientFiles";
+                net_soft_update_Server.FileUpdatePath = Application.StartupPath + @"\ClientFiles";
                 net_soft_update_Server.ServerStart(CommonLibrary.CommonLibrary.Port_Update_Net);
             }
             catch (Exception ex)

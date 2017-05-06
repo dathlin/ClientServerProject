@@ -302,7 +302,7 @@ namespace 软件系统客户端模版
                 UserClient.DateTimeServer = Convert.ToDateTime(object2.Substring(4));
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
-                    toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm");
+                    toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm")+$"({net_socket_client.DelayTime}ms)";
                 }));
             }
         }
@@ -374,19 +374,20 @@ namespace 软件系统客户端模版
         {
             //将所有的子集控件添加进去
 
-            /*
+            /*******************************************************************************
+             * 
              *    例如此处展示了文件控件是如何添加进去的 
              *    1.先进行实例化，赋值初始参数
              *    2.添加进项目
              *    3.显示
-             */
+             *
+             *******************************************************************************/
 
             UIControls_Files = new UIControls.ShareFilesRender()
             {
-                Parent = this,//决定了放在哪个界面显示，此处仅仅是测试
-                Visible = true,
-                Location = new Point(100, 100),
-                //Dock = DockStyle.Fill,
+                Visible = false,
+                Parent = panel_main,//决定了放在哪个界面显示，此处示例
+                Dock = DockStyle.Fill,
             };
             all_main_render.Add(UIControls_Files);
         }
