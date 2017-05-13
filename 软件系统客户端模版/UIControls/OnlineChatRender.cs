@@ -15,5 +15,11 @@ namespace 软件系统客户端模版.UIControls
         {
             InitializeComponent();
         }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //按下Enter键后进行发送数据到服务器
+
+        }
     }
 }
