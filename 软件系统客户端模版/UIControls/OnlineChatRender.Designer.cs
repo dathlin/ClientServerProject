@@ -75,6 +75,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Name = "OnlineChatRender";
             this.Size = new System.Drawing.Size(635, 429);
+            this.Load += new System.EventHandler(this.OnlineChatRender_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

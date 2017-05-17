@@ -25,7 +25,7 @@ using HslCommunication.BasicFramework;
 //============================================================================
 //
 //    注意：本代码的相关操作未作密码验证，如有需要，请自行完成
-//    示例：具体示例参照Form1_FormClosing(object sender, FormClosingEventArgs e)方法
+//    示例：具体示例参照本页面Form1_FormClosing(object sender, FormClosingEventArgs e)方法
 //
 //============================================================================
 
@@ -33,7 +33,7 @@ using HslCommunication.BasicFramework;
 //============================================================================
 //
 //    本项目模版不包含  软件自动更新.exe
-//    如需支持自动升级  请联系hsl200909@163.com获取
+//    如需支持部署环境的自动升级  请联系hsl200909@163.com获取
 //    软件自动更新.exe  将绑定IP和端口后授权销售，30元人民币一组，永久使用
 //
 //============================================================================
@@ -457,6 +457,15 @@ namespace 软件系统服务端模版
         }
 
 
+        /****************************************************************************************************
+         * 
+         * 
+         *   您在下面可以自己扩展数据处理的方法，设计原则为运行速度尽可能的快，不要长时间阻塞
+         * 
+         * 
+         ****************************************************************************************************/
+
+
 
 
         #endregion
@@ -491,10 +500,29 @@ namespace 软件系统服务端模版
         private void Net_socket_server_AcceptString(HuTcpState object1, string object2)
         {
             //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字符串都会到此处处理
-            string head_code = object2.Substring(0, 4);
-            byte[] result = Convert.FromBase64String(object2.Substring(4));
+            if (object2.StartsWith("H"))
+            {
+                //H类系统指令
+                DataProcessingWithStartH(object1, object2);
+            }
 
         }
+
+        /// <summary>
+        /// H开头的处理块
+        /// </summary>
+        /// <param name="object1"></param>
+        /// <param name="headcode">指令头</param>
+        /// <param name="object2"></param>
+        private void DataProcessingWithStartH(HuTcpState object1, string object2)
+        {
+            string headCode = object2.Substring(0, 4);
+            if (headCode == CommonHeadCode.MultiNetHeadCode.留言消息)
+            {
+
+            }
+        }
+
 
         private void Net_socket_server_AcceptByte(HuTcpState object1, byte[] object2)
         {

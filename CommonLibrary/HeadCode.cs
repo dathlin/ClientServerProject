@@ -36,12 +36,19 @@ namespace CommonLibrary
 
 
 
+
             public static string 网络日志查看 { get; } = "B001";//B开头的是日志请求和清空
             public static string 网络日志清空 { get; } = "B002";
             public static string 同步日志查看 { get; } = "B003";
             public static string 同步日志清空 { get; } = "B004";
             public static string 更新日志查看 { get; } = "B005";
             public static string 更新日志清空 { get; } = "B006";
+
+            /**************************************************************************************
+             * 
+             *    为了保证您的指令头不和系统的冲突，您的指令头应该以C,D,E,F开头
+             * 
+             **************************************************************************************/
 
         }
         /// <summary>
@@ -53,11 +60,19 @@ namespace CommonLibrary
             public static string 关闭所有客户端 { get; } = "H002";
             public static string 弹窗消息 { get; } = "H003";
             public static string 时间推送 { get; } = "H004";
-            public static string 文件数量 { get; } = "HA00";
-            public static string 初始化数据 { get; } = "HA01";
+            public static string 文件数量 { get; } = "H005";
+            public static string 初始化数据 { get; } = "H006";
+            public static string 留言消息 { get; } = "H007";
+
+
+            /**************************************************************************************
+             * 
+             *    为了保证您的指令头不和系统的冲突，您的指令头应该以I,J,K,L开头
+             * 
+             **************************************************************************************/
         }
 
 
-        //可以在下面进行扩展，需要保证长度都是统一的
+        //可以在下面进行扩展，需要保证长度都是统一的，新建您自己的类型
     }
 }
