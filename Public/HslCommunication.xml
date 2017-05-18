@@ -525,6 +525,13 @@
             设置或获取系统框架的版本号
             </summary>
         </member>
+        <member name="M:HslCommunication.BasicFramework.SoftBasic.DeepClone(System.Object)">
+            <summary>
+            使用序列化反序列化深度克隆一个对象
+            </summary>
+            <param name="oringinal"></param>
+            <returns></returns>
+        </member>
         <member name="T:HslCommunication.BasicFramework.SoftMail">
             <summary>
             软件的邮箱类，用于发送邮箱数据，连续发送10次失败则禁止发送
@@ -1593,6 +1600,12 @@
             </summary>
             <param name="obj"></param>
         </member>
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.ReceiveCallBack(System.IAsyncResult)">
+            <summary>
+            一种以同步数据接收的方式来接收数据，如果数据量比较大，将会影响性能
+            </summary>
+            <param name="ar">异步状态</param>
+        </member>
         <member name="M:HslCommunication.Enthernet.Net_Socket_Server.Send(HslCommunication.Enthernet.HuTcpState,System.String)">
             <summary>
             服务器端用于数据发送文本的方法
@@ -2368,6 +2381,74 @@
             <param name="description">描述</param>
             <param name="ex">异常</param>
         </member>
+        <member name="T:HslCommunication.CoordinationStatus">
+            <summary>
+            线程的协调逻辑状态
+            </summary>
+        </member>
+        <member name="F:HslCommunication.CoordinationStatus.AllDone">
+            <summary>
+            所有项完成
+            </summary>
+        </member>
+        <member name="F:HslCommunication.CoordinationStatus.Timeout">
+            <summary>
+            超时
+            </summary>
+        </member>
+        <member name="F:HslCommunication.CoordinationStatus.Cancel">
+            <summary>
+            任务取消
+            </summary>
+        </member>
+        <member name="T:HslCommunication.AsyncCoordinator">
+            <summary>
+            一个线程协调逻辑类，详细参考书籍《CLR Via C#》page:681
+            </summary>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.AboutToBegin(System.Int32)">
+            <summary>
+            每次的操作任务开始前必须调用该方法
+            </summary>
+            <param name="opsToAdd"></param>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.JustEnded">
+            <summary>
+            在一次任务处理好操作之后，必须调用该方法
+            </summary>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.AllBegun(System.Action{HslCommunication.CoordinationStatus},System.Int32)">
+            <summary>
+            该方法必须在发起所有的操作之后调用
+            </summary>
+            <param name="callback">回调方法</param>
+            <param name="timeout">超时时间</param>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.TimeExpired(System.Object)">
+            <summary>
+            超时的方法
+            </summary>
+            <param name="o"></param>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.Cancel">
+            <summary>
+            取消任务的执行
+            </summary>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.ReportStatus(HslCommunication.CoordinationStatus)">
+            <summary>
+            生成一次报告
+            </summary>
+            <param name="status">报告的状态</param>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.Maxinum(System.Int32@,System.Func{System.Int32,System.Int32})">
+            <summary>
+            乐观的并发方法模型，具体参照《CLR Via C#》page:686
+            </summary>
+            <param name="target">唯一的目标数据</param>
+            <param name="change">修改数据的算法</param>
+            <returns></returns>
+        </member>
         <member name="T:HslCommunication.OperateResultBase">
             <summary>
             操作结果的类
@@ -2414,6 +2495,68 @@
             实际的数据
             </summary>
         </member>
+        <member name="T:HslCommunication.Profinet.MelsecNetBase">
+            <summary>
+            三菱网络类基类，提供三菱基础数据和方法
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.MelsecNetBase.NetworkNumber">
+            <summary>
+            获取或设置PLC所在的网络号，一般都为0
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.MelsecNetBase.NetworkStationNumber">
+            <summary>
+            获取或设置PLC所在网络的站号，一般都为0
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Profinet.MelsecNetBase.ReceiveBytesTranslate(System.Byte[])">
+            <summary>
+            当读取位数据时，进行相对的转化
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.MelsecNetBase.GetLengthFromPlcType(HslCommunication.Profinet.MelsecDataType,System.Int32)">
+            <summary>
+            根据读取的数据类型和长度返回最终生成的数据
+            </summary>
+            <param name="type">数据类型</param>
+            <param name="length">长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.MelsecNetBase.BoolTranslateBytes(System.Boolean[])">
+            <summary>
+            将BOOL变量数组转化成可写入PLC的字节数据
+            </summary>
+            <param name="data">bool数组</param>
+            <returns>可写入PLC的字节数据</returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.MelsecNetBase.SingularTurnEven(System.Byte[])">
+            <summary>
+            根据字节数据进行补齐偶数位
+            </summary>
+            <param name="bytes">数据</param>
+            <returns>补齐后的数据</returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.MelsecNetBase.GetReadCommand(HslCommunication.Profinet.MelsecDataType,System.UInt16,System.UInt16)">
+            <summary>
+            根据类型地址长度确认需要读取的指令头
+            </summary>
+            <param name="type">类型</param>
+            <param name="address">起始地址</param>
+            <param name="length">长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.MelsecNetBase.GetWriteCommand(HslCommunication.Profinet.MelsecDataType,System.UInt16,System.Byte[])">
+            <summary>
+            根据类型地址以及需要写入的数据来生成指令头
+            </summary>
+            <param name="type"></param>
+            <param name="address"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="T:HslCommunication.Profinet.MelsecNet">
             <summary>
             数据访问类，用于计算机和三菱PLC的以太网模块通讯的类
@@ -2421,37 +2564,13 @@
             只支持同步访问方式，必须先配置网络参数
             </summary>
         </member>
-        <member name="P:HslCommunication.Profinet.MelsecNet.NetworkNumber">
-            <summary>
-            获取或设置PLC所在的网络号，一般都为0
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Profinet.MelsecNet.NetworkStationNumber">
-            <summary>
-            获取或设置PLC所在网络的站号，一般都为0
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Profinet.MelsecNet.ReceiveBytesTranslate(System.Byte[])">
-            <summary>
-            当读取位数据时，进行相对的转化
-            </summary>
-            <param name="bytes"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Profinet.MelsecNet.SingularTurnEven(System.Byte[])">
-            <summary>
-            根据字节数据进行补齐偶数位
-            </summary>
-            <param name="bytes">数据</param>
-            <returns>补齐后的数据</returns>
-        </member>
         <member name="M:HslCommunication.Profinet.MelsecNet.ReadFromPLC(HslCommunication.Profinet.MelsecDataType,System.UInt16,System.UInt16)">
             <summary>
             从三菱PLC中读取想要的数据，返回读取结果
             </summary>
             <param name="type">想要读取的数据类型</param>
             <param name="address">读取数据的起始地址</param>
-            <param name="lengh">读取的数据长度，字最大值960，位最大值7168</param>
+            <param name="length">读取的数据长度，字最大值960，位最大值7168</param>
             <returns>带数据头的字节数组</returns>
         </member>
         <member name="M:HslCommunication.Profinet.MelsecNet.WriteAsciiStringIntoPLC(HslCommunication.Profinet.MelsecDataType,System.UInt16,System.String)">
@@ -2530,6 +2649,59 @@
             <param name="data">原始的字节数据</param>
             <returns>结果</returns>
         </member>
+        <member name="T:HslCommunication.Profinet.MelsecNetMultiAsync">
+            <summary>
+            异步的多PLC请求类，可以同时并发的向多个PLC发起请求，该类使用非阻塞的高性能方式实现
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Profinet.MelsecNetMultiAsync.#ctor(System.Byte,System.Byte,HslCommunication.Profinet.MelsecDataType,System.UInt16,System.UInt16,System.Int32,System.Int32,System.Net.IPEndPoint[])">
+            <summary>
+            实例化一个多PLC请求的对象
+            </summary>
+            <param name="networkNumber">要求所有网络号一致</param>
+            <param name="networkStationNumber">要求所有站号一致</param>
+            <param name="type">要求所有读取类型一致</param>
+            <param name="address">要求所有起始地址一致</param>
+            <param name="length">要求所有读取数据长度一致</param>
+            <param name="timeout">连接PLC过程中的超时时间</param>
+            <param name="readCycle">每次请求访问的间隔时间</param>
+            <param name="allAddress">所有等待访问的PLC的IP地址</param>
+        </member>
+        <member name="F:HslCommunication.Profinet.MelsecNetMultiAsync.Timeout">
+            <summary>
+            超时时间
+            </summary>
+        </member>
+        <member name="F:HslCommunication.Profinet.MelsecNetMultiAsync.ReadCycle">
+            <summary>
+            访问周期
+            </summary>
+        </member>
+        <member name="F:HslCommunication.Profinet.MelsecNetMultiAsync.ConnectStatus">
+            <summary>
+            系统的连接状态，0未连接，1连接中
+            </summary>
+        </member>
+        <member name="F:HslCommunication.Profinet.MelsecNetMultiAsync.BytesResult">
+            <summary>
+            用于存储结果的字节数组
+            </summary>
+        </member>
+        <member name="F:HslCommunication.Profinet.MelsecNetMultiAsync.EveryMachineLength">
+            <summary>
+            每台设备的长度
+            </summary>
+        </member>
+        <member name="E:HslCommunication.Profinet.MelsecNetMultiAsync.OnReceivedData">
+            <summary>
+            接收到所有的PLC数据时候触发
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Profinet.MelsecNetMultiAsync.ThreadDealWithTimeout">
+            <summary>
+            维护超时连接的线程方法
+            </summary>
+        </member>
         <member name="T:HslCommunication.Profinet.MelsecDataType">
             <summary>
             三菱PLC的数据类型，此处只包含了几个常用的类型
@@ -2581,6 +2753,46 @@
         <member name="F:HslCommunication.Profinet.MelsecDataType.L">
             <summary>
             L锁存继电器
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.PlcStateOne.Index">
+            <summary>
+            在数组中的位置
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.PlcStateOne.PlcEndPoint">
+            <summary>
+            PLC的IP地址
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.PlcStateOne.WorkSocket">
+            <summary>
+            用于工作的套接字对象
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.PlcStateOne.IsConnect">
+            <summary>
+            连接是否成功
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.PlcStateOne.PlcDataHead">
+            <summary>
+            头子节
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.PlcStateOne.LengthDataHead">
+            <summary>
+            头子节接收长度
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.PlcStateOne.PlcDataContent">
+            <summary>
+            接收的PLC实际数据
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.PlcStateOne.LengthDataContent">
+            <summary>
+            实际数据的接收长度
             </summary>
         </member>
         <member name="T:HslCommunication.Profinet.PlcNetBase">
