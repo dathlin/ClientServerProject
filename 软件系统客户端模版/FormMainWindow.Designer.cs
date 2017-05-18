@@ -37,6 +37,18 @@
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_time = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.管理员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.更改公告ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.日志查看ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.账户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.远程更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.注册账号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.关于本软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.更新日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.版本号说明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_right = new System.Windows.Forms.Panel();
             this.label_file_count = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -59,20 +71,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label_Announcement = new System.Windows.Forms.Label();
             this.panel_left = new System.Windows.Forms.Panel();
-            this.panel_main = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
-            this.管理员ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.更改公告ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.日志查看ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.账户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.远程更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.注册账号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关于本软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.更新日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.版本号说明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel_main = new System.Windows.Forms.Panel();
+            this.留言板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel_right.SuspendLayout();
@@ -153,6 +154,103 @@
             this.menuStrip1.Size = new System.Drawing.Size(921, 35);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 管理员ToolStripMenuItem
+            // 
+            this.管理员ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.更改公告ToolStripMenuItem,
+            this.日志查看ToolStripMenuItem,
+            this.账户管理ToolStripMenuItem,
+            this.远程更新ToolStripMenuItem,
+            this.注册账号ToolStripMenuItem});
+            this.管理员ToolStripMenuItem.Image = global::软件系统客户端模版.Properties.Resources.Team_32xLG;
+            this.管理员ToolStripMenuItem.Name = "管理员ToolStripMenuItem";
+            this.管理员ToolStripMenuItem.Size = new System.Drawing.Size(100, 31);
+            this.管理员ToolStripMenuItem.Text = "管理员";
+            // 
+            // 更改公告ToolStripMenuItem
+            // 
+            this.更改公告ToolStripMenuItem.Name = "更改公告ToolStripMenuItem";
+            this.更改公告ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.更改公告ToolStripMenuItem.Text = "更改公告";
+            this.更改公告ToolStripMenuItem.Click += new System.EventHandler(this.更改公告ToolStripMenuItem_Click);
+            // 
+            // 日志查看ToolStripMenuItem
+            // 
+            this.日志查看ToolStripMenuItem.Name = "日志查看ToolStripMenuItem";
+            this.日志查看ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.日志查看ToolStripMenuItem.Text = "日志查看";
+            this.日志查看ToolStripMenuItem.Click += new System.EventHandler(this.日志查看ToolStripMenuItem_Click);
+            // 
+            // 账户管理ToolStripMenuItem
+            // 
+            this.账户管理ToolStripMenuItem.Name = "账户管理ToolStripMenuItem";
+            this.账户管理ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.账户管理ToolStripMenuItem.Text = "账户管理";
+            this.账户管理ToolStripMenuItem.Click += new System.EventHandler(this.账户管理ToolStripMenuItem_Click);
+            // 
+            // 远程更新ToolStripMenuItem
+            // 
+            this.远程更新ToolStripMenuItem.Name = "远程更新ToolStripMenuItem";
+            this.远程更新ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.远程更新ToolStripMenuItem.Text = "远程更新";
+            this.远程更新ToolStripMenuItem.Click += new System.EventHandler(this.远程更新ToolStripMenuItem_Click);
+            // 
+            // 注册账号ToolStripMenuItem
+            // 
+            this.注册账号ToolStripMenuItem.Name = "注册账号ToolStripMenuItem";
+            this.注册账号ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.注册账号ToolStripMenuItem.Text = "注册账号";
+            this.注册账号ToolStripMenuItem.Click += new System.EventHandler(this.注册账号ToolStripMenuItem_Click);
+            // 
+            // 设置ToolStripMenuItem
+            // 
+            this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.修改密码ToolStripMenuItem,
+            this.留言板ToolStripMenuItem});
+            this.设置ToolStripMenuItem.Image = global::软件系统客户端模版.Properties.Resources.PickAxe_32xLG;
+            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
+            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(80, 31);
+            this.设置ToolStripMenuItem.Text = "设置";
+            // 
+            // 修改密码ToolStripMenuItem
+            // 
+            this.修改密码ToolStripMenuItem.Name = "修改密码ToolStripMenuItem";
+            this.修改密码ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.修改密码ToolStripMenuItem.Text = "修改密码";
+            this.修改密码ToolStripMenuItem.Click += new System.EventHandler(this.修改密码ToolStripMenuItem_Click);
+            // 
+            // 关于ToolStripMenuItem
+            // 
+            this.关于ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.关于本软件ToolStripMenuItem,
+            this.更新日志ToolStripMenuItem,
+            this.版本号说明ToolStripMenuItem});
+            this.关于ToolStripMenuItem.Image = global::软件系统客户端模版.Properties.Resources.ASCube_32xLG;
+            this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(80, 31);
+            this.关于ToolStripMenuItem.Text = "关于";
+            // 
+            // 关于本软件ToolStripMenuItem
+            // 
+            this.关于本软件ToolStripMenuItem.Name = "关于本软件ToolStripMenuItem";
+            this.关于本软件ToolStripMenuItem.Size = new System.Drawing.Size(184, 32);
+            this.关于本软件ToolStripMenuItem.Text = "关于本软件";
+            this.关于本软件ToolStripMenuItem.Click += new System.EventHandler(this.关于本软件ToolStripMenuItem_Click);
+            // 
+            // 更新日志ToolStripMenuItem
+            // 
+            this.更新日志ToolStripMenuItem.Name = "更新日志ToolStripMenuItem";
+            this.更新日志ToolStripMenuItem.Size = new System.Drawing.Size(184, 32);
+            this.更新日志ToolStripMenuItem.Text = "更新日志";
+            this.更新日志ToolStripMenuItem.Click += new System.EventHandler(this.更新日志ToolStripMenuItem_Click);
+            // 
+            // 版本号说明ToolStripMenuItem
+            // 
+            this.版本号说明ToolStripMenuItem.Name = "版本号说明ToolStripMenuItem";
+            this.版本号说明ToolStripMenuItem.Size = new System.Drawing.Size(184, 32);
+            this.版本号说明ToolStripMenuItem.Text = "版本号说明";
+            this.版本号说明ToolStripMenuItem.Click += new System.EventHandler(this.版本号说明ToolStripMenuItem_Click);
             // 
             // panel_right
             // 
@@ -387,14 +485,6 @@
             this.panel_left.Size = new System.Drawing.Size(140, 419);
             this.panel_left.TabIndex = 4;
             // 
-            // panel_main
-            // 
-            this.panel_main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_main.Location = new System.Drawing.Point(140, 35);
-            this.panel_main.Name = "panel_main";
-            this.panel_main.Size = new System.Drawing.Size(557, 419);
-            this.panel_main.TabIndex = 5;
-            // 
             // label10
             // 
             this.label10.Location = new System.Drawing.Point(4, 7);
@@ -403,101 +493,20 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "左侧边栏，不需要可以隐藏";
             // 
-            // 管理员ToolStripMenuItem
+            // panel_main
             // 
-            this.管理员ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.更改公告ToolStripMenuItem,
-            this.日志查看ToolStripMenuItem,
-            this.账户管理ToolStripMenuItem,
-            this.远程更新ToolStripMenuItem,
-            this.注册账号ToolStripMenuItem});
-            this.管理员ToolStripMenuItem.Image = global::软件系统客户端模版.Properties.Resources.Team_32xLG;
-            this.管理员ToolStripMenuItem.Name = "管理员ToolStripMenuItem";
-            this.管理员ToolStripMenuItem.Size = new System.Drawing.Size(100, 31);
-            this.管理员ToolStripMenuItem.Text = "管理员";
+            this.panel_main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_main.Location = new System.Drawing.Point(140, 35);
+            this.panel_main.Name = "panel_main";
+            this.panel_main.Size = new System.Drawing.Size(557, 419);
+            this.panel_main.TabIndex = 5;
             // 
-            // 更改公告ToolStripMenuItem
+            // 留言板ToolStripMenuItem
             // 
-            this.更改公告ToolStripMenuItem.Name = "更改公告ToolStripMenuItem";
-            this.更改公告ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
-            this.更改公告ToolStripMenuItem.Text = "更改公告";
-            this.更改公告ToolStripMenuItem.Click += new System.EventHandler(this.更改公告ToolStripMenuItem_Click);
-            // 
-            // 日志查看ToolStripMenuItem
-            // 
-            this.日志查看ToolStripMenuItem.Name = "日志查看ToolStripMenuItem";
-            this.日志查看ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
-            this.日志查看ToolStripMenuItem.Text = "日志查看";
-            this.日志查看ToolStripMenuItem.Click += new System.EventHandler(this.日志查看ToolStripMenuItem_Click);
-            // 
-            // 账户管理ToolStripMenuItem
-            // 
-            this.账户管理ToolStripMenuItem.Name = "账户管理ToolStripMenuItem";
-            this.账户管理ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
-            this.账户管理ToolStripMenuItem.Text = "账户管理";
-            this.账户管理ToolStripMenuItem.Click += new System.EventHandler(this.账户管理ToolStripMenuItem_Click);
-            // 
-            // 远程更新ToolStripMenuItem
-            // 
-            this.远程更新ToolStripMenuItem.Name = "远程更新ToolStripMenuItem";
-            this.远程更新ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
-            this.远程更新ToolStripMenuItem.Text = "远程更新";
-            this.远程更新ToolStripMenuItem.Click += new System.EventHandler(this.远程更新ToolStripMenuItem_Click);
-            // 
-            // 注册账号ToolStripMenuItem
-            // 
-            this.注册账号ToolStripMenuItem.Name = "注册账号ToolStripMenuItem";
-            this.注册账号ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
-            this.注册账号ToolStripMenuItem.Text = "注册账号";
-            this.注册账号ToolStripMenuItem.Click += new System.EventHandler(this.注册账号ToolStripMenuItem_Click);
-            // 
-            // 设置ToolStripMenuItem
-            // 
-            this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.修改密码ToolStripMenuItem});
-            this.设置ToolStripMenuItem.Image = global::软件系统客户端模版.Properties.Resources.PickAxe_32xLG;
-            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
-            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(80, 31);
-            this.设置ToolStripMenuItem.Text = "设置";
-            // 
-            // 修改密码ToolStripMenuItem
-            // 
-            this.修改密码ToolStripMenuItem.Name = "修改密码ToolStripMenuItem";
-            this.修改密码ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
-            this.修改密码ToolStripMenuItem.Text = "修改密码";
-            this.修改密码ToolStripMenuItem.Click += new System.EventHandler(this.修改密码ToolStripMenuItem_Click);
-            // 
-            // 关于ToolStripMenuItem
-            // 
-            this.关于ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.关于本软件ToolStripMenuItem,
-            this.更新日志ToolStripMenuItem,
-            this.版本号说明ToolStripMenuItem});
-            this.关于ToolStripMenuItem.Image = global::软件系统客户端模版.Properties.Resources.ASCube_32xLG;
-            this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(80, 31);
-            this.关于ToolStripMenuItem.Text = "关于";
-            // 
-            // 关于本软件ToolStripMenuItem
-            // 
-            this.关于本软件ToolStripMenuItem.Name = "关于本软件ToolStripMenuItem";
-            this.关于本软件ToolStripMenuItem.Size = new System.Drawing.Size(184, 32);
-            this.关于本软件ToolStripMenuItem.Text = "关于本软件";
-            this.关于本软件ToolStripMenuItem.Click += new System.EventHandler(this.关于本软件ToolStripMenuItem_Click);
-            // 
-            // 更新日志ToolStripMenuItem
-            // 
-            this.更新日志ToolStripMenuItem.Name = "更新日志ToolStripMenuItem";
-            this.更新日志ToolStripMenuItem.Size = new System.Drawing.Size(184, 32);
-            this.更新日志ToolStripMenuItem.Text = "更新日志";
-            this.更新日志ToolStripMenuItem.Click += new System.EventHandler(this.更新日志ToolStripMenuItem_Click);
-            // 
-            // 版本号说明ToolStripMenuItem
-            // 
-            this.版本号说明ToolStripMenuItem.Name = "版本号说明ToolStripMenuItem";
-            this.版本号说明ToolStripMenuItem.Size = new System.Drawing.Size(184, 32);
-            this.版本号说明ToolStripMenuItem.Text = "版本号说明";
-            this.版本号说明ToolStripMenuItem.Click += new System.EventHandler(this.版本号说明ToolStripMenuItem_Click);
+            this.留言板ToolStripMenuItem.Name = "留言板ToolStripMenuItem";
+            this.留言板ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.留言板ToolStripMenuItem.Text = "留言板";
+            this.留言板ToolStripMenuItem.Click += new System.EventHandler(this.留言板ToolStripMenuItem_Click);
             // 
             // FormMainWindow
             // 
@@ -577,6 +586,7 @@
         private System.Windows.Forms.Panel panel_left;
         private System.Windows.Forms.Panel panel_main;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ToolStripMenuItem 留言板ToolStripMenuItem;
     }
 }
 

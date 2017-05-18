@@ -377,9 +377,8 @@ namespace 软件系统服务端模版
             }
             else if (headCode == CommonHeadCode.SimplifyHeadCode.密码修改)
             {
-                //更新服务器的账户密码
-                //此处使用的是组件自带的验证的方式，如果使用SQL数据库，另行验证
-                Newtonsoft.Json.Linq.JObject json = Newtonsoft.Json.Linq.JObject.Parse(object2.Substring(4));
+                //更新服务器的账户密码，此处使用的是组件自带的验证的方式，如果使用SQL数据库，另行验证
+                JObject json = JObject.Parse(object2.Substring(4));
                 //提取账户，密码
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
@@ -519,7 +518,9 @@ namespace 软件系统服务端模版
             string headCode = object2.Substring(0, 4);
             if (headCode == CommonHeadCode.MultiNetHeadCode.留言消息)
             {
-
+                string content = headCode + object1._Login_Alias + DateTime.Now.ToString(" yyyy-MM-dd HH:mm:ss") + Environment.NewLine + object2.Substring(4);
+                //转发所有的客户端，包括发送者
+                net_socket_server.SendAllClients(content);
             }
         }
 

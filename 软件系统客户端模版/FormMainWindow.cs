@@ -219,6 +219,12 @@ namespace 软件系统客户端模版
             Close();
         }
 
+        private void 留言板ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetShowRenderControl(UIControls_Chat);
+            UIControls_Chat?.InputFocus();
+        }
+
         #endregion
 
         #region 异步网络块
@@ -233,7 +239,7 @@ namespace 软件系统客户端模版
                 net_socket_client.EndPointServer = new System.Net.IPEndPoint(
                     System.Net.IPAddress.Parse(UserClient.ServerIp),
                     CommonLibrary.CommonLibrary.Port_Main_Net);
-                net_socket_client.ClientAlias = UserClient.UserAccount.UserName;
+                net_socket_client.ClientAlias = $"{UserClient.UserAccount.UserName} [{UserClient.UserAccount.Factory}]";//标记客户端在线的名称
                 net_socket_client.ClientStart();
             }
             catch(Exception ex)
@@ -302,7 +308,14 @@ namespace 软件系统客户端模版
                 UserClient.DateTimeServer = Convert.ToDateTime(object2.Substring(4));
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
-                    toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm")+$"({net_socket_client.DelayTime}ms)";
+                    toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm") + $"({net_socket_client.DelayTime}ms)";
+                }));
+            }
+            else if (head_code == CommonHeadCode.MultiNetHeadCode.留言消息)
+            {
+                if (IsHandleCreated) Invoke(new Action(() =>
+                {
+                    UIControls_Chat?.DealwithReceive(object2.Substring(4));
                 }));
             }
         }
@@ -356,6 +369,12 @@ namespace 软件系统客户端模版
         /// </summary>
         private UIControls.ShareFilesRender UIControls_Files { get; set; }
 
+        /// <summary>
+        /// 用于聊天的控件
+        /// </summary>
+        private UIControls.OnlineChatRender UIControls_Chat { get; set; }
+
+
 
 
 
@@ -390,6 +409,18 @@ namespace 软件系统客户端模版
                 Dock = DockStyle.Fill,
             };
             all_main_render.Add(UIControls_Files);
+
+            UIControls_Chat = new UIControls.OnlineChatRender((m) =>
+            {
+                net_socket_client.Send(CommonHeadCode.MultiNetHeadCode.留言消息 + m);
+            })
+            {
+                Visible = false,
+                Parent = panel_main,//决定了放在哪个界面显示，此处示例
+                Dock = DockStyle.Fill,
+            };
+            all_main_render.Add(UIControls_Chat);
+
         }
 
         private void SetShowRenderControl(UserControl control)
@@ -421,10 +452,11 @@ namespace 软件系统客户端模版
             UIControls_Files.UpdateFiles();
         }
 
+
+
+
         #endregion
 
-
-
-
+      
     }
 }
