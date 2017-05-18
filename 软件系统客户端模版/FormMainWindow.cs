@@ -248,7 +248,7 @@ namespace 软件系统客户端模版
             }
         }
 
-        private void Net_socket_client_AcceptString(HuTcpState object1, string object2)
+        private void Net_socket_client_AcceptString(AsyncStateOne object1, string object2)
         {
             //接收到服务器发来的字符串数据
             string head_code = object2.Substring(0, 4);
@@ -320,7 +320,7 @@ namespace 软件系统客户端模版
             }
         }
 
-        private void Net_socket_client_AcceptByte(HuTcpState object1, byte[] object2)
+        private void Net_socket_client_AcceptByte(AsyncStateOne object1, byte[] object2)
         {
             //接收到服务器发来的字节数据
             if (IsHandleCreated) Invoke(new Action(() =>

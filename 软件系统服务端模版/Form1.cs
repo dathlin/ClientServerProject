@@ -290,7 +290,7 @@ namespace 软件系统服务端模版
         /// </summary>
         /// <param name="object1">客户端的地址</param>
         /// <param name="object2">字节数据，根据实际情况选择是否使用</param>
-        private void Net_simplify_server_ReceivedBytesEvent(HuStateOne object1, byte[] object2)
+        private void Net_simplify_server_ReceivedBytesEvent(AsyncStateBase object1, byte[] object2)
         {
             net_simplify_server.SendMessage(object1, object2);
         }
@@ -299,7 +299,7 @@ namespace 软件系统服务端模版
         /// </summary>
         /// <param name="object1">客户端的地址</param>
         /// <param name="object2">消息数据，应该使用指令头+数据组成</param>
-        private void Net_simplify_server_ReceiveStringEvent(HuStateOne object1, string object2)
+        private void Net_simplify_server_ReceiveStringEvent(AsyncStateBase object1, string object2)
         {
             //必须返回结果，调用SendMessage(object1,[实际数据]);
             if(object2.StartsWith("A"))
@@ -329,7 +329,7 @@ namespace 软件系统服务端模版
         /// </summary>
         /// <param name="object1"></param>
         /// <param name="object2"></param>
-        private void DataProcessingWithStartA(HuStateOne object1, string object2)
+        private void DataProcessingWithStartA(AsyncStateBase object1, string object2)
         {
             string headCode = object2.Substring(0, 4);
             if (headCode == CommonHeadCode.SimplifyHeadCode.维护检查)
@@ -355,7 +355,7 @@ namespace 软件系统服务端模版
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
                 net_simplify_server.SendMessage(object1, UserServer.ServerAccounts.CheckAccountJson(
-                    name, password, ((System.Net.IPEndPoint)(object1.WorkSocket.RemoteEndPoint)).Address.ToString()));
+                    name, password, object1.GetRemoteEndPoint().Address.ToString()));
             }
             else if (headCode == CommonHeadCode.SimplifyHeadCode.更新公告)
             {
@@ -419,7 +419,7 @@ namespace 软件系统服务端模版
         /// </summary>
         /// <param name="object1"></param>
         /// <param name="object2"></param>
-        private void DataProcessingWithStartB(HuStateOne object1, string object2)
+        private void DataProcessingWithStartB(AsyncStateBase object1, string object2)
         {
             string headCode = object2.Substring(0, 4);
             if (headCode == CommonHeadCode.SimplifyHeadCode.网络日志查看)
@@ -496,7 +496,7 @@ namespace 软件系统服务端模版
             }
         }
 
-        private void Net_socket_server_AcceptString(HuTcpState object1, string object2)
+        private void Net_socket_server_AcceptString(AsyncStateOne object1, string object2)
         {
             //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字符串都会到此处处理
             if (object2.StartsWith("H"))
@@ -513,19 +513,19 @@ namespace 软件系统服务端模版
         /// <param name="object1"></param>
         /// <param name="headcode">指令头</param>
         /// <param name="object2"></param>
-        private void DataProcessingWithStartH(HuTcpState object1, string object2)
+        private void DataProcessingWithStartH(AsyncStateOne object1, string object2)
         {
             string headCode = object2.Substring(0, 4);
             if (headCode == CommonHeadCode.MultiNetHeadCode.留言消息)
             {
-                string content = headCode + object1._Login_Alias + DateTime.Now.ToString(" yyyy-MM-dd HH:mm:ss") + Environment.NewLine + object2.Substring(4);
+                string content = headCode + object1.LoginAlias + DateTime.Now.ToString(" yyyy-MM-dd HH:mm:ss") + Environment.NewLine + object2.Substring(4);
                 //转发所有的客户端，包括发送者
                 net_socket_server.SendAllClients(content);
             }
         }
 
 
-        private void Net_socket_server_AcceptByte(HuTcpState object1, byte[] object2)
+        private void Net_socket_server_AcceptByte(AsyncStateOne object1, byte[] object2)
         {
             //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字节数组都会到此处处理
         }
@@ -542,13 +542,13 @@ namespace 软件系统服务端模版
             }
         }
 
-        private void Net_socket_server_ClientOffline(HuTcpState object1, string object2)
+        private void Net_socket_server_ClientOffline(AsyncStateOne object1, string object2)
         {
             Net_socket_clients_change(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" +
-                        object1._Login_Alias + " " + object2);
+                        object1.LoginAlias + " " + object2);
         }
 
-        private void Net_socket_server_ClientOnline(HuTcpState object1)
+        private void Net_socket_server_ClientOnline(AsyncStateOne object1)
         {
             //上线后回发一条数据初始化信息
             JObject json = new JObject
@@ -559,7 +559,7 @@ namespace 软件系统服务端模版
             net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据 + json.ToString());
             //触发上下线功能
             Net_socket_clients_change(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" +
-                        object1._Login_Alias + " 上线");
+                        object1.LoginAlias + " 上线");
         }
 
 
