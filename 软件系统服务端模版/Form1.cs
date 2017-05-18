@@ -659,6 +659,55 @@ namespace 软件系统服务端模版
         #endregion
 
 
+        #region 访问PLC块
+
+        /*************************************************************************************************
+         * 
+         *    以下展示一个高性能访问多台PLC数据的类，即使同时访问100台设备，性能也是非常高
+         * 
+         *    该类没有仔细的在现场环境测试过，不保证完全可用
+         * 
+         *************************************************************************************************/
+
+        HslCommunication.Profinet.MelsecNetMultiAsync MelsecMulti { get; set; }
+
+        private void MelsecNetMultiInnitialization()
+        {
+            List<System.Net.IPEndPoint> IpEndPoints = new List<System.Net.IPEndPoint>();
+            //增加100台需要访问的三菱设备，指定所有设备IP和端口，注意：顺序很重要
+            for (int i = 1; i < 100; i++)
+            {
+                IpEndPoints.Add(new System.Net.IPEndPoint(System.Net.IPAddress.Parse("192.168.10." + i), 6000));
+            }
+
+            //每隔1000秒钟访问一次
+            MelsecMulti = new HslCommunication.Profinet.MelsecNetMultiAsync(0, 0, HslCommunication.Profinet.MelsecDataType.D, 6000, 20, 700, 1000, IpEndPoints.ToArray());
+            MelsecMulti.OnReceivedData += MelsecMulti_OnReceivedData;
+        }
+
+        private void MelsecMulti_OnReceivedData(byte[] object1)
+        {
+            /*********************************************************************************************
+             * 
+             *    正常情况下，一秒触发一次，object1包含了所有机台读取到的数据
+             *    比如每台设备读取D6000开始20个D，如上述指令所示
+             *    那么每台设备数据长度为20*2+2=42个byte，100台设备就是4200字节长度
+             *    也就是说，object1的0-41字节是第一台设备的，以此类推
+             *    每台设备的前两个字节都为0才说明本次数据访问正常，为0x00,0x01说明连接失败，其他说明说明三菱本身的异常
+             * 
+             ********************************************************************************************/
+
+        }
+
+
+
+        #endregion
+
+
+
+
+
+
         /// <summary>
         /// 用来记录一般的事物日志
         /// </summary>
