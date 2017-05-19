@@ -668,7 +668,7 @@ namespace 软件系统服务端模版
         #endregion
 
 
-        #region 访问PLC块
+        #region 访问PLC块示例代码
 
         /*************************************************************************************************
          * 
@@ -718,7 +718,30 @@ namespace 软件系统服务端模版
 
         #endregion
 
+        #region 流水号生成示例代码
 
+        private SoftNumericalOrder OrderAutoCreate { get; set; }
+
+        /// <summary>
+        /// 流水号初始化方法，如果需要可以放到窗口的load方法中
+        /// </summary>
+        private void OrderInitialization()
+        {
+            /*********************************************************************************************************
+             * 
+             *    说明     此处的时间格式是年月日，7是指跟在时间后面的序号的位数，不够补零
+             *    示例1    调用 string str = OrderAutoCreate.GetNumericalOrder();//str为 AB201705190000001
+             *    示例2    调用 string str = OrderAutoCreate.GetNumericalOrder("KN");//str为 KN201705190000002
+             *    注意     默认计数不清空，后面的1，2会一值累加，可以调用900亿亿次，如果需要定期清空，请自行周期调用OrderAutoCreate.ClearNumericalOrder();
+             *    提示     如果需要定期清空，在本页面的ThreadTimeTick()方法中清空即可
+             *    性能     一秒钟可以响应请求100万次，并成功存储当前计数值
+             * 
+             **********************************************************************************************************/
+
+            OrderAutoCreate = new SoftNumericalOrder("AB", "yyyyMMdd", 7, Application.StartupPath + @"\order.txt");
+        }
+
+        #endregion
 
 
 

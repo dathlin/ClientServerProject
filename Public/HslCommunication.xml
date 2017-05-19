@@ -693,6 +693,75 @@
             消息是否已经被查看
             </summary>
         </member>
+        <member name="T:HslCommunication.BasicFramework.SoftNumericalOrder">
+            <summary>
+            一个用于自动流水号生成的类，必须指定保存的文件，实时保存来确认安全
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftNumericalOrder.#ctor(System.String,System.String,System.Int32,System.String)">
+            <summary>
+            实例化一个流水号生成的对象
+            </summary>
+            <param name="textHead">流水号的头文本</param>
+            <param name="timeFormate">流水号带的时间信息</param>
+            <param name="numberLength">流水号数字的标准长度，不够补0</param>
+            <param name="fileSavePath">流水号存储的文本位置</param>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftNumericalOrder.SaveStatus">
+            <summary>
+            文件的保存状态
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftNumericalOrder.CurrentIndex">
+            <summary>
+            当前的生成序列号
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftNumericalOrder.TextHead">
+            <summary>
+            流水号的文本头
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftNumericalOrder.TimeFormate">
+            <summary>
+            时间格式默认年月日
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftNumericalOrder.NumberLength">
+            <summary>
+            流水号数字应该显示的长度
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftNumericalOrder.ToSaveString">
+            <summary>
+            获取流水号的值
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftNumericalOrder.LoadByString(System.String)">
+            <summary>
+            加载流水号
+            </summary>
+            <param name="content"></param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftNumericalOrder.ClearNumericalOrder">
+            <summary>
+            清除流水号计数，进行重新计数
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftNumericalOrder.GetNumericalOrder">
+            <summary>
+            获取流水号数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftNumericalOrder.GetNumericalOrder(System.String)">
+            <summary>
+            获取流水号数据
+            </summary>
+            <param name="textHead">指定一个新的文本头</param>
+            <returns></returns>
+        </member>
         <member name="T:HslCommunication.BasicFramework.Paintdata">
             <summary>
             包含整型和字符串描述的数据类型
@@ -1600,20 +1669,26 @@
             </summary>
             <param name="obj"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.ReceiveCallBack(System.IAsyncResult)">
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.HeadReceiveCallback(System.IAsyncResult)">
             <summary>
-            一种以同步数据接收的方式来接收数据，如果数据量比较大，将会影响性能
+            指令头接收方法
             </summary>
-            <param name="ar">异步状态</param>
+            <param name="ar"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.Send(HslCommunication.Enthernet.HuTcpState,System.String)">
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.ContentReceiveCallback(System.IAsyncResult)">
+            <summary>
+            数据内容接收方法
+            </summary>
+            <param name="ar"></param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.Send(HslCommunication.Enthernet.AsyncStateOne,System.String)">
             <summary>
             服务器端用于数据发送文本的方法
             </summary>
             <param name="stateone">数据发送对象</param>
             <param name="str">发送的文本</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.Send(HslCommunication.Enthernet.HuTcpState,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.Send(HslCommunication.Enthernet.AsyncStateOne,System.Byte[])">
             <summary>
             服务器端用于发送字节的方法
             </summary>
@@ -1712,6 +1787,18 @@
             启动客户端引擎，连接服务器系统
             </summary>
         </member>
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.HeadReceiveCallback(System.IAsyncResult)">
+            <summary>
+            指令头接收方法
+            </summary>
+            <param name="ar"></param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.ContentReceiveCallback(System.IAsyncResult)">
+            <summary>
+            数据内容接收方法
+            </summary>
+            <param name="ar"></param>
+        </member>
         <member name="M:HslCommunication.Enthernet.Net_Socket_Client.Send(System.String)">
             <summary>
             服务器端用于数据发送文本的方法
@@ -1794,14 +1881,14 @@
             关闭引擎
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.SendMessage(HslCommunication.Enthernet.HuStateOne,System.String)">
+        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.SendMessage(HslCommunication.Enthernet.AsyncStateBase,System.String)">
             <summary>
             向指定的通信对象发送字符串数据
             </summary>
             <param name="socket">通信对象</param>
             <param name="str">实际发送的字符串数据</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.SendMessage(HslCommunication.Enthernet.HuStateOne,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.SendMessage(HslCommunication.Enthernet.AsyncStateBase,System.Byte[])">
             <summary>
             向指定的通信对象发送字节数据
             </summary>
@@ -2078,106 +2165,139 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="T:HslCommunication.Enthernet.StateOneBase">
+        <member name="T:HslCommunication.Enthernet.AsyncStateBase">
             <summary>
-            系统套接字基类，提供一些基础服务
+            异步状态的基类
             </summary>
         </member>
-        <member name="F:HslCommunication.Enthernet.StateOneBase.ReceiveBuffer">
+        <member name="P:HslCommunication.Enthernet.AsyncStateBase.WorkSocket">
             <summary>
-            用来缓冲长度的字节
+            传输数据的对象
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.StateOneBase.AlreadyReceivedLength">
+        <member name="M:HslCommunication.Enthernet.AsyncStateBase.GetRemoteEndPoint">
             <summary>
-            已经接收或上传的数据长度，用来判断接收是否完成的依据
+            获取远程的网络地址
             </summary>
+            <returns></returns>
         </member>
-        <member name="F:HslCommunication.Enthernet.StateOneBase.SendBuffer">
-            <summary>
-            用于发送数据的
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.StateOneBase.AlreadySendLength">
-            <summary>
-            已经发送的数据长度，用来判定是否发送完成的依据
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.StateOneBase.WorkSocket">
-            <summary>
-            通信用的socket
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.StateOneBase.ConnectTime">
-            <summary>
-            套接字的连接时间
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.StateOneBase.BytesSizeToString(System.Int32)">
+        <member name="M:HslCommunication.Enthernet.AsyncStateBase.BytesSizeToString(System.Int32)">
             <summary>
             获取指定长度的数据的文本描述
             </summary>
             <param name="size"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.StateOneBase.Close">
+        <member name="T:HslCommunication.Enthernet.AsyncStateSend">
             <summary>
-            关闭网络资源
+            发送数据的异步状态
             </summary>
         </member>
-        <member name="T:HslCommunication.Enthernet.HuTcpState">
+        <member name="P:HslCommunication.Enthernet.AsyncStateSend.Content">
             <summary>
-            异步多客户端系统的套接字对象
+            发送的数据内容
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.HuTcpState._HeadCode_Bytes">
+        <member name="P:HslCommunication.Enthernet.AsyncStateSend.AlreadySendLength">
             <summary>
-            数据信息的接收的数据头
+            已经发送长度
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.HuTcpState._Work_Socket">
+        <member name="T:HslCommunication.Enthernet.AsyncStateOne">
             <summary>
-            此次连接的套接字
+            异步多客户端网络的对象
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.HuTcpState._Head_Length">
-            <summary>
-            信息头的数据长度
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.HuTcpState._IpEnd_Point">
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne._IpEnd_Point">
             <summary>
             此连接对象连接的远程客户端
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.HuTcpState._Login_Alias">
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne.LoginAlias">
             <summary>
             远程对象的别名
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.HuTcpState._Heart_Time">
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne._Heart_Time">
             <summary>
             心跳验证的时间点
             </summary>
         </member>
-        <member name="T:HslCommunication.Enthernet.HuStateOne">
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne.HeadLength">
             <summary>
-            同步服务器的使用的套接字对象
+            头子节数据标准长度
             </summary>
         </member>
-        <member name="F:HslCommunication.Enthernet.HuStateOne._HeadBytes">
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne.BytesHead">
             <summary>
-            用于接收密令头
+            指令头缓存
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.HuStateOne.Lenght">
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne.AlreadyReceivedHead">
             <summary>
-            密令头长度
+            已经接收的指令头长度
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne.BytesContent">
+            <summary>
+            数据内容缓存
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne.AlreadyReceivedContent">
+            <summary>
+            已经接收的数据内容长度
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.AsyncStateOne.Clear">
+            <summary>
+            清除本次的接收内容
             </summary>
         </member>
         <member name="T:HslCommunication.Enthernet.FileStateOne">
             <summary>
             用于文件传输的时候的封装对象
+            </summary>
+        </member>
+        <member name="F:HslCommunication.Enthernet.FileStateOne.ReceiveBuffer">
+            <summary>
+            用来缓冲长度的字节
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.FileStateOne.AlreadyReceivedLength">
+            <summary>
+            已经接收或上传的数据长度，用来判断接收是否完成的依据
+            </summary>
+        </member>
+        <member name="F:HslCommunication.Enthernet.FileStateOne.SendBuffer">
+            <summary>
+            用于发送数据的
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.FileStateOne.AlreadySendLength">
+            <summary>
+            已经发送的数据长度，用来判定是否发送完成的依据
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.FileStateOne.WorkSocket">
+            <summary>
+            通信用的socket
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.FileStateOne.ConnectTime">
+            <summary>
+            套接字的连接时间
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.FileStateOne.BytesSizeToString(System.Int32)">
+            <summary>
+            获取指定长度的数据的文本描述
+            </summary>
+            <param name="size"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.FileStateOne.Close">
+            <summary>
+            关闭网络资源
             </summary>
         </member>
         <member name="P:HslCommunication.Enthernet.FileStateOne.IsFinishOperate">
