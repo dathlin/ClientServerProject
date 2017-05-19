@@ -77,7 +77,7 @@ namespace 软件系统客户端模版.UIControls
                             }
                             else
                             {
-                                return true;
+                                return MessageBox.Show("请确认是否真的删除？", "删除确认", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
                             }
                         });
                     panel2.Controls.Add(item);

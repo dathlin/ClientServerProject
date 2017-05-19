@@ -20,7 +20,10 @@ namespace CommonLibrary
 
 
 
-            public const string AccountLoadFailed = "新增账户失败"; 
+            public const string AccountLoadFailed = "新增账户失败";
+            public const string AccountDeleteSuccess = "账户删除：";
+            public const string AccountAddSuccess = "账户新增：";
+            public const string AccountModifyPassword = "账户更改密码：";
         }
     }
 }

@@ -71,5 +71,15 @@ namespace 软件系统客户端模版
         {
             ClearFromServer(CommonHeadCode.SimplifyHeadCode.更新日志清空);
         }
+
+        private void userButton7_Click(object sender, EventArgs e)
+        {
+            ReadFromServer(CommonHeadCode.SimplifyHeadCode.运行日志查看);
+        }
+
+        private void userButton6_Click(object sender, EventArgs e)
+        {
+            ClearFromServer(CommonHeadCode.SimplifyHeadCode.运行日志清空);
+        }
     }
 }

@@ -65,7 +65,7 @@ namespace 软件系统服务端模版
         private void Form1_Load(object sender, EventArgs e)
         {
             //初始化日志工具
-            LogHelper = new SoftLogHelper()
+            RuntimeLogHelper = new SoftLogHelper()
             {
                 LogSaveFileName = Application.StartupPath + @"\log.txt",
             };
@@ -78,7 +78,7 @@ namespace 软件系统服务端模版
             //加载账户信息
             UserServer.ServerAccounts.FileSavePath = Application.StartupPath + @"\accounts.txt";
             UserServer.ServerAccounts.LoadByFile();
-            UserServer.ServerAccounts.LogHelper = LogHelper;
+            UserServer.ServerAccounts.LogHelper = RuntimeLogHelper;
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -449,6 +449,15 @@ namespace 软件系统服务端模版
                 net_soft_update_Server.LogHelper.ClearLogText();
                 net_simplify_server.SendMessage(object1, "成功");
             }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.运行日志查看)
+            {
+                net_simplify_server.SendMessage(object1, RuntimeLogHelper.GetLogText());
+            }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.运行日志清空)
+            {
+                RuntimeLogHelper.ClearLogText();
+                net_simplify_server.SendMessage(object1, "成功");
+            }
             else
             {
                 net_simplify_server.SendMessage(object1, object2);
@@ -680,9 +689,9 @@ namespace 软件系统服务端模版
                 IpEndPoints.Add(new System.Net.IPEndPoint(System.Net.IPAddress.Parse("192.168.10." + i), 6000));
             }
 
-            //每隔1000秒钟访问一次
+            //每隔1秒钟访问一次
             MelsecMulti = new HslCommunication.Profinet.MelsecNetMultiAsync(0, 0, HslCommunication.Profinet.MelsecDataType.D, 6000, 20, 700, 1000, IpEndPoints.ToArray());
-            MelsecMulti.OnReceivedData += MelsecMulti_OnReceivedData;
+            MelsecMulti.OnReceivedData += MelsecMulti_OnReceivedData;//所有机台的数据都返回时触发
         }
 
         private void MelsecMulti_OnReceivedData(byte[] object1)
@@ -696,7 +705,13 @@ namespace 软件系统服务端模版
              *    每台设备的前两个字节都为0才说明本次数据访问正常，为0x00,0x01说明连接失败，其他说明说明三菱本身的异常
              * 
              ********************************************************************************************/
+            for (int i = 0; i < 100; i++)
+            {
+                int startIndex = i * 42;
+                ushort netState = BitConverter.ToUInt16(object1, startIndex);//为0，说明数据正常，不为0说明网络访问失败或是指令出错
 
+
+            }
         }
 
 
@@ -711,6 +726,6 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 用来记录一般的事物日志
         /// </summary>
-        private SoftLogHelper LogHelper { get; set; }
+        private SoftLogHelper RuntimeLogHelper { get; set; }
     }
 }

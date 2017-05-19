@@ -40,6 +40,7 @@ namespace 软件系统客户端模版
             UserAccount account = new UserAccount();
             account.UserName = textBox1.Text;
             account.Password = textBox2.Text;
+            account.Factory = textBox3.Text;
             switch (comboBox1.SelectedIndex)
             {
                 case 0: account.Grade = AccountGrade.SuperAdministrator; break;
