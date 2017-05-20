@@ -641,11 +641,11 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_simple_file_server = new SimpleShareFileServer(
-                    list => JArray.FromObject(list).ToString(),
-                    str => JArray.Parse(str).ToObject<List<File_Save>>());
-                //文件信息存储路径
-                net_simple_file_server.FileSavePath = Application.StartupPath + @"\files.txt";
+                net_simple_file_server = new SimpleShareFileServer()
+                {
+                    //文件信息存储路径
+                    FileSavePath = Application.StartupPath + @"\files.txt"
+                };
                 net_simple_file_server.ReadFromFile();
                 //文件存储路径
                 net_simple_file_server.File_save_path = Application.StartupPath + @"\Files";

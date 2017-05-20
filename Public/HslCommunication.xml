@@ -1449,12 +1449,10 @@
             文件删除的指令头
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.#ctor(System.Func{System.Collections.Generic.List{HslCommunication.Enthernet.File_Save},System.String},System.Func{System.String,System.Collections.Generic.List{HslCommunication.Enthernet.File_Save}})">
+        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.#ctor">
             <summary>
             生成对象，需要指定存储规则
             </summary>
-            <param name="toJsonString">获取字符串的规则</param>
-            <param name="toListArray">从字符串转化成对象数据</param>
         </member>
         <member name="P:HslCommunication.Enthernet.SimpleShareFileServer.FileSavePath">
             <summary>
