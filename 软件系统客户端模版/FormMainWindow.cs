@@ -14,23 +14,26 @@ using HslCommunication.Enthernet;
 using HslCommunication.BasicFramework;
 
 
-//============================================================================
-//    模版日期  2017-02-21
-//    创建人    胡少林
-//    版权所有  胡少林
-//    授权说明  模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
-//    说明      JSON组件引用自james newton-king，遵循MIT授权协议
-//    说明      文件的图标来源于http://fileicons.chromefans.org/,感谢作者的无私分享
-//============================================================================
+/***************************************************************************************
+ * 
+ *    模版日期    2017-05-20
+ *    创建人      胡少林
+ *    版权所有    胡少林
+ *    授权说明    模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
+ *    说明一      JSON组件引用自james newton-king，遵循MIT授权协议
+ *    说明二      文件的图标来源于http://fileicons.chromefans.org/,感谢作者的无私分享
+ * 
+ ****************************************************************************************/
 
+/***************************************************************************************
+ * 
+ *    版本说明    最新版以github为准，由于提交更改比较频繁，需要经常查看官网地址:https://github.com/dathlin/C-S-
+ *    注意        本代码的相关操作未作密码验证，如有需要，请自行完成
+ *    示例        密码验证具体示例参照Form1_FormClosing(object sender, FormClosingEventArgs e)方法
+ *    如果        遇到启动调试就退出了，请注释掉Program.cs文件中的指允许启动一个实例的代码
+ * 
+ ****************************************************************************************/
 
-//============================================================================
-//
-//    注意：本代码的相关操作未作密码验证，如有需要，请自行完成
-//    示例：具体示例参照Form1_FormClosing(object sender, FormClosingEventArgs e)方法
-//    如果：遇到启动调试就退出了，请注释掉Program.cs文件中的指允许启动一个实例的代码
-//
-//============================================================================
 
 
 
@@ -125,22 +128,28 @@ namespace 软件系统客户端模版
         private void 修改密码ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //实例化一个密码修改的窗口，并指定了实现修改的具体方法，指定了密码长度
-            FormPasswordModify fpm = new FormPasswordModify(UserClient.UserAccount.Password,
-                p => {
-                    JObject json = new JObject();json.Add(UserAccount.UserNameText, UserClient.UserAccount.UserName);
-                    json.Add(UserAccount.PasswordText, p);
+            using (FormPasswordModify fpm = new FormPasswordModify(UserClient.UserAccount.Password,
+                p =>
+                {
+                    JObject json = new JObject
+                    {
+                        { UserAccount.UserNameText, UserClient.UserAccount.UserName },
+                        { UserAccount.PasswordText, p }
+                    };
                     return UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.密码修改 + json.ToString()).IsSuccess;
-                }, 6, 8);
-            fpm.ShowDialog();
-            fpm.Dispose();
+                }, 6, 8))
+            {
+                fpm.ShowDialog();
+            }
         }
 
         private void 关于本软件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormAbout fa = new FormAbout(Resource.StringResouce.SoftName, 
-                UserClient.CurrentVersion, 2017, Resource.StringResouce.SoftCopyRight);
-            fa.ShowDialog();
-            fa.Dispose();
+            using (FormAbout fa = new FormAbout(Resource.StringResouce.SoftName,
+                UserClient.CurrentVersion, 2017, Resource.StringResouce.SoftCopyRight))
+            {
+                fa.ShowDialog();
+            }
         }
 
         private void 更新日志ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -151,31 +160,35 @@ namespace 软件系统客户端模版
                 UserClient.JsonSettings.IsNewVersionRunning = false;
                 UserClient.JsonSettings.SaveToFile();
             }
-            FormUpdateLog ful = new FormUpdateLog(UserClient.HistoryVersions);
-            ful.ShowDialog();
-            ful.Dispose();
+            using (FormUpdateLog ful = new FormUpdateLog(UserClient.HistoryVersions))
+            {
+                ful.ShowDialog();
+            }
         }
 
         private void 版本号说明ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormAboutVersion fav = new FormAboutVersion(UserClient.CurrentVersion);
-            fav.ShowDialog();
-            fav.Dispose();
+            using (FormAboutVersion fav = new FormAboutVersion(UserClient.CurrentVersion))
+            {
+                fav.ShowDialog();
+            }
         }
 
         private void 更改公告ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormInputAndAction fiaa = new FormInputAndAction(str => UserClient.Net_simplify_client.ReadFromServer(
-                CommonHeadCode.SimplifyHeadCode.更新公告 + str).IsSuccess,UserClient.Announcement);
-            fiaa.ShowDialog();
-            fiaa.Dispose();
+            using (FormInputAndAction fiaa = new FormInputAndAction(str => UserClient.Net_simplify_client.ReadFromServer(
+                 CommonHeadCode.SimplifyHeadCode.更新公告 + str).IsSuccess, UserClient.Announcement))
+            {
+                fiaa.ShowDialog();
+            }
         }
 
         private void 日志查看ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormLog flg = new FormLog();
-            flg.ShowDialog();
-            flg.Dispose();
+            using (FormLog flg = new FormLog())
+            {
+                flg.ShowDialog();
+            }
         }
 
         private void 注册账号ToolStripMenuItem_Click(object sender, EventArgs e)

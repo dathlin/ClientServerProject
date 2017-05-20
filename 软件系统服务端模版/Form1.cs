@@ -179,6 +179,13 @@ namespace 软件系统服务端模版
                 fm.ShowDialog();
             }
         }
+        private void 框架作者ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormAuthorAdvertisement faa = new FormAuthorAdvertisement())
+            {
+                faa.ShowDialog();
+            }
+        }
         private void 账户管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //该部分比较复杂，需要对委托，匿名委托概念比较清晰

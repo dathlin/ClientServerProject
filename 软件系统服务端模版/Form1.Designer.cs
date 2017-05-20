@@ -36,6 +36,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_version = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel_time = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.版本控制ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +54,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.toolStripStatusLabel_time = new System.Windows.Forms.ToolStripStatusLabel();
+            this.框架作者ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -89,6 +90,12 @@
             this.toolStripStatusLabel_version.Name = "toolStripStatusLabel_version";
             this.toolStripStatusLabel_version.Size = new System.Drawing.Size(43, 17);
             this.toolStripStatusLabel_version.Text = "V1.0.0";
+            // 
+            // toolStripStatusLabel_time
+            // 
+            this.toolStripStatusLabel_time.Name = "toolStripStatusLabel_time";
+            this.toolStripStatusLabel_time.Size = new System.Drawing.Size(32, 17);
+            this.toolStripStatusLabel_time.Text = "时间";
             // 
             // menuStrip1
             // 
@@ -155,7 +162,8 @@
             // 
             this.关于ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.关于软件ToolStripMenuItem,
-            this.版本号说明ToolStripMenuItem});
+            this.版本号说明ToolStripMenuItem,
+            this.框架作者ToolStripMenuItem});
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
             this.关于ToolStripMenuItem.Size = new System.Drawing.Size(54, 25);
             this.关于ToolStripMenuItem.Text = "关于";
@@ -246,11 +254,12 @@
             this.listBox1.Size = new System.Drawing.Size(216, 344);
             this.listBox1.TabIndex = 8;
             // 
-            // toolStripStatusLabel_time
+            // 框架作者ToolStripMenuItem
             // 
-            this.toolStripStatusLabel_time.Name = "toolStripStatusLabel_time";
-            this.toolStripStatusLabel_time.Size = new System.Drawing.Size(32, 17);
-            this.toolStripStatusLabel_time.Text = "时间";
+            this.框架作者ToolStripMenuItem.Name = "框架作者ToolStripMenuItem";
+            this.框架作者ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.框架作者ToolStripMenuItem.Text = "框架作者";
+            this.框架作者ToolStripMenuItem.Click += new System.EventHandler(this.框架作者ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -307,6 +316,7 @@
         private System.Windows.Forms.ToolStripMenuItem 版本号说明ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 账户管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_time;
+        private System.Windows.Forms.ToolStripMenuItem 框架作者ToolStripMenuItem;
     }
 }
 

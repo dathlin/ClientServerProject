@@ -3459,6 +3459,11 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.qrcode_for_gh_319218678954_258">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.ram">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
