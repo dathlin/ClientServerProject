@@ -7,7 +7,7 @@
 <br />
 
 #### 关于本项目模版
-<p style="text-indent:2em">本模版基于.Net Framework3.5+C#7.0开发完成，所以必须使用Visual studio 2017进行开发，低版本的IDE打开项目将出现语法识别错误。该模版由三部分的程序组成：</p>
+<p style="text-indent:2em">本模版基于.Net Framework3.5+C#7.0开发完成，所以必须使用Visual studio 2017进行开发，低版本的IDE打开项目将出现语法识别错误。有必要说明下为什么使用.Net Framework3.5，这个版本是xp系统比较方便安装的，在企业部署中会相对容易很多，所以如果你的系统也是应用于企业的，那么强烈建议使用3.5版本，该模版由三部分的程序组成：</p>
 <ul>
 <li>公共组件</li>
 <li>服务器端</li>
@@ -43,8 +43,8 @@
 # 本网络组件支持使用工业以太网技术访问PLC
 <p>本组件支持常规的整数的数据读写，也支持字符串数据读写，包括中文，以下只是简单的举例，目前已经完成了一个三菱PLC高并发访问的类，具体交流可以通过以下方式联系我</p>
 <ul>
-<li>技术支持QQ群：592132877</li>
-<li>邮箱：hsl200909@163.com</li>
+<li>技术支持QQ群：<strong>592132877</strong></li>
+<li>邮箱：<strong>hsl200909@163.com</strong></li>
 </ul>
 <p>如果要使用本组件访问PLC，需要引用命名空间，如下</p>
 <pre>
@@ -54,6 +54,8 @@ using HslCommunication.Profinet;
 </pre>
 
 #### 三菱PLC访问数据读写
+
+详细手册：<a href="https://github.com/dathlin/C-S-/blob/master/MelsecReadMe.md">三菱PLC数据读写手册</a>
 
 ##### 初始化对象
 <pre>
@@ -160,6 +162,8 @@ using HslCommunication.Profinet;
 </pre>
 
 #### 西门子PLC访问数据读写
+
+详细手册：<a href="https://github.com/dathlin/C-S-/blob/master/SiemensReadMe.md">西门子PLC数据读写手册</a>
 
 ##### 初始化对象
 <pre>
