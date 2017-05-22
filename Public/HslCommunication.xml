@@ -2221,6 +2221,11 @@
             心跳验证的时间点
             </summary>
         </member>
+        <member name="F:HslCommunication.Enthernet.AsyncStateOne.UdpEndPoint">
+            <summary>
+            UDP通信中的远程端
+            </summary>
+        </member>
         <member name="P:HslCommunication.Enthernet.AsyncStateOne.HeadLength">
             <summary>
             头子节数据标准长度
@@ -2772,7 +2777,7 @@
             异步的多PLC请求类，可以同时并发的向多个PLC发起请求，该类使用非阻塞的高性能方式实现
             </summary>
         </member>
-        <member name="M:HslCommunication.Profinet.MelsecNetMultiAsync.#ctor(System.Byte,System.Byte,HslCommunication.Profinet.MelsecDataType,System.UInt16,System.UInt16,System.Int32,System.Int32,System.Net.IPEndPoint[])">
+        <member name="M:HslCommunication.Profinet.MelsecNetMultiAsync.#ctor(System.Byte,System.Byte,HslCommunication.Profinet.MelsecDataType,System.UInt16,System.UInt16,System.Int32,System.Int32,System.Net.IPAddress[],System.Int32,System.Int32)">
             <summary>
             实例化一个多PLC请求的对象
             </summary>
@@ -2784,6 +2789,8 @@
             <param name="timeout">连接PLC过程中的超时时间</param>
             <param name="readCycle">每次请求访问的间隔时间</param>
             <param name="allAddress">所有等待访问的PLC的IP地址</param>
+            <param name="portMain">访问PLC时的主端口</param>
+            <param name="portBackup">访问PLC时的备用端口</param>
         </member>
         <member name="F:HslCommunication.Profinet.MelsecNetMultiAsync.Timeout">
             <summary>
@@ -2878,7 +2885,17 @@
             在数组中的位置
             </summary>
         </member>
-        <member name="P:HslCommunication.Profinet.PlcStateOne.PlcEndPoint">
+        <member name="P:HslCommunication.Profinet.PlcStateOne.PortMain">
+            <summary>
+            主要访问的PLC端口
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.PlcStateOne.PortBackup">
+            <summary>
+            备用访问的PLC端口
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.PlcStateOne.PlcIpAddress">
             <summary>
             PLC的IP地址
             </summary>
@@ -2918,9 +2935,25 @@
             以太网模块访问的基类
             </summary>
         </member>
+        <member name="M:HslCommunication.Profinet.PlcNetBase.GetPort">
+            <summary>
+            获取访问的端口号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.PlcNetBase.ChangePort">
+            <summary>
+            更换端口号
+            </summary>
+        </member>
         <member name="P:HslCommunication.Profinet.PlcNetBase.PortRead">
             <summary>
             读取数据的端口，默认为1000
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Profinet.PlcNetBase.PortReadBackup">
+            <summary>
+            读取数据的备用端口，默认为1000，当一次请求失败时，将会自动切换端口
             </summary>
         </member>
         <member name="P:HslCommunication.Profinet.PlcNetBase.PortWrite">
