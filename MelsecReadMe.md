@@ -36,6 +36,7 @@
             //初始化
             melsec_net.PLCIpAddress = System.Net.IPAddress.Parse("192.168.0.7");//IP
             melsec_net.PortRead = 6000;//端口
+	    melsec_net.PortReadBackup = 6001;//备用端口，切换将会切换使用，必须指定，也可以指定为6000
             melsec_net.PortWrite = 6000;//写入端口，也可以和读取一样
             melsec_net.NetworkNumber = 0;//网络号
             melsec_net.NetworkStationNumber = 0;//网络站号
