@@ -689,15 +689,15 @@ namespace 软件系统服务端模版
 
         private void MelsecNetMultiInnitialization()
         {
-            List<System.Net.IPEndPoint> IpEndPoints = new List<System.Net.IPEndPoint>();
+            List<System.Net.IPAddress> IpEndPoints = new List<System.Net.IPAddress>();
             //增加100台需要访问的三菱设备，指定所有设备IP和端口，注意：顺序很重要
             for (int i = 1; i < 100; i++)
             {
-                IpEndPoints.Add(new System.Net.IPEndPoint(System.Net.IPAddress.Parse("192.168.10." + i), 6000));
+                IpEndPoints.Add(System.Net.IPAddress.Parse("192.168.10." + i));
             }
 
             //每隔1秒钟访问一次
-            MelsecMulti = new HslCommunication.Profinet.MelsecNetMultiAsync(0, 0, HslCommunication.Profinet.MelsecDataType.D, 6000, 20, 700, 1000, IpEndPoints.ToArray());
+            MelsecMulti = new HslCommunication.Profinet.MelsecNetMultiAsync(0, 0, HslCommunication.Profinet.MelsecDataType.D, 6000, 20, 700, 1000, IpEndPoints.ToArray(), 6000, 6001);
             MelsecMulti.OnReceivedData += MelsecMulti_OnReceivedData;//所有机台的数据都返回时触发
         }
 
