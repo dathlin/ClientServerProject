@@ -252,7 +252,7 @@ namespace 软件系统客户端模版
                 net_socket_client.EndPointServer = new System.Net.IPEndPoint(
                     System.Net.IPAddress.Parse(UserClient.ServerIp),
                     CommonLibrary.CommonLibrary.Port_Main_Net);
-                net_socket_client.ClientAlias = $"{UserClient.UserAccount.UserName} [{UserClient.UserAccount.Factory}]";//标记客户端在线的名称
+                net_socket_client.ClientAlias = $"{UserClient.UserAccount.UserName} ({UserClient.UserAccount.Factory})";//标记客户端在线的名称
                 net_socket_client.ClientStart();
             }
             catch(Exception ex)

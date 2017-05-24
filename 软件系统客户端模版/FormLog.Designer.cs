@@ -39,6 +39,11 @@ namespace 软件系统客户端模版
             this.userButton5 = new HslCommunication.Controls.UserButton();
             this.userButton6 = new HslCommunication.Controls.UserButton();
             this.userButton7 = new HslCommunication.Controls.UserButton();
+            this.userButton_log1 = new HslCommunication.Controls.UserButton();
+            this.userButton_log2 = new HslCommunication.Controls.UserButton();
+            this.userButton_log3 = new HslCommunication.Controls.UserButton();
+            this.userButton_log4 = new HslCommunication.Controls.UserButton();
+            this.userButton_log = new HslCommunication.Controls.UserButton();
             this.SuspendLayout();
             // 
             // textBox1
@@ -50,7 +55,7 @@ namespace 软件系统客户端模版
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(596, 457);
+            this.textBox1.Size = new System.Drawing.Size(596, 463);
             this.textBox1.TabIndex = 0;
             // 
             // userButton_login
@@ -173,11 +178,91 @@ namespace 软件系统客户端模版
             this.userButton7.UIText = "运行日志查看";
             this.userButton7.Click += new System.EventHandler(this.userButton7_Click);
             // 
+            // userButton_log1
+            // 
+            this.userButton_log1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.userButton_log1.BackColor = System.Drawing.Color.Transparent;
+            this.userButton_log1.CustomerInformation = "";
+            this.userButton_log1.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton_log1.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton_log1.Location = new System.Drawing.Point(12, 482);
+            this.userButton_log1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton_log1.Name = "userButton_log1";
+            this.userButton_log1.Size = new System.Drawing.Size(63, 26);
+            this.userButton_log1.TabIndex = 14;
+            this.userButton_log1.UIText = "普通";
+            this.userButton_log1.Click += new System.EventHandler(this.userButton_log1_Click);
+            // 
+            // userButton_log2
+            // 
+            this.userButton_log2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.userButton_log2.BackColor = System.Drawing.Color.Transparent;
+            this.userButton_log2.CustomerInformation = "";
+            this.userButton_log2.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton_log2.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton_log2.Location = new System.Drawing.Point(81, 482);
+            this.userButton_log2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton_log2.Name = "userButton_log2";
+            this.userButton_log2.Size = new System.Drawing.Size(63, 26);
+            this.userButton_log2.TabIndex = 15;
+            this.userButton_log2.UIText = "信息";
+            this.userButton_log2.Click += new System.EventHandler(this.userButton_log2_Click);
+            // 
+            // userButton_log3
+            // 
+            this.userButton_log3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.userButton_log3.BackColor = System.Drawing.Color.Transparent;
+            this.userButton_log3.CustomerInformation = "";
+            this.userButton_log3.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton_log3.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton_log3.Location = new System.Drawing.Point(150, 482);
+            this.userButton_log3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton_log3.Name = "userButton_log3";
+            this.userButton_log3.Size = new System.Drawing.Size(63, 26);
+            this.userButton_log3.TabIndex = 16;
+            this.userButton_log3.UIText = "警告";
+            this.userButton_log3.Click += new System.EventHandler(this.userButton_log3_Click);
+            // 
+            // userButton_log4
+            // 
+            this.userButton_log4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.userButton_log4.BackColor = System.Drawing.Color.Transparent;
+            this.userButton_log4.CustomerInformation = "";
+            this.userButton_log4.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton_log4.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton_log4.Location = new System.Drawing.Point(219, 482);
+            this.userButton_log4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton_log4.Name = "userButton_log4";
+            this.userButton_log4.Size = new System.Drawing.Size(63, 26);
+            this.userButton_log4.TabIndex = 17;
+            this.userButton_log4.UIText = "错误";
+            this.userButton_log4.Click += new System.EventHandler(this.userButton_log4_Click);
+            // 
+            // userButton_log
+            // 
+            this.userButton_log.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.userButton_log.BackColor = System.Drawing.Color.Transparent;
+            this.userButton_log.CustomerInformation = "";
+            this.userButton_log.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton_log.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton_log.Location = new System.Drawing.Point(288, 482);
+            this.userButton_log.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton_log.Name = "userButton_log";
+            this.userButton_log.Size = new System.Drawing.Size(63, 26);
+            this.userButton_log.TabIndex = 18;
+            this.userButton_log.UIText = "全部";
+            this.userButton_log.Click += new System.EventHandler(this.userButton_log_Click);
+            // 
             // FormLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 492);
+            this.ClientSize = new System.Drawing.Size(732, 512);
+            this.Controls.Add(this.userButton_log);
+            this.Controls.Add(this.userButton_log4);
+            this.Controls.Add(this.userButton_log3);
+            this.Controls.Add(this.userButton_log2);
+            this.Controls.Add(this.userButton_log1);
             this.Controls.Add(this.userButton6);
             this.Controls.Add(this.userButton7);
             this.Controls.Add(this.userButton5);
@@ -209,5 +294,10 @@ namespace 软件系统客户端模版
         private UserButton userButton5;
         private UserButton userButton6;
         private UserButton userButton7;
+        private UserButton userButton_log1;
+        private UserButton userButton_log2;
+        private UserButton userButton_log3;
+        private UserButton userButton_log4;
+        private UserButton userButton_log;
     }
 }

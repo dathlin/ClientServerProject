@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CommonLibrary;
+using System.Text.RegularExpressions;
 
 using HslCommunication;
 using HslCommunication.Enthernet;
@@ -32,7 +33,11 @@ namespace 软件系统客户端模版
         private void ReadFromServer(string head_code)
         {
             OperateResultString result = net_simplify_client.ReadFromServer(head_code);
-            if (result.IsSuccess) textBox1.Text = result.Content;
+            if (result.IsSuccess)
+            {
+                textBox1.Text = result.Content;
+                LogTemp = result.Content;
+            }
             else textBox1.Text = result.ToMessageShowString();
         }
         private void ClearFromServer(string head_code)
@@ -80,6 +85,52 @@ namespace 软件系统客户端模版
         private void userButton6_Click(object sender, EventArgs e)
         {
             ClearFromServer(CommonHeadCode.SimplifyHeadCode.运行日志清空);
+        }
+
+        /// <summary>
+        /// 查询日志的缓存
+        /// </summary>
+        private string LogTemp = string.Empty;
+
+        /// <summary>
+        /// 筛选出符合需求的日志
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        private string FilterString(string filter)
+        {
+            StringBuilder sb = new StringBuilder();
+            MatchCollection mc = Regex.Matches(LogTemp, @"\[" + filter + @"[^\[]+");
+            foreach (Match m in mc)
+            {
+                sb.Append(m.Value);
+            }
+            return sb.ToString();
+        }
+
+        private void userButton_log1_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = FilterString(HslCommunication.BasicFramework.SoftLogHelper.Normal);
+        }
+
+        private void userButton_log2_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = FilterString(HslCommunication.BasicFramework.SoftLogHelper.Information);
+        }
+
+        private void userButton_log3_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = FilterString(HslCommunication.BasicFramework.SoftLogHelper.Warnning);
+        }
+
+        private void userButton_log4_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = FilterString(HslCommunication.BasicFramework.SoftLogHelper.Error);
+        }
+
+        private void userButton_log_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = LogTemp;
         }
     }
 }
