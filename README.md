@@ -66,8 +66,8 @@ using HslCommunication.Profinet;
             //初始化
             melsec_net.PLCIpAddress = System.Net.IPAddress.Parse("192.168.0.7");//IP
             melsec_net.PortRead = 6000;//端口
-            melsec_net.PortReadBackup = 6001;//备用端口，切换将会切换使用，必须指定，也可以指定为6000
-            melsec_net.PortWrite = 6000;//写入端口，也可以和读取一样
+            melsec_net.PortReadBackup = 6001;//备用读端口，也可以不指定，默认负数，不会切换负数端口
+            melsec_net.PortWrite = 6000;//写入端口，也可以和读取一样
             melsec_net.NetworkNumber = 0;//网络号
             melsec_net.NetworkStationNumber = 0;//网络站号
             melsec_net.ConnectTimeout = 500;//连接超时时间
@@ -175,7 +175,7 @@ using HslCommunication.Profinet;
         {
             siemens_net.ConnectTimeout = 500;//超时时间
             siemens_net.PortRead = 2000;//读端口
-            siemens_net.PortReadBackup = 6001;//备用端口，切换将会切换使用，必须指定，也可以指定为6000
+            siemens_net.PortReadBackup = 2002;//备用读端口，也可以不指定，默认负数，不会切换负数端口
             siemens_net.PortWrite = 2001;//写端口
             siemens_net.PLCIpAddress = System.Net.IPAddress.Parse("192.168.0.6");//ip地址
         }
