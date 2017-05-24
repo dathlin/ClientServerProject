@@ -49,7 +49,7 @@
 		//初始化，此处的值参考了上面的配置参数
 		siemens_net.ConnectTimeout = 500;
 		siemens_net.PortRead = 2000;
-		siemens_net.PortReadBackup = 2003;//备用端口，切换将会切换使用，必须指定，也可以指定为6000
+		siemens_net.PortReadBackup = 2002;//备用读端口，也可以不指定，默认负数，不会切换负数端口
 		siemens_net.PortWrite = 2001;
 		siemens_net.PLCIpAddress = System.Net.IPAddress.Parse("192.168.0.6");
 	}
