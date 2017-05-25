@@ -221,6 +221,7 @@ using HslCommunication.Profinet;
 </code>
 </pre>
 
-# 最后说两句
-#### Author:<a href="https://github.com/dathlin">Richard.Hu</a>
-#### License:MIT
+
+# License:
+Copyright (c) Richard.Hu. All rights reserved.
+Licensed under the MIT License.
