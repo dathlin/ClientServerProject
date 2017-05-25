@@ -10,7 +10,7 @@
 <strong>环境</strong>：此处以GX Works2为示例，添加以太网模块，型号为<strong>QJ71E71-100</strong>，组态里添加完成后进行以太网的参数配置，此处需要注意的是：<strong style="color:#ff0000">参数的配置对接下来的代码中配置参数要一一对应</strong>
 ![](https://github.com/dathlin/C-S-/raw/master/img/plc_melsec_1.jpg)
 
-<span style="font-weight:bold;color:#ff0000">注意：在PLC的以太网模块的配置中，无法设置网络号为0，也无法设置站号为0， 所以此处均设置为1，在C#程序中也使用上述的配置，在代码中均配置为0，如果您自定义设置为网络2， 站号8，那么在代码中就要写对应的数据。如果仍然通信失败，重新测试0，0。</span>
+<strong><font color=#ff0000>注意：在PLC的以太网模块的配置中，无法设置网络号为0，也无法设置站号为0， 所以此处均设置为1，在C#程序中也使用上述的配置，在代码中均配置为0，如果您自定义设置为网络2， 站号8，那么在代码中就要写对应的数据。如果仍然通信失败，重新测试0，0。</font></strong>
 
 <strong>打开设置</strong>：在上图中的打开设置选项，进行其他参数的配置，下图只是举了一个例子，开通了4个端口来支持读写操作：
 ![](https://github.com/dathlin/C-S-/raw/master/img/plc_melsec_2.jpg)
