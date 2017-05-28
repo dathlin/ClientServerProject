@@ -696,7 +696,7 @@ namespace 软件系统服务端模版
                 IpEndPoints.Add(System.Net.IPAddress.Parse("192.168.10." + i));
             }
 
-            //每隔1秒钟访问一次
+            //每隔1秒钟访问一次，读取的地址为D6000-D6019，超时时间为700毫秒，主端口为6000，备用端口为6001
             MelsecMulti = new HslCommunication.Profinet.MelsecNetMultiAsync(0, 0, HslCommunication.Profinet.MelsecDataType.D, 6000, 20, 700, 1000, IpEndPoints.ToArray(), 6000, 6001);
             MelsecMulti.OnReceivedData += MelsecMulti_OnReceivedData;//所有机台的数据都返回时触发
         }
