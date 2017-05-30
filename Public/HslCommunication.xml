@@ -1077,9 +1077,14 @@
             错误的消息等级
             </summary>
         </member>
-        <member name="P:HslCommunication.BasicFramework.SoftLogHelper.SaveNormalFileName">
+        <member name="P:HslCommunication.BasicFramework.SoftLogHelper.LogSaveFileName">
             <summary>
             日志记录的路径，如果没有设置将不进行保存
+            </summary>
+        </member>
+        <member name="P:HslCommunication.BasicFramework.SoftLogHelper.SaveTimesCount">
+            <summary>
+            获取或设置日志存储的次数
             </summary>
         </member>
         <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Lock_file_save">
