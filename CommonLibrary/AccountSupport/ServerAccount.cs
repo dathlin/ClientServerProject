@@ -47,7 +47,7 @@ namespace CommonLibrary
                     if (name == all_list_accounts[i].UserName)
                     {
                         all_list_accounts[i].Password = password;
-                        LogHelper?.LogSave(Resource.StringResouce.AccountModifyPassword + name);
+                        LogHelper?.SaveInformation(Resource.StringResouce.AccountModifyPassword + name);
                         break;
                     }
                 }
@@ -145,7 +145,7 @@ namespace CommonLibrary
                     }
                 }
                 all_list_accounts.Add(account);
-                LogHelper?.LogSave(Resource.StringResouce.AccountAddSuccess + account.UserName);
+                LogHelper?.SaveInformation(Resource.StringResouce.AccountAddSuccess + account.UserName);
             }
             return true;
         }
@@ -163,7 +163,7 @@ namespace CommonLibrary
                     if (name == all_list_accounts[i].UserName)
                     {
                         all_list_accounts.RemoveAt(i);
-                        LogHelper?.LogSave(Resource.StringResouce.AccountDeleteSuccess + name);
+                        LogHelper?.SaveInformation(Resource.StringResouce.AccountDeleteSuccess + name);
                         break;
                     }
                 }
@@ -211,7 +211,7 @@ namespace CommonLibrary
                 }
                 catch(Exception ex)
                 {
-                    LogHelper?.LogSave(Resource.StringResouce.AccountLoadFailed, ex);
+                    LogHelper?.SaveError(Resource.StringResouce.AccountLoadFailed, ex);
                 }
             }
         }
