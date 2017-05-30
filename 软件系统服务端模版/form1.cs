@@ -432,38 +432,46 @@ namespace 软件系统服务端模版
             if (headCode == CommonHeadCode.SimplifyHeadCode.网络日志查看)
             {
                 net_simplify_server.SendMessage(object1, net_socket_server.LogHelper.GetLogText());
+                RuntimeLogHelper.SaveInformation("网络日志查看");
             }
             else if (headCode == CommonHeadCode.SimplifyHeadCode.网络日志清空)
             {
                 net_socket_server.LogHelper.ClearLogText();
                 net_simplify_server.SendMessage(object1, "成功");
+                RuntimeLogHelper.SaveWarnning("网络日志清空");
             }
             else if (headCode == CommonHeadCode.SimplifyHeadCode.同步日志查看)
             {
                 net_simplify_server.SendMessage(object1, net_simplify_server.LogHelper.GetLogText());
+                RuntimeLogHelper.SaveInformation("同步日志查看");
             }
             else if (headCode == CommonHeadCode.SimplifyHeadCode.同步日志清空)
             {
                 net_simplify_server.LogHelper.ClearLogText();
                 net_simplify_server.SendMessage(object1, "成功");
+                RuntimeLogHelper.SaveWarnning("同步日志清空");
             }
             else if (headCode == CommonHeadCode.SimplifyHeadCode.更新日志查看)
             {
                 net_simplify_server.SendMessage(object1, net_soft_update_Server.LogHelper.GetLogText());
+                RuntimeLogHelper.SaveInformation("更新日志查看");
             }
             else if (headCode == CommonHeadCode.SimplifyHeadCode.更新日志清空)
             {
                 net_soft_update_Server.LogHelper.ClearLogText();
                 net_simplify_server.SendMessage(object1, "成功");
+                RuntimeLogHelper.SaveWarnning("更新日志清空");
             }
             else if (headCode == CommonHeadCode.SimplifyHeadCode.运行日志查看)
             {
                 net_simplify_server.SendMessage(object1, RuntimeLogHelper.GetLogText());
+                RuntimeLogHelper.SaveInformation("运行日志查看");
             }
             else if (headCode == CommonHeadCode.SimplifyHeadCode.运行日志清空)
             {
                 RuntimeLogHelper.ClearLogText();
                 net_simplify_server.SendMessage(object1, "成功");
+                RuntimeLogHelper.SaveInformation("运行日志清空");
             }
             else
             {
@@ -756,6 +764,7 @@ namespace 软件系统服务端模版
          *    说明     日志的使用方式分为4个等级，1.普通 2.信息 3.警告 4.错误  对应的调用方法不一致
          *    具体     如果想要调用存储[信息]等级日志，调用 RuntimeLogHelper.SaveInformation("等待存储的信息")
          *    大小     调用10000次存储信息后，日志文件大小在200K左右，需要手动进行情况日志
+         *    注意     在存储信息时不要带有'['和']'这两个字符，会影响日志筛选时的准确性
          * 
          **********************************************************************************************************/
 
