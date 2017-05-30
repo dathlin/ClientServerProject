@@ -91,8 +91,8 @@ namespace 软件系统客户端模版
             IsWindowShow = true;
 
 
-            //是否显示更新日志
-            if(UserClient.JsonSettings.IsNewVersionRunning)
+            //是否显示更新日志，显示前进行判断该版本是否已经显示过了
+            if (UserClient.JsonSettings.IsNewVersionRunning)
             {
                 UserClient.JsonSettings.IsNewVersionRunning = false;
                 UserClient.JsonSettings.SaveToFile();
@@ -100,7 +100,7 @@ namespace 软件系统客户端模版
             }
 
             //根据权限使能菜单
-            if(UserClient.UserAccount.Grade<AccountGrade.SuperAdministrator)
+            if (UserClient.UserAccount.Grade < AccountGrade.SuperAdministrator)
             {
                 日志查看ToolStripMenuItem.Enabled = false;
                 账户管理ToolStripMenuItem.Enabled = false;
@@ -111,7 +111,7 @@ namespace 软件系统客户端模版
         {
             //窗口关闭
             IsWindowShow = false;
-
+            //通知服务器退出网络服务
             net_socket_client.ClientClose();
 
             //等待一秒退出
@@ -461,6 +461,7 @@ namespace 软件系统客户端模版
 
         private void label_file_count_Click(object sender, EventArgs e)
         {
+            //点击查看了共享文件
             SetShowRenderControl(UIControls_Files);
             UIControls_Files.UpdateFiles();
         }

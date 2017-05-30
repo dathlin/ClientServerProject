@@ -13,30 +13,33 @@ using Newtonsoft.Json.Linq;
 using HslCommunication.BasicFramework;
 
 
-//============================================================================
-//    模版日期  2017-05-18
-//    创建人    胡少林
-//    版权所有  胡少林
-//    授权说明  模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
-//    说明      JSON组件引用自james newton-king，遵循MIT授权协议
-//============================================================================
+/******************************************************************************************
+ * 
+ *    模版日期  2017-05-30
+ *    创建人    Richard.Hu
+ *    版权所有  Richard.Hu
+ *    授权说明  模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
+ *    说明      JSON组件引用自james newton-king，遵循MIT授权协议
+ *    网络组件  网络组件的版权由Richard.Hu所有
+ *    
+ ********************************************************************************************/
 
 
-//============================================================================
-//
-//    注意：本代码的相关操作未作密码验证，如有需要，请自行完成
-//    示例：具体示例参照本页面Form1_FormClosing(object sender, FormClosingEventArgs e)方法
-//
-//============================================================================
+/******************************************************************************************
+ * 
+ *    注意：本代码的相关操作未作密码验证，如有需要，请自行完成
+ *    示例：具体示例参照本页面Form1_FormClosing(object sender, FormClosingEventArgs e)方法
+ *
+ ********************************************************************************************/
 
 
-//============================================================================
-//
-//    本项目模版不包含  《软件自动更新.exe》
-//    如需支持部署环境的自动升级  请联系hsl200909@163.com获取
-//    软件自动更新.exe  将绑定IP，端口和软件名称后授权销售，30元人民币一组，永久使用
-//
-//============================================================================
+/******************************************************************************************
+ * 
+ *    本项目模版不包含  《软件自动更新.exe》
+ *    如需支持部署环境的自动升级  请联系hsl200909@163.com获取
+ *    软件自动更新.exe  将绑定IP，端口和软件名称后授权销售，30元人民币一组，永久使用
+ *
+ ********************************************************************************************/
 
 
 
@@ -119,11 +122,11 @@ namespace 软件系统服务端模版
         {
             if (!IsSystemStart)
             {
-                Net_Simplify_Server_Initialization();
-                Net_Socket_Server_Initialization();
-                Net_SoftUpdate_Server_Initialization();
-                Net_File_Update_Initialization();
-                Simple_File_Initiaization();
+                Net_Simplify_Server_Initialization();//同步网络初始化
+                Net_Socket_Server_Initialization();//异步网络初始化
+                Net_SoftUpdate_Server_Initialization();//软件更新引擎初始化
+                Net_File_Update_Initialization();//软件异地更新引擎初始化
+                Simple_File_Initiaization();//共享文件引擎初始化
                 启动服务器ToolStripMenuItem.Text = "已启动";
                 启动服务器ToolStripMenuItem.BackColor = Color.LimeGreen;
                 IsSystemStart = true;
@@ -234,7 +237,7 @@ namespace 软件系统服务端模版
                 //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
                 //只放置exe和dll组件，必须放置：软件自动更新.exe
                 net_soft_update_Server.KeyToken = CommonHeadCode.KeyToken;
-                net_soft_update_Server.FileUpdatePath = Application.StartupPath + @"\ClientFiles";
+                net_soft_update_Server.FileUpdatePath = Application.StartupPath + @"\ClientFiles";//客户端文件路径
                 net_soft_update_Server.ServerStart(CommonLibrary.CommonLibrary.Port_Update_Net);
             }
             catch (Exception ex)
@@ -282,9 +285,9 @@ namespace 软件系统服务端模版
             try
             {
                 net_simplify_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
-                net_simplify_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\simplify_log.txt";
-                net_simplify_server.ReceiveStringEvent += Net_simplify_server_ReceiveStringEvent;
-                net_simplify_server.ReceivedBytesEvent += Net_simplify_server_ReceivedBytesEvent;
+                net_simplify_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\simplify_log.txt";//日志路径
+                net_simplify_server.ReceiveStringEvent += Net_simplify_server_ReceiveStringEvent;//接收到字符串触发
+                net_simplify_server.ReceivedBytesEvent += Net_simplify_server_ReceivedBytesEvent;//接收到字节触发
                 net_simplify_server.ServerStart(CommonLibrary.CommonLibrary.Port_Second_Net);
             }
             catch (Exception ex)
@@ -334,8 +337,8 @@ namespace 软件系统服务端模版
         /// <summary>
         /// A指令块，处理系统基础运行的消息
         /// </summary>
-        /// <param name="object1"></param>
-        /// <param name="object2"></param>
+        /// <param name="object1">网络状态对象</param>
+        /// <param name="object2">实际的数据</param>
         private void DataProcessingWithStartA(AsyncStateBase object1, string object2)
         {
             string headCode = object2.Substring(0, 4);
@@ -494,7 +497,9 @@ namespace 软件系统服务端模版
         #endregion
 
         #region 异步数据传送引擎
-        //异步客户端管理引擎
+        /// <summary>
+        /// 异步客户端管理引擎，维护所有的客户端在线情况，支持主动发数据到所有的客户端
+        /// </summary>
         private Net_Socket_Server net_socket_server = new Net_Socket_Server();
         /// <summary>
         /// 异步传送数据的初始化
@@ -506,12 +511,12 @@ namespace 软件系统服务端模版
                 net_socket_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
                 net_socket_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\net_log.txt";
                 net_socket_server.FormatClientOnline = "#IP:{0} Name:{1}";//必须为#开头，具体格式可由自身需求确定
-                net_socket_server.IsSaveLogClientLineChange = true;
-                net_socket_server.ClientOnline += Net_socket_server_ClientOnline;
-                net_socket_server.ClientOffline += Net_socket_server_ClientOffline;
-                net_socket_server.MessageAlerts += Net_socket_server_MessageAlerts;
-                net_socket_server.AcceptByte += Net_socket_server_AcceptByte;
-                net_socket_server.AcceptString += Net_socket_server_AcceptString;
+                net_socket_server.IsSaveLogClientLineChange = true;//设置客户端上下线是否记录到日志
+                net_socket_server.ClientOnline += Net_socket_server_ClientOnline;//客户端上线触发
+                net_socket_server.ClientOffline += Net_socket_server_ClientOffline;//客户端下线触发，包括异常掉线
+                net_socket_server.MessageAlerts += Net_socket_server_MessageAlerts;//服务器产生提示消息触发
+                net_socket_server.AcceptByte += Net_socket_server_AcceptByte;//服务器接收到字节数据触发
+                net_socket_server.AcceptString += Net_socket_server_AcceptString;//服务器接收到字符串数据触发
                 net_socket_server.ServerStart(CommonLibrary.CommonLibrary.Port_Main_Net);
             }
             catch (Exception ex)
@@ -581,6 +586,10 @@ namespace 软件系统服务端模版
                 { "FileCount", new JValue(net_simple_file_server.File_Count()) }
             };
             net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据 + json.ToString());
+
+
+            //此处决定要不要将在线客户端的数据发送所有客户端
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.所有客户端在线信息 + net_socket_server.AllClients);
             //触发上下线功能
             Net_socket_clients_change(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" +
                         object1.LoginAlias + " 上线");
@@ -596,8 +605,6 @@ namespace 软件系统服务端模版
                     textBox1.AppendText(str + Environment.NewLine);
                     listBox1.DataSource = net_socket_server.AllClients.Split('#');
                     label4.Text = net_socket_server.ClientCount.ToString();
-                    //此处决定要不要将在线客户端的数据发送所有客户端
-                    net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.所有客户端在线信息 + net_socket_server.AllClients);
                 }));
             }
         }
@@ -605,9 +612,18 @@ namespace 软件系统服务端模版
         #endregion
 
         #region 后台计数线程
-        //=============================================================================
-        //后台计数的线程
+        
+        /*********************************************************************************************
+         * 
+         *    说明       一个后台线程，用来执行一些周期执行的东西
+         *    注意       它不仅执行每秒触发的代码，也支持每分钟，每天，每月，每年等等
+         * 
+         ********************************************************************************************/
 
+
+        /// <summary>
+        /// 初始化后台的计数线程
+        /// </summary>
         public void TimeTickInitilization()
         {
             toolStripStatusLabel_time.Alignment = ToolStripItemAlignment.Right;
@@ -623,6 +639,9 @@ namespace 软件系统服务端模版
         {
             Thread.Sleep(300);//加一个微小的延时
             int second = DateTime.Now.Second - 1;
+            int minute = -1;
+            int hour = -1;
+            int day = -1;
             Action DTimeShow = delegate
               {
                   toolStripStatusLabel_time.Text = DateTime.Now.ToString();
@@ -642,6 +661,21 @@ namespace 软件系统服务端模版
                     net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.时间推送 +
                         DateTime.Now.ToString("O"));
                 }
+                if (minute != DateTime.Now.Minute)
+                {
+                    minute = DateTime.Now.Minute;
+                    //每分钟执行的代码
+                }
+                if (hour != DateTime.Now.Hour)
+                {
+                    hour = DateTime.Now.Hour;
+                    //每小时执行的代码
+                }
+                if (day != DateTime.Now.Day)
+                {
+                    day = DateTime.Now.Day;
+                    //每天执行的代码
+                }
             }
         }
 
@@ -649,9 +683,13 @@ namespace 软件系统服务端模版
         #endregion
 
         #region 共享文件下载块
-
+        /// <summary>
+        /// 共享文件服务器引擎
+        /// </summary>
         private SimpleShareFileServer net_simple_file_server { get; set; } = null;
-
+        /// <summary>
+        /// 共享文件服务引擎初始化
+        /// </summary>
         private void Simple_File_Initiaization()
         {
             try
