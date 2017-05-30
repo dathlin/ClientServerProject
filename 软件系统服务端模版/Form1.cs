@@ -160,7 +160,7 @@ namespace 软件系统服务端模版
             using (FormInputAndAction fiaa = new FormInputAndAction(
                 m =>
                 {
-                 net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗消息 + m); return true;
+                    net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗消息 + m); return true;
                 }))
             {
                 fiaa.ShowDialog();
@@ -312,11 +312,11 @@ namespace 软件系统服务端模版
         private void Net_simplify_server_ReceiveStringEvent(AsyncStateBase object1, string object2)
         {
             //必须返回结果，调用SendMessage(object1,[实际数据]);
-            if(object2.StartsWith("A"))
+            if (object2.StartsWith("A"))
             {
                 DataProcessingWithStartA(object1, object2);
             }
-            else if(object2.StartsWith("B"))
+            else if (object2.StartsWith("B"))
             {
                 DataProcessingWithStartB(object1, object2);
             }
@@ -612,7 +612,7 @@ namespace 软件系统服务端模版
         #endregion
 
         #region 后台计数线程
-        
+
         /*********************************************************************************************
          * 
          *    说明       一个后台线程，用来执行一些周期执行的东西
@@ -643,9 +643,9 @@ namespace 软件系统服务端模版
             int hour = -1;
             int day = -1;
             Action DTimeShow = delegate
-              {
-                  toolStripStatusLabel_time.Text = DateTime.Now.ToString();
-              };
+            {
+                toolStripStatusLabel_time.Text = DateTime.Now.ToString();
+            };
 
             while (IsWindowShow)
             {
@@ -705,7 +705,7 @@ namespace 软件系统服务端模版
                 net_simple_file_server.FileChange += Net_simple_file_server_FileChange;
                 net_simple_file_server.ServerStart(CommonLibrary.CommonLibrary.Port_Share_File);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SoftBasic.ShowExceptionMessage(ex);
             }

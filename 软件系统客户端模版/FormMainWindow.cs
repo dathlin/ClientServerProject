@@ -206,7 +206,7 @@ namespace 软件系统客户端模版
                 OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户信息);
                 if (result.IsSuccess) return result.Content;
                 else return result.ToMessageShowString();
-            },m => UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更细账户信息 + m).IsSuccess);
+            }, m => UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更细账户信息 + m).IsSuccess);
             fam.ShowDialog();
             fam.Dispose();
         }
@@ -255,7 +255,7 @@ namespace 软件系统客户端模版
                 net_socket_client.ClientAlias = $"{UserClient.UserAccount.UserName} ({UserClient.UserAccount.Factory})";//标记客户端在线的名称
                 net_socket_client.ClientStart();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SoftBasic.ShowExceptionMessage(ex);
             }
@@ -304,10 +304,10 @@ namespace 软件系统客户端模版
                 JObject json = JObject.Parse(object2.Substring(4));
                 UserClient.DateTimeServer = json["Time"].ToObject<DateTime>();
                 if (IsHandleCreated) Invoke(new Action(() =>
-                 {
-                     toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm");
-                     label_file_count.Text = json["FileCount"].ToObject<int>().ToString();
-                 }));
+                {
+                    toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm");
+                    label_file_count.Text = json["FileCount"].ToObject<int>().ToString();
+                }));
             }
             else if (head_code == CommonHeadCode.MultiNetHeadCode.文件数量)
             {
@@ -438,7 +438,7 @@ namespace 软件系统客户端模版
 
         private void SetShowRenderControl(UserControl control)
         {
-            if(!ReferenceEquals(CurrentRender,control))
+            if (!ReferenceEquals(CurrentRender, control))
             {
                 CurrentRender = control;
                 all_main_render.ForEach(c => c.Visible = false);
@@ -448,9 +448,9 @@ namespace 软件系统客户端模版
         private void SetShowRenderControl(Type typeControl)
         {
             UserControl control = null;
-            foreach(var c in all_main_render)
+            foreach (var c in all_main_render)
             {
-                if(c.GetType()==typeControl)
+                if (c.GetType() == typeControl)
                 {
                     control = c;
                     break;
@@ -471,6 +471,6 @@ namespace 软件系统客户端模版
 
         #endregion
 
-      
+
     }
 }
