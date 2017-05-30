@@ -1054,7 +1054,7 @@
         </member>
         <member name="T:HslCommunication.BasicFramework.SoftLogHelper">
             <summary>
-            日志的记录类，文件格式为txt，编码为ANSI，支持4中消息等级的划分
+            一个线程安全且高性能的日志记录类，文件格式为txt，编码为ANSI，支持4中消息等级的划分
             </summary>
         </member>
         <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Normal">
@@ -1077,14 +1077,14 @@
             错误的消息等级
             </summary>
         </member>
-        <member name="P:HslCommunication.BasicFramework.SoftLogHelper.LogSaveFileName">
+        <member name="P:HslCommunication.BasicFramework.SoftLogHelper.SaveNormalFileName">
             <summary>
             日志记录的路径，如果没有设置将不进行保存
             </summary>
         </member>
         <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Lock_file_save">
             <summary>
-            日志保存时的安全锁
+            文件的存储读取锁
             </summary>
         </member>
         <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Lock_list_save">
@@ -1092,102 +1092,65 @@
             日志列表操作的安全锁
             </summary>
         </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.all_save_wait">
+        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.WaittingForSaveMessage">
             <summary>
-            所有的等待保存的消息，包括主动添加的和之前保存失败的
+            等待存储的日志的集合
             </summary>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftLogHelper.WriteMessageToFile(System.String)">
             <summary>
-            向文件中写入数据，文件必须存在
+            向文件中写入数据，文件路径必须存在
             </summary>
             <param name="str">需要写入的数据</param>
         </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.LogSave(System.String)">
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveNormal(System.String)">
+            <summary>
+            用于保存一般日志级别内容的方法
+            </summary>
+            <param name="str">需要保存的字符串</param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveInformation(System.String)">
             <summary>
             用于内部保存日志内容的方法
             </summary>
             <param name="str"></param>
         </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.LogSaveInformation(System.String)">
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveWarnning(System.String)">
             <summary>
             用于内部保存日志内容的方法
             </summary>
             <param name="str"></param>
         </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.LogSaveWarnning(System.String)">
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.String)">
             <summary>
             用于内部保存日志内容的方法
             </summary>
             <param name="str"></param>
         </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.LogSaveError(System.String)">
-            <summary>
-            用于内部保存日志内容的方法
-            </summary>
-            <param name="str"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.LogSave(System.String,System.String)">
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveNormal(System.String,System.String)">
             <summary>
             用于内部保存日志内容的方法
             </summary>
             <param name="str"></param>
             <param name="degree"></param>
         </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.LogSave(System.String,System.Exception)">
+        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.SaveStatus">
+            <summary>
+            文件的存储状态，0表示未存储，1表示存储中
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.String,System.Exception)">
             <summary>
             存储一个异常和简单描述的信息
             </summary>
             <param name="description"></param>
             <param name="ex"></param>
         </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.LogSave(System.Exception)">
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.Exception)">
             <summary>
             用于存储一个异常的方法
             </summary>
             <param name="ex"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.AddLogCache(System.String)">
-            <summary>
-            增加一個需要保存的消息，在需要的时候调用LogSave存储
-            </summary>
-            <param name="str"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.AddLogCacheInformation(System.String)">
-            <summary>
-            增加一個需要保存的消息，在需要的时候调用LogSave存储
-            </summary>
-            <param name="str"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.AddLogCacheWarnning(System.String)">
-            <summary>
-            增加一個需要保存的消息，在需要的时候调用LogSave存储
-            </summary>
-            <param name="str"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.AddLogCacheError(System.String)">
-            <summary>
-            增加一個需要保存的消息，在需要的时候调用LogSave存储
-            </summary>
-            <param name="str"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.AddLogCache(System.String,System.String)">
-            <summary>
-            增加一個需要保存的消息，在需要的时候调用LogSave存储
-            </summary>
-            <param name="str"></param>
-            <param name="degree">等级</param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.AddLogCache(System.Exception)">
-            <summary>
-            增加一個需要保存的异常，在需要的时候调用LogSave存储
-            </summary>
-            <param name="ex">需要记录的异常</param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.LogSaveCache">
-            <summary>
-            当列表有数据的时候，调用该方法会保存列表中的信息
-            </summary>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftLogHelper.GetLogText">
             <summary>
