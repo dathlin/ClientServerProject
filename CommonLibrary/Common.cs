@@ -12,7 +12,7 @@ namespace CommonLibrary
         {
             //初始化模版的版本号
             //预计第一个正式发行的版本为1.1.0 日期为2017-08-10
-            SoftBasic.FrameworkVersion = new SystemVersion("1.0.4");
+            SoftBasic.FrameworkVersion = new SystemVersion("1.0.5");
 
         }
 
