@@ -1116,19 +1116,19 @@
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveInformation(System.String)">
             <summary>
-            用于内部保存日志内容的方法
+            用于保存信息级别日志内容的方法
             </summary>
             <param name="str"></param>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveWarnning(System.String)">
             <summary>
-            用于内部保存日志内容的方法
+            用于保存警告级别日志内容的方法
             </summary>
             <param name="str"></param>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.String)">
             <summary>
-            用于内部保存日志内容的方法
+            用于保存错误日志内容的方法
             </summary>
             <param name="str"></param>
         </member>

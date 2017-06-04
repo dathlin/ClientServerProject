@@ -476,6 +476,17 @@ namespace 软件系统服务端模版
                 net_simplify_server.SendMessage(object1, "成功");
                 RuntimeLogHelper.SaveInformation("运行日志清空");
             }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.共享文件日志查看)
+            {
+                net_simplify_server.SendMessage(object1, net_simple_file_server.LogHelper.GetLogText());
+                RuntimeLogHelper.SaveInformation("共享文件日志查看");
+            }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.共享文件日志清空)
+            {
+                net_simple_file_server.LogHelper.ClearLogText();
+                net_simplify_server.SendMessage(object1, "成功");
+                RuntimeLogHelper.SaveInformation("共享文件日志清空");
+            }
             else
             {
                 net_simplify_server.SendMessage(object1, object2);
@@ -700,6 +711,7 @@ namespace 软件系统服务端模版
                     FileSavePath = Application.StartupPath + @"\files.txt"
                 };
                 net_simple_file_server.ReadFromFile();
+                net_simple_file_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\share_file_log.txt";
                 //文件存储路径
                 net_simple_file_server.File_save_path = Application.StartupPath + @"\Files";
                 net_simple_file_server.FileChange += Net_simple_file_server_FileChange;

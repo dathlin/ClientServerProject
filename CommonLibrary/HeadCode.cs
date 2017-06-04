@@ -45,6 +45,8 @@ namespace CommonLibrary
             public static string 更新日志清空 { get; } = "B006";
             public static string 运行日志查看 { get; } = "B007";
             public static string 运行日志清空 { get; } = "B008";
+            public static string 共享文件日志查看 { get; } = "B009";
+            public static string 共享文件日志清空 { get; } = "B010";
 
             /**************************************************************************************
              * 
