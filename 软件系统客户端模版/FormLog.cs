@@ -96,6 +96,18 @@ namespace 软件系统客户端模版
             ClearFromServer(CommonHeadCode.SimplifyHeadCode.共享文件日志清空);
         }
 
+        private void userButton11_Click(object sender, EventArgs e)
+        {
+            ReadFromServer(CommonHeadCode.SimplifyHeadCode.建议反馈日志查看);
+        }
+
+        private void userButton10_Click(object sender, EventArgs e)
+        {
+            ClearFromServer(CommonHeadCode.SimplifyHeadCode.建议反馈日志清空);
+        }
+
+
+
         /// <summary>
         /// 查询日志的缓存
         /// </summary>

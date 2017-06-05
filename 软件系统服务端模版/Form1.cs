@@ -72,6 +72,11 @@ namespace 软件系统服务端模版
             {
                 LogSaveFileName = Application.StartupPath + @"\log.txt",
             };
+            //初始化反馈信息工具
+            AdviceLogHelper = new SoftLogHelper()
+            {
+                LogSaveFileName = Application.StartupPath + @"\advice_log.txt",
+            };
             //保存路径初始化
             UserServer.ServerSettings.FileSavePath = Application.StartupPath + @"\settings.txt";
             //加载参数
@@ -418,6 +423,11 @@ namespace 软件系统服务端模版
             {
                 net_simplify_server.SendMessage(object1, net_simple_file_server.ToJsonString());
             }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.意见反馈)
+            {
+                AdviceLogHelper.SaveInformation(object2.Substring(4));
+                net_simplify_server.SendMessage(object1, "成功");
+            }
             else
             {
                 net_simplify_server.SendMessage(object1, object2);
@@ -486,6 +496,17 @@ namespace 软件系统服务端模版
                 net_simple_file_server.LogHelper.ClearLogText();
                 net_simplify_server.SendMessage(object1, "成功");
                 RuntimeLogHelper.SaveInformation("共享文件日志清空");
+            }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.建议反馈日志查看)
+            {
+                net_simplify_server.SendMessage(object1, AdviceLogHelper.GetLogText());
+                RuntimeLogHelper.SaveInformation("建议反馈日志查看");
+            }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.建议反馈日志清空)
+            {
+                AdviceLogHelper.ClearLogText();
+                net_simplify_server.SendMessage(object1, "成功");
+                RuntimeLogHelper.SaveWarnning("建议反馈日志清空");
             }
             else
             {
@@ -729,6 +750,24 @@ namespace 软件系统服务端模版
             net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.文件数量 + net_simple_file_server.File_Count());
         }
 
+
+        #endregion
+
+        #region 意见反馈块
+
+        /**********************************************************************************************************
+         * 
+         *    说明：    用来记录意见反馈的数据
+         *    举例：    AdviceLogHelper.SaveInformation("张三：主界面的颜色稍微调整一下");
+         * 
+         **********************************************************************************************************/
+
+
+
+        /// <summary>
+        /// 用来记录一般的事物日志
+        /// </summary>
+        private SoftLogHelper AdviceLogHelper { get; set; }
 
         #endregion
 

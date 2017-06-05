@@ -33,6 +33,7 @@ namespace CommonLibrary
             public static string 注册账号 { get; } = "A009";
             public static string 更新版本号 { get; } = "A010";
             public static string 请求文件列表 { get; } = "A011";
+            public static string 意见反馈 { get; } = "A012";
 
 
 
@@ -47,6 +48,8 @@ namespace CommonLibrary
             public static string 运行日志清空 { get; } = "B008";
             public static string 共享文件日志查看 { get; } = "B009";
             public static string 共享文件日志清空 { get; } = "B010";
+            public static string 建议反馈日志查看 { get; } = "B011";
+            public static string 建议反馈日志清空 { get; } = "B012";
 
             /**************************************************************************************
              * 

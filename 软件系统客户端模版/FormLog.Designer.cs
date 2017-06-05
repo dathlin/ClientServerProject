@@ -46,6 +46,8 @@ namespace 软件系统客户端模版
             this.userButton_log = new HslCommunication.Controls.UserButton();
             this.userButton8 = new HslCommunication.Controls.UserButton();
             this.userButton9 = new HslCommunication.Controls.UserButton();
+            this.userButton10 = new HslCommunication.Controls.UserButton();
+            this.userButton11 = new HslCommunication.Controls.UserButton();
             this.SuspendLayout();
             // 
             // textBox1
@@ -57,7 +59,7 @@ namespace 软件系统客户端模版
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(596, 463);
+            this.textBox1.Size = new System.Drawing.Size(643, 498);
             this.textBox1.TabIndex = 0;
             // 
             // userButton_login
@@ -67,7 +69,7 @@ namespace 软件系统客户端模版
             this.userButton_login.CustomerInformation = "";
             this.userButton_login.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton_login.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton_login.Location = new System.Drawing.Point(619, 11);
+            this.userButton_login.Location = new System.Drawing.Point(666, 11);
             this.userButton_login.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton_login.Name = "userButton_login";
             this.userButton_login.Size = new System.Drawing.Size(103, 26);
@@ -82,7 +84,7 @@ namespace 软件系统客户端模版
             this.userButton1.CustomerInformation = "";
             this.userButton1.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton1.Location = new System.Drawing.Point(619, 45);
+            this.userButton1.Location = new System.Drawing.Point(666, 45);
             this.userButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton1.Name = "userButton1";
             this.userButton1.Size = new System.Drawing.Size(103, 26);
@@ -97,7 +99,7 @@ namespace 软件系统客户端模版
             this.userButton2.CustomerInformation = "";
             this.userButton2.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton2.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton2.Location = new System.Drawing.Point(619, 96);
+            this.userButton2.Location = new System.Drawing.Point(666, 96);
             this.userButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton2.Name = "userButton2";
             this.userButton2.Size = new System.Drawing.Size(103, 26);
@@ -112,7 +114,7 @@ namespace 软件系统客户端模版
             this.userButton3.CustomerInformation = "";
             this.userButton3.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton3.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton3.Location = new System.Drawing.Point(619, 130);
+            this.userButton3.Location = new System.Drawing.Point(666, 130);
             this.userButton3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton3.Name = "userButton3";
             this.userButton3.Size = new System.Drawing.Size(103, 26);
@@ -127,7 +129,7 @@ namespace 软件系统客户端模版
             this.userButton4.CustomerInformation = "";
             this.userButton4.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton4.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton4.Location = new System.Drawing.Point(619, 181);
+            this.userButton4.Location = new System.Drawing.Point(666, 181);
             this.userButton4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton4.Name = "userButton4";
             this.userButton4.Size = new System.Drawing.Size(103, 26);
@@ -142,7 +144,7 @@ namespace 软件系统客户端模版
             this.userButton5.CustomerInformation = "";
             this.userButton5.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton5.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton5.Location = new System.Drawing.Point(619, 215);
+            this.userButton5.Location = new System.Drawing.Point(666, 215);
             this.userButton5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton5.Name = "userButton5";
             this.userButton5.Size = new System.Drawing.Size(103, 26);
@@ -157,7 +159,7 @@ namespace 软件系统客户端模版
             this.userButton6.CustomerInformation = "";
             this.userButton6.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton6.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton6.Location = new System.Drawing.Point(619, 450);
+            this.userButton6.Location = new System.Drawing.Point(666, 485);
             this.userButton6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton6.Name = "userButton6";
             this.userButton6.Size = new System.Drawing.Size(103, 26);
@@ -172,7 +174,7 @@ namespace 软件系统客户端模版
             this.userButton7.CustomerInformation = "";
             this.userButton7.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton7.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton7.Location = new System.Drawing.Point(619, 416);
+            this.userButton7.Location = new System.Drawing.Point(666, 451);
             this.userButton7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton7.Name = "userButton7";
             this.userButton7.Size = new System.Drawing.Size(103, 26);
@@ -187,7 +189,7 @@ namespace 软件系统客户端模版
             this.userButton_log1.CustomerInformation = "";
             this.userButton_log1.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton_log1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton_log1.Location = new System.Drawing.Point(12, 482);
+            this.userButton_log1.Location = new System.Drawing.Point(12, 517);
             this.userButton_log1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton_log1.Name = "userButton_log1";
             this.userButton_log1.Size = new System.Drawing.Size(63, 26);
@@ -202,7 +204,7 @@ namespace 软件系统客户端模版
             this.userButton_log2.CustomerInformation = "";
             this.userButton_log2.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton_log2.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton_log2.Location = new System.Drawing.Point(81, 482);
+            this.userButton_log2.Location = new System.Drawing.Point(81, 517);
             this.userButton_log2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton_log2.Name = "userButton_log2";
             this.userButton_log2.Size = new System.Drawing.Size(63, 26);
@@ -217,7 +219,7 @@ namespace 软件系统客户端模版
             this.userButton_log3.CustomerInformation = "";
             this.userButton_log3.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton_log3.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton_log3.Location = new System.Drawing.Point(150, 482);
+            this.userButton_log3.Location = new System.Drawing.Point(150, 517);
             this.userButton_log3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton_log3.Name = "userButton_log3";
             this.userButton_log3.Size = new System.Drawing.Size(63, 26);
@@ -232,7 +234,7 @@ namespace 软件系统客户端模版
             this.userButton_log4.CustomerInformation = "";
             this.userButton_log4.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton_log4.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton_log4.Location = new System.Drawing.Point(219, 482);
+            this.userButton_log4.Location = new System.Drawing.Point(219, 517);
             this.userButton_log4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton_log4.Name = "userButton_log4";
             this.userButton_log4.Size = new System.Drawing.Size(63, 26);
@@ -247,7 +249,7 @@ namespace 软件系统客户端模版
             this.userButton_log.CustomerInformation = "";
             this.userButton_log.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton_log.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton_log.Location = new System.Drawing.Point(288, 482);
+            this.userButton_log.Location = new System.Drawing.Point(288, 517);
             this.userButton_log.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton_log.Name = "userButton_log";
             this.userButton_log.Size = new System.Drawing.Size(63, 26);
@@ -262,7 +264,7 @@ namespace 软件系统客户端模版
             this.userButton8.CustomerInformation = "";
             this.userButton8.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton8.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton8.Location = new System.Drawing.Point(619, 301);
+            this.userButton8.Location = new System.Drawing.Point(666, 301);
             this.userButton8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton8.Name = "userButton8";
             this.userButton8.Size = new System.Drawing.Size(103, 26);
@@ -277,7 +279,7 @@ namespace 软件系统客户端模版
             this.userButton9.CustomerInformation = "";
             this.userButton9.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton9.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton9.Location = new System.Drawing.Point(619, 267);
+            this.userButton9.Location = new System.Drawing.Point(666, 267);
             this.userButton9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton9.Name = "userButton9";
             this.userButton9.Size = new System.Drawing.Size(103, 26);
@@ -285,11 +287,43 @@ namespace 软件系统客户端模版
             this.userButton9.UIText = "共享文件日志查看";
             this.userButton9.Click += new System.EventHandler(this.userButton9_Click);
             // 
+            // userButton10
+            // 
+            this.userButton10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.userButton10.BackColor = System.Drawing.Color.Transparent;
+            this.userButton10.CustomerInformation = "";
+            this.userButton10.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton10.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton10.Location = new System.Drawing.Point(666, 385);
+            this.userButton10.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton10.Name = "userButton10";
+            this.userButton10.Size = new System.Drawing.Size(103, 26);
+            this.userButton10.TabIndex = 22;
+            this.userButton10.UIText = "建议反馈清空";
+            this.userButton10.Click += new System.EventHandler(this.userButton10_Click);
+            // 
+            // userButton11
+            // 
+            this.userButton11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.userButton11.BackColor = System.Drawing.Color.Transparent;
+            this.userButton11.CustomerInformation = "";
+            this.userButton11.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton11.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton11.Location = new System.Drawing.Point(666, 351);
+            this.userButton11.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton11.Name = "userButton11";
+            this.userButton11.Size = new System.Drawing.Size(103, 26);
+            this.userButton11.TabIndex = 21;
+            this.userButton11.UIText = "建议反馈查看";
+            this.userButton11.Click += new System.EventHandler(this.userButton11_Click);
+            // 
             // FormLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 512);
+            this.ClientSize = new System.Drawing.Size(779, 547);
+            this.Controls.Add(this.userButton10);
+            this.Controls.Add(this.userButton11);
             this.Controls.Add(this.userButton8);
             this.Controls.Add(this.userButton9);
             this.Controls.Add(this.userButton_log);
@@ -335,5 +369,7 @@ namespace 软件系统客户端模版
         private UserButton userButton_log;
         private UserButton userButton8;
         private UserButton userButton9;
+        private UserButton userButton10;
+        private UserButton userButton11;
     }
 }

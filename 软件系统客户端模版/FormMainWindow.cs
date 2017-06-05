@@ -238,6 +238,15 @@ namespace 软件系统客户端模版
             UIControls_Chat?.InputFocus();
         }
 
+        private void 意见反馈ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormInputAndAction fiaa = new FormInputAndAction(str => UserClient.Net_simplify_client.ReadFromServer(
+                 CommonHeadCode.SimplifyHeadCode.意见反馈 + UserClient.UserAccount.UserName + ":" + str).IsSuccess))
+            {
+                fiaa.ShowDialog();
+            }
+        }
+
         #endregion
 
         #region 异步网络块
@@ -469,8 +478,9 @@ namespace 软件系统客户端模版
 
 
 
+
         #endregion
 
-
+        
     }
 }

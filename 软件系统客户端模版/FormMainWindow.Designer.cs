@@ -45,6 +45,7 @@
             this.注册账号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.留言板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于本软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更新日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +74,7 @@
             this.panel_left = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.panel_main = new System.Windows.Forms.Panel();
-            this.留言板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.意见反馈ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel_right.SuspendLayout();
@@ -220,12 +221,20 @@
             this.修改密码ToolStripMenuItem.Text = "修改密码";
             this.修改密码ToolStripMenuItem.Click += new System.EventHandler(this.修改密码ToolStripMenuItem_Click);
             // 
+            // 留言板ToolStripMenuItem
+            // 
+            this.留言板ToolStripMenuItem.Name = "留言板ToolStripMenuItem";
+            this.留言板ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.留言板ToolStripMenuItem.Text = "留言板";
+            this.留言板ToolStripMenuItem.Click += new System.EventHandler(this.留言板ToolStripMenuItem_Click);
+            // 
             // 关于ToolStripMenuItem
             // 
             this.关于ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.关于本软件ToolStripMenuItem,
             this.更新日志ToolStripMenuItem,
-            this.版本号说明ToolStripMenuItem});
+            this.版本号说明ToolStripMenuItem,
+            this.意见反馈ToolStripMenuItem});
             this.关于ToolStripMenuItem.Image = global::软件系统客户端模版.Properties.Resources.ASCube_32xLG;
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
             this.关于ToolStripMenuItem.Size = new System.Drawing.Size(80, 31);
@@ -501,12 +510,12 @@
             this.panel_main.Size = new System.Drawing.Size(557, 419);
             this.panel_main.TabIndex = 5;
             // 
-            // 留言板ToolStripMenuItem
+            // 意见反馈ToolStripMenuItem
             // 
-            this.留言板ToolStripMenuItem.Name = "留言板ToolStripMenuItem";
-            this.留言板ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
-            this.留言板ToolStripMenuItem.Text = "留言板";
-            this.留言板ToolStripMenuItem.Click += new System.EventHandler(this.留言板ToolStripMenuItem_Click);
+            this.意见反馈ToolStripMenuItem.Name = "意见反馈ToolStripMenuItem";
+            this.意见反馈ToolStripMenuItem.Size = new System.Drawing.Size(184, 32);
+            this.意见反馈ToolStripMenuItem.Text = "意见反馈";
+            this.意见反馈ToolStripMenuItem.Click += new System.EventHandler(this.意见反馈ToolStripMenuItem_Click);
             // 
             // FormMainWindow
             // 
@@ -587,6 +596,7 @@
         private System.Windows.Forms.Panel panel_main;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ToolStripMenuItem 留言板ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 意见反馈ToolStripMenuItem;
     }
 }
 
