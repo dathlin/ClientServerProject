@@ -53,23 +53,29 @@ using HslCommunication.Profinet;
 1. 服务器端的版本控制，更新新的版本号，按照实际需求来更新您的版本号，门牌为【设置】-【版本控制】
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/server1.png) 
+
 2. 服务器端的维护状态控制，比如系统维护阶段，不允许所有客户端登录，门牌为【设置】-【维护切换】
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/server2.png) 
+
 3. 消息群发，您也可以在代码中自动触发群发，代码参考此处的手动群发，门牌为【设置】-【消息发送】
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/server3.png) 
+
 4. 账户管理，客户端的界面和这个一致，该管理属于底层的json数据管理，任意更改数据，门牌为【设置】-【账户管理】
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/server4.png)
+
 5. 关于本系统，框架版本号以本github发布的版本号为准，门牌为【关于】-【关于软件】
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/server5.png)
+
 6. 一键断开，如遇到紧急情况，或是切换维护之前，可以选择强制关闭所有的客户端。门牌为【设置】-【一键断开】
 
 <br />
 <br />
 <br />
+
 # 客户端的程序界面
 
 ###### 登录窗口
