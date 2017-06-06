@@ -45,9 +45,10 @@ using HslCommunication.Profinet;
 </ol>
 
 # 服务器端程序界面如下：
+
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/server.png)  
-<br />
-######下述服务器端的功能说明均来自服务器的菜单点击
+
+###### 下述服务器端的功能说明均来自服务器的菜单点击
 
 1. 服务器端的版本控制，更新新的版本号，按照实际需求来更新您的版本号，门牌为【设置】-【版本控制】
 
@@ -70,35 +71,46 @@ using HslCommunication.Profinet;
 <br />
 <br />
 # 客户端的程序界面
+
 ###### 登录窗口
+
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client1.png)  
 <br />
 
 ###### 登录主界面（此处点击了关于菜单）
+
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client2.png)  
 
 ###### 更改公告，此处没有设置权限过滤，门牌为【管理员】-【更改公告】
+
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client3.png) 
 
 ###### 日志查看，本系统集成了非常实用的日志功能，所有的网络组件均支持日志的记录，方便调试。门牌为【管理员】-【日志查看】
+
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client4.png) 
 
 ###### 远程更新，成功部署本系统后，支持远程客户端的版本更新，此功能应开发人员拥有。门牌为【管理员】-【远程更新】
+
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client5.png) 
 
 ###### 密码更改，当账户需要更改密码时，需要对密码进行验证。门牌为【设置】-【修改密码】
+
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client6.png) 
 
 ###### 更新日志，当客户端更新了新的版本后，初次运行程序时就会自动弹出如下窗口，具体的更新内容应该写入到文件中。手动门牌为【关于】-【更新日志】
+
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client7.png) 
 
 ###### 反馈意见，人性化的软件允许用户支持提交修改建议，功能使用反馈等。门牌为【关于】-【意见反馈】
+
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client8.png) 
 
 ###### 快速注册账号，支持管理员快速注册账号，该界面允许更改。门牌为【管理员】-【注册账号】
+
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client9.png) 
 
 ###### 共享文件，本系统支持一个小型的文件共享，包含了上传下载删除过滤。门牌为主界面的【文件数量】
+
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client10.png) 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client12.png) 
 
