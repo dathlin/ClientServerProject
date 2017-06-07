@@ -100,6 +100,7 @@ namespace 软件系统服务端模版
                     //关闭网络引擎
                     net_socket_server.ServerClose();
                     net_simplify_server.ServerClose();
+                    net_udp_server.ServerClose();
                 }
                 else
                 {
