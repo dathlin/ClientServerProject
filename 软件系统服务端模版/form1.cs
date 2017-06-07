@@ -801,13 +801,13 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 服务器的UDP核心引擎
         /// </summary>
-        private UdpNetServer net_udp_server { get; set; }
+        private Net_Udp_Server net_udp_server { get; set; }
 
         private void Net_Udp_Server_Initialization()
         {
             try
             {
-                net_udp_server = new UdpNetServer();
+                net_udp_server = new Net_Udp_Server();
                 net_udp_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\udp_log.txt";//日志路径
                 net_udp_server.ReceiveCacheLength = 1024;//单次接收数据的缓冲长度
                 net_udp_server.AcceptByte += Net_udp_server_AcceptByte;//接收到字节数据的时候触发事件
