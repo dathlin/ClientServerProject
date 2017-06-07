@@ -55,6 +55,9 @@ namespace 软件系统客户端模版
 
         private void FormMainWindow_Load(object sender, EventArgs e)
         {
+            //udp测试
+            //SendServerUdpData("载入了窗体");
+
             //窗口载入
             label_userName.Text = UserClient.UserAccount.UserName;
             label_grade.Text = AccountGrade.GetDescription(UserClient.UserAccount.Grade);
@@ -90,6 +93,8 @@ namespace 软件系统客户端模版
             //窗口显示
             IsWindowShow = true;
 
+            //udp测试
+            //SendServerUdpData("显示了窗体");
 
             //是否显示更新日志，显示前进行判断该版本是否已经显示过了
             if (UserClient.JsonSettings.IsNewVersionRunning)
@@ -481,6 +486,17 @@ namespace 软件系统客户端模版
 
         #endregion
 
+        #region Udp发送示例
+        /// <summary>
+        /// 调用该方法并指定参数即可，最长字符串不得
+        /// </summary>
+        /// <param name="data"></param>
+        private void SendServerUdpData(string data)
+        {
+            //测试发送udp消息
+            UserClient.Net_Udp_Client.SendMessage(data);
+        }
 
+        #endregion
     }
 }

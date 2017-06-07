@@ -1963,6 +1963,60 @@
             </summary>
             <param name="obj"></param>
         </member>
+        <member name="T:HslCommunication.Enthernet.UdpNetServer">
+            <summary>
+            一个用于UDP通信的类，服务器端用来接收所有客户端发送数据的功能
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.UdpNetServer.ReceiveCacheLength">
+            <summary>
+            获取或设置一次接收时的数据长度
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.UdpNetServer.ServerStart(System.Int32)">
+            <summary>
+            根据指定的端口启动Upd侦听
+            </summary>
+            <param name="port"></param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.UdpNetServer.ServerClose">
+            <summary>
+            关闭引擎
+            </summary>
+        </member>
+        <member name="E:HslCommunication.Enthernet.UdpNetServer.AcceptString">
+            <summary>
+            当接收到文本数据的时候,触发此事件
+            </summary>
+        </member>
+        <member name="E:HslCommunication.Enthernet.UdpNetServer.AcceptByte">
+            <summary>
+            当接收到字节数据的时候,触发此事件
+            </summary>
+        </member>
+        <member name="T:HslCommunication.Enthernet.UdpNetClient">
+            <summary>
+            UDP客户端的类，只负责发送数据到服务器，该数据经过封装
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.UdpNetClient.#ctor(System.Net.IPEndPoint)">
+            <summary>
+            实例化对象，
+            </summary>
+            <param name="endpoint"></param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.UdpNetClient.SendMessage(System.Byte[])">
+            <summary>
+            发送字节数据到服务器
+            </summary>
+            <param name="data">字节数据</param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.UdpNetClient.SendMessage(System.String)">
+            <summary>
+            发送字符串数据到服务器
+            </summary>
+            <param name="data">字符串数据</param>
+        </member>
         <member name="T:HslCommunication.Enthernet.FileItemShow">
             <summary>
             文件显示的子控件类

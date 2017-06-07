@@ -50,6 +50,8 @@ namespace CommonLibrary
             public static string 共享文件日志清空 { get; } = "B010";
             public static string 建议反馈日志查看 { get; } = "B011";
             public static string 建议反馈日志清空 { get; } = "B012";
+            public static string UDP日志查看 { get; } = "B013";
+            public static string UDP日志清空 { get; } = "B014";
 
             /**************************************************************************************
              * 

@@ -43,7 +43,10 @@ namespace CommonLibrary
         /// 共享文件的端口号
         /// </summary>
         public static int Port_Share_File { get; } = 34261;
-
+        /// <summary>
+        /// 用于UDP传输的端口号
+        /// </summary>
+        public static int Port_Udp_Server { get; } = 32566;
         #endregion
 
         /// <summary>

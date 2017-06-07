@@ -105,7 +105,15 @@ namespace 软件系统客户端模版
         {
             ClearFromServer(CommonHeadCode.SimplifyHeadCode.建议反馈日志清空);
         }
+        private void userButton13_Click(object sender, EventArgs e)
+        {
+            ReadFromServer(CommonHeadCode.SimplifyHeadCode.UDP日志查看);
+        }
 
+        private void userButton12_Click(object sender, EventArgs e)
+        {
+            ClearFromServer(CommonHeadCode.SimplifyHeadCode.UDP日志清空);
+        }
 
 
         /// <summary>

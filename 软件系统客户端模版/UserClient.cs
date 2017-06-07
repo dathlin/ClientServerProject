@@ -70,5 +70,11 @@ namespace 软件系统客户端模版
         {
             KeyToken = CommonHeadCode.KeyToken,
         };
+
+        /// <summary>
+        /// 用于使用udp向服务器进行发送即时可丢失数据的对象
+        /// </summary>
+        public static UdpNetClient Net_Udp_Client = new UdpNetClient(new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
+                CommonLibrary.CommonLibrary.Port_Udp_Server));
     }
 }
