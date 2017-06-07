@@ -132,6 +132,7 @@ namespace 软件系统服务端模版
                 Net_SoftUpdate_Server_Initialization();//软件更新引擎初始化
                 Net_File_Update_Initialization();//软件异地更新引擎初始化
                 Simple_File_Initiaization();//共享文件引擎初始化
+                Net_Udp_Server_Initialization();//UDP引擎服务初始化
                 启动服务器ToolStripMenuItem.Text = "已启动";
                 启动服务器ToolStripMenuItem.BackColor = Color.LimeGreen;
                 IsSystemStart = true;
@@ -508,6 +509,17 @@ namespace 软件系统服务端模版
                 net_simplify_server.SendMessage(object1, "成功");
                 RuntimeLogHelper.SaveWarnning("建议反馈日志清空");
             }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.UDP日志查看)
+            {
+                net_simplify_server.SendMessage(object1, net_udp_server.LogHelper.GetLogText());
+                RuntimeLogHelper.SaveInformation("UDP日志查看");
+            }
+            else if (headCode == CommonHeadCode.SimplifyHeadCode.UDP日志清空)
+            {
+                net_udp_server.LogHelper.ClearLogText();
+                net_simplify_server.SendMessage(object1, "成功");
+                RuntimeLogHelper.SaveWarnning("UDP日志清空");
+            }
             else
             {
                 net_simplify_server.SendMessage(object1, object2);
@@ -771,6 +783,57 @@ namespace 软件系统服务端模版
 
         #endregion
 
+        #region Udp网络通信块
+
+        /*********************************************************************************************************
+         * 
+         *    说明    一个用于网络间通信的UDP服务引擎，客户端调用UserClient.Net_Udp_Client.SendMessage(data);发送
+         *            详细请参考客户端FormMainWindow中的udp发送说明
+         *    特点    该Udp引擎非常健壮，接收失败了会抛弃本次接收，自动进入下一轮接收。
+         *    安全    本引擎含有数据长度校验机制，确保服务器接收到的数据是正确的，没有丢失的
+         *    注意    如果服务器配置了ReceiveCacheLength = 1024，那么客户端发送的字符串数据长度不能超过1000，否则服务器会自动丢弃，可在日志中查看
+         *    警告    如果想要你自己的软件支持向本引擎访问，必须使用该网络组件实现，参考客户端定义，否则发送失败
+         * 
+         **********************************************************************************************************/
+
+
+        /// <summary>
+        /// 服务器的UDP核心引擎
+        /// </summary>
+        private UdpNetServer net_udp_server { get; set; }
+
+        private void Net_Udp_Server_Initialization()
+        {
+            try
+            {
+                net_udp_server = new UdpNetServer();
+                net_udp_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\udp_log.txt";//日志路径
+                net_udp_server.ReceiveCacheLength = 1024;//单次接收数据的缓冲长度
+                net_udp_server.AcceptByte += Net_udp_server_AcceptByte;//接收到字节数据的时候触发事件
+                net_udp_server.AcceptString += Net_udp_server_AcceptString;//接收到字符串数据的时候触发事件
+                net_udp_server.ServerStart(CommonLibrary.CommonLibrary.Port_Udp_Server);
+            }
+            catch(Exception ex)
+            {
+                SoftBasic.ShowExceptionMessage(ex);
+            }
+        }
+
+        private void Net_udp_server_AcceptString(AsyncStateOne object1, string object2)
+        {
+            //此处为测试
+            Invoke(new Action(() =>
+            {
+                textBox1.AppendText($"{DateTime.Now.ToString("MM-dd HH:mm:ss ")}来自IP:{object1._IpEnd_Point.Address.ToString()} 内容:{object2}{Environment.NewLine}");
+            }));
+        }
+
+        private void Net_udp_server_AcceptByte(AsyncStateOne object1, byte[] object2)
+        {
+            //具体用法参考上面字符串方法
+        }
+
+        #endregion
 
         #region 访问PLC块示例代码
 
