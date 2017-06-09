@@ -89,6 +89,11 @@ namespace CommonLibrary
         /// 上次系统登录的密码
         /// </summary>
         public string Password { get; set; } = "";
+        /// <summary>
+        /// 上次系统登录的时间
+        /// </summary>
+        public DateTime LoginTime { get; set; } = DateTime.Now;
+
 
         /// <summary>
         /// 当前计算机的机器码，用来判定参数是否是正确的
@@ -107,6 +112,7 @@ namespace CommonLibrary
             json.Add(nameof(Password), new JValue(Password));
             json.Add(nameof(IsNewVersionRunning), new JValue(IsNewVersionRunning));
             json.Add(nameof(SystemInfo), new JValue(SystemInfo));
+            json.Add(nameof(LoginTime), new JValue(LoginTime));
             return json.ToString();
         }
         public override void LoadByString(string content)
@@ -119,6 +125,7 @@ namespace CommonLibrary
                 LoginName = SoftBasic.GetValueFromJsonObject(json, nameof(LoginName), LoginName);
                 IsNewVersionRunning = SoftBasic.GetValueFromJsonObject(json, nameof(IsNewVersionRunning), IsNewVersionRunning);
                 Password = SoftBasic.GetValueFromJsonObject(json, nameof(Password), Password);
+                LoginTime = SoftBasic.GetValueFromJsonObject(json, nameof(LoginTime), LoginTime);
             }
         }
 

@@ -49,11 +49,14 @@ namespace 软件系统客户端模版
         {
             IsWindowShow = true;
 
-            //加载数据
-            textBox_userName.Text = UserClient.JsonSettings.LoginName ?? "";
-            textBox_password.Text = UserClient.JsonSettings.Password ?? "";
-            checkBox_remeber.Checked = UserClient.JsonSettings.Password != "";
-
+            //如果七天未登录，账户密码清除
+            if ((DateTime.Now - UserClient.JsonSettings.LoginTime).TotalDays < 7)
+            {
+                //加载数据
+                textBox_userName.Text = UserClient.JsonSettings.LoginName ?? "";
+                textBox_password.Text = UserClient.JsonSettings.Password ?? "";
+                checkBox_remeber.Checked = UserClient.JsonSettings.Password != "";
+            }
             //初始化输入焦点
             if (UserClient.JsonSettings.Password != "") userButton_login.Focus();
             else if (UserClient.JsonSettings.LoginName != "") textBox_password.Focus();
@@ -230,6 +233,7 @@ namespace 软件系统客户端模版
             //登录成功，进行保存用户名称和密码
             UserClient.JsonSettings.LoginName = textBox_userName.Text;
             UserClient.JsonSettings.Password = checkBox_remeber.Checked ? textBox_password.Text : "";
+            UserClient.JsonSettings.LoginTime = DateTime.Now;
             UserClient.JsonSettings.SaveToFile();
 
 
