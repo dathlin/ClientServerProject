@@ -89,6 +89,10 @@
   <ItemGroup>
     <Folder Include="screenshots\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="SoftUpdate\软件自动更新.exe" />
+    <Content Include="SoftUpdate\部署说明.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
