@@ -577,6 +577,7 @@ namespace 软件系统服务端模版
                 net_socket_server.IsSaveLogClientLineChange = true;//设置客户端上下线是否记录到日志
                 net_socket_server.ClientOnline += new HslCommunication.NetBase.IEDelegate<AsyncStateOne>(Net_socket_server_ClientOnline);//客户端上线触发
                 net_socket_server.ClientOffline += new HslCommunication.NetBase.IEDelegate<AsyncStateOne, string>(Net_socket_server_ClientOffline);//客户端下线触发，包括异常掉线
+                net_socket_server.AllClientsStatusChange += new HslCommunication.NetBase.IEDelegate<string>(Net_socket_server_AllClientsStatusChange);//客户端上下线变化时触发
                 net_socket_server.MessageAlerts += new HslCommunication.NetBase.IEDelegate<string>(Net_socket_server_MessageAlerts);//服务器产生提示消息触发
                 net_socket_server.AcceptByte += new HslCommunication.NetBase.IEDelegate<AsyncStateOne, int, byte[]>(Net_socket_server_AcceptByte);//服务器接收到字节数据触发
                 net_socket_server.AcceptString += new HslCommunication.NetBase.IEDelegate<AsyncStateOne, int, string>(Net_socket_server_AcceptString);//服务器接收到字符串数据触发
@@ -588,6 +589,7 @@ namespace 软件系统服务端模版
             }
         }
 
+       
 
 
         /******************************************************************************************************************
@@ -658,11 +660,8 @@ namespace 软件系统服务端模版
                 { "Time", new JValue(DateTime.Now) },
                 { "FileCount", new JValue(net_simple_file_server.File_Count()) }
             };
+            //发送客户端的初始化数据
             net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据,  json.ToString());
-
-
-            //此处决定要不要将在线客户端的数据发送所有客户端
-            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.总在线信息, net_socket_server.AllClients);
             //触发上下线功能
             Net_socket_clients_change(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" +
                         object1.LoginAlias + " 上线");
@@ -676,11 +675,25 @@ namespace 软件系统服务端模版
                 BeginInvoke(new Action(() =>
                 {
                     textBox1.AppendText(str + Environment.NewLine);
-                    listBox1.DataSource = net_socket_server.AllClients.Split('#');
+                }));
+            }
+        }
+
+        private void Net_socket_server_AllClientsStatusChange(string data)
+        {
+            //此处决定要不要将在线客户端的数据发送所有客户端
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.总在线信息, data);
+
+            if (IsWindowShow && IsHandleCreated)
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    listBox1.DataSource = data.Split('#');
                     label4.Text = net_socket_server.ClientCount.ToString();
                 }));
             }
         }
+
 
         #endregion
 

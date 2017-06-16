@@ -1666,15 +1666,10 @@
             一个计算上线下线的高性能缓存对象
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Server.AllClients">
+        <member name="P:HslCommunication.Enthernet.Net_Socket_Server.IsSaveLogClientLineChange">
             <summary>
             计算所有客户端在线的信息
             </summary>
-            <summary>
-            所有客户端的在线信息，使用#符号分隔开来
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Server.IsSaveLogClientLineChange">
             <summary>
             获取或设置服务器是否记录客户端上下线信息
             </summary>
@@ -1708,6 +1703,11 @@
         <member name="E:HslCommunication.Enthernet.Net_Socket_Server.MessageAlerts">
             <summary>
             服务器的异常，启动，等等一般消息产生的时候，出发此事件
+            </summary>
+        </member>
+        <member name="E:HslCommunication.Enthernet.Net_Socket_Server.AllClientsStatusChange">
+            <summary>
+            客户端的上下限状态变更时触发，仅作为在线客户端识别
             </summary>
         </member>
         <member name="E:HslCommunication.Enthernet.Net_Socket_Server.ClientOnline">
