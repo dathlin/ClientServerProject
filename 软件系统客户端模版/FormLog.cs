@@ -30,7 +30,7 @@ namespace 软件系统客户端模版
 
         }
 
-        private void ReadFromServer(string head_code)
+        private void ReadFromServer(int head_code)
         {
             OperateResultString result = net_simplify_client.ReadFromServer(head_code);
             if (result.IsSuccess)
@@ -40,7 +40,7 @@ namespace 软件系统客户端模版
             }
             else textBox1.Text = result.ToMessageShowString();
         }
-        private void ClearFromServer(string head_code)
+        private void ClearFromServer(int head_code)
         {
             OperateResultString result = net_simplify_client.ReadFromServer(head_code);
             if (result.IsSuccess) textBox1.Text = "清除成功";
@@ -88,22 +88,22 @@ namespace 软件系统客户端模版
         }
         private void userButton9_Click(object sender, EventArgs e)
         {
-            ReadFromServer(CommonHeadCode.SimplifyHeadCode.共享文件日志查看);
+            ReadFromServer(CommonHeadCode.SimplifyHeadCode.文件日志查看);
         }
 
         private void userButton8_Click(object sender, EventArgs e)
         {
-            ClearFromServer(CommonHeadCode.SimplifyHeadCode.共享文件日志清空);
+            ClearFromServer(CommonHeadCode.SimplifyHeadCode.文件日志清空);
         }
 
         private void userButton11_Click(object sender, EventArgs e)
         {
-            ReadFromServer(CommonHeadCode.SimplifyHeadCode.建议反馈日志查看);
+            ReadFromServer(CommonHeadCode.SimplifyHeadCode.反馈日志查看);
         }
 
         private void userButton10_Click(object sender, EventArgs e)
         {
-            ClearFromServer(CommonHeadCode.SimplifyHeadCode.建议反馈日志清空);
+            ClearFromServer(CommonHeadCode.SimplifyHeadCode.反馈日志清空);
         }
         private void userButton13_Click(object sender, EventArgs e)
         {

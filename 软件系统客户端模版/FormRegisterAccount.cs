@@ -51,7 +51,7 @@ namespace 软件系统客户端模版
             account.LoginEnable = comboBox2.SelectedItem.ToString() == "允许";
             account.ForbidMessage = textBox4.Text;
 
-            OperateResultString result = net_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.注册账号 + account.ToJsonString());
+            OperateResultString result = net_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.注册账号, account.ToJsonString());
             if (result.IsSuccess && result.Content == "1")
             {
                 MessageBox.Show("注册成功！");

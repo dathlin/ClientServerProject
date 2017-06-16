@@ -69,12 +69,17 @@ namespace 软件系统客户端模版
                 CommonLibrary.CommonLibrary.Port_Second_Net))
         {
             KeyToken = CommonHeadCode.KeyToken,
+            ConnectTimeout = 5000,
         };
 
         /// <summary>
         /// 用于使用udp向服务器进行发送即时可丢失数据的对象
         /// </summary>
-        public static Net_Udp_Client Net_Udp_Client = new Net_Udp_Client(new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
-                CommonLibrary.CommonLibrary.Port_Udp_Server));
+        public static Net_Udp_Client Net_Udp_Client = new Net_Udp_Client(
+            new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
+                CommonLibrary.CommonLibrary.Port_Udp_Server))
+        {
+            KeyToken = CommonHeadCode.KeyToken,
+        };
     }
 }

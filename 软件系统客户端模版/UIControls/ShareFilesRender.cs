@@ -43,10 +43,10 @@ namespace 软件系统客户端模版.UIControls
         private void userButton_refresh_Click(object sender, EventArgs e)
         {
             //向服务器请求数据
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.请求文件列表);
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.请求文件);
             if(result.IsSuccess)
             {
-                Cache_Files = JArray.Parse(result.Content).ToObject<List<File_Save>>();
+                Cache_Files = JArray.Parse(result.Content).ToObject<List<HslSoftFile>>();
                 SetFilesShow(Cache_Files);
             }
             else
@@ -55,7 +55,7 @@ namespace 软件系统客户端模版.UIControls
             }
         }
 
-        private void SetFilesShow(List<File_Save> files)
+        private void SetFilesShow(List<HslSoftFile> files)
         {
             panel2.SuspendLayout();
             //清楚缓存
@@ -113,7 +113,7 @@ namespace 软件系统客户端模版.UIControls
         /// <summary>
         /// 所有文件信息的缓存，以支持直接的搜索
         /// </summary>
-        private List<File_Save> Cache_Files { get; set; } = new List<File_Save>();
+        private List<HslSoftFile> Cache_Files { get; set; } = new List<HslSoftFile>();
         /// <summary>
         /// 文件控件的缓存列表，方便清除垃圾
         /// </summary>

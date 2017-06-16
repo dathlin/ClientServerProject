@@ -15,47 +15,48 @@ namespace CommonLibrary
         /// </summary>
         public static Guid KeyToken { get; set; } = new Guid("1275BB9A-14B2-4A96-9673-B0AF0463D474");
 
-
+        
+        
         /// <summary>
-        /// 同步通信的头说明，以字母A开头，后面接B,C,D,E,F
+        /// 同步通信的指令头说明，以10000开头，后面接20000，30000，
         /// </summary>
         [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Auto)]
         public class SimplifyHeadCode
         {
-            public static string 维护检查 { get; } = "A001";//A开始的表明是系统相关的
-            public static string 更新检查 { get; } = "A002";
-            public static string 账户检查 { get; } = "A003";
-            public static string 参数下载 { get; } = "A004";
-            public static string 密码修改 { get; } = "A005";
-            public static string 更细账户信息 { get; } = "A006";
-            public static string 获取账户信息 { get; } = "A007";
-            public static string 更新公告 { get; } = "A008";
-            public static string 注册账号 { get; } = "A009";
-            public static string 更新版本号 { get; } = "A010";
-            public static string 请求文件列表 { get; } = "A011";
-            public static string 意见反馈 { get; } = "A012";
+            public static int 维护检查 { get; } =        10000;//10000开始的表明是系统相关的
+            public static int 更新检查 { get; } =        10001;
+            public static int 账户检查 { get; } =        10002;
+            public static int 参数下载 { get; } =        10003;
+            public static int 密码修改 { get; } =        10004;
+            public static int 更细账户 { get; } =        10005;
+            public static int 获取账户 { get; } =        10006;
+            public static int 更新公告 { get; } =        10007;
+            public static int 注册账号 { get; } =        10008;
+            public static int 更新版本 { get; } =        10009;
+            public static int 请求文件 { get; } =        10010;
+            public static int 意见反馈 { get; } =        10011;
 
 
 
 
-            public static string 网络日志查看 { get; } = "B001";//B开头的是日志请求和清空
-            public static string 网络日志清空 { get; } = "B002";
-            public static string 同步日志查看 { get; } = "B003";
-            public static string 同步日志清空 { get; } = "B004";
-            public static string 更新日志查看 { get; } = "B005";
-            public static string 更新日志清空 { get; } = "B006";
-            public static string 运行日志查看 { get; } = "B007";
-            public static string 运行日志清空 { get; } = "B008";
-            public static string 共享文件日志查看 { get; } = "B009";
-            public static string 共享文件日志清空 { get; } = "B010";
-            public static string 建议反馈日志查看 { get; } = "B011";
-            public static string 建议反馈日志清空 { get; } = "B012";
-            public static string UDP日志查看 { get; } = "B013";
-            public static string UDP日志清空 { get; } = "B014";
+            public static int 网络日志查看 { get; } =      11000;//11000开头的是日志请求和清空
+            public static int 网络日志清空 { get; } =      11001;
+            public static int 同步日志查看 { get; } =      11002;
+            public static int 同步日志清空 { get; } =      11003;
+            public static int 更新日志查看 { get; } =      11004;
+            public static int 更新日志清空 { get; } =      11005;
+            public static int 运行日志查看 { get; } =      11006;
+            public static int 运行日志清空 { get; } =      11007;
+            public static int 文件日志查看 { get; } =      11008;
+            public static int 文件日志清空 { get; } =      11009;
+            public static int 反馈日志查看 { get; } =      11010;
+            public static int 反馈日志清空 { get; } =      11011;
+            public static int UDP日志查看 { get; } =       11012;
+            public static int UDP日志清空 { get; } =       11013;
 
             /**************************************************************************************
              * 
-             *    为了保证您的指令头不和系统的冲突，您的指令头应该以C,D,E,F开头
+             *    为了保证您的指令头不和系统的冲突，您的指令头应该以20000之后开头
              * 
              **************************************************************************************/
 
@@ -65,13 +66,13 @@ namespace CommonLibrary
         /// </summary>
         public class MultiNetHeadCode
         {
-            public static string 所有客户端在线信息 { get; } = "H001";
-            public static string 关闭所有客户端 { get; } = "H002";
-            public static string 弹窗消息 { get; } = "H003";
-            public static string 时间推送 { get; } = "H004";
-            public static string 文件数量 { get; } = "H005";
-            public static string 初始化数据 { get; } = "H006";
-            public static string 留言消息 { get; } = "H007";
+            public static int 总在线信息 { get; } =        50000;
+            public static int 关闭客户端 { get; } =        50001;
+            public static int 弹窗新消息 { get; } =        50002;
+            public static int 时间的推送 { get; } =        50003;
+            public static int 文件总数量 { get; } =        50004;
+            public static int 初始化数据 { get; } =        50005;
+            public static int 留言版消息 { get; } =        50006;
 
 
             /**************************************************************************************

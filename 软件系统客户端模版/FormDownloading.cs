@@ -22,10 +22,10 @@ namespace 软件系统客户端模版
 
     public partial class FormDownloading : Form
     {
-        public FormDownloading(string cmd,Action<OperateResultString> action)
+        public FormDownloading(int customer,Action<OperateResultString> action)
         {
             InitializeComponent();
-            net_cmd = cmd;
+            net_cmd = customer;
             DealWithResult = action;
             DoubleBuffered = true;
         }
@@ -84,7 +84,7 @@ namespace 软件系统客户端模版
         }
 
         
-        private string net_cmd = "";
+        private int net_cmd = 0;
         private Action<OperateResultString> DealWithResult = null;
 
         private void ThreadRequestServer()

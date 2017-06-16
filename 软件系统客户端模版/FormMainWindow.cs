@@ -16,7 +16,7 @@ using HslCommunication.BasicFramework;
 
 /***************************************************************************************
  * 
- *    模版日期    2017-05-20
+ *    模版日期    2017-06-16
  *    创建人      胡少林
  *    版权所有    胡少林
  *    授权说明    模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
@@ -56,7 +56,7 @@ namespace 软件系统客户端模版
         private void FormMainWindow_Load(object sender, EventArgs e)
         {
             //udp测试
-            //SendServerUdpData("载入了窗体");
+            //SendServerUdpData(0, "载入了窗体");
 
             //窗口载入
             label_userName.Text = UserClient.UserAccount.UserName;
@@ -94,7 +94,7 @@ namespace 软件系统客户端模版
             IsWindowShow = true;
 
             //udp测试
-            //SendServerUdpData("显示了窗体");
+            //SendServerUdpData(0, "显示了窗体");
 
             //是否显示更新日志，显示前进行判断该版本是否已经显示过了
             if (UserClient.JsonSettings.IsNewVersionRunning)
@@ -111,6 +111,8 @@ namespace 软件系统客户端模版
                 账户管理ToolStripMenuItem.Enabled = false;
                 远程更新ToolStripMenuItem.Enabled = false;
             }
+            //启动定时器
+            TimeTickInitilization();
         }
         private void FormMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -141,7 +143,7 @@ namespace 软件系统客户端模版
                         { UserAccount.UserNameText, UserClient.UserAccount.UserName },
                         { UserAccount.PasswordText, p }
                     };
-                    return UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.密码修改 + json.ToString()).IsSuccess;
+                    return UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.密码修改, json.ToString()).IsSuccess;
                 }, 6, 8))
             {
                 fpm.ShowDialog();
@@ -182,7 +184,7 @@ namespace 软件系统客户端模版
         private void 更改公告ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormInputAndAction fiaa = new FormInputAndAction(str => UserClient.Net_simplify_client.ReadFromServer(
-                 CommonHeadCode.SimplifyHeadCode.更新公告 + str).IsSuccess, UserClient.Announcement, "请输入公告内容"))
+                 CommonHeadCode.SimplifyHeadCode.更新公告, str).IsSuccess, UserClient.Announcement, "请输入公告内容"))
             {
                 fiaa.ShowDialog();
             }
@@ -208,10 +210,10 @@ namespace 软件系统客户端模版
         {
             FormAccountManage fam = new FormAccountManage(() =>
             {
-                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户信息);
+                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户);
                 if (result.IsSuccess) return result.Content;
                 else return result.ToMessageShowString();
-            }, m => UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更细账户信息 + m).IsSuccess);
+            }, m => UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更细账户, m).IsSuccess);
             fam.ShowDialog();
             fam.Dispose();
         }
@@ -246,7 +248,7 @@ namespace 软件系统客户端模版
         private void 意见反馈ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormInputAndAction fiaa = new FormInputAndAction(str => UserClient.Net_simplify_client.ReadFromServer(
-                 CommonHeadCode.SimplifyHeadCode.意见反馈 + UserClient.UserAccount.UserName + ":" + str).IsSuccess, "", "请输入意见反馈："))
+                 CommonHeadCode.SimplifyHeadCode.意见反馈, UserClient.UserAccount.UserName + ":" + str).IsSuccess, "", "请输入意见反馈："))
             {
                 fiaa.ShowDialog();
             }
@@ -274,48 +276,51 @@ namespace 软件系统客户端模版
                 SoftBasic.ShowExceptionMessage(ex);
             }
         }
-
-        private void Net_socket_client_AcceptString(AsyncStateOne object1, string object2)
+        /// <summary>
+        /// 接收到服务器的字节数据的回调方法
+        /// </summary>
+        /// <param name="state">网络连接对象</param>
+        /// <param name="customer">用户自定义的指令头，用来区分数据用途</param>
+        /// <param name="data">数据</param>
+        private void Net_socket_client_AcceptString(AsyncStateOne state, int customer, string data)
         {
-            //接收到服务器发来的字符串数据
-            string head_code = object2.Substring(0, 4);
-            if (head_code == CommonHeadCode.MultiNetHeadCode.弹窗消息)
+            if (customer == CommonHeadCode.MultiNetHeadCode.弹窗新消息)
             {
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
-                    FormPopup fpp = new FormPopup(object2.Substring(4), Color.DodgerBlue, 10000);
+                    FormPopup fpp = new FormPopup(data, Color.DodgerBlue, 10000);
                     fpp.Show();
                 }));
             }
-            else if (head_code == CommonHeadCode.MultiNetHeadCode.所有客户端在线信息)
+            else if (customer == CommonHeadCode.MultiNetHeadCode.总在线信息)
             {
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
-                    listBox1.DataSource = object2.Substring(4).Split('#');
+                    listBox1.DataSource = data.Split('#');
                 }));
             }
-            else if (head_code == CommonHeadCode.MultiNetHeadCode.关闭所有客户端)
+            else if (customer == CommonHeadCode.MultiNetHeadCode.关闭客户端)
             {
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
                     Close();
                 }));
             }
-            else if (head_code == CommonHeadCode.SimplifyHeadCode.更新公告)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.更新公告)
             {
                 //此处应用到了同步类的指令头
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
-                    UserClient.Announcement = object2.Substring(4);
-                    label_Announcement.Text = object2.Substring(4);
-                    FormPopup fpp = new FormPopup(object2.Substring(4), Color.DodgerBlue, 10000);
+                    UserClient.Announcement = data;
+                    label_Announcement.Text = data;
+                    FormPopup fpp = new FormPopup(data, Color.DodgerBlue, 10000);
                     fpp.Show();
                 }));
             }
-            else if (head_code == CommonHeadCode.MultiNetHeadCode.初始化数据)
+            else if (customer == CommonHeadCode.MultiNetHeadCode.初始化数据)
             {
                 //收到服务器的数据
-                JObject json = JObject.Parse(object2.Substring(4));
+                JObject json = JObject.Parse(data);
                 UserClient.DateTimeServer = json["Time"].ToObject<DateTime>();
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
@@ -323,36 +328,28 @@ namespace 软件系统客户端模版
                     label_file_count.Text = json["FileCount"].ToObject<int>().ToString();
                 }));
             }
-            else if (head_code == CommonHeadCode.MultiNetHeadCode.文件数量)
+            else if (customer == CommonHeadCode.MultiNetHeadCode.文件总数量)
             {
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
-                    label_file_count.Text = object2.Substring(4);
+                    label_file_count.Text = data;
                 }));
             }
-            else if (head_code == CommonHeadCode.MultiNetHeadCode.时间推送)
-            {
-                UserClient.DateTimeServer = Convert.ToDateTime(object2.Substring(4));
-                if (IsHandleCreated) Invoke(new Action(() =>
-                {
-                    toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm") + $"({net_socket_client.DelayTime}ms)";
-                }));
-            }
-            else if (head_code == CommonHeadCode.MultiNetHeadCode.留言消息)
+            else if (customer == CommonHeadCode.MultiNetHeadCode.留言版消息)
             {
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
-                    UIControls_Chat?.DealwithReceive(object2.Substring(4));
+                    UIControls_Chat?.DealwithReceive(data);
                 }));
             }
         }
 
-        private void Net_socket_client_AcceptByte(AsyncStateOne object1, byte[] object2)
+        private void Net_socket_client_AcceptByte(AsyncStateOne object1, int customer, byte[] object2)
         {
             //接收到服务器发来的字节数据
             if (IsHandleCreated) Invoke(new Action(() =>
             {
-                MessageBox.Show(BitConverter.ToInt32(object2, 0).ToString());
+                MessageBox.Show(customer.ToString());
             }));
         }
 
@@ -439,7 +436,7 @@ namespace 软件系统客户端模版
 
             UIControls_Chat = new UIControls.OnlineChatRender((m) =>
             {
-                net_socket_client.Send(CommonHeadCode.MultiNetHeadCode.留言消息 + m);
+                net_socket_client.Send(CommonHeadCode.MultiNetHeadCode.留言版消息, m);
             })
             {
                 Visible = false,
@@ -491,11 +488,81 @@ namespace 软件系统客户端模版
         /// 调用该方法并指定参数即可，最长字符串不得
         /// </summary>
         /// <param name="data"></param>
-        private void SendServerUdpData(string data)
+        private void SendServerUdpData(int customer, string data)
         {
             //测试发送udp消息
-            UserClient.Net_Udp_Client.SendMessage(data);
+            UserClient.Net_Udp_Client.SendMessage(customer, data);
         }
+
+        #endregion
+
+        #region 后台计数线程
+
+        /*********************************************************************************************
+         * 
+         *    说明       一个后台线程，用来执行一些周期执行的东西
+         *    注意       它不仅执行每秒触发的代码，也支持每分钟，每天，每月，每年等等
+         * 
+         ********************************************************************************************/
+
+
+        /// <summary>
+        /// 初始化后台的计数线程
+        /// </summary>
+        public void TimeTickInitilization()
+        {
+
+            Thread thread = new Thread(new ThreadStart(ThreadTimeTick));
+            thread.IsBackground = true;
+            thread.Start();
+        }
+
+        public void ThreadTimeTick()
+        {
+            Thread.Sleep(300);//加一个微小的延时
+            int second = DateTime.Now.Second - 1;
+            int minute = -1;
+            int hour = -1;
+            int day = -1;
+            Action DTimeShow = delegate
+            {
+                //显示服务器的时间和当前网络的延时时间，通常为毫秒
+                toolStripStatusLabel_time.Text = net_socket_client.ServerTime.ToString("yyyy-MM-dd HH:mm:ss") + $"({net_socket_client.DelayTime}ms)";
+            };
+
+            while (IsWindowShow)
+            {
+                while (DateTime.Now.Second == second)
+                {
+                    Thread.Sleep(20);
+                }
+                second = DateTime.Now.Second;
+                if (IsWindowShow && IsHandleCreated) Invoke(DTimeShow);
+                //每秒钟执行的代码
+                UserClient.DateTimeServer = net_socket_client.ServerTime;
+
+                if (second == 0)
+                {
+                    //每个0秒执行的代码
+                }
+                if (minute != DateTime.Now.Minute)
+                {
+                    minute = DateTime.Now.Minute;
+                    //每分钟执行的代码
+                }
+                if (hour != DateTime.Now.Hour)
+                {
+                    hour = DateTime.Now.Hour;
+                    //每小时执行的代码
+                }
+                if (day != DateTime.Now.Day)
+                {
+                    day = DateTime.Now.Day;
+                    //每天执行的代码
+                }
+            }
+        }
+
 
         #endregion
     }

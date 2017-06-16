@@ -532,6 +532,116 @@
             <param name="oringinal"></param>
             <returns></returns>
         </member>
+        <member name="T:HslCommunication.BasicFramework.SoftLogHelper">
+            <summary>
+            一个线程安全且高性能的日志记录类，文件格式为txt，编码为ANSI，支持4中消息等级的划分
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Normal">
+            <summary>
+            普通的消息等级
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Information">
+            <summary>
+            信息的消息等级
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Warnning">
+            <summary>
+            警告的消息等级
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Error">
+            <summary>
+            错误的消息等级
+            </summary>
+        </member>
+        <member name="P:HslCommunication.BasicFramework.SoftLogHelper.LogSaveFileName">
+            <summary>
+            日志记录的路径，如果没有设置将不进行保存
+            </summary>
+        </member>
+        <member name="P:HslCommunication.BasicFramework.SoftLogHelper.SaveTimesCount">
+            <summary>
+            获取或设置日志存储的次数
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Lock_file_save">
+            <summary>
+            文件的存储读取锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Lock_list_save">
+            <summary>
+            日志列表操作的安全锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.WaittingForSaveMessage">
+            <summary>
+            等待存储的日志的集合
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveNormal(System.String)">
+            <summary>
+            用于保存一般日志级别内容的方法
+            </summary>
+            <param name="str">需要保存的字符串</param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveInformation(System.String)">
+            <summary>
+            用于保存信息级别日志内容的方法
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveWarnning(System.String)">
+            <summary>
+            用于保存警告级别日志内容的方法
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.String)">
+            <summary>
+            用于保存错误日志内容的方法
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveNormal(System.String,System.String)">
+            <summary>
+            用于内部保存日志内容的方法
+            </summary>
+            <param name="str"></param>
+            <param name="degree"></param>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.SaveStatus">
+            <summary>
+            文件的存储状态，0表示未存储，1表示存储中
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.String,System.Exception)">
+            <summary>
+            存储一个异常和简单描述的信息
+            </summary>
+            <param name="description"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.Exception)">
+            <summary>
+            用于存储一个异常的方法
+            </summary>
+            <param name="ex"></param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.GetLogText">
+            <summary>
+            调用此方法可以获得所有的日志信息，可以用来回发给客户端查看
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.ClearLogText">
+            <summary>
+            用于清空日志的所有内容，可以从外部调用
+            </summary>
+        </member>
         <member name="T:HslCommunication.BasicFramework.SoftMail">
             <summary>
             软件的邮箱类，用于发送邮箱数据，连续发送10次失败则禁止发送
@@ -707,11 +817,6 @@
             <param name="numberLength">流水号数字的标准长度，不够补0</param>
             <param name="fileSavePath">流水号存储的文本位置</param>
         </member>
-        <member name="F:HslCommunication.BasicFramework.SoftNumericalOrder.SaveStatus">
-            <summary>
-            文件的保存状态
-            </summary>
-        </member>
         <member name="F:HslCommunication.BasicFramework.SoftNumericalOrder.CurrentIndex">
             <summary>
             当前的生成序列号
@@ -761,6 +866,11 @@
             </summary>
             <param name="textHead">指定一个新的文本头</param>
             <returns></returns>
+        </member>
+        <member name="P:HslCommunication.BasicFramework.SoftNumericalOrder.AsyncCoordinator">
+            <summary>
+            高性能存储块
+            </summary>
         </member>
         <member name="T:HslCommunication.BasicFramework.Paintdata">
             <summary>
@@ -859,6 +969,7 @@
             <param name="conStr">数据库的连接字符串</param>
             <param name="cmdStr">sql语句，适合插入，更新，删除</param>
             <returns>返回受影响的行数</returns>
+            <exception cref="T:System.Data.SqlClient.SqlException"></exception>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftSqlOperate.ExecuteSql(System.Data.SqlClient.SqlConnection,System.String)">
             <summary>
@@ -867,6 +978,7 @@
             <param name="conn">数据库的连接对象</param>
             <param name="cmdStr">sql语句，适合插入，更新，删除</param>
             <returns>返回受影响的行数</returns>
+            <exception cref="T:System.Data.SqlClient.SqlException"></exception>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftSqlOperate.ExecuteSelectTable(System.String,System.String)">
             <summary>
@@ -875,6 +987,8 @@
             <param name="conStr">数据库的连接字符串</param>
             <param name="cmdStr">sql语句，选择数据表的语句</param>
             <returns>结果数据表</returns>
+            <exception cref="T:System.Data.SqlClient.SqlException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftSqlOperate.ExecuteSelectTable(System.Data.SqlClient.SqlConnection,System.String)">
             <summary>
@@ -883,6 +997,7 @@
             <param name="conn">数据库连接对象</param>
             <param name="cmdStr">sql语句，选择数据表的语句</param>
             <returns>结果数据表</returns>
+            <exception cref="T:System.Data.SqlClient.SqlException"></exception>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftSqlOperate.ExecuteSelectEnumerable``1(System.String,System.String)">
             <summary>
@@ -891,6 +1006,8 @@
             <param name="conStr">数据库的连接字符串</param>
             <param name="cmdStr">sql语句，选择数据表的语句</param>
             <returns>结果数据集合</returns>
+            <exception cref="T:System.Data.SqlClient.SqlException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftSqlOperate.ExecuteSelectEnumerable``1(System.Data.SqlClient.SqlConnection,System.String)">
             <summary>
@@ -899,6 +1016,8 @@
             <param name="conn">数据库的连接对象</param>
             <param name="cmdStr">sql语句，选择数据表的语句</param>
             <returns>结果数据集合</returns>
+            <exception cref="T:System.Data.SqlClient.SqlException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftSqlOperate.ExecuteSelectObject``1(System.String,System.String)">
             <summary>
@@ -907,6 +1026,8 @@
             <param name="conStr">数据库的连接字符串</param>
             <param name="cmdStr">sql语句，选择数据表的语句</param>
             <returns>结果数据</returns>
+            <exception cref="T:System.Data.SqlClient.SqlException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftSqlOperate.ExecuteSelectObject``1(System.Data.SqlClient.SqlConnection,System.String)">
             <summary>
@@ -915,6 +1036,8 @@
             <param name="conn">数据库的连接对象</param>
             <param name="cmdStr">sql语句，选择数据表的语句</param>
             <returns>结果数据</returns>
+            <exception cref="T:System.Data.SqlClient.SqlException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
         </member>
         <member name="T:HslCommunication.BasicFramework.ISqlDataType">
             <summary>
@@ -1052,194 +1175,85 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:HslCommunication.BasicFramework.SoftLogHelper">
-            <summary>
-            一个线程安全且高性能的日志记录类，文件格式为txt，编码为ANSI，支持4中消息等级的划分
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Normal">
-            <summary>
-            普通的消息等级
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Information">
-            <summary>
-            信息的消息等级
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Warnning">
-            <summary>
-            警告的消息等级
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Error">
-            <summary>
-            错误的消息等级
-            </summary>
-        </member>
-        <member name="P:HslCommunication.BasicFramework.SoftLogHelper.LogSaveFileName">
-            <summary>
-            日志记录的路径，如果没有设置将不进行保存
-            </summary>
-        </member>
-        <member name="P:HslCommunication.BasicFramework.SoftLogHelper.SaveTimesCount">
-            <summary>
-            获取或设置日志存储的次数
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Lock_file_save">
-            <summary>
-            文件的存储读取锁
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Lock_list_save">
-            <summary>
-            日志列表操作的安全锁
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.WaittingForSaveMessage">
-            <summary>
-            等待存储的日志的集合
-            </summary>
-        </member>
-        <member name="P:HslCommunication.BasicFramework.SoftLogHelper.TimesOfWriteFile">
-            <summary>
-            写入文件的次数
-            </summary>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveNormal(System.String)">
-            <summary>
-            用于保存一般日志级别内容的方法
-            </summary>
-            <param name="str">需要保存的字符串</param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveInformation(System.String)">
-            <summary>
-            用于保存信息级别日志内容的方法
-            </summary>
-            <param name="str"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveWarnning(System.String)">
-            <summary>
-            用于保存警告级别日志内容的方法
-            </summary>
-            <param name="str"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.String)">
-            <summary>
-            用于保存错误日志内容的方法
-            </summary>
-            <param name="str"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveNormal(System.String,System.String)">
-            <summary>
-            用于内部保存日志内容的方法
-            </summary>
-            <param name="str"></param>
-            <param name="degree"></param>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.SaveStatus">
-            <summary>
-            文件的存储状态，0表示未存储，1表示存储中
-            </summary>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.String,System.Exception)">
-            <summary>
-            存储一个异常和简单描述的信息
-            </summary>
-            <param name="description"></param>
-            <param name="ex"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.Exception)">
-            <summary>
-            用于存储一个异常的方法
-            </summary>
-            <param name="ex"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.GetLogText">
-            <summary>
-            调用此方法可以获得所有的日志信息，可以用来回发给客户端查看
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.ClearLogText">
-            <summary>
-            用于清空日志的所有内容，可以从外部调用
-            </summary>
-        </member>
-        <member name="T:HslCommunication.CommunicationCode">
+        <member name="T:HslCommunication.HslCommunicationCode">
             <summary>
             用于本程序集访问通信的暗号说明
             </summary>
         </member>
-        <member name="P:HslCommunication.CommunicationCode.Hsl_Protocol_Check_Secends">
+        <member name="F:HslCommunication.HslCommunicationCode.HeadByteLength">
+            <summary>
+            规定所有的网络传输指令头都为32字节
+            </summary>
+        </member>
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_Check_Secends">
             <summary>
             用于心跳程序的暗号信息
             </summary>
         </member>
-        <member name="P:HslCommunication.CommunicationCode.Hsl_Protocol_String_Text">
-            <summary>
-            说明发送的只是文本信息
-            </summary>
-        </member>
-        <member name="P:HslCommunication.CommunicationCode.Hsl_Protocol_User_Bytes">
-            <summary>
-            发送的数据就是普通的字节数组
-            </summary>
-        </member>
-        <member name="P:HslCommunication.CommunicationCode.Hsl_Protocol_Client_Quit">
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_Client_Quit">
             <summary>
             客户端退出消息
             </summary>
         </member>
-        <member name="P:HslCommunication.CommunicationCode.Hsl_Protocol_Client_Refuse_Login">
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_Client_Refuse_Login">
             <summary>
             因为客户端达到上限而拒绝登录
             </summary>
         </member>
-        <member name="P:HslCommunication.CommunicationCode.Hsl_Protocol_Client_Allow_Login">
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_Client_Allow_Login">
             <summary>
             允许客户端登录到服务器
             </summary>
         </member>
-        <member name="P:HslCommunication.CommunicationCode.Hsl_Protocol_File_Download">
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_User_String">
+            <summary>
+            说明发送的只是文本信息
+            </summary>
+        </member>
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_User_Bytes">
+            <summary>
+            发送的数据就是普通的字节数组
+            </summary>
+        </member>
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_User_Bitmap">
+            <summary>
+            发送的数据就是普通的图片数据
+            </summary>
+        </member>
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Download">
             <summary>
             请求文件下载的暗号
             </summary>
         </member>
-        <member name="P:HslCommunication.CommunicationCode.Hsl_Protocol_File_Upload">
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Upload">
             <summary>
             请求文件上传的暗号
             </summary>
         </member>
-        <member name="P:HslCommunication.CommunicationCode.Hsl_Protocol_File_Check_Right">
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Check_Right">
             <summary>
             文件校验成功
             </summary>
         </member>
-        <member name="P:HslCommunication.CommunicationCode.Hsl_Protocol_File_Check_Error">
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Check_Error">
             <summary>
             文件校验失败
             </summary>
         </member>
-        <member name="P:HslCommunication.CommunicationCode.Hsl_Protocol_File_Save_Error">
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Save_Error">
             <summary>
             文件保存失败
             </summary>
         </member>
-        <member name="M:HslCommunication.CommunicationCode.CommandBytes(System.String)">
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_NoZipped">
             <summary>
-            根据字符串数据生成带有暗号头的数据
+            不压缩数据字节
             </summary>
-            <param name="str_Sended"></param>
-            <returns></returns>
         </member>
-        <member name="M:HslCommunication.CommunicationCode.CommandBytes(System.Byte[])">
+        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_Zipped">
             <summary>
-            根据字节数据生成带有暗号头的数据
+            压缩数据字节
             </summary>
-            <param name="Sended"></param>
-            <returns></returns>
         </member>
         <member name="T:HslCommunication.Controls.UserButton">
             <summary>
@@ -1397,69 +1411,69 @@
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:HslCommunication.Enthernet.File_Save">
+        <member name="T:HslCommunication.Enthernet.HslSoftFile">
             <summary>
             用来保存的文件信息类
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.File_Save.FileName">
+        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileName">
             <summary>
             文件的名称
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.File_Save.FileSize">
+        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileSize">
             <summary>
             文件的大小
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.File_Save.FileTag">
+        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileTag">
             <summary>
             用于用户自定义的标识
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.File_Save.UploadName">
+        <member name="P:HslCommunication.Enthernet.HslSoftFile.UploadName">
             <summary>
             文件的上传人
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.File_Save.UploadDate">
+        <member name="P:HslCommunication.Enthernet.HslSoftFile.UploadDate">
             <summary>
             文件的上传日期
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.File_Save.FileNote">
+        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileNote">
             <summary>
             文件的描述，说明备注
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.File_Save.FilePath">
+        <member name="P:HslCommunication.Enthernet.HslSoftFile.FilePath">
             <summary>
             文件在服务器的实际存储路径
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.File_Save.FileDownloadTimes">
+        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileDownloadTimes">
             <summary>
             文件被下载的次数
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.File_Save.FileExc">
+        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileExc">
             <summary>
             文件的后缀名
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.File_Save.GetTextFromFileSize">
+        <member name="M:HslCommunication.Enthernet.HslSoftFile.GetTextFromFileSize">
             <summary>
             获取大小
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.File_Save.GetFileIcon">
+        <member name="M:HslCommunication.Enthernet.HslSoftFile.GetFileIcon">
             <summary>
             获取文件对象显示图标
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.File_Save.GetFileRenderIcon(System.String)">
+        <member name="M:HslCommunication.Enthernet.HslSoftFile.GetFileRenderIcon(System.String)">
             <summary>
             根据文件后缀选择需要对应显示的文件图标，包含了二十多种常用文件的图标
             </summary>
@@ -1502,7 +1516,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.AddNew(HslCommunication.Enthernet.File_Save)">
+        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.AddNew(HslCommunication.Enthernet.HslSoftFile)">
             <summary>
             新增一个文件对象
             </summary>
@@ -1529,7 +1543,7 @@
         </member>
         <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.GetHuFileFromFileName(System.String)">
             <summary>
-            根据
+            根据文件名称获取文件类型
             </summary>
             <param name="filename"></param>
             <returns></returns>
@@ -1540,9 +1554,9 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.SaveLocalFile">
+        <member name="P:HslCommunication.Enthernet.SimpleShareFileServer.AsyncCoordinator">
             <summary>
-            将所有数据进行保存
+            一个乐观并发模型高性能执行类
             </summary>
         </member>
         <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.ReadFromFile">
@@ -1626,6 +1640,11 @@
             基于TCP的服务器引擎端核心类
             </summary>
         </member>
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.#ctor">
+            <summary>
+            实例化一个网络服务器类对象
+            </summary>
+        </member>
         <member name="P:HslCommunication.Enthernet.Net_Socket_Server.ConnectMax">
             <summary>
             所支持的同时在线客户端的最大数量，商用限制1000个，最小10个
@@ -1637,7 +1656,20 @@
             示例："#IP:{0} Name:{1}"
             </summary>
         </member>
+        <member name="F:HslCommunication.Enthernet.Net_Socket_Server.m_AllClients">
+            <summary>
+            客户端在线信息缓存
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.Net_Socket_Server.AsyncCoordinator">
+            <summary>
+            一个计算上线下线的高性能缓存对象
+            </summary>
+        </member>
         <member name="P:HslCommunication.Enthernet.Net_Socket_Server.AllClients">
+            <summary>
+            计算所有客户端在线的信息
+            </summary>
             <summary>
             所有客户端的在线信息，使用#符号分隔开来
             </summary>
@@ -1704,43 +1736,44 @@
             </summary>
             <param name="obj"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.HeadReceiveCallback(System.IAsyncResult)">
-            <summary>
-            指令头接收方法
-            </summary>
-            <param name="ar"></param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.ContentReceiveCallback(System.IAsyncResult)">
-            <summary>
-            数据内容接收方法
-            </summary>
-            <param name="ar"></param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.Send(HslCommunication.Enthernet.AsyncStateOne,System.String)">
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.Send(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.String)">
             <summary>
             服务器端用于数据发送文本的方法
             </summary>
             <param name="stateone">数据发送对象</param>
+            <param name="customer">用户自定义的数据对象，如不需要，赋值为0</param>
             <param name="str">发送的文本</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.Send(HslCommunication.Enthernet.AsyncStateOne,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.Send(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Byte[])">
             <summary>
             服务器端用于发送字节的方法
             </summary>
             <param name="stateone">数据发送对象</param>
+            <param name="customer">用户自定义的数据对象，如不需要，赋值为0</param>
             <param name="bytes">实际发送的数据</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.SendAllClients(System.String)">
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.SendAllClients(System.Int32,System.String)">
             <summary>
             服务端用于发送所有数据到所有的客户端
             </summary>
-            <param name="str"></param>
+            <param name="customer">用户自定义的命令头</param>
+            <param name="str">需要传送的实际的数据</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.SendAllClients(System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.SendAllClients(System.Int32,System.Byte[])">
             <summary>
             服务端用于发送所有数据到所有的客户端
             </summary>
+            <param name="customer">用户自定义的命令头</param>
             <param name="data">需要群发客户端的字节数据</param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
+            <summary>
+            数据处理中心
+            </summary>
+            <param name="receive"></param>
+            <param name="protocol"></param>
+            <param name="customer"></param>
+            <param name="content"></param>
         </member>
         <member name="T:HslCommunication.Enthernet.Net_Socket_Client">
             <summary>
@@ -1780,6 +1813,11 @@
         <member name="P:HslCommunication.Enthernet.Net_Socket_Client.EndPointServer">
             <summary>
             远程服务器的IP地址和端口
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.Net_Socket_Client.ServerTime">
+            <summary>
+            服务器的时间，自动实现和服务器同步
             </summary>
         </member>
         <member name="P:HslCommunication.Enthernet.Net_Socket_Client.DelayTime">
@@ -1822,29 +1860,28 @@
             启动客户端引擎，连接服务器系统
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.HeadReceiveCallback(System.IAsyncResult)">
-            <summary>
-            指令头接收方法
-            </summary>
-            <param name="ar"></param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.ContentReceiveCallback(System.IAsyncResult)">
-            <summary>
-            数据内容接收方法
-            </summary>
-            <param name="ar"></param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.Send(System.String)">
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.Send(System.Int32,System.String)">
             <summary>
             服务器端用于数据发送文本的方法
             </summary>
+            <param name="customer">用户自定义的命令头</param>
             <param name="str">发送的文本</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.Send(System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.Send(System.Int32,System.Byte[])">
             <summary>
             服务器端用于发送字节的方法
             </summary>
+            <param name="customer">用户自定义的命令头</param>
             <param name="bytes">实际发送的数据</param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
+            <summary>
+            客户端的数据处理中心
+            </summary>
+            <param name="receive"></param>
+            <param name="protocol"></param>
+            <param name="customer"></param>
+            <param name="content"></param>
         </member>
         <member name="M:HslCommunication.Enthernet.Net_Socket_Client.ThreadHeartCheck">
             <summary>
@@ -1863,26 +1900,36 @@
             </summary>
             <param name="end_point">服务器的通信地址</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Client.ReadFromServer(System.String)">
+        <member name="M:HslCommunication.Enthernet.Net_Simplify_Client.ReadFromServer(System.Int32,System.String)">
             <summary>
             客户端向服务器进行请求，请求字符串数据
             </summary>
-            <param name="send"></param>
+            <param name="customer">用户的指令头</param>
+            <param name="send">发送数据</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Client.ReadFromServer(System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.Net_Simplify_Client.ReadFromServer(System.Int32)">
+            <summary>
+            客户端向服务器进行请求，请求字符串数据
+            </summary>
+            <param name="customer">用户的指令头</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.Net_Simplify_Client.ReadFromServer(System.Int32,System.Byte[])">
             <summary>
             客户端向服务器进行请求，请求字节数据
             </summary>
+            <param name="customer">用户的指令头</param>
             <param name="send"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Client.ReadFromServerBase(System.Byte[],System.Int32)">
+        <member name="M:HslCommunication.Enthernet.Net_Simplify_Client.ReadFromServerBase(System.Int32,System.Int32,System.Byte[])">
             <summary>
             需要发送的底层数据
             </summary>
-            <param name="send">需要发送的底层数据</param>
             <param name="headcode">数据的指令头</param>
+            <param name="customer">用户的指令头</param>
+            <param name="send">需要发送的底层数据</param>
             <returns></returns>
         </member>
         <member name="T:HslCommunication.Enthernet.Net_Simplify_Server">
@@ -1916,25 +1963,43 @@
             关闭引擎
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.SendMessage(HslCommunication.Enthernet.AsyncStateBase,System.String)">
+        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.SendMessage(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.String)">
             <summary>
             向指定的通信对象发送字符串数据
             </summary>
-            <param name="socket">通信对象</param>
+            <param name="state">通信对象</param>
+            <param name="customer">用户的指令头</param>
             <param name="str">实际发送的字符串数据</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.SendMessage(HslCommunication.Enthernet.AsyncStateBase,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.SendMessage(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Byte[])">
             <summary>
             向指定的通信对象发送字节数据
             </summary>
-            <param name="socket"></param>
-            <param name="bytes"></param>
+            <param name="state">连接对象</param>
+            <param name="customer">用户的指令头</param>
+            <param name="bytes">实际的数据</param>
         </member>
         <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.ThreadPoolLogin(System.Object)">
             <summary>
             处理请求接收连接后的方法
             </summary>
             <param name="obj"></param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.SocketReceiveException(HslCommunication.Enthernet.AsyncStateOne,System.Exception)">
+            <summary>
+            处理异常的方法
+            </summary>
+            <param name="receive"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
+            <summary>
+            数据处理中心
+            </summary>
+            <param name="receive"></param>
+            <param name="protocol"></param>
+            <param name="customer"></param>
+            <param name="content"></param>
         </member>
         <member name="T:HslCommunication.Enthernet.Net_SoftUpdate_Server">
             <summary>
@@ -1970,7 +2035,7 @@
         </member>
         <member name="P:HslCommunication.Enthernet.Net_Udp_Server.ReceiveCacheLength">
             <summary>
-            获取或设置一次接收时的数据长度
+            获取或设置一次接收时的数据长度，默认2KB数据长度
             </summary>
         </member>
         <member name="M:HslCommunication.Enthernet.Net_Udp_Server.ServerStart(System.Int32)">
@@ -1983,6 +2048,13 @@
             <summary>
             关闭引擎
             </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.Net_Udp_Server.RefreshReceive">
+            <summary>
+            重新开始接收数据
+            </summary>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            
         </member>
         <member name="E:HslCommunication.Enthernet.Net_Udp_Server.AcceptString">
             <summary>
@@ -2005,17 +2077,25 @@
             </summary>
             <param name="endpoint"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Udp_Client.SendMessage(System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.Net_Udp_Client.SendMessage(System.Int32,System.Byte[])">
             <summary>
             发送字节数据到服务器
             </summary>
+            <param name="customer">用户自定义的标记数据</param>
             <param name="data">字节数据</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.Net.Sockets.SocketException"></exception>
+            <exception cref="T:System.ObjectDisposedException"></exception>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Udp_Client.SendMessage(System.String)">
+        <member name="M:HslCommunication.Enthernet.Net_Udp_Client.SendMessage(System.Int32,System.String)">
             <summary>
             发送字符串数据到服务器
             </summary>
+            <param name="customer">用户自定义的标记数据</param>
             <param name="data">字符串数据</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.Net.Sockets.SocketException"></exception>
+            <exception cref="T:System.ObjectDisposedException"></exception>
         </member>
         <member name="T:HslCommunication.Enthernet.FileItemShow">
             <summary>
@@ -2040,7 +2120,7 @@
             服务器的端口号
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileItemShow.SetFile(HslCommunication.Enthernet.File_Save,System.Func{System.Boolean})">
+        <member name="M:HslCommunication.Enthernet.FileItemShow.SetFile(HslCommunication.Enthernet.HslSoftFile,System.Func{System.Boolean})">
             <summary>
             设置文件数据
             </summary>
@@ -2317,11 +2397,6 @@
             UDP通信中的远程端
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.AsyncStateOne.HeadLength">
-            <summary>
-            头子节数据标准长度
-            </summary>
-        </member>
         <member name="P:HslCommunication.Enthernet.AsyncStateOne.BytesHead">
             <summary>
             指令头缓存
@@ -2416,6 +2491,145 @@
             <param name="is_download"></param>
             <returns></returns>
         </member>
+        <member name="T:HslCommunication.HslTimeOut">
+            <summary>
+            超时操作的类 [a class use to indicate the time-out of the connection]
+            </summary>
+        </member>
+        <member name="P:HslCommunication.HslTimeOut.StartTime">
+            <summary>
+            操作的开始时间
+            </summary>
+        </member>
+        <member name="P:HslCommunication.HslTimeOut.IsSuccessful">
+            <summary>
+            操作是否成功
+            </summary>
+        </member>
+        <member name="P:HslCommunication.HslTimeOut.DelayTime">
+            <summary>
+            延时的时间，单位毫秒
+            </summary>
+        </member>
+        <member name="P:HslCommunication.HslTimeOut.WorkSocket">
+            <summary>
+            连接超时用的Socket
+            </summary>
+        </member>
+        <member name="T:HslCommunication.NetSupport">
+            <summary>
+            静态的方法支持类，提供一些网络的静态支持
+            </summary>
+        </member>
+        <member name="F:HslCommunication.NetSupport.BufferSize">
+            <summary>
+            文件的读写缓存大小
+            </summary>
+        </member>
+        <member name="M:HslCommunication.NetSupport.ThreadPoolCheckConnect(HslCommunication.HslTimeOut,System.Int32)">
+            <summary>
+            检查是否超时的静态方法
+            </summary>
+            <param name="timeout"></param>
+            <param name="millisecond"></param>
+        </member>
+        <member name="M:HslCommunication.NetSupport.IsTwoBytesEquel(System.Byte[],System.Byte[])">
+            <summary>
+            判断两个字节是否相同
+            </summary>
+            <param name="b1">第一个字节</param>
+            <param name="b2">第二个字节</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetSupport.IsTwoBytesEquel(System.Byte[],System.Int32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            判断两个字节的指定部分是否相同
+            </summary>
+            <param name="b1">第一个字节</param>
+            <param name="start1">第一个字节的起始位置</param>
+            <param name="b2">第二个字节</param>
+            <param name="start2">第二个字节的起始位置</param>
+            <param name="length">校验的长度</param>
+            <returns>返回是否相等</returns>
+            <exception cref="T:System.IndexOutOfRangeException"></exception>
+        </member>
+        <member name="M:HslCommunication.NetSupport.ReadFromSocket(System.Net.Sockets.Socket,System.Int32)">
+            <summary>
+            读取socket数据的基础方法，只适合用来接收指令头，或是同步数据
+            </summary>
+            <param name="socket">通信对象</param>
+            <param name="receive">接收的长度</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.Net.Sockets.SocketException"></exception>
+            <exception cref="T:System.ObjectDisposedException"></exception>
+            <exception cref="T:System.Security.SecurityException"></exception>
+        </member>
+        <member name="M:HslCommunication.NetSupport.ReadFromSocketAndWriteStream(System.IO.FileStream,System.Net.Sockets.Socket,System.Int32,System.Boolean)">
+            <summary>
+            读取socket指定长度数据并写入文件流中
+            </summary>
+            <param name="fs">支持写入的文件流</param>
+            <param name="socket">连接的套接字</param>
+            <param name="receive">指定接收长度</param>
+            <param name="is_response">是否回发进度</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.Net.Sockets.SocketException"></exception>
+            <exception cref="T:System.ObjectDisposedException"></exception>
+            <exception cref="T:System.Security.SecurityException"></exception>
+        </member>
+        <member name="M:HslCommunication.NetSupport.ReadFromSocketAndWriteStream(System.IO.FileStream,HslCommunication.Enthernet.FileStateOne,System.Int32,System.Boolean)">
+            <summary>
+            读取socket指定长度数据并写入文件流中
+            </summary>
+            <param name="fs">支持写入的文件流</param>
+            <param name="receive">指定接收长度</param>
+            <param name="is_response">是否回发进度</param>
+            <param name="stateone">套接字的属性</param>
+        </member>
+        <member name="M:HslCommunication.NetSupport.ReadFromStreamAndWriteSocket(System.IO.FileStream,System.Net.Sockets.Socket,System.Int32)">
+            <summary>
+            读取文件流并将数据写入socket
+            </summary>
+            <param name="fs">文件流</param>
+            <param name="socket">连接的套接字</param>
+            <param name="send_length">要写入的长度</param>
+        </member>
+        <member name="M:HslCommunication.NetSupport.CommandBytes(System.Int32,System.Int32,System.Guid,System.Byte[])">
+            <summary>
+            生成终极传送指令的方法，所有的数据均通过该方法出来
+            </summary>
+            <param name="command">命令头</param>
+            <param name="customer">自用自定义</param>
+            <param name="token">令牌</param>
+            <param name="data">字节数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetSupport.CommandAnalysis(System.Byte[],System.Byte[])">
+            <summary>
+            解析接收到数据，先解压缩后进行解密
+            </summary>
+            <param name="head"></param>
+            <param name="content"></param>
+        </member>
+        <member name="M:HslCommunication.NetSupport.CommandBytes(System.Int32,System.Guid,System.Byte[])">
+            <summary>
+            获取发送字节数据的实际数据
+            </summary>
+            <param name="customer"></param>
+            <param name="token"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetSupport.CommandBytes(System.Int32,System.Guid,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="customer"></param>
+            <param name="token"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="T:HslCommunication.NetBase">
             <summary>
             一个网络通信类的基础类
@@ -2426,22 +2640,19 @@
             用于通信工作的核心对象
             </summary>
         </member>
+        <member name="P:HslCommunication.NetBase.ConnectTimeout">
+            <summary>
+            网络访问中的超时时间，单位：毫秒，默认值2200
+            </summary>
+        </member>
         <member name="P:HslCommunication.NetBase.KeyToken">
             <summary>
             当前对象的身份令牌，用来在网络通信中标识唯一的验证
             </summary>
         </member>
-        <member name="M:HslCommunication.NetBase.IsTwoBytesEquel(System.Byte[],System.Byte[])">
+        <member name="P:HslCommunication.NetBase.SegmentationLength">
             <summary>
-            判断两个字节是否相同
-            </summary>
-            <param name="b1">第一个字节</param>
-            <param name="b2">第二个字节</param>
-            <returns></returns>
-        </member>
-        <member name="P:HslCommunication.NetBase.ConnectTimeout">
-            <summary>
-            网络访问中的超时时间，单位：毫秒，默认值2200
+            分次接收的数据长度
             </summary>
         </member>
         <member name="M:HslCommunication.NetBase.ThreadPoolCheckConnect(System.Object)">
@@ -2449,40 +2660,6 @@
             检查超时的子线程
             </summary>
             <param name="obj"></param>
-        </member>
-        <member name="M:HslCommunication.NetBase.ReadFromSocket(System.Net.Sockets.Socket,System.Int32)">
-            <summary>
-            读取socket数据的基础方法
-            </summary>
-            <param name="socket">通信对象</param>
-            <param name="receive">接收的长度</param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.NetBase.ReadFromSocketAndWriteStream(System.IO.FileStream,System.Net.Sockets.Socket,System.Int32,System.Boolean)">
-            <summary>
-            读取socket指定长度数据并写入文件流中
-            </summary>
-            <param name="fs">支持写入的文件流</param>
-            <param name="socket">连接的套接字</param>
-            <param name="receive">指定接收长度</param>
-            <param name="is_response">是否回发进度</param>
-        </member>
-        <member name="M:HslCommunication.NetBase.ReadFromSocketAndWriteStream(System.IO.FileStream,HslCommunication.Enthernet.FileStateOne,System.Int32,System.Boolean)">
-            <summary>
-            读取socket指定长度数据并写入文件流中
-            </summary>
-            <param name="fs">支持写入的文件流</param>
-            <param name="receive">指定接收长度</param>
-            <param name="is_response">是否回发进度</param>
-            <param name="stateone">套接字的属性</param>
-        </member>
-        <member name="M:HslCommunication.NetBase.ReadFromStreamAndWriteSocket(System.IO.FileStream,System.Net.Sockets.Socket,System.Int32)">
-            <summary>
-            读取文件流并将数据写入socket
-            </summary>
-            <param name="fs">文件流</param>
-            <param name="socket">连接的套接字</param>
-            <param name="send_length">要写入的长度</param>
         </member>
         <member name="T:HslCommunication.NetBase.IEDelegate">
             <summary>
@@ -2505,12 +2682,16 @@
             <param name="object1">object1</param>
             <param name="object2">object2</param>
         </member>
-        <member name="M:HslCommunication.NetBase.ByteToHexString(System.Byte[])">
+        <member name="T:HslCommunication.NetBase.IEDelegate`3">
             <summary>
-            将字节数组转化为16进制的字符串
+            带三个参数的委托
             </summary>
-            <param name="InBytes">字节数组</param>
-            <returns>字符串</returns>
+            <typeparam name="T1">T1</typeparam>
+            <typeparam name="T2">T2</typeparam>
+            <typeparam name="T3">T3</typeparam>
+            <param name="object1">object1</param>
+            <param name="object2">object2</param>
+            <param name="object3">object3</param>
         </member>
         <member name="T:HslCommunication.NetComplexBase">
             <summary>
@@ -2530,20 +2711,45 @@
             </summary>
             <param name="ar"></param>
         </member>
+        <member name="M:HslCommunication.NetComplexBase.ReBeginReceiveHead(HslCommunication.Enthernet.AsyncStateOne)">
+            <summary>
+            重新开始接收下一次的数据传递
+            </summary>
+            <param name="receive"></param>
+        </member>
+        <member name="M:HslCommunication.NetComplexBase.HeadReceiveCallback(System.IAsyncResult)">
+            <summary>
+            指令头接收方法
+            </summary>
+            <param name="ar"></param>
+        </member>
+        <member name="M:HslCommunication.NetComplexBase.ContentReceiveCallback(System.IAsyncResult)">
+            <summary>
+            数据内容接收方法
+            </summary>
+            <param name="ar"></param>
+        </member>
+        <member name="M:HslCommunication.NetComplexBase.SynchronalReceiveCallback(System.Net.Sockets.Socket)">
+            <summary>
+            同步数据的接收的块
+            </summary>
+            <param name="socket">网络的套接字</param>
+        </member>
+        <member name="M:HslCommunication.NetComplexBase.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
+            <summary>
+            数据处理中心，应该继承重写
+            </summary>
+            <param name="receive">连接状态</param>
+            <param name="protocol">协议头</param>
+            <param name="customer">用户自定义</param>
+            <param name="content">数据内容</param>
+        </member>
         <member name="M:HslCommunication.NetComplexBase.DoWithException(System.String,System.Exception)">
             <summary>
             处理异常的方法，该方法需要在服务器端进行重写
             </summary>
             <param name="description"></param>
             <param name="ex"></param>
-        </member>
-        <member name="M:HslCommunication.NetComplexBase.TranslateDataToSend(System.Byte[],System.Int32)">
-            <summary>
-            用于同步通信中数据转换成实际发送的数据
-            </summary>
-            <param name="send">等待发送的数据</param>
-            <param name="headcode">数据头</param>
-            <returns>实际发送的数据</returns>
         </member>
         <member name="P:HslCommunication.NetComplexBase.IsSocketClosedAfterFinished">
             <summary>
@@ -2663,27 +2869,42 @@
             <param name="change">修改数据的算法</param>
             <returns></returns>
         </member>
-        <member name="T:HslCommunication.OperateResultBase">
+        <member name="T:HslCommunication.HslAsyncCoordinator">
             <summary>
-            操作结果的类
+            一个用于高性能，乐观并发模型控制操作的类
             </summary>
         </member>
-        <member name="P:HslCommunication.OperateResultBase.IsSuccess">
+        <member name="F:HslCommunication.HslAsyncCoordinator.OperaterStatus">
+            <summary>
+            操作状态，0是未操作，1是操作中
+            </summary>
+        </member>
+        <member name="F:HslCommunication.HslAsyncCoordinator.Target">
+            <summary>
+            需要操作的次数
+            </summary>
+        </member>
+        <member name="T:HslCommunication.OperateResult">
+            <summary>
+            操作结果的类，只带有成功标志和错误信息
+            </summary>
+        </member>
+        <member name="P:HslCommunication.OperateResult.IsSuccess">
             <summary>
             指示本次访问是否成功
             </summary>
         </member>
-        <member name="P:HslCommunication.OperateResultBase.Message">
+        <member name="P:HslCommunication.OperateResult.Message">
             <summary>
             具体的错误描述
             </summary>
         </member>
-        <member name="P:HslCommunication.OperateResultBase.ErrorCode">
+        <member name="P:HslCommunication.OperateResult.ErrorCode">
             <summary>
             具体的错误代码
             </summary>
         </member>
-        <member name="M:HslCommunication.OperateResultBase.ToMessageShowString">
+        <member name="M:HslCommunication.OperateResult.ToMessageShowString">
             <summary>
             获取错误代号及文本描述
             </summary>
@@ -2691,7 +2912,7 @@
         </member>
         <member name="T:HslCommunication.OperateResultString">
             <summary>
-            操作结果的字符串类
+            操作结果的类，除了带有成功标志和错误信息，还带有一个字符串数据
             </summary>
         </member>
         <member name="P:HslCommunication.OperateResultString.Content">
@@ -2701,7 +2922,7 @@
         </member>
         <member name="T:HslCommunication.OperateResultBytes">
             <summary>
-            操作结果的字节数组类
+            操作结果的类，除了带有成功标志和错误信息，还带有一个字节数据
             </summary>
         </member>
         <member name="P:HslCommunication.OperateResultBytes.Content">
@@ -2865,7 +3086,7 @@
         </member>
         <member name="T:HslCommunication.Profinet.MelsecNetMultiAsync">
             <summary>
-            异步的多PLC请求类，可以同时并发的向多个PLC发起请求，该类使用非阻塞的高性能方式实现
+            异步的多PLC请求类，可以同时并发的向多个PLC发起请求，该类使用非阻塞的高性能方式实现，需要好好测试
             </summary>
         </member>
         <member name="M:HslCommunication.Profinet.MelsecNetMultiAsync.#ctor(System.Byte,System.Byte,HslCommunication.Profinet.MelsecDataType,System.UInt16,System.UInt16,System.Int32,System.Int32,System.Net.IPAddress[],System.Int32,System.Int32)">
@@ -3811,25 +4032,24 @@
             根据自定义初始化方法进行初始化串口信息
             </summary>
         </member>
-        <member name="T:HslCommunication.HslTimeOut">
+        <member name="T:HslCommunication.HslZipped">
             <summary>
-            超时连接的类 [a class use to indicate the time-out of the connection]
+            一个负责压缩解压数据字节的类
             </summary>
         </member>
-        <member name="P:HslCommunication.HslTimeOut.StartConnectTime">
+        <member name="M:HslCommunication.HslZipped.CompressBytes(System.Byte[])">
             <summary>
-            开始连接或是请求的时间
+            压缩字节数据
             </summary>
+            <param name="bytes">等待被压缩的数据</param>
+            <returns>压缩之后的数据</returns>
         </member>
-        <member name="P:HslCommunication.HslTimeOut.IsConnected">
+        <member name="M:HslCommunication.HslZipped.Decompress(System.Byte[])">
             <summary>
-            获取或设置是否连接成功，默认为False
+            解压压缩后的数据
             </summary>
-        </member>
-        <member name="P:HslCommunication.HslTimeOut.WorkSocket">
-            <summary>
-            用于连接或是工作的套接字
-            </summary>
+            <param name="bytes">压缩后的数据</param>
+            <returns>压缩前的原始数据</returns>
         </member>
     </members>
 </doc>

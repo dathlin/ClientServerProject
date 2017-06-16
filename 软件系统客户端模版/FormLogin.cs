@@ -93,6 +93,7 @@ namespace 软件系统客户端模版
 
         private void userButton_login_Click(object sender, EventArgs e)
         {
+
             label_status.Visible = true;
             //验证输入
             if (string.IsNullOrEmpty(textBox_userName.Text))
@@ -174,6 +175,7 @@ namespace 软件系统客户端模版
             OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.维护检查);
             if(result.IsSuccess)
             {
+                byte[] temp = Encoding.Unicode.GetBytes(result.Content);
                 //例如返回结果为1说明允许登录，0则说明服务器处于维护中，并将信息显示
                 if (result.Content != "1")
                 {
@@ -204,11 +206,12 @@ namespace 软件系统客户端模版
             //   以下展示了服务器校验的方法，如您需要数据库校验，请删除下面并改成SQL访问验证的方式
 
             //包装数据
-            Newtonsoft.Json.Linq.JObject json = new Newtonsoft.Json.Linq.JObject();
-            json.Add(UserAccount.UserNameText, new Newtonsoft.Json.Linq.JValue(textBox_userName.Text));
-            json.Add(UserAccount.PasswordText, new Newtonsoft.Json.Linq.JValue(textBox_password.Text));
-
-            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.账户检查+json.ToString());
+            JObject json = new JObject
+            {
+                { UserAccount.UserNameText, new Newtonsoft.Json.Linq.JValue(textBox_userName.Text) },
+                { UserAccount.PasswordText, new Newtonsoft.Json.Linq.JValue(textBox_password.Text) }
+            };
+            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.账户检查, json.ToString());
             if (result.IsSuccess)
             {
                 //服务器应该返回账户的信息
