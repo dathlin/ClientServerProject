@@ -29,6 +29,7 @@ using HslCommunication.BasicFramework;
  * 
  *    注意：本代码的相关操作未作密码验证，如有需要，请自行完成
  *    示例：具体示例参照本页面Form1_FormClosing(object sender, FormClosingEventArgs e)方法
+ *    账号：默认一个超级管理员账号：admin 密码123456
  *
  ********************************************************************************************/
 
@@ -423,6 +424,8 @@ namespace 软件系统服务端模版
                     UserServer.ServerSettings.SystemVersion = new SystemVersion(data);
                     UserServer.ServerSettings.SaveToFile();
                     toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
+                    //记录数据
+                    RuntimeLogHelper.SaveInformation($"更改了版本号：{data}")
                     net_simplify_server.SendMessage(state, customer, "1");
                 }
                 catch
