@@ -15,7 +15,7 @@ using HslCommunication.BasicFramework;
 
 /******************************************************************************************
  * 
- *    模版日期  2017-05-30
+ *    模版日期  2017-06-16
  *    创建人    Richard.Hu
  *    版权所有  Richard.Hu
  *    授权说明  模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
@@ -167,7 +167,7 @@ namespace 软件系统服务端模版
             using (FormInputAndAction fiaa = new FormInputAndAction(
                 m =>
                 {
-                    net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗消息 + m); return true;
+                    net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗新消息,  m); return true;
                 }))
             {
                 fiaa.ShowDialog();
@@ -177,7 +177,7 @@ namespace 软件系统服务端模版
         private void 一键断开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //关闭信号发送至所有在线客户端
-            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.关闭所有客户端);
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.关闭客户端, "");
         }
 
         private void 关于软件ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -305,31 +305,45 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 接收来自客户端的字节数据
         /// </summary>
-        /// <param name="object1">客户端的地址</param>
-        /// <param name="object2">字节数据，根据实际情况选择是否使用</param>
-        private void Net_simplify_server_ReceivedBytesEvent(AsyncStateBase object1, byte[] object2)
+        /// <param name="state">网络状态</param>
+        /// <param name="customer">字节数据，根据实际情况选择是否使用</param>
+        /// <param name="data">来自客户端的字节数据</param>
+        private void Net_simplify_server_ReceivedBytesEvent(AsyncStateOne state, int customer, byte[] data)
         {
-            net_simplify_server.SendMessage(object1, object2);
+            net_simplify_server.SendMessage(state, customer, data);
         }
+
+
+
+
+        /******************************************************************************************************************
+         * 
+         *    方法说明：    当接收到来自客户端的数据的时候触发的方法
+         *    特别注意：    如果你的数据处理中引发了异常，应用程序将会奔溃，SendMessage异常系统将会自动处理
+         * 
+         ******************************************************************************************************************/
+
+
         /// <summary>
         /// 接收到来自客户端的数据，此处需要放置维护验证，更新验证等等操作
         /// </summary>
-        /// <param name="object1">客户端的地址</param>
-        /// <param name="object2">消息数据，应该使用指令头+数据组成</param>
-        private void Net_simplify_server_ReceiveStringEvent(AsyncStateBase object1, string object2)
+        /// <param name="state">客户端的地址</param>
+        /// <param name="customer">用于自定义的指令头，可不用，转而使用data来区分</param>
+        /// <param name="data">接收到的服务器的数据</param>
+        private void Net_simplify_server_ReceiveStringEvent(AsyncStateOne state, int customer, string data)
         {
             //必须返回结果，调用SendMessage(object1,[实际数据]);
-            if (object2.StartsWith("A"))
+            if (customer < 11000)
             {
-                DataProcessingWithStartA(object1, object2);
+                DataProcessingWithStartA(state, customer, data);
             }
-            else if (object2.StartsWith("B"))
+            else if (customer < 12000)
             {
-                DataProcessingWithStartB(object1, object2);
+                DataProcessingWithStartB(state, customer, data);
             }
             else
             {
-                net_simplify_server.SendMessage(object1, object2);
+                net_simplify_server.SendMessage(state, customer, data);
             }
         }
 
@@ -344,186 +358,186 @@ namespace 软件系统服务端模版
         /// <summary>
         /// A指令块，处理系统基础运行的消息
         /// </summary>
-        /// <param name="object1">网络状态对象</param>
-        /// <param name="object2">实际的数据</param>
-        private void DataProcessingWithStartA(AsyncStateBase object1, string object2)
+        /// <param name="state">网络状态对象</param>
+        /// <param name="data">实际的数据</param>
+        private void DataProcessingWithStartA(AsyncStateOne state, int customer, string data)
         {
-            string headCode = object2.Substring(0, 4);
-            if (headCode == CommonHeadCode.SimplifyHeadCode.维护检查)
+            if (customer == CommonHeadCode.SimplifyHeadCode.维护检查)
             {
-                net_simplify_server.SendMessage(object1, UserServer.ServerSettings.Can_Account_Login ? "1" : "0" +
-                    UserServer.ServerSettings.Account_Forbidden_Reason);
+                net_simplify_server.SendMessage(state, customer, "1");
+                    //UserServer.ServerSettings.Can_Account_Login ? "1" : "0" +
+                    //UserServer.ServerSettings.Account_Forbidden_Reason);
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.更新检查)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.更新检查)
             {
-                net_simplify_server.SendMessage(object1, UserServer.ServerSettings.SystemVersion.ToString());
+                net_simplify_server.SendMessage(state, customer, UserServer.ServerSettings.SystemVersion.ToString());
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.参数下载)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.参数下载)
             {
                 Newtonsoft.Json.Linq.JObject json = new Newtonsoft.Json.Linq.JObject();
                 json.Add(nameof(UserServer.ServerSettings.Announcement), new Newtonsoft.Json.Linq.JValue(UserServer.ServerSettings.Announcement));
-                net_simplify_server.SendMessage(object1, json.ToString());
+                net_simplify_server.SendMessage(state, customer, json.ToString());
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.账户检查)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.账户检查)
             {
                 //此处使用的是组件自带的验证的方式，如果使用SQL数据库，另行验证
-                JObject json = JObject.Parse(object2.Substring(4));
+                JObject json = JObject.Parse(data);
                 //提取账户，密码
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
-                net_simplify_server.SendMessage(object1, UserServer.ServerAccounts.CheckAccountJson(
-                    name, password, object1.GetRemoteEndPoint().Address.ToString()));
+                net_simplify_server.SendMessage(state, customer, UserServer.ServerAccounts.CheckAccountJson(
+                    name, password, state.GetRemoteEndPoint().Address.ToString()));
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.更新公告)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.更新公告)
             {
-                UserServer.ServerSettings.Announcement = object2.Substring(4);
+                UserServer.ServerSettings.Announcement = data;
                 //通知所有客户端更新公告
-                net_socket_server.SendAllClients(object2);
-                net_simplify_server.SendMessage(object1, "成功");
+                net_socket_server.SendAllClients(customer, data);
+                net_simplify_server.SendMessage(state, customer, "成功");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.获取账户信息)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.获取账户)
             {
                 //返回服务器的账户信息
-                net_simplify_server.SendMessage(object1, UserServer.ServerAccounts.GetAllAccountsJson());
+                net_simplify_server.SendMessage(state, customer, UserServer.ServerAccounts.GetAllAccountsJson());
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.更细账户信息)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.更细账户)
             {
                 //更新服务器的账户信息
-                UserServer.ServerAccounts.LoadAllAccountsJson(object2.Substring(4));
-                net_simplify_server.SendMessage(object1, "成功");
+                UserServer.ServerAccounts.LoadAllAccountsJson(data);
+                net_simplify_server.SendMessage(state, customer, "成功");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.密码修改)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.密码修改)
             {
                 //更新服务器的账户密码，此处使用的是组件自带的验证的方式，如果使用SQL数据库，另行验证
-                JObject json = JObject.Parse(object2.Substring(4));
+                JObject json = JObject.Parse(data);
                 //提取账户，密码
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
                 UserServer.ServerAccounts.UpdatePassword(name, password);
-                net_simplify_server.SendMessage(object1, "成功");
+                net_simplify_server.SendMessage(state, customer, "成功");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.更新版本号)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.更新版本)
             {
                 try
                 {
-                    UserServer.ServerSettings.SystemVersion = new SystemVersion(object2.Substring(4));
+                    UserServer.ServerSettings.SystemVersion = new SystemVersion(data);
                     UserServer.ServerSettings.SaveToFile();
                     toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
-                    net_simplify_server.SendMessage(object1, "1");
+                    net_simplify_server.SendMessage(state, customer, "1");
                 }
                 catch
                 {
-                    net_simplify_server.SendMessage(object1, "0");
+                    net_simplify_server.SendMessage(state, customer, "0");
                 }
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.注册账号)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.注册账号)
             {
-                bool result = UserServer.ServerAccounts.AddNewAccount(object2.Substring(4));
-                net_simplify_server.SendMessage(object1, result ? "1" : "0");
+                bool result = UserServer.ServerAccounts.AddNewAccount(data);
+                net_simplify_server.SendMessage(state, customer, result ? "1" : "0");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.请求文件列表)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.请求文件)
             {
-                net_simplify_server.SendMessage(object1, net_simple_file_server.ToJsonString());
+                net_simplify_server.SendMessage(state, customer, net_simple_file_server.ToJsonString());
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.意见反馈)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.意见反馈)
             {
-                AdviceLogHelper.SaveInformation(object2.Substring(4));
-                net_simplify_server.SendMessage(object1, "成功");
+                AdviceLogHelper.SaveInformation(data);
+                net_simplify_server.SendMessage(state, customer, "成功");
             }
             else
             {
-                net_simplify_server.SendMessage(object1, object2);
+                net_simplify_server.SendMessage(state, customer, data);
             }
         }
 
         /// <summary>
         /// B指令块，处理日志相关的消息
         /// </summary>
-        /// <param name="object1"></param>
-        /// <param name="object2"></param>
-        private void DataProcessingWithStartB(AsyncStateBase object1, string object2)
+        /// <param name="state"></param>
+        /// <param name="customer">用户自定义的命令头</param>
+        /// <param name="data"></param>
+        private void DataProcessingWithStartB(AsyncStateOne state, int customer, string data)
         {
-            string headCode = object2.Substring(0, 4);
-            if (headCode == CommonHeadCode.SimplifyHeadCode.网络日志查看)
+            if (customer == CommonHeadCode.SimplifyHeadCode.网络日志查看)
             {
-                net_simplify_server.SendMessage(object1, net_socket_server.LogHelper.GetLogText());
+                net_simplify_server.SendMessage(state, customer, net_socket_server.LogHelper.GetLogText());
                 RuntimeLogHelper.SaveInformation("网络日志查看");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.网络日志清空)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.网络日志清空)
             {
                 net_socket_server.LogHelper.ClearLogText();
-                net_simplify_server.SendMessage(object1, "成功");
+                net_simplify_server.SendMessage(state, customer, "成功");
                 RuntimeLogHelper.SaveWarnning("网络日志清空");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.同步日志查看)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.同步日志查看)
             {
-                net_simplify_server.SendMessage(object1, net_simplify_server.LogHelper.GetLogText());
+                net_simplify_server.SendMessage(state, customer, net_simplify_server.LogHelper.GetLogText());
                 RuntimeLogHelper.SaveInformation("同步日志查看");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.同步日志清空)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.同步日志清空)
             {
                 net_simplify_server.LogHelper.ClearLogText();
-                net_simplify_server.SendMessage(object1, "成功");
+                net_simplify_server.SendMessage(state, customer, "成功");
                 RuntimeLogHelper.SaveWarnning("同步日志清空");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.更新日志查看)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.更新日志查看)
             {
-                net_simplify_server.SendMessage(object1, net_soft_update_Server.LogHelper.GetLogText());
+                net_simplify_server.SendMessage(state, customer, net_soft_update_Server.LogHelper.GetLogText());
                 RuntimeLogHelper.SaveInformation("更新日志查看");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.更新日志清空)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.更新日志清空)
             {
                 net_soft_update_Server.LogHelper.ClearLogText();
-                net_simplify_server.SendMessage(object1, "成功");
+                net_simplify_server.SendMessage(state, customer, "成功");
                 RuntimeLogHelper.SaveWarnning("更新日志清空");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.运行日志查看)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.运行日志查看)
             {
-                net_simplify_server.SendMessage(object1, RuntimeLogHelper.GetLogText());
+                net_simplify_server.SendMessage(state, customer, RuntimeLogHelper.GetLogText());
                 RuntimeLogHelper.SaveInformation("运行日志查看");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.运行日志清空)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.运行日志清空)
             {
                 RuntimeLogHelper.ClearLogText();
-                net_simplify_server.SendMessage(object1, "成功");
+                net_simplify_server.SendMessage(state, customer, "成功");
                 RuntimeLogHelper.SaveInformation("运行日志清空");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.共享文件日志查看)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.文件日志查看)
             {
-                net_simplify_server.SendMessage(object1, net_simple_file_server.LogHelper.GetLogText());
+                net_simplify_server.SendMessage(state, customer, net_simple_file_server.LogHelper.GetLogText());
                 RuntimeLogHelper.SaveInformation("共享文件日志查看");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.共享文件日志清空)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.文件日志清空)
             {
                 net_simple_file_server.LogHelper.ClearLogText();
-                net_simplify_server.SendMessage(object1, "成功");
+                net_simplify_server.SendMessage(state, customer, "成功");
                 RuntimeLogHelper.SaveInformation("共享文件日志清空");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.建议反馈日志查看)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.反馈日志查看)
             {
-                net_simplify_server.SendMessage(object1, AdviceLogHelper.GetLogText());
+                net_simplify_server.SendMessage(state, customer, AdviceLogHelper.GetLogText());
                 RuntimeLogHelper.SaveInformation("建议反馈日志查看");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.建议反馈日志清空)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.反馈日志清空)
             {
                 AdviceLogHelper.ClearLogText();
-                net_simplify_server.SendMessage(object1, "成功");
+                net_simplify_server.SendMessage(state, customer, "成功");
                 RuntimeLogHelper.SaveWarnning("建议反馈日志清空");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.UDP日志查看)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.UDP日志查看)
             {
-                net_simplify_server.SendMessage(object1, net_udp_server.LogHelper.GetLogText());
+                net_simplify_server.SendMessage(state, 0, net_udp_server.LogHelper.GetLogText());
                 RuntimeLogHelper.SaveInformation("UDP日志查看");
             }
-            else if (headCode == CommonHeadCode.SimplifyHeadCode.UDP日志清空)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.UDP日志清空)
             {
                 net_udp_server.LogHelper.ClearLogText();
-                net_simplify_server.SendMessage(object1, "成功");
+                net_simplify_server.SendMessage(state, customer, "成功");
                 RuntimeLogHelper.SaveWarnning("UDP日志清空");
             }
             else
             {
-                net_simplify_server.SendMessage(object1, object2);
+                net_simplify_server.SendMessage(state, customer, data);
             }
         }
 
@@ -557,11 +571,11 @@ namespace 软件系统服务端模版
                 net_socket_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\net_log.txt";
                 net_socket_server.FormatClientOnline = "#IP:{0} Name:{1}";//必须为#开头，具体格式可由自身需求确定
                 net_socket_server.IsSaveLogClientLineChange = true;//设置客户端上下线是否记录到日志
-                net_socket_server.ClientOnline += Net_socket_server_ClientOnline;//客户端上线触发
-                net_socket_server.ClientOffline += Net_socket_server_ClientOffline;//客户端下线触发，包括异常掉线
-                net_socket_server.MessageAlerts += Net_socket_server_MessageAlerts;//服务器产生提示消息触发
-                net_socket_server.AcceptByte += Net_socket_server_AcceptByte;//服务器接收到字节数据触发
-                net_socket_server.AcceptString += Net_socket_server_AcceptString;//服务器接收到字符串数据触发
+                net_socket_server.ClientOnline += new HslCommunication.NetBase.IEDelegate<AsyncStateOne>(Net_socket_server_ClientOnline);//客户端上线触发
+                net_socket_server.ClientOffline += new HslCommunication.NetBase.IEDelegate<AsyncStateOne, string>(Net_socket_server_ClientOffline);//客户端下线触发，包括异常掉线
+                net_socket_server.MessageAlerts += new HslCommunication.NetBase.IEDelegate<string>(Net_socket_server_MessageAlerts);//服务器产生提示消息触发
+                net_socket_server.AcceptByte += new HslCommunication.NetBase.IEDelegate<AsyncStateOne, int, byte[]>(Net_socket_server_AcceptByte);//服务器接收到字节数据触发
+                net_socket_server.AcceptString += new HslCommunication.NetBase.IEDelegate<AsyncStateOne, int, string>(Net_socket_server_AcceptString);//服务器接收到字符串数据触发
                 net_socket_server.ServerStart(CommonLibrary.CommonLibrary.Port_Main_Net);
             }
             catch (Exception ex)
@@ -570,13 +584,24 @@ namespace 软件系统服务端模版
             }
         }
 
-        private void Net_socket_server_AcceptString(AsyncStateOne object1, string object2)
+
+
+        /******************************************************************************************************************
+         * 
+         *    方法说明：    当接收到来自客户端的数据的时候触发的方法
+         *    特别注意：    如果你的数据处理中引发了异常，应用程序将会继续运行，该异常将会记录在网络日志中，
+         *                   所以有必要的话，对可能发生的异常需要提前处理。
+         * 
+         ******************************************************************************************************************/
+
+
+        private void Net_socket_server_AcceptString(AsyncStateOne object1, int customer, string data)
         {
             //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字符串都会到此处处理
-            if (object2.StartsWith("H"))
+            if (50000 <= customer && customer < 51000)
             {
                 //H类系统指令
-                DataProcessingWithStartH(object1, object2);
+                DataProcessingWithStartH(object1, customer, data);
             }
 
         }
@@ -584,22 +609,21 @@ namespace 软件系统服务端模版
         /// <summary>
         /// H开头的处理块
         /// </summary>
-        /// <param name="object1"></param>
-        /// <param name="headcode">指令头</param>
-        /// <param name="object2"></param>
-        private void DataProcessingWithStartH(AsyncStateOne object1, string object2)
+        /// <param name="state">网络状态</param>
+        /// <param name="headcode">用户自定义的指令头</param>
+        /// <param name="data">字符串数据</param>
+        private void DataProcessingWithStartH(AsyncStateOne state, int customer, string data)
         {
-            string headCode = object2.Substring(0, 4);
-            if (headCode == CommonHeadCode.MultiNetHeadCode.留言消息)
+            if (customer == CommonHeadCode.MultiNetHeadCode.留言版消息)
             {
-                string content = headCode + object1.LoginAlias + DateTime.Now.ToString(" yyyy-MM-dd HH:mm:ss") + Environment.NewLine + object2.Substring(4);
+                string content = state.LoginAlias + DateTime.Now.ToString(" yyyy-MM-dd HH:mm:ss") + Environment.NewLine + data;
                 //转发所有的客户端，包括发送者
-                net_socket_server.SendAllClients(content);
+                net_socket_server.SendAllClients(customer, content);
             }
         }
 
 
-        private void Net_socket_server_AcceptByte(AsyncStateOne object1, byte[] object2)
+        private void Net_socket_server_AcceptByte(AsyncStateOne state, int customer, byte[] data)
         {
             //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字节数组都会到此处处理
         }
@@ -630,11 +654,11 @@ namespace 软件系统服务端模版
                 { "Time", new JValue(DateTime.Now) },
                 { "FileCount", new JValue(net_simple_file_server.File_Count()) }
             };
-            net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据 + json.ToString());
+            net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据,  json.ToString());
 
 
             //此处决定要不要将在线客户端的数据发送所有客户端
-            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.所有客户端在线信息 + net_socket_server.AllClients);
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.总在线信息, net_socket_server.AllClients);
             //触发上下线功能
             Net_socket_clients_change(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" +
                         object1.LoginAlias + " 上线");
@@ -700,11 +724,12 @@ namespace 软件系统服务端模版
                 }
                 second = DateTime.Now.Second;
                 if (IsWindowShow && IsHandleCreated) Invoke(DTimeShow);
-                //每隔一分钟将时间发送给所有客户端，格式为标准时间
+                //每秒钟执行的代码
+                
                 if (second == 0)
                 {
-                    net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.时间推送 +
-                        DateTime.Now.ToString("O"));
+                    //每个0秒执行的代码
+                    //net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.时间的推送, DateTime.Now.ToString("O"));
                 }
                 if (minute != DateTime.Now.Minute)
                 {
@@ -760,7 +785,7 @@ namespace 软件系统服务端模版
         private void Net_simple_file_server_FileChange()
         {
             //将文件数据发送给客户端
-            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.文件数量 + net_simple_file_server.File_Count());
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.文件总数量, net_simple_file_server.File_Count().ToString());
         }
 
 
@@ -809,27 +834,28 @@ namespace 软件系统服务端模版
             {
                 net_udp_server = new Net_Udp_Server();
                 net_udp_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\udp_log.txt";//日志路径
+                net_udp_server.KeyToken = CommonHeadCode.KeyToken;
                 net_udp_server.ReceiveCacheLength = 1024;//单次接收数据的缓冲长度
                 net_udp_server.AcceptByte += Net_udp_server_AcceptByte;//接收到字节数据的时候触发事件
                 net_udp_server.AcceptString += Net_udp_server_AcceptString;//接收到字符串数据的时候触发事件
                 net_udp_server.ServerStart(CommonLibrary.CommonLibrary.Port_Udp_Server);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SoftBasic.ShowExceptionMessage(ex);
             }
         }
 
-        private void Net_udp_server_AcceptString(AsyncStateOne object1, string object2)
+        private void Net_udp_server_AcceptString(AsyncStateOne state, int customer, string data)
         {
             //此处为测试
             Invoke(new Action(() =>
             {
-                textBox1.AppendText($"{DateTime.Now.ToString("MM-dd HH:mm:ss ")}来自IP:{object1._IpEnd_Point.Address.ToString()} 内容:{object2}{Environment.NewLine}");
+                textBox1.AppendText($"{DateTime.Now.ToString("MM-dd HH:mm:ss ")}来自IP:{state._IpEnd_Point.Address.ToString()} 内容:{data}{Environment.NewLine}");
             }));
         }
 
-        private void Net_udp_server_AcceptByte(AsyncStateOne object1, byte[] object2)
+        private void Net_udp_server_AcceptByte(AsyncStateOne state, int customer, byte[] data)
         {
             //具体用法参考上面字符串方法
         }
