@@ -1,6 +1,6 @@
 ﻿namespace 软件系统服务端模版
 {
-    partial class Form1
+    partial class FormServerWindow
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -47,6 +47,7 @@
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.版本号说明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.框架作者ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.启动服务器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,7 +55,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.框架作者ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label5 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -66,9 +67,9 @@
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel_version,
             this.toolStripStatusLabel_time});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 408);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 459);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(758, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(764, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -107,7 +108,7 @@
             this.启动服务器ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(758, 29);
+            this.menuStrip1.Size = new System.Drawing.Size(764, 29);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -182,6 +183,13 @@
             this.版本号说明ToolStripMenuItem.Text = "版本号说明";
             this.版本号说明ToolStripMenuItem.Click += new System.EventHandler(this.版本号说明ToolStripMenuItem_Click);
             // 
+            // 框架作者ToolStripMenuItem
+            // 
+            this.框架作者ToolStripMenuItem.Name = "框架作者ToolStripMenuItem";
+            this.框架作者ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.框架作者ToolStripMenuItem.Text = "框架作者";
+            this.框架作者ToolStripMenuItem.Click += new System.EventHandler(this.框架作者ToolStripMenuItem_Click);
+            // 
             // 启动服务器ToolStripMenuItem
             // 
             this.启动服务器ToolStripMenuItem.Name = "启动服务器ToolStripMenuItem";
@@ -195,7 +203,7 @@
             this.label3.BackColor = System.Drawing.Color.LimeGreen;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(661, 0);
+            this.label3.Location = new System.Drawing.Point(667, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 29);
             this.label3.TabIndex = 7;
@@ -205,7 +213,7 @@
             // label4
             // 
             this.label4.ForeColor = System.Drawing.Color.Chocolate;
-            this.label4.Location = new System.Drawing.Point(146, 40);
+            this.label4.Location = new System.Drawing.Point(146, 74);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 17);
             this.label4.TabIndex = 12;
@@ -217,17 +225,17 @@
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(237, 60);
+            this.textBox1.Location = new System.Drawing.Point(237, 94);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(511, 344);
+            this.textBox1.Size = new System.Drawing.Size(517, 361);
             this.textBox1.TabIndex = 11;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(234, 40);
+            this.label2.Location = new System.Drawing.Point(234, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 17);
             this.label2.TabIndex = 10;
@@ -236,7 +244,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 40);
+            this.label1.Location = new System.Drawing.Point(7, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 17);
             this.label1.TabIndex = 9;
@@ -248,24 +256,31 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 17;
-            this.listBox1.Location = new System.Drawing.Point(10, 60);
+            this.listBox1.Location = new System.Drawing.Point(10, 94);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBox1.Size = new System.Drawing.Size(216, 344);
+            this.listBox1.Size = new System.Drawing.Size(216, 361);
             this.listBox1.TabIndex = 8;
             // 
-            // 框架作者ToolStripMenuItem
+            // label5
             // 
-            this.框架作者ToolStripMenuItem.Name = "框架作者ToolStripMenuItem";
-            this.框架作者ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
-            this.框架作者ToolStripMenuItem.Text = "框架作者";
-            this.框架作者ToolStripMenuItem.Click += new System.EventHandler(this.框架作者ToolStripMenuItem_Click);
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label5.Location = new System.Drawing.Point(10, 38);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(744, 36);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "XXXXX系统";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Form1
+            // FormServerWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 430);
+            this.ClientSize = new System.Drawing.Size(764, 481);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
@@ -277,7 +292,7 @@
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "Form1";
+            this.Name = "FormServerWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "服务器端程序";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -317,6 +332,7 @@
         private System.Windows.Forms.ToolStripMenuItem 账户管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_time;
         private System.Windows.Forms.ToolStripMenuItem 框架作者ToolStripMenuItem;
+        private System.Windows.Forms.Label label5;
     }
 }
 

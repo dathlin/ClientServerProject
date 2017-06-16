@@ -48,9 +48,9 @@ using HslCommunication.BasicFramework;
 
 namespace 软件系统服务端模版
 {
-    public partial class Form1 : Form
+    public partial class FormServerWindow : Form
     {
-        public Form1()
+        public FormServerWindow()
         {
             InitializeComponent();
         }
@@ -84,6 +84,7 @@ namespace 软件系统服务端模版
             UserServer.ServerSettings.LoadByFile();
             toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
             toolStripStatusLabel1.Text = $"本软件著作权归{Resource.StringResouce.SoftCopyRight}所有";
+            label5.Text = Resource.StringResouce.SoftName;
             //加载账户信息
             UserServer.ServerAccounts.FileSavePath = Application.StartupPath + @"\accounts.txt";
             UserServer.ServerAccounts.LoadByFile();

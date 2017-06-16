@@ -34,7 +34,7 @@ namespace 软件系统服务端模版
             System.Threading.ThreadPool.SetMaxThreads(1000, 256);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FormServerWindow());
         }
 
         [DllImport("User32.dll")]
