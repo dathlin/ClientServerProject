@@ -335,11 +335,11 @@ namespace 软件系统服务端模版
         private void Net_simplify_server_ReceiveStringEvent(AsyncStateOne state, int customer, string data)
         {
             //必须返回结果，调用SendMessage(object1,[实际数据]);
-            if (customer < 11000)
+            if (CommonHeadCode.SimplifyHeadCode.IsCustomerGroupSystem(customer))
             {
                 DataProcessingWithStartA(state, customer, data);
             }
-            else if (customer < 12000)
+            else if (CommonHeadCode.SimplifyHeadCode.IsCustomerGroupLogging(customer))
             {
                 DataProcessingWithStartB(state, customer, data);
             }
@@ -604,7 +604,7 @@ namespace 软件系统服务端模版
         private void Net_socket_server_AcceptString(AsyncStateOne object1, int customer, string data)
         {
             //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字符串都会到此处处理
-            if (50000 <= customer && customer < 51000)
+            if (CommonHeadCode.MultiNetHeadCode.IsCustomerGroupSystem(customer))
             {
                 //H类系统指令
                 DataProcessingWithStartH(object1, customer, data);

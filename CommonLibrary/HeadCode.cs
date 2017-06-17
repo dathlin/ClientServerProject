@@ -10,6 +10,14 @@ namespace CommonLibrary
     /// </summary>
     public class CommonHeadCode
     {
+
+        /************************************************************************************************
+         * 
+         *    注意：您在准备二次开发时，应该重新生成一个自己的GUID码
+         * 
+         **************************************************************************************************/
+
+
         /// <summary>
         /// 用于同步和异步的网络的身份令牌，提升安全性
         /// </summary>
@@ -23,6 +31,15 @@ namespace CommonLibrary
         [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Auto)]
         public class SimplifyHeadCode
         {
+            /// <summary>
+            /// 判断指令否是系统指令
+            /// </summary>
+            /// <param name="customer">指令</param>
+            /// <returns>是否符合</returns>
+            public static bool IsCustomerGroupSystem(int customer)
+            {
+                return (customer >= 10000 && customer < 11000);
+            }
             public static int 维护检查 { get; } =        10000;//10000开始的表明是系统相关的
             public static int 更新检查 { get; } =        10001;
             public static int 账户检查 { get; } =        10002;
@@ -38,7 +55,15 @@ namespace CommonLibrary
 
 
 
-
+            /// <summary>
+            /// 判断指令否是日志相关指令
+            /// </summary>
+            /// <param name="customer">指令</param>
+            /// <returns>是否符合</returns>
+            public static bool IsCustomerGroupLogging(int customer)
+            {
+                return (customer >= 11000 && customer < 12000);
+            }
             public static int 网络日志查看 { get; } =      11000;//11000开头的是日志请求和清空
             public static int 网络日志清空 { get; } =      11001;
             public static int 同步日志查看 { get; } =      11002;
@@ -66,6 +91,15 @@ namespace CommonLibrary
         /// </summary>
         public class MultiNetHeadCode
         {
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="customer">指令</param>
+            /// <returns>是否符合</returns>
+            public static bool IsCustomerGroupSystem(int customer)
+            {
+                return (customer >= 50000 && customer < 51000);
+            }
             public static int 总在线信息 { get; } =        50000;
             public static int 关闭客户端 { get; } =        50001;
             public static int 弹窗新消息 { get; } =        50002;
