@@ -53,6 +53,13 @@ namespace 软件系统服务端模版
         public FormServerWindow()
         {
             InitializeComponent();
+
+            //检测日志路径是否存储
+            LogSavePath = Application.StartupPath + @"\Logs";
+            if(!System.IO.Directory.Exists(LogSavePath))
+            {
+                System.IO.Directory.CreateDirectory(LogSavePath);
+            }
         }
 
         #region 窗口属性+窗口方法
@@ -66,17 +73,19 @@ namespace 软件系统服务端模版
         /// </summary>
         private bool IsSystemStart { get; set; } = false;
 
+        private string LogSavePath { get; set; }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             //初始化日志工具
             RuntimeLogHelper = new SoftLogHelper()
             {
-                LogSaveFileName = Application.StartupPath + @"\log.txt",
+                LogSaveFileName = LogSavePath + @"\log.txt",
             };
             //初始化反馈信息工具
             AdviceLogHelper = new SoftLogHelper()
             {
-                LogSaveFileName = Application.StartupPath + @"\advice_log.txt",
+                LogSaveFileName = LogSavePath + @"\advice_log.txt",
             };
             //保存路径初始化
             UserServer.ServerSettings.FileSavePath = Application.StartupPath + @"\settings.txt";
@@ -242,7 +251,7 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_soft_update_Server.LogHelper.LogSaveFileName = Application.StartupPath + @"\update_log.txt";
+                net_soft_update_Server.LogHelper.LogSaveFileName = LogSavePath + @"\update_log.txt";
                 //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
                 //只放置exe和dll组件，必须放置：软件自动更新.exe
                 net_soft_update_Server.KeyToken = CommonHeadCode.KeyToken;
@@ -270,7 +279,7 @@ namespace 软件系统服务端模版
             try
             {
                 net_file_update.FilesPath = Application.StartupPath + @"\ClientFiles";//服务器客户端需要更新的路径，与上述一致
-                net_file_update.LogHelper.LogSaveFileName = Application.StartupPath + @"\update_file_log.txt";
+                net_file_update.LogHelper.LogSaveFileName = LogSavePath + @"\update_file_log.txt";
                 net_file_update.KeyToken = CommonHeadCode.KeyToken;
                 net_file_update.ServerStart(CommonLibrary.CommonLibrary.Port_Update_Remote);
             }
@@ -294,7 +303,7 @@ namespace 软件系统服务端模版
             try
             {
                 net_simplify_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
-                net_simplify_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\simplify_log.txt";//日志路径
+                net_simplify_server.LogHelper.LogSaveFileName = LogSavePath + @"\simplify_log.txt";//日志路径
                 net_simplify_server.ReceiveStringEvent += Net_simplify_server_ReceiveStringEvent;//接收到字符串触发
                 net_simplify_server.ReceivedBytesEvent += Net_simplify_server_ReceivedBytesEvent;//接收到字节触发
                 net_simplify_server.ServerStart(CommonLibrary.CommonLibrary.Port_Second_Net);
@@ -577,7 +586,7 @@ namespace 软件系统服务端模版
             try
             {
                 net_socket_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
-                net_socket_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\net_log.txt";
+                net_socket_server.LogHelper.LogSaveFileName = LogSavePath + @"\net_log.txt";
                 net_socket_server.FormatClientOnline = "#IP:{0} Name:{1}";//必须为#开头，具体格式可由自身需求确定
                 net_socket_server.IsSaveLogClientLineChange = true;//设置客户端上下线是否记录到日志
                 net_socket_server.ClientOnline += new HslCommunication.NetBase.IEDelegate<AsyncStateOne>(Net_socket_server_ClientOnline);//客户端上线触发
@@ -792,7 +801,7 @@ namespace 软件系统服务端模版
                     FileSavePath = Application.StartupPath + @"\files.txt"
                 };
                 net_simple_file_server.ReadFromFile();
-                net_simple_file_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\share_file_log.txt";
+                net_simple_file_server.LogHelper.LogSaveFileName = LogSavePath + @"\share_file_log.txt";
                 //文件存储路径
                 net_simple_file_server.File_save_path = Application.StartupPath + @"\Files";
                 net_simple_file_server.FileChange += Net_simple_file_server_FileChange;
@@ -855,7 +864,7 @@ namespace 软件系统服务端模版
             try
             {
                 net_udp_server = new Net_Udp_Server();
-                net_udp_server.LogHelper.LogSaveFileName = Application.StartupPath + @"\udp_log.txt";//日志路径
+                net_udp_server.LogHelper.LogSaveFileName = LogSavePath + @"\udp_log.txt";//日志路径
                 net_udp_server.KeyToken = CommonHeadCode.KeyToken;
                 net_udp_server.ReceiveCacheLength = 1024;//单次接收数据的缓冲长度
                 net_udp_server.AcceptByte += Net_udp_server_AcceptByte;//接收到字节数据的时候触发事件
