@@ -448,6 +448,11 @@ namespace 软件系统服务端模版
                 AdviceLogHelper.SaveInformation(data);
                 net_simplify_server.SendMessage(state, customer, "成功");
             }
+            else if (customer == CommonHeadCode.SimplifyHeadCode.群发消息)
+            {
+                net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗新消息, data);
+                net_simplify_server.SendMessage(state, customer, "成功");
+            }
             else
             {
                 net_simplify_server.SendMessage(state, customer, data);

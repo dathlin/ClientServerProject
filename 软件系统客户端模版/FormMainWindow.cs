@@ -254,6 +254,15 @@ namespace 软件系统客户端模版
             }
         }
 
+        private void 消息发送ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormInputAndAction fiaa = new FormInputAndAction(str => UserClient.Net_simplify_client.ReadFromServer(
+                 CommonHeadCode.SimplifyHeadCode.群发消息, UserClient.UserAccount.UserName + ":" + str).IsSuccess, "", "请输入群发的消息："))
+            {
+                fiaa.ShowDialog();
+            }
+        }
+
         #endregion
 
         #region 异步网络块
@@ -565,5 +574,7 @@ namespace 软件系统客户端模版
 
 
         #endregion
+
+        
     }
 }

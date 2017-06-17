@@ -52,6 +52,7 @@ namespace CommonLibrary
             public static int 更新版本 { get; } =        10009;
             public static int 请求文件 { get; } =        10010;
             public static int 意见反馈 { get; } =        10011;
+            public static int 群发消息 { get; } =        10012;
 
 
 
