@@ -129,7 +129,7 @@ namespace 软件系统客户端模版
         private string FilterString(string filter)
         {
             StringBuilder sb = new StringBuilder();
-            MatchCollection mc = Regex.Matches(LogTemp, @"\[" + filter + @"[^\[]+");
+            MatchCollection mc = Regex.Matches(LogTemp, @"\u0002\[" + filter + @"[^\u0002]+");
             foreach (Match m in mc)
             {
                 sb.Append(m.Value);
