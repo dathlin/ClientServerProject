@@ -968,6 +968,23 @@ namespace 软件系统服务端模版
 
         #endregion
 
+        #region 服务器临时聊天消息存储块
+
+        private SoftMsgQueue<string> Chats_Managment { get; set; }
+
+        private void ChatInitialization()
+        {
+            Chats_Managment = new SoftMsgQueue<string>()
+            {
+                MaxCache = 200,//记录200条临时消息
+                FileSavePath = Application.StartupPath + @"\chats.txt"//设置保存的路径
+            };
+            Chats_Managment.LoadByFile();//加载以前的数据
+        }
+
+
+        #endregion
+
 
         /*********************************************************************************************************
          * 
