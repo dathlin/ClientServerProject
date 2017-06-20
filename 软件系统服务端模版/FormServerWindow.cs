@@ -98,6 +98,8 @@ namespace 软件系统服务端模版
             UserServer.ServerAccounts.FileSavePath = Application.StartupPath + @"\accounts.txt";
             UserServer.ServerAccounts.LoadByFile();
             UserServer.ServerAccounts.LogHelper = RuntimeLogHelper;
+            //初始化聊天信息
+            ChatInitialization();
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -385,8 +387,10 @@ namespace 软件系统服务端模版
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.参数下载)
             {
-                Newtonsoft.Json.Linq.JObject json = new Newtonsoft.Json.Linq.JObject();
-                json.Add(nameof(UserServer.ServerSettings.Announcement), new Newtonsoft.Json.Linq.JValue(UserServer.ServerSettings.Announcement));
+                JObject json = new JObject
+                {
+                    { nameof(UserServer.ServerSettings.Announcement), new JValue(UserServer.ServerSettings.Announcement) }
+                };
                 net_simplify_server.SendMessage(state, customer, json.ToString());
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.账户检查)
@@ -636,9 +640,7 @@ namespace 软件系统服务端模版
         {
             if (customer == CommonHeadCode.MultiNetHeadCode.留言版消息)
             {
-                string content = state.LoginAlias + DateTime.Now.ToString(" yyyy-MM-dd HH:mm:ss") + Environment.NewLine + data;
-                //转发所有的客户端，包括发送者
-                net_socket_server.SendAllClients(customer, content);
+                ChatAddMessage(state.LoginAlias, data);
             }
         }
 
@@ -672,13 +674,15 @@ namespace 软件系统服务端模版
             JObject json = new JObject
             {
                 { "Time", new JValue(DateTime.Now) },
-                { "FileCount", new JValue(net_simple_file_server.File_Count()) }
+                { "FileCount", new JValue(net_simple_file_server.File_Count()) },
+                { "chats", new JValue(Chats_Managment.ToSaveString())}
             };
             //发送客户端的初始化数据
             net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据,  json.ToString());
             //触发上下线功能
             Net_socket_clients_change(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" +
                         object1.LoginAlias + " 上线");
+            ChatAddMessage(object1.LoginAlias + " 上线");
         }
 
 
@@ -982,6 +986,25 @@ namespace 软件系统服务端模版
             Chats_Managment.LoadByFile();//加载以前的数据
         }
 
+        private void ChatAddMessage(string user,string message)
+        {
+            string content = "\u0002" + user + DateTime.Now.ToString(" yyyy-MM-dd HH:mm:ss") + Environment.NewLine + " " + message;
+            //转发所有的客户端，包括发送者
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.留言版消息, content);
+            //添加缓存
+            Chats_Managment.AddNewItem(content);
+        }
+
+
+        /// <summary>
+        /// 如果需要发送一些系统自己的消息，请调用这个方法。
+        /// 一般来说将系统消息和用户聊天消息进行区分
+        /// </summary>
+        /// <param name="message">消息</param>
+        private void ChatAddMessage(string message)
+        {
+            ChatAddMessage("[系统]", message);
+        }
 
         #endregion
 

@@ -16,6 +16,7 @@
             //紧急存储数据
             UserServer.ServerSettings.SaveToFile();
             UserServer.ServerAccounts.SaveToFile();
+            Chats_Managment.SaveToFile();
 
             if (disposing && (components != null))
             {

@@ -41,6 +41,14 @@ namespace 软件系统客户端模版.UIControls
         {
            richTextBox1.AppendText(str + Environment.NewLine);
         }
+        /// <summary>
+        /// 新增聊天的历史记录
+        /// </summary>
+        /// <param name="str"></param>
+        public void AddChatsHistory(string str)
+        {
+            richTextBox1.Text = str;
+        }
 
         public void InputFocus()
         {

@@ -43,6 +43,7 @@
             this.账户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.远程更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.注册账号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.消息发送ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.留言板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,7 +76,6 @@
             this.panel_left = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.panel_main = new System.Windows.Forms.Panel();
-            this.消息发送ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel_right.SuspendLayout();
@@ -205,6 +205,13 @@
             this.注册账号ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.注册账号ToolStripMenuItem.Text = "注册账号";
             this.注册账号ToolStripMenuItem.Click += new System.EventHandler(this.注册账号ToolStripMenuItem_Click);
+            // 
+            // 消息发送ToolStripMenuItem
+            // 
+            this.消息发送ToolStripMenuItem.Name = "消息发送ToolStripMenuItem";
+            this.消息发送ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.消息发送ToolStripMenuItem.Text = "消息发送";
+            this.消息发送ToolStripMenuItem.Click += new System.EventHandler(this.消息发送ToolStripMenuItem_Click);
             // 
             // 设置ToolStripMenuItem
             // 
@@ -518,13 +525,6 @@
             this.panel_main.Name = "panel_main";
             this.panel_main.Size = new System.Drawing.Size(557, 419);
             this.panel_main.TabIndex = 5;
-            // 
-            // 消息发送ToolStripMenuItem
-            // 
-            this.消息发送ToolStripMenuItem.Name = "消息发送ToolStripMenuItem";
-            this.消息发送ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
-            this.消息发送ToolStripMenuItem.Text = "消息发送";
-            this.消息发送ToolStripMenuItem.Click += new System.EventHandler(this.消息发送ToolStripMenuItem_Click);
             // 
             // FormMainWindow
             // 

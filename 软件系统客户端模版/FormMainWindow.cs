@@ -331,10 +331,14 @@ namespace 软件系统客户端模版
                 //收到服务器的数据
                 JObject json = JObject.Parse(data);
                 UserClient.DateTimeServer = json["Time"].ToObject<DateTime>();
+                List<string> chats = JArray.Parse(json["chats"].ToString()).ToObject<List<string>>();
+                StringBuilder sb = new StringBuilder();
+                chats.ForEach(m => { sb.Append(m + Environment.NewLine); });
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
                     toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm");
                     label_file_count.Text = json["FileCount"].ToObject<int>().ToString();
+                    UIControls_Chat.AddChatsHistory(sb.ToString());
                 }));
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.文件总数量)
