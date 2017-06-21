@@ -372,6 +372,7 @@ namespace 软件系统服务端模版
         /// A指令块，处理系统基础运行的消息
         /// </summary>
         /// <param name="state">网络状态对象</param>
+        /// <param name="customer">用户自定义的指令头</param>
         /// <param name="data">实际的数据</param>
         private void DataProcessingWithStartA(AsyncStateOne state, int customer, string data)
         {
@@ -475,9 +476,9 @@ namespace 软件系统服务端模版
         /// <summary>
         /// B指令块，处理日志相关的消息
         /// </summary>
-        /// <param name="state"></param>
+        /// <param name="state">网络状态对象</param>
         /// <param name="customer">用户自定义的命令头</param>
-        /// <param name="data"></param>
+        /// <param name="data">实际的数据</param>
         private void DataProcessingWithStartB(AsyncStateOne state, int customer, string data)
         {
             if (customer == CommonHeadCode.SimplifyHeadCode.网络日志查看)
@@ -634,7 +635,7 @@ namespace 软件系统服务端模版
         /// H开头的处理块
         /// </summary>
         /// <param name="state">网络状态</param>
-        /// <param name="headcode">用户自定义的指令头</param>
+        /// <param name="customer">用户自定义的指令头</param>
         /// <param name="data">字符串数据</param>
         private void DataProcessingWithStartH(AsyncStateOne state, int customer, string data)
         {
@@ -682,7 +683,6 @@ namespace 软件系统服务端模版
             //触发上下线功能
             Net_socket_clients_change(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" +
                         object1.LoginAlias + " 上线");
-            ChatAddMessage(object1.LoginAlias + " 上线");
         }
 
 
@@ -976,6 +976,9 @@ namespace 软件系统服务端模版
 
         private SoftMsgQueue<string> Chats_Managment { get; set; }
 
+        /// <summary>
+        /// 聊天消息块的初始化
+        /// </summary>
         private void ChatInitialization()
         {
             Chats_Managment = new SoftMsgQueue<string>()
@@ -986,6 +989,11 @@ namespace 软件系统服务端模版
             Chats_Managment.LoadByFile();//加载以前的数据
         }
 
+        /// <summary>
+        /// 新增一个消息，需要指明发送人和消息内容
+        /// </summary>
+        /// <param name="user">消息发送人</param>
+        /// <param name="message">内容</param>
         private void ChatAddMessage(string user,string message)
         {
             string content = "\u0002" + user + DateTime.Now.ToString(" yyyy-MM-dd HH:mm:ss") + Environment.NewLine + " " + message;
@@ -1015,6 +1023,7 @@ namespace 软件系统服务端模版
          *    具体     如果想要调用存储[信息]等级日志，调用 RuntimeLogHelper.SaveInformation("等待存储的信息")
          *    大小     调用10000次存储信息后，日志文件大小在200K左右，需要手动进行情况日志
          *    注意     在存储信息时不要带有一个特殊字符，[\u0002]不可见的标识文本开始字符，会影响日志筛选时的准确性
+         *    性能     该类使用了乐观并发模型技术，支持高并发的数据存储，可以安全的在线程间调用
          * 
          **********************************************************************************************************/
 
