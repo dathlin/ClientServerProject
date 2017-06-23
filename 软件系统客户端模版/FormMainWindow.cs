@@ -110,6 +110,8 @@ namespace 软件系统客户端模版
                 日志查看ToolStripMenuItem.Enabled = false;
                 账户管理ToolStripMenuItem.Enabled = false;
                 远程更新ToolStripMenuItem.Enabled = false;
+                注册账号ToolStripMenuItem.Enabled = false;
+                消息发送ToolStripMenuItem.Enabled = false;
             }
             //启动定时器
             TimeTickInitilization();
@@ -122,9 +124,10 @@ namespace 软件系统客户端模版
             net_socket_client.ClientClose();
 
             //等待一秒退出
-            FormWaitInfomation fwm = new FormWaitInfomation("正在退出程序...", 1000);
-            fwm.ShowDialog();
-            fwm.Dispose();
+            using (FormWaitInfomation fwm = new FormWaitInfomation("正在退出程序...", 1000))
+            {
+                fwm.ShowDialog();
+            }
         }
 
 
