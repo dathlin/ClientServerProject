@@ -474,6 +474,13 @@
             一个软件基础类，提供常用的一些静态方法
             </summary>
         </member>
+        <member name="M:HslCommunication.BasicFramework.SoftBasic.GetEnumValues``1">
+            <summary>
+            获取一个枚举类型的所有枚举值，可直接应用于组合框数据
+            </summary>
+            <typeparam name="TEnum">枚举的类型值</typeparam>
+            <returns>枚举值数组</returns>
+        </member>
         <member name="M:HslCommunication.BasicFramework.SoftBasic.GetValueFromJsonObject``1(Newtonsoft.Json.Linq.JObject,System.String,``0)">
             <summary>
             一个泛型方法，提供json对象的数据读取
@@ -534,7 +541,7 @@
         </member>
         <member name="T:HslCommunication.BasicFramework.SoftLogHelper">
             <summary>
-            一个线程安全且高性能的日志记录类，文件格式为txt，编码为ANSI，支持4中消息等级的划分
+            一个线程安全且高性能的日志记录类，文件格式为txt，编码为UTF8，支持4中消息等级的划分
             </summary>
         </member>
         <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Normal">
@@ -734,7 +741,7 @@
             <summary>
             一个简单通用的消息队列
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T">类型</typeparam>
         </member>
         <member name="F:HslCommunication.BasicFramework.SoftMsgQueue`1.all_items">
             <summary>
@@ -2871,8 +2878,14 @@
         </member>
         <member name="T:HslCommunication.HslAsyncCoordinator">
             <summary>
-            一个用于高性能，乐观并发模型控制操作的类
+            一个用于高性能，乐观并发模型控制操作的类，允许一个方法(隔离方法)的安全单次执行
             </summary>
+        </member>
+        <member name="M:HslCommunication.HslAsyncCoordinator.#ctor(System.Action)">
+            <summary>
+            实例化一个对象，需要传入隔离执行的方法
+            </summary>
+            <param name="operater">隔离执行的方法</param>
         </member>
         <member name="F:HslCommunication.HslAsyncCoordinator.OperaterStatus">
             <summary>
@@ -2882,6 +2895,11 @@
         <member name="F:HslCommunication.HslAsyncCoordinator.Target">
             <summary>
             需要操作的次数
+            </summary>
+        </member>
+        <member name="M:HslCommunication.HslAsyncCoordinator.StartOperaterInfomation">
+            <summary>
+            启动线程池执行隔离方法
             </summary>
         </member>
         <member name="T:HslCommunication.OperateResult">
@@ -3265,7 +3283,7 @@
         </member>
         <member name="P:HslCommunication.Profinet.PlcNetBase.PortReadBackup">
             <summary>
-            读取数据的备用端口，默认为1000，当一次请求失败时，将会自动切换端口
+            读取数据的备用端口，默认为-1(不切换)，当一次请求失败时，将会自动切换端口
             </summary>
         </member>
         <member name="P:HslCommunication.Profinet.PlcNetBase.PortWrite">
