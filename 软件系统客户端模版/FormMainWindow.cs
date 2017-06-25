@@ -246,6 +246,7 @@ namespace 软件系统客户端模版
         {
             SetShowRenderControl(UIControls_Chat);
             UIControls_Chat?.InputFocus();
+            UIControls_Chat?.ScrollToDown();
         }
 
         private void 意见反馈ToolStripMenuItem_Click(object sender, EventArgs e)
