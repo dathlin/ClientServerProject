@@ -120,7 +120,9 @@ using HslCommunication.Profinet;
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client10.png) 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client12.png) 
 
+###### 本系统集成了一个小型的简单群聊天系统，缓存消息200条。门牌为主界面的【设置】-【留言板】
 
+![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client13.png)
 
 <br />
 <br />
