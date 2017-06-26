@@ -4,6 +4,72 @@
         <name>HslCommunication</name>
     </assembly>
     <members>
+        <member name="T:HslCommunication.BasicFramework.Exception`1">
+            <summary>
+            一个自定义的支持序列化反序列化的异常类，具体用法参照第四版《CLR Via C#》P414
+            </summary>
+            <typeparam name="TExceptionArgs"></typeparam>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.Exception`1.c_args">
+            <summary>
+            用于反序列化的
+            </summary>
+        </member>
+        <member name="P:HslCommunication.BasicFramework.Exception`1.Args">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.Exception`1.#ctor(System.String,System.Exception)">
+            <summary>
+            实例化一个异常对象
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.Exception`1.#ctor(`0,System.String,System.Exception)">
+            <summary>
+            实例化一个异常对象
+            </summary>
+            <param name="args"></param>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.Exception`1.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            获取存储对象的序列化数据
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="P:HslCommunication.BasicFramework.Exception`1.Message">
+            <summary>
+            获取描述当前异常的消息
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.Exception`1.Equals(System.Object)">
+            <summary>
+            确定指定的object是否等于当前的object
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.Exception`1.GetHashCode">
+            <summary>
+            用作特定类型的哈希函数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HslCommunication.BasicFramework.ExceptionArgs">
+            <summary>
+            异常消息基类
+            </summary>
+        </member>
+        <member name="P:HslCommunication.BasicFramework.ExceptionArgs.Message">
+            <summary>
+            获取消息文本
+            </summary>
+        </member>
         <member name="T:HslCommunication.BasicFramework.FormAbout">
             <summary>
             系统的关于类
@@ -2718,11 +2784,12 @@
             </summary>
             <param name="ar"></param>
         </member>
-        <member name="M:HslCommunication.NetComplexBase.ReBeginReceiveHead(HslCommunication.Enthernet.AsyncStateOne)">
+        <member name="M:HslCommunication.NetComplexBase.ReBeginReceiveHead(HslCommunication.Enthernet.AsyncStateOne,System.Boolean)">
             <summary>
             重新开始接收下一次的数据传递
             </summary>
-            <param name="receive"></param>
+            <param name="receive">网络状态</param>
+            <param name="isProcess">是否触发数据处理</param>
         </member>
         <member name="M:HslCommunication.NetComplexBase.HeadReceiveCallback(System.IAsyncResult)">
             <summary>
