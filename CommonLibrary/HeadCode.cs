@@ -53,6 +53,7 @@ namespace CommonLibrary
             public static int 请求文件 { get; } =        10010;
             public static int 意见反馈 { get; } =        10011;
             public static int 群发消息 { get; } =        10012;
+            public static int 异常消息 { get; } =        10013;
 
 
 
@@ -79,6 +80,8 @@ namespace CommonLibrary
             public static int 反馈日志清空 { get; } =      11011;
             public static int UDP日志查看 { get; } =       11012;
             public static int UDP日志清空 { get; } =       11013;
+            public static int 客户端日志查看 { get; } =    11014;
+            public static int 客户端日志清空 { get; } =    11015;
 
             /**************************************************************************************
              * 

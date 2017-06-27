@@ -87,6 +87,11 @@ namespace 软件系统服务端模版
             {
                 LogSaveFileName = LogSavePath + @"\advice_log.txt",
             };
+            //初始化客户端异常日志工具
+            ClientsLogHelper = new SoftLogHelper()
+            {
+                LogSaveFileName = LogSavePath + @"\clients_log.txt",
+            };
             //保存路径初始化
             UserServer.ServerSettings.FileSavePath = Application.StartupPath + @"\settings.txt";
             //加载参数
@@ -467,6 +472,13 @@ namespace 软件系统服务端模版
                 net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗新消息, data);
                 net_simplify_server.SendMessage(state, customer, "成功");
             }
+            else if (customer == CommonHeadCode.SimplifyHeadCode.异常消息)
+            {
+                ClientsLogHelper.SaveError(data);
+                net_simplify_server.SendMessage(state, customer, "成功");
+                //如果需要发送您自己的邮件，请取消下面的注释并替代您的邮箱地址
+                //SoftMail.MailSystem163.SendMail("hsl200909@163.com", "异常记录", "时间：" + DateTime.Now.ToString("O") + Environment.NewLine + data);
+            }
             else
             {
                 net_simplify_server.SendMessage(state, customer, data);
@@ -557,6 +569,17 @@ namespace 软件系统服务端模版
                 net_udp_server.LogHelper.ClearLogText();
                 net_simplify_server.SendMessage(state, customer, "成功");
                 RuntimeLogHelper.SaveWarnning("UDP日志清空");
+            }
+            else if (customer == CommonHeadCode.SimplifyHeadCode.客户端日志查看)
+            {
+                net_simplify_server.SendMessage(state, 0, ClientsLogHelper.GetLogText());
+                RuntimeLogHelper.SaveInformation("客户端日志查看");
+            }
+            else if (customer == CommonHeadCode.SimplifyHeadCode.客户端日志清空)
+            {
+                ClientsLogHelper.ClearLogText();
+                net_simplify_server.SendMessage(state, customer, "成功");
+                RuntimeLogHelper.SaveWarnning("客户端日志清空");
             }
             else
             {
@@ -1016,6 +1039,8 @@ namespace 软件系统服务端模版
 
         #endregion
 
+        #region 系统日志块
+
 
         /*********************************************************************************************************
          * 
@@ -1031,5 +1056,12 @@ namespace 软件系统服务端模版
         /// 用来记录一般的事物日志
         /// </summary>
         private SoftLogHelper RuntimeLogHelper { get; set; }
+        /// <summary>
+        /// 用来记录客户端的异常日志
+        /// </summary>
+        private SoftLogHelper ClientsLogHelper { get; set; }
+
+
+        #endregion
     }
 }
