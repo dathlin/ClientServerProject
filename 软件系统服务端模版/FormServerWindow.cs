@@ -11,6 +11,7 @@ using System.Threading;
 using CommonLibrary;
 using Newtonsoft.Json.Linq;
 using HslCommunication.BasicFramework;
+using System.Diagnostics;
 
 
 /******************************************************************************************
@@ -756,6 +757,7 @@ namespace 软件系统服务端模版
             toolStripStatusLabel_time.Alignment = ToolStripItemAlignment.Right;
             statusStrip1.LayoutStyle = ToolStripLayoutStyle.StackWithOverflow;
             toolStripStatusLabel_time.ForeColor = Color.Purple;//紫色
+            
 
             Thread thread = new Thread(new ThreadStart(ThreadTimeTick));
             thread.IsBackground = true;
@@ -765,14 +767,22 @@ namespace 软件系统服务端模版
         /// 缓存的上次内存占用
         /// </summary>
         private long GC_Memery { get; set; }
+        /// <summary>
+        /// 程序的内存对象
+        /// </summary>
+        private long Pm_Memery { get; set; }
 
         private void MethodOccurEverySecond()
         {
-            long current = GC.GetTotalMemory(false);
+            long current1 = GC.GetTotalMemory(false);
+            long current2 = 0;
             toolStripStatusLabel_time.Text = DateTime.Now.ToString();
-            label_GC_Memery.Text = current.ToString();
-            label_GC_Memery.BackColor = current < GC_Memery ? Color.Tomato : SystemColors.Control;
-            GC_Memery = current;
+            label_GC_Memery.Text = current1.ToString();
+            label_Pm_Memery.Text = "备用";//current2.ToString();
+            label_GC_Memery.BackColor = current1 < GC_Memery ? Color.Tomato : SystemColors.Control;
+            label_Pm_Memery.BackColor = current2 < Pm_Memery ? Color.Tomato : SystemColors.Control;
+            GC_Memery = current1;
+            Pm_Memery = current2;
         }
 
 
