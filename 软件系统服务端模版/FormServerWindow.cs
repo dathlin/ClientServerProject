@@ -78,6 +78,8 @@ namespace 软件系统服务端模版
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //初始化默认的委托对象
+            ActionInitialization();
             //初始化日志工具
             RuntimeLogHelper = new SoftLogHelper()
             {
@@ -138,6 +140,40 @@ namespace 软件系统服务端模版
             TimeTickInitilization();
             Refresh();
             启动服务器ToolStripMenuItem.PerformClick();
+        }
+
+        #endregion
+
+        #region 界面基础方法集
+        /// <summary>
+        /// 初始化委托
+        /// </summary>
+        private void ActionInitialization()
+        {
+            ActionUserInterfaceMessageRender = new Action<string>(m =>
+            {
+                UserInterfaceMessageRender(m);
+            });
+        }
+
+        private Action<string> ActionUserInterfaceMessageRender = null;
+        /// <summary>
+        /// 往界面添加消息的方法，此方法是线程安全的，无论处于哪个线程都可以调用该方法
+        /// </summary>
+        /// <param name="msg">新增的数据内容</param>
+        private void UserInterfaceMessageRender(string msg)
+        {
+            if (IsWindowShow)
+            {
+                if (textBox1.InvokeRequired)
+                {
+                    textBox1.BeginInvoke(ActionUserInterfaceMessageRender, msg);
+                }
+                else
+                {
+                    textBox1.AppendText(msg + Environment.NewLine);
+                }
+            }
         }
 
         #endregion
@@ -677,20 +713,12 @@ namespace 软件系统服务端模版
 
         private void Net_socket_server_MessageAlerts(string object1)
         {
-            //同上的方法，此处处理数据时处于后台线程
-            if (IsWindowShow && IsHandleCreated)
-            {
-                BeginInvoke(new Action(() =>
-                {
-                    textBox1.AppendText(object1 + Environment.NewLine);
-                }));
-            }
+            UserInterfaceMessageRender(object1 + Environment.NewLine);
         }
 
         private void Net_socket_server_ClientOffline(AsyncStateOne object1, string object2)
         {
-            Net_socket_clients_change(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" +
-                        object1.LoginAlias + " " + object2);
+            UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" + object1.LoginAlias + " " + object2);
         }
 
         private void Net_socket_server_ClientOnline(AsyncStateOne object1)
@@ -705,21 +733,10 @@ namespace 软件系统服务端模版
             //发送客户端的初始化数据
             net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据,  json.ToString());
             //触发上下线功能
-            Net_socket_clients_change(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" +
-                        object1.LoginAlias + " 上线");
+            UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" + object1.LoginAlias + " 上线");
         }
 
-
-        private void Net_socket_clients_change(string str)
-        {
-            if (IsWindowShow && IsHandleCreated)
-            {
-                BeginInvoke(new Action(() =>
-                {
-                    textBox1.AppendText(str + Environment.NewLine);
-                }));
-            }
-        }
+        
 
         private void Net_socket_server_AllClientsStatusChange(string data)
         {
