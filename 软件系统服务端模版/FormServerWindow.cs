@@ -761,6 +761,20 @@ namespace 软件系统服务端模版
             thread.IsBackground = true;
             thread.Start();
         }
+        /// <summary>
+        /// 缓存的上次内存占用
+        /// </summary>
+        private long GC_Memery { get; set; }
+
+        private void MethodOccurEverySecond()
+        {
+            long current = GC.GetTotalMemory(false);
+            toolStripStatusLabel_time.Text = DateTime.Now.ToString();
+            label_GC_Memery.Text = current.ToString();
+            label_GC_Memery.BackColor = current < GC_Memery ? Color.Tomato : SystemColors.Control;
+            GC_Memery = current;
+        }
+
 
         public void ThreadTimeTick()
         {
@@ -769,10 +783,7 @@ namespace 软件系统服务端模版
             int minute = -1;
             int hour = -1;
             int day = -1;
-            Action DTimeShow = delegate
-            {
-                toolStripStatusLabel_time.Text = DateTime.Now.ToString();
-            };
+            Action DTimeShow = MethodOccurEverySecond;
 
             while (IsWindowShow)
             {
