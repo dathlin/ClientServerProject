@@ -55,6 +55,8 @@ namespace 软件系统服务端模版
         {
             InitializeComponent();
 
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
             //检测日志路径是否存储
             LogSavePath = Application.StartupPath + @"\Logs";
             if(!System.IO.Directory.Exists(LogSavePath))
@@ -62,6 +64,8 @@ namespace 软件系统服务端模版
                 System.IO.Directory.CreateDirectory(LogSavePath);
             }
         }
+
+        
 
         #region 窗口属性+窗口方法
 
@@ -173,6 +177,21 @@ namespace 软件系统服务端模版
                 {
                     textBox1.AppendText(msg + Environment.NewLine);
                 }
+            }
+        }
+
+
+
+        /// <summary>
+        /// 一个处理服务器未处理异常的方法，对该方法进行记录，方便以后的分析
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if(e.ExceptionObject is Exception ex)
+            {
+                RuntimeLogHelper.SaveError("UnhandledException:", ex);
             }
         }
 
