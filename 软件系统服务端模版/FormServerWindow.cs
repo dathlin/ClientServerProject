@@ -44,6 +44,14 @@ using System.Diagnostics;
  ********************************************************************************************/
 
 
+/******************************************************************************************
+ * 
+ *    关于邮件系统：如果你服务器端的程序部署在可上网的计算机上时，可以使用
+ *    先进行邮件系统的初始化，指定接收邮件的地址
+ *    如果需要使用，请参照下面的邮件功能块说明
+ *
+ ********************************************************************************************/
+
 
 
 
@@ -55,17 +63,18 @@ namespace 软件系统服务端模版
         {
             InitializeComponent();
 
+            //捕获所有未处理的异常并进行预处理
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             //检测日志路径是否存储
             LogSavePath = Application.StartupPath + @"\Logs";
-            if(!System.IO.Directory.Exists(LogSavePath))
+            if (!System.IO.Directory.Exists(LogSavePath))
             {
                 System.IO.Directory.CreateDirectory(LogSavePath);
             }
         }
 
-        
+
 
         #region 窗口属性+窗口方法
 
@@ -84,6 +93,8 @@ namespace 软件系统服务端模版
         {
             //初始化默认的委托对象
             ActionInitialization();
+            //邮件系统初始化
+            SoftMailInitialization();
             //初始化日志工具
             RuntimeLogHelper = new SoftLogHelper()
             {
@@ -189,9 +200,11 @@ namespace 软件系统服务端模版
         /// <param name="e"></param>
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            if(e.ExceptionObject is Exception ex)
+            if (e.ExceptionObject is Exception ex)
             {
                 RuntimeLogHelper.SaveError("UnhandledException:", ex);
+                //发送到自己的EMAIL
+                SendUserMail(ex);
             }
         }
 
@@ -241,7 +254,7 @@ namespace 软件系统服务端模版
             using (FormInputAndAction fiaa = new FormInputAndAction(
                 m =>
                 {
-                    net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗新消息,  m); return true;
+                    net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗新消息, m); return true;
                 }))
             {
                 fiaa.ShowDialog();
@@ -440,8 +453,8 @@ namespace 软件系统服务端模版
             if (customer == CommonHeadCode.SimplifyHeadCode.维护检查)
             {
                 net_simplify_server.SendMessage(state, customer, "1");
-                    //UserServer.ServerSettings.Can_Account_Login ? "1" : "0" +
-                    //UserServer.ServerSettings.Account_Forbidden_Reason);
+                //UserServer.ServerSettings.Can_Account_Login ? "1" : "0" +
+                //UserServer.ServerSettings.Account_Forbidden_Reason);
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.更新检查)
             {
@@ -532,8 +545,8 @@ namespace 软件系统服务端模版
             {
                 ClientsLogHelper.SaveError(data);
                 net_simplify_server.SendMessage(state, customer, "成功");
-                //如果需要发送您自己的邮件，请取消下面的注释并替代您的邮箱地址
-                //SoftMail.MailSystem163.SendMail("hsl200909@163.com", "异常记录", "时间：" + DateTime.Now.ToString("O") + Environment.NewLine + data);
+                //发送到邮箱
+                SendUserMail("异常记录", "时间：" + DateTime.Now.ToString("O") + Environment.NewLine + data);
             }
             else
             {
@@ -687,7 +700,7 @@ namespace 软件系统服务端模版
             }
         }
 
-       
+
 
 
         /******************************************************************************************************************
@@ -750,12 +763,12 @@ namespace 软件系统服务端模版
                 { "chats", new JValue(Chats_Managment.ToSaveString())}
             };
             //发送客户端的初始化数据
-            net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据,  json.ToString());
+            net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据, json.ToString());
             //触发上下线功能
             UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" + object1.LoginAlias + " 上线");
         }
 
-        
+
 
         private void Net_socket_server_AllClientsStatusChange(string data)
         {
@@ -793,7 +806,7 @@ namespace 软件系统服务端模版
             toolStripStatusLabel_time.Alignment = ToolStripItemAlignment.Right;
             statusStrip1.LayoutStyle = ToolStripLayoutStyle.StackWithOverflow;
             toolStripStatusLabel_time.ForeColor = Color.Purple;//紫色
-            
+
 
             Thread thread = new Thread(new ThreadStart(ThreadTimeTick));
             thread.IsBackground = true;
@@ -840,7 +853,7 @@ namespace 软件系统服务端模版
                 second = DateTime.Now.Second;
                 if (IsWindowShow && IsHandleCreated) Invoke(DTimeShow);
                 //每秒钟执行的代码
-                
+
                 if (second == 0)
                 {
                     //每个0秒执行的代码
@@ -1074,7 +1087,7 @@ namespace 软件系统服务端模版
         /// </summary>
         /// <param name="user">消息发送人</param>
         /// <param name="message">内容</param>
-        private void ChatAddMessage(string user,string message)
+        private void ChatAddMessage(string user, string message)
         {
             string content = "\u0002" + user + DateTime.Now.ToString(" yyyy-MM-dd HH:mm:ss") + Environment.NewLine + " " + message;
             //转发所有的客户端，包括发送者
@@ -1118,6 +1131,42 @@ namespace 软件系统服务端模版
         /// </summary>
         private SoftLogHelper ClientsLogHelper { get; set; }
 
+
+        #endregion
+
+        #region 邮件系统块
+
+        /******************************************************************************************
+         * 
+         *    本邮件系统使用了组件中预设好的中间发送地址，已经内置了两个邮件地址
+         *    本处仅仅使用了163网易的邮箱发送
+         *    下面提供了两个方法，实现了方便的发送，可以在程序的其他地方进行调用
+         *
+         ********************************************************************************************/
+
+        /// <summary>
+        /// 控制系统是否真的发送邮件到指定地址
+        /// </summary>
+        private bool IsSendMailEnable { get; set; }
+        /// <summary>
+        /// 邮件发送系统的初始方式，所有的参数将在下面进行
+        /// </summary>
+        private void SoftMailInitialization()
+        {
+            IsSendMailEnable = false;//先进行关闭
+            SoftMail.MailSystem163.MailSendAddress = "hsl200909@163.com";//作者测试的邮箱地址，实际需要换成你自己的
+        }
+
+
+        private void SendUserMail(Exception ex)
+        {
+            if(IsSendMailEnable) SoftMail.MailSystem163.SendMail(ex);
+        }
+
+        private void SendUserMail(string subject, string body)
+        {
+            if (IsSendMailEnable) SoftMail.MailSystem163.SendMail(subject, body);
+        }
 
         #endregion
     }
