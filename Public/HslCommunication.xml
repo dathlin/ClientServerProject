@@ -4,6 +4,143 @@
         <name>HslCommunication</name>
     </assembly>
     <members>
+        <member name="P:HslCommunication.BasicFramework.FormPortraitSelect.HasPicture">
+            <summary>
+            是否有图片存在
+            </summary>
+        </member>
+        <member name="P:HslCommunication.BasicFramework.FormPortraitSelect.RectangleSelected">
+            <summary>
+            已选择的图形大小
+            </summary>
+        </member>
+        <member name="P:HslCommunication.BasicFramework.FormPortraitSelect.RectangleImage">
+            <summary>
+            在控件显示的图片的大小，按照比例缩放以后
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.FormPortraitSelect.LoadPictureFile(System.String)">
+            <summary>
+            增加一张图片的路径
+            </summary>
+            <param name="picPath"></param>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.FormPortraitSelect.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.FormPortraitSelect.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.FormPortraitSelect.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:HslCommunication.BasicFramework.SoftCacheArrayBase">
+            <summary>
+            内存队列的基类
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftCacheArrayBase.DataBytes">
+            <summary>
+            字节数据流
+            </summary>
+        </member>
+        <member name="P:HslCommunication.BasicFramework.SoftCacheArrayBase.ArrayLength">
+            <summary>
+            数据的长度
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftCacheArrayBase.HybirdLock">
+            <summary>
+            数据数组变动时的数据锁
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftCacheArrayBase.LoadFromBytes(System.Byte[])">
+            <summary>
+            用于从保存的数据对象初始化的
+            </summary>
+            <param name="dataSave"></param>
+            <exception cref="T:System.NullReferenceException"></exception>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftCacheArrayBase.GetAllData">
+            <summary>
+            获取原本的数据字节
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HslCommunication.BasicFramework.SoftCacheArrayLong">
+            <summary>
+            一个内存队列缓存的类，数据类型为Int64
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftCacheArrayLong.DataArray">
+            <summary>
+            数据的本身面貌
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftCacheArrayLong.#ctor(System.Int32,System.Int32)">
+            <summary>
+            实例化一个数据对象
+            </summary>
+            <param name="capacity"></param>
+            <param name="defaultValue"></param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftCacheArrayLong.LoadFromBytes(System.Byte[])">
+            <summary>
+            用于从保存的数据对象初始化的
+            </summary>
+            <param name="dataSave"></param>
+            <exception cref="T:System.NullReferenceException"></exception>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftCacheArrayLong.AddValue(System.Int64)">
+            <summary>
+            线程安全的添加数据
+            </summary>
+            <param name="value">值</param>
+        </member>
+        <member name="T:HslCommunication.BasicFramework.SoftCacheArrayInt">
+            <summary>
+            一个内存队列缓存的类，数据类型为Int32
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftCacheArrayInt.DataArray">
+            <summary>
+            数据的本身面貌
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftCacheArrayInt.#ctor(System.Int32,System.Int32)">
+            <summary>
+            实例化一个数据对象
+            </summary>
+            <param name="capacity"></param>
+            <param name="defaultValue"></param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftCacheArrayInt.LoadFromBytes(System.Byte[])">
+            <summary>
+            用于从保存的数据对象初始化的
+            </summary>
+            <param name="dataSave"></param>
+            <exception cref="T:System.NullReferenceException"></exception>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftCacheArrayInt.AddValue(System.Int32)">
+            <summary>
+            线程安全的添加数据
+            </summary>
+            <param name="value">值</param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftCacheArrayInt.GetIntArray">
+            <summary>
+            安全的获取数组队列
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HslCommunication.BasicFramework.Exception`1">
             <summary>
             一个自定义的支持序列化反序列化的异常类，具体用法参照第四版《CLR Via C#》P414
@@ -571,6 +708,7 @@
             显示一个完整的错误信息
             </summary>
             <param name="ex"></param>
+            <exception cref="T:System.NullReferenceException"></exception>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftBasic.GetExceptionMessage(System.Exception)">
             <summary>
@@ -578,6 +716,7 @@
             </summary>
             <param name="ex"></param>
             <returns></returns>
+            <exception cref="T:System.NullReferenceException"></exception>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftBasic.ByteToHexString(System.Byte[])">
             <summary>
@@ -585,6 +724,7 @@
             </summary>
             <param name="InBytes">字节数组</param>
             <returns>返回的字符串</returns>
+            <exception cref="T:System.NullReferenceException"></exception>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftBasic.ByteToHexString(System.String)">
             <summary>
@@ -592,6 +732,7 @@
             </summary>
             <param name="InString">输入的字符串数据</param>
             <returns>返回的字符串</returns>
+            <exception cref="T:System.NullReferenceException"></exception>
         </member>
         <member name="P:HslCommunication.BasicFramework.SoftBasic.FrameworkVersion">
             <summary>
@@ -604,6 +745,7 @@
             </summary>
             <param name="oringinal"></param>
             <returns></returns>
+            <exception cref="T:System.NullReferenceException"></exception>
         </member>
         <member name="T:HslCommunication.BasicFramework.SoftLogHelper">
             <summary>
@@ -640,14 +782,14 @@
             获取或设置日志存储的次数
             </summary>
         </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Lock_file_save">
+        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.HybirdLockFile">
             <summary>
             文件的存储读取锁
             </summary>
         </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Lock_list_save">
+        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.HybirdLockList">
             <summary>
-            日志列表操作的安全锁
+            日志列表操作的一个安全混合锁
             </summary>
         </member>
         <member name="F:HslCommunication.BasicFramework.SoftLogHelper.WaittingForSaveMessage">
@@ -984,6 +1126,17 @@
             <summary>
             静态类，包含了几个常用的画图方法，获取字符串，绘制小三角等
             </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftPainting.GetGraphicFromArray(System.Int32[],System.Int32,System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+            获取一个直方图
+            </summary>
+            <param name="array">数据数组</param>
+            <param name="width">宽度</param>
+            <param name="height">高度</param>
+            <param name="degree">刻度划分等级</param>
+            <param name="lineColor">线条颜色</param>
+            <returns></returns>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftPainting.GetGraphicFromArray(HslCommunication.BasicFramework.Paintdata[],System.Int32,System.Int32,HslCommunication.BasicFramework.GraphicRender)">
             <summary>
@@ -1578,6 +1731,16 @@
             生成对象，需要指定存储规则
             </summary>
         </member>
+        <member name="F:HslCommunication.Enthernet.SimpleShareFileServer.files">
+            <summary>
+            文件的列表
+            </summary>
+        </member>
+        <member name="F:HslCommunication.Enthernet.SimpleShareFileServer.HybirdLockList">
+            <summary>
+            文件列表的混合锁
+            </summary>
+        </member>
         <member name="P:HslCommunication.Enthernet.SimpleShareFileServer.FileSavePath">
             <summary>
             临时文件存储的路径
@@ -1757,9 +1920,9 @@
             所有的客户端连接的核心对象
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Server.Lock_sockets_operate">
+        <member name="F:HslCommunication.Enthernet.Net_Socket_Server.HybirdLockSockets">
             <summary>
-            客户端数组操作的线程锁
+            客户端数组操作的线程混合锁
             </summary>
         </member>
         <member name="M:HslCommunication.Enthernet.Net_Socket_Server.ServerStart(System.Int32)">
@@ -2603,8 +2766,8 @@
             <summary>
             检查是否超时的静态方法
             </summary>
-            <param name="timeout"></param>
-            <param name="millisecond"></param>
+            <param name="timeout">数据封送对象</param>
+            <param name="millisecond">超时的时间</param>
         </member>
         <member name="M:HslCommunication.NetSupport.IsTwoBytesEquel(System.Byte[],System.Byte[])">
             <summary>
@@ -2898,6 +3061,7 @@
         <member name="T:HslCommunication.AsyncCoordinator">
             <summary>
             一个线程协调逻辑类，详细参考书籍《CLR Via C#》page:681
+            这个类可惜没有报告进度的功能
             </summary>
         </member>
         <member name="M:HslCommunication.AsyncCoordinator.AboutToBegin(System.Int32)">
@@ -2967,6 +3131,118 @@
         <member name="M:HslCommunication.HslAsyncCoordinator.StartOperaterInfomation">
             <summary>
             启动线程池执行隔离方法
+            </summary>
+        </member>
+        <member name="T:HslCommunication.HslReadWriteLock">
+            <summary>
+            一个高性能的读写锁，支持写锁定，读灵活，读时写锁定，写时读锁定
+            </summary>
+        </member>
+        <member name="M:HslCommunication.HslReadWriteLock.ToString">
+            <summary>
+            返回本对象的描述字符串
+            </summary>
+            <returns>对象的描述字符串</returns>
+        </member>
+        <member name="M:HslCommunication.HslReadWriteLock.#ctor">
+            <summary>
+            实例化一个读写锁的对象
+            </summary>
+        </member>
+        <member name="M:HslCommunication.HslReadWriteLock.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="M:HslCommunication.HslReadWriteLock.Enter(System.Boolean)">
+            <summary>
+            根据读写情况请求锁
+            </summary>
+            <param name="exclusive">True为写请求，False为读请求</param>
+        </member>
+        <member name="M:HslCommunication.HslReadWriteLock.Leave">
+            <summary>
+            释放锁，将根据锁状态自动区分读写锁
+            </summary>
+        </member>
+        <member name="T:HslCommunication.SimpleHybirdLock">
+            <summary>
+            一个简单的混合线程同步锁，采用了基元用户加基元内核同步构造实现
+            </summary>
+        </member>
+        <member name="M:HslCommunication.SimpleHybirdLock.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SimpleHybirdLock.m_waiters">
+            <summary>
+            基元用户模式构造同步锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SimpleHybirdLock.m_waiterLock">
+            <summary>
+            基元内核模式构造同步锁
+            </summary>
+        </member>
+        <member name="M:HslCommunication.SimpleHybirdLock.Enter">
+            <summary>
+            获取锁
+            </summary>
+        </member>
+        <member name="M:HslCommunication.SimpleHybirdLock.Leave">
+            <summary>
+            离开锁
+            </summary>
+        </member>
+        <member name="T:HslCommunication.Singleton">
+            <summary>
+            一个双检锁的示例，适合一些占内存的静态数据对象，获取的时候才实例化真正的对象
+            </summary>
+        </member>
+        <member name="T:HslCommunication.AdvancedHybirdLock">
+            <summary>
+            一个高级的混合线程同步锁，采用了基元用户加基元内核同步构造实现，并包含了自旋和线程所有权
+            </summary>
+        </member>
+        <member name="M:HslCommunication.AdvancedHybirdLock.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="F:HslCommunication.AdvancedHybirdLock.m_waiters">
+            <summary>
+            基元用户模式构造同步锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.AdvancedHybirdLock.m_waiterLock">
+            <summary>
+            基元内核模式构造同步锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.AdvancedHybirdLock.m_spincount">
+            <summary>
+            控制自旋的一个字段
+            </summary>
+        </member>
+        <member name="F:HslCommunication.AdvancedHybirdLock.m_owningThreadId">
+            <summary>
+            指出哪个线程拥有锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.AdvancedHybirdLock.m_recursion">
+            <summary>
+            指示锁拥有了多少次
+            </summary>
+        </member>
+        <member name="M:HslCommunication.AdvancedHybirdLock.Enter">
+            <summary>
+            获取锁
+            </summary>
+        </member>
+        <member name="M:HslCommunication.AdvancedHybirdLock.Leave">
+            <summary>
+            离开锁
             </summary>
         </member>
         <member name="T:HslCommunication.OperateResult">
