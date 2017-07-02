@@ -54,6 +54,7 @@ namespace CommonLibrary
             public static int 意见反馈 { get; } =        10011;
             public static int 群发消息 { get; } =        10012;
             public static int 异常消息 { get; } =        10013;
+            public static int 性能计数 { get; } =        10014;
 
 
 

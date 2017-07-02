@@ -397,7 +397,14 @@ namespace 软件系统服务端模版
         /// <param name="data">来自客户端的字节数据</param>
         private void Net_simplify_server_ReceivedBytesEvent(AsyncStateOne state, int customer, byte[] data)
         {
-            net_simplify_server.SendMessage(state, customer, data);
+            if(customer==CommonHeadCode.SimplifyHeadCode.性能计数)
+            {
+                net_simplify_server.SendMessage(state, customer, GetPerfomace());
+            }
+            else
+            {
+                net_simplify_server.SendMessage(state, customer, data);
+            }
         }
 
 
@@ -824,6 +831,9 @@ namespace 软件系统服务端模版
         private void MethodOccurEverySecond()
         {
             long current1 = GC.GetTotalMemory(false);
+            //增加到性能计数
+            AddPerfomace(current1);
+
             long current2 = 0;
             toolStripStatusLabel_time.Text = DateTime.Now.ToString();
             label_GC_Memery.Text = current1.ToString();
@@ -876,6 +886,23 @@ namespace 软件系统服务端模版
                 }
             }
         }
+
+
+        #region 服务器内存性能缓存小模块
+
+        private SoftCacheArrayInt SoftCachePerfomance = new SoftCacheArrayInt(400, 0);
+
+        private void AddPerfomace(long value)
+        {
+            SoftCachePerfomance.AddValue((int)value);//虽然存在不安全隐患，但是几乎不可能大于20亿
+        }
+
+        private byte[] GetPerfomace()
+        {
+            return SoftCachePerfomance.GetAllData();
+        }
+
+        #endregion
 
 
         #endregion

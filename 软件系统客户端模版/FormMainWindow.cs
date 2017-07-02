@@ -112,6 +112,7 @@ namespace 软件系统客户端模版
                 远程更新ToolStripMenuItem.Enabled = false;
                 注册账号ToolStripMenuItem.Enabled = false;
                 消息发送ToolStripMenuItem.Enabled = false;
+                开发中心ToolStripMenuItem.Enabled = false;
             }
             //启动定时器
             TimeTickInitilization();
@@ -264,6 +265,14 @@ namespace 软件系统客户端模版
                  CommonHeadCode.SimplifyHeadCode.群发消息, UserClient.UserAccount.UserName + ":" + str).IsSuccess, "", "请输入群发的消息："))
             {
                 fiaa.ShowDialog();
+            }
+        }
+
+        private void 开发中心ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormSuper fs = new FormSuper())
+            {
+                fs.ShowDialog();
             }
         }
 
@@ -581,8 +590,9 @@ namespace 软件系统客户端模版
         }
 
 
+
         #endregion
 
-        
+      
     }
 }
