@@ -83,12 +83,6 @@
     <Compile Include="FormRegisterAccount.Designer.cs">
       <DependentUpon>FormRegisterAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSuper.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormSuper.Designer.cs">
-      <DependentUpon>FormSuper.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormUpdateRemote.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,9 +118,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormRegisterAccount.resx">
       <DependentUpon>FormRegisterAccount.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormSuper.resx">
-      <DependentUpon>FormSuper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormUpdateRemote.resx">
       <DependentUpon>FormUpdateRemote.cs</DependentUpon>

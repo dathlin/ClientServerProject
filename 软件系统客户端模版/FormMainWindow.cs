@@ -270,7 +270,25 @@ namespace 软件系统客户端模版
 
         private void 开发中心ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FormSuper fs = new FormSuper())
+            using (FormSuper fs = new FormSuper(() =>
+            {
+                OperateResultBytes result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.性能计数, new byte[0]);
+                //解析
+                if (result.IsSuccess)
+                {
+                    int[] data = new int[result.Content.Length / 4];
+                    for (int i = 0; i < data.Length; i++)
+                    {
+                        data[i] = BitConverter.ToInt32(result.Content, i * 4);
+                    }
+                    return data;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }))
             {
                 fs.ShowDialog();
             }

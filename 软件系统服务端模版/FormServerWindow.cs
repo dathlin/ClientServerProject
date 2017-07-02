@@ -316,6 +316,18 @@ namespace 软件系统服务端模版
         }
 
 
+        private void label_GC_Memery_Click(object sender, EventArgs e)
+        {
+            //点击了性能组件
+            using (FormSuper fs = new FormSuper(() =>
+            {
+                return SoftCachePerfomance.GetIntArray();
+            }))
+            {
+                fs.ShowDialog();
+            }
+        }
+
         #endregion
 
         #region 软件更新服务引擎
@@ -890,7 +902,7 @@ namespace 软件系统服务端模版
 
         #region 服务器内存性能缓存小模块
 
-        private SoftCacheArrayInt SoftCachePerfomance = new SoftCacheArrayInt(400, 0);
+        private SoftCacheArrayInt SoftCachePerfomance = new SoftCacheArrayInt(500, 0);
 
         private void AddPerfomace(long value)
         {
@@ -1196,5 +1208,7 @@ namespace 软件系统服务端模版
         }
 
         #endregion
+
+
     }
 }

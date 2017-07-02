@@ -67,6 +67,12 @@
     </Compile>
     <Compile Include="AccountSupport\ServerAccount.cs" />
     <Compile Include="AccountSupport\UserAccount.cs" />
+    <Compile Include="BasicSupport\FormSuper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSupport\FormSuper.Designer.cs">
+      <DependentUpon>FormSuper.cs</DependentUpon>
+    </Compile>
     <Compile Include="BasicSupport\FormUpdateLog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AccountSupport\FormPasswordModify.resx">
       <DependentUpon>FormPasswordModify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BasicSupport\FormSuper.resx">
+      <DependentUpon>FormSuper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BasicSupport\FormUpdateLog.resx">
       <DependentUpon>FormUpdateLog.cs</DependentUpon>

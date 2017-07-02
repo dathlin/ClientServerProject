@@ -1,4 +1,4 @@
-﻿namespace 软件系统客户端模版
+﻿namespace CommonLibrary
 {
     partial class FormSuper
     {
@@ -36,18 +36,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(298, 18);
+            this.label1.Location = new System.Drawing.Point(12, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 17);
+            this.label1.Size = new System.Drawing.Size(92, 17);
             this.label1.TabIndex = 0;
-            this.label1.Text = "对象内存图形";
+            this.label1.Text = "对象内存图形：";
             // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(301, 38);
+            this.pictureBox1.Location = new System.Drawing.Point(15, 38);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(503, 380);
+            this.pictureBox1.Size = new System.Drawing.Size(789, 380);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 

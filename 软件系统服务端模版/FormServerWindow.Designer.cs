@@ -304,12 +304,14 @@
             // 
             this.label_GC_Memery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_GC_Memery.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_GC_Memery.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label_GC_Memery.Location = new System.Drawing.Point(629, 37);
             this.label_GC_Memery.Name = "label_GC_Memery";
             this.label_GC_Memery.Size = new System.Drawing.Size(125, 17);
             this.label_GC_Memery.TabIndex = 16;
             this.label_GC_Memery.Text = "0";
             this.label_GC_Memery.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label_GC_Memery.Click += new System.EventHandler(this.label_GC_Memery_Click);
             // 
             // label_Pm_Memery
             // 
