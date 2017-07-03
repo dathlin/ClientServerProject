@@ -3,7 +3,7 @@
 #### 关于HslCommunication.dll
 <p>该组件功能提供了一些基础类和整个C-S项目的核心网络的支持，除此之外，该组件提供了访问三菱PLC和西门子PLC的数据功能。</p>
 
-<p>本组件支持常规的整数的数据读写，也支持字符串数据读写，包括中文，以下只是简单的举例，目前已经完成了一个三菱PLC高并发访问的类，具体交流可以通过以下方式联系我</p>
+<p>本组件支持常规的整数的数据读写，支持位数据读写，也支持字符串数据读写，包括中文，具体使用方式请参照下述手册，目前已经完成了一个三菱PLC高并发访问的类，具体交流可以通过以下方式联系我</p>
 <ul>
 <li>技术支持QQ群：<strong>592132877</strong></li>
 <li>邮箱：<strong>hsl200909@163.com</strong></li>
@@ -19,6 +19,10 @@ using HslCommunication.Profinet;
 
 西门子详细手册：<a href="https://github.com/dathlin/C-S-/blob/master/SiemensReadMe.md">西门子PLC数据读写手册</a>
 
+下载地址：<a href="https://github.com/dathlin/C-S-/raw/master/Public/HslCommunication.dll">单独的组件dll文件</a>
+
+文档地址：<a href="https://github.com/dathlin/C-S-/raw/master/Public/HslCommunication.xml">单独的组件xml注释文件</a>
+
 #### 关于本项目模版
 <p style="text-indent:2em">本模版基于.Net Framework3.5+C#7.0开发完成，所以必须使用Visual studio 2017进行开发，低版本的IDE打开项目将出现语法识别错误。有必要说明下为什么使用.Net Framework3.5，这个版本是xp系统比较方便安装的，在企业部署中会相对容易很多，所以如果你的系统也是应用于企业的，那么强烈建议使用3.5版本，该模版由三部分的程序组成：</p>
 <ul>
@@ -27,15 +31,15 @@ using HslCommunication.Profinet;
 <li>客户端</li>
 </ul>
 
-<p style="text-indent:2em">组成部分主要是一个服务端运行的程序，一个客户端运行的程序，还有一个公共的组件，以及一个json组件和一个网络组件，实现了基础的账户管理功能，版本控制，软件升级，公告管理，消息群发功能。具体的操作方法见演示就行。下面主要介绍下服务端的程序界面和客户端的程序界面。
+<p style="text-indent:2em">组成部分主要是一个服务端运行的程序，一个客户端运行的程序，还有一个公共的组件，以及一个json组件和一个网络组件，实现了基础的账户管理功能，版本控制，软件升级，公告管理，消息群发等等功能。具体的操作方法见演示就行。下面主要介绍下服务端的程序界面和客户端的程序界面。
 </p>
 
 
 #### 整个系统的架构设计如下
-![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/design.png)  
+![](https://github.com/dathlin/C-S-/raw/master/img/Design1.png)  
 <br />
 
-#### 客户端后台登录流程
+#### 系统的登录设计
 <ol>
 <li>状态检查，检测服务器的维护状态设置，如果处于维护中，则显示不能登录系统原因。</li>
 <li>账户检查，服务器对登录账户全面检查，用户名是否存在，密码是否正确，是否允许登录，并对登录ip，时间，频次进行记录。</li>
@@ -43,6 +47,15 @@ using HslCommunication.Profinet;
 <li>参数下载，上述所有检查通过以后，进行运行数据的初始化，比如将公告数据传送到客户端，您也可以添加自己的数据。采用json数据进行封装，客户端解析的时候请参照示例。</li>
 <li>上述所有检测通过之后，启动客户端的主界面程序。但凡有一项检测失败，或者参数下载失败，均不允许登录，并且提示相关错误。</li>
 </ol>
+
+![](https://github.com/dathlin/C-S-/raw/master/img/Design2.png)  
+
+#### 系统的异常处理模型设计
+![](https://github.com/dathlin/C-S-/raw/master/img/Design3.png)  
+
+#### 系统的其他工具设计
+![](https://github.com/dathlin/C-S-/raw/master/img/Design4.png)  
+
 
 # 服务器端程序界面如下：
 
