@@ -137,6 +137,10 @@ using HslCommunication.Profinet;
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client13.png)
 
+###### 监视服务器的对象内存消耗，门牌为【管理员】-【开发中心】
+
+![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client14.png)
+
 <br />
 <br />
 
