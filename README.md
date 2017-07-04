@@ -56,6 +56,9 @@ using HslCommunication.Profinet;
 #### 系统的其他工具设计
 ![](https://github.com/dathlin/C-S-/raw/master/img/Design4.png)  
 
+#### 一个基于此模版的示例项目设计模型
+![](https://github.com/dathlin/C-S-/raw/master/img/Design5.png)  
+
 
 # 服务器端程序界面如下：
 
