@@ -220,6 +220,7 @@ namespace 软件系统服务端模版
                 Net_SoftUpdate_Server_Initialization();//软件更新引擎初始化
                 Net_File_Update_Initialization();//软件异地更新引擎初始化
                 Simple_File_Initiaization();//共享文件引擎初始化
+                Net_File_Portrait_Initialization();//头像文件管理服务
                 Net_Udp_Server_Initialization();//UDP引擎服务初始化
                 启动服务器ToolStripMenuItem.Text = "已启动";
                 启动服务器ToolStripMenuItem.BackColor = Color.LimeGreen;
@@ -1209,6 +1210,31 @@ namespace 软件系统服务端模版
 
         #endregion
 
+        #region 头像管理块
 
+        /// <summary>
+        /// 用于用户账户的头像文件保存
+        /// </summary>
+        private Net_File_Server net_file_Portrait = new Net_File_Server();
+        /// <summary>
+        /// 用户头像管理服务的引擎
+        /// </summary>
+        private void Net_File_Portrait_Initialization()
+        {
+            try
+            {
+                net_file_Portrait.FilesPath = Application.StartupPath;
+                net_file_Portrait.LogHelper.LogSaveFileName = LogSavePath + @"\Portrait_file_log.txt";
+                net_file_Portrait.KeyToken = CommonHeadCode.KeyToken;
+                net_file_Portrait.ServerStart(CommonLibrary.CommonLibrary.Port_Portrait_Server);
+            }
+            catch (Exception ex)
+            {
+                SoftBasic.ShowExceptionMessage(ex);
+            }
+        }
+
+
+        #endregion
     }
 }

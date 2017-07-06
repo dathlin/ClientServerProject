@@ -55,6 +55,10 @@ namespace CommonLibrary
             public static int 群发消息 { get; } =        10012;
             public static int 异常消息 { get; } =        10013;
             public static int 性能计数 { get; } =        10014;
+            public static int 请求小头 { get; } =        10015;
+            public static int 下载小头 { get; } =        10016;
+            public static int 请求大头 { get; } =        10017;
+            public static int 下载大头 { get; } =        10018;
 
 
 

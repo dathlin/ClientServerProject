@@ -116,6 +116,8 @@ namespace 软件系统客户端模版
             }
             //启动定时器
             TimeTickInitilization();
+            //显示头像
+            DownloadUserPortraint();
         }
         private void FormMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -292,6 +294,12 @@ namespace 软件系统客户端模版
             {
                 fs.ShowDialog();
             }
+        }
+
+
+        private void 更换头像ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangePortrait();
         }
 
         #endregion
@@ -609,8 +617,104 @@ namespace 软件系统客户端模版
 
 
 
+
         #endregion
 
-      
+        #region 头像图片上传下载块
+
+        private string GetPortraitPath()
+        {
+            string path = Application.StartupPath + @"\Portrait\" + UserClient.UserAccount.UserName;
+            if (!System.IO.Directory.Exists(path))
+            {
+                System.IO.Directory.CreateDirectory(path);
+            }
+            return path;
+        }
+
+        private void ChangePortrait()
+        {
+            using (FormPortraitSelect fps = new FormPortraitSelect())
+            {
+                if (fps.ShowDialog() == DialogResult.OK)
+                {
+                    string path = GetPortraitPath();
+
+                    string guid = Guid.NewGuid().ToString("N");
+                    string path300 = path + @"\" + PortraitSupport.LargePortraitHead + guid + ".png";
+                    string path32 = path + @"\" + PortraitSupport.SmallPortraitHead + guid + ".png";
+
+                    Bitmap bitmap300 = (Bitmap)fps.GetSpecifiedSizeImage(300);
+                    bitmap300.Save(path300);
+                    Bitmap bitmap32 = (Bitmap)fps.GetSpecifiedSizeImage(32);
+                    bitmap32.Save(path32);
+                    //传送服务器
+                    bitmap300.Dispose();
+                    bitmap32.Dispose();
+
+                    using (FormFileOperate ffo = new FormFileOperate(CommonHeadCode.KeyToken, new System.Net.IPEndPoint(
+                        System.Net.IPAddress.Parse(UserClient.ServerIp), CommonLibrary.CommonLibrary.Port_Portrait_Server),
+                        new string[]
+                        {
+                            path300,
+                            path32
+                        }, "Files", "Portrait", UserClient.UserAccount.UserName))
+                    {
+                        ffo.ShowDialog();
+                    }
+                    DownloadUserPortraint();
+                }
+            }
+        }
+
+
+
+        private void DownloadUserPortraint()
+        {
+            string path = GetPortraitPath();
+            //获取服务器文件名称
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.请求小头, UserClient.UserAccount.UserName);
+            if(result.IsSuccess)
+            {
+                if(result.Content[0]=='Y')
+                {
+                    //服务器存在头像
+                    string fileName = PortraitSupport.GetSmallPortraitFileName(path);
+                    string serverName = result.Content.Substring(1);
+                    if (!string.IsNullOrEmpty(fileName))
+                    {
+                        if (PortraitSupport.GetSmallPortraitFileName(path).Contains(serverName))
+                        {
+                            //加载本地头像
+                            pictureBox1.LoadAsync(fileName);
+                        }
+                        else
+                        {
+                            //头像已经换了
+                            P1:
+                            result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.下载小头, UserClient.UserAccount.UserName);
+                            if(result.IsSuccess)
+                            {
+                                byte[] data = Convert.FromBase64String(result.Content);
+                                System.IO.File.WriteAllBytes(path + @"\" + serverName, data);
+                                pictureBox1.LoadAsync(path + @"\" + serverName);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //客户端不存在头像
+                        goto P1;
+                    }
+                }
+                else
+                {
+                    //服务器不存在头像，本次加载结束
+                }
+            }
+        }
+
+
+        #endregion
     }
 }

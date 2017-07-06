@@ -57,6 +57,10 @@ namespace CommonLibrary
         /// 用于UDP传输的端口号
         /// </summary>
         public static int Port_Udp_Server { get; } = 32566;
+        /// <summary>
+        /// 头像管理的服务器端口
+        /// </summary>
+        public static int Port_Portrait_Server { get; } = 24672;
         #endregion
 
         /// <summary>
