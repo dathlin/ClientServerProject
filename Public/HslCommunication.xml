@@ -694,6 +694,13 @@
             一个软件基础类，提供常用的一些静态方法
             </summary>
         </member>
+        <member name="M:HslCommunication.BasicFramework.SoftBasic.CalculateFileMD5(System.String)">
+            <summary>
+            获取文件的md5码
+            </summary>
+            <param name="filePath"></param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.BasicFramework.SoftBasic.GetEnumValues``1">
             <summary>
             获取一个枚举类型的所有枚举值，可直接应用于组合框数据
