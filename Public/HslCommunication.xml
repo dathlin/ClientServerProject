@@ -4,6 +4,16 @@
         <name>HslCommunication</name>
     </assembly>
     <members>
+        <member name="T:HslCommunication.BasicFramework.FormPortraitSelect">
+            <summary>
+            一个正方形图形选择窗口，可以获取指定的分辨率
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.FormPortraitSelect.#ctor">
+            <summary>
+            实例化一个对象
+            </summary>
+        </member>
         <member name="P:HslCommunication.BasicFramework.FormPortraitSelect.HasPicture">
             <summary>
             是否有图片存在
@@ -24,6 +34,13 @@
             增加一张图片的路径
             </summary>
             <param name="picPath"></param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.FormPortraitSelect.GetSpecifiedSizeImage(System.Int32)">
+            <summary>
+            获取指定大小的图片，该图片将会按照比例压缩
+            </summary>
+            <param name="size">图片的横向分辨率</param>
+            <returns>缩放后的图形</returns>
         </member>
         <member name="F:HslCommunication.BasicFramework.FormPortraitSelect.components">
             <summary>
@@ -1275,6 +1292,91 @@
             根据sdr对象初始化数据的方法
             </summary>
             <param name="sdr"></param>
+        </member>
+        <member name="T:HslCommunication.BasicFramework.SoftMultiTask`1">
+            <summary>
+            一个用于多线程并发处理数据的模型类，适用于处理数据量非常庞大的情况
+            </summary>
+            <typeparam name="T">等待处理的数据类型</typeparam>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftMultiTask`1.#ctor(`0[],System.Func{`0,System.Boolean},System.Int32)">
+            <summary>
+            实例化一个数据处理对象
+            </summary>
+            <param name="dataList">数据处理列表</param>
+            <param name="operater">数据操作方法</param>
+            <param name="threadCount">需要使用的线程数</param>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_opCount">
+            <summary>
+            操作总数，判定操作是否完成
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_threadCount">
+            <summary>
+            准备启动的处理数据的线程数量
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_dataList">
+            <summary>
+            列表数据
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_operater">
+            <summary>
+            需要操作的方法
+            </summary>
+        </member>
+        <member name="T:HslCommunication.BasicFramework.SoftMultiTask`1.MultiInfo">
+            <summary>
+            一个双参数委托
+            </summary>
+            <param name="item"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="T:HslCommunication.BasicFramework.SoftMultiTask`1.MultiInfoTwo">
+            <summary>
+            用于报告进度的委托，当finish等于count时，任务完成
+            </summary>
+            <param name="finish">已完成操作数量</param>
+            <param name="count">总数量</param>
+            <param name="success">成功数量</param>
+            <param name="failed">失败数量</param>
+        </member>
+        <member name="E:HslCommunication.BasicFramework.SoftMultiTask`1.OnExceptionOccur">
+            <summary>
+            异常发生时事件
+            </summary>
+        </member>
+        <member name="E:HslCommunication.BasicFramework.SoftMultiTask`1.OnReportProgress">
+            <summary>
+            报告处理进度时发生
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_finishCount">
+            <summary>
+            已处理完成数量，无论是否异常
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_successCount">
+            <summary>
+            处理完成并实现操作数量
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_failedCount">
+            <summary>
+            处理过程中异常数量
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.HybirdLock">
+            <summary>
+            用于触发事件的混合线程锁
+            </summary>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftMultiTask`1.StartOperater">
+            <summary>
+            启动多线程进行数据处理
+            </summary>
         </member>
         <member name="T:HslCommunication.BasicFramework.SystemVersion">
             <summary>
