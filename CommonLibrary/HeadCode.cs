@@ -87,6 +87,8 @@ namespace CommonLibrary
             public static int UDP日志清空 { get; } =       11013;
             public static int 客户端日志查看 { get; } =    11014;
             public static int 客户端日志清空 { get; } =    11015;
+            public static int 头像日志查看 { get; } =      11016;
+            public static int 头像日志清空 { get; } =      11017;
 
             /**************************************************************************************
              * 

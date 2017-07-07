@@ -125,7 +125,15 @@ namespace 软件系统客户端模版
         {
             ClearFromServer(CommonHeadCode.SimplifyHeadCode.客户端日志清空);
         }
+        private void userButton17_Click(object sender, EventArgs e)
+        {
+            ReadFromServer(CommonHeadCode.SimplifyHeadCode.头像日志查看);
+        }
 
+        private void userButton16_Click(object sender, EventArgs e)
+        {
+            ClearFromServer(CommonHeadCode.SimplifyHeadCode.头像日志清空);
+        }
 
         /// <summary>
         /// 查询日志的缓存
@@ -173,5 +181,6 @@ namespace 软件系统客户端模版
             textBox1.Text = LogTemp;
         }
 
+        
     }
 }

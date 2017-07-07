@@ -714,6 +714,17 @@ namespace 软件系统服务端模版
                 net_simplify_server.SendMessage(state, customer, "成功");
                 RuntimeLogHelper.SaveWarnning("客户端日志清空");
             }
+            else if (customer == CommonHeadCode.SimplifyHeadCode.头像日志查看)
+            {
+                net_simplify_server.SendMessage(state, 0, net_file_Portrait.LogHelper.GetLogText());
+                RuntimeLogHelper.SaveInformation("头像日志查看");
+            }
+            else if (customer == CommonHeadCode.SimplifyHeadCode.头像日志清空)
+            {
+                net_file_Portrait.LogHelper.ClearLogText();
+                net_simplify_server.SendMessage(state, customer, "成功");
+                RuntimeLogHelper.SaveWarnning("头像日志清空");
+            }
             else
             {
                 net_simplify_server.SendMessage(state, customer, data);
