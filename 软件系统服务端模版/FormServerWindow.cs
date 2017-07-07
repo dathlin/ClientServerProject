@@ -495,8 +495,18 @@ namespace 软件系统服务端模版
                 //提取账户，密码
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
-                net_simplify_server.SendMessage(state, customer, UserServer.ServerAccounts.CheckAccountJson(
-                    name, password, state.GetRemoteEndPoint().Address.ToString()));
+
+                UserAccount account = UserServer.ServerAccounts.CheckAccount(name, password, state.GetRemoteEndPoint().Address.ToString());
+                //检测是否重复登录
+                if(account.LoginEnable)
+                {
+                    if(IsClinetOnline(account.UserName))
+                    {
+                        account.LoginEnable = false;
+                        account.ForbidMessage = "该账户已经登录";
+                    }
+                }
+                net_simplify_server.SendMessage(state, customer, JObject.FromObject(account).ToString());
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.更新公告)
             {
@@ -849,7 +859,7 @@ namespace 软件系统服务端模版
         {
             //此处决定要不要将在线客户端的数据发送所有客户端
             net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.总在线信息, data);
-
+            Net_Socket_All_Clients = data;
             if (IsWindowShow && IsHandleCreated)
             {
                 BeginInvoke(new Action(() =>
@@ -860,6 +870,30 @@ namespace 软件系统服务端模版
             }
         }
 
+        /// <summary>
+        /// 所有在线客户端的信息
+        /// </summary>
+        private string Net_Socket_All_Clients = string.Empty;
+        /// <summary>
+        /// 用来判断客户端是否已经在线，除了超级管理员，其他的账户不允许重复在线，重复登录的账户予以特殊标记
+        /// </summary>
+        /// <returns>该客户端是否在线</returns>
+        private bool IsClinetOnline(string userName)
+        {
+            if (userName == "admin") return false;
+            if(Net_Socket_All_Clients.Contains($"Name:{userName}#"))
+            {
+                return true;
+            }
+            else if(Net_Socket_All_Clients.EndsWith($"Name:{userName}"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         #endregion
 

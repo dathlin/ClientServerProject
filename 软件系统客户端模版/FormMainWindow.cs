@@ -742,7 +742,7 @@ namespace 软件系统客户端模版
                 if (result.Content[0] == 'Y')
                 {
                     byte[] data = Convert.FromBase64String(result.Content.Substring(1));
-                    string path32 = path + @"\" + PortraitSupport.SmallPortrait;
+                    string path32 = path + @"\" + PortraitSupport.LargePortrait;
                     System.IO.File.WriteAllBytes(path32, data);
                     System.Diagnostics.Process.Start(path32);
                 }
