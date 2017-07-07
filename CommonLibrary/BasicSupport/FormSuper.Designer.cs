@@ -65,6 +65,7 @@
             this.userButton4.Size = new System.Drawing.Size(103, 26);
             this.userButton4.TabIndex = 11;
             this.userButton4.UIText = "数据信息查看";
+            this.userButton4.Click += new System.EventHandler(this.userButton4_Click);
             // 
             // FormSuper
             // 
