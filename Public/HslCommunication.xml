@@ -1311,12 +1311,17 @@
             实例化一个数据处理对象
             </summary>
             <param name="dataList">数据处理列表</param>
-            <param name="operater">数据操作方法</param>
+            <param name="operater">数据操作方法，应该是相对耗时的任务</param>
             <param name="threadCount">需要使用的线程数</param>
         </member>
         <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_opCount">
             <summary>
             操作总数，判定操作是否完成
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_opThreadCount">
+            <summary>
+            判断是否所有的线程是否处理完成
             </summary>
         </member>
         <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_threadCount">
