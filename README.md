@@ -31,7 +31,7 @@ using HslCommunication.Profinet;
 <li>客户端</li>
 </ul>
 
-<p style="text-indent:2em">组成部分主要是一个服务端运行的程序，一个客户端运行的程序，还有一个公共的组件，以及一个json组件和一个网络组件，实现了基础的账户管理功能，版本控制，软件升级，公告管理，消息群发等等功能。具体的操作方法见演示就行。下面主要介绍下服务端的程序界面和客户端的程序界面。
+<p style="text-indent:2em">组成部分主要是一个服务端运行的程序，一个客户端运行的程序，还有一个公共的组件，以及一个json组件和一个网络组件，实现了基础的账户管理功能，版本控制，软件升级，公告管理，消息群发，性能监视，头像管理等等功能。具体的操作方法见演示就行。下面主要介绍下服务端的程序界面和客户端的程序界面。
 </p>
 
 
@@ -52,6 +52,9 @@ using HslCommunication.Profinet;
 
 #### 系统的异常处理模型设计
 ![](https://github.com/dathlin/C-S-/raw/master/img/Design3.png)  
+
+#### 系统的账户头像设计
+![](https://github.com/dathlin/C-S-/raw/master/img/Design6.png) 
 
 #### 系统的其他工具设计
 ![](https://github.com/dathlin/C-S-/raw/master/img/Design4.png)  
@@ -144,6 +147,10 @@ using HslCommunication.Profinet;
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client14.png)
 
+###### 修改账户的头像，门牌为【设备】-【更换头像】
+
+![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client15.png)
+
 <br />
 <br />
 
@@ -152,3 +159,4 @@ using HslCommunication.Profinet;
 # License:
 ###### Copyright (c) Richard.Hu. All rights reserved.
 ###### Licensed under the MIT License.
+###### WeChat:工业智能软件开发项目组
