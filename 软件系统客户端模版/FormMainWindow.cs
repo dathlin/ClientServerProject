@@ -641,12 +641,12 @@ namespace 软件系统客户端模版
                     string path = GetPortraitPath();
 
                     string guid = Guid.NewGuid().ToString("N");
-                    string path300 = path + @"\" + PortraitSupport.LargePortraitHead + guid + ".png";
-                    string path32 = path + @"\" + PortraitSupport.SmallPortraitHead + guid + ".png";
+                    string path300 = path + @"\" + PortraitSupport.LargePortrait;
+                    string path32 = path + @"\" + PortraitSupport.SmallPortrait;
 
-                    Bitmap bitmap300 = (Bitmap)fps.GetSpecifiedSizeImage(300);
+                    Bitmap bitmap300 = fps.GetSpecifiedSizeImage(300);
                     bitmap300.Save(path300);
-                    Bitmap bitmap32 = (Bitmap)fps.GetSpecifiedSizeImage(32);
+                    Bitmap bitmap32 = fps.GetSpecifiedSizeImage(32);
                     bitmap32.Save(path32);
                     //传送服务器
                     bitmap300.Dispose();
@@ -679,11 +679,13 @@ namespace 软件系统客户端模版
                 if(result.Content[0]=='Y')
                 {
                     //服务器存在头像
-                    string fileName = PortraitSupport.GetSmallPortraitFileName(path);
-                    string serverName = result.Content.Substring(1);
-                    if (!string.IsNullOrEmpty(fileName))
+                    string fileName = path + @"\" + PortraitSupport.SmallPortrait;
+                    string FileMd5 = result.Content.Substring(1);
+                    if (System.IO.File.Exists(fileName))
                     {
-                        if (PortraitSupport.GetSmallPortraitFileName(path).Contains(serverName))
+                        //文件文件
+                        string currentMd5 = SoftBasic.CalculateFileMD5(fileName);
+                        if (currentMd5 == FileMd5)
                         {
                             //加载本地头像
                             pictureBox1.LoadAsync(fileName);
@@ -691,20 +693,13 @@ namespace 软件系统客户端模版
                         else
                         {
                             //头像已经换了
-                            P1:
-                            result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.下载小头, UserClient.UserAccount.UserName);
-                            if(result.IsSuccess)
-                            {
-                                byte[] data = Convert.FromBase64String(result.Content);
-                                System.IO.File.WriteAllBytes(path + @"\" + serverName, data);
-                                pictureBox1.LoadAsync(path + @"\" + serverName);
-                            }
+                            DownloadUserPortraint(path);
                         }
                     }
                     else
                     {
                         //客户端不存在头像
-                        goto P1;
+                        DownloadUserPortraint(path);
                     }
                 }
                 else
@@ -714,7 +709,49 @@ namespace 软件系统客户端模版
             }
         }
 
+        private void DownloadUserPortraint(string path)
+        {
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.下载小头, UserClient.UserAccount.UserName);
+            if (result.IsSuccess)
+            {
+                if (result.Content[0] == 'Y')
+                {
+                    byte[] data = Convert.FromBase64String(result.Content.Substring(1));
+                    string path32 = path + @"\" + PortraitSupport.SmallPortrait;
+                    System.IO.File.WriteAllBytes(path32, data);
+                    pictureBox1.LoadAsync(path32);
+                }
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            //点击了头像，请求下载高清版本头像
+            using (FormMatterRemind fmr = new FormMatterRemind("正在下载图片", ThreadPoolDownloadSizeLarge))
+            {
+                fmr.ShowDialog();
+            }
+        }
+
+        private void ThreadPoolDownloadSizeLarge()
+        {
+            string path = GetPortraitPath();
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.下载大头, UserClient.UserAccount.UserName);
+            if (result.IsSuccess)
+            {
+                if (result.Content[0] == 'Y')
+                {
+                    byte[] data = Convert.FromBase64String(result.Content.Substring(1));
+                    string path32 = path + @"\" + PortraitSupport.SmallPortrait;
+                    System.IO.File.WriteAllBytes(path32, data);
+                    System.Diagnostics.Process.Start(path32);
+                }
+            }
+            Thread.Sleep(1000);
+        }
 
         #endregion
+
+
     }
 }

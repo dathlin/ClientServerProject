@@ -568,6 +568,50 @@ namespace 软件系统服务端模版
                 //发送到邮箱
                 SendUserMail("异常记录", "时间：" + DateTime.Now.ToString("O") + Environment.NewLine + data);
             }
+            else if (customer == CommonHeadCode.SimplifyHeadCode.请求小头)
+            {
+                string fileName = Application.StartupPath + @"\Files\Portrait\" + data + @"\" + PortraitSupport.SmallPortrait;
+                if(string.IsNullOrEmpty(fileName))
+                {
+                    net_simplify_server.SendMessage(state, customer, "N");
+                }
+                else
+                {
+                    try
+                    {
+                        net_simplify_server.SendMessage(state, customer, "Y" + SoftBasic.CalculateFileMD5(fileName));
+                    }
+                    catch(Exception ex)
+                    {
+                        net_simplify_server.SendMessage(state, customer, "N");
+                        RuntimeLogHelper.SaveError(ex);
+                    }
+                }
+            }
+            else if (customer == CommonHeadCode.SimplifyHeadCode.下载小头)
+            {
+                string fileName = Application.StartupPath + @"\Files\Portrait\" + data + @"\" + PortraitSupport.SmallPortrait;
+                if (string.IsNullOrEmpty(fileName))
+                {
+                    net_simplify_server.SendMessage(state, customer, "N");
+                }
+                else
+                {
+                    net_simplify_server.SendMessage(state, customer, "Y" + Convert.ToBase64String(System.IO.File.ReadAllBytes(fileName)));
+                }
+            }
+            else if (customer == CommonHeadCode.SimplifyHeadCode.下载大头)
+            {
+                string fileName = Application.StartupPath + @"\Files\Portrait\" + data + @"\" + PortraitSupport.LargePortrait;
+                if (string.IsNullOrEmpty(fileName))
+                {
+                    net_simplify_server.SendMessage(state, customer, "N");
+                }
+                else
+                {
+                    net_simplify_server.SendMessage(state, customer, "Y" + Convert.ToBase64String(System.IO.File.ReadAllBytes(fileName)));
+                }
+            }
             else
             {
                 net_simplify_server.SendMessage(state, customer, data);
@@ -1233,7 +1277,7 @@ namespace 软件系统服务端模版
                 SoftBasic.ShowExceptionMessage(ex);
             }
         }
-
+        
 
         #endregion
     }

@@ -48,6 +48,7 @@
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.留言板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.更换头像ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于本软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更新日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +78,6 @@
             this.panel_left = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.panel_main = new System.Windows.Forms.Panel();
-            this.更换头像ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -249,6 +249,13 @@
             this.留言板ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.留言板ToolStripMenuItem.Text = "留言板";
             this.留言板ToolStripMenuItem.Click += new System.EventHandler(this.留言板ToolStripMenuItem_Click);
+            // 
+            // 更换头像ToolStripMenuItem
+            // 
+            this.更换头像ToolStripMenuItem.Name = "更换头像ToolStripMenuItem";
+            this.更换头像ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.更换头像ToolStripMenuItem.Text = "更换头像";
+            this.更换头像ToolStripMenuItem.Click += new System.EventHandler(this.更换头像ToolStripMenuItem_Click);
             // 
             // 关于ToolStripMenuItem
             // 
@@ -539,21 +546,16 @@
             this.panel_main.Size = new System.Drawing.Size(557, 419);
             this.panel_main.TabIndex = 5;
             // 
-            // 更换头像ToolStripMenuItem
-            // 
-            this.更换头像ToolStripMenuItem.Name = "更换头像ToolStripMenuItem";
-            this.更换头像ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
-            this.更换头像ToolStripMenuItem.Text = "更换头像";
-            this.更换头像ToolStripMenuItem.Click += new System.EventHandler(this.更换头像ToolStripMenuItem_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Location = new System.Drawing.Point(887, 1);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 32);
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // FormMainWindow
             // 

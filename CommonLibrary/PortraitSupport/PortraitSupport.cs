@@ -11,11 +11,11 @@ namespace CommonLibrary
         /// <summary>
         /// 小尺寸头像
         /// </summary>
-        public const string SmallPortraitHead = "Size_32_";
+        public const string SmallPortrait = "Size_32_.png";
         /// <summary>
         /// 大尺寸头像
         /// </summary>
-        public const string LargePortraitHead = "Size_300_";
+        public const string LargePortrait = "Size_300_.png";
 
 
         public static string GetSmallPortraitFileName(string dirPath)
@@ -23,7 +23,7 @@ namespace CommonLibrary
             string[] files = Directory.GetFiles(dirPath);
             foreach(var m in files)
             {
-                if(m.Contains(SmallPortraitHead))
+                if(m.Contains(SmallPortrait))
                 {
                     return m;
                 }
@@ -35,7 +35,7 @@ namespace CommonLibrary
             string[] files = Directory.GetFiles(dirPath);
             foreach (var m in files)
             {
-                if (m.Contains(LargePortraitHead))
+                if (m.Contains(LargePortrait))
                 {
                     return m;
                 }
