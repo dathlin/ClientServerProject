@@ -54,8 +54,11 @@ namespace CommonLibrary
                 {
                     if (IsWindowShow)
                     {
-                        pictureBox1.Image?.Dispose();
-                        pictureBox1.Image = HslCommunication.BasicFramework.SoftPainting.GetGraphicFromArray(data, pictureBox1.Width - 2, pictureBox1.Height - 2, 7, Color.Blue);
+                        if (pictureBox1.Width > 10)
+                        {
+                            pictureBox1.Image?.Dispose();
+                            pictureBox1.Image = HslCommunication.BasicFramework.SoftPainting.GetGraphicFromArray(data, pictureBox1.Width - 2, pictureBox1.Height - 2, 7, Color.Blue);
+                        }
                     }
                 }
                 DataTemp = data;
