@@ -23,5 +23,10 @@ namespace 软件系统服务端Wpf
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
     }
 }
