@@ -42,7 +42,8 @@ namespace 软件系统客户端Wpf
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             TextBlockSoftName.Text = CommonLibrary.Resource.StringResouce.SoftName;
-            TextBlockSoftVersion.Text=
+            TextBlockSoftVersion.Text = UserClient.CurrentVersion.ToString();
+            TextBlockSoftCopyright.Text = $"本软件著作权归{CommonLibrary.Resource.StringResouce.SoftCopyRight}所有";
         }
     }
 }

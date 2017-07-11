@@ -71,8 +71,6 @@ namespace 软件系统客户端Wpf
             }
 
         }
-        
-
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {

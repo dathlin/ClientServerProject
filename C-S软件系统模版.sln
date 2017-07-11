@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "软件系统客户端模版
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "软件系统服务端模版", "软件系统服务端模版\软件系统服务端模版.csproj", "{2AFB749C-A6CE-4B2A-B02D-4FC7BB8ADA30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "软件系统服务端Wpf", "软件系统服务端Wpf\软件系统服务端Wpf.csproj", "{9B5A13FF-8483-4BB8-B0E7-2CF9A8E01C45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "软件系统客户端Wpf", "软件系统客户端Wpf\软件系统客户端Wpf.csproj", "{DB8977DD-F909-449D-B58E-08B8A6A78F2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{2AFB749C-A6CE-4B2A-B02D-4FC7BB8ADA30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AFB749C-A6CE-4B2A-B02D-4FC7BB8ADA30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AFB749C-A6CE-4B2A-B02D-4FC7BB8ADA30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9B5A13FF-8483-4BB8-B0E7-2CF9A8E01C45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B5A13FF-8483-4BB8-B0E7-2CF9A8E01C45}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B5A13FF-8483-4BB8-B0E7-2CF9A8E01C45}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B5A13FF-8483-4BB8-B0E7-2CF9A8E01C45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB8977DD-F909-449D-B58E-08B8A6A78F2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB8977DD-F909-449D-B58E-08B8A6A78F2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB8977DD-F909-449D-B58E-08B8A6A78F2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB8977DD-F909-449D-B58E-08B8A6A78F2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
