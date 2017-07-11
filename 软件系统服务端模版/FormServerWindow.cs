@@ -472,9 +472,9 @@ namespace 软件系统服务端模版
         {
             if (customer == CommonHeadCode.SimplifyHeadCode.维护检查)
             {
-                net_simplify_server.SendMessage(state, customer, "1");
-                //UserServer.ServerSettings.Can_Account_Login ? "1" : "0" +
-                //UserServer.ServerSettings.Account_Forbidden_Reason);
+                net_simplify_server.SendMessage(state, customer, 
+                UserServer.ServerSettings.Can_Account_Login ? "1" : "0" +
+                UserServer.ServerSettings.Account_Forbidden_Reason);
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.更新检查)
             {
