@@ -152,6 +152,18 @@ using HslCommunication.Profinet;
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client15.png)
 
 <br />
+
+
+# Wpf版客户端的程序界面
+
+###### 登录窗口
+
+![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client1.png)  
+
+###### 其他功能等待添加
+<br />
+
+
 <br />
 
 
