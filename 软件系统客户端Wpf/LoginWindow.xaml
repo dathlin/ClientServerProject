@@ -45,19 +45,15 @@
                 </Grid.ColumnDefinitions>
                 <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="Account" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
                 <TextBox Grid.Row="0" Grid.Column="1" 
-				    x:Name="NameTextBox"
+				    x:Name="NameTextBox" KeyDown="NameTextBox_KeyDown"
 				    materialDesign:HintAssist.Hint="请输入名称">
-                    <TextBox.Text>
-                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                        </Binding>
-                    </TextBox.Text>
                 </TextBox>
                 <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="Key" Foreground="{Binding ElementName=PasswordBox, Path=BorderBrush}" HorizontalAlignment="Right" />
                 <PasswordBox Grid.Row="1" Grid.Column="1" 		
-                     x:Name="PasswordBox"
+                     x:Name="PasswordBox" KeyDown="PasswordBox_KeyDown"
                      materialDesign:HintAssist.Hint="请输入密码" />
-                <Button Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Style="{StaticResource MaterialDesignRaisedLightButton}" Width="100" Height="35"
-                    ToolTip="随便测试下" Click="Button_Click">
+                <Button x:Name="LoginButton" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Style="{StaticResource MaterialDesignRaisedLightButton}" Width="100" Height="35"
+                    Click="Button_Click">
                     登录系统
                 </Button>
 
@@ -65,9 +61,9 @@
 
 
             <StackPanel Orientation="Horizontal" Margin="100,2,8,8">
-                <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" VerticalAlignment="Center"
-                          ToolTip="向右划可以记住密码" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"/>
-                <TextBlock Grid.Column="1" Style="{StaticResource Caption}">是否记住密码</TextBlock>
+                <ToggleButton x:Name="Remember" Style="{StaticResource MaterialDesignSwitchToggleButton}" VerticalAlignment="Center"
+                          ToolTip="单击记住密码" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Unchecked"/>
+                <TextBlock Grid.Column="1" Style="{StaticResource Caption}">是否记住密码？</TextBlock>
             </StackPanel>
 
             <TextBlock x:Name="WindowToolTip" TextAlignment="Center" Visibility="Hidden" Margin="0,10,0,0" Style="{StaticResource Caption}">正在连接服务器...</TextBlock>
