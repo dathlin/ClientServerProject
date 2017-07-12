@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:软件系统客户端Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" WindowState="Maximized">
+        Title="MainWindow" Height="350" Width="525" WindowState="Maximized" Activated="Window_Activated" Closing="Window_Closing" ContentRendered="Window_ContentRendered" Initialized="Window_Initialized"
+        Loaded="Window_Loaded">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -26,6 +27,7 @@
     </Window.Resources>
     <Grid>
         <DockPanel>
+            <!--菜单项目-->
             <Menu IsMainMenu="True" DockPanel.Dock="Top">
                 <MenuItem Header="_管理员">
                     <MenuItem.Icon>
@@ -116,6 +118,52 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
+
+            <!--底部状态栏以及公告-->
+            <Grid DockPanel.Dock="Bottom" Background="WhiteSmoke">
+                <Grid Margin="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="TextBlock_CopyRight" Foreground="Gray">本软件著作权归某某所有</TextBlock>
+                            <TextBlock Margin="20,0,0,0">版本号：</TextBlock>
+                            <TextBlock x:Name="TextBlock_Version">1.0.0</TextBlock>
+                            <TextBlock Margin="20,0,0,0">客户端状态：</TextBlock>
+                            <TextBlock x:Name="TextBlock_ClientStatus">正在连接服务器...</TextBlock>
+                            <TextBlock Margin="20,0,0,0" Foreground="Blue">温馨提示：</TextBlock>
+                            <TextBlock x:Name="TextBlock_Information" Foreground="Blue"></TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock>时间：</TextBlock>
+                            <TextBlock x:Name="TextBlock_ServerTime">0000-00-00 00:00:00</TextBlock>
+                            <TextBlock Margin="20,0,0,0">延迟：</TextBlock>
+                            <TextBlock x:Name="TextBlock_ServerDelay">0</TextBlock>
+                            <TextBlock>ms</TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid Width="100" DockPanel.Dock="Left">
+                <Border BorderThickness="0,1,1,1" BorderBrush="LightGray">
+                </Border>
+            </Grid>
+
+            <Grid DockPanel.Dock="Right">
+                
+            </Grid>
+
+            <Grid>
+                
+            </Grid>
+            
         </DockPanel>
+        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}"
+                                             x:Name="SoftSnackbar" />
     </Grid>
 </Window>

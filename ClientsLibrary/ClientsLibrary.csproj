@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserClient.cs" />
+    <Compile Include="UserPortrait.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FormDownloading.resx">
