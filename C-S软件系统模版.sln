@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "软件系统服务端模版
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "软件系统客户端Wpf", "软件系统客户端Wpf\软件系统客户端Wpf.csproj", "{DB8977DD-F909-449D-B58E-08B8A6A78F2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientsLibrary", "ClientsLibrary\ClientsLibrary.csproj", "{2063879B-D561-47FF-A0D5-6CEF2B9E4ABD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DB8977DD-F909-449D-B58E-08B8A6A78F2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB8977DD-F909-449D-B58E-08B8A6A78F2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB8977DD-F909-449D-B58E-08B8A6A78F2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2063879B-D561-47FF-A0D5-6CEF2B9E4ABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2063879B-D561-47FF-A0D5-6CEF2B9E4ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2063879B-D561-47FF-A0D5-6CEF2B9E4ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2063879B-D561-47FF-A0D5-6CEF2B9E4ABD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
