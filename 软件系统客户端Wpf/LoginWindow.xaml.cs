@@ -29,6 +29,9 @@ namespace 软件系统客户端Wpf
         public LoginWindow()
         {
             InitializeComponent();
+
+            UserClient.JsonSettings.FileSavePath = AppDomain.CurrentDomain.BaseDirectory + @"\JsonSettings.txt";
+            UserClient.JsonSettings.LoadByFile();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -303,8 +306,7 @@ namespace 软件系统客户端Wpf
             TextBlockSoftVersion.Text = UserClient.CurrentVersion.ToString();
             TextBlockSoftCopyright.Text = $"本软件著作权归{CommonLibrary.Resource.StringResouce.SoftCopyRight}所有";
 
-            UserClient.JsonSettings.FileSavePath = AppDomain.CurrentDomain.BaseDirectory + @"\JsonSettings.txt";
-            UserClient.JsonSettings.LoadByFile();
+            
 
             if ((DateTime.Now - UserClient.JsonSettings.LoginTime).TotalDays < 7)
             {

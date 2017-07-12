@@ -22,14 +22,20 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <GradientStop Color="Azure" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel>
-            <materialDesign:Card Padding="24" Margin="8">
-                <TextBlock x:Name="TextBlockSoftName" TextAlignment="Center" Style="{DynamicResource MaterialDesignTitleTextBlock}">[您的软件系统]</TextBlock>
+            <materialDesign:Card Padding="16" Margin="8" Background="Transparent">
+                <TextBlock x:Name="TextBlockSoftName" TextAlignment="Center" FontSize="32" Style="{DynamicResource MaterialDesignTitleTextBlock}">[您的软件系统]</TextBlock>
             </materialDesign:Card>
 
             <Grid Margin="8,8,8,8">
