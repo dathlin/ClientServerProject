@@ -31,39 +31,39 @@
                     <MenuItem.Icon>
                         <materialDesign:PackIcon Kind="AccountSettingsVariant" />
                     </MenuItem.Icon>
-                    <MenuItem Header="公告更改">
+                    <MenuItem Header="公告更改" x:Name="MenuItem公告管理" Click="MenuItem公告管理_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="BorderColor" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="账户管理">
+                    <MenuItem Header="账户管理" x:Name="MenuItem账户管理" Click="MenuItem账户管理_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="AccountCircle" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="注册账户">
+                    <MenuItem Header="注册账户" x:Name="MenuItem注册账户" Click="MenuItem注册账户_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="AccountPlus" />
                         </MenuItem.Icon>
                     </MenuItem>
                     
                     <Separator />
-                    <MenuItem Header="日志查看">
+                    <MenuItem Header="日志查看" x:Name="MenuItem日志查看" Click="MenuItem日志查看_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="FlagVariant" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="远程更新">
+                    <MenuItem Header="远程更新" x:Name="MenuItem远程更新" Click="MenuItem远程更新_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="Rotate3d" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="消息发送">
+                    <MenuItem Header="消息发送" x:Name="MenuItem消息发送" Click="MenuItem消息发送_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="MessageTextOutline" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="开发中心">
+                    <MenuItem Header="开发中心" x:Name="MenuItem开发中心" Click="MenuItem开发中心_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="Security" />
                         </MenuItem.Icon>
@@ -73,17 +73,17 @@
                     <MenuItem.Icon>
                         <materialDesign:PackIcon Kind="Settings" />
                     </MenuItem.Icon>
-                    <MenuItem Header="密码更改">
+                    <MenuItem Header="密码更改" x:Name="MenuItem密码更改" Click="MenuItem密码更改_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="KeyChange" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="聊天信息">
+                    <MenuItem Header="聊天信息" x:Name="MenuItem聊天信息" Click="MenuItem聊天信息_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="MessageOutline" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="头像更改">
+                    <MenuItem Header="头像更改" x:Name="MenuItem头像更改" Click="MenuItem头像更改_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="AccountConvert" />
                         </MenuItem.Icon>
@@ -94,22 +94,22 @@
                     <MenuItem.Icon>
                         <materialDesign:PackIcon Kind="CubeOutline" />
                     </MenuItem.Icon>
-                    <MenuItem Header="关于本软件">
+                    <MenuItem Header="关于本软件" x:Name="MenuItem关于本软件" Click="MenuItem关于本软件_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="Leaf" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="更新日志">
+                    <MenuItem Header="更新日志" x:Name="MenuItem更新日志" Click="MenuItem更新日志_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="BookOpen" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="版本号说明">
+                    <MenuItem Header="版本号说明" x:Name="MenuItem版本号说明" Click="MenuItem版本号说明_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="InformationOutline" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="意见反馈">
+                    <MenuItem Header="意见反馈" x:Name="MenuItem意见反馈" Click="MenuItem意见反馈_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="Bridge" />
                         </MenuItem.Icon>

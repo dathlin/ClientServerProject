@@ -1,4 +1,5 @@
 ﻿using CommonLibrary;
+using HslCommunication;
 using HslCommunication.BasicFramework;
 using HslCommunication.Enthernet;
 using Newtonsoft.Json.Linq;
@@ -59,7 +60,150 @@ namespace 软件系统客户端Wpf
         }
 
 
+        #region 菜单逻辑块
 
+
+        private void MenuItem公告管理_Click(object sender, RoutedEventArgs e)
+        {
+            using (FormInputAndAction fiaa = new FormInputAndAction(str => UserClient.Net_simplify_client.ReadFromServer(
+                 CommonHeadCode.SimplifyHeadCode.更新公告, str).IsSuccess, UserClient.Announcement, "请输入公告内容"))
+            {
+                fiaa.ShowDialog();
+            }
+        }
+
+        private void MenuItem账户管理_Click(object sender, RoutedEventArgs e)
+        {
+            FormAccountManage fam = new FormAccountManage(() =>
+            {
+                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户);
+                if (result.IsSuccess) return result.Content;
+                else return result.ToMessageShowString();
+            }, m => UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更细账户, m).IsSuccess);
+            fam.ShowDialog();
+            fam.Dispose();
+        }
+
+        private void MenuItem注册账户_Click(object sender, RoutedEventArgs e)
+        {
+            //using (FormRegisterAccount fra = new FormRegisterAccount())
+            //{
+            //    fra.ShowDialog();
+            //}
+        }
+
+        private void MenuItem日志查看_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem远程更新_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserClient.UserAccount.UserName == "admin")
+            {
+                //using (FormUpdateRemote fur = new FormUpdateRemote())
+                //{
+                //    fur.ShowDialog();
+                //}
+            }
+            else
+            {
+                MessageBox.Show("权限不足！");
+            }
+        }
+
+        private void MenuItem消息发送_Click(object sender, RoutedEventArgs e)
+        {
+            using (FormInputAndAction fiaa = new FormInputAndAction(str => UserClient.Net_simplify_client.ReadFromServer(
+                 CommonHeadCode.SimplifyHeadCode.群发消息, UserClient.UserAccount.UserName + ":" + str).IsSuccess, "", "请输入群发的消息："))
+            {
+                fiaa.ShowDialog();
+            }
+        }
+
+        private void MenuItem开发中心_Click(object sender, RoutedEventArgs e)
+        {
+            using (FormSuper fs = new FormSuper(() =>
+            {
+                OperateResultBytes result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.性能计数, new byte[0]);
+                //解析
+                if (result.IsSuccess)
+                {
+                    int[] data = new int[result.Content.Length / 4];
+                    for (int i = 0; i < data.Length; i++)
+                    {
+                        data[i] = BitConverter.ToInt32(result.Content, i * 4);
+                    }
+                    return data;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }))
+            {
+                fs.ShowDialog();
+            }
+        }
+
+        private void MenuItem密码更改_Click(object sender, RoutedEventArgs e)
+        {
+            using (FormPasswordModify fpm = new FormPasswordModify(UserClient.UserAccount.Password,
+                p =>
+                {
+                    JObject json = new JObject
+                    {
+                        { UserAccount.UserNameText, UserClient.UserAccount.UserName },
+                        { UserAccount.PasswordText, p }
+                    };
+                    return UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.密码修改, json.ToString()).IsSuccess;
+                }, 6, 8))
+            {
+                fpm.ShowDialog();
+            }
+        }
+
+        private void MenuItem聊天信息_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem头像更改_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem关于本软件_Click(object sender, RoutedEventArgs e)
+        {
+            using (FormAbout fa = new FormAbout(Resource.StringResouce.SoftName,
+                UserClient.CurrentVersion, 2017, Resource.StringResouce.SoftCopyRight))
+            {
+                fa.ShowDialog();
+            }
+        }
+
+        private void MenuItem更新日志_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem版本号说明_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem意见反馈_Click(object sender, RoutedEventArgs e)
+        {
+            using (FormInputAndAction fiaa = new FormInputAndAction(str => UserClient.Net_simplify_client.ReadFromServer(
+                 CommonHeadCode.SimplifyHeadCode.意见反馈, UserClient.UserAccount.UserName + ":" + str).IsSuccess, "", "请输入意见反馈："))
+            {
+                fiaa.ShowDialog();
+            }
+        }
+
+
+        #endregion
 
 
         #region 异步网络块
@@ -194,15 +338,16 @@ namespace 软件系统客户端Wpf
         }
 
 
+
+
+
+
+
+
+
+
         #endregion
 
-
-
-
-
-
-
-
-
+        
     }
 }
