@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using HslCommunication.Enthernet;
 using HslCommunication;
 using CommonLibrary;
+using ClientsLibrary;
 
 namespace 软件系统客户端模版.UIControls
 {

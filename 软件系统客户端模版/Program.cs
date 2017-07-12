@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+
 namespace 软件系统客户端模版
 {
     static class Program
@@ -20,7 +21,7 @@ namespace 软件系统客户端模版
         static void Main()
         {
             //捕获未处理的异常
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += ClientsLibrary.UserClient.CurrentDomain_UnhandledException;
             //=====================================================================
             //为了强制只启动一个应用程序的实例
 
@@ -65,19 +66,7 @@ namespace 软件系统客户端模版
             }
         }
 
-        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            if(e.ExceptionObject is Exception ex)
-            {
-                //使用UDP方法传送会服务器
-                string info = $"{Environment.NewLine}信息：{ex.Message}" +
-                    $"{Environment.NewLine}类型：{ex.GetType().ToString()}" +
-                    $"{Environment.NewLine}堆栈：{ex.StackTrace}" +
-                    $"{Environment.NewLine}方法：{ex.TargetSite.Name}" +
-                    $"{Environment.NewLine}" + "=".PadLeft(50, '=');
-                UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.异常消息, info);
-            }
-        }
+      
 
         [DllImport("User32.dll")]
         private static extern bool ShowWindowAsync(IntPtr hWnd, int cmdShow);

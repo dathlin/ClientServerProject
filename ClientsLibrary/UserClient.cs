@@ -83,5 +83,20 @@ namespace ClientsLibrary
         {
             KeyToken = CommonHeadCode.KeyToken,
         };
+
+
+        public static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (e.ExceptionObject is Exception ex)
+            {
+                //使用UDP方法传送会服务器
+                string info = $"{Environment.NewLine}信息：{ex.Message}" +
+                    $"{Environment.NewLine}类型：{ex.GetType().ToString()}" +
+                    $"{Environment.NewLine}堆栈：{ex.StackTrace}" +
+                    $"{Environment.NewLine}方法：{ex.TargetSite.Name}" +
+                    $"{Environment.NewLine}" + "=".PadLeft(50, '=');
+                UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.异常消息, info);
+            }
+        }
     }
 }

@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClientsLibrary">
+      <HintPath>..\ClientsLibrary\bin\Debug\ClientsLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="CommonLibrary">
       <HintPath>..\CommonLibrary\bin\Debug\CommonLibrary.dll</HintPath>
     </Reference>
@@ -82,7 +85,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BasicSupport\UserClient.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>

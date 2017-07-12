@@ -26,7 +26,7 @@ namespace 软件系统客户端Wpf
         {
             base.OnStartup(e);
             //捕获未处理的异常
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += ClientsLibrary.UserClient.CurrentDomain_UnhandledException;
 
             Process process = Process.GetCurrentProcess();
             //遍历应用程序的同名进程组
@@ -71,11 +71,7 @@ namespace 软件系统客户端Wpf
             }
 
         }
-
-        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            
-        }
+        
 
         [DllImport("User32.dll")]
         private static extern bool ShowWindowAsync(IntPtr hWnd, int cmdShow);

@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClientsLibrary">
+      <HintPath>..\ClientsLibrary\bin\Debug\ClientsLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="CommonLibrary">
       <HintPath>..\CommonLibrary\bin\Debug\CommonLibrary.dll</HintPath>
     </Reference>
@@ -53,18 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormDownloading.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormDownloading.Designer.cs">
-      <DependentUpon>FormDownloading.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormLog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormLog.Designer.cs">
-      <DependentUpon>FormLog.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,18 +67,6 @@
     </Compile>
     <Compile Include="FormMainWindow.Designer.cs">
       <DependentUpon>FormMainWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormRegisterAccount.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormRegisterAccount.Designer.cs">
-      <DependentUpon>FormRegisterAccount.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormUpdateRemote.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormUpdateRemote.Designer.cs">
-      <DependentUpon>FormUpdateRemote.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,24 +82,11 @@
     <Compile Include="UIControls\ShareFilesRender.Designer.cs">
       <DependentUpon>ShareFilesRender.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserClient.cs" />
-    <EmbeddedResource Include="FormDownloading.resx">
-      <DependentUpon>FormDownloading.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormLog.resx">
-      <DependentUpon>FormLog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMainWindow.resx">
       <DependentUpon>FormMainWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormRegisterAccount.resx">
-      <DependentUpon>FormRegisterAccount.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormUpdateRemote.resx">
-      <DependentUpon>FormUpdateRemote.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

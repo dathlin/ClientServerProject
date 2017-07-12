@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using HslCommunication;
 using CommonLibrary;
 using HslCommunication.BasicFramework;
+using ClientsLibrary;
 
 namespace 软件系统客户端模版
 {

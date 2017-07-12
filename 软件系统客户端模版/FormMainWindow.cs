@@ -12,6 +12,7 @@ using System.Threading;
 using HslCommunication;
 using HslCommunication.Enthernet;
 using HslCommunication.BasicFramework;
+using ClientsLibrary;
 
 
 /***************************************************************************************
