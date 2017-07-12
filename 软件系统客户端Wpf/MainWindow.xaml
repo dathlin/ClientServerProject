@@ -154,8 +154,12 @@
                 </Border>
             </Grid>
 
-            <Grid DockPanel.Dock="Right">
-                
+            <Grid DockPanel.Dock="Right" Width="180">
+                <materialDesign:Chip Content="" Margin="0 0 6 4">
+                    <materialDesign:Chip.Icon>
+                        <Image x:Name="AccountPortrait"/>
+                    </materialDesign:Chip.Icon>
+                </materialDesign:Chip>
             </Grid>
 
             <Grid>
