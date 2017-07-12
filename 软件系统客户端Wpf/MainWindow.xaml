@@ -2,11 +2,120 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:软件系统客户端Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" WindowState="Maximized">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignCaptionTextBlock}" x:Key="Caption">
+                <Setter Property="Opacity" Value=".68"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <DockPanel>
+            <Menu IsMainMenu="True" DockPanel.Dock="Top">
+                <MenuItem Header="_管理员">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="AccountSettingsVariant" />
+                    </MenuItem.Icon>
+                    <MenuItem Header="公告更改">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="BorderColor" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="账户管理">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="AccountCircle" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="注册账户">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="AccountPlus" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    
+                    <Separator />
+                    <MenuItem Header="日志查看">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="FlagVariant" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="远程更新">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Rotate3d" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="消息发送">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="MessageTextOutline" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="开发中心">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Security" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_设置">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="Settings" />
+                    </MenuItem.Icon>
+                    <MenuItem Header="密码更改">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="KeyChange" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="聊天信息">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="MessageOutline" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="头像更改">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="AccountConvert" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                </MenuItem>
+                <MenuItem Header="_关于">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="CubeOutline" />
+                    </MenuItem.Icon>
+                    <MenuItem Header="关于本软件">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Leaf" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="更新日志">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="BookOpen" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="版本号说明">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="InformationOutline" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="意见反馈">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Bridge" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
     </Grid>
 </Window>
