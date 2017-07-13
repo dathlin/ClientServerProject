@@ -121,7 +121,8 @@ namespace 软件系统客户端Wpf
             //启动定时器
             TimeTickInitilization();
             //显示头像
-            //DownloadUserPortraint();
+            SoftUserPortraitInitialization();
+            SoftUserPortrait.DownloadUserPortraint();
         }
 
         private void Window_Initialized(object sender, EventArgs e)
@@ -288,7 +289,7 @@ namespace 软件系统客户端Wpf
 
         private void MenuItem头像更改_Click(object sender, RoutedEventArgs e)
         {
-
+            SoftUserPortrait.ChangePortrait();
         }
 
         private void MenuItem关于本软件_Click(object sender, RoutedEventArgs e)
@@ -561,6 +562,36 @@ namespace 软件系统客户端Wpf
         {
             //测试发送udp消息
             UserClient.Net_Udp_Client.SendMessage(customer, data);
+        }
+
+        #endregion
+
+        #region 头像图片上传下载块
+
+
+        private UserPortrait SoftUserPortrait { get; set; }
+
+        private void SoftUserPortraitInitialization()
+        {
+            SoftUserPortrait = new UserPortrait(AppDomain.CurrentDomain.BaseDirectory + @"\Portrait\" + UserClient.UserAccount.UserName, 
+                m => {
+                    BitmapImage bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(m, UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    bi.Freeze();
+                    AccountPortrait.Source = bi;
+                });
+        }
+
+        
+        private void AccountChip_Click(object sender, RoutedEventArgs e)
+        {
+            //点击了头像，请求下载高清版本头像
+            using (FormMatterRemind fmr = new FormMatterRemind("正在下载图片", SoftUserPortrait.ThreadPoolDownloadSizeLarge))
+            {
+                fmr.ShowDialog();
+            }
         }
 
         #endregion

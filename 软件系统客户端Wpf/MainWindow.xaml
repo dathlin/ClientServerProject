@@ -155,11 +155,13 @@
             </Grid>
 
             <Grid DockPanel.Dock="Right" Width="180">
-                <materialDesign:Chip Content="" Margin="0 0 6 4">
-                    <materialDesign:Chip.Icon>
-                        <Image x:Name="AccountPortrait"/>
-                    </materialDesign:Chip.Icon>
-                </materialDesign:Chip>
+                <StackPanel>
+                    <materialDesign:Chip x:Name="AccountChip" Content="" Margin="0 0 6 4" Click="AccountChip_Click">
+                        <materialDesign:Chip.Icon>
+                            <Image x:Name="AccountPortrait"/>
+                        </materialDesign:Chip.Icon>
+                    </materialDesign:Chip>
+                </StackPanel>
             </Grid>
 
             <Grid>
