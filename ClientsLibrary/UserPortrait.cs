@@ -17,7 +17,7 @@ namespace ClientsLibrary
     /// </summary>
     public class UserPortrait
     {
-        public UserPortrait(string filePath,Action<string> loadPic)
+        public UserPortrait(string filePath,Action<string> loadPic,Action disPic)
         {
             if (!System.IO.Directory.Exists(filePath))
             {
@@ -25,12 +25,14 @@ namespace ClientsLibrary
             }
             FileSavePath = filePath;
             LoadPic = loadPic;
+            DisPic = disPic;
         }
 
         private string FileSavePath { get; set; }
 
         private Action<string> LoadPic = null;
-        
+        private Action DisPic = null;
+
         public void ChangePortrait()
         {
             using (FormPortraitSelect fps = new FormPortraitSelect())
@@ -39,6 +41,8 @@ namespace ClientsLibrary
                 {
                     string path300 = FileSavePath + @"\" + PortraitSupport.LargePortrait;
                     string path32 = FileSavePath + @"\" + PortraitSupport.SmallPortrait;
+
+                    DisPic?.Invoke();
 
                     Bitmap bitmap300 = fps.GetSpecifiedSizeImage(300);
                     bitmap300.Save(path300);
