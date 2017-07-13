@@ -575,12 +575,16 @@ namespace 软件系统客户端Wpf
         {
             SoftUserPortrait = new UserPortrait(AppDomain.CurrentDomain.BaseDirectory + @"\Portrait\" + UserClient.UserAccount.UserName, 
                 m => {
+                    byte[] content = System.IO.File.ReadAllBytes(m);
                     BitmapImage bi = new BitmapImage();
                     bi.BeginInit();
-                    bi.UriSource = new Uri(m, UriKind.RelativeOrAbsolute);
+                    bi.StreamSource = new System.IO.MemoryStream(content);
                     bi.EndInit();
-                    bi.Freeze();
                     AccountPortrait.Source = bi;
+                },
+                ()=>
+                {
+                    AccountPortrait.Source = null;
                 });
         }
 

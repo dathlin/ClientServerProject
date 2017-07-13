@@ -630,7 +630,7 @@ namespace 软件系统客户端模版
 
         private void SoftUserPortraitInitialization()
         {
-            SoftUserPortrait = new UserPortrait(Application.StartupPath + @"\Portrait\" + UserClient.UserAccount.UserName, m => pictureBox1.LoadAsync(m));
+            SoftUserPortrait = new UserPortrait(Application.StartupPath + @"\Portrait\" + UserClient.UserAccount.UserName, m => pictureBox1.LoadAsync(m),null);
         }
 
        
