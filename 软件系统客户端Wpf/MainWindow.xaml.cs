@@ -123,6 +123,7 @@ namespace 软件系统客户端Wpf
             //显示头像
             SoftUserPortraitInitialization();
             SoftUserPortrait.DownloadUserPortraint();
+            AccountChip.Content = UserClient.UserAccount.UserName;
         }
 
         private void Window_Initialized(object sender, EventArgs e)
@@ -134,13 +135,12 @@ namespace 软件系统客户端Wpf
         {
             //在窗体加载时触发，窗体还不显示任何东西
             //窗口载入
-            //label_userName.Text = UserClient.UserAccount.UserName;
-            //label_grade.Text = AccountGrade.GetDescription(UserClient.UserAccount.Grade);
-            //label_factory.Text = UserClient.UserAccount.Factory;
-            //label_register.Text = UserClient.UserAccount.RegisterTime.ToString();
-            //label_last.Text = UserClient.UserAccount.LastLoginTime.ToString();
-            //label_times.Text = UserClient.UserAccount.LoginFrequency.ToString();
-            //label_address.Text = UserClient.UserAccount.LastLoginIpAddress;
+            Account_grade.Text = AccountGrade.GetDescription(UserClient.UserAccount.Grade);
+            Account_factory.Text = UserClient.UserAccount.Factory;
+            Account_register.Text = UserClient.UserAccount.RegisterTime.ToString();
+            Account_last.Text = UserClient.UserAccount.LastLoginTime.ToString();
+            Account_times.Text = UserClient.UserAccount.LoginFrequency.ToString();
+            Account_address.Text = UserClient.UserAccount.LastLoginIpAddress;
 
             //状态栏设置
             TextBlock_CopyRight.Text = $"本软件著作权归{Resource.StringResouce.SoftCopyRight}所有";
@@ -332,6 +332,11 @@ namespace 软件系统客户端Wpf
             }
         }
 
+        private void Button_Quit_Click(object sender, RoutedEventArgs e)
+        {
+            App.QuitCode = 1;
+            Close();
+        }
 
         #endregion
 
@@ -598,8 +603,9 @@ namespace 软件系统客户端Wpf
             }
         }
 
+
         #endregion
 
-
+        
     }
 }
