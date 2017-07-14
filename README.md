@@ -160,6 +160,10 @@ using HslCommunication.Profinet;
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client1.png)  
 
+###### 主窗口，还未实现聊天及文件功能
+
+![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client2.png) 
+
 ###### 其他功能等待添加
 <br />
 
