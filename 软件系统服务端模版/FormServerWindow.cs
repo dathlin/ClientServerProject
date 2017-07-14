@@ -396,6 +396,7 @@ namespace 软件系统服务端模版
                 net_simplify_server.ReceiveStringEvent += Net_simplify_server_ReceiveStringEvent;//接收到字符串触发
                 net_simplify_server.ReceivedBytesEvent += Net_simplify_server_ReceivedBytesEvent;//接收到字节触发
                 net_simplify_server.ServerStart(CommonLibrary.CommonLibrary.Port_Second_Net);
+                net_simplify_server.ConnectTimeout = 5200;
             }
             catch (Exception ex)
             {
