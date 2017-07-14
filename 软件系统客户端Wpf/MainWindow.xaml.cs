@@ -152,7 +152,7 @@ namespace 软件系统客户端Wpf
             net_socket_client.AcceptByte += Net_socket_client_AcceptByte;
             net_socket_client.AcceptString += Net_socket_client_AcceptString;
 
-            //label_Announcement.Text = UserClient.Announcement;
+            TextBlock_Announcement.Text = UserClient.Announcement;
 
             TextBlock_Version.Text = UserClient.CurrentVersion.ToString();
 
@@ -381,7 +381,7 @@ namespace 软件系统客户端Wpf
             {
                 if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
                 {
-                    //listBox1.DataSource = data.Split('#');
+                    ListBox_Onlines.ItemsSource = data.Split('#');
                 }));
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.关闭客户端)
@@ -397,7 +397,7 @@ namespace 软件系统客户端Wpf
                 if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
                 {
                     UserClient.Announcement = data;
-                    //label_Announcement.Text = data;
+                    TextBlock_Announcement.Text = data;
                     FormPopup fpp = new FormPopup(data, System.Drawing.Color.DodgerBlue, 10000);
                     fpp.Show();
                 }));
