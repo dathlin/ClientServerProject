@@ -19,6 +19,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ClientsLibrary;
 using System.Threading;
+using 软件系统客户端Wpf.Views;
+using System.Windows.Media.Animation;
 
 namespace 软件系统客户端Wpf
 {
@@ -157,7 +159,7 @@ namespace 软件系统客户端Wpf
             TextBlock_Version.Text = UserClient.CurrentVersion.ToString();
 
             //初始化窗口
-            //MainRenderInitialization();
+            MainRenderInitialization();
         }
 
         private void AddStringRenderShow(string str)
@@ -276,15 +278,16 @@ namespace 软件系统客户端Wpf
                 fpm.ShowDialog();
             }
         }
-
-        private int index = 1;
+        
         private void MenuItem聊天信息_Click(object sender, RoutedEventArgs e)
         {
-            var messageQueue = SoftSnackbar.MessageQueue;
-            var message = "这是一条测试数据这是一条测试数据这是一条测试数据这是一条测试数据这是一条测试数据" + index++;
+            //var messageQueue = SoftSnackbar.MessageQueue;
+            //var message = "这是一条测试数据这是一条测试数据这是一条测试数据这是一条测试数据这是一条测试数据" + index++;
 
-            //the message queue can be called from any thread
-            Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+            ////the message queue can be called from any thread
+            //Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+
+            SetShowRenderControl(UIControls_Chat);
         }
 
         private void MenuItem头像更改_Click(object sender, RoutedEventArgs e)
@@ -606,6 +609,91 @@ namespace 软件系统客户端Wpf
 
         #endregion
 
-        
+        #region 多界面管理块
+
+        private List<UserControl> all_main_render = new List<UserControl>();
+
+
+        private UserChat UIControls_Chat { get; set; }
+
+
+        /// <summary>
+        /// 正在显示的子界面
+        /// </summary>
+        private UserControl CurrentRender { get; set; }
+
+        /// <summary>
+        /// 主界面的初始化
+        /// </summary>
+        private void MainRenderInitialization()
+        {
+            //将所有的子集控件添加进去
+
+            /*******************************************************************************
+             * 
+             *    例如此处展示了文件控件是如何添加进去的 
+             *    1.先进行实例化，赋值初始参数
+             *    2.添加进项目
+             *    3.显示
+             *
+             *******************************************************************************/
+
+            //UIControls_Files = new UIControls.ShareFilesRender()
+            //{
+            //    Visible = false,
+            //    Parent = panel_main,//决定了放在哪个界面显示，此处示例
+            //    Dock = DockStyle.Fill,
+            //};
+            //all_main_render.Add(UIControls_Files);
+
+            UIControls_Chat = new UserChat((m) =>
+            {
+                net_socket_client.Send(CommonHeadCode.MultiNetHeadCode.留言版消息, m);
+            });
+            all_main_render.Add(UIControls_Chat);
+
+        }
+
+        private void SetShowRenderControl(UserControl control)
+        {
+            if (!ReferenceEquals(CurrentRender, control))
+            {
+                CurrentRender = control;
+                //UserContentControl.Content = control;
+
+                DoubleAnimation d_opacity = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(100));
+                DoubleAnimation d_y = new DoubleAnimation(0, -10, TimeSpan.FromMilliseconds(100));
+                TranslateTransform tt = new TranslateTransform();
+                UserContentControl.RenderTransform = tt;
+                d_opacity.Completed += delegate
+                {
+                    UserContentControl.Content = control;
+                    DoubleAnimation d_opacity2 = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(100));
+                    DoubleAnimation d_y2 = new DoubleAnimation(10, 0, TimeSpan.FromMilliseconds(100));
+                    TranslateTransform tt2 = new TranslateTransform();
+                    UserContentControl.RenderTransform = tt2;
+                    UserContentControl.BeginAnimation(OpacityProperty, d_opacity2);
+                    tt.BeginAnimation(TranslateTransform.XProperty, d_y2);
+                };
+
+                UserContentControl.BeginAnimation(OpacityProperty, d_opacity);
+                tt.BeginAnimation(TranslateTransform.XProperty, d_y);
+            }
+        }
+        private void SetShowRenderControl(Type typeControl)
+        {
+            UserControl control = null;
+            foreach (var c in all_main_render)
+            {
+                if (c.GetType() == typeControl)
+                {
+                    control = c;
+                    break;
+                }
+            }
+            if (control != null) SetShowRenderControl(control);
+        }
+
+        #endregion
     }
 }

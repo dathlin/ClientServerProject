@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:软件系统客户端Wpf"
         xmlns:y="clr-namespace:ClientsLibrary;assembly=ClientsLibrary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" WindowState="Maximized" Activated="Window_Activated" Closing="Window_Closing" ContentRendered="Window_ContentRendered" Initialized="Window_Initialized"
+        Title="MainWindow" Height="550" Width="825" WindowState="Maximized" Activated="Window_Activated" Closing="Window_Closing" ContentRendered="Window_ContentRendered" Initialized="Window_Initialized"
         Loaded="Window_Loaded">
 
     <Window.Resources>
@@ -152,9 +152,12 @@
 
             <Grid Width="100" DockPanel.Dock="Left">
                 <Border BorderThickness="0,1,1,1" BorderBrush="LightGray">
+                    <TextBlock>随便放点什么东西</TextBlock>
                 </Border>
             </Grid>
 
+            
+            <!--右侧的账户信息和登录消息-->
             <Grid DockPanel.Dock="Right" Width="230">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -240,12 +243,21 @@
                 </Grid>
             </Grid>
 
+            <!--主界面，应该设置成可以放置其他东西-->
             <Grid>
-                
+                <ContentControl Margin="3" x:Name="UserContentControl">
+                    <StackPanel>
+                        <TextBlock>asdasdasd</TextBlock>
+                        <TextBlock>asdasdasddasdasd</TextBlock>
+                        <TextBlock>asdasdasd</TextBlock>
+                        <TextBlock>asdasasdasdasd</TextBlock>
+                        <TextBlock>asdasdasdasd</TextBlock>
+                        <TextBlock>asdasasdadasd</TextBlock>
+                    </StackPanel>
+                </ContentControl>
             </Grid>
             
         </DockPanel>
-        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}"
-                                             x:Name="SoftSnackbar" />
+        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="SoftSnackbar" />
     </Grid>
 </Window>
