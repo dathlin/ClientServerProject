@@ -91,6 +91,11 @@
                             <materialDesign:PackIcon Kind="AccountConvert" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Header="主题色调" x:Name="MenuItem主题色调" Click="MenuItem主题色调_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Palette" />
+                        </MenuItem.Icon>
+                    </MenuItem>
 
                 </MenuItem>
                 <MenuItem Header="_关于">

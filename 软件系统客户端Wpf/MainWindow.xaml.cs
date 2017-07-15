@@ -297,6 +297,12 @@ namespace 软件系统客户端Wpf
             SoftUserPortrait.ChangePortrait();
         }
 
+
+        private void MenuItem主题色调_Click(object sender, RoutedEventArgs e)
+        {
+            SetShowRenderControl(UIControl_Palette);
+        }
+
         private void MenuItem关于本软件_Click(object sender, RoutedEventArgs e)
         {
             using (FormAbout fa = new FormAbout(Resource.StringResouce.SoftName,
@@ -621,6 +627,8 @@ namespace 软件系统客户端Wpf
         private UserHome UIControl_Home { get; set; }
 
 
+        private UserPaletteSelector UIControl_Palette { get; set; }
+
         /// <summary>
         /// 正在显示的子界面
         /// </summary>
@@ -658,6 +666,11 @@ namespace 软件系统客户端Wpf
 
             UIControl_Home = new UserHome();
             all_main_render.Add(UIControl_Home);
+
+            UIControl_Palette = new UserPaletteSelector();
+            all_main_render.Add(UIControl_Palette);
+
+
         }
 
         private void SetShowRenderControl(UserControl control)
@@ -710,5 +723,7 @@ namespace 软件系统客户端Wpf
         {
             SetShowRenderControl(UIControl_Home);
         }
+
+        
     }
 }
