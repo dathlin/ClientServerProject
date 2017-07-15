@@ -1,5 +1,8 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +26,16 @@ namespace 软件系统客户端Wpf.Views
         public UserHome()
         {
             InitializeComponent();
+        }
+
+        private void EmailButton_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("mailto://hsl200909@163.com");
+        }
+
+        private void GithubButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/dathlin/C-S-");
         }
     }
 }

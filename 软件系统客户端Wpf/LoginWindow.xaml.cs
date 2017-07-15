@@ -106,7 +106,7 @@ namespace 软件系统客户端Wpf
             };
 
             //延时
-            Thread.Sleep(200);
+            Thread.Sleep(400);
 
             //请求指令头数据，该数据需要更具实际情况更改
             OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.维护检查);
@@ -135,7 +135,7 @@ namespace 软件系统客户端Wpf
             Dispatcher.Invoke(message_show, "正在检查账户...");
 
             //延时
-            Thread.Sleep(200);
+            Thread.Sleep(400);
 
             //===================================================================================
             //   根据实际情况校验，选择数据库校验或是将用户名密码发至服务器校验
@@ -180,7 +180,7 @@ namespace 软件系统客户端Wpf
             Dispatcher.Invoke(message_show, "正在验证版本...");
 
             //延时
-            Thread.Sleep(200);
+            Thread.Sleep(400);
 
             result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.更新检查);
             if (result.IsSuccess)
@@ -229,7 +229,7 @@ namespace 软件系统客户端Wpf
              Dispatcher.Invoke(message_show, "正在下载参数...");
 
             //延时
-            Thread.Sleep(200);
+            Thread.Sleep(400);
 
 
             result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.参数下载);
@@ -291,12 +291,12 @@ namespace 软件系统客户端Wpf
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
-
+            LoginButton.Focus();
         }
 
         private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
         {
-
+            LoginButton.Focus();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -4,9 +4,111 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:软件系统客户端Wpf.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <!-- throw in some extra colour for our floating action button -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Green.Named.Primary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16,50,16,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <!--<Image Source="Resources/ms-icon-310x310.png" Stretch="Uniform" Width="100" Height="100" />-->
+            <StackPanel Grid.Column="1" Margin="24 16 0 0" VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" TextWrapping="Wrap">欢迎使用C-S软件系统模版的wpf版</TextBlock>
+            </StackPanel>
+        </Grid>
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Bottom"
+                      Margin="0 100 0 32">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:Card Width="420" Margin="4 2 8 16" Height="270">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="Windows" Width="160" Height="160" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="16 16 16 8">关于模版</TextBlock>
+                                <TextBlock TextWrapping="Wrap" Margin="16 0 16 8" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                           VerticalAlignment="Top">本项目致力于打造一个.Net平台下的一个通用的C-S基础模版，使用了C#7.0语法开发，方便其他中小型
+                                系统在此之上进行二次开发，也方便新学习C#的人学习。</TextBlock>
+                            </StackPanel>
+                            <Border Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" Padding="8">
+                                <DockPanel>
+                                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                                            DockPanel.Dock="Right" Click="EmailButton_Click"
+                                            ToolTip="hsl200909@163.com">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Email" />
+                                            <TextBlock Margin="8 0 0 0" VerticalAlignment="Center">Email</TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                    <TextBlock Foreground="{DynamicResource MaterialDesignBodyLight}" TextWrapping="Wrap" Margin="16" VerticalAlignment="Center">
+                                        本项目是作者的心血结晶，但是限于作者的水平及从事行业的背景，所开发的功能项目难免有疏漏之处，可以点击右侧给我发邮件。
+                                    </TextBlock>
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Width="420" Margin="8 2 4 16" Height="270">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="GithubCircle" Width="160" Height="160" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="16 16 16 8">关于源代码</TextBlock>
+                                <TextBlock TextWrapping="Wrap" Margin="16 0 16 8" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                           VerticalAlignment="Top">本项目将在github上开源，如果您喜欢这个项目，可以在github上进行star或是fork，并提出相关的改进push。</TextBlock>
+                            </StackPanel>
+                            <Border Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="0 1 0 0" BorderBrush="{DynamicResource MaterialDesignDivider}" Padding="8">
+                                <DockPanel>
+                                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                                            DockPanel.Dock="Right"
+                                             Click="GithubButton_OnClick"
+                                            ToolTip="https://github.com/dathlin/C-S-">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="CodeTags" />
+                                            <TextBlock Margin="8 0 0 0" VerticalAlignment="Center">Github</TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                    <TextBlock Foreground="{DynamicResource MaterialDesignBodyLight}" TextWrapping="Wrap" Margin="16" VerticalAlignment="Center">
+                                        本项目的开源地址请点击右侧按钮。
+                                    </TextBlock>
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+                    </materialDesign:Card>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

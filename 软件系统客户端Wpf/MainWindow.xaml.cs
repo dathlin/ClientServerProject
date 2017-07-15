@@ -126,6 +126,8 @@ namespace 软件系统客户端Wpf
             SoftUserPortraitInitialization();
             SoftUserPortrait.DownloadUserPortraint();
             AccountChip.Content = UserClient.UserAccount.UserName;
+
+            SetShowRenderControl(UIControl_Home);
         }
 
         private void Window_Initialized(object sender, EventArgs e)
@@ -616,6 +618,8 @@ namespace 软件系统客户端Wpf
 
         private UserChat UIControls_Chat { get; set; }
 
+        private UserHome UIControl_Home { get; set; }
+
 
         /// <summary>
         /// 正在显示的子界面
@@ -652,6 +656,8 @@ namespace 软件系统客户端Wpf
             });
             all_main_render.Add(UIControls_Chat);
 
+            UIControl_Home = new UserHome();
+            all_main_render.Add(UIControl_Home);
         }
 
         private void SetShowRenderControl(UserControl control)
@@ -672,14 +678,18 @@ namespace 软件系统客户端Wpf
                     DoubleAnimation d_y2 = new DoubleAnimation(10, 0, TimeSpan.FromMilliseconds(100));
                     TranslateTransform tt2 = new TranslateTransform();
                     UserContentControl.RenderTransform = tt2;
+                    tt2.BeginAnimation(TranslateTransform.XProperty, d_y2);
                     UserContentControl.BeginAnimation(OpacityProperty, d_opacity2);
-                    tt.BeginAnimation(TranslateTransform.XProperty, d_y2);
                 };
 
                 UserContentControl.BeginAnimation(OpacityProperty, d_opacity);
                 tt.BeginAnimation(TranslateTransform.XProperty, d_y);
             }
         }
+
+
+
+
         private void SetShowRenderControl(Type typeControl)
         {
             UserControl control = null;
@@ -695,5 +705,10 @@ namespace 软件系统客户端Wpf
         }
 
         #endregion
+
+        private void Button_BackMain_Click(object sender, RoutedEventArgs e)
+        {
+            SetShowRenderControl(UIControl_Home);
+        }
     }
 }
