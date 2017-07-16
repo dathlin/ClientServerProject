@@ -9,6 +9,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="400">
     <UserControl.Resources>
+        <Style x:Key="MaterialDesignFloatingHintTextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="24" />
+        </Style>
         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
             <Setter Property="Margin" Value="0" />
             <Setter Property="CommandParameter" Value="{Binding}" />
@@ -82,7 +85,8 @@
         <wpf:Card DockPanel.Dock="Top" Margin="2">
             <DockPanel>
                 <local:Palette DockPanel.Dock="Left" Width="200" />
-                <TextBlock Margin="16" TextWrapping="Wrap" VerticalAlignment="Center">This is your current palette.  Configure your initial palette in App.xaml, but palettes can be changed at runtime.</TextBlock>
+                <TextBlock Margin="16" TextWrapping="Wrap" VerticalAlignment="Center">这是你当前的主题配色，可以在app.xaml中进行配置和初始化，
+                    也可以在运行的时候进行更改。</TextBlock>
             </DockPanel>
         </wpf:Card>
         <Grid Margin="0 16 0 0">
@@ -91,9 +95,9 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Margin="8">
-                <TextBlock VerticalAlignment="Center">Light</TextBlock>
+                <TextBlock VerticalAlignment="Center">浅色主题</TextBlock>
                 <ToggleButton Margin="8 0 16 0" Command="{Binding ToggleBaseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}" />
-                <TextBlock VerticalAlignment="Center">Dark</TextBlock>
+                <TextBlock VerticalAlignment="Center">暗色主题</TextBlock>
             </StackPanel>
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0 12 0 0">
                 <ItemsControl ItemsSource="{Binding Swatches, Mode=OneTime}">

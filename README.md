@@ -164,6 +164,10 @@ using HslCommunication.Profinet;
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client2.png) 
 
+###### 主窗口的暗色主题
+
+![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client3.png) 
+
 ###### 其他功能等待添加
 <br />
 

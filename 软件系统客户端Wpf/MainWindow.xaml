@@ -8,7 +8,13 @@
         xmlns:y="clr-namespace:ClientsLibrary;assembly=ClientsLibrary"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="825" WindowState="Maximized" Activated="Window_Activated" Closing="Window_Closing" ContentRendered="Window_ContentRendered" Initialized="Window_Initialized"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -19,6 +25,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignCaptionTextBlock}" x:Key="Caption">
@@ -126,7 +134,7 @@
             </Menu>
 
             <!--底部状态栏以及公告-->
-            <Grid DockPanel.Dock="Bottom" Background="WhiteSmoke">
+            <Grid DockPanel.Dock="Bottom">
                 <Grid Margin="2">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -140,8 +148,8 @@
                             <TextBlock x:Name="TextBlock_Version">1.0.0</TextBlock>
                             <TextBlock Margin="20,0,0,0">客户端状态：</TextBlock>
                             <TextBlock x:Name="TextBlock_ClientStatus">正在连接服务器...</TextBlock>
-                            <TextBlock Margin="20,0,0,0" Foreground="Blue">温馨提示：</TextBlock>
-                            <TextBlock x:Name="TextBlock_Information" Foreground="Blue"></TextBlock>
+                            <TextBlock Margin="20,0,0,0" Foreground="DodgerBlue">温馨提示：</TextBlock>
+                            <TextBlock x:Name="TextBlock_Information" Foreground="DodgerBlue"></TextBlock>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
@@ -156,7 +164,7 @@
             </Grid>
 
             <Grid Width="100" DockPanel.Dock="Left">
-                <Border BorderThickness="0,1,1,1" BorderBrush="LightGray" Padding="5">
+                <Border BorderThickness="0,1,1,1" BorderBrush="DarkGray" Padding="5">
                     <StackPanel>
                         <TextBlock>随便放点什么东西</TextBlock>
                         <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Grid.Column="1" Width="60" VerticalAlignment="Center"

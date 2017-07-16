@@ -73,9 +73,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\AnotherCommandImplementation.cs" />
     <Compile Include="Views\Palette.xaml.cs">
       <DependentUpon>Palette.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PaletteSelectorViewModel.cs" />
     <Compile Include="Views\UserChat.xaml.cs">
       <DependentUpon>UserChat.xaml</DependentUpon>
     </Compile>

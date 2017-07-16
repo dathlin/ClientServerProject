@@ -667,7 +667,7 @@ namespace 软件系统客户端Wpf
             UIControl_Home = new UserHome();
             all_main_render.Add(UIControl_Home);
 
-            UIControl_Palette = new UserPaletteSelector();
+            UIControl_Palette = new UserPaletteSelector() { DataContext = new PaletteSelectorViewModel() };
             all_main_render.Add(UIControl_Palette);
 
 
