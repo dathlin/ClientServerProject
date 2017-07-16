@@ -160,13 +160,17 @@ using HslCommunication.Profinet;
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client1.png)  
 
-###### 主窗口，还未实现聊天及文件功能
+###### 主窗口，还未实现文件功能
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client2.png) 
 
 ###### 主窗口的暗色主题
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client3.png) 
+
+###### 主题选择界面
+
+![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client4.png)
 
 ###### 其他功能等待添加
 <br />
@@ -180,3 +184,4 @@ using HslCommunication.Profinet;
 ###### Copyright (c) Richard.Hu. All rights reserved.
 ###### Licensed under the MIT License.
 ###### WeChat:工业智能软件开发项目组
+###### Wpf模版使用了一个开源项目，<a href="https://github.com/ButchersBoy/MaterialDesignInXamlToolkit">https://github.com/ButchersBoy/MaterialDesignInXamlToolkit</a>
