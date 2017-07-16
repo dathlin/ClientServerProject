@@ -93,6 +93,10 @@ namespace CommonLibrary
         /// 上次系统登录的时间
         /// </summary>
         public DateTime LoginTime { get; set; } = DateTime.Now;
+        /// <summary>
+        /// 指示系统的主题色是否是深色
+        /// </summary>
+        public bool IsThemeDark { get; set; } = false;
 
 
         /// <summary>
@@ -113,6 +117,7 @@ namespace CommonLibrary
             json.Add(nameof(IsNewVersionRunning), new JValue(IsNewVersionRunning));
             json.Add(nameof(SystemInfo), new JValue(SystemInfo));
             json.Add(nameof(LoginTime), new JValue(LoginTime));
+            json.Add(nameof(IsThemeDark), new JValue(false));
             return json.ToString();
         }
         public override void LoadByString(string content)
@@ -126,6 +131,7 @@ namespace CommonLibrary
                 IsNewVersionRunning = SoftBasic.GetValueFromJsonObject(json, nameof(IsNewVersionRunning), IsNewVersionRunning);
                 Password = SoftBasic.GetValueFromJsonObject(json, nameof(Password), Password);
                 LoginTime = SoftBasic.GetValueFromJsonObject(json, nameof(LoginTime), LoginTime);
+                IsThemeDark = SoftBasic.GetValueFromJsonObject(json, nameof(IsThemeDark), IsThemeDark);
             }
         }
 
