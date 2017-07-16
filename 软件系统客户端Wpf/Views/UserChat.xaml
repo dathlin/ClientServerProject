@@ -13,14 +13,25 @@
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <ListBox>
+
+        <TextBox IsReadOnly="True" x:Name="TextBox_ChatHistory" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"></TextBox>
+        <!--<ListBox>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
+        </ListBox>-->
 
         <TextBlock Grid.Row="1" Margin="2">按Enter键发送消息：</TextBlock>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBox MaxLines="1" KeyDown="TextBox_KeyDown" x:Name="TextBox_Send"></TextBox>
+            <Button Style="{StaticResource MaterialDesignRaisedButton}" Grid.Column="1" Click="Button_Click">发送</Button>
+        </Grid>
     </Grid>
 </UserControl>

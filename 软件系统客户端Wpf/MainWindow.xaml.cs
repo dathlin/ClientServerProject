@@ -290,6 +290,7 @@ namespace 软件系统客户端Wpf
             //Task.Factory.StartNew(() => messageQueue.Enqueue(message));
 
             SetShowRenderControl(UIControls_Chat);
+            UIControls_Chat.ScrollToDown();
         }
 
         private void MenuItem头像更改_Click(object sender, RoutedEventArgs e)
@@ -425,7 +426,7 @@ namespace 软件系统客户端Wpf
                 {
                     TextBlock_ServerTime.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm:ss");
                     //label_file_count.Text = json["FileCount"].ToObject<int>().ToString();
-                    //UIControls_Chat.AddChatsHistory(sb.ToString());
+                    UIControls_Chat.AddChatsHistory(sb.ToString());
                 }));
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.文件总数量)
@@ -439,7 +440,7 @@ namespace 软件系统客户端Wpf
             {
                 if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
                 {
-                    //UIControls_Chat?.DealwithReceive(data);
+                    UIControls_Chat?.DealwithReceive(data);
                 }));
             }
         }

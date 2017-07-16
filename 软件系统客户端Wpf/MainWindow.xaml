@@ -163,16 +163,18 @@
                 </Grid>
             </Grid>
 
-            <Grid Width="100" DockPanel.Dock="Left">
-                <Border BorderThickness="0,1,1,1" BorderBrush="DarkGray" Padding="5">
-                    <StackPanel>
-                        <TextBlock>随便放点什么东西</TextBlock>
-                        <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Grid.Column="1" Width="60" VerticalAlignment="Center"
+            <Grid Width="180" DockPanel.Dock="Left">
+                <GroupBox Header="系统信息" Margin="2,5,0,0">
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock>随便放点什么东西</TextBlock>
+                            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Grid.Column="1" Width="60" VerticalAlignment="Center"
                                         Click="Button_BackMain_Click">
-                            主页
-                        </Button>
-                    </StackPanel>
-                </Border>
+                                主页
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
             </Grid>
 
             
