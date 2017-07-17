@@ -101,7 +101,7 @@
                                         </StackPanel>
                                     </Button>
                                     <TextBlock Foreground="{DynamicResource MaterialDesignBodyLight}" TextWrapping="Wrap" Margin="16" VerticalAlignment="Center">
-                                        本项目的开源地址请点击右侧按钮。
+                                        本项目的开源地址请点击右侧按钮。授权：MIT
                                     </TextBlock>
                                 </DockPanel>
                             </Border>

@@ -361,6 +361,14 @@ namespace 软件系统客户端Wpf
             Close();
         }
 
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //点击了文件查看
+            MessageBox.Show("点击了文件");
+        }
+
+
         #endregion
 
 
@@ -436,7 +444,7 @@ namespace 软件系统客户端Wpf
                 if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
                 {
                     TextBlock_ServerTime.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm:ss");
-                    //label_file_count.Text = json["FileCount"].ToObject<int>().ToString();
+                    TextBlock_FileCount.Text = json["FileCount"].ToObject<int>().ToString();
                     UIControls_Chat.AddChatsHistory(sb.ToString());
                 }));
             }
@@ -444,7 +452,7 @@ namespace 软件系统客户端Wpf
             {
                 if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
                 {
-                    //label_file_count.Text = data;
+                    TextBlock_FileCount.Text = data;
                 }));
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.留言版消息)
@@ -733,9 +741,9 @@ namespace 软件系统客户端Wpf
 
         private void Button_BackMain_Click(object sender, RoutedEventArgs e)
         {
+            //点击了主页
             SetShowRenderControl(UIControl_Home);
         }
 
-        
     }
 }
