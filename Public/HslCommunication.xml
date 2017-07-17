@@ -645,6 +645,11 @@
             文件存储功能的基类，包含了文件存储路径，存储方法等
             </summary>
         </member>
+        <member name="F:HslCommunication.BasicFramework.SoftFileSaveBase.HybirdLock">
+            <summary>
+            一个用于读写同步的混合线程锁
+            </summary>
+        </member>
         <member name="M:HslCommunication.BasicFramework.SoftFileSaveBase.ToSaveString">
             <summary>
             获取需要保存的数据，需要重写实现
@@ -1327,6 +1332,11 @@
         <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_threadCount">
             <summary>
             准备启动的处理数据的线程数量
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_runStatus">
+            <summary>
+            指示多线程处理是否在运行中，防止冗余调用
             </summary>
         </member>
         <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_dataList">
