@@ -18,6 +18,7 @@ using CommonLibrary;
 using HslCommunication.BasicFramework;
 using Newtonsoft.Json.Linq;
 using ClientsLibrary;
+using MaterialDesignThemes.Wpf;
 
 namespace 软件系统客户端Wpf
 {

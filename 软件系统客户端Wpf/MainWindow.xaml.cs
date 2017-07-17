@@ -21,6 +21,7 @@ using ClientsLibrary;
 using System.Threading;
 using 软件系统客户端Wpf.Views;
 using System.Windows.Media.Animation;
+using MaterialDesignThemes.Wpf;
 
 namespace 软件系统客户端Wpf
 {
@@ -162,6 +163,9 @@ namespace 软件系统客户端Wpf
 
             //初始化窗口
             MainRenderInitialization();
+
+            //加载主题
+            new PaletteHelper().SetLightDark(UserClient.JsonSettings.IsThemeDark);
         }
 
         private void AddStringRenderShow(string str)

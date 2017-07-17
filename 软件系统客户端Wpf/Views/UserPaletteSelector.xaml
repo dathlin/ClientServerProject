@@ -7,7 +7,7 @@
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:local="clr-namespace:软件系统客户端Wpf.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="400">
+             d:DesignHeight="700" d:DesignWidth="400" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <Style x:Key="MaterialDesignFloatingHintTextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="{x:Type TextBox}">
             <Setter Property="FontSize" Value="24" />
@@ -96,7 +96,8 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Margin="8">
                 <TextBlock VerticalAlignment="Center">浅色主题</TextBlock>
-                <ToggleButton Margin="8 0 16 0" Command="{Binding ToggleBaseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}" />
+                <ToggleButton Margin="8 0 16 0" Command="{Binding ToggleBaseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked}" 
+                              x:Name="CheckBox_Theme" Checked="CheckBox_Theme_Checked" Unchecked="CheckBox_Theme_Unchecked"/>
                 <TextBlock VerticalAlignment="Center">暗色主题</TextBlock>
             </StackPanel>
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0 12 0 0">

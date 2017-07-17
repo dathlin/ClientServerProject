@@ -18,7 +18,7 @@ namespace 软件系统客户端Wpf.Views
 
         public ICommand ToggleBaseCommand { get; } = new AnotherCommandImplementation(o => ApplyBase((bool)o));
 
-        private static void ApplyBase(bool isDark)
+        public static void ApplyBase(bool isDark)
         {
             new PaletteHelper().SetLightDark(isDark);
         }
@@ -27,14 +27,14 @@ namespace 软件系统客户端Wpf.Views
 
         public ICommand ApplyPrimaryCommand { get; } = new AnotherCommandImplementation(o => ApplyPrimary((Swatch)o));
 
-        private static void ApplyPrimary(Swatch swatch)
+        public static void ApplyPrimary(Swatch swatch)
         {
             new PaletteHelper().ReplacePrimaryColor(swatch);
         }
 
         public ICommand ApplyAccentCommand { get; } = new AnotherCommandImplementation(o => ApplyAccent((Swatch)o));
 
-        private static void ApplyAccent(Swatch swatch)
+        public static void ApplyAccent(Swatch swatch)
         {
             new PaletteHelper().ReplaceAccentColor(swatch);
         }

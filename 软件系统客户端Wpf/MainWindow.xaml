@@ -164,7 +164,7 @@
             </Grid>
 
             <Grid Width="180" DockPanel.Dock="Left">
-                <GroupBox Header="系统信息" Margin="2,5,0,0">
+                <GroupBox Header="系统信息" Margin="0,0,0,0">
                     <Grid>
                         <StackPanel>
                             <TextBlock>随便放点什么东西</TextBlock>
@@ -266,7 +266,7 @@
 
             <!--主界面，应该设置成可以放置其他东西-->
             <Grid>
-                <ContentControl Margin="3" x:Name="UserContentControl">
+                <ContentControl Margin="3,0,3,0" x:Name="UserContentControl">
                 </ContentControl>
             </Grid>
             

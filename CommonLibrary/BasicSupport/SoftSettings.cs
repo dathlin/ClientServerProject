@@ -117,7 +117,7 @@ namespace CommonLibrary
             json.Add(nameof(IsNewVersionRunning), new JValue(IsNewVersionRunning));
             json.Add(nameof(SystemInfo), new JValue(SystemInfo));
             json.Add(nameof(LoginTime), new JValue(LoginTime));
-            json.Add(nameof(IsThemeDark), new JValue(false));
+            json.Add(nameof(IsThemeDark), new JValue(IsThemeDark));
             return json.ToString();
         }
         public override void LoadByString(string content)
