@@ -19,6 +19,7 @@ using HslCommunication.BasicFramework;
 using Newtonsoft.Json.Linq;
 using ClientsLibrary;
 using MaterialDesignThemes.Wpf;
+using System.IO;
 
 namespace 软件系统客户端Wpf
 {
@@ -320,6 +321,18 @@ namespace 软件系统客户端Wpf
             if (UserClient.JsonSettings.Password != "") LoginButton.Focus();
             else if (UserClient.JsonSettings.LoginName != "") PasswordBox.Focus();
             else NameTextBox.Focus();
+
+
+
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\Palette.txt"))
+            {
+                using (StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"\Palette.txt", Encoding.UTF8))
+                {
+                    string temp = sr.ReadToEnd();
+                    MaterialDesignThemes.Wpf.Palette obj = JObject.Parse(temp).ToObject<MaterialDesignThemes.Wpf.Palette>();
+                    new PaletteHelper().ReplacePalette(obj);
+                }
+            }
         }
 
         private void NameTextBox_KeyDown(object sender, KeyEventArgs e)

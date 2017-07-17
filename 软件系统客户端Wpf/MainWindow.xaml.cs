@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -83,6 +84,12 @@ namespace 软件系统客户端Wpf
             //通知服务器退出网络服务
             net_socket_client.ClientClose();
 
+            //保存当前的颜色选择
+            var p = new PaletteHelper().QueryPalette();
+            using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @"\Palette.txt", false, Encoding.UTF8))
+            {
+                sw.Write(JObject.FromObject(p).ToString());
+            }
             //等待一秒退出
             using (FormWaitInfomation fwm = new FormWaitInfomation("正在退出程序...", 1000))
             {

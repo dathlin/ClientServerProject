@@ -82,7 +82,7 @@
         </DataTemplate>
     </UserControl.Resources>
     <DockPanel>
-        <wpf:Card DockPanel.Dock="Top" Margin="2">
+        <wpf:Card DockPanel.Dock="Top" Margin="2,0,2,0">
             <DockPanel>
                 <local:Palette DockPanel.Dock="Left" Width="200" />
                 <TextBlock Margin="16" TextWrapping="Wrap" VerticalAlignment="Center">这是你当前的主题配色，可以在app.xaml中进行配置和初始化，
