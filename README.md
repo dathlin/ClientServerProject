@@ -172,7 +172,15 @@ using HslCommunication.Profinet;
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client4.png)
 
-###### 其他功能等待添加
+
+###### 共享文件界面
+
+![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client5.png)
+
+###### 其他功能界面使用了winform的窗口技术，此处不在赘述。
+
+
+
 <br />
 
 
