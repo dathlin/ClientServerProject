@@ -163,6 +163,7 @@
                 </Grid>
             </Grid>
 
+            <!--左侧的侧边栏预告-->
             <Grid Width="180" DockPanel.Dock="Left">
                 <GroupBox Header="系统信息" Margin="0,0,0,0">
                     <Grid>

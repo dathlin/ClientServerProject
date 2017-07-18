@@ -365,7 +365,7 @@ namespace 软件系统客户端Wpf
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //点击了文件查看
-            MessageBox.Show("点击了文件");
+            SetShowRenderControl(UIControl_Files);
         }
 
 
@@ -645,7 +645,8 @@ namespace 软件系统客户端Wpf
         private UserChat UIControls_Chat { get; set; }
 
         private UserHome UIControl_Home { get; set; }
-
+        
+        private UserFileRender UIControl_Files { get; set; }
 
         private UserPaletteSelector UIControl_Palette { get; set; }
 
@@ -690,6 +691,8 @@ namespace 软件系统客户端Wpf
             UIControl_Palette = new UserPaletteSelector() { DataContext = new PaletteSelectorViewModel() };
             all_main_render.Add(UIControl_Palette);
 
+            UIControl_Files = new UserFileRender();
+            all_main_render.Add(UIControl_Files);
 
         }
 

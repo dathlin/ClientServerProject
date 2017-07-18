@@ -81,6 +81,12 @@
     <Compile Include="Views\UserChat.xaml.cs">
       <DependentUpon>UserChat.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserFileRender.xaml.cs">
+      <DependentUpon>UserFileRender.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserFileRenderItem.xaml.cs">
+      <DependentUpon>UserFileRenderItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserHome.xaml.cs">
       <DependentUpon>UserHome.xaml</DependentUpon>
     </Compile>
@@ -111,6 +117,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserChat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserFileRender.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserFileRenderItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
