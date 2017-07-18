@@ -143,7 +143,7 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="TextBlock_CopyRight" Foreground="Gray">本软件著作权归某某所有</TextBlock>
+                            <TextBlock x:Name="TextBlock_CopyRight" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}">本软件著作权归某某所有</TextBlock>
                             <TextBlock Margin="20,0,0,0">版本号：</TextBlock>
                             <TextBlock x:Name="TextBlock_Version">1.0.0</TextBlock>
                             <TextBlock Margin="20,0,0,0">客户端状态：</TextBlock>
@@ -241,7 +241,7 @@
 
                     <GroupBox Header="公告" Margin="2,5,0,0" Grid.Row="1">
                         <Grid Height="100">
-                            <TextBlock Foreground="DodgerBlue" x:Name="TextBlock_Announcement" TextWrapping="Wrap"></TextBlock>
+                            <TextBlock x:Name="TextBlock_Announcement" TextWrapping="Wrap"></TextBlock>
                         </Grid>
                     </GroupBox>
 
