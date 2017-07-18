@@ -86,7 +86,7 @@ namespace 软件系统客户端Wpf
 
             //保存当前的颜色选择
             var p = new PaletteHelper().QueryPalette();
-            using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @"\Palette.txt", false, Encoding.UTF8))
+            using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @"Palette.txt", false, Encoding.UTF8))
             {
                 sw.Write(JObject.FromObject(p).ToString());
             }
@@ -366,6 +366,7 @@ namespace 软件系统客户端Wpf
         {
             //点击了文件查看
             SetShowRenderControl(UIControl_Files);
+            UIControl_Files.UpdateFiles();
         }
 
 
@@ -609,7 +610,7 @@ namespace 软件系统客户端Wpf
 
         private void SoftUserPortraitInitialization()
         {
-            SoftUserPortrait = new UserPortrait(AppDomain.CurrentDomain.BaseDirectory + @"\Portrait\" + UserClient.UserAccount.UserName, 
+            SoftUserPortrait = new UserPortrait(AppDomain.CurrentDomain.BaseDirectory + @"Portrait\" + UserClient.UserAccount.UserName, 
                 m => {
                     byte[] content = System.IO.File.ReadAllBytes(m);
                     BitmapImage bi = new BitmapImage();

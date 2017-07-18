@@ -1962,6 +1962,31 @@
             刷新客户端的文件信息
             </summary>
         </member>
+        <member name="T:HslCommunication.Enthernet.SimpleFileClient">
+            <summary>
+            文件传送中的客户端类
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.SimpleFileClient.DeleteFile(System.String,System.Int32,System.String)">
+            <summary>
+            删除服务器上的文件
+            </summary>
+            <param name="serverIp"></param>
+            <param name="serverPort"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.SimpleFileClient.DownloadFile(System.String,System.Int32,System.String,System.Action{System.Int32,System.Int32},System.String)">
+            <summary>
+            下载文件信息
+            </summary>
+            <param name="serverIp"></param>
+            <param name="serverPort"></param>
+            <param name="fileName"></param>
+            <param name="processReport"></param>
+            <param name="fileSave"></param>
+            <returns></returns>
+        </member>
         <member name="T:HslCommunication.Enthernet.Net_File_Server">
             <summary>
             文件传送类服务器，仅仅负责数据传送部分，不负责数据库的存储
@@ -2987,6 +3012,14 @@
             </summary>
             <param name="customer"></param>
             <param name="token"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetSupport.GetBytesFromString(System.Int32,System.String)">
+            <summary>
+            根据字符串及指令头返回数据信息
+            </summary>
+            <param name="code"></param>
             <param name="data"></param>
             <returns></returns>
         </member>

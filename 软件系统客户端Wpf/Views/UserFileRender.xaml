@@ -35,7 +35,7 @@
         </Grid>
 
         <Border Grid.Row="1" BorderThickness="0,1,0,0" Margin="0,5,0,0" BorderBrush="{DynamicResource MaterialDesignDivider}">
-            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="0,5,5,0" x:Name="FileListControl" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 
                 </StackPanel>

@@ -262,7 +262,7 @@
                                     CornerRadius="2" MouseLeftButtonDown="Border_MouseLeftButtonDown" Cursor="Hand"
                                     Background="{DynamicResource PrimaryHueLightBrush}">
                                 <TextBlock HorizontalAlignment="Right" x:Name="TextBlock_FileCount" Margin="0,0,5,0" ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                               >0</TextBlock>
+                                               Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">0</TextBlock>
                             </Border>
                             <TextBlock Grid.Row="1" Grid.Column="0">在线信息：</TextBlock>
                             <ListBox Grid.Row="2" Grid.ColumnSpan="2" x:Name="ListBox_Onlines" FontSize="10.5"></ListBox>

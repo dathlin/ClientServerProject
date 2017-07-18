@@ -32,7 +32,7 @@ namespace 软件系统客户端Wpf
         {
             InitializeComponent();
 
-            UserClient.JsonSettings.FileSavePath = AppDomain.CurrentDomain.BaseDirectory + @"\JsonSettings.txt";
+            UserClient.JsonSettings.FileSavePath = AppDomain.CurrentDomain.BaseDirectory + @"JsonSettings.txt";
             UserClient.JsonSettings.LoadByFile();
         }
 
@@ -91,7 +91,7 @@ namespace 软件系统客户端Wpf
             Action start_update = delegate
             {
                 //需要该exe支持，否则将无法是实现自动版本控制
-                string update_file_name = AppDomain.CurrentDomain.BaseDirectory + @"\软件自动更新.exe";
+                string update_file_name = AppDomain.CurrentDomain.BaseDirectory + @"软件自动更新.exe";
                 try
                 {
                     System.Diagnostics.Process.Start(update_file_name);
@@ -324,9 +324,9 @@ namespace 软件系统客户端Wpf
 
 
 
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\Palette.txt"))
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"Palette.txt"))
             {
-                using (StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"\Palette.txt", Encoding.UTF8))
+                using (StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"Palette.txt", Encoding.UTF8))
                 {
                     string temp = sr.ReadToEnd();
                     MaterialDesignThemes.Wpf.Palette obj = JObject.Parse(temp).ToObject<MaterialDesignThemes.Wpf.Palette>();

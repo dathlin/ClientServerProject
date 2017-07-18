@@ -4,34 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:软件系统客户端Wpf.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="400" BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}"
              Margin="0,0,0,3" MinWidth="400">
-    <Grid Margin="3">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="120"></ColumnDefinition>
-            <ColumnDefinition Width="130"></ColumnDefinition>
-            <ColumnDefinition Width="60"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Image x:Name="FileIcon" Grid.RowSpan="2" Width="18" Height="18" VerticalAlignment="Top" Margin="3,6,3,3"></Image>
+    <StackPanel>
+        <Grid Margin="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="130"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="FileIcon" Grid.RowSpan="2" Width="16" Height="16" VerticalAlignment="Top" Margin="3,6,3,3"></Image>
 
-        <TextBlock x:Name="FileName" Grid.Column="1" VerticalAlignment="Center">文件名称：</TextBlock>
-        <TextBlock x:Name="FileSize" Grid.Column="2" VerticalAlignment="Center">大小：</TextBlock>
-        <TextBlock x:Name="FileDate" Grid.Column="3" VerticalAlignment="Center">日期：</TextBlock>
+            <TextBlock x:Name="FileName" Grid.Column="1" VerticalAlignment="Center">文件名称：</TextBlock>
+            <TextBlock x:Name="FileSize" Grid.Column="2" VerticalAlignment="Center">大小：</TextBlock>
+            <TextBlock x:Name="FileDate" Grid.Column="3" VerticalAlignment="Center">日期：</TextBlock>
 
-        <TextBlock x:Name="FileDeleteButton" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand"
-                   Background="{DynamicResource PrimaryHueLightBrush}" Padding="6,3,6,3">删除</TextBlock>
+            <TextBlock x:Name="FileDeleteButton" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand"
+                       Background="{DynamicResource PrimaryHueLightBrush}" Padding="12,3,12,3" MouseLeftButtonDown="FileDeleteButton_MouseLeftButtonDown"
+                       Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">删除</TextBlock>
         
-        <TextBlock x:Name="FileDescription" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">文件备注：</TextBlock>
-        <TextBlock x:Name="FilePeople" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">上传人：</TextBlock>
-        <TextBlock x:Name="FileDownloadTimes" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center">下载次数：</TextBlock>
-        <TextBlock x:Name="FileDownloadButton" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand"
-                   Background="{DynamicResource PrimaryHueLightBrush}" Padding="6,3,6,3">下载</TextBlock>
-    </Grid>
+            <TextBlock x:Name="FileDescription" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">文件备注：</TextBlock>
+            <TextBlock x:Name="FilePeople" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">上传人：</TextBlock>
+            <TextBlock x:Name="FileDownloadTimes" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center">下载次数：</TextBlock>
+            <TextBlock x:Name="FileDownloadButton" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand"
+                       Background="{DynamicResource PrimaryHueLightBrush}" Padding="12,3,12,3" MouseLeftButtonDown="FileDownloadButton_MouseLeftButtonDown"
+                       Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">下载</TextBlock>
+        </Grid>
+        <ProgressBar x:Name="FileDownloadProgress" Grid.Row="2" Grid.ColumnSpan="4" Margin="30,-5,63,0" Height="4"></ProgressBar>
+    </StackPanel>
 </UserControl>
