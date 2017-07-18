@@ -260,7 +260,7 @@
                             <TextBlock Grid.Row="0" Grid.Column="0">共享文件：</TextBlock>
                             <Border Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}"
                                     CornerRadius="2" MouseLeftButtonDown="Border_MouseLeftButtonDown" Cursor="Hand"
-                                    Background="{DynamicResource PrimaryHueLightBrush}">
+                                    Background="{DynamicResource PrimaryHueMidBrush}">
                                 <TextBlock HorizontalAlignment="Right" x:Name="TextBlock_FileCount" Margin="0,0,5,0" ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                                Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">0</TextBlock>
                             </Border>

@@ -28,14 +28,14 @@
             <TextBlock x:Name="FileDate" Grid.Column="3" VerticalAlignment="Center">日期：</TextBlock>
 
             <TextBlock x:Name="FileDeleteButton" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand"
-                       Background="{DynamicResource PrimaryHueLightBrush}" Padding="12,3,12,3" MouseLeftButtonDown="FileDeleteButton_MouseLeftButtonDown"
+                       Background="{DynamicResource PrimaryHueMidBrush}" Padding="12,3,12,3" MouseLeftButtonDown="FileDeleteButton_MouseLeftButtonDown"
                        Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">删除</TextBlock>
         
             <TextBlock x:Name="FileDescription" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">文件备注：</TextBlock>
             <TextBlock x:Name="FilePeople" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">上传人：</TextBlock>
             <TextBlock x:Name="FileDownloadTimes" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center">下载次数：</TextBlock>
             <TextBlock x:Name="FileDownloadButton" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand"
-                       Background="{DynamicResource PrimaryHueLightBrush}" Padding="12,3,12,3" MouseLeftButtonDown="FileDownloadButton_MouseLeftButtonDown"
+                       Background="{DynamicResource PrimaryHueMidBrush}" Padding="12,3,12,3" MouseLeftButtonDown="FileDownloadButton_MouseLeftButtonDown"
                        Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">下载</TextBlock>
         </Grid>
         <ProgressBar x:Name="FileDownloadProgress" Grid.Row="2" Grid.ColumnSpan="4" Margin="30,-5,63,0" Height="4"></ProgressBar>
