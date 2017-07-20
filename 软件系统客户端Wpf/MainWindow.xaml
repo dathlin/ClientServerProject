@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:软件系统客户端Wpf"
         xmlns:y="clr-namespace:ClientsLibrary;assembly=ClientsLibrary"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="825" WindowState="Maximized" Activated="Window_Activated" Closing="Window_Closing" ContentRendered="Window_ContentRendered" Initialized="Window_Initialized"
         Loaded="Window_Loaded"
@@ -34,250 +35,265 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <DockPanel>
-            <!--菜单项目-->
-            <Menu IsMainMenu="True" DockPanel.Dock="Top">
-                <MenuItem Header="_管理员">
-                    <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="AccountSettingsVariant" />
-                    </MenuItem.Icon>
-                    <MenuItem Header="公告更改" x:Name="MenuItem公告管理" Click="MenuItem公告管理_Click">
+
+    <materialDesign:DialogHost x:Name="DialogHostWait">
+        <Grid>
+            <DockPanel>
+                <!--菜单项目-->
+                <Menu IsMainMenu="True" DockPanel.Dock="Top">
+                    <MenuItem Header="_管理员">
                         <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="BorderColor" />
+                            <materialDesign:PackIcon Kind="AccountSettingsVariant" />
                         </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="账户管理" x:Name="MenuItem账户管理" Click="MenuItem账户管理_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="AccountCircle" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="注册账户" x:Name="MenuItem注册账户" Click="MenuItem注册账户_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="AccountPlus" />
-                        </MenuItem.Icon>
-                    </MenuItem>
+                        <MenuItem Header="公告更改" x:Name="MenuItem公告管理" Click="MenuItem公告管理_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="BorderColor" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="账户管理" x:Name="MenuItem账户管理" Click="MenuItem账户管理_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="AccountCircle" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="注册账户" x:Name="MenuItem注册账户" Click="MenuItem注册账户_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="AccountPlus" />
+                            </MenuItem.Icon>
+                        </MenuItem>
                     
-                    <Separator />
-                    <MenuItem Header="日志查看" x:Name="MenuItem日志查看" Click="MenuItem日志查看_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="FlagVariant" />
-                        </MenuItem.Icon>
+                        <Separator />
+                        <MenuItem Header="日志查看" x:Name="MenuItem日志查看" Click="MenuItem日志查看_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="FlagVariant" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="远程更新" x:Name="MenuItem远程更新" Click="MenuItem远程更新_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="Rotate3d" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="消息发送" x:Name="MenuItem消息发送" Click="MenuItem消息发送_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="MessageTextOutline" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="开发中心" x:Name="MenuItem开发中心" Click="MenuItem开发中心_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="Security" />
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="远程更新" x:Name="MenuItem远程更新" Click="MenuItem远程更新_Click">
+                    <MenuItem Header="_设置">
                         <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="Rotate3d" />
+                            <materialDesign:PackIcon Kind="Settings" />
                         </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="消息发送" x:Name="MenuItem消息发送" Click="MenuItem消息发送_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="MessageTextOutline" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="开发中心" x:Name="MenuItem开发中心" Click="MenuItem开发中心_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="Security" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="_设置">
-                    <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="Settings" />
-                    </MenuItem.Icon>
-                    <MenuItem Header="密码更改" x:Name="MenuItem密码更改" Click="MenuItem密码更改_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="KeyChange" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="聊天信息" x:Name="MenuItem聊天信息" Click="MenuItem聊天信息_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="MessageOutline" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="头像更改" x:Name="MenuItem头像更改" Click="MenuItem头像更改_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="AccountConvert" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="主题色调" x:Name="MenuItem主题色调" Click="MenuItem主题色调_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="Palette" />
-                        </MenuItem.Icon>
-                    </MenuItem>
+                        <MenuItem Header="密码更改" x:Name="MenuItem密码更改" Click="MenuItem密码更改_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="KeyChange" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="聊天信息" x:Name="MenuItem聊天信息" Click="MenuItem聊天信息_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="MessageOutline" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="头像更改" x:Name="MenuItem头像更改" Click="MenuItem头像更改_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="AccountConvert" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="主题色调" x:Name="MenuItem主题色调" Click="MenuItem主题色调_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="Palette" />
+                            </MenuItem.Icon>
+                        </MenuItem>
 
-                </MenuItem>
-                <MenuItem Header="_关于">
-                    <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="CubeOutline" />
-                    </MenuItem.Icon>
-                    <MenuItem Header="关于本软件" x:Name="MenuItem关于本软件" Click="MenuItem关于本软件_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="Leaf" />
-                        </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="更新日志" x:Name="MenuItem更新日志" Click="MenuItem更新日志_Click">
+                    <MenuItem Header="_关于">
                         <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="BookOpen" />
+                            <materialDesign:PackIcon Kind="CubeOutline" />
                         </MenuItem.Icon>
+                        <MenuItem Header="关于本软件" x:Name="MenuItem关于本软件" Click="MenuItem关于本软件_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="Leaf" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="更新日志" x:Name="MenuItem更新日志" Click="MenuItem更新日志_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="BookOpen" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="版本号说明" x:Name="MenuItem版本号说明" Click="MenuItem版本号说明_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="InformationOutline" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="意见反馈" x:Name="MenuItem意见反馈" Click="MenuItem意见反馈_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="Bridge" />
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="版本号说明" x:Name="MenuItem版本号说明" Click="MenuItem版本号说明_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="InformationOutline" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="意见反馈" x:Name="MenuItem意见反馈" Click="MenuItem意见反馈_Click">
-                        <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="Bridge" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </MenuItem>
-            </Menu>
+                </Menu>
 
-            <!--底部状态栏以及公告-->
-            <Grid DockPanel.Dock="Bottom">
-                <Grid Margin="2">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="TextBlock_CopyRight" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}">本软件著作权归某某所有</TextBlock>
-                            <TextBlock Margin="20,0,0,0">版本号：</TextBlock>
-                            <TextBlock x:Name="TextBlock_Version">1.0.0</TextBlock>
-                            <TextBlock Margin="20,0,0,0">客户端状态：</TextBlock>
-                            <TextBlock x:Name="TextBlock_ClientStatus">正在连接服务器...</TextBlock>
-                            <TextBlock Margin="20,0,0,0" Foreground="DodgerBlue">温馨提示：</TextBlock>
-                            <TextBlock x:Name="TextBlock_Information" Foreground="DodgerBlue"></TextBlock>
-                        </StackPanel>
-
-                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <TextBlock>时间：</TextBlock>
-                            <TextBlock x:Name="TextBlock_ServerTime">0000-00-00 00:00:00</TextBlock>
-                            <TextBlock Margin="20,0,0,0">延迟：</TextBlock>
-                            <TextBlock x:Name="TextBlock_ServerDelay">0</TextBlock>
-                            <TextBlock>ms</TextBlock>
-                        </StackPanel>
-                    </Grid>
-                </Grid>
-            </Grid>
-
-            <!--左侧的侧边栏预告-->
-            <Grid Width="180" DockPanel.Dock="Left">
-                <GroupBox Header="系统信息" Margin="0,0,0,0">
-                    <Grid>
-                        <StackPanel>
-                            <TextBlock>随便放点什么东西</TextBlock>
-                            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Grid.Column="1" Width="60" VerticalAlignment="Center"
-                                        Click="Button_BackMain_Click">
-                                主页
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                </GroupBox>
-            </Grid>
-
-            
-            <!--右侧的账户信息和登录消息-->
-            <Grid DockPanel.Dock="Right" Width="230">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    
-                    <GroupBox Header="账户信息" Margin="2,0,0,0" Grid.Row="0">
+                <!--底部状态栏以及公告-->
+                <Grid DockPanel.Dock="Bottom">
+                    <Grid Margin="2">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"></RowDefinition>
-                                <RowDefinition Height="auto"></RowDefinition>
-                                <RowDefinition Height="auto"></RowDefinition>
-                                <RowDefinition Height="auto"></RowDefinition>
-                                <RowDefinition Height="auto"></RowDefinition>
-                                <RowDefinition Height="auto"></RowDefinition>
-                                <RowDefinition Height="auto"></RowDefinition>
-                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                            <Grid Grid.ColumnSpan="2">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="TextBlock_CopyRight" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}">本软件著作权归某某所有</TextBlock>
+                                <TextBlock Margin="20,0,0,0">版本号：</TextBlock>
+                                <TextBlock x:Name="TextBlock_Version">1.0.0</TextBlock>
+                                <TextBlock Margin="20,0,0,0">客户端状态：</TextBlock>
+                                <TextBlock x:Name="TextBlock_ClientStatus">正在连接服务器...</TextBlock>
+                                <TextBlock Margin="20,0,0,0" Foreground="DodgerBlue">温馨提示：</TextBlock>
+                                <TextBlock x:Name="TextBlock_Information" Foreground="DodgerBlue"></TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <TextBlock>时间：</TextBlock>
+                                <TextBlock x:Name="TextBlock_ServerTime">0000-00-00 00:00:00</TextBlock>
+                                <TextBlock Margin="20,0,0,0">延迟：</TextBlock>
+                                <TextBlock x:Name="TextBlock_ServerDelay">0</TextBlock>
+                                <TextBlock>ms</TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <!--左侧的侧边栏预告-->
+                <Grid Width="180" DockPanel.Dock="Left">
+                    <GroupBox Header="系统信息" Margin="0,0,0,0">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock>随便放点什么东西</TextBlock>
+                                <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Grid.Column="1" Width="60" VerticalAlignment="Center"
+                                            Click="Button_BackMain_Click">
+                                    主页
+                                </Button>
+                                <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Grid.Column="1" Width="60" VerticalAlignment="Center"
+                                            Click="Button_Dialog_Click">
+                                    窗口测试
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+
+            
+                <!--右侧的账户信息和登录消息-->
+                <Grid DockPanel.Dock="Right" Width="230">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                    
+                        <GroupBox Header="账户信息" Margin="2,0,0,0" Grid.Row="0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
+                                <Grid Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
 
-                                <materialDesign:Chip x:Name="AccountChip" Content="" Margin="0 0 6 4" Click="AccountChip_Click" VerticalAlignment="Center">
-                                    <materialDesign:Chip.Icon>
-                                        <Image x:Name="AccountPortrait"/>
-                                    </materialDesign:Chip.Icon>
-                                </materialDesign:Chip>
 
-                                <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Grid.Column="1" Width="60" VerticalAlignment="Center"
-                                        Click="Button_Quit_Click">
-                                    注销
-                                </Button>
+                                    <materialDesign:Chip x:Name="AccountChip" Content="" Margin="0 0 6 4" Click="AccountChip_Click" VerticalAlignment="Center">
+                                        <materialDesign:Chip.Icon>
+                                            <Image x:Name="AccountPortrait"/>
+                                        </materialDesign:Chip.Icon>
+                                    </materialDesign:Chip>
+
+                                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Grid.Column="1" Width="60" VerticalAlignment="Center"
+                                            Click="Button_Quit_Click">
+                                        注销
+                                    </Button>
+                                </Grid>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0">权限等级：</TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="0">所属分厂：</TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="0">注册时间：</TextBlock>
+                                <TextBlock Grid.Row="4" Grid.Column="0">登录频次：</TextBlock>
+                                <TextBlock Grid.Row="5" Grid.Column="0">最近登录：</TextBlock>
+                                <TextBlock Grid.Row="6" Grid.Column="0">上次登录IP：</TextBlock>
+
+                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="Account_grade"></TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="Account_factory"></TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="Account_register"></TextBlock>
+                                <TextBlock Grid.Row="4" Grid.Column="1" x:Name="Account_last"></TextBlock>
+                                <TextBlock Grid.Row="5" Grid.Column="1" x:Name="Account_times"></TextBlock>
+                                <TextBlock Grid.Row="6" Grid.Column="1" x:Name="Account_address"></TextBlock>
                             </Grid>
+                        </GroupBox>
 
-                            <TextBlock Grid.Row="1" Grid.Column="0">权限等级：</TextBlock>
-                            <TextBlock Grid.Row="2" Grid.Column="0">所属分厂：</TextBlock>
-                            <TextBlock Grid.Row="3" Grid.Column="0">注册时间：</TextBlock>
-                            <TextBlock Grid.Row="4" Grid.Column="0">登录频次：</TextBlock>
-                            <TextBlock Grid.Row="5" Grid.Column="0">最近登录：</TextBlock>
-                            <TextBlock Grid.Row="6" Grid.Column="0">上次登录IP：</TextBlock>
+                        <GroupBox Header="公告" Margin="2,5,0,0" Grid.Row="1">
+                            <Grid Height="100">
+                                <TextBlock x:Name="TextBlock_Announcement" TextWrapping="Wrap"></TextBlock>
+                            </Grid>
+                        </GroupBox>
 
-                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="Account_grade"></TextBlock>
-                            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="Account_factory"></TextBlock>
-                            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="Account_register"></TextBlock>
-                            <TextBlock Grid.Row="4" Grid.Column="1" x:Name="Account_last"></TextBlock>
-                            <TextBlock Grid.Row="5" Grid.Column="1" x:Name="Account_times"></TextBlock>
-                            <TextBlock Grid.Row="6" Grid.Column="1" x:Name="Account_address"></TextBlock>
-                        </Grid>
-                    </GroupBox>
+                        <GroupBox Header="系统信息" Margin="2,5,0,0" Grid.Row="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
 
-                    <GroupBox Header="公告" Margin="2,5,0,0" Grid.Row="1">
-                        <Grid Height="100">
-                            <TextBlock x:Name="TextBlock_Announcement" TextWrapping="Wrap"></TextBlock>
-                        </Grid>
-                    </GroupBox>
-
-                    <GroupBox Header="系统信息" Margin="2,5,0,0" Grid.Row="2">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"></RowDefinition>
-                                <RowDefinition Height="auto"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock Grid.Row="0" Grid.Column="0">共享文件：</TextBlock>
-                            <Border Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}"
-                                    CornerRadius="2" MouseLeftButtonDown="Border_MouseLeftButtonDown" Cursor="Hand"
-                                    Background="{DynamicResource PrimaryHueMidBrush}">
-                                <TextBlock HorizontalAlignment="Right" x:Name="TextBlock_FileCount" Margin="0,0,5,0" ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                               Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">0</TextBlock>
-                            </Border>
-                            <TextBlock Grid.Row="1" Grid.Column="0">在线信息：</TextBlock>
-                            <ListBox Grid.Row="2" Grid.ColumnSpan="2" x:Name="ListBox_Onlines" FontSize="10.5"></ListBox>
-                        </Grid>
-                    </GroupBox>
+                                <TextBlock Grid.Row="0" Grid.Column="0">共享文件：</TextBlock>
+                                <Border Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                                        CornerRadius="2" MouseLeftButtonDown="Border_MouseLeftButtonDown" Cursor="Hand"
+                                        Background="{DynamicResource PrimaryHueMidBrush}">
+                                    <TextBlock HorizontalAlignment="Right" x:Name="TextBlock_FileCount" Margin="0,0,5,0" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                   Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">0</TextBlock>
+                                </Border>
+                                <TextBlock Grid.Row="1" Grid.Column="0">在线信息：</TextBlock>
+                                <ListBox Grid.Row="2" Grid.ColumnSpan="2" x:Name="ListBox_Onlines" FontSize="10.5"></ListBox>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
                 </Grid>
-            </Grid>
 
-            <!--主界面，应该设置成可以放置其他东西-->
-            <Grid>
-                <ContentControl Margin="3,0,3,0" x:Name="UserContentControl">
-                </ContentControl>
-            </Grid>
+                <!--主界面，应该设置成可以放置其他东西-->
+                <Grid>
+                    <ContentControl Margin="3,0,3,0" x:Name="UserContentControl">
+                    </ContentControl>
+                </Grid>
             
-        </DockPanel>
-        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="SoftSnackbar" />
-    </Grid>
+            </DockPanel>
+            <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="SoftSnackbar" />
+
+        </Grid>
+
+        <materialDesign:DialogHost.DialogContent>
+            <StackPanel Margin="16">
+                <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0" />
+                <TextBlock>正在下载中...</TextBlock>
+            </StackPanel>
+        </materialDesign:DialogHost.DialogContent>
+    </materialDesign:DialogHost>
 </Window>

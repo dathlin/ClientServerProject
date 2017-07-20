@@ -748,6 +748,13 @@ namespace 软件系统客户端Wpf
             //点击了主页
             SetShowRenderControl(UIControl_Home);
         }
-
+        
+        private async void Button_Dialog_Click(object sender, RoutedEventArgs e)
+        {
+            //点击了显示一个提示的窗体
+            DialogHostWait.IsOpen = true;
+            await Task.Delay(2000);
+            DialogHostWait.IsOpen = false;
+        }
     }
 }
