@@ -26,5 +26,10 @@ namespace 软件系统浏览器模版.Controllers
 
             return View();
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
     }
 }
