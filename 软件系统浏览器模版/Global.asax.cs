@@ -16,6 +16,9 @@ namespace 软件系统浏览器模版
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //错误记录
+            AppDomain.CurrentDomain.UnhandledException += ClientsLibrary.UserClient.CurrentDomain_UnhandledException;
         }
     }
 }
