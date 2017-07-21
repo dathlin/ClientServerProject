@@ -38,10 +38,6 @@
             </div>
         </div>
     </div>
-    @if (ViewData["消息"] != null)
-    {
-        <script type="text/javascript">alert('@ViewData["消息"]')</script>
-    }
 
     <script type="text/javascript">
         var windowScreen = document.documentElement;
@@ -51,5 +47,11 @@
             main_div.style.marginTop = main_top;
         }
     </script>
+
+    @if (ViewData["Message"] != null)
+    {
+        <script type="text/javascript">alert('@ViewData["Message"]')</script>
+    }
+
 </body>
 </html>
