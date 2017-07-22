@@ -1,6 +1,7 @@
 ﻿using ClientsLibrary;
 using CommonLibrary;
 using HslCommunication;
+using HslCommunication.BasicFramework;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -68,6 +69,34 @@ namespace 软件系统浏览器模版.Controllers
                     return Login(account.ForbidMessage);
                 }
                 UserClient.UserAccount = account;
+            }
+            else
+            {
+                //访问失败
+                return Login(result.Message);
+            }
+
+
+            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.更新检查);
+            if (result.IsSuccess)
+            {
+                //服务器应该返回服务器的版本号
+                SystemVersion sv = new SystemVersion(result.Content);
+                //系统账户跳过低版本检测
+                if (fc["UserName"] != "admin")
+                {
+                    if (UserClient.CurrentVersion != sv)
+                    {
+                        return Login("当前版本号不正确，需要服务器更新才允许登录。");
+                    }
+                }
+                else
+                {
+                    if (UserClient.CurrentVersion < sv)
+                    {
+                        return Login("版本号过时，需要管理员更新才允许登录。");
+                    }
+                }
             }
             else
             {
