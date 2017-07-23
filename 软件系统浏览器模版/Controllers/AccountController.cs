@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using 软件系统浏览器模版.Models;
 
 namespace 软件系统浏览器模版.Controllers
 {
@@ -68,7 +69,8 @@ namespace 软件系统浏览器模版.Controllers
                     //不允许登录
                     return Login(account.ForbidMessage);
                 }
-                UserClient.UserAccount = account;
+                Session[SessionItemsDescription.UserAccount] = account;
+                //UserClient.UserAccount = account;
             }
             else
             {
@@ -87,14 +89,14 @@ namespace 软件系统浏览器模版.Controllers
                 {
                     if (UserClient.CurrentVersion != sv)
                     {
-                        return Login("当前版本号不正确，需要服务器更新才允许登录。");
+                        return Login("当前版本号不正确，需要联系管理员更新服务器才允许登录。");
                     }
                 }
                 else
                 {
                     if (UserClient.CurrentVersion < sv)
                     {
-                        return Login("版本号过时，需要管理员更新才允许登录。");
+                        return Login("版本号过时，需要联系管理员更新服务器才允许登录。");
                     }
                 }
             }
@@ -107,5 +109,9 @@ namespace 软件系统浏览器模版.Controllers
             //允许登录，并记录到Session
             return RedirectToAction("Index", "Home");
         }
+
+
+
+
     }
 }

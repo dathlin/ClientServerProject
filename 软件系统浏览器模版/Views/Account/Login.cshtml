@@ -21,7 +21,7 @@
                 @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
-                    <span class="heading">XX管理系统<small style="font-family:'Microsoft YaHei';color:#a1a1a1;font-size:15px">用户登录</small></span>
+                    <span class="heading">@CommonLibrary.Resource.StringResouce.SoftName<small style="font-family:'Microsoft YaHei';color:#a1a1a1;font-size:15px">用户登录</small></span>
                     <div class="form-group">
                         <input type="text" class="form-control" name="UserName" placeholder="用户名" required>
                         <i class="fa fa-user"></i>
