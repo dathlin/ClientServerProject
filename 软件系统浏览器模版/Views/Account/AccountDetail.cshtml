@@ -6,6 +6,7 @@
     CommonLibrary.UserAccount account = ViewData[SessionItemsDescription.UserAccount] as CommonLibrary.UserAccount;
 }
 
+<h2>账户详细信息</h2>
 <table class="table table-hover">
         <thead>
             <tr>
@@ -54,6 +55,11 @@
                 <th scope="row">8</th>
                 <td>上次登录Ip</td>
                 <td>@account.LastLoginIpAddress</td>
+            </tr>
+            <tr>
+                <th scope="row">9</th>
+                <td>上次登录方式</td>
+                <td>@account.LastLoginWay</td>
             </tr>
         </tbody>
 </table>
