@@ -72,6 +72,10 @@ namespace CommonLibrary
         /// </summary>
         public static string PasswordText { get { return "Password"; } }
         /// <summary>
+        /// 用于存储和传送的名称
+        /// </summary>
+        public static string LoginWayText { get { return "LoginWay"; } }
+        /// <summary>
         /// 深度拷贝当前的账户信息
         /// </summary>
         /// <typeparam name="T">返回的类型，应该为继承后的类型</typeparam>

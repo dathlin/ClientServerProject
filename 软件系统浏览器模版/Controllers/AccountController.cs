@@ -58,7 +58,8 @@ namespace 软件系统浏览器模版.Controllers
             JObject json = new JObject
             {
                 { UserAccount.UserNameText, new JValue(fc["UserName"]) },
-                { UserAccount.PasswordText, new JValue(fc["UserPassword"]) }
+                { UserAccount.PasswordText, new JValue(fc["UserPassword"]) },
+                { UserAccount.LoginWayText, new JValue("webApp") }
             };
             result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.账户检查, json.ToString());
             if (result.IsSuccess)

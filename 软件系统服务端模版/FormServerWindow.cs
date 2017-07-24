@@ -496,8 +496,9 @@ namespace 软件系统服务端模版
                 //提取账户，密码
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
+                string way = SoftBasic.GetValueFromJsonObject(json, UserAccount.LoginWayText, "winform");
 
-                UserAccount account = UserServer.ServerAccounts.CheckAccount(name, password, state.GetRemoteEndPoint().Address.ToString());
+                UserAccount account = UserServer.ServerAccounts.CheckAccount(name, password, state.GetRemoteEndPoint().Address.ToString(), way);
                 //检测是否重复登录
                 if(account.LoginEnable)
                 {

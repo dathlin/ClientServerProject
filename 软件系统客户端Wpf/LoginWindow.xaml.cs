@@ -147,7 +147,8 @@ namespace 软件系统客户端Wpf
             JObject json = new JObject
             {
                 { UserAccount.UserNameText, new JValue(UserName) },
-                { UserAccount.PasswordText, new JValue(UserPassword) }
+                { UserAccount.PasswordText, new JValue(UserPassword) },
+                { UserAccount.LoginWayText, new JValue("wpf") }
             };
             result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.账户检查, json.ToString());
             if (result.IsSuccess)
