@@ -1,0 +1,59 @@
+﻿@using  软件系统浏览器模版.Models
+
+@{
+    ViewBag.Title = "AccountDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    CommonLibrary.UserAccount account = ViewData[SessionItemsDescription.UserAccount] as CommonLibrary.UserAccount;
+}
+
+<table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>属性</th>
+                <th>信息</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>账户名</td>
+                <td>@account.UserName</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>密码</td>
+                <td>********</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>分厂</td>
+                <td>@account.Factory</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>权限</td>
+                <td>@CommonLibrary.AccountGrade.GetDescription(account.Grade)</td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>注册时间</td>
+                <td>@account.RegisterTime.ToString()</td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td>登录次数</td>
+                <td>@account.LoginFrequency</td>
+            </tr>
+            <tr>
+                <th scope="row">7</th>
+                <td>上次登录时间</td>
+                <td>@account.LastLoginTime</td>
+            </tr>
+            <tr>
+                <th scope="row">8</th>
+                <td>上次登录Ip</td>
+                <td>@account.LastLoginIpAddress</td>
+            </tr>
+        </tbody>
+</table>

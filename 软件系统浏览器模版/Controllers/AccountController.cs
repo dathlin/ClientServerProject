@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using 软件系统浏览器模版.Models;
+using 软件系统浏览器模版.Models.Account;
 
 namespace 软件系统浏览器模版.Controllers
 {
@@ -110,8 +111,31 @@ namespace 软件系统浏览器模版.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        //POST 用于退出系统的账户
+        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关
+        /// <summary>
+        /// 注销账户的方法
+        /// </summary>
+        /// <param name="fc"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff(FormCollection fc)
+        {
+            Session[SessionItemsDescription.UserAccount] = null;
+            return RedirectToAction("Login", "Account");
+        }
 
-
-
+        //GET 查看账号详细信息的界面
+        /// <summary>
+        /// 查看账户的详细信息
+        /// </summary>
+        /// <returns></returns>
+        [AuthorizeUser]
+        public ActionResult AccountDetail()
+        {
+            ViewData[SessionItemsDescription.UserAccount] = Session[SessionItemsDescription.UserAccount];
+            return View();
+        }
     }
 }
