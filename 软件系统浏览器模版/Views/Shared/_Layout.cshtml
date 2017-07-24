@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("应用程序名称", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(CommonLibrary.Resource.StringResouce.SoftName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -33,7 +33,16 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - @CommonLibrary.Resource.StringResouce.SoftName</p>
+            <p style="text-align:center">
+                @{ 
+                    string year = DateTime.Now.Year > 2017 ? "2017 - " + DateTime.Now.Year : DateTime.Now.Year.ToString();
+                }
+
+                <small>
+                    &copy; @year - @CommonLibrary.Resource.StringResouce.SoftName | 本软件著作权归<span>@CommonLibrary.Resource.StringResouce.SoftCopyRight</span>所有
+                    | 服务器版本：V @ClientsLibrary.UserClient.CurrentVersion.ToString()
+                </small>
+            </p>
         </footer>
     </div>
 

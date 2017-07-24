@@ -1,4 +1,27 @@
-﻿
-<ul class="nav navbar-nav navbar-right">
-    <li>@Html.ActionLink("登录", "AccountLogin", "Home")</li>
-</ul>
+﻿@using 软件系统浏览器模版.Models
+@using  CommonLibrary
+ 
+
+@{
+    if (Session[SessionItemsDescription.UserAccount] == null)
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("登录", "AccountLogin", "Home")</li>
+        </ul>
+    }
+    else
+    {
+        UserAccount user = Session[软件系统浏览器模版.Models.SessionItemsDescription.UserAccount] as UserAccount;
+
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                <li>@Html.ActionLink("您好，" + user.UserName + "!", "AccountDetail", "Account")</li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
+            </ul>
+        }
+    }
+}
