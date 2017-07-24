@@ -60,6 +60,10 @@ namespace CommonLibrary
         /// </summary>
         public int LoginFailedCount { get; set; } = 0;
         /// <summary>
+        /// 上次登录系统的方式，有winform版，wpf版，web版
+        /// </summary>
+        public string LastLoginWay { get; set; } = string.Empty;
+        /// <summary>
         /// 用于存储和传送的名称
         /// </summary>
         public static string UserNameText { get { return "UserName"; } }

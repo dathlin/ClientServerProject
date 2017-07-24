@@ -82,7 +82,7 @@ namespace CommonLibrary
         /// <param name="code">需要验证的密码</param>
         /// <param name="ipAddress">登录的ip地址</param>
         /// <returns>验证的结果对象</returns>
-        public T CheckAccount(string name, string code, string ipAddress)
+        public T CheckAccount(string name, string code, string ipAddress, string way)
         {
             T result = new T()
             {
@@ -111,6 +111,7 @@ namespace CommonLibrary
                             //下面两个数据应该是旧的数据
                             item.LastLoginIpAddress = ipAddress;
                             item.LastLoginTime = DateTime.Now;
+                            item.LastLoginWay = way;
                             break;
                         }
                     }
@@ -177,9 +178,9 @@ namespace CommonLibrary
         /// <param name="code">登录的密码</param>
         /// <param name="ipAddress">检查的客户端的登录的ip地址</param>
         /// <returns></returns>
-        public string CheckAccountJson(string name, string code, string ipAddress)
+        public string CheckAccountJson(string name, string code, string ipAddress, string way)
         {
-            T result = CheckAccount(name, code, ipAddress);
+            T result = CheckAccount(name, code, ipAddress, way);
             return JObject.FromObject(result).ToString();
         }
 
@@ -209,7 +210,7 @@ namespace CommonLibrary
                 {
                     all_list_accounts = JArray.Parse(json).ToObject<List<T>>();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     LogHelper?.SaveError(Resource.StringResouce.AccountLoadFailed, ex);
                 }
