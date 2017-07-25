@@ -1,7 +1,25 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "关于本软件系统";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<dl class="dl-horizontal">
+    <dt>软件名称</dt>
+    <dd>@CommonLibrary.Resource.StringResouce.SoftName</dd>
+    <dt>版本号</dt>
+    <dd>V<span>@ClientsLibrary.UserClient.CurrentVersion.ToString()</span></dd>
+    <dt>版权声明</dt>
+    <dd>本软件著作权归<span>@CommonLibrary.Resource.StringResouce.SoftCopyRight</span>所有</dd>
+    <dt>基础框架版本</dt>
+    <dd>V<span>@HslCommunication.BasicFramework.SoftBasic.FrameworkVersion.ToString()</span></dd>
+    <dt>框架版本</dt>
+    <dd>本系统框架由<a href="http://www.cnblogs.com/dathlin/">Richard.Hu</a>提供技术支持</dd>
+    <dt>框架开源地址</dt>
+    <dd><a href="https://github.com/dathlin/C-S-">https://github.com/dathlin/C-S-</a></dd>
+    <dt>JSON.Net</dt>
+    <dd><a href="http://www.newtonsoft.com/json">http://www.newtonsoft.com/json</a></dd>
+    <dt>Wpf基础架构</dt>
+    <dd><a href="https://github.com/ButchersBoy/MaterialDesignInXamlToolkit">https://github.com/ButchersBoy/MaterialDesignInXamlToolkit</a></dd>
+    <dt>Glyphicons图标来源</dt>
+    <dd><a href="http://glyphicons.com/">http://glyphicons.com/</a></dd>
+</dl>

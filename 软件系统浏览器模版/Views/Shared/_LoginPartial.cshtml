@@ -18,8 +18,15 @@
             @Html.AntiForgeryToken()
 
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                <li>@Html.ActionLink("您好，" + user.UserName + "!", "AccountDetail", "Account")</li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        您好， @user.UserName !
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("账户详细信息", "AccountDetail", "Account")</li>
+                        <li>@Html.ActionLink("修改密码", "ChangePassword", "Account")</li>
+                    </ul>
+                </li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
             </ul>
         }

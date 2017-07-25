@@ -27,8 +27,6 @@ namespace 软件系统浏览器模版.Controllers
         [AuthorizeUser]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
@@ -44,6 +42,14 @@ namespace 软件系统浏览器模版.Controllers
             return View();
         }
 
-
+        /// <summary>
+        /// 系统更新日志
+        /// </summary>
+        /// <returns></returns>
+        [AuthorizeUser]
+        public ActionResult UpdateLog()
+        {
+            return View();
+        }
     }
 }

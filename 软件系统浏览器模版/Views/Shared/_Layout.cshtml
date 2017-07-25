@@ -21,9 +21,38 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                    <li>@Html.ActionLink("关于", "About", "Home")</li>
-                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        管理员</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("公告更改", "About", "Home")</li>
+                            <li>@Html.ActionLink("账号管理", "About", "Home")</li>
+                            <li>@Html.ActionLink("注册账户", "About", "Home")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("日志查看", "About", "Home")</li>
+                            <li>@Html.ActionLink("消息发送", "About", "Home")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        设置</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("关于本系统", "About", "Home")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                        关于</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("关于本系统", "About", "Home")</li>
+                            <li>@Html.ActionLink("更新日志", "UpdateLog", "Home")</li>
+                            <li>@Html.ActionLink("版本号说明", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("建议反馈", "Contact", "Home")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
