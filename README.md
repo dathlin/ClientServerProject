@@ -180,6 +180,18 @@ using HslCommunication.Profinet;
 ###### 其他功能界面使用了winform的窗口技术，此处不在赘述。
 
 
+<br />
+
+# Web版客户端的程序界面
+
+###### 登录界面，背景图片可以自定义
+
+![](https://github.com/dathlin/C-S-/raw/master/软件系统浏览器模版/screenshots/browser1.png) 
+
+###### 主界面，很多功能还在完善中
+
+![](https://github.com/dathlin/C-S-/raw/master/软件系统浏览器模版/screenshots/browser2.png) 
+
 
 <br />
 
