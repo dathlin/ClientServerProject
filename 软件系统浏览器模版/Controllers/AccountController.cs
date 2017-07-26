@@ -13,6 +13,12 @@ using 软件系统浏览器模版.Models.Account;
 
 namespace 软件系统浏览器模版.Controllers
 {
+
+
+
+    /// <summary>
+    /// 账户相关的控制器
+    /// </summary>
     public class AccountController : Controller
     {
         // GET: Account
@@ -104,6 +110,22 @@ namespace 软件系统浏览器模版.Controllers
             }
             else
             {
+                //访问失败
+                return Login(result.Message);
+            }
+
+
+            result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.参数下载);
+            if (result.IsSuccess)
+            {
+                //服务器返回初始化的数据，此处进行数据的提取，有可能包含了多个数据
+                json = JObject.Parse(result.Content);
+                //例如公告数据
+                UserClient.Announcement = SoftBasic.GetValueFromJsonObject(json, nameof(UserClient.Announcement), "");
+            }
+            else
+            {
+                //访问失败
                 //访问失败
                 return Login(result.Message);
             }
