@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "关于版本号";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>版本号说明<small>每个版本号的含义</small></h2>
+
+<h3>当前的版本号为：V @ClientsLibrary.UserClient.CurrentVersion.ToString()</h3>
+
+<dl class="dl-horizontal">
+    <dt>@ClientsLibrary.UserClient.CurrentVersion.MainVersion</dt>
+    <dd>程序的大版本号，一般是架构升级或是界面大调整。</dd>
+    <dt>@ClientsLibrary.UserClient.CurrentVersion.SecondaryVersion</dt>
+    <dd>程序的次版本号，一般是指软件功能升级或是界面小幅度调整。</dd>
+    <dt>@ClientsLibrary.UserClient.CurrentVersion.EditVersion</dt>
+    <dd>程序的修订版本号，一般是指常规的版本更新和BUG修复。</dd>
+    <dt>@ClientsLibrary.UserClient.CurrentVersion.InnerVersion</dt>
+    <dd>程序的内部版本号，用于内部开发使用。</dd>
+</dl>

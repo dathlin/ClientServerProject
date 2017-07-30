@@ -51,5 +51,39 @@ namespace 软件系统浏览器模版.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 版本号说明
+        /// </summary>
+        /// <returns></returns>
+        [AuthorizeUser]
+        public ActionResult VersionInformation()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 一个错误的消息界面
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public ActionResult ErrorPage(string message)
+        {
+            ViewBag.Message = message;
+            return View("Error");
+        }
+
+
+        //GET
+        /// <summary>
+        /// 获取意见反馈的界面
+        /// </summary>
+        /// <returns></returns>
+        [AuthorizeUser]
+        public ActionResult AdviceFeedback()
+        {
+            return View();
+        }
+
     }
 }

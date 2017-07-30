@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "意见反馈";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>请在下方填写意见反馈，字数控制在1000字以内</h2>
+
+
+        @using (Html.BeginForm("AdviceFeedback", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div class="form-group">
+                <label for="Advice">请输入建议</label>
+                <textarea class="form-control" id="Advice" placeholder="建议，字数1000字以内"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-default">Submit</button>
+        }

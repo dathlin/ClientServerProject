@@ -216,6 +216,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\AccountDetail.cshtml" />
     <Content Include="Views\Home\UpdateLog.cshtml" />
+    <Content Include="Views\Home\VersionInformation.cshtml" />
+    <Content Include="Views\Home\AdviceFeedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
