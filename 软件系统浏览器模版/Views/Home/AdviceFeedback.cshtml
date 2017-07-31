@@ -2,20 +2,38 @@
 @{
     ViewBag.Title = "意见反馈";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string content = Guid.NewGuid().ToString("N");
+}
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 }
 
 <h2>请在下方填写意见反馈，字数控制在1000字以内</h2>
+<div>
 
+    @using (Ajax.BeginForm("AdviceFeedback", "Home", new AjaxOptions()
+    {
+        HttpMethod="POST",
+        UpdateTargetId = content,
+        InsertionMode = InsertionMode.Replace
+    }, new { @class = "form-horizontal" }))
+    {
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label for="advice">请输入建议</label>
+        <textarea class="form-control" name="advice" id="advice" placeholder="建议内容，字数1000字以内，不要带回车键" rows="6"></textarea>
+    </div>
 
-        @using (Html.BeginForm("AdviceFeedback", "Home", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
+    
+    <div id="@content" class="form-group" style="padding:0px,5px,0px,5px">
 
+    </div>
+    
+    <button type="submit" class="btn btn-default">提交</button>
+    }
 
-            <div class="form-group">
-                <label for="Advice">请输入建议</label>
-                <textarea class="form-control" id="Advice" placeholder="建议，字数1000字以内" rows="6"></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-default">提交</button>
-        }
+</div>

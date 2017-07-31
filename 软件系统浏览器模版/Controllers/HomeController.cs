@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClientsLibrary;
+using CommonLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -85,5 +87,34 @@ namespace 软件系统浏览器模版.Controllers
             return View();
         }
 
+
+        //POST
+        /// <summary>
+        /// 获取意见反馈的界面
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AuthorizeUser]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdviceFeedback(string advice)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                //对建议进行保存
+                HslCommunication.OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.意见反馈, UserClient.UserAccount.UserName + ":" + advice);
+                if (result.IsSuccess)
+                {
+                    return Content("<div class=\"alert alert-success\" role=\"alert\">成功提交数据</div><script>alert('建议提交成功！')</script>", "text/html");
+                }
+                else
+                {
+                    return Content("<div class=\"alert alert-danger\" role=\"alert\">建议提交失败，请稍后再试！错误信息：" + result.Message + "</div>", "text/html");
+                }
+            }
+            else
+            {
+                return Content("<div class=\"alert alert-danger\" role=\"alert\">这是一个错误的请求！</div>", "text/html");
+            }
+        }
     }
 }
