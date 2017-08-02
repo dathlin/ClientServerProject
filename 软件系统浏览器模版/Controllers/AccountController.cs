@@ -160,5 +160,18 @@ namespace 软件系统浏览器模版.Controllers
             ViewData[SessionItemsDescription.UserAccount] = Session[SessionItemsDescription.UserAccount];
             return View();
         }
+
+
+        //GET
+        /// <summary>
+        /// 更改账户的密码的页面，更改密码之前需要对旧的密码进行验证
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+
     }
 }
