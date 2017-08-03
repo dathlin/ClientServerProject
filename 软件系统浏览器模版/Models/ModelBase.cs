@@ -24,8 +24,16 @@ namespace 软件系统浏览器模版.Models
 
 
 
-
-
+    /// <summary>
+    /// 消息框的状态
+    /// </summary>
+    public enum MessageBoxStyle
+    {
+        success,
+        info,
+        warning,
+        danger
+    }
 
     
 

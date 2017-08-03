@@ -220,6 +220,12 @@
     <Content Include="Views\Home\UpdateLog.cshtml" />
     <Content Include="Views\Home\VersionInformation.cshtml" />
     <Content Include="Views\Home\AdviceFeedback.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Shared\_MessageDangerPartial.cshtml" />
+    <Content Include="Views\Account\SetPasswordPartial.cshtml" />
+    <Content Include="Views\Shared\_MessageInfoPartial.cshtml" />
+    <Content Include="Views\Shared\_MessageSuccessPartial.cshtml" />
+    <Content Include="Views\Shared\_MessageWarningPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -173,5 +173,32 @@ namespace 软件系统浏览器模版.Controllers
         }
 
 
+        //POST 这是一个Ajax的请求
+        [HttpPost]
+        [AuthorizeUser]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckPassword(string InputPassword)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                UserAccount account = Session[SessionItemsDescription.UserAccount] as UserAccount;
+                if (InputPassword == account.Password)
+                {
+                    //允许修改密码
+                    return PartialView("SetPasswordPartial");
+                }
+                else
+                {
+                    ViewData["alertMessage"] = "密码验证失败！";
+                    return PartialView("_MessageDangerPartial");
+                }
+            }
+            else
+            {
+                ViewData["alertMessage"] = "请求无效！";
+                return PartialView("_MessageDangerPartial");
+            }
+        }
+
     }
 }
