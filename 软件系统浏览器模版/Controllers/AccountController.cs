@@ -200,5 +200,57 @@ namespace 软件系统浏览器模版.Controllers
             }
         }
 
+
+        //POST 这是一个Ajax的请求
+        [HttpPost]
+        [AuthorizeUser]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetNewPassword(string inputPassword1, string inputPassword2)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                UserAccount account = Session[SessionItemsDescription.UserAccount] as UserAccount;
+                if (inputPassword1 != inputPassword2)
+                {
+                    ViewData["alertMessage"] = "两次密码不一致！";
+                    return PartialView("_MessageDangerPartial");
+                }
+                if (inputPassword1.Length < 5 || inputPassword1.Length > 8)
+                {
+                    ViewData["alertMessage"] = "密码位数错误，应该在5-8位！";
+                    return PartialView("_MessageDangerPartial");
+                }
+
+                if(!System.Text.RegularExpressions.Regex.IsMatch(inputPassword1, "^[A-Za-z0-9]+$"))
+                {
+                    ViewData["alertMessage"] = "密码包含了特殊字符，只能是字母数字。";
+                    return PartialView("_MessageDangerPartial");
+                }
+
+                JObject json = new JObject
+                    {
+                        { UserAccount.UserNameText, UserClient.UserAccount.UserName },
+                        { UserAccount.PasswordText, inputPassword1 }
+                    };
+
+                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.密码修改, json.ToString());
+                if (result.IsSuccess)
+                {
+                    ViewData["alertMessage"] = "密码修改成功！";
+                    return PartialView("_MessageSuccessPartial");
+                }
+                else
+                {
+                    ViewData["alertMessage"] = result.Message;
+                    return PartialView("_MessageDangerPartial");
+                }
+            }
+            else
+            {
+                ViewData["alertMessage"] = "请求无效！";
+                return PartialView("_MessageDangerPartial");
+            }
+        }
+
     }
 }
