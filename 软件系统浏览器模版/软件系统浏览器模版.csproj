@@ -226,6 +226,8 @@
     <Content Include="Views\Shared\_MessageInfoPartial.cshtml" />
     <Content Include="Views\Shared\_MessageSuccessPartial.cshtml" />
     <Content Include="Views\Shared\_MessageWarningPartial.cshtml" />
+    <Content Include="Views\Home\ChangeAnnouncement.cshtml" />
+    <Content Include="Views\Home\ManagementAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

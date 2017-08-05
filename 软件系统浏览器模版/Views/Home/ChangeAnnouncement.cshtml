@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "更改公告";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}
+
+<br />
+
+<div>
+    @{ string updateId = Guid.NewGuid().ToString();}
+    @using (Ajax.BeginForm("SetAnnouncement", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = updateId, InsertionMode = InsertionMode.Replace },
+                                                        new { @class = "form-horizontal" }))
+    {
+        <fieldset>
+            @Html.AntiForgeryToken()
+            <legend style="font-family:'Microsoft YaHei UI',Arial, Helvetica, sans-serif">请输入新的公告内容，不能为空！</legend>
+            <div class="form-group">
+                <label for="Announcement" class="col-lg-2 control-label">公告：</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" id="Announcement" name="Announcement" placeholder="1000字以内" required rows="10">@ClientsLibrary.UserClient.Announcement</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">提交公告</button>
+                </div>
+            </div>
+        </fieldset>
+    }
+</div>
+<div id="@updateId">
+
+</div>
+

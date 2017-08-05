@@ -1,10 +1,13 @@
 ﻿using ClientsLibrary;
 using CommonLibrary;
+using HslCommunication;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using 软件系统浏览器模版.Models;
 using 软件系统浏览器模版.Models.Account;
 
 namespace 软件系统浏览器模版.Controllers
@@ -64,17 +67,6 @@ namespace 软件系统浏览器模版.Controllers
             return View();
         }
 
-        /// <summary>
-        /// 一个错误的消息界面
-        /// </summary>
-        /// <param name="message"></param>
-        /// <returns></returns>
-        public ActionResult ErrorPage(string message)
-        {
-            ViewBag.Message = message;
-            return View("Error");
-        }
-
 
         //GET
         /// <summary>
@@ -115,6 +107,82 @@ namespace 软件系统浏览器模版.Controllers
             {
                 return Content("<div class=\"alert alert-danger\" role=\"alert\">这是一个错误的请求！</div>", "text/html");
             }
+        }
+
+        //GET
+        /// <summary>
+        /// 设置新的公告的页面
+        /// </summary>
+        [HttpGet]
+        [AuthorizeUser]
+        public ActionResult ChangeAnnouncement()
+        {
+            return View();
+        }
+
+
+        //POST
+        /// <summary>
+        /// 设置新的公告内容的界面
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AuthorizeUser]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetAnnouncement(FormCollection fc)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                string announcement = fc["Announcement"];
+                UserAccount account = Session[SessionItemsDescription.UserAccount] as UserAccount;
+
+                if (announcement.Length > 1000)
+                {
+                    ViewData["alertMessage"] = "公告的字数超过了1000字！";
+                    return PartialView("_MessageDangerPartial");
+                }
+
+
+                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更新公告, announcement);
+                if (result.IsSuccess)
+                {
+                    ViewData["alertMessage"] = "公告更改成功！";
+                    UserClient.Announcement = announcement;
+                    return PartialView("_MessageSuccessPartial");
+                }
+                else
+                {
+                    ViewData["alertMessage"] = result.Message;
+                    return PartialView("_MessageDangerPartial");
+                }
+            }
+            else
+            {
+                ViewData["alertMessage"] = "请求无效！";
+                return PartialView("_MessageDangerPartial");
+            }
+        }
+
+
+
+        //GET
+        /// <summary>
+        /// 获取账号管理的界面
+        /// </summary>
+        [HttpGet]
+        [AuthorizeUser]
+        public ActionResult ManagementAccount()
+        {
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户);
+            if(result.IsSuccess)
+            {
+                ViewData["accounts"] = result.Content;
+            }
+            else
+            {
+                ViewData["accounts"] = "数据获取失败：" + result.ToMessageShowString();
+            }
+            return View();
         }
     }
 }
