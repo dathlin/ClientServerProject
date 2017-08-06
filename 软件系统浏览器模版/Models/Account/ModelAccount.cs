@@ -29,4 +29,25 @@ namespace 软件系统浏览器模版.Models.Account
             }
         }
     }
+
+    /// <summary>
+    /// 验证系统的账户是否符合管理员的信息
+    /// </summary>
+    public class AuthorizeAdminAttribute : AuthorizeAttribute
+    {
+        public override void OnAuthorization(AuthorizationContext filterContext)
+        {
+            if (filterContext.HttpContext.Session[SessionItemsDescription.UserAccount] is UserAccount account)
+            {
+                if (account.Grade < AccountGrade.SuperAdministrator)
+                {
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Home", action = "LackOfAuthority" }));
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Account", action = "Login" }));
+            }
+        }
+    }
 }

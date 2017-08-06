@@ -35,6 +35,18 @@ namespace 软件系统浏览器模版.Controllers
             return View();
         }
 
+        //Get
+        /// <summary>
+        /// 权限不足时显示的界面
+        /// </summary>
+        /// <returns></returns>
+        [AuthorizeUser]
+        public ActionResult LackOfAuthority()
+        {
+            return View();
+        }
+
+
         /// <summary>
         /// 网站的联系人界面
         /// </summary>
@@ -184,5 +196,56 @@ namespace 软件系统浏览器模版.Controllers
             }
             return View();
         }
+
+
+        //POST
+        /// <summary>
+        /// 设置新的账户的请求
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AuthorizeUser]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetManagementAccount(FormCollection fc)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                string Accounts = fc["NewAccounts"];
+                UserAccount account = Session[SessionItemsDescription.UserAccount] as UserAccount;
+                
+
+                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更细账户, Accounts);
+                if (result.IsSuccess)
+                {
+                    ViewData["alertMessage"] = "账户更改成功！";
+                    return PartialView("_MessageSuccessPartial");
+                }
+                else
+                {
+                    ViewData["alertMessage"] = result.Message;
+                    return PartialView("_MessageDangerPartial");
+                }
+            }
+            else
+            {
+                ViewData["alertMessage"] = "请求无效！";
+                return PartialView("_MessageDangerPartial");
+            }
+        }
+
+
+
+
+        //GET
+        /// <summary>
+        /// 注册新的账户界面
+        /// </summary>
+        [HttpGet]
+        [AuthorizeAdmin]
+        public ActionResult RegisterAccount()
+        {
+            return View();
+        }
+
     }
 }

@@ -13,16 +13,16 @@
 
 <div>
     @{ string updateId = Guid.NewGuid().ToString();}
-    @using (Ajax.BeginForm("SetAnnouncement", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = updateId, InsertionMode = InsertionMode.Replace },
+    @using (Ajax.BeginForm("SetManagementAccount", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = updateId, InsertionMode = InsertionMode.Replace },
                                                                 new { @class = "form-horizontal" }))
     {
         <fieldset>
             @Html.AntiForgeryToken()
             <legend style="font-family:'Microsoft YaHei UI',Arial, Helvetica, sans-serif">账户管理</legend>
             <div class="form-group">
-                <label for="Announcement" class="col-lg-2 control-label">账户json数据：</label>
+                <label for="NewAccounts" class="col-lg-2 control-label">账户json数据：</label>
                 <div class="col-lg-10">
-                    <textarea class="form-control" id="Announcement" name="Announcement" placeholder="json数据" required rows="25">@ViewData["accounts"].ToString()</textarea>
+                    <textarea class="form-control" id="NewAccounts" name="NewAccounts" placeholder="json数据" required rows="25">@ViewData["accounts"].ToString()</textarea>
                 </div>
             </div>
             <div class="form-group">
