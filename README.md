@@ -1,13 +1,79 @@
 # C-S架构的服务器客户端模版
 
-#### 关于HslCommunication.dll
-<p>该组件功能提供了一些基础类和整个C-S项目的核心网络的支持，除此之外，该组件提供了访问三菱PLC和西门子PLC的数据功能。</p>
+## Summary
+一个基于中小型提炼的C-S开发框架，在大多数的一对多的系统设计中会包含一些常用的重复的功能代码，比如网络通信机制，客户端版本控制，账户控制管理，密码修改，公告管理等等，大多数的中小型系统只是需要到简单的权限管理即可。
+<br />
+本框架包含了三种客户端的模式，第一种常用的winform客户端，第二种为wpf客户端，第三种为asp.net mvc模式，也就是说你可以在winform和wpf客户端上选择一种模式，然后您的系统提供一些功能到asp.net上去，所有的账户模型都是统一的，这样方便一些只需要查看报表用户的人员不需要在部署客户端了。当然，客户端可以提供更加强大的功能。
 
-<p>本组件支持常规的整数的数据读写，支持位数据读写，也支持字符串数据读写，包括中文，具体使用方式请参照下述手册，目前已经完成了一个三菱PLC高并发访问的类，具体交流可以通过以下方式联系我</p>
+
+## Features included
+<ul>
+<li>一个简单的账户管理功能，包含了账户注册，密码修改，客户端登录账户记录,账户注销,账户包含了一些基础信息</li>
+<li>一个简单的公告管理功能，允许有权限的账户针对公告进行更改，未来将支持公告更改记录</li>
+<li>一个简单的意见反馈功能，允许客户端反馈软件的意见或是BUG，方便开发人员更改</li>
+<li>一个简单的右下角消息框弹出功能，在公告更改和新发消息的时候可以自由控制</li>
+<li>一个简单的版本日志提示窗口，在新版本更新后就会自动提示显示</li>
+</ul>
+<ul>
+<li>一个完善的网络通信框架，包含一对多控制的tcp网络（服务器对客户端进行控制，并方便的群发数据），单独请求数据的同步网络，udp网络</li>
+<li>完善的自动升级的部署机制，服务器部署新版本后，所有客户端都将一键自动更新</li>
+<li>客户端提供开发人员远程更新服务器程序的能力，方便开发人员的操作</li>
+<li>完善的日志记录功能，所有的网络功能和文件功能都提供了日志记录，所有客户端的异常都会发送至服务器记录，客户端也可以非常方便的查看所有的日志信息，您也可以很方便的将其他信息记录到日志中</li>
+<li>一个简单的局域网聊天功能，用于所有的在线账户进行聊天的功能，所有的消息做了一定的缓存</li>
+<li>提供了一个文件共享平台，大多数的软件系统都会共享一些特殊的文件资料，允许方便的下载，管理，上传</li>
+<li>提供所有账户自身的头像功能，未来还将支持多账户同步</li>
+<li>提供一个简单的开发中心，允许客户端实时监视服务器程序的对象内存使用情况</li>
+</ul>
+<ul>
+<li>Wpf版本的客户端程序额外提供了一个主题颜色设置的功能</li>
+</ul>
+
+## Environment
+
+<ul>
+<li>IDE: Visual Studio 2017
+<ul>
+
+<li>winform 服务器：.NET Framework 3.5</li>
+<li>winform 客户端：.NET Framework 3.5</li>
+<li>wpf客户端： .NET Framework 4.5</li>
+<li>asp.net mvc服务器：.NET Framework 4.5</li>
+</ul>
+</li>
+</ul>
+
+## Getting Started
+<ul>
+<li>重新生成<b>CommonLibrary</b>项目</li>
+<li>重新生成<b>ClientsLibrary</b>项目</li>
+<li>重新生成<b>软件系统服务端模版</b>并运行该exe</li>
+<li>选择一个你想调试的客户端版本程序，例如winform就启动<b>软件系统客户端模版</b>项目</li>
+<li>输入一个默认的账户admin,密码123456</li>
+<li>接下来就可以体验所有的功能了</li>
+</ul>
+
+## Contribute
+如果你也喜欢这个项目，可以点击右上角的star或是fork，如果发现了一些BUG或是需要更改的地方也可以直接发起pull request，当然也可以联系技术支持QQ群来联系我本人，或是发送邮件，具体参考下面。
+
+## Contact
 <ul>
 <li>技术支持QQ群：<strong>592132877</strong></li>
 <li>邮箱：<strong>hsl200909@163.com</strong></li>
 </ul>
+
+## Disclaimer
+<ul>
+<li>使用了<a href="http://www.newtonsoft.com/json">json.net组件</a></li>
+<li>Wpf模版使用了一个开源项目，<a href="https://github.com/ButchersBoy/MaterialDesignInXamlToolkit">https://github.com/ButchersBoy/MaterialDesignInXamlToolkit</a></li>
+<li>文件共享功能的图标来源<a href="http://fileicons.chromefans.org/">免费文件图标</a></li>
+</ul>
+
+
+## 关于HslCommunication.dll
+<p>该组件功能提供了一些基础类和整个C-S项目的核心网络的支持，除此之外，该组件提供了访问三菱PLC和西门子PLC的数据功能。</p>
+
+<p>本组件支持常规的整数的数据读写，支持位数据读写，也支持字符串数据读写，包括中文，具体使用方式请参照下述手册，目前已经完成了一个三菱PLC高并发访问的类，具体交流可以通过以下方式联系我</p>
+
 <p>如果要使用本组件访问PLC，需要引用命名空间，如下</p>
 <pre>
 <code>
@@ -23,19 +89,12 @@ using HslCommunication.Profinet;
 
 文档地址：<a href="https://github.com/dathlin/C-S-/raw/master/Public/HslCommunication.xml">单独的组件xml注释文件</a>
 
-#### 关于本项目模版
-<p style="text-indent:2em">本模版基于.Net Framework3.5+C#7.0开发完成，后来新增的wpf版本的客户端基于.Net 4.5实现，所以必须使用Visual studio 2017进行开发，低版本的IDE打开项目将出现语法识别错误。有必要说明下为什么使用.Net Framework3.5，这个版本是xp系统比较方便安装的，在企业部署中会相对容易很多，所以如果你的系统也是应用于企业的，那么强烈建议使用3.5版本，如果是电脑配置相对比较不错的，使用wpf版本可以实现更复杂的动画界面，该模版由三部分的程序组成：</p>
-<ul>
-<li>公共组件</li>
-<li>服务器端</li>
-<li>winform客户端+wpf客户端</li>
-</ul>
-
-<p style="text-indent:2em">组成部分主要是一个服务端运行的程序，一个客户端运行的程序（可以根据自身的需求选择winform还是wpf），还有一个公共的组件，以及一个json组件和一个网络组件，实现了基础的账户管理功能，版本控制，软件升级，公告管理，消息群发，性能监视，头像管理等等功能。具体的操作方法见演示就行。下面主要介绍下服务端的程序界面和客户端的程序设计模型。
-</p>
 
 
-#### 整个系统的架构设计如下
+# 整个系统的架构设计如下
+
+#### 核心架构的设计机制
+
 ![](https://github.com/dathlin/C-S-/raw/master/img/Design1.png)  
 <br />
 
@@ -204,4 +263,3 @@ using HslCommunication.Profinet;
 ###### Copyright (c) Richard.Hu. All rights reserved.
 ###### Licensed under the MIT License.
 ###### WeChat:工业智能软件开发项目组
-###### Wpf模版使用了一个开源项目，<a href="https://github.com/ButchersBoy/MaterialDesignInXamlToolkit">https://github.com/ButchersBoy/MaterialDesignInXamlToolkit</a>
