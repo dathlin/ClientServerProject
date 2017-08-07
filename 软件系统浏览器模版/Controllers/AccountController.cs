@@ -252,5 +252,18 @@ namespace 软件系统浏览器模版.Controllers
             }
         }
 
+
+
+        //GET
+        /// <summary>
+        /// 注册新的账户界面
+        /// </summary>
+        [HttpGet]
+        [AuthorizeAdmin]
+        public ActionResult RegisterAccount()
+        {
+            return View();
+        }
+
     }
 }

@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "注册新的账户";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}
+
+<br />
+
+<div>
+    @{ string updateId = Guid.NewGuid().ToString();}
+    @using (Ajax.BeginForm("RegisterAccount", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = updateId, InsertionMode = InsertionMode.Replace },
+                                                                new { @class = "form-horizontal" }))
+    {
+        <fieldset>
+            @Html.AntiForgeryToken()
+            <legend style="font-family:'Microsoft YaHei UI',Arial, Helvetica, sans-serif">注册新的账户<small>如果账户名已存在，会注册失败</small></legend>
+            
+            <div class="form-group">
+                <label for="username" class="col-lg-2 control-label">用户名：</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="唯一标志的用户名" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="col-lg-2 control-label">密码：</label>
+                <div class="col-lg-10">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="用户登录的密码" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="factory" class="col-lg-2 control-label">工厂：</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="factory" name="factory" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="grade" class="col-lg-2 control-label">权限：</label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="grade" name="grade">
+                        <option value="@CommonLibrary.AccountGrade.SuperAdministrator">@CommonLibrary.AccountGrade.GetDescription(CommonLibrary.AccountGrade.SuperAdministrator)</option>
+                        <option value="@CommonLibrary.AccountGrade.Admin">@CommonLibrary.AccountGrade.GetDescription(CommonLibrary.AccountGrade.Admin)</option>
+                        <option value="@CommonLibrary.AccountGrade.Technology">@CommonLibrary.AccountGrade.GetDescription(CommonLibrary.AccountGrade.Technology)</option>
+                        <option value="@CommonLibrary.AccountGrade.General">@CommonLibrary.AccountGrade.GetDescription(CommonLibrary.AccountGrade.General)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="loginEnable" class="col-lg-2 control-label">能否登录：</label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="loginEnable" name="loginEnable">
+                        <option value="True">允许登录</option>
+                        <option value="False">禁止登录</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="loginEnable" class="col-lg-2 control-label">禁止原因：</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" name="reason" id="reason" placeholder="禁止登录的原因，在禁止登录时将会显示这个信息" rows="3"></textarea>
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">提交信息</button>
+                </div>
+            </div>
+        </fieldset>
+    }
+</div>
+<div id="@updateId">
+
+</div>

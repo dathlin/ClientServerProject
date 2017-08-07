@@ -229,7 +229,7 @@
     <Content Include="Views\Home\ChangeAnnouncement.cshtml" />
     <Content Include="Views\Home\ManagementAccount.cshtml" />
     <Content Include="Views\Home\LackOfAuthority.cshtml" />
-    <Content Include="Views\Home\RegisterAccount.cshtml" />
+    <Content Include="Views\Account\RegisterAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
