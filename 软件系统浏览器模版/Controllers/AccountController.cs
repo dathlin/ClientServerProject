@@ -265,5 +265,50 @@ namespace 软件系统浏览器模版.Controllers
             return View();
         }
 
+
+        //POST
+        /// <summary>
+        /// 在用户点击注册账户之后显示的界面
+        /// </summary>
+        [HttpPost]
+        [AuthorizeAdmin]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegisterAccount(FormCollection fc)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                try
+                {
+                    UserAccount account = new UserAccount();
+                    account.UserName = fc["username"];
+                    account.Password = fc["password"];
+                    account.Factory = fc["factory"];
+                    account.Grade = int.Parse(fc["grade"]);
+                    account.LoginEnable = bool.Parse(fc["loginEnable"]);
+                    account.ForbidMessage = fc["reason"];
+                    OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.注册账号, account.ToJsonString());
+                    if (result.IsSuccess && result.Content == "1")
+                    {
+                        ViewData["alertMessage"] = "账户注册成功！";
+                        return PartialView("_MessageSuccessPartial");
+                    }
+                    else
+                    {
+                        ViewData["alertMessage"] = "账户注册失败！";
+                        return PartialView("_MessageDangerPartial");
+                    }
+                }
+                catch
+                {
+                    ViewData["alertMessage"] = "数据异常！";
+                    return PartialView("_MessageDangerPartial");
+                }
+            }
+            else
+            {
+                ViewData["alertMessage"] = "请求无效！";
+                return PartialView("_MessageDangerPartial");
+            }
+        }
     }
 }
