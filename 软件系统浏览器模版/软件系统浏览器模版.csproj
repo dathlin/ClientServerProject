@@ -230,6 +230,7 @@
     <Content Include="Views\Home\ManagementAccount.cshtml" />
     <Content Include="Views\Home\LackOfAuthority.cshtml" />
     <Content Include="Views\Account\RegisterAccount.cshtml" />
+    <Content Include="Views\Home\SendMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

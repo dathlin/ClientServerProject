@@ -234,8 +234,59 @@ namespace 软件系统浏览器模版.Controllers
         }
 
 
+        //GET
+        /// <summary>
+        /// 获取发送消息的界面
+        /// </summary>
+        [HttpGet]
+        [AuthorizeUser]
+        public ActionResult SendMessage()
+        {
+            return View();
+        }
 
 
+        //POST
+        /// <summary>
+        /// 设置新的消息发送的界面
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AuthorizeUser]
+        [ValidateAntiForgeryToken]
+        public ActionResult SendMessage(FormCollection fc)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                string announcement = fc["SendMessage"];
+                UserAccount account = Session[SessionItemsDescription.UserAccount] as UserAccount;
+
+                if (announcement.Length > 1000)
+                {
+                    ViewData["alertMessage"] = "需要发送的字数超过了1000字！";
+                    return PartialView("_MessageDangerPartial");
+                }
+
+
+                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.群发消息, announcement);
+                if (result.IsSuccess)
+                {
+                    ViewData["alertMessage"] = "消息群发成功！";
+                    UserClient.Announcement = announcement;
+                    return PartialView("_MessageSuccessPartial");
+                }
+                else
+                {
+                    ViewData["alertMessage"] = result.Message;
+                    return PartialView("_MessageDangerPartial");
+                }
+            }
+            else
+            {
+                ViewData["alertMessage"] = "请求无效！";
+                return PartialView("_MessageDangerPartial");
+            }
+        }
 
     }
 }
