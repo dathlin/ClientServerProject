@@ -258,21 +258,21 @@ namespace 软件系统浏览器模版.Controllers
         {
             if (Request.IsAjaxRequest())
             {
-                string announcement = fc["SendMessage"];
+                string SendMessage = fc["SendMessage"];
                 UserAccount account = Session[SessionItemsDescription.UserAccount] as UserAccount;
 
-                if (announcement.Length > 1000)
+                if (SendMessage.Length > 1000)
                 {
                     ViewData["alertMessage"] = "需要发送的字数超过了1000字！";
                     return PartialView("_MessageDangerPartial");
                 }
 
 
-                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.群发消息, announcement);
+                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.群发消息, SendMessage);
                 if (result.IsSuccess)
                 {
                     ViewData["alertMessage"] = "消息群发成功！";
-                    UserClient.Announcement = announcement;
+                    UserClient.Announcement = SendMessage;
                     return PartialView("_MessageSuccessPartial");
                 }
                 else
@@ -287,6 +287,8 @@ namespace 软件系统浏览器模版.Controllers
                 return PartialView("_MessageDangerPartial");
             }
         }
+
+
 
     }
 }
