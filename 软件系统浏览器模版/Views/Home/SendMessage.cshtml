@@ -13,21 +13,21 @@
 
 <div>
     @{ string updateId = Guid.NewGuid().ToString();}
-    @using (Ajax.BeginForm("SetManagementAccount", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = updateId, InsertionMode = InsertionMode.Replace },
+    @using (Ajax.BeginForm("SendMessage", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = updateId, InsertionMode = InsertionMode.Replace },
                                                                         new { @class = "form-horizontal" }))
     {
         <fieldset>
             @Html.AntiForgeryToken()
-            <legend style="font-family:'Microsoft YaHei UI',Arial, Helvetica, sans-serif">账户管理</legend>
+            <legend style="font-family:'Microsoft YaHei UI',Arial, Helvetica, sans-serif">请输入消息并点击发送</legend>
             <div class="form-group">
-                <label for="NewAccounts" class="col-lg-2 control-label">账户json数据：</label>
+                <label for="SendMessage" class="col-lg-2 control-label">消息：</label>
                 <div class="col-lg-10">
-                    <textarea class="form-control" id="NewAccounts" name="NewAccounts" placeholder="json数据" required rows="25">@ViewData["accounts"].ToString()</textarea>
+                    <textarea class="form-control" id="SendMessage" name="SendMessage" placeholder="1000字以内" required rows="10"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" class="btn btn-primary">提交新数据</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
                 </div>
             </div>
         </fieldset>
