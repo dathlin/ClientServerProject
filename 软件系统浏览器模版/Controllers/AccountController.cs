@@ -189,14 +189,12 @@ namespace 软件系统浏览器模版.Controllers
                 }
                 else
                 {
-                    ViewData["alertMessage"] = "密码验证失败！";
-                    return PartialView("_MessageDangerPartial");
+                    return PartialViewMessage(MessageBoxStyle.warning, "密码验证失败！");
                 }
             }
             else
             {
-                ViewData["alertMessage"] = "请求无效！";
-                return PartialView("_MessageDangerPartial");
+                return PartialViewMessage(MessageBoxStyle.danger, "请求无效！");
             }
         }
 
@@ -212,19 +210,16 @@ namespace 软件系统浏览器模版.Controllers
                 UserAccount account = Session[SessionItemsDescription.UserAccount] as UserAccount;
                 if (inputPassword1 != inputPassword2)
                 {
-                    ViewData["alertMessage"] = "两次密码不一致！";
-                    return PartialView("_MessageDangerPartial");
+                    return PartialViewMessage(MessageBoxStyle.warning, "两次密码不一致！");
                 }
                 if (inputPassword1.Length < 5 || inputPassword1.Length > 8)
                 {
-                    ViewData["alertMessage"] = "密码位数错误，应该在5-8位！";
-                    return PartialView("_MessageDangerPartial");
+                    return PartialViewMessage(MessageBoxStyle.warning, "密码位数错误，应该在5-8位！");
                 }
 
                 if(!System.Text.RegularExpressions.Regex.IsMatch(inputPassword1, "^[A-Za-z0-9]+$"))
                 {
-                    ViewData["alertMessage"] = "密码包含了特殊字符，只能是字母数字。";
-                    return PartialView("_MessageDangerPartial");
+                    return PartialViewMessage(MessageBoxStyle.warning, "密码包含了特殊字符，只能是字母数字。");
                 }
 
                 JObject json = new JObject
@@ -236,19 +231,16 @@ namespace 软件系统浏览器模版.Controllers
                 OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.密码修改, json.ToString());
                 if (result.IsSuccess)
                 {
-                    ViewData["alertMessage"] = "密码修改成功！";
-                    return PartialView("_MessageSuccessPartial");
+                    return PartialViewMessage(MessageBoxStyle.success, "密码修改成功！");
                 }
                 else
                 {
-                    ViewData["alertMessage"] = result.Message;
-                    return PartialView("_MessageDangerPartial");
+                    return PartialViewMessage(MessageBoxStyle.danger, result.Message);
                 }
             }
             else
             {
-                ViewData["alertMessage"] = "请求无效！";
-                return PartialView("_MessageDangerPartial");
+                return PartialViewMessage(MessageBoxStyle.danger, "请求无效！");
             }
         }
 
@@ -289,25 +281,34 @@ namespace 软件系统浏览器模版.Controllers
                     OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.注册账号, account.ToJsonString());
                     if (result.IsSuccess && result.Content == "1")
                     {
-                        ViewData["alertMessage"] = "账户注册成功！";
-                        return PartialView("_MessageSuccessPartial");
+                        return PartialViewMessage(MessageBoxStyle.success, "账户注册成功！");
                     }
                     else
                     {
-                        ViewData["alertMessage"] = "账户注册失败！";
-                        return PartialView("_MessageDangerPartial");
+                        return PartialViewMessage(MessageBoxStyle.warning, "账户注册失败！");
                     }
                 }
                 catch
                 {
-                    ViewData["alertMessage"] = "数据异常！";
-                    return PartialView("_MessageDangerPartial");
+                    return PartialViewMessage(MessageBoxStyle.danger, "数据异常！");
                 }
             }
             else
             {
-                ViewData["alertMessage"] = "请求无效！";
-                return PartialView("_MessageDangerPartial");
+                return PartialViewMessage(MessageBoxStyle.danger, "请求无效！");
+            }
+        }
+
+
+        private ActionResult PartialViewMessage(MessageBoxStyle style, string message)
+        {
+            ViewData["alertMessage"] = message;
+            switch(style)
+            {
+                case MessageBoxStyle.success:return PartialView("_MessageSuccessPartial");
+                case MessageBoxStyle.info: return PartialView("_MessageInfoPartial");
+                case MessageBoxStyle.warning: return PartialView("_MessageWarningPartial");
+                default: return PartialView("_MessageDangerPartial");
             }
         }
     }
