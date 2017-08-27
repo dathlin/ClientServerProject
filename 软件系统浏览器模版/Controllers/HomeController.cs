@@ -108,16 +108,16 @@ namespace 软件系统浏览器模版.Controllers
                 HslCommunication.OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.意见反馈, UserClient.UserAccount.UserName + ":" + advice);
                 if (result.IsSuccess)
                 {
-                    return Content("<div class=\"alert alert-success\" role=\"alert\">成功提交数据</div><script>alert('建议提交成功！')</script>", "text/html");
+                    return PartialViewMessage(MessageBoxStyle.success, "建议提交成功！");
                 }
                 else
                 {
-                    return Content("<div class=\"alert alert-danger\" role=\"alert\">建议提交失败，请稍后再试！错误信息：" + result.Message + "</div>", "text/html");
+                    return PartialViewMessage(MessageBoxStyle.danger, result.Message);
                 }
             }
             else
             {
-                return Content("<div class=\"alert alert-danger\" role=\"alert\">这是一个错误的请求！</div>", "text/html");
+                return PartialViewMessage(MessageBoxStyle.danger, "请求无效！");
             }
         }
 
@@ -150,28 +150,24 @@ namespace 软件系统浏览器模版.Controllers
 
                 if (announcement.Length > 1000)
                 {
-                    ViewData["alertMessage"] = "公告的字数超过了1000字！";
-                    return PartialView("_MessageDangerPartial");
+                    return PartialViewMessage(MessageBoxStyle.warning, "公告的字数超过了1000字！");
                 }
 
 
                 OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更新公告, announcement);
                 if (result.IsSuccess)
                 {
-                    ViewData["alertMessage"] = "公告更改成功！";
                     UserClient.Announcement = announcement;
-                    return PartialView("_MessageSuccessPartial");
+                    return PartialViewMessage(MessageBoxStyle.success, "公告更改成功！");
                 }
                 else
                 {
-                    ViewData["alertMessage"] = result.Message;
-                    return PartialView("_MessageDangerPartial");
+                    return PartialViewMessage(MessageBoxStyle.danger, result.Message);
                 }
             }
             else
             {
-                ViewData["alertMessage"] = "请求无效！";
-                return PartialView("_MessageDangerPartial");
+                return PartialViewMessage(MessageBoxStyle.danger, "请求无效！");
             }
         }
 
@@ -217,19 +213,16 @@ namespace 软件系统浏览器模版.Controllers
                 OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更细账户, Accounts);
                 if (result.IsSuccess)
                 {
-                    ViewData["alertMessage"] = "账户更改成功！";
-                    return PartialView("_MessageSuccessPartial");
+                    return PartialViewMessage(MessageBoxStyle.success, "账户更改成功！");
                 }
                 else
                 {
-                    ViewData["alertMessage"] = result.Message;
-                    return PartialView("_MessageDangerPartial");
+                    return PartialViewMessage(MessageBoxStyle.danger, result.Message);
                 }
             }
             else
             {
-                ViewData["alertMessage"] = "请求无效！";
-                return PartialView("_MessageDangerPartial");
+                return PartialViewMessage(MessageBoxStyle.danger, "请求无效！");
             }
         }
 
@@ -263,32 +256,33 @@ namespace 软件系统浏览器模版.Controllers
 
                 if (SendMessage.Length > 1000)
                 {
-                    ViewData["alertMessage"] = "需要发送的字数超过了1000字！";
-                    return PartialView("_MessageDangerPartial");
+                    return PartialViewMessage(MessageBoxStyle.warning, "需要发送的字数超过了1000字！");
                 }
 
 
                 OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.群发消息, SendMessage);
                 if (result.IsSuccess)
                 {
-                    ViewData["alertMessage"] = "消息群发成功！";
                     UserClient.Announcement = SendMessage;
-                    return PartialView("_MessageSuccessPartial");
+                    return PartialViewMessage(MessageBoxStyle.success, "消息群发成功！");
                 }
                 else
                 {
-                    ViewData["alertMessage"] = result.Message;
-                    return PartialView("_MessageDangerPartial");
+                    return PartialViewMessage(MessageBoxStyle.danger, result.Message);
                 }
             }
             else
             {
-                ViewData["alertMessage"] = "请求无效！";
-                return PartialView("_MessageDangerPartial");
+                return PartialViewMessage(MessageBoxStyle.danger, "请求无效！");
             }
         }
 
 
+
+        private ActionResult PartialViewMessage(MessageBoxStyle style, string message)
+        {
+            return RedirectToAction("Message", "Share", new { style = style, message = message });
+        }
 
     }
 }

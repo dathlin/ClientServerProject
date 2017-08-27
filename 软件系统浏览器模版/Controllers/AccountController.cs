@@ -302,14 +302,7 @@ namespace 软件系统浏览器模版.Controllers
 
         private ActionResult PartialViewMessage(MessageBoxStyle style, string message)
         {
-            ViewData["alertMessage"] = message;
-            switch(style)
-            {
-                case MessageBoxStyle.success:return PartialView("_MessageSuccessPartial");
-                case MessageBoxStyle.info: return PartialView("_MessageInfoPartial");
-                case MessageBoxStyle.warning: return PartialView("_MessageWarningPartial");
-                default: return PartialView("_MessageDangerPartial");
-            }
+            return RedirectToAction("Message", "Share", new { style = style, message = message });
         }
     }
 }

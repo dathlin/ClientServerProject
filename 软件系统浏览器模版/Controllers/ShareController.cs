@@ -26,6 +26,7 @@ namespace 软件系统浏览器模版.Controllers
         public ActionResult Message(MessageBoxStyle style, string message)
         {
             ViewData["alertMessage"] = message;
+            ViewData["Guid"] = Guid.NewGuid().ToString("N");
             switch (style)
             {
                 case MessageBoxStyle.success: return PartialView("_MessageSuccessPartial");
