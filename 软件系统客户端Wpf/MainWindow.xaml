@@ -233,8 +233,8 @@
                                 <TextBlock Grid.Row="1" Grid.Column="0">权限等级：</TextBlock>
                                 <TextBlock Grid.Row="2" Grid.Column="0">所属分厂：</TextBlock>
                                 <TextBlock Grid.Row="3" Grid.Column="0">注册时间：</TextBlock>
-                                <TextBlock Grid.Row="4" Grid.Column="0">登录频次：</TextBlock>
-                                <TextBlock Grid.Row="5" Grid.Column="0">最近登录：</TextBlock>
+                                <TextBlock Grid.Row="4" Grid.Column="0">最近登录：</TextBlock>
+                                <TextBlock Grid.Row="5" Grid.Column="0">登录频次：</TextBlock>
                                 <TextBlock Grid.Row="6" Grid.Column="0">上次登录IP：</TextBlock>
 
                                 <TextBlock Grid.Row="1" Grid.Column="1" x:Name="Account_grade"></TextBlock>
