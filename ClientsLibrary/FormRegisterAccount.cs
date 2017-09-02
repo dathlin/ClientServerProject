@@ -32,7 +32,7 @@ namespace ClientsLibrary
             textBox4.Text = (new UserAccount()).ForbidMessage;
         }
 
-        private Net_Simplify_Client net_client = null;
+        private NetSimplifyClient net_client = null;
 
         private void userButton_login_Click(object sender, EventArgs e)
         {

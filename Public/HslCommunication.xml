@@ -689,7 +689,7 @@
             文件存储的路径
             </summary>
         </member>
-        <member name="P:HslCommunication.BasicFramework.SoftFileSaveBase.LogHelper">
+        <member name="P:HslCommunication.BasicFramework.SoftFileSaveBase.ILogNet">
             <summary>
             日志记录类
             </summary>
@@ -775,116 +775,6 @@
             <param name="oringinal"></param>
             <returns></returns>
             <exception cref="T:System.NullReferenceException"></exception>
-        </member>
-        <member name="T:HslCommunication.BasicFramework.SoftLogHelper">
-            <summary>
-            一个线程安全且高性能的日志记录类，文件格式为txt，编码为UTF8，支持4中消息等级的划分
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Normal">
-            <summary>
-            普通的消息等级
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Information">
-            <summary>
-            信息的消息等级
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Warnning">
-            <summary>
-            警告的消息等级
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.Error">
-            <summary>
-            错误的消息等级
-            </summary>
-        </member>
-        <member name="P:HslCommunication.BasicFramework.SoftLogHelper.LogSaveFileName">
-            <summary>
-            日志记录的路径，如果没有设置将不进行保存
-            </summary>
-        </member>
-        <member name="P:HslCommunication.BasicFramework.SoftLogHelper.SaveTimesCount">
-            <summary>
-            获取或设置日志存储的次数
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.HybirdLockFile">
-            <summary>
-            文件的存储读取锁
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.HybirdLockList">
-            <summary>
-            日志列表操作的一个安全混合锁
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.WaittingForSaveMessage">
-            <summary>
-            等待存储的日志的集合
-            </summary>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveNormal(System.String)">
-            <summary>
-            用于保存一般日志级别内容的方法
-            </summary>
-            <param name="str">需要保存的字符串</param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveInformation(System.String)">
-            <summary>
-            用于保存信息级别日志内容的方法
-            </summary>
-            <param name="str"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveWarnning(System.String)">
-            <summary>
-            用于保存警告级别日志内容的方法
-            </summary>
-            <param name="str"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.String)">
-            <summary>
-            用于保存错误日志内容的方法
-            </summary>
-            <param name="str"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveNormal(System.String,System.String)">
-            <summary>
-            用于内部保存日志内容的方法
-            </summary>
-            <param name="str"></param>
-            <param name="degree"></param>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftLogHelper.SaveStatus">
-            <summary>
-            文件的存储状态，0表示未存储，1表示存储中
-            </summary>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.String,System.Exception)">
-            <summary>
-            存储一个异常和简单描述的信息
-            </summary>
-            <param name="description"></param>
-            <param name="ex"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.SaveError(System.Exception)">
-            <summary>
-            用于存储一个异常的方法
-            </summary>
-            <param name="ex"></param>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.GetLogText">
-            <summary>
-            调用此方法可以获得所有的日志信息，可以用来回发给客户端查看
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftLogHelper.ClearLogText">
-            <summary>
-            用于清空日志的所有内容，可以从外部调用
-            </summary>
         </member>
         <member name="T:HslCommunication.BasicFramework.SoftMail">
             <summary>
@@ -1116,6 +1006,31 @@
             高性能存储块
             </summary>
         </member>
+        <member name="T:HslCommunication.BasicFramework.GraphDirection">
+            <summary>
+            图形的方向
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.GraphDirection.Upward">
+            <summary>
+            向上
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.GraphDirection.Downward">
+            <summary>
+            向下
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.GraphDirection.Ledtward">
+            <summary>
+            向左
+            </summary>
+        </member>
+        <member name="F:HslCommunication.BasicFramework.GraphDirection.Rightward">
+            <summary>
+            向右
+            </summary>
+        </member>
         <member name="T:HslCommunication.BasicFramework.Paintdata">
             <summary>
             包含整型和字符串描述的数据类型
@@ -1166,6 +1081,46 @@
             <param name="degree">刻度划分等级</param>
             <param name="lineColor">线条颜色</param>
             <returns></returns>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftPainting.ComputePaintLocationY(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            计算绘图时的相对偏移值
+            </summary>
+            <param name="max">0-100分的最大值，就是指准备绘制的最大值</param>
+            <param name="min">0-100分的最小值，就是指准备绘制的最小值</param>
+            <param name="height">实际绘图区域的高度</param>
+            <param name="value">需要绘制数据的当前值</param>
+            <returns>相对于0的位置，还需要增加上面的偏值</returns>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftPainting.PaintCoordinateDivide(System.Drawing.Graphics,System.Drawing.Pen,System.Drawing.Pen,System.Drawing.Font,System.Drawing.Brush,System.Drawing.StringFormat,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            绘制坐标系中的刻度线
+            </summary>
+            <param name="g"></param>
+            <param name="penLine"></param>
+            <param name="penDash"></param>
+            <param name="font"></param>
+            <param name="brush"></param>
+            <param name="sf"></param>
+            <param name="degree"></param>
+            <param name="max"></param>
+            <param name="min"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+            <param name="left"></param>
+            <param name="right"></param>
+            <param name="up"></param>
+            <param name="down"></param>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftPainting.PaintTriangle(System.Drawing.Graphics,System.Drawing.Brush,System.Drawing.Point,System.Int32,HslCommunication.BasicFramework.GraphDirection)">
+            <summary>
+            根据指定的方向绘制一个箭头
+            </summary>
+            <param name="g"></param>
+            <param name="brush"></param>
+            <param name="point"></param>
+            <param name="size"></param>
+            <param name="direction"></param>
         </member>
         <member name="M:HslCommunication.BasicFramework.SoftPainting.GetGraphicFromArray(HslCommunication.BasicFramework.Paintdata[],System.Int32,System.Int32,HslCommunication.BasicFramework.GraphicRender)">
             <summary>
@@ -1304,101 +1259,6 @@
             根据sdr对象初始化数据的方法
             </summary>
             <param name="sdr"></param>
-        </member>
-        <member name="T:HslCommunication.BasicFramework.SoftMultiTask`1">
-            <summary>
-            一个用于多线程并发处理数据的模型类，适用于处理数据量非常庞大的情况
-            </summary>
-            <typeparam name="T">等待处理的数据类型</typeparam>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftMultiTask`1.#ctor(`0[],System.Func{`0,System.Boolean},System.Int32)">
-            <summary>
-            实例化一个数据处理对象
-            </summary>
-            <param name="dataList">数据处理列表</param>
-            <param name="operater">数据操作方法，应该是相对耗时的任务</param>
-            <param name="threadCount">需要使用的线程数</param>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_opCount">
-            <summary>
-            操作总数，判定操作是否完成
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_opThreadCount">
-            <summary>
-            判断是否所有的线程是否处理完成
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_threadCount">
-            <summary>
-            准备启动的处理数据的线程数量
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_runStatus">
-            <summary>
-            指示多线程处理是否在运行中，防止冗余调用
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_dataList">
-            <summary>
-            列表数据
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_operater">
-            <summary>
-            需要操作的方法
-            </summary>
-        </member>
-        <member name="T:HslCommunication.BasicFramework.SoftMultiTask`1.MultiInfo">
-            <summary>
-            一个双参数委托
-            </summary>
-            <param name="item"></param>
-            <param name="ex"></param>
-        </member>
-        <member name="T:HslCommunication.BasicFramework.SoftMultiTask`1.MultiInfoTwo">
-            <summary>
-            用于报告进度的委托，当finish等于count时，任务完成
-            </summary>
-            <param name="finish">已完成操作数量</param>
-            <param name="count">总数量</param>
-            <param name="success">成功数量</param>
-            <param name="failed">失败数量</param>
-        </member>
-        <member name="E:HslCommunication.BasicFramework.SoftMultiTask`1.OnExceptionOccur">
-            <summary>
-            异常发生时事件
-            </summary>
-        </member>
-        <member name="E:HslCommunication.BasicFramework.SoftMultiTask`1.OnReportProgress">
-            <summary>
-            报告处理进度时发生
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_finishCount">
-            <summary>
-            已处理完成数量，无论是否异常
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_successCount">
-            <summary>
-            处理完成并实现操作数量
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.m_failedCount">
-            <summary>
-            处理过程中异常数量
-            </summary>
-        </member>
-        <member name="F:HslCommunication.BasicFramework.SoftMultiTask`1.HybirdLock">
-            <summary>
-            用于触发事件的混合线程锁
-            </summary>
-        </member>
-        <member name="M:HslCommunication.BasicFramework.SoftMultiTask`1.StartOperater">
-            <summary>
-            启动多线程进行数据处理
-            </summary>
         </member>
         <member name="T:HslCommunication.BasicFramework.SystemVersion">
             <summary>
@@ -1761,6 +1621,343 @@
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
+        <member name="T:HslCommunication.CoordinationStatus">
+            <summary>
+            线程的协调逻辑状态
+            </summary>
+        </member>
+        <member name="F:HslCommunication.CoordinationStatus.AllDone">
+            <summary>
+            所有项完成
+            </summary>
+        </member>
+        <member name="F:HslCommunication.CoordinationStatus.Timeout">
+            <summary>
+            超时
+            </summary>
+        </member>
+        <member name="F:HslCommunication.CoordinationStatus.Cancel">
+            <summary>
+            任务取消
+            </summary>
+        </member>
+        <member name="T:HslCommunication.AsyncCoordinator">
+            <summary>
+            一个线程协调逻辑类，详细参考书籍《CLR Via C#》page:681
+            这个类可惜没有报告进度的功能
+            </summary>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.AboutToBegin(System.Int32)">
+            <summary>
+            每次的操作任务开始前必须调用该方法
+            </summary>
+            <param name="opsToAdd"></param>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.JustEnded">
+            <summary>
+            在一次任务处理好操作之后，必须调用该方法
+            </summary>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.AllBegun(System.Action{HslCommunication.CoordinationStatus},System.Int32)">
+            <summary>
+            该方法必须在发起所有的操作之后调用
+            </summary>
+            <param name="callback">回调方法</param>
+            <param name="timeout">超时时间</param>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.TimeExpired(System.Object)">
+            <summary>
+            超时的方法
+            </summary>
+            <param name="o"></param>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.Cancel">
+            <summary>
+            取消任务的执行
+            </summary>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.ReportStatus(HslCommunication.CoordinationStatus)">
+            <summary>
+            生成一次报告
+            </summary>
+            <param name="status">报告的状态</param>
+        </member>
+        <member name="M:HslCommunication.AsyncCoordinator.Maxinum(System.Int32@,System.Func{System.Int32,System.Int32})">
+            <summary>
+            乐观的并发方法模型，具体参照《CLR Via C#》page:686
+            </summary>
+            <param name="target">唯一的目标数据</param>
+            <param name="change">修改数据的算法</param>
+            <returns></returns>
+        </member>
+        <member name="T:HslCommunication.HslAsyncCoordinator">
+            <summary>
+            一个用于高性能，乐观并发模型控制操作的类，允许一个方法(隔离方法)的安全单次执行
+            </summary>
+        </member>
+        <member name="M:HslCommunication.HslAsyncCoordinator.#ctor(System.Action)">
+            <summary>
+            实例化一个对象，需要传入隔离执行的方法
+            </summary>
+            <param name="operater">隔离执行的方法</param>
+        </member>
+        <member name="F:HslCommunication.HslAsyncCoordinator.OperaterStatus">
+            <summary>
+            操作状态，0是未操作，1是操作中
+            </summary>
+        </member>
+        <member name="F:HslCommunication.HslAsyncCoordinator.Target">
+            <summary>
+            需要操作的次数
+            </summary>
+        </member>
+        <member name="M:HslCommunication.HslAsyncCoordinator.StartOperaterInfomation">
+            <summary>
+            启动线程池执行隔离方法
+            </summary>
+        </member>
+        <member name="T:HslCommunication.HslReadWriteLock">
+            <summary>
+            一个高性能的读写锁，支持写锁定，读灵活，读时写锁定，写时读锁定
+            </summary>
+        </member>
+        <member name="M:HslCommunication.HslReadWriteLock.ToString">
+            <summary>
+            返回本对象的描述字符串
+            </summary>
+            <returns>对象的描述字符串</returns>
+        </member>
+        <member name="M:HslCommunication.HslReadWriteLock.#ctor">
+            <summary>
+            实例化一个读写锁的对象
+            </summary>
+        </member>
+        <member name="M:HslCommunication.HslReadWriteLock.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="M:HslCommunication.HslReadWriteLock.Enter(System.Boolean)">
+            <summary>
+            根据读写情况请求锁
+            </summary>
+            <param name="exclusive">True为写请求，False为读请求</param>
+        </member>
+        <member name="M:HslCommunication.HslReadWriteLock.Leave">
+            <summary>
+            释放锁，将根据锁状态自动区分读写锁
+            </summary>
+        </member>
+        <member name="T:HslCommunication.SimpleHybirdLock">
+            <summary>
+            一个简单的混合线程同步锁，采用了基元用户加基元内核同步构造实现
+            </summary>
+        </member>
+        <member name="M:HslCommunication.SimpleHybirdLock.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SimpleHybirdLock.m_waiters">
+            <summary>
+            基元用户模式构造同步锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SimpleHybirdLock.m_waiterLock">
+            <summary>
+            基元内核模式构造同步锁
+            </summary>
+        </member>
+        <member name="M:HslCommunication.SimpleHybirdLock.Enter">
+            <summary>
+            获取锁
+            </summary>
+        </member>
+        <member name="M:HslCommunication.SimpleHybirdLock.Leave">
+            <summary>
+            离开锁
+            </summary>
+        </member>
+        <member name="T:HslCommunication.SoftMultiTask`1">
+            <summary>
+            一个用于多线程并发处理数据的模型类，适用于处理数据量非常庞大的情况
+            </summary>
+            <typeparam name="T">等待处理的数据类型</typeparam>
+        </member>
+        <member name="M:HslCommunication.SoftMultiTask`1.#ctor(`0[],System.Func{`0,System.Boolean},System.Int32)">
+            <summary>
+            实例化一个数据处理对象
+            </summary>
+            <param name="dataList">数据处理列表</param>
+            <param name="operater">数据操作方法，应该是相对耗时的任务</param>
+            <param name="threadCount">需要使用的线程数</param>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.m_opCount">
+            <summary>
+            操作总数，判定操作是否完成
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.m_opThreadCount">
+            <summary>
+            判断是否所有的线程是否处理完成
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.m_threadCount">
+            <summary>
+            准备启动的处理数据的线程数量
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.m_runStatus">
+            <summary>
+            指示多线程处理是否在运行中，防止冗余调用
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.m_dataList">
+            <summary>
+            列表数据
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.m_operater">
+            <summary>
+            需要操作的方法
+            </summary>
+        </member>
+        <member name="T:HslCommunication.SoftMultiTask`1.MultiInfo">
+            <summary>
+            一个双参数委托
+            </summary>
+            <param name="item"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="T:HslCommunication.SoftMultiTask`1.MultiInfoTwo">
+            <summary>
+            用于报告进度的委托，当finish等于count时，任务完成
+            </summary>
+            <param name="finish">已完成操作数量</param>
+            <param name="count">总数量</param>
+            <param name="success">成功数量</param>
+            <param name="failed">失败数量</param>
+        </member>
+        <member name="E:HslCommunication.SoftMultiTask`1.OnExceptionOccur">
+            <summary>
+            异常发生时事件
+            </summary>
+        </member>
+        <member name="E:HslCommunication.SoftMultiTask`1.OnReportProgress">
+            <summary>
+            报告处理进度时发生
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.m_finishCount">
+            <summary>
+            已处理完成数量，无论是否异常
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.m_successCount">
+            <summary>
+            处理完成并实现操作数量
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.m_failedCount">
+            <summary>
+            处理过程中异常数量
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.HybirdLock">
+            <summary>
+            用于触发事件的混合线程锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.m_isRunningStop">
+            <summary>
+            指示处理状态是否为暂停状态
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.m_isQuit">
+            <summary>
+            指示系统是否需要强制退出
+            </summary>
+        </member>
+        <member name="F:HslCommunication.SoftMultiTask`1.m_isQuitAfterException">
+            <summary>
+            在发生错误的时候是否强制退出后续的操作
+            </summary>
+        </member>
+        <member name="M:HslCommunication.SoftMultiTask`1.StartOperater">
+            <summary>
+            启动多线程进行数据处理
+            </summary>
+        </member>
+        <member name="M:HslCommunication.SoftMultiTask`1.StopOperater">
+            <summary>
+            暂停当前的操作
+            </summary>
+        </member>
+        <member name="M:HslCommunication.SoftMultiTask`1.ResumeOperater">
+            <summary>
+            恢复暂停的操作
+            </summary>
+        </member>
+        <member name="M:HslCommunication.SoftMultiTask`1.EndedOperater">
+            <summary>
+            直接手动强制结束操作
+            </summary>
+        </member>
+        <member name="P:HslCommunication.SoftMultiTask`1.IsQuitAfterException">
+            <summary>
+            在发生错误的时候是否强制退出后续的操作
+            </summary>
+        </member>
+        <member name="T:HslCommunication.Singleton">
+            <summary>
+            一个双检锁的示例，适合一些占内存的静态数据对象，获取的时候才实例化真正的对象
+            </summary>
+        </member>
+        <member name="T:HslCommunication.AdvancedHybirdLock">
+            <summary>
+            一个高级的混合线程同步锁，采用了基元用户加基元内核同步构造实现，并包含了自旋和线程所有权
+            </summary>
+        </member>
+        <member name="M:HslCommunication.AdvancedHybirdLock.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="F:HslCommunication.AdvancedHybirdLock.m_waiters">
+            <summary>
+            基元用户模式构造同步锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.AdvancedHybirdLock.m_waiterLock">
+            <summary>
+            基元内核模式构造同步锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.AdvancedHybirdLock.m_spincount">
+            <summary>
+            控制自旋的一个字段
+            </summary>
+        </member>
+        <member name="F:HslCommunication.AdvancedHybirdLock.m_owningThreadId">
+            <summary>
+            指出哪个线程拥有锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.AdvancedHybirdLock.m_recursion">
+            <summary>
+            指示锁拥有了多少次
+            </summary>
+        </member>
+        <member name="M:HslCommunication.AdvancedHybirdLock.Enter">
+            <summary>
+            获取锁
+            </summary>
+        </member>
+        <member name="M:HslCommunication.AdvancedHybirdLock.Leave">
+            <summary>
+            离开锁
+            </summary>
+        </member>
         <member name="T:HslCommunication.Enthernet.HslSoftFile">
             <summary>
             用来保存的文件信息类
@@ -1987,71 +2184,71 @@
             <param name="fileSave"></param>
             <returns></returns>
         </member>
-        <member name="T:HslCommunication.Enthernet.Net_File_Server">
+        <member name="T:HslCommunication.Enthernet.NetFileServer">
             <summary>
             文件传送类服务器，仅仅负责数据传送部分，不负责数据库的存储
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_File_Server.FilesPath">
+        <member name="P:HslCommunication.Enthernet.NetFileServer.FilesPath">
             <summary>
             所有文件存储的根目录 默认D盘Files文件夹
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_File_Server.ServerStart(System.Int32)">
+        <member name="M:HslCommunication.Enthernet.NetFileServer.ServerStart(System.Int32)">
             <summary>
             启动服务器的引擎
             </summary>
             <param name="port">指定一个端口号</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_File_Server.ServerClose">
+        <member name="M:HslCommunication.Enthernet.NetFileServer.ServerClose">
             <summary>
             关闭服务器的引擎
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_File_Server.ThreadPoolLogin(System.Object)">
+        <member name="M:HslCommunication.Enthernet.NetFileServer.ThreadPoolLogin(System.Object)">
             <summary>
             处理数据
             </summary>
             <param name="obj"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_File_Server.ReceiveCallBack(System.IAsyncResult)">
+        <member name="M:HslCommunication.Enthernet.NetFileServer.ReceiveCallBack(System.IAsyncResult)">
             <summary>
             用来确认文件是否发送完成的
             </summary>
             <param name="ir"></param>
         </member>
-        <member name="T:HslCommunication.Enthernet.Net_Socket_Server">
+        <member name="T:HslCommunication.Enthernet.NetComplexServer">
             <summary>
             基于TCP的服务器引擎端核心类
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.#ctor">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.#ctor">
             <summary>
             实例化一个网络服务器类对象
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Server.ConnectMax">
+        <member name="P:HslCommunication.Enthernet.NetComplexServer.ConnectMax">
             <summary>
             所支持的同时在线客户端的最大数量，商用限制1000个，最小10个
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Server.FormatClientOnline">
+        <member name="P:HslCommunication.Enthernet.NetComplexServer.FormatClientOnline">
             <summary>
             客户端在线信息显示的格式化文本，如果自定义，必须#开头，
             示例："#IP:{0} Name:{1}"
             </summary>
         </member>
-        <member name="F:HslCommunication.Enthernet.Net_Socket_Server.m_AllClients">
+        <member name="F:HslCommunication.Enthernet.NetComplexServer.m_AllClients">
             <summary>
             客户端在线信息缓存
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Server.AsyncCoordinator">
+        <member name="P:HslCommunication.Enthernet.NetComplexServer.AsyncCoordinator">
             <summary>
             一个计算上线下线的高性能缓存对象
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Server.IsSaveLogClientLineChange">
+        <member name="P:HslCommunication.Enthernet.NetComplexServer.IsSaveLogClientLineChange">
             <summary>
             计算所有客户端在线的信息
             </summary>
@@ -2059,69 +2256,69 @@
             获取或设置服务器是否记录客户端上下线信息
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Server.ClientCount">
+        <member name="P:HslCommunication.Enthernet.NetComplexServer.ClientCount">
             <summary>
             所有在线客户端的数量
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Server.All_sockets_connect">
+        <member name="P:HslCommunication.Enthernet.NetComplexServer.All_sockets_connect">
             <summary>
             所有的客户端连接的核心对象
             </summary>
         </member>
-        <member name="F:HslCommunication.Enthernet.Net_Socket_Server.HybirdLockSockets">
+        <member name="F:HslCommunication.Enthernet.NetComplexServer.HybirdLockSockets">
             <summary>
             客户端数组操作的线程混合锁
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.ServerStart(System.Int32)">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.ServerStart(System.Int32)">
             <summary>
             启动引擎
             </summary>
             <param name="port"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.ServerClose">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.ServerClose">
             <summary>
             关闭引擎
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Socket_Server.MessageAlerts">
+        <member name="E:HslCommunication.Enthernet.NetComplexServer.MessageAlerts">
             <summary>
             服务器的异常，启动，等等一般消息产生的时候，出发此事件
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Socket_Server.AllClientsStatusChange">
+        <member name="E:HslCommunication.Enthernet.NetComplexServer.AllClientsStatusChange">
             <summary>
             客户端的上下限状态变更时触发，仅作为在线客户端识别
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Socket_Server.ClientOnline">
+        <member name="E:HslCommunication.Enthernet.NetComplexServer.ClientOnline">
             <summary>
             当客户端上线的时候，触发此事件
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Socket_Server.ClientOffline">
+        <member name="E:HslCommunication.Enthernet.NetComplexServer.ClientOffline">
             <summary>
             当客户端下线的时候，触发此事件
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Socket_Server.AcceptString">
+        <member name="E:HslCommunication.Enthernet.NetComplexServer.AcceptString">
             <summary>
             当接收到文本数据的时候,触发此事件
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Socket_Server.AcceptByte">
+        <member name="E:HslCommunication.Enthernet.NetComplexServer.AcceptByte">
             <summary>
             当接收到字节数据的时候,触发此事件
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.ThreadPoolLogin(System.Object)">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.ThreadPoolLogin(System.Object)">
             <summary>
             登录后的处理方法
             </summary>
             <param name="obj"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.Send(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.String)">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.Send(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.String)">
             <summary>
             服务器端用于数据发送文本的方法
             </summary>
@@ -2129,7 +2326,7 @@
             <param name="customer">用户自定义的数据对象，如不需要，赋值为0</param>
             <param name="str">发送的文本</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.Send(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.Send(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Byte[])">
             <summary>
             服务器端用于发送字节的方法
             </summary>
@@ -2137,21 +2334,21 @@
             <param name="customer">用户自定义的数据对象，如不需要，赋值为0</param>
             <param name="bytes">实际发送的数据</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.SendAllClients(System.Int32,System.String)">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.SendAllClients(System.Int32,System.String)">
             <summary>
             服务端用于发送所有数据到所有的客户端
             </summary>
             <param name="customer">用户自定义的命令头</param>
             <param name="str">需要传送的实际的数据</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.SendAllClients(System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.SendAllClients(System.Int32,System.Byte[])">
             <summary>
             服务端用于发送所有数据到所有的客户端
             </summary>
             <param name="customer">用户自定义的命令头</param>
             <param name="data">需要群发客户端的字节数据</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Server.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
             <summary>
             数据处理中心
             </summary>
@@ -2160,106 +2357,113 @@
             <param name="customer"></param>
             <param name="content"></param>
         </member>
-        <member name="T:HslCommunication.Enthernet.Net_Socket_Client">
+        <member name="T:HslCommunication.Enthernet.NetComplexClient">
             <summary>
             基于TCP通信的客户端核心类
             </summary>
         </member>
-        <member name="F:HslCommunication.Enthernet.Net_Socket_Client.stateone">
+        <member name="F:HslCommunication.Enthernet.NetComplexClient.stateone">
             <summary>
             客户端的核心连接块
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Client.Is_Client_Start">
+        <member name="P:HslCommunication.Enthernet.NetComplexClient.Is_Client_Start">
             <summary>
             客户端系统是否启动
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Client.Connect_Failed_Count">
+        <member name="P:HslCommunication.Enthernet.NetComplexClient.Connect_Failed_Count">
             <summary>
             重连接失败的次数
             </summary>
         </member>
-        <member name="F:HslCommunication.Enthernet.Net_Socket_Client.Is_Client_Connecting">
+        <member name="F:HslCommunication.Enthernet.NetComplexClient.Is_Client_Connecting">
             <summary>
             指示客户端是否处于正在连接服务器中
             </summary>
         </member>
-        <member name="F:HslCommunication.Enthernet.Net_Socket_Client.lock_connecting">
+        <member name="F:HslCommunication.Enthernet.NetComplexClient.lock_connecting">
             <summary>
             登录服务器的判断锁
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Client.ClientAlias">
+        <member name="P:HslCommunication.Enthernet.NetComplexClient.ClientAlias">
             <summary>
             客户端登录的标识名称，可以为ID号，也可以为登录名
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Client.EndPointServer">
+        <member name="P:HslCommunication.Enthernet.NetComplexClient.EndPointServer">
             <summary>
             远程服务器的IP地址和端口
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Client.ServerTime">
+        <member name="P:HslCommunication.Enthernet.NetComplexClient.ServerTime">
             <summary>
             服务器的时间，自动实现和服务器同步
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Socket_Client.DelayTime">
+        <member name="P:HslCommunication.Enthernet.NetComplexClient.DelayTime">
             <summary>
             系统与服务器的延时时间，单位毫秒
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Socket_Client.LoginSuccess">
+        <member name="E:HslCommunication.Enthernet.NetComplexClient.LoginSuccess">
             <summary>
             客户端启动成功的事件，重连成功也将触发此事件
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Socket_Client.LoginFailed">
+        <member name="E:HslCommunication.Enthernet.NetComplexClient.LoginFailed">
             <summary>
             连接失败时触发的事件
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Socket_Client.MessageAlerts">
+        <member name="E:HslCommunication.Enthernet.NetComplexClient.MessageAlerts">
             <summary>
             服务器的异常，启动，等等一般消息产生的时候，出发此事件
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Socket_Client.AcceptString">
+        <member name="E:HslCommunication.Enthernet.NetComplexClient.AcceptString">
             <summary>
             当接收到文本数据的时候,触发此事件
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Socket_Client.AcceptByte">
+        <member name="E:HslCommunication.Enthernet.NetComplexClient.AcceptByte">
             <summary>
             当接收到字节数据的时候,触发此事件
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.ClientClose">
+        <member name="M:HslCommunication.Enthernet.NetComplexClient.ClientClose">
             <summary>
             关闭该客户端引擎
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.ClientStart">
+        <member name="M:HslCommunication.Enthernet.NetComplexClient.ClientStart">
             <summary>
             启动客户端引擎，连接服务器系统
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.Send(System.Int32,System.String)">
+        <member name="M:HslCommunication.Enthernet.NetComplexClient.SocketReceiveException(HslCommunication.Enthernet.AsyncStateOne,System.Exception)">
+            <summary>
+            通信出错后的处理
+            </summary>
+            <param name="receive"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.NetComplexClient.Send(System.Int32,System.String)">
             <summary>
             服务器端用于数据发送文本的方法
             </summary>
             <param name="customer">用户自定义的命令头</param>
             <param name="str">发送的文本</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.Send(System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetComplexClient.Send(System.Int32,System.Byte[])">
             <summary>
             服务器端用于发送字节的方法
             </summary>
             <param name="customer">用户自定义的命令头</param>
             <param name="bytes">实际发送的数据</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetComplexClient.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
             <summary>
             客户端的数据处理中心
             </summary>
@@ -2268,87 +2472,86 @@
             <param name="customer"></param>
             <param name="content"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Socket_Client.ThreadHeartCheck">
+        <member name="M:HslCommunication.Enthernet.NetComplexClient.ThreadHeartCheck">
             <summary>
             心跳线程的方法
             </summary>
         </member>
-        <member name="T:HslCommunication.Enthernet.Net_Simplify_Client">
+        <member name="T:HslCommunication.Enthernet.NetSimplifyClient">
             <summary>
             用户同步访问数据的客户端类
             在客户端设置参数后，调用方法即可成功读取服务器数据，甚至是文件
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Client.#ctor(System.Net.IPEndPoint)">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.#ctor(System.Net.IPEndPoint)">
             <summary>
             实例化一个客户端的对象，用于和服务器通信
             </summary>
             <param name="end_point">服务器的通信地址</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Client.ReadFromServer(System.Int32,System.String)">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServer(System.Int32,System.String,System.Action{System.Int32,System.Int32},System.Action{System.Int32,System.Int32})">
             <summary>
             客户端向服务器进行请求，请求字符串数据
             </summary>
             <param name="customer">用户的指令头</param>
             <param name="send">发送数据</param>
+            <param name="sendStatus">发送数据时的进度报告</param>
+            <param name="receiveStatus">接收数据时的进度报告</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Client.ReadFromServer(System.Int32)">
-            <summary>
-            客户端向服务器进行请求，请求字符串数据
-            </summary>
-            <param name="customer">用户的指令头</param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Client.ReadFromServer(System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServer(System.Int32,System.Byte[],System.Action{System.Int32,System.Int32},System.Action{System.Int32,System.Int32})">
             <summary>
             客户端向服务器进行请求，请求字节数据
             </summary>
             <param name="customer">用户的指令头</param>
             <param name="send"></param>
+            <param name="sendStatus">发送数据的进度报告</param>
+            <param name="receiveStatus">接收数据的进度报告</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Client.ReadFromServerBase(System.Int32,System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServerBase(System.Int32,System.Int32,System.Byte[],System.Action{System.Int32,System.Int32},System.Action{System.Int32,System.Int32})">
             <summary>
             需要发送的底层数据
             </summary>
             <param name="headcode">数据的指令头</param>
             <param name="customer">用户的指令头</param>
             <param name="send">需要发送的底层数据</param>
+            <param name="sendStatus">发送状态的进度报告，用于显示上传进度</param>
+            <param name="receiveStatus">接收状态的进度报告，用于显示下载进度</param>
             <returns></returns>
         </member>
-        <member name="T:HslCommunication.Enthernet.Net_Simplify_Server">
+        <member name="T:HslCommunication.Enthernet.NetSimplifyServer">
             <summary>
             同步数据交换的服务器端类，先配置相关的参数，再启动系统
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.#ctor">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.#ctor">
             <summary>
             实例化一个对象
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Simplify_Server.ReceiveStringEvent">
+        <member name="E:HslCommunication.Enthernet.NetSimplifyServer.ReceiveStringEvent">
             <summary>
             接收字符串信息的事件
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Simplify_Server.ReceivedBytesEvent">
+        <member name="E:HslCommunication.Enthernet.NetSimplifyServer.ReceivedBytesEvent">
             <summary>
             接收字节信息的事件
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.ServerStart(System.Int32)">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.ServerStart(System.Int32)">
             <summary>
             启动服务器的引擎
             </summary>
             <param name="port">指定一个端口号</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.ServerClose">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.ServerClose">
             <summary>
             关闭引擎
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.SendMessage(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.String)">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.SendMessage(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.String)">
             <summary>
             向指定的通信对象发送字符串数据
             </summary>
@@ -2356,7 +2559,7 @@
             <param name="customer">用户的指令头</param>
             <param name="str">实际发送的字符串数据</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.SendMessage(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.SendMessage(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Byte[])">
             <summary>
             向指定的通信对象发送字节数据
             </summary>
@@ -2364,20 +2567,20 @@
             <param name="customer">用户的指令头</param>
             <param name="bytes">实际的数据</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.ThreadPoolLogin(System.Object)">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.ThreadPoolLogin(System.Object)">
             <summary>
             处理请求接收连接后的方法
             </summary>
             <param name="obj"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.SocketReceiveException(HslCommunication.Enthernet.AsyncStateOne,System.Exception)">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.SocketReceiveException(HslCommunication.Enthernet.AsyncStateOne,System.Exception)">
             <summary>
             处理异常的方法
             </summary>
             <param name="receive"></param>
             <param name="ex"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Simplify_Server.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
             <summary>
             数据处理中心
             </summary>
@@ -2386,83 +2589,99 @@
             <param name="customer"></param>
             <param name="content"></param>
         </member>
-        <member name="T:HslCommunication.Enthernet.Net_SoftUpdate_Server">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.SynchronalReceiveCallback(System.Net.Sockets.Socket,System.Boolean)">
+            <summary>
+            同步数据的接收的块
+            </summary>
+            <param name="socket">网络的套接字</param>
+            <param name="Response">是否回发接收进度</param>
+        </member>
+        <member name="T:HslCommunication.Enthernet.NetSoftUpdateServer">
             <summary>
             用于服务器支持软件全自动更新升级的类
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_SoftUpdate_Server.FileUpdatePath">
+        <member name="P:HslCommunication.Enthernet.NetSoftUpdateServer.FileUpdatePath">
             <summary>
             系统升级时客户端所在的目录，默认为C:\HslCommunication
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_SoftUpdate_Server.ServerStart(System.Int32)">
+        <member name="M:HslCommunication.Enthernet.NetSoftUpdateServer.ServerStart(System.Int32)">
             <summary>
             启动服务器的引擎
             </summary>
             <param name="port"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_SoftUpdate_Server.ServerClose">
+        <member name="M:HslCommunication.Enthernet.NetSoftUpdateServer.ServerClose">
             <summary>
             关闭引擎
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_SoftUpdate_Server.ThreadPoolLogin(System.Object)">
+        <member name="M:HslCommunication.Enthernet.NetSoftUpdateServer.ThreadPoolLogin(System.Object)">
             <summary>
             系统的登录方法
             </summary>
             <param name="obj"></param>
         </member>
-        <member name="T:HslCommunication.Enthernet.Net_Udp_Server">
+        <member name="T:HslCommunication.Enthernet.NetUdpServer">
             <summary>
             一个用于UDP通信的类，服务器端用来接收所有客户端发送数据的功能
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.Net_Udp_Server.ReceiveCacheLength">
+        <member name="P:HslCommunication.Enthernet.NetUdpServer.ReceiveCacheLength">
             <summary>
             获取或设置一次接收时的数据长度，默认2KB数据长度
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Udp_Server.ServerStart(System.Int32)">
+        <member name="M:HslCommunication.Enthernet.NetUdpServer.ServerStart(System.Int32)">
             <summary>
             根据指定的端口启动Upd侦听
             </summary>
             <param name="port"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Udp_Server.ServerClose">
+        <member name="M:HslCommunication.Enthernet.NetUdpServer.ServerClose">
             <summary>
             关闭引擎
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Udp_Server.RefreshReceive">
+        <member name="M:HslCommunication.Enthernet.NetUdpServer.RefreshReceive">
             <summary>
             重新开始接收数据
             </summary>
             <exception cref="T:System.ArgumentNullException"></exception>
             
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Udp_Server.AcceptString">
+        <member name="M:HslCommunication.Enthernet.NetUdpServer.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
+            <summary>
+            数据处理中心
+            </summary>
+            <param name="receive"></param>
+            <param name="protocol"></param>
+            <param name="customer"></param>
+            <param name="content"></param>
+        </member>
+        <member name="E:HslCommunication.Enthernet.NetUdpServer.AcceptString">
             <summary>
             当接收到文本数据的时候,触发此事件
             </summary>
         </member>
-        <member name="E:HslCommunication.Enthernet.Net_Udp_Server.AcceptByte">
+        <member name="E:HslCommunication.Enthernet.NetUdpServer.AcceptByte">
             <summary>
             当接收到字节数据的时候,触发此事件
             </summary>
         </member>
-        <member name="T:HslCommunication.Enthernet.Net_Udp_Client">
+        <member name="T:HslCommunication.Enthernet.NetUdpClient">
             <summary>
             UDP客户端的类，只负责发送数据到服务器，该数据经过封装
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Udp_Client.#ctor(System.Net.IPEndPoint)">
+        <member name="M:HslCommunication.Enthernet.NetUdpClient.#ctor(System.Net.IPEndPoint)">
             <summary>
             实例化对象，
             </summary>
             <param name="endpoint"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Udp_Client.SendMessage(System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetUdpClient.SendMessage(System.Int32,System.Byte[])">
             <summary>
             发送字节数据到服务器
             </summary>
@@ -2472,7 +2691,7 @@
             <exception cref="T:System.Net.Sockets.SocketException"></exception>
             <exception cref="T:System.ObjectDisposedException"></exception>
         </member>
-        <member name="M:HslCommunication.Enthernet.Net_Udp_Client.SendMessage(System.Int32,System.String)">
+        <member name="M:HslCommunication.Enthernet.NetUdpClient.SendMessage(System.Int32,System.String)">
             <summary>
             发送字符串数据到服务器
             </summary>
@@ -2901,6 +3120,520 @@
             连接超时用的Socket
             </summary>
         </member>
+        <member name="T:HslCommunication.LogNet.ILogNet">
+            <summary>
+            一个通用的日志接口
+            </summary>
+        </member>
+        <member name="P:HslCommunication.LogNet.ILogNet.LogSaveMode">
+            <summary>
+            文件存储模式，1:单文件，2:根据大小，3:根据时间
+            </summary>
+        </member>
+        <member name="E:HslCommunication.LogNet.ILogNet.BeforeSaveToFile">
+            <summary>
+            存储之前引发的事件，允许额外的操作
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.ILogNet.RecordMessage(HslCommunication.LogNet.HslMessageDegree,System.String)">
+            <summary>
+            自定义的消息记录
+            </summary>
+            <param name="degree"></param>
+            <param name="text"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.ILogNet.WriteDebug(System.String)">
+            <summary>
+            写入一条调试日志
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.ILogNet.WriteDescrition(System.String)">
+            <summary>
+            写入一条解释性的信息
+            </summary>
+            <param name="description"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.ILogNet.WriteError(System.String)">
+            <summary>
+            写入一条错误日志
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.ILogNet.WriteException(System.String,System.Exception)">
+            <summary>
+            写入一条异常信息
+            </summary>
+            <param name="text"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.ILogNet.WriteFatal(System.String)">
+            <summary>
+            写入一条致命日志
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.ILogNet.WriteInfo(System.String)">
+            <summary>
+            写入一条信息日志
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.ILogNet.WriteNewLine">
+            <summary>
+            写入一行换行符
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.ILogNet.WriteWarn(System.String)">
+            <summary>
+            写入一条警告日志
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.ILogNet.SetMessageDegree(HslCommunication.LogNet.HslMessageDegree)">
+            <summary>
+            设置日志的存储等级，高于该等级的才会被存储
+            </summary>
+            <param name="degree"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.ILogNet.GetExistLogFileNames">
+            <summary>
+            获取已存在的日志文件名称
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HslCommunication.LogNet.LogNetBase">
+            <summary>
+            日志存储类的基类，提供一些基础的服务
+            </summary>    
+        </member>
+        <member name="F:HslCommunication.LogNet.LogNetBase.m_fileSaveLock">
+            <summary>
+            文件读写锁
+            </summary>
+        </member>
+        <member name="E:HslCommunication.LogNet.LogNetBase.BeforeSaveToFile">
+            <summary>
+            在存储到文件的时候将会触发的事件
+            </summary>
+        </member>
+        <member name="P:HslCommunication.LogNet.LogNetBase.LogSaveMode">
+            <summary>
+            日志存储模式，1:单文件，2:按大小存储，3:按时间存储
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.WriteDebug(System.String)">
+            <summary>
+            写入一条调试信息
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.WriteInfo(System.String)">
+            <summary>
+            写入一条信息
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.WriteWarn(System.String)">
+            <summary>
+            写入一条警告信息
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.WriteError(System.String)">
+            <summary>
+            写入一条错误消息
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.WriteFatal(System.String)">
+            <summary>
+            写入一条致命错误信息
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.WriteException(System.String,System.Exception)">
+            <summary>
+            写入一条异常信息
+            </summary>
+            <param name="text"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.RecordMessage(HslCommunication.LogNet.HslMessageDegree,System.String)">
+            <summary>
+            记录一条自定义的消息
+            </summary>
+            <param name="degree"></param>
+            <param name="text"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.WriteDescrition(System.String)">
+            <summary>
+            写入一条解释性的消息，不需要带有回车键
+            </summary>
+            <param name="description"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.WriteNewLine">
+            <summary>
+            写入一条换行符
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.SetMessageDegree(HslCommunication.LogNet.HslMessageDegree)">
+            <summary>
+            设置日志的存储等级，高于该等级的才会被存储
+            </summary>
+            <param name="degree"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.GetFileSaveName">
+            <summary>
+            获取要存储的文件的名称
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.CheckPathEndWithSprit(System.String)">
+            <summary>
+            返回检查的路径名称，将会包含反斜杠
+            </summary>
+            <param name="filePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.Dispose(System.Boolean)">
+            <summary>
+            释放资源
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetBase.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="T:HslCommunication.LogNet.HslEventArgs">
+            <summary>
+            带有存储消息的事件
+            </summary>
+        </member>
+        <member name="P:HslCommunication.LogNet.HslEventArgs.HslMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:HslCommunication.LogNet.GenerateMode">
+            <summary>
+            日志文件输出模式
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.GenerateMode.ByEveryHour">
+            <summary>
+            按每个小时生成日志文件
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.GenerateMode.ByEveryDay">
+            <summary>
+            按每天生成日志文件
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.GenerateMode.ByEveryMonth">
+            <summary>
+            按每个月生成日志文件
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.GenerateMode.ByEverySeason">
+            <summary>
+            按每季度生成日志文件
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.GenerateMode.ByEveryYear">
+            <summary>
+            按每年生成日志文件
+            </summary>
+        </member>
+        <member name="T:HslCommunication.LogNet.HslMessageDegree">
+            <summary>
+            记录消息的等级
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.HslMessageDegree.None">
+            <summary>
+            一条消息都不记录
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.HslMessageDegree.FATAL">
+            <summary>
+            记录致命等级及以上日志的消息
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.HslMessageDegree.ERROR">
+            <summary>
+            记录异常等级及以上日志的消息
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.HslMessageDegree.WARN">
+            <summary>
+            记录警告等级及以上日志的消息
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.HslMessageDegree.INFO">
+            <summary>
+            记录信息等级及以上日志的消息
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.HslMessageDegree.DEBUG">
+            <summary>
+            记录调试等级及以上日志的信息
+            </summary>
+        </member>
+        <member name="T:HslCommunication.LogNet.HslMessageItem">
+            <summary>
+            单个日志的记录信息
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.HslMessageItem.#ctor">
+            <summary>
+            默认的无参构造器
+            </summary>
+        </member>
+        <member name="P:HslCommunication.LogNet.HslMessageItem.Id">
+            <summary>
+            单个记录信息的标识ID，程序重新运行时清空
+            </summary>
+        </member>
+        <member name="P:HslCommunication.LogNet.HslMessageItem.Degree">
+            <summary>
+            消息的等级
+            </summary>
+        </member>
+        <member name="P:HslCommunication.LogNet.HslMessageItem.ThreadId">
+            <summary>
+            线程ID
+            </summary>
+        </member>
+        <member name="P:HslCommunication.LogNet.HslMessageItem.Text">
+            <summary>
+            消息文本
+            </summary>
+        </member>
+        <member name="P:HslCommunication.LogNet.HslMessageItem.Time">
+            <summary>
+            消息发生的事件
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.FormLogNetView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.FormLogNetView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HslCommunication.LogNet.FormLogNetView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:HslCommunication.LogNet.LogNetAnalysisControl">
+            <summary>
+            一个用于日志分析的控件
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetAnalysisControl.#ctor">
+            <summary>
+            实例化一个控件信息
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetAnalysisControl.SetLogNetSource(System.String)">
+            <summary>
+            设置日志的数据源
+            </summary>
+            <param name="logSource">直接从日志文件中读到的数据或是来自网络的数据</param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetAnalysisControl.FilterLogSource(System.String)">
+            <summary>
+            从现有的日志中筛选数据
+            </summary>
+            <param name="degree"></param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetAnalysisControl.AnalysisLogSource(System.DateTime,System.DateTime,System.String)">
+            <summary>
+            底层的数据分析筛选
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="degree"></param>
+        </member>
+        <member name="F:HslCommunication.LogNet.LogNetAnalysisControl.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetAnalysisControl.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetAnalysisControl.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:HslCommunication.LogNet.LogNetManagment">
+            <summary>
+            日志类的管理器
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.LogNetManagment.LogSaveModeBySingleFile">
+            <summary>
+            存储文件的时候指示单文件存储
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.LogNetManagment.LogSaveModeByFileSize">
+            <summary>
+            存储文件的时候指示根据文件大小存储
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.LogNetManagment.LogSaveModeByDateTime">
+            <summary>
+            存储文件的时候指示根据日志时间来存储
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.LogNetManagment.LogFileHeadString">
+            <summary>
+            日志文件的头标志
+            </summary>
+        </member>
+        <member name="P:HslCommunication.LogNet.LogNetManagment.LogNet">
+            <summary>
+            公开的一个静态变量，允许随意的设置
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetManagment.GetSaveStringFromException(System.String,System.Exception)">
+            <summary>
+            通过异常文本格式化成字符串用于保存或发送
+            </summary>
+            <param name="text"></param>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HslCommunication.LogNet.LogNetDateTime">
+            <summary>
+            一个日志组件，可以根据时间来区分不同的文件存储
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetDateTime.#ctor(System.String,HslCommunication.LogNet.GenerateMode)">
+            <summary>
+            实例化一个根据时间存储的日志组件
+            </summary>
+            <param name="filePath">文件存储的路径</param>
+            <param name="generateMode">存储文件的间隔</param>
+        </member>
+        <member name="F:HslCommunication.LogNet.LogNetDateTime.m_fileName">
+            <summary>
+            当前正在存储的文件名称
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.LogNetDateTime.m_filePath">
+            <summary>
+            文件的路径
+            </summary>
+        </member>
+        <member name="F:HslCommunication.LogNet.LogNetDateTime.m_generateMode">
+            <summary>
+            文件的存储模式，默认按照年份来存储
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetDateTime.GetFileSaveName">
+            <summary>
+            获取需要保存的日志文件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetDateTime.GetExistLogFileNames">
+            <summary>
+            获取所有的文件夹中的日志文件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HslCommunication.LogNet.LogNetFileSize">
+            <summary>
+            根据文件的大小来存储日志信息
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetFileSize.#ctor(System.String,System.Int32)">
+            <summary>
+            实例化一个根据文件大小生成新文件的
+            </summary>
+            <param name="filePath">日志文件的保存路径</param>
+            <param name="fileMaxSize">每个日志文件的最大大小，默认2M</param>
+        </member>
+        <member name="F:HslCommunication.LogNet.LogNetFileSize.m_fileName">
+            <summary>
+            当前正在存储的文件名称
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetFileSize.GetFileSaveName">
+            <summary>
+            获取需要保存的日志文件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetFileSize.GetLastAccessFileName">
+            <summary>
+            获取之前保存的日志文件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetFileSize.GetDefaultFileName">
+            <summary>
+            获取一个新的默认的文件名称
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetFileSize.GetExistLogFileNames">
+            <summary>
+            返回所有的日志文件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HslCommunication.LogNet.LogNetSingle">
+            <summary>
+            单日志文件对象
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetSingle.#ctor(System.String)">
+            <summary>
+            实例化一个单文件日志的对象
+            </summary>
+            <param name="filePath"></param>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetSingle.ClearLog">
+            <summary>
+            单日志文件允许清空日志内容
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetSingle.GetAllSavedLog">
+            <summary>
+            获取单日志文件的所有保存记录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetSingle.GetFileSaveName">
+            <summary>
+            获取存储的文件的名称
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.LogNet.LogNetSingle.GetExistLogFileNames">
+            <summary>
+            获取所有的日志文件数组，对于单日志文件来说就只有一个
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HslCommunication.NetSupport">
             <summary>
             静态的方法支持类，提供一些网络的静态支持
@@ -2909,6 +3642,11 @@
         <member name="F:HslCommunication.NetSupport.BufferSize">
             <summary>
             文件的读写缓存大小
+            </summary>
+        </member>
+        <member name="F:HslCommunication.NetSupport.SocketBufferSize">
+            <summary>
+            Socket传输中的缓冲池大小
             </summary>
         </member>
         <member name="M:HslCommunication.NetSupport.ThreadPoolCheckConnect(HslCommunication.HslTimeOut,System.Int32)">
@@ -2925,6 +3663,17 @@
             <param name="b1">第一个字节</param>
             <param name="b2">第二个字节</param>
             <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetSupport.IsTwoGuidEquel(System.Byte[],System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            判断两个GUID的数据部分是否相同
+            </summary>
+            <param name="b1">第一个字节</param>
+            <param name="start1">第一个字节的起始位置</param>
+            <param name="b2">第二个字节</param>
+            <param name="start2">第二个字节的起始位置</param>
+            <returns>返回是否相等</returns>
+            <exception cref="T:System.IndexOutOfRangeException"></exception>
         </member>
         <member name="M:HslCommunication.NetSupport.IsTwoBytesEquel(System.Byte[],System.Int32,System.Byte[],System.Int32,System.Int32)">
             <summary>
@@ -2944,6 +3693,33 @@
             </summary>
             <param name="socket">通信对象</param>
             <param name="receive">接收的长度</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.Net.Sockets.SocketException"></exception>
+            <exception cref="T:System.ObjectDisposedException"></exception>
+            <exception cref="T:System.Security.SecurityException"></exception>
+        </member>
+        <member name="M:HslCommunication.NetSupport.ReadFromSocket(System.Net.Sockets.Socket,System.Int32,System.Boolean)">
+            <summary>
+            读取socket数据的基础方法并返回接收长度，只适合用来接收指令头，或是同步数据
+            </summary>
+            <param name="socket">通信对象</param>
+            <param name="receive">接收的长度</param>
+            <param name="response">是否回发接收数据长度</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.Net.Sockets.SocketException"></exception>
+            <exception cref="T:System.ObjectDisposedException"></exception>
+            <exception cref="T:System.Security.SecurityException"></exception>
+        </member>
+        <member name="M:HslCommunication.NetSupport.ReadFromSocket(System.Net.Sockets.Socket,System.Int32,System.Action{System.Int32,System.Int32},System.Boolean)">
+            <summary>
+            读取socket数据的基础方法，只适合用来接收指令头，或是同步数据
+            </summary>
+            <param name="socket">通信对象</param>
+            <param name="receive">接收的长度</param>
+            <param name="report">用于报告接收进度的对象</param>
+            <param name="response">是否回发接收数据长度</param>
             <returns></returns>
             <exception cref="T:System.ArgumentNullException"></exception>
             <exception cref="T:System.Net.Sockets.SocketException"></exception>
@@ -2999,7 +3775,7 @@
         </member>
         <member name="M:HslCommunication.NetSupport.CommandBytes(System.Int32,System.Guid,System.Byte[])">
             <summary>
-            获取发送字节数据的实际数据
+            获取发送字节数据的实际数据，带指令头
             </summary>
             <param name="customer"></param>
             <param name="token"></param>
@@ -3008,7 +3784,7 @@
         </member>
         <member name="M:HslCommunication.NetSupport.CommandBytes(System.Int32,System.Guid,System.String)">
             <summary>
-            
+            获取发送字节数据的实际数据，带指令头
             </summary>
             <param name="customer"></param>
             <param name="token"></param>
@@ -3033,16 +3809,6 @@
             用于通信工作的核心对象
             </summary>
         </member>
-        <member name="P:HslCommunication.NetBase.ConnectTimeout">
-            <summary>
-            网络访问中的超时时间，单位：毫秒，默认值2200
-            </summary>
-        </member>
-        <member name="P:HslCommunication.NetBase.KeyToken">
-            <summary>
-            当前对象的身份令牌，用来在网络通信中标识唯一的验证
-            </summary>
-        </member>
         <member name="P:HslCommunication.NetBase.SegmentationLength">
             <summary>
             分次接收的数据长度
@@ -3053,6 +3819,16 @@
             检查超时的子线程
             </summary>
             <param name="obj"></param>
+        </member>
+        <member name="P:HslCommunication.NetBase.ConnectTimeout">
+            <summary>
+            网络访问中的超时时间，单位：毫秒，默认值2200
+            </summary>
+        </member>
+        <member name="P:HslCommunication.NetBase.KeyToken">
+            <summary>
+            当前对象的身份令牌，用来在网络通信中双向认证的依据
+            </summary>
         </member>
         <member name="T:HslCommunication.NetBase.IEDelegate">
             <summary>
@@ -3086,50 +3862,56 @@
             <param name="object2">object2</param>
             <param name="object3">object3</param>
         </member>
-        <member name="T:HslCommunication.NetComplexBase">
+        <member name="P:HslCommunication.NetBase.LogNet">
+            <summary>
+            日志保存类，默认为空
+            </summary>
+        </member>
+        <member name="T:HslCommunication.NetShareBase">
             <summary>
             客户端服务端都拥有的一些方法
             </summary>
         </member>
-        <member name="M:HslCommunication.NetComplexBase.SendBytesAsync(System.Net.Sockets.Socket,System.Byte[])">
+        <member name="M:HslCommunication.NetShareBase.SendBytesAsync(System.Net.Sockets.Socket,System.Byte[])">
             <summary>
             发送数据的方法
             </summary>
             <param name="socket">通信用的核心对象</param>
             <param name="content"></param>
         </member>
-        <member name="M:HslCommunication.NetComplexBase.SendCallBack(System.IAsyncResult)">
+        <member name="M:HslCommunication.NetShareBase.SendCallBack(System.IAsyncResult)">
             <summary>
             发送回发方法
             </summary>
             <param name="ar"></param>
         </member>
-        <member name="M:HslCommunication.NetComplexBase.ReBeginReceiveHead(HslCommunication.Enthernet.AsyncStateOne,System.Boolean)">
+        <member name="M:HslCommunication.NetShareBase.ReBeginReceiveHead(HslCommunication.Enthernet.AsyncStateOne,System.Boolean)">
             <summary>
             重新开始接收下一次的数据传递
             </summary>
             <param name="receive">网络状态</param>
             <param name="isProcess">是否触发数据处理</param>
         </member>
-        <member name="M:HslCommunication.NetComplexBase.HeadReceiveCallback(System.IAsyncResult)">
+        <member name="M:HslCommunication.NetShareBase.HeadReceiveCallback(System.IAsyncResult)">
             <summary>
             指令头接收方法
             </summary>
             <param name="ar"></param>
         </member>
-        <member name="M:HslCommunication.NetComplexBase.ContentReceiveCallback(System.IAsyncResult)">
+        <member name="M:HslCommunication.NetShareBase.SocketReceiveException(HslCommunication.Enthernet.AsyncStateOne,System.Exception)">
+            <summary>
+            接收出错的时候进行处理
+            </summary>
+            <param name="receive"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:HslCommunication.NetShareBase.ContentReceiveCallback(System.IAsyncResult)">
             <summary>
             数据内容接收方法
             </summary>
             <param name="ar"></param>
         </member>
-        <member name="M:HslCommunication.NetComplexBase.SynchronalReceiveCallback(System.Net.Sockets.Socket)">
-            <summary>
-            同步数据的接收的块
-            </summary>
-            <param name="socket">网络的套接字</param>
-        </member>
-        <member name="M:HslCommunication.NetComplexBase.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.NetShareBase.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
             <summary>
             数据处理中心，应该继承重写
             </summary>
@@ -3137,18 +3919,6 @@
             <param name="protocol">协议头</param>
             <param name="customer">用户自定义</param>
             <param name="content">数据内容</param>
-        </member>
-        <member name="M:HslCommunication.NetComplexBase.DoWithException(System.String,System.Exception)">
-            <summary>
-            处理异常的方法，该方法需要在服务器端进行重写
-            </summary>
-            <param name="description"></param>
-            <param name="ex"></param>
-        </member>
-        <member name="P:HslCommunication.NetComplexBase.IsSocketClosedAfterFinished">
-            <summary>
-            指示是否在发送结束后关闭套接字
-            </summary>
         </member>
         <member name="T:HslCommunication.NetServerBase">
             <summary>
@@ -3168,9 +3938,9 @@
         </member>
         <member name="M:HslCommunication.NetServerBase.ThreadPoolLogin(System.Object)">
             <summary>
-            登录回调方法
+            用于登录的回调方法
             </summary>
-            <param name="obj"></param>
+            <param name="obj">socket对象</param>
         </member>
         <member name="M:HslCommunication.NetServerBase.ServerStart(System.Int32)">
             <summary>
@@ -3181,225 +3951,6 @@
         <member name="M:HslCommunication.NetServerBase.ServerClose">
             <summary>
             关闭服务器的引擎
-            </summary>
-        </member>
-        <member name="P:HslCommunication.NetServerBase.LogHelper">
-            <summary>
-            日志保存类
-            </summary>
-        </member>
-        <member name="M:HslCommunication.NetServerBase.DoWithException(System.String,System.Exception)">
-            <summary>
-            存储错误日志
-            </summary>
-            <param name="description">描述</param>
-            <param name="ex">异常</param>
-        </member>
-        <member name="T:HslCommunication.CoordinationStatus">
-            <summary>
-            线程的协调逻辑状态
-            </summary>
-        </member>
-        <member name="F:HslCommunication.CoordinationStatus.AllDone">
-            <summary>
-            所有项完成
-            </summary>
-        </member>
-        <member name="F:HslCommunication.CoordinationStatus.Timeout">
-            <summary>
-            超时
-            </summary>
-        </member>
-        <member name="F:HslCommunication.CoordinationStatus.Cancel">
-            <summary>
-            任务取消
-            </summary>
-        </member>
-        <member name="T:HslCommunication.AsyncCoordinator">
-            <summary>
-            一个线程协调逻辑类，详细参考书籍《CLR Via C#》page:681
-            这个类可惜没有报告进度的功能
-            </summary>
-        </member>
-        <member name="M:HslCommunication.AsyncCoordinator.AboutToBegin(System.Int32)">
-            <summary>
-            每次的操作任务开始前必须调用该方法
-            </summary>
-            <param name="opsToAdd"></param>
-        </member>
-        <member name="M:HslCommunication.AsyncCoordinator.JustEnded">
-            <summary>
-            在一次任务处理好操作之后，必须调用该方法
-            </summary>
-        </member>
-        <member name="M:HslCommunication.AsyncCoordinator.AllBegun(System.Action{HslCommunication.CoordinationStatus},System.Int32)">
-            <summary>
-            该方法必须在发起所有的操作之后调用
-            </summary>
-            <param name="callback">回调方法</param>
-            <param name="timeout">超时时间</param>
-        </member>
-        <member name="M:HslCommunication.AsyncCoordinator.TimeExpired(System.Object)">
-            <summary>
-            超时的方法
-            </summary>
-            <param name="o"></param>
-        </member>
-        <member name="M:HslCommunication.AsyncCoordinator.Cancel">
-            <summary>
-            取消任务的执行
-            </summary>
-        </member>
-        <member name="M:HslCommunication.AsyncCoordinator.ReportStatus(HslCommunication.CoordinationStatus)">
-            <summary>
-            生成一次报告
-            </summary>
-            <param name="status">报告的状态</param>
-        </member>
-        <member name="M:HslCommunication.AsyncCoordinator.Maxinum(System.Int32@,System.Func{System.Int32,System.Int32})">
-            <summary>
-            乐观的并发方法模型，具体参照《CLR Via C#》page:686
-            </summary>
-            <param name="target">唯一的目标数据</param>
-            <param name="change">修改数据的算法</param>
-            <returns></returns>
-        </member>
-        <member name="T:HslCommunication.HslAsyncCoordinator">
-            <summary>
-            一个用于高性能，乐观并发模型控制操作的类，允许一个方法(隔离方法)的安全单次执行
-            </summary>
-        </member>
-        <member name="M:HslCommunication.HslAsyncCoordinator.#ctor(System.Action)">
-            <summary>
-            实例化一个对象，需要传入隔离执行的方法
-            </summary>
-            <param name="operater">隔离执行的方法</param>
-        </member>
-        <member name="F:HslCommunication.HslAsyncCoordinator.OperaterStatus">
-            <summary>
-            操作状态，0是未操作，1是操作中
-            </summary>
-        </member>
-        <member name="F:HslCommunication.HslAsyncCoordinator.Target">
-            <summary>
-            需要操作的次数
-            </summary>
-        </member>
-        <member name="M:HslCommunication.HslAsyncCoordinator.StartOperaterInfomation">
-            <summary>
-            启动线程池执行隔离方法
-            </summary>
-        </member>
-        <member name="T:HslCommunication.HslReadWriteLock">
-            <summary>
-            一个高性能的读写锁，支持写锁定，读灵活，读时写锁定，写时读锁定
-            </summary>
-        </member>
-        <member name="M:HslCommunication.HslReadWriteLock.ToString">
-            <summary>
-            返回本对象的描述字符串
-            </summary>
-            <returns>对象的描述字符串</returns>
-        </member>
-        <member name="M:HslCommunication.HslReadWriteLock.#ctor">
-            <summary>
-            实例化一个读写锁的对象
-            </summary>
-        </member>
-        <member name="M:HslCommunication.HslReadWriteLock.Dispose">
-            <summary>
-            释放资源
-            </summary>
-        </member>
-        <member name="M:HslCommunication.HslReadWriteLock.Enter(System.Boolean)">
-            <summary>
-            根据读写情况请求锁
-            </summary>
-            <param name="exclusive">True为写请求，False为读请求</param>
-        </member>
-        <member name="M:HslCommunication.HslReadWriteLock.Leave">
-            <summary>
-            释放锁，将根据锁状态自动区分读写锁
-            </summary>
-        </member>
-        <member name="T:HslCommunication.SimpleHybirdLock">
-            <summary>
-            一个简单的混合线程同步锁，采用了基元用户加基元内核同步构造实现
-            </summary>
-        </member>
-        <member name="M:HslCommunication.SimpleHybirdLock.Dispose">
-            <summary>
-            释放资源
-            </summary>
-        </member>
-        <member name="F:HslCommunication.SimpleHybirdLock.m_waiters">
-            <summary>
-            基元用户模式构造同步锁
-            </summary>
-        </member>
-        <member name="F:HslCommunication.SimpleHybirdLock.m_waiterLock">
-            <summary>
-            基元内核模式构造同步锁
-            </summary>
-        </member>
-        <member name="M:HslCommunication.SimpleHybirdLock.Enter">
-            <summary>
-            获取锁
-            </summary>
-        </member>
-        <member name="M:HslCommunication.SimpleHybirdLock.Leave">
-            <summary>
-            离开锁
-            </summary>
-        </member>
-        <member name="T:HslCommunication.Singleton">
-            <summary>
-            一个双检锁的示例，适合一些占内存的静态数据对象，获取的时候才实例化真正的对象
-            </summary>
-        </member>
-        <member name="T:HslCommunication.AdvancedHybirdLock">
-            <summary>
-            一个高级的混合线程同步锁，采用了基元用户加基元内核同步构造实现，并包含了自旋和线程所有权
-            </summary>
-        </member>
-        <member name="M:HslCommunication.AdvancedHybirdLock.Dispose">
-            <summary>
-            释放资源
-            </summary>
-        </member>
-        <member name="F:HslCommunication.AdvancedHybirdLock.m_waiters">
-            <summary>
-            基元用户模式构造同步锁
-            </summary>
-        </member>
-        <member name="F:HslCommunication.AdvancedHybirdLock.m_waiterLock">
-            <summary>
-            基元内核模式构造同步锁
-            </summary>
-        </member>
-        <member name="F:HslCommunication.AdvancedHybirdLock.m_spincount">
-            <summary>
-            控制自旋的一个字段
-            </summary>
-        </member>
-        <member name="F:HslCommunication.AdvancedHybirdLock.m_owningThreadId">
-            <summary>
-            指出哪个线程拥有锁
-            </summary>
-        </member>
-        <member name="F:HslCommunication.AdvancedHybirdLock.m_recursion">
-            <summary>
-            指示锁拥有了多少次
-            </summary>
-        </member>
-        <member name="M:HslCommunication.AdvancedHybirdLock.Enter">
-            <summary>
-            获取锁
-            </summary>
-        </member>
-        <member name="M:HslCommunication.AdvancedHybirdLock.Leave">
-            <summary>
-            离开锁
             </summary>
         </member>
         <member name="T:HslCommunication.OperateResult">

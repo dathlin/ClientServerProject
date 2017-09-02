@@ -17,7 +17,7 @@ using ClientsLibrary;
 
 /***************************************************************************************
  * 
- *    模版日期    2017-06-16
+ *    模版日期    2017-09-02
  *    创建人      胡少林
  *    版权所有    胡少林
  *    授权说明    模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
@@ -201,7 +201,7 @@ namespace 软件系统客户端模版
 
         private void 日志查看ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FormLog flg = new FormLog())
+            using (FormLogView flg = new FormLogView())
             {
                 flg.ShowDialog();
             }
@@ -309,7 +309,7 @@ namespace 软件系统客户端模版
 
         #region 异步网络块
 
-        private Net_Socket_Client net_socket_client = new Net_Socket_Client();
+        private NetComplexClient net_socket_client = new NetComplexClient();
 
         private void Net_Socket_Client_Initialization()
         {

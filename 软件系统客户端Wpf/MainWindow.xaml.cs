@@ -219,7 +219,7 @@ namespace 软件系统客户端Wpf
 
         private void MenuItem日志查看_Click(object sender, RoutedEventArgs e)
         {
-            using (FormLog flg = new FormLog())
+            using (FormLogView flg = new FormLogView())
             {
                 flg.ShowDialog();
             }
@@ -375,7 +375,7 @@ namespace 软件系统客户端Wpf
 
         #region 异步网络块
 
-        private Net_Socket_Client net_socket_client = new Net_Socket_Client();
+        private NetComplexClient net_socket_client = new NetComplexClient();
 
         private void Net_Socket_Client_Initialization()
         {

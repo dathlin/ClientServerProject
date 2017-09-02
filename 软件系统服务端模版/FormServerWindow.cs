@@ -12,11 +12,12 @@ using CommonLibrary;
 using Newtonsoft.Json.Linq;
 using HslCommunication.BasicFramework;
 using System.Diagnostics;
+using HslCommunication.LogNet;
 
 
 /******************************************************************************************
  * 
- *    模版日期  2017-06-16
+ *    模版日期  2017-09-02
  *    创建人    Richard.Hu
  *    版权所有  Richard.Hu
  *    授权说明  模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
@@ -96,20 +97,11 @@ namespace 软件系统服务端模版
             //邮件系统初始化
             SoftMailInitialization();
             //初始化日志工具
-            RuntimeLogHelper = new SoftLogHelper()
-            {
-                LogSaveFileName = LogSavePath + @"\log.txt",
-            };
+            RuntimeLogHelper = new LogNetSingle(LogSavePath + @"\log.txt");
             //初始化反馈信息工具
-            AdviceLogHelper = new SoftLogHelper()
-            {
-                LogSaveFileName = LogSavePath + @"\advice_log.txt",
-            };
+            AdviceLogHelper = new LogNetSingle(LogSavePath + @"\advice_log.txt");
             //初始化客户端异常日志工具
-            ClientsLogHelper = new SoftLogHelper()
-            {
-                LogSaveFileName = LogSavePath + @"\clients_log.txt",
-            };
+            ClientsLogHelper = new LogNetSingle(LogSavePath + @"\clients_log.txt");
             //保存路径初始化
             UserServer.ServerSettings.FileSavePath = Application.StartupPath + @"\settings.txt";
             //加载参数
@@ -120,7 +112,7 @@ namespace 软件系统服务端模版
             //加载账户信息
             UserServer.ServerAccounts.FileSavePath = Application.StartupPath + @"\accounts.txt";
             UserServer.ServerAccounts.LoadByFile();
-            UserServer.ServerAccounts.LogHelper = RuntimeLogHelper;
+            UserServer.ServerAccounts.ILogNet = RuntimeLogHelper;
             //初始化聊天信息
             ChatInitialization();
         }
@@ -202,7 +194,7 @@ namespace 软件系统服务端模版
         {
             if (e.ExceptionObject is Exception ex)
             {
-                RuntimeLogHelper.SaveError("UnhandledException:", ex);
+                RuntimeLogHelper.WriteException("UnhandledException:", ex);
                 //发送到自己的EMAIL
                 SendUserMail(ex);
             }
@@ -335,12 +327,12 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 支持软件自动更新的后台服务引擎
         /// </summary>
-        private Net_SoftUpdate_Server net_soft_update_Server = new Net_SoftUpdate_Server();
+        private NetSoftUpdateServer net_soft_update_Server = new NetSoftUpdateServer();
         private void Net_SoftUpdate_Server_Initialization()
         {
             try
             {
-                net_soft_update_Server.LogHelper.LogSaveFileName = LogSavePath + @"\update_log.txt";
+                net_soft_update_Server.LogNet = new LogNetSingle(LogSavePath + @"\update_log.txt");
                 //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
                 //只放置exe和dll组件，必须放置：软件自动更新.exe
                 net_soft_update_Server.KeyToken = CommonHeadCode.KeyToken;
@@ -359,7 +351,7 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 用于局域网异地更新服务器的客户端程序的引擎，仅限客户端
         /// </summary>
-        private Net_File_Server net_file_update = new Net_File_Server();
+        private NetFileServer net_file_update = new NetFileServer();
         /// <summary>
         /// 软件异地更新的初始化，如不需要可以不启动，该功能支持发送客户端文件至服务器实现覆盖更新
         /// </summary>
@@ -368,7 +360,7 @@ namespace 软件系统服务端模版
             try
             {
                 net_file_update.FilesPath = Application.StartupPath + @"\ClientFiles";//服务器客户端需要更新的路径，与上述一致
-                net_file_update.LogHelper.LogSaveFileName = LogSavePath + @"\update_file_log.txt";
+                net_file_update.LogNet = new LogNetSingle(LogSavePath + @"\update_file_log.txt");
                 net_file_update.KeyToken = CommonHeadCode.KeyToken;
                 net_file_update.ServerStart(CommonLibrary.CommonLibrary.Port_Update_Remote);
             }
@@ -383,7 +375,7 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 用户同步数据传送的引擎
         /// </summary>
-        private Net_Simplify_Server net_simplify_server = new Net_Simplify_Server();
+        private NetSimplifyServer net_simplify_server = new NetSimplifyServer();
         /// <summary>
         /// 同步传送数据的初始化
         /// </summary>
@@ -392,7 +384,8 @@ namespace 软件系统服务端模版
             try
             {
                 net_simplify_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
-                net_simplify_server.LogHelper.LogSaveFileName = LogSavePath + @"\simplify_log.txt";//日志路径
+                net_simplify_server.LogNet = new LogNetSingle(LogSavePath + @"\simplify_log.txt");//日志路径
+                net_simplify_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_simplify_server.ReceiveStringEvent += Net_simplify_server_ReceiveStringEvent;//接收到字符串触发
                 net_simplify_server.ReceivedBytesEvent += Net_simplify_server_ReceivedBytesEvent;//接收到字节触发
                 net_simplify_server.ServerStart(CommonLibrary.CommonLibrary.Port_Second_Net);
@@ -546,7 +539,7 @@ namespace 软件系统服务端模版
                     UserServer.ServerSettings.SaveToFile();
                     toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
                     //记录数据
-                    RuntimeLogHelper.SaveInformation($"更改了版本号：{data}");
+                    RuntimeLogHelper.WriteInfo($"更改了版本号：{data}");
                     net_simplify_server.SendMessage(state, customer, "1");
                 }
                 catch
@@ -565,7 +558,7 @@ namespace 软件系统服务端模版
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.意见反馈)
             {
-                AdviceLogHelper.SaveInformation(data);
+                AdviceLogHelper.WriteInfo(data);
                 net_simplify_server.SendMessage(state, customer, "成功");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.群发消息)
@@ -575,7 +568,7 @@ namespace 软件系统服务端模版
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.异常消息)
             {
-                ClientsLogHelper.SaveError(data);
+                ClientsLogHelper.WriteError(data);
                 net_simplify_server.SendMessage(state, customer, "成功");
                 //发送到邮箱
                 SendUserMail("异常记录", "时间：" + DateTime.Now.ToString("O") + Environment.NewLine + data);
@@ -596,7 +589,7 @@ namespace 软件系统服务端模版
                     catch(Exception ex)
                     {
                         net_simplify_server.SendMessage(state, customer, "N");
-                        RuntimeLogHelper.SaveError(ex);
+                        RuntimeLogHelper.WriteException(null, ex);
                     }
                 }
             }
@@ -640,102 +633,138 @@ namespace 软件系统服务端模版
         {
             if (customer == CommonHeadCode.SimplifyHeadCode.网络日志查看)
             {
-                net_simplify_server.SendMessage(state, customer, net_socket_server.LogHelper.GetLogText());
-                RuntimeLogHelper.SaveInformation("网络日志查看");
+                LogNetSingle logNet = (LogNetSingle)net_socket_server.LogNet;
+                net_simplify_server.SendMessage(state, customer, logNet.GetAllSavedLog());
+                RuntimeLogHelper.WriteInfo("网络日志查看");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.网络日志清空)
             {
-                net_socket_server.LogHelper.ClearLogText();
+                if (net_socket_server.LogNet is LogNetSingle logNet)
+                {
+                    logNet.ClearLog();
+                }
                 net_simplify_server.SendMessage(state, customer, "成功");
-                RuntimeLogHelper.SaveWarnning("网络日志清空");
+                RuntimeLogHelper.WriteWarn("网络日志清空");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.同步日志查看)
             {
-                net_simplify_server.SendMessage(state, customer, net_simplify_server.LogHelper.GetLogText());
-                RuntimeLogHelper.SaveInformation("同步日志查看");
+                LogNetSingle logNet = (LogNetSingle)net_simplify_server.LogNet;
+                net_simplify_server.SendMessage(state, customer, logNet.GetAllSavedLog());
+                RuntimeLogHelper.WriteInfo("同步日志查看");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.同步日志清空)
             {
-                net_simplify_server.LogHelper.ClearLogText();
+                if (net_simplify_server.LogNet is LogNetSingle logNet)
+                {
+                    logNet.ClearLog();
+                }
                 net_simplify_server.SendMessage(state, customer, "成功");
-                RuntimeLogHelper.SaveWarnning("同步日志清空");
+                RuntimeLogHelper.WriteWarn("同步日志清空");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.更新日志查看)
             {
-                net_simplify_server.SendMessage(state, customer, net_soft_update_Server.LogHelper.GetLogText());
-                RuntimeLogHelper.SaveInformation("更新日志查看");
+                LogNetSingle logNet = (LogNetSingle)net_soft_update_Server.LogNet;
+                net_simplify_server.SendMessage(state, customer, logNet.GetAllSavedLog());
+                RuntimeLogHelper.WriteInfo("更新日志查看");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.更新日志清空)
             {
-                net_soft_update_Server.LogHelper.ClearLogText();
+                if (net_soft_update_Server.LogNet is LogNetSingle logNet)
+                {
+                    logNet.ClearLog();
+                }
                 net_simplify_server.SendMessage(state, customer, "成功");
-                RuntimeLogHelper.SaveWarnning("更新日志清空");
+                RuntimeLogHelper.WriteWarn("更新日志清空");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.运行日志查看)
             {
-                net_simplify_server.SendMessage(state, customer, RuntimeLogHelper.GetLogText());
-                RuntimeLogHelper.SaveInformation("运行日志查看");
+                LogNetSingle logNet = (LogNetSingle)RuntimeLogHelper;
+                net_simplify_server.SendMessage(state, customer, logNet.GetAllSavedLog());
+                RuntimeLogHelper.WriteInfo("运行日志查看");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.运行日志清空)
             {
-                RuntimeLogHelper.ClearLogText();
+                if (RuntimeLogHelper is LogNetSingle logNet)
+                {
+                    logNet.ClearLog();
+                }
                 net_simplify_server.SendMessage(state, customer, "成功");
-                RuntimeLogHelper.SaveInformation("运行日志清空");
+                RuntimeLogHelper.WriteWarn("运行日志清空");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.文件日志查看)
             {
-                net_simplify_server.SendMessage(state, customer, net_simple_file_server.LogHelper.GetLogText());
-                RuntimeLogHelper.SaveInformation("共享文件日志查看");
+                LogNetSingle logNet = (LogNetSingle)net_simple_file_server.LogNet;
+                net_simplify_server.SendMessage(state, customer, logNet.GetAllSavedLog());
+                RuntimeLogHelper.WriteInfo("共享文件日志查看");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.文件日志清空)
             {
-                net_simple_file_server.LogHelper.ClearLogText();
+                if (net_simple_file_server.LogNet is LogNetSingle logNet)
+                {
+                    logNet.ClearLog();
+                }
                 net_simplify_server.SendMessage(state, customer, "成功");
-                RuntimeLogHelper.SaveInformation("共享文件日志清空");
+                RuntimeLogHelper.WriteWarn("共享文件日志清空");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.反馈日志查看)
             {
-                net_simplify_server.SendMessage(state, customer, AdviceLogHelper.GetLogText());
-                RuntimeLogHelper.SaveInformation("建议反馈日志查看");
+                LogNetSingle logNet = (LogNetSingle)AdviceLogHelper;
+                net_simplify_server.SendMessage(state, customer, logNet.GetAllSavedLog());
+                RuntimeLogHelper.WriteInfo("建议反馈日志查看");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.反馈日志清空)
             {
-                AdviceLogHelper.ClearLogText();
+                if (AdviceLogHelper is LogNetSingle logNet)
+                {
+                    logNet.ClearLog();
+                }
                 net_simplify_server.SendMessage(state, customer, "成功");
-                RuntimeLogHelper.SaveWarnning("建议反馈日志清空");
+                RuntimeLogHelper.WriteWarn("建议反馈日志清空");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.UDP日志查看)
             {
-                net_simplify_server.SendMessage(state, 0, net_udp_server.LogHelper.GetLogText());
-                RuntimeLogHelper.SaveInformation("UDP日志查看");
+                LogNetSingle logNet = (LogNetSingle)net_udp_server.LogNet;
+                net_simplify_server.SendMessage(state, 0, logNet.GetAllSavedLog());
+                RuntimeLogHelper.WriteInfo("UDP日志查看");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.UDP日志清空)
             {
-                net_udp_server.LogHelper.ClearLogText();
+                if (net_udp_server.LogNet is LogNetSingle logNet)
+                {
+                    logNet.ClearLog();
+                }
                 net_simplify_server.SendMessage(state, customer, "成功");
-                RuntimeLogHelper.SaveWarnning("UDP日志清空");
+                RuntimeLogHelper.WriteWarn("UDP日志清空");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.客户端日志查看)
             {
-                net_simplify_server.SendMessage(state, 0, ClientsLogHelper.GetLogText());
-                RuntimeLogHelper.SaveInformation("客户端日志查看");
+                LogNetSingle logNet = ClientsLogHelper as LogNetSingle;
+                net_simplify_server.SendMessage(state, 0, logNet.GetAllSavedLog());
+                RuntimeLogHelper.WriteInfo("客户端日志查看");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.客户端日志清空)
             {
-                ClientsLogHelper.ClearLogText();
+                if (ClientsLogHelper is LogNetSingle logNet)
+                {
+                    logNet.ClearLog();
+                }
                 net_simplify_server.SendMessage(state, customer, "成功");
-                RuntimeLogHelper.SaveWarnning("客户端日志清空");
+                RuntimeLogHelper.WriteWarn("客户端日志清空");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.头像日志查看)
             {
-                net_simplify_server.SendMessage(state, 0, net_file_Portrait.LogHelper.GetLogText());
-                RuntimeLogHelper.SaveInformation("头像日志查看");
+                LogNetSingle logNet = (LogNetSingle)net_file_Portrait.LogNet;
+                net_simplify_server.SendMessage(state, 0, logNet.GetAllSavedLog());
+                RuntimeLogHelper.WriteInfo("头像日志查看");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.头像日志清空)
             {
-                net_file_Portrait.LogHelper.ClearLogText();
+                if (net_file_Portrait.LogNet is LogNetSingle logNet)
+                {
+                    logNet.ClearLog();
+                }
                 net_simplify_server.SendMessage(state, customer, "成功");
-                RuntimeLogHelper.SaveWarnning("头像日志清空");
+                RuntimeLogHelper.WriteWarn("头像日志清空");
             }
             else
             {
@@ -761,7 +790,7 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 异步客户端管理引擎，维护所有的客户端在线情况，支持主动发数据到所有的客户端
         /// </summary>
-        private Net_Socket_Server net_socket_server = new Net_Socket_Server();
+        private NetComplexServer net_socket_server = new NetComplexServer();
         /// <summary>
         /// 异步传送数据的初始化
         /// </summary>
@@ -770,7 +799,8 @@ namespace 软件系统服务端模版
             try
             {
                 net_socket_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
-                net_socket_server.LogHelper.LogSaveFileName = LogSavePath + @"\net_log.txt";
+                net_socket_server.LogNet =new LogNetSingle(LogSavePath + @"\net_log.txt");
+                net_socket_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_socket_server.FormatClientOnline = "#IP:{0} Name:{1}";//必须为#开头，具体格式可由自身需求确定
                 net_socket_server.IsSaveLogClientLineChange = true;//设置客户端上下线是否记录到日志
                 net_socket_server.ClientOnline += new HslCommunication.NetBase.IEDelegate<AsyncStateOne>(Net_socket_server_ClientOnline);//客户端上线触发
@@ -1029,7 +1059,8 @@ namespace 软件系统服务端模版
                     FileSavePath = Application.StartupPath + @"\files.txt"
                 };
                 net_simple_file_server.ReadFromFile();
-                net_simple_file_server.LogHelper.LogSaveFileName = LogSavePath + @"\share_file_log.txt";
+                net_simple_file_server.LogNet =new LogNetSingle(LogSavePath + @"\share_file_log.txt");
+                net_simple_file_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 //文件存储路径
                 net_simple_file_server.File_save_path = Application.StartupPath + @"\Files";
                 net_simple_file_server.FileChange += Net_simple_file_server_FileChange;
@@ -1064,7 +1095,7 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 用来记录一般的事物日志
         /// </summary>
-        private SoftLogHelper AdviceLogHelper { get; set; }
+        private ILogNet AdviceLogHelper { get; set; }
 
         #endregion
 
@@ -1085,14 +1116,15 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 服务器的UDP核心引擎
         /// </summary>
-        private Net_Udp_Server net_udp_server { get; set; }
+        private NetUdpServer net_udp_server { get; set; }
 
         private void Net_Udp_Server_Initialization()
         {
             try
             {
-                net_udp_server = new Net_Udp_Server();
-                net_udp_server.LogHelper.LogSaveFileName = LogSavePath + @"\udp_log.txt";//日志路径
+                net_udp_server = new NetUdpServer();
+                net_udp_server.LogNet =new LogNetSingle(LogSavePath + @"\udp_log.txt");//日志路径
+                net_udp_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_udp_server.KeyToken = CommonHeadCode.KeyToken;
                 net_udp_server.ReceiveCacheLength = 1024;//单次接收数据的缓冲长度
                 net_udp_server.AcceptByte += Net_udp_server_AcceptByte;//接收到字节数据的时候触发事件
@@ -1245,8 +1277,8 @@ namespace 软件系统服务端模版
 
         /*********************************************************************************************************
          * 
-         *    说明     日志的使用方式分为4个等级，1.普通 2.信息 3.警告 4.错误  对应的调用方法不一致
-         *    具体     如果想要调用存储[信息]等级日志，调用 RuntimeLogHelper.SaveInformation("等待存储的信息")
+         *    说明     日志的使用方式分为5个等级，1.DEBUG 2.INFO 3.WARN 4.ERROR 5.FATAL  对应的调用方法不一致
+         *    具体     如果想要调用存储[信息]等级日志，调用 RuntimeLogHelper.WriteInfo("等待存储的信息")
          *    大小     调用10000次存储信息后，日志文件大小在200K左右，需要手动进行情况日志
          *    注意     在存储信息时不要带有一个特殊字符，[\u0002]不可见的标识文本开始字符，会影响日志筛选时的准确性
          *    性能     该类使用了乐观并发模型技术，支持高并发的数据存储，可以安全的在线程间调用
@@ -1256,11 +1288,11 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 用来记录一般的事物日志
         /// </summary>
-        private SoftLogHelper RuntimeLogHelper { get; set; }
+        private ILogNet RuntimeLogHelper { get; set; }
         /// <summary>
         /// 用来记录客户端的异常日志
         /// </summary>
-        private SoftLogHelper ClientsLogHelper { get; set; }
+        private ILogNet ClientsLogHelper { get; set; }
 
 
         #endregion
@@ -1306,7 +1338,7 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 用于用户账户的头像文件保存
         /// </summary>
-        private Net_File_Server net_file_Portrait = new Net_File_Server();
+        private NetFileServer net_file_Portrait = new NetFileServer();
         /// <summary>
         /// 用户头像管理服务的引擎
         /// </summary>
@@ -1315,7 +1347,7 @@ namespace 软件系统服务端模版
             try
             {
                 net_file_Portrait.FilesPath = Application.StartupPath;
-                net_file_Portrait.LogHelper.LogSaveFileName = LogSavePath + @"\Portrait_file_log.txt";
+                net_file_Portrait.LogNet =new LogNetSingle(LogSavePath + @"\Portrait_file_log.txt");
                 net_file_Portrait.KeyToken = CommonHeadCode.KeyToken;
                 net_file_Portrait.ServerStart(CommonLibrary.CommonLibrary.Port_Portrait_Server);
             }

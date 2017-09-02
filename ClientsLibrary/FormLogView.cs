@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CommonLibrary;
+using HslCommunication;
+using HslCommunication.Enthernet;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,46 +9,44 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using CommonLibrary;
-using System.Text.RegularExpressions;
-
-using HslCommunication;
-using HslCommunication.Enthernet;
-
 
 namespace ClientsLibrary
 {
-    public partial class FormLog : Form
+    public partial class FormLogView : Form
     {
-        public FormLog()
+        public FormLogView()
         {
             InitializeComponent();
             net_simplify_client = UserClient.Net_simplify_client;
         }
 
-        private Net_Simplify_Client net_simplify_client = null;
-
-        private void FormLog_Load(object sender, EventArgs e)
+        private void FormLogView_Load(object sender, EventArgs e)
         {
 
         }
+
+        private NetSimplifyClient net_simplify_client = null;
 
         private void ReadFromServer(int head_code)
         {
             OperateResultString result = net_simplify_client.ReadFromServer(head_code);
             if (result.IsSuccess)
             {
-                textBox1.Text = result.Content;
-                LogTemp = result.Content;
+                logNetAnalysisControl1.SetLogNetSource(result.Content);
             }
-            else textBox1.Text = result.ToMessageShowString();
+            else
+            {
+                MessageBox.Show(result.ToMessageShowString());
+            }
         }
+
         private void ClearFromServer(int head_code)
         {
             OperateResultString result = net_simplify_client.ReadFromServer(head_code);
-            if (result.IsSuccess) textBox1.Text = "清除成功";
-            else textBox1.Text = result.ToMessageShowString();
+            if (result.IsSuccess) MessageBox.Show("清除成功");
+            else MessageBox.Show(result.ToMessageShowString());
         }
+
 
         private void userButton_login_Click(object sender, EventArgs e)
         {
@@ -135,52 +136,9 @@ namespace ClientsLibrary
             ClearFromServer(CommonHeadCode.SimplifyHeadCode.头像日志清空);
         }
 
-        /// <summary>
-        /// 查询日志的缓存
-        /// </summary>
-        private string LogTemp = string.Empty;
-
-        /// <summary>
-        /// 筛选出符合需求的日志
-        /// </summary>
-        /// <param name="filter"></param>
-        /// <returns></returns>
-        private string FilterString(string filter)
+        private void logNetAnalysisControl1_Load(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
-            MatchCollection mc = Regex.Matches(LogTemp, @"\u0002\[" + filter + @"[^\u0002]+");
-            foreach (Match m in mc)
-            {
-                sb.Append(m.Value);
-            }
-            return sb.ToString();
-        }
 
-        private void userButton_log1_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = FilterString(HslCommunication.BasicFramework.SoftLogHelper.Normal);
         }
-
-        private void userButton_log2_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = FilterString(HslCommunication.BasicFramework.SoftLogHelper.Information);
-        }
-
-        private void userButton_log3_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = FilterString(HslCommunication.BasicFramework.SoftLogHelper.Warnning);
-        }
-
-        private void userButton_log4_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = FilterString(HslCommunication.BasicFramework.SoftLogHelper.Error);
-        }
-
-        private void userButton_log_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = LogTemp;
-        }
-
-        
     }
 }

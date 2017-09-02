@@ -25,9 +25,9 @@ namespace ClientsLibrary
         public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0");
 
         /// <summary>
-        /// 服务器的IP地址，默认为127.0.0.1，可用于单机调试
+        /// 服务器的IP地址，默认为127.0.0.1，可用于单机调试，云端：117.48.203.204
         /// </summary>
-        public static string ServerIp { get; } = "117.48.203.204";//用于测试的云服务器地址
+        public static string ServerIp { get; } = "127.0.0.1";//用于测试的云服务器地址
 
         /// <summary>
         /// 所有版本更新信息的对象
@@ -66,7 +66,7 @@ namespace ClientsLibrary
         /// <summary>
         /// 用于访问服务器数据的网络对象类，必须修改这个端口参数，否则运行失败
         /// </summary>
-        public static Net_Simplify_Client Net_simplify_client = new Net_Simplify_Client(
+        public static NetSimplifyClient Net_simplify_client = new NetSimplifyClient(
             new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
                 CommonLibrary.CommonLibrary.Port_Second_Net))
         {
@@ -77,7 +77,7 @@ namespace ClientsLibrary
         /// <summary>
         /// 用于使用udp向服务器进行发送即时可丢失数据的对象
         /// </summary>
-        public static Net_Udp_Client Net_Udp_Client = new Net_Udp_Client(
+        public static NetUdpClient Net_Udp_Client = new NetUdpClient(
             new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
                 CommonLibrary.CommonLibrary.Port_Udp_Server))
         {
@@ -90,12 +90,8 @@ namespace ClientsLibrary
             if (e.ExceptionObject is Exception ex)
             {
                 //使用UDP方法传送会服务器
-                string info = $"{Environment.NewLine}信息：{ex.Message}" +
-                    $"{Environment.NewLine}类型：{ex.GetType().ToString()}" +
-                    $"{Environment.NewLine}堆栈：{ex.StackTrace}" +
-                    $"{Environment.NewLine}方法：{ex.TargetSite.Name}" +
-                    $"{Environment.NewLine}" + "=".PadLeft(50, '=');
-                UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.异常消息, info);
+                string info = HslCommunication.LogNet.LogNetManagment.GetSaveStringFromException(null, ex);
+                Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.异常消息, info);
             }
         }
     }

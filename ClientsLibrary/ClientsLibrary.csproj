@@ -55,11 +55,11 @@
     <Compile Include="FormDownloading.Designer.cs">
       <DependentUpon>FormDownloading.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormLog.cs">
+    <Compile Include="FormLogView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLog.Designer.cs">
-      <DependentUpon>FormLog.cs</DependentUpon>
+    <Compile Include="FormLogView.Designer.cs">
+      <DependentUpon>FormLogView.cs</DependentUpon>
     </Compile>
     <Compile Include="FormRegisterAccount.cs">
       <SubType>Form</SubType>
@@ -81,8 +81,8 @@
     <EmbeddedResource Include="FormDownloading.resx">
       <DependentUpon>FormDownloading.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormLog.resx">
-      <DependentUpon>FormLog.cs</DependentUpon>
+    <EmbeddedResource Include="FormLogView.resx">
+      <DependentUpon>FormLogView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRegisterAccount.resx">
       <DependentUpon>FormRegisterAccount.cs</DependentUpon>
