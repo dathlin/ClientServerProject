@@ -62,6 +62,11 @@
                         </MenuItem>
                     
                         <Separator />
+                        <MenuItem Header="分厂配置" x:Name="MenuItem分厂配置" Click="MenuItem分厂配置_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="City" />
+                            </MenuItem.Icon>
+                        </MenuItem>
                         <MenuItem Header="日志查看" x:Name="MenuItem日志查看" Click="MenuItem日志查看_Click">
                             <MenuItem.Icon>
                                 <materialDesign:PackIcon Kind="FlagVariant" />

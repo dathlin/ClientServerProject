@@ -54,10 +54,9 @@
             this.logNetAnalysisControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.logNetAnalysisControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.logNetAnalysisControl1.Location = new System.Drawing.Point(8, 8);
+            this.logNetAnalysisControl1.Location = new System.Drawing.Point(8, 7);
             this.logNetAnalysisControl1.Name = "logNetAnalysisControl1";
-            this.logNetAnalysisControl1.Size = new System.Drawing.Size(783, 693);
+            this.logNetAnalysisControl1.Size = new System.Drawing.Size(785, 696);
             this.logNetAnalysisControl1.TabIndex = 47;
             this.logNetAnalysisControl1.Load += new System.EventHandler(this.logNetAnalysisControl1_Load);
             // 

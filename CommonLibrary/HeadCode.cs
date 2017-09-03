@@ -59,6 +59,9 @@ namespace CommonLibrary
             public static int 下载小头 { get; } =        10016;
             public static int 请求大头 { get; } =        10017;
             public static int 下载大头 { get; } =        10018;
+            public static int 请求分厂 { get; } =        10019;
+            public static int 上传分厂 { get; } =        10020;
+
 
 
 

@@ -79,6 +79,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.panel_main = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.分厂配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel_right.SuspendLayout();
@@ -170,7 +171,8 @@
             this.远程更新ToolStripMenuItem,
             this.注册账号ToolStripMenuItem,
             this.消息发送ToolStripMenuItem,
-            this.开发中心ToolStripMenuItem});
+            this.开发中心ToolStripMenuItem,
+            this.分厂配置ToolStripMenuItem});
             this.管理员ToolStripMenuItem.Image = global::软件系统客户端模版.Properties.Resources.Team_32xLG;
             this.管理员ToolStripMenuItem.Name = "管理员ToolStripMenuItem";
             this.管理员ToolStripMenuItem.Size = new System.Drawing.Size(100, 31);
@@ -557,6 +559,13 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // 分厂配置ToolStripMenuItem
+            // 
+            this.分厂配置ToolStripMenuItem.Name = "分厂配置ToolStripMenuItem";
+            this.分厂配置ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.分厂配置ToolStripMenuItem.Text = "分厂配置";
+            this.分厂配置ToolStripMenuItem.Click += new System.EventHandler(this.分厂配置ToolStripMenuItem_Click);
+            // 
             // FormMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -643,6 +652,7 @@
         private System.Windows.Forms.ToolStripMenuItem 开发中心ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 更换头像ToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem 分厂配置ToolStripMenuItem;
     }
 }
 

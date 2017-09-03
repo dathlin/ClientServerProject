@@ -9,9 +9,14 @@ using CommonLibrary;
 namespace ClientsLibrary
 {
 
-    //====================================================================================================
-    //   模版说明：
-    //====================================================================================================
+
+    /***********************************************************************************
+     * 
+     *    说明：用来存储客户端全局的变量数据，好在任何界面都可以直达数据
+     * 
+     * 
+     ***********************************************************************************/
+
 
     /// <summary>
     /// 一个通用的用户客户端类
@@ -19,15 +24,30 @@ namespace ClientsLibrary
     public class UserClient
     {
         public static JsonSettings JsonSettings = new JsonSettings();
+
+
+
         /// <summary>
         /// 本软件的当前版本，用来验证更新的关键依据
         /// </summary>
         public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0");
 
+
+
         /// <summary>
-        /// 服务器的IP地址，默认为127.0.0.1，可用于单机调试，云端：117.48.203.204
+        /// 服务器的IP地址，默认为127.0.0.1，可用于单机调试，云服务器端：117.48.203.204
         /// </summary>
         public static string ServerIp { get; } = "127.0.0.1";//用于测试的云服务器地址
+
+
+
+        /// <summary>
+        /// 系统的分厂信息
+        /// </summary>
+        public static List<string> SystemFactories { get; set; } = new List<string>();
+
+
+
 
         /// <summary>
         /// 所有版本更新信息的对象
@@ -39,7 +59,8 @@ namespace ClientsLibrary
                 {
                     VersionNum=new SystemVersion("1.0.0"),
                     ReleaseDate=new DateTime(2017,1,1),//该版本发布的日期
-                    UpdateDetails=new StringBuilder("1.本系统第一版本正式发布使用。"+Environment.NewLine+
+                    UpdateDetails=new StringBuilder(
+                        "1.本系统第一版本正式发布使用。"+Environment.NewLine+
                         "2.提供了多客户端用时在线的功能。"+Environment.NewLine+
                         "3.需要用户自行添加"),
                 },
@@ -85,6 +106,12 @@ namespace ClientsLibrary
         };
 
 
+
+        /// <summary>
+        /// 用来处理客户端发生的未捕获的异常，将通过网络组件发送至服务器存储，用于更好的跟踪错误
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             if (e.ExceptionObject is Exception ex)

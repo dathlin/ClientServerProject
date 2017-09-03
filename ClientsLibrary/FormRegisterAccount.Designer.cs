@@ -34,15 +34,15 @@ namespace ClientsLibrary
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.userButton_login = new UserButton();
+            this.userButton_login = new HslCommunication.Controls.UserButton();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox_factory = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -76,13 +76,6 @@ namespace ClientsLibrary
             this.label2.Size = new System.Drawing.Size(44, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "密码：";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(98, 87);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(232, 23);
-            this.textBox3.TabIndex = 5;
             // 
             // label3
             // 
@@ -159,11 +152,21 @@ namespace ClientsLibrary
             this.comboBox2.Size = new System.Drawing.Size(232, 25);
             this.comboBox2.TabIndex = 14;
             // 
+            // comboBox_factory
+            // 
+            this.comboBox_factory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_factory.FormattingEnabled = true;
+            this.comboBox_factory.Location = new System.Drawing.Point(98, 86);
+            this.comboBox_factory.Name = "comboBox_factory";
+            this.comboBox_factory.Size = new System.Drawing.Size(232, 25);
+            this.comboBox_factory.TabIndex = 15;
+            // 
             // FormRegisterAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 342);
+            this.Controls.Add(this.comboBox_factory);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.userButton_login);
@@ -171,7 +174,6 @@ namespace ClientsLibrary
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
@@ -197,7 +199,6 @@ namespace ClientsLibrary
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -206,5 +207,6 @@ namespace ClientsLibrary
         private UserButton userButton_login;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox_factory;
     }
 }

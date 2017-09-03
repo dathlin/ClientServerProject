@@ -14,13 +14,25 @@ namespace ClientsLibrary
 {
     public partial class FormRegisterAccount : Form
     {
-        public FormRegisterAccount()
+        /// <summary>
+        /// 实例化对象
+        /// </summary>
+        /// <param name="factories"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public FormRegisterAccount(string[] factories)
         {
             InitializeComponent();
 
             net_client = UserClient.Net_simplify_client;
+            Factories = new List<string>(factories);
+
+
+            // 根据自身需求是否添加总公司名称
+            Factories.Add("总公司");
         }
-        
+
+        private List<string> Factories = null;
+
         private void FormRegisterAccount_Load(object sender, EventArgs e)
         {
             comboBox1.DataSource = AccountGrade.GetDescription();
@@ -29,6 +41,8 @@ namespace ClientsLibrary
             comboBox1.SelectedItem = AccountGrade.GetDescription(AccountGrade.Technology);
             comboBox2.SelectedItem = "允许";
 
+            comboBox_factory.DataSource = Factories.ToArray();
+
             textBox4.Text = (new UserAccount()).ForbidMessage;
         }
 
@@ -36,11 +50,11 @@ namespace ClientsLibrary
 
         private void userButton_login_Click(object sender, EventArgs e)
         {
-            //点击了注册，先获取数据
+            // 点击了注册，先获取数据
             UserAccount account = new UserAccount();
             account.UserName = textBox1.Text;
             account.Password = textBox2.Text;
-            account.Factory = textBox3.Text;
+            account.Factory = comboBox_factory.SelectedItem.ToString();
             switch (comboBox1.SelectedIndex)
             {
                 case 0: account.Grade = AccountGrade.SuperAdministrator; break;

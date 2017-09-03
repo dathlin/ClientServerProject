@@ -123,6 +123,7 @@ namespace 软件系统客户端Wpf
                 MenuItem注册账户.IsEnabled = false;
                 MenuItem消息发送.IsEnabled = false;
                 MenuItem开发中心.IsEnabled = false;
+                MenuItem分厂配置.IsEnabled = false;
             }
 
 
@@ -211,7 +212,7 @@ namespace 软件系统客户端Wpf
 
         private void MenuItem注册账户_Click(object sender, RoutedEventArgs e)
         {
-            using (FormRegisterAccount fra = new FormRegisterAccount())
+            using (FormRegisterAccount fra = new FormRegisterAccount(UserClient.SystemFactories.ToArray()))
             {
                 fra.ShowDialog();
             }
@@ -369,6 +370,18 @@ namespace 软件系统客户端Wpf
             UIControl_Files.UpdateFiles();
         }
 
+
+        private void MenuItem分厂配置_Click(object sender, RoutedEventArgs e)
+        {
+            using (FormInputAndAction fiaa = new FormInputAndAction(
+            str => UserClient.Net_simplify_client.ReadFromServer(
+                CommonHeadCode.SimplifyHeadCode.上传分厂, str).IsSuccess,
+            JArray.FromObject(UserClient.SystemFactories).ToString(),
+            "请按照JSON格式更新分厂信息，然后提交："))
+            {
+                fiaa.ShowDialog();
+            }
+        }
 
         #endregion
 
@@ -756,5 +769,7 @@ namespace 软件系统客户端Wpf
             await Task.Delay(2000);
             DialogHostWait.IsOpen = false;
         }
+
+
     }
 }

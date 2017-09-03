@@ -474,7 +474,7 @@ namespace 软件系统服务端模版
         {
             if (customer == CommonHeadCode.SimplifyHeadCode.维护检查)
             {
-                net_simplify_server.SendMessage(state, customer, 
+                net_simplify_server.SendMessage(state, customer,
                 UserServer.ServerSettings.Can_Account_Login ? "1" : "0" +
                 UserServer.ServerSettings.Account_Forbidden_Reason);
             }
@@ -486,7 +486,8 @@ namespace 软件系统服务端模版
             {
                 JObject json = new JObject
                 {
-                    { nameof(UserServer.ServerSettings.Announcement), new JValue(UserServer.ServerSettings.Announcement) }
+                    { nameof(UserServer.ServerSettings.Announcement), new JValue(UserServer.ServerSettings.Announcement) },
+                    { nameof(UserServer.ServerSettings.SystemFactories), new JArray(UserServer.ServerSettings.SystemFactories) },
                 };
                 net_simplify_server.SendMessage(state, customer, json.ToString());
             }
@@ -501,9 +502,9 @@ namespace 软件系统服务端模版
 
                 UserAccount account = UserServer.ServerAccounts.CheckAccount(name, password, state.GetRemoteEndPoint().Address.ToString(), way);
                 //检测是否重复登录
-                if(account.LoginEnable)
+                if (account.LoginEnable)
                 {
-                    if(IsClinetOnline(account.UserName))
+                    if (IsClinetOnline(account.UserName))
                     {
                         account.LoginEnable = false;
                         account.ForbidMessage = "该账户已经登录";
@@ -576,7 +577,7 @@ namespace 软件系统服务端模版
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.异常消息)
             {
-                ClientsLogHelper.WriteError(data);
+                ClientsLogHelper.WriteFatal(data);
                 net_simplify_server.SendMessage(state, customer, "成功");
                 //发送到邮箱
                 SendUserMail("异常记录", "时间：" + DateTime.Now.ToString("O") + Environment.NewLine + data);
@@ -584,7 +585,7 @@ namespace 软件系统服务端模版
             else if (customer == CommonHeadCode.SimplifyHeadCode.请求小头)
             {
                 string fileName = Application.StartupPath + @"\Files\Portrait\" + data + @"\" + PortraitSupport.SmallPortrait;
-                if(string.IsNullOrEmpty(fileName))
+                if (string.IsNullOrEmpty(fileName))
                 {
                     net_simplify_server.SendMessage(state, customer, "N");
                 }
@@ -594,7 +595,7 @@ namespace 软件系统服务端模版
                     {
                         net_simplify_server.SendMessage(state, customer, "Y" + SoftBasic.CalculateFileMD5(fileName));
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         net_simplify_server.SendMessage(state, customer, "N");
                         RuntimeLogHelper.WriteException(null, ex);
@@ -624,6 +625,18 @@ namespace 软件系统服务端模版
                 {
                     net_simplify_server.SendMessage(state, customer, "Y" + Convert.ToBase64String(System.IO.File.ReadAllBytes(fileName)));
                 }
+            }
+            else if (customer == CommonHeadCode.SimplifyHeadCode.上传分厂)
+            {
+                try
+                {
+                    UserServer.ServerSettings.SystemFactories = JArray.Parse(data).ToObject<List<string>>();
+                }
+                catch (Exception ex)
+                {
+                    RuntimeLogHelper?.WriteException(null, ex);
+                }
+                net_simplify_server.SendMessage(state, customer, "1");
             }
             else
             {

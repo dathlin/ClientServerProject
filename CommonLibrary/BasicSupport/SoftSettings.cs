@@ -6,10 +6,33 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using HslCommunication.BasicFramework;
 
-//2017-02-10
+
+
+
+/*************************************************************************************
+ * 
+ *    时间：2017年9月3日 09:18:21
+ *    说明：本文档主要包含一个主要内容，关于客户端和服务器的一些本地参数存储解析
+ *    
+ *    服务器：此处存储了系统版本号，公告，是否允许用户登录，分厂信息等等共享
+ *    客户端：此处存储了用户名，密码，上次登录时间，机器码等等，用于客户端自我校验
+ *    
+ *    格式：存储采用json字符串存储，客户端还进行了双向加密，防止用户直接打开更改
+ * 
+ *************************************************************************************/
+
+
+
+
+
+
+
+
 
 namespace CommonLibrary
 {
+    
+
     /// <summary>
     /// 服务器的常用参数保存，包含了版本号，公告，是否允许登录，不能登录说明
     /// </summary>
@@ -33,6 +56,15 @@ namespace CommonLibrary
         /// 不允许登录系统的原因
         /// </summary>
         public string Account_Forbidden_Reason { get; set; } = "系统处于维护中，请稍后登录。";
+        /// <summary>
+        /// 系统的所属分厂
+        /// </summary>
+        public List<string> SystemFactories { get; set; } = new List<string>();
+
+
+
+
+
 
         /// <summary>
         /// 获取需要存储的数据
@@ -45,7 +77,8 @@ namespace CommonLibrary
                 { nameof(SystemVersion), new JValue(SystemVersion.ToString()) },
                 { nameof(Announcement), new JValue(Announcement) },
                 { nameof(Can_Account_Login), new JValue(Can_Account_Login) },
-                { nameof(Account_Forbidden_Reason), new JValue(Account_Forbidden_Reason) }
+                { nameof(Account_Forbidden_Reason), new JValue(Account_Forbidden_Reason) },
+                { nameof(SystemFactories), new JArray(SystemFactories) }
             };
             return json.ToString();
         }
@@ -60,6 +93,7 @@ namespace CommonLibrary
             Announcement = json.Property(nameof(Announcement)).Value.Value<string>();
             Can_Account_Login = SoftBasic.GetValueFromJsonObject(json, nameof(Can_Account_Login), Can_Account_Login);
             Account_Forbidden_Reason = SoftBasic.GetValueFromJsonObject(json, nameof(Account_Forbidden_Reason), Account_Forbidden_Reason);
+            SystemFactories = JArray.Parse(SoftBasic.GetValueFromJsonObject(json, nameof(SystemFactories), "[]")).ToObject<List<string>>();
         }
 
     }
