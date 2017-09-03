@@ -61,6 +61,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label_GC_Memery = new System.Windows.Forms.Label();
             this.label_Pm_Memery = new System.Windows.Forms.Label();
+            this.日志查看ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -124,7 +125,8 @@
             this.维护切换ToolStripMenuItem,
             this.消息发送ToolStripMenuItem,
             this.一键断开ToolStripMenuItem,
-            this.账户管理ToolStripMenuItem});
+            this.账户管理ToolStripMenuItem,
+            this.日志查看ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(54, 25);
             this.设置ToolStripMenuItem.Text = "设置";
@@ -132,35 +134,35 @@
             // 版本控制ToolStripMenuItem
             // 
             this.版本控制ToolStripMenuItem.Name = "版本控制ToolStripMenuItem";
-            this.版本控制ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.版本控制ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.版本控制ToolStripMenuItem.Text = "版本控制";
             this.版本控制ToolStripMenuItem.Click += new System.EventHandler(this.版本控制ToolStripMenuItem_Click);
             // 
             // 维护切换ToolStripMenuItem
             // 
             this.维护切换ToolStripMenuItem.Name = "维护切换ToolStripMenuItem";
-            this.维护切换ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.维护切换ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.维护切换ToolStripMenuItem.Text = "维护切换";
             this.维护切换ToolStripMenuItem.Click += new System.EventHandler(this.维护切换ToolStripMenuItem_Click);
             // 
             // 消息发送ToolStripMenuItem
             // 
             this.消息发送ToolStripMenuItem.Name = "消息发送ToolStripMenuItem";
-            this.消息发送ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.消息发送ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.消息发送ToolStripMenuItem.Text = "消息发送";
             this.消息发送ToolStripMenuItem.Click += new System.EventHandler(this.消息发送ToolStripMenuItem_Click);
             // 
             // 一键断开ToolStripMenuItem
             // 
             this.一键断开ToolStripMenuItem.Name = "一键断开ToolStripMenuItem";
-            this.一键断开ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.一键断开ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.一键断开ToolStripMenuItem.Text = "一键断开";
             this.一键断开ToolStripMenuItem.Click += new System.EventHandler(this.一键断开ToolStripMenuItem_Click);
             // 
             // 账户管理ToolStripMenuItem
             // 
             this.账户管理ToolStripMenuItem.Name = "账户管理ToolStripMenuItem";
-            this.账户管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.账户管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.账户管理ToolStripMenuItem.Text = "账户管理";
             this.账户管理ToolStripMenuItem.Click += new System.EventHandler(this.账户管理ToolStripMenuItem_Click);
             // 
@@ -324,6 +326,13 @@
             this.label_Pm_Memery.Text = "0";
             this.label_Pm_Memery.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // 日志查看ToolStripMenuItem
+            // 
+            this.日志查看ToolStripMenuItem.Name = "日志查看ToolStripMenuItem";
+            this.日志查看ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.日志查看ToolStripMenuItem.Text = "日志查看";
+            this.日志查看ToolStripMenuItem.Click += new System.EventHandler(this.日志查看ToolStripMenuItem_Click);
+            // 
             // FormServerWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -390,6 +399,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label_GC_Memery;
         private System.Windows.Forms.Label label_Pm_Memery;
+        private System.Windows.Forms.ToolStripMenuItem 日志查看ToolStripMenuItem;
     }
 }
 

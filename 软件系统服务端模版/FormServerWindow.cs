@@ -321,6 +321,14 @@ namespace 软件系统服务端模版
             }
         }
 
+        private void 日志查看ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormLogNetView fln = new FormLogNetView())
+            {
+                fln.ShowDialog();
+            }
+        }
+
         #endregion
 
         #region 软件更新服务引擎
@@ -1356,8 +1364,10 @@ namespace 软件系统服务端模版
                 SoftBasic.ShowExceptionMessage(ex);
             }
         }
-        
+
 
         #endregion
+
+
     }
 }
