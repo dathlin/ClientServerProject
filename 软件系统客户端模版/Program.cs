@@ -20,23 +20,23 @@ namespace 软件系统客户端模版
         [STAThread]
         static void Main()
         {
-            //捕获未处理的异常
+            // 捕获未处理的异常
             AppDomain.CurrentDomain.UnhandledException += ClientsLibrary.UserClient.CurrentDomain_UnhandledException;
             //=====================================================================
-            //为了强制只启动一个应用程序的实例
+            // 为了强制只启动一个应用程序的实例
 
             Process process = Process.GetCurrentProcess();
-            //遍历应用程序的同名进程组
+            // 遍历应用程序的同名进程组
             foreach (Process p in Process.GetProcessesByName(process.ProcessName))
             {
-                //不是同一进程则关闭刚刚创建的进程
+                // 不是同一进程则关闭刚刚创建的进程
                 if (p.Id != process.Id)
                 {
-                    //此处显示原先的窗口需要一定的时间，不然无法显示
+                    // 此处显示原先的窗口需要一定的时间，不然无法显示
                     ShowWindowAsync(p.MainWindowHandle, 9);
                     SetForegroundWindow(p.MainWindowHandle);
                     System.Threading.Thread.Sleep(10);
-                    Application.Exit();//关闭当前的应用程序
+                    Application.Exit();// 关闭当前的应用程序
                     return;
                 }
             }
@@ -44,7 +44,7 @@ namespace 软件系统客户端模版
             Application.SetCompatibleTextRenderingDefault(false);
 
             //===================================================================
-            //运行主窗口之前先进行账户的验证
+            // 运行主窗口之前先进行账户的验证
             P1:
 
             FormLogin login = new FormLogin();
@@ -55,7 +55,7 @@ namespace 软件系统客户端模版
                 Application.Run(fmw);
                 if (QuitCode == 1)
                 {
-                    //继续显示登录窗口
+                    // 继续显示登录窗口
                     QuitCode = 0;
                     goto P1;
                 }

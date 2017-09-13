@@ -33,6 +33,8 @@ namespace 软件系统客户端模版.UIControls
             }
 
             using (FormSimplyFileUpload upload = new FormSimplyFileUpload(
+                CommonHeadCode.KeyToken,
+                UserClient.LogNet,
                 UserClient.ServerIp,
                 CommonLibrary.CommonLibrary.Port_Share_File,
                 UserClient.UserAccount.UserName))
@@ -67,7 +69,9 @@ namespace 软件系统客户端模版.UIControls
                 //添加子控件
                 foreach(var m in files)
                 {
-                    FileItemShow item = new FileItemShow(UserClient.ServerIp,
+                    FileItemShow item = new FileItemShow(
+                        CommonHeadCode.KeyToken,
+                        UserClient.LogNet, UserClient.ServerIp,
                         CommonLibrary.CommonLibrary.Port_Share_File,
                         () =>
                         {

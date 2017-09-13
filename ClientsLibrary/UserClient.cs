@@ -105,6 +105,10 @@ namespace ClientsLibrary
             KeyToken = CommonHeadCode.KeyToken,
         };
 
+        /// <summary>
+        /// 客户端的日志纪录对象
+        /// </summary>
+        public static HslCommunication.LogNet.ILogNet LogNet { get; set; }
 
 
         /// <summary>

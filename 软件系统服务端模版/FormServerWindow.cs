@@ -17,7 +17,7 @@ using HslCommunication.LogNet;
 
 /******************************************************************************************
  * 
- *    模版日期  2017-09-02
+ *    模版日期  2017-09-13
  *    创建人    Richard.Hu
  *    版权所有  Richard.Hu
  *    授权说明  模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
@@ -359,7 +359,7 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 用于局域网异地更新服务器的客户端程序的引擎，仅限客户端
         /// </summary>
-        private NetFileServer net_file_update = new NetFileServer();
+        private AdvancedFileServer net_file_update = new AdvancedFileServer();
         /// <summary>
         /// 软件异地更新的初始化，如不需要可以不启动，该功能支持发送客户端文件至服务器实现覆盖更新
         /// </summary>
@@ -367,7 +367,8 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_file_update.FilesPath = Application.StartupPath + @"\ClientFiles";//服务器客户端需要更新的路径，与上述一致
+                net_file_update.FilesDirectoryPath = Application.StartupPath + @"\ClientFiles";//服务器客户端需要更新的路径，与上述一致
+                net_file_update.FilesDirectoryPathTemp= Application.StartupPath + @"\Temp";
                 net_file_update.LogNet = new LogNetSingle(LogSavePath + @"\update_file_log.txt");
                 net_file_update.KeyToken = CommonHeadCode.KeyToken;
                 net_file_update.ServerStart(CommonLibrary.CommonLibrary.Port_Update_Remote);
@@ -1066,7 +1067,7 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 共享文件服务器引擎
         /// </summary>
-        private SimpleShareFileServer net_simple_file_server { get; set; } = null;
+        private SimpleFileServer net_simple_file_server { get; set; } = null;
         /// <summary>
         /// 共享文件服务引擎初始化
         /// </summary>
@@ -1074,16 +1075,18 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_simple_file_server = new SimpleShareFileServer()
+                net_simple_file_server = new SimpleFileServer()
                 {
                     //文件信息存储路径
-                    FileSavePath = Application.StartupPath + @"\files.txt"
+                    FileListName = Application.StartupPath + @"\files.txt"
                 };
+                net_simple_file_server.KeyToken = CommonHeadCode.KeyToken;
                 net_simple_file_server.ReadFromFile();
                 net_simple_file_server.LogNet =new LogNetSingle(LogSavePath + @"\share_file_log.txt");
                 net_simple_file_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 //文件存储路径
-                net_simple_file_server.File_save_path = Application.StartupPath + @"\Files";
+                net_simple_file_server.FilesDirectoryPath = Application.StartupPath + @"\Files";
+                net_simple_file_server.FilesDirectoryPathTemp = Application.StartupPath + @"\Temp";
                 net_simple_file_server.FileChange += Net_simple_file_server_FileChange;
                 net_simple_file_server.ServerStart(CommonLibrary.CommonLibrary.Port_Share_File);
             }
@@ -1359,7 +1362,7 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 用于用户账户的头像文件保存
         /// </summary>
-        private NetFileServer net_file_Portrait = new NetFileServer();
+        private AdvancedFileServer net_file_Portrait = new AdvancedFileServer();
         /// <summary>
         /// 用户头像管理服务的引擎
         /// </summary>
@@ -1367,7 +1370,8 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_file_Portrait.FilesPath = Application.StartupPath;
+                net_file_Portrait.FilesDirectoryPath = Application.StartupPath;
+                net_file_Portrait.FilesDirectoryPathTemp= Application.StartupPath + @"\Temp";
                 net_file_Portrait.LogNet =new LogNetSingle(LogSavePath + @"\Portrait_file_log.txt");
                 net_file_Portrait.KeyToken = CommonHeadCode.KeyToken;
                 net_file_Portrait.ServerStart(CommonLibrary.CommonLibrary.Port_Portrait_Server);

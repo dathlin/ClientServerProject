@@ -1395,72 +1395,77 @@
             规定所有的网络传输指令头都为32字节
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_Check_Secends">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_Check_Secends">
             <summary>
             用于心跳程序的暗号信息
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_Client_Quit">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_Client_Quit">
             <summary>
             客户端退出消息
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_Client_Refuse_Login">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_Client_Refuse_Login">
             <summary>
             因为客户端达到上限而拒绝登录
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_Client_Allow_Login">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_Client_Allow_Login">
             <summary>
             允许客户端登录到服务器
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_User_String">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_User_String">
             <summary>
             说明发送的只是文本信息
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_User_Bytes">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_User_Bytes">
             <summary>
             发送的数据就是普通的字节数组
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_User_Bitmap">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_User_Bitmap">
             <summary>
             发送的数据就是普通的图片数据
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Download">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Download">
             <summary>
             请求文件下载的暗号
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Upload">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Upload">
             <summary>
             请求文件上传的暗号
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Check_Right">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Delete">
+            <summary>
+            请求删除文件的暗号
+            </summary>
+        </member>
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Check_Right">
             <summary>
             文件校验成功
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Check_Error">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Check_Error">
             <summary>
             文件校验失败
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Save_Error">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Save_Error">
             <summary>
             文件保存失败
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_NoZipped">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_NoZipped">
             <summary>
             不压缩数据字节
             </summary>
         </member>
-        <member name="P:HslCommunication.HslCommunicationCode.Hsl_Protocol_Zipped">
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_Zipped">
             <summary>
             压缩数据字节
             </summary>
@@ -2027,144 +2032,107 @@
             <param name="exc">文件的扩展名</param>
             <returns>图形对象</returns>
         </member>
-        <member name="T:HslCommunication.Enthernet.SimpleShareFileServer">
+        <member name="T:HslCommunication.Enthernet.SimpleFileServer">
             <summary>
             一个简单的共享文件类，配合下载控件和上传窗口一起使用，适用于系统公共的文件管理
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.SimpleShareFileServer.File_head_download">
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.#ctor">
             <summary>
-            文件的下载指令头
+            实例化对象，需要指定存储规则
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.SimpleShareFileServer.File_head_upload">
+        <member name="P:HslCommunication.Enthernet.SimpleFileServer.FileListName">
             <summary>
-            文件的上传指令头
+            存储文件列表的txt文件名，默认D:\\files.txt
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.SimpleShareFileServer.File_head_delete">
+        <member name="E:HslCommunication.Enthernet.SimpleFileServer.FileChange">
             <summary>
-            文件删除的指令头
+            当服务器文件变化时，有文件删除或是添加时，触发的事件，可以选中通知客户端刷新数据
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.#ctor">
-            <summary>
-            生成对象，需要指定存储规则
-            </summary>
-        </member>
-        <member name="F:HslCommunication.Enthernet.SimpleShareFileServer.files">
+        <member name="F:HslCommunication.Enthernet.SimpleFileServer.files">
             <summary>
             文件的列表
             </summary>
         </member>
-        <member name="F:HslCommunication.Enthernet.SimpleShareFileServer.HybirdLockList">
+        <member name="F:HslCommunication.Enthernet.SimpleFileServer.HybirdLockList">
             <summary>
             文件列表的混合锁
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.SimpleShareFileServer.FileSavePath">
-            <summary>
-            临时文件存储的路径
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.File_Count">
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.File_Count">
             <summary>
             返回所有文件的数量
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.AddNew(HslCommunication.Enthernet.HslSoftFile)">
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.AddNew(HslCommunication.Enthernet.HslSoftFile)">
             <summary>
             新增一个文件对象
             </summary>
             <param name="file"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.DeleteOne(System.String)">
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.DeleteOne(System.String)">
             <summary>
             根据文件名称，删除一个文件对象
             </summary>
             <param name="filename"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.DownloadTimesAdd(System.String)">
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.DownloadTimesAdd(System.String)">
             <summary>
             追加一个文件对象的下载数据
             </summary>
             <param name="filename"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.IsFileExsist(System.String)">
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.IsFileExsist(System.String)">
             <summary>
             判断文件对对象管理中是否存在
             </summary>
             <param name="filename"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.GetHuFileFromFileName(System.String)">
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.GetHuFileFromFileName(System.String)">
             <summary>
             根据文件名称获取文件类型
             </summary>
             <param name="filename"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.ToJsonString">
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.ToJsonString">
             <summary>
             获取JSON字符串
             </summary>
             <returns></returns>
         </member>
-        <member name="P:HslCommunication.Enthernet.SimpleShareFileServer.AsyncCoordinator">
+        <member name="P:HslCommunication.Enthernet.SimpleFileServer.AsyncCoordinator">
             <summary>
             一个乐观并发模型高性能执行类
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.ReadFromFile">
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.ReadFromFile">
             <summary>
             从文件中加载数据信息
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.SimpleShareFileServer.File_save_path">
-            <summary>
-            文件的存储路径
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.ServerStart(System.Int32)">
-            <summary>
-            启动文件服务引擎
-            </summary>
-            <param name="port"></param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.ThreadPoolLogin(System.Object)">
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.ThreadPoolLogin(System.Object)">
             <summary>
             请求接入的回调方法
             </summary>
             <param name="obj"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.ReceiveCallback(System.IAsyncResult)">
-            <summary>
-            在收到客户端下载完毕的消息后选中关闭本次连接
-            </summary>
-            <param name="ar"></param>
-        </member>
-        <member name="T:HslCommunication.Enthernet.SimpleShareFileServer.NoticeClient">
-            <summary>
-            提醒客户端的委托
-            </summary>
-        </member>
-        <member name="E:HslCommunication.Enthernet.SimpleShareFileServer.FileChange">
-            <summary>
-            当服务器文件变化时，有文件删除或是添加时，触发的事件，可以选中通知客户端刷新数据
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleShareFileServer.OnFileChange">
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.OnFileChange">
             <summary>
             刷新客户端的文件信息
             </summary>
         </member>
-        <member name="T:HslCommunication.Enthernet.SimpleFileClient">
+        <member name="T:HslCommunication.Enthernet.FileClient">
             <summary>
             文件传送中的客户端类
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileClient.DeleteFile(System.String,System.Int32,System.String)">
+        <member name="M:HslCommunication.Enthernet.FileClient.DeleteFile(System.String,System.Int32,System.String)">
             <summary>
             删除服务器上的文件
             </summary>
@@ -2173,7 +2141,15 @@
             <param name="fileName"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileClient.DownloadFile(System.String,System.Int32,System.String,System.Action{System.Int32,System.Int32},System.String)">
+        <member name="M:HslCommunication.Enthernet.FileClient.DeleteFile(System.Net.IPEndPoint,System.String)">
+            <summary>
+            删除服务器上的文件
+            </summary>
+            <param name="iPEndPoint">服务器的终结点</param>
+            <param name="fileName">文件的名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.FileClient.DownloadFile(System.String,System.Int32,System.String,System.Action{System.Int64,System.Int64},System.String)">
             <summary>
             下载文件信息
             </summary>
@@ -2181,41 +2157,54 @@
             <param name="serverPort"></param>
             <param name="fileName"></param>
             <param name="processReport"></param>
-            <param name="fileSave"></param>
+            <param name="fileSaveName"></param>
             <returns></returns>
         </member>
-        <member name="T:HslCommunication.Enthernet.NetFileServer">
+        <member name="M:HslCommunication.Enthernet.FileClient.DownloadFile(System.Net.IPEndPoint,System.String,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            下载文件信息
+            </summary>
+            <param name="iPEndPoint"></param>
+            <param name="fileName"></param>
+            <param name="processReport"></param>
+            <param name="fileSaveName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.FileClient.UploadFile(System.String,System.Int32,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
+            <summary>
+            上传文件给服务器
+            </summary>
+            <param name="serverIp">服务器的ip地址</param>
+            <param name="serverPort">服务器的端口号</param>
+            <param name="fileName">本地完整路径的文件名</param>
+            <param name="serverName">在服务器保存的文件名，不包含驱动器路径</param>
+            <param name="fileTag"></param>
+            <param name="fileUpload"></param>
+            <param name="processReport">汇报进度</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.FileClient.UploadFile(System.Net.IPEndPoint,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
+            <summary>
+            上传文件给服务器
+            </summary>
+            <param name="iPEndPoint">远程终结点</param>
+            <param name="fileName">本地完整路径的文件名</param>
+            <param name="serverName">在服务器保存的文件名，不包含驱动器路径</param>
+            <param name="fileTag">文件的描述</param>
+            <param name="fileUpload">文件的上传人</param>
+            <param name="processReport">汇报进度</param>
+            <returns></returns>
+        </member>
+        <member name="T:HslCommunication.Enthernet.AdvancedFileServer">
             <summary>
             文件传送类服务器，仅仅负责数据传送部分，不负责数据库的存储
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.NetFileServer.FilesPath">
-            <summary>
-            所有文件存储的根目录 默认D盘Files文件夹
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.NetFileServer.ServerStart(System.Int32)">
-            <summary>
-            启动服务器的引擎
-            </summary>
-            <param name="port">指定一个端口号</param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.NetFileServer.ServerClose">
-            <summary>
-            关闭服务器的引擎
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.NetFileServer.ThreadPoolLogin(System.Object)">
+        <member name="M:HslCommunication.Enthernet.AdvancedFileServer.ThreadPoolLogin(System.Object)">
             <summary>
             处理数据
             </summary>
             <param name="obj"></param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.NetFileServer.ReceiveCallBack(System.IAsyncResult)">
-            <summary>
-            用来确认文件是否发送完成的
-            </summary>
-            <param name="ir"></param>
         </member>
         <member name="T:HslCommunication.Enthernet.NetComplexServer">
             <summary>
@@ -2489,7 +2478,7 @@
             </summary>
             <param name="end_point">服务器的通信地址</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServer(System.Int32,System.String,System.Action{System.Int32,System.Int32},System.Action{System.Int32,System.Int32})">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServer(System.Int32,System.String,System.Action{System.Int64,System.Int64},System.Action{System.Int64,System.Int64})">
             <summary>
             客户端向服务器进行请求，请求字符串数据
             </summary>
@@ -2499,7 +2488,7 @@
             <param name="receiveStatus">接收数据时的进度报告</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServer(System.Int32,System.Byte[],System.Action{System.Int32,System.Int32},System.Action{System.Int32,System.Int32})">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServer(System.Int32,System.Byte[],System.Action{System.Int64,System.Int64},System.Action{System.Int64,System.Int64})">
             <summary>
             客户端向服务器进行请求，请求字节数据
             </summary>
@@ -2509,7 +2498,7 @@
             <param name="receiveStatus">接收数据的进度报告</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServerBase(System.Int32,System.Int32,System.Byte[],System.Action{System.Int32,System.Int32},System.Action{System.Int32,System.Int32})">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServerBase(System.Int32,System.Int32,System.Byte[],System.Action{System.Int64,System.Int64},System.Action{System.Int64,System.Int64})">
             <summary>
             需要发送的底层数据
             </summary>
@@ -2589,12 +2578,11 @@
             <param name="customer"></param>
             <param name="content"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.SynchronalReceiveCallback(System.Net.Sockets.Socket,System.Boolean)">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.SynchronalReceiveCallback(System.Net.Sockets.Socket)">
             <summary>
             同步数据的接收的块
             </summary>
             <param name="socket">网络的套接字</param>
-            <param name="Response">是否回发接收进度</param>
         </member>
         <member name="T:HslCommunication.Enthernet.NetSoftUpdateServer">
             <summary>
@@ -2706,10 +2694,12 @@
             文件显示的子控件类
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileItemShow.#ctor(System.String,System.Int32,System.Func{System.Boolean})">
+        <member name="M:HslCommunication.Enthernet.FileItemShow.#ctor(System.Guid,HslCommunication.LogNet.ILogNet,System.String,System.Int32,System.Func{System.Boolean})">
             <summary>
             生成一个文件对象的显示控件
             </summary>
+            <param name="token">令牌</param>
+            <param name="lognet">日志组件</param>
             <param name="serverIp">服务器的IP地址</param>
             <param name="serverPort">服务器的端口号</param>
             <param name="deleteCheck">用户自定义的删除确认委托，可用于验证权限及密码</param>
@@ -2753,10 +2743,11 @@
             上传或下载的控件
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileOperateControl.#ctor(System.Guid,System.Net.IPEndPoint,System.String,System.String,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.FileOperateControl.#ctor(HslCommunication.LogNet.ILogNet,System.Guid,System.Net.IPEndPoint,System.String,System.String,System.String,System.String)">
             <summary>
             上传的实例化方法
             </summary>
+            <param name="logNet">日志组件</param>
             <param name="token">网络令牌</param>
             <param name="endpoint">服务器的端口地址</param>
             <param name="filepath">完整的文件路径</param>
@@ -2764,10 +2755,11 @@
             <param name="group">文件所属的分类</param>
             <param name="id">文件所属的设备ID</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileOperateControl.#ctor(System.Guid,System.Net.IPEndPoint,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.FileOperateControl.#ctor(HslCommunication.LogNet.ILogNet,System.Guid,System.Net.IPEndPoint,System.String,System.String)">
             <summary>
             下载的实例化方法
             </summary>
+            <param name="logNet">日志组件</param>
             <param name="token">网络令牌</param>
             <param name="endpoint">服务器的端口地址</param>
             <param name="filepath">服务器的文件路径</param>
@@ -2813,20 +2805,9 @@
             开始上传文件
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileOperateControl.ThreadPoolCheckConnect(System.Object)">
-            <summary>
-            检查超时的子线程
-            </summary>
-            <param name="obj"></param>
-        </member>
         <member name="M:HslCommunication.Enthernet.FileOperateControl.StartDownloadFile">
             <summary>
             启动下载文件
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileOperateControl.StartDownloadFileAsync">
-            <summary>
-            启动一个异步的下载方法
             </summary>
         </member>
         <member name="F:HslCommunication.Enthernet.FileOperateControl.components">
@@ -2851,22 +2832,24 @@
             用于文件上传或下载的窗口
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.FormFileOperate.#ctor(System.Guid,System.Net.IPEndPoint,System.String[],System.String,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.FormFileOperate.#ctor(System.Guid,HslCommunication.LogNet.ILogNet,System.Net.IPEndPoint,System.String[],System.String,System.String,System.String)">
             <summary>
             实例化一个文件上传的窗口
             </summary>
             <param name="token">网络令牌</param>
+            <param name="logNet">日志组件</param>
             <param name="endpoint">服务器远程地址</param>
             <param name="files">等待上传的文件数组</param>
             <param name="factory">工厂大类</param>
             <param name="group">分类</param>
             <param name="id">设备序号</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.FormFileOperate.#ctor(System.Guid,System.Net.IPEndPoint,System.String[],System.String)">
+        <member name="M:HslCommunication.Enthernet.FormFileOperate.#ctor(System.Guid,HslCommunication.LogNet.ILogNet,System.Net.IPEndPoint,System.String[],System.String)">
             <summary>
             实例化一个文件下载的窗口
             </summary>
             <param name="token">网络令牌</param>
+            <param name="logNet">日志组件</param>
             <param name="endpoint">服务器的远程地址</param>
             <param name="files">等待下载的文件</param>
             <param name="savepath">保存路径</param>
@@ -2898,10 +2881,12 @@
             用于文件上传的类
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.FormSimplyFileUpload.#ctor(System.String,System.Int32,System.String)">
+        <member name="M:HslCommunication.Enthernet.FormSimplyFileUpload.#ctor(System.Guid,HslCommunication.LogNet.ILogNet,System.String,System.Int32,System.String)">
             <summary>
             实例化一个文件上传的窗口
             </summary>
+            <param name="token">令牌</param>
+            <param name="logNet">日志组件</param>
             <param name="serverIp">服务器的IP地址</param>
             <param name="serverPort">服务器的端口号</param>
             <param name="uploadName">文件上传人的名称</param>
@@ -2920,6 +2905,13 @@
             <summary>
             文件长传人的名称
             </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.FormSimplyFileUpload.ReportProgress(System.Int64,System.Int64)">
+            <summary>
+            用于报告进度的方法
+            </summary>
+            <param name="current"></param>
+            <param name="count"></param>
         </member>
         <member name="F:HslCommunication.Enthernet.FormSimplyFileUpload.components">
             <summary>
@@ -3098,6 +3090,11 @@
         <member name="T:HslCommunication.HslTimeOut">
             <summary>
             超时操作的类 [a class use to indicate the time-out of the connection]
+            </summary>
+        </member>
+        <member name="M:HslCommunication.HslTimeOut.#ctor">
+            <summary>
+            实例化对象
             </summary>
         </member>
         <member name="P:HslCommunication.HslTimeOut.StartTime">
@@ -3417,6 +3414,16 @@
             消息发生的事件
             </summary>
         </member>
+        <member name="T:HslCommunication.LogNet.FormLogNetView">
+            <summary>
+            日志查看器的窗口类，用于分析统计日志数据
+            </summary>
+        </member>
+        <member name="M:HslCommunication.LogNet.FormLogNetView.#ctor">
+            <summary>
+            实例化一个日志查看器的窗口
+            </summary>
+        </member>
         <member name="F:HslCommunication.LogNet.FormLogNetView.components">
             <summary>
             Required designer variable.
@@ -3639,11 +3646,6 @@
             静态的方法支持类，提供一些网络的静态支持
             </summary>
         </member>
-        <member name="F:HslCommunication.NetSupport.BufferSize">
-            <summary>
-            文件的读写缓存大小
-            </summary>
-        </member>
         <member name="F:HslCommunication.NetSupport.SocketBufferSize">
             <summary>
             Socket传输中的缓冲池大小
@@ -3664,16 +3666,13 @@
             <param name="b2">第二个字节</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.NetSupport.IsTwoGuidEquel(System.Byte[],System.Int32,System.Byte[],System.Int32)">
+        <member name="M:HslCommunication.NetSupport.CheckTokenEquel(System.Byte[],System.Guid)">
             <summary>
-            判断两个GUID的数据部分是否相同
+            判断两个数据的令牌是否相等
             </summary>
-            <param name="b1">第一个字节</param>
-            <param name="start1">第一个字节的起始位置</param>
-            <param name="b2">第二个字节</param>
-            <param name="start2">第二个字节的起始位置</param>
-            <returns>返回是否相等</returns>
-            <exception cref="T:System.IndexOutOfRangeException"></exception>
+            <param name="head">头指令</param>
+            <param name="token">令牌</param>
+            <returns></returns>
         </member>
         <member name="M:HslCommunication.NetSupport.IsTwoBytesEquel(System.Byte[],System.Int32,System.Byte[],System.Int32,System.Int32)">
             <summary>
@@ -3687,7 +3686,7 @@
             <returns>返回是否相等</returns>
             <exception cref="T:System.IndexOutOfRangeException"></exception>
         </member>
-        <member name="M:HslCommunication.NetSupport.ReadFromSocket(System.Net.Sockets.Socket,System.Int32)">
+        <member name="M:HslCommunication.NetSupport.ReadBytesFromSocket(System.Net.Sockets.Socket,System.Int32)">
             <summary>
             读取socket数据的基础方法，只适合用来接收指令头，或是同步数据
             </summary>
@@ -3699,26 +3698,14 @@
             <exception cref="T:System.ObjectDisposedException"></exception>
             <exception cref="T:System.Security.SecurityException"></exception>
         </member>
-        <member name="M:HslCommunication.NetSupport.ReadFromSocket(System.Net.Sockets.Socket,System.Int32,System.Boolean)">
-            <summary>
-            读取socket数据的基础方法并返回接收长度，只适合用来接收指令头，或是同步数据
-            </summary>
-            <param name="socket">通信对象</param>
-            <param name="receive">接收的长度</param>
-            <param name="response">是否回发接收数据长度</param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentNullException"></exception>
-            <exception cref="T:System.Net.Sockets.SocketException"></exception>
-            <exception cref="T:System.ObjectDisposedException"></exception>
-            <exception cref="T:System.Security.SecurityException"></exception>
-        </member>
-        <member name="M:HslCommunication.NetSupport.ReadFromSocket(System.Net.Sockets.Socket,System.Int32,System.Action{System.Int32,System.Int32},System.Boolean)">
+        <member name="M:HslCommunication.NetSupport.ReadBytesFromSocket(System.Net.Sockets.Socket,System.Int32,System.Action{System.Int64,System.Int64},System.Boolean,System.Boolean)">
             <summary>
             读取socket数据的基础方法，只适合用来接收指令头，或是同步数据
             </summary>
             <param name="socket">通信对象</param>
             <param name="receive">接收的长度</param>
             <param name="report">用于报告接收进度的对象</param>
+            <param name="reportByPercent">是否按照百分比报告进度</param>
             <param name="response">是否回发接收数据长度</param>
             <returns></returns>
             <exception cref="T:System.ArgumentNullException"></exception>
@@ -3726,35 +3713,45 @@
             <exception cref="T:System.ObjectDisposedException"></exception>
             <exception cref="T:System.Security.SecurityException"></exception>
         </member>
-        <member name="M:HslCommunication.NetSupport.ReadFromSocketAndWriteStream(System.IO.FileStream,System.Net.Sockets.Socket,System.Int32,System.Boolean)">
+        <member name="M:HslCommunication.NetSupport.WriteStreamFromSocket(System.Net.Sockets.Socket,System.IO.Stream,System.Int64,System.Action{System.Int64,System.Int64},System.Boolean)">
             <summary>
-            读取socket指定长度数据并写入文件流中
+            从socket套接字读取数据并写入流中，必然报告进度
             </summary>
-            <param name="fs">支持写入的文件流</param>
-            <param name="socket">连接的套接字</param>
-            <param name="receive">指定接收长度</param>
-            <param name="is_response">是否回发进度</param>
+            <param name="socket">通信对象</param>
+            <param name="stream">stream</param>
+            <param name="receive">接收的长度</param>
+            <param name="report">用于报告接收进度的对象</param>
+            <param name="reportByPercent">是否按照百分比报告进度</param>
+            <returns></returns>
             <exception cref="T:System.ArgumentNullException"></exception>
             <exception cref="T:System.Net.Sockets.SocketException"></exception>
             <exception cref="T:System.ObjectDisposedException"></exception>
             <exception cref="T:System.Security.SecurityException"></exception>
         </member>
-        <member name="M:HslCommunication.NetSupport.ReadFromSocketAndWriteStream(System.IO.FileStream,HslCommunication.Enthernet.FileStateOne,System.Int32,System.Boolean)">
+        <member name="M:HslCommunication.NetSupport.WriteSocketFromStream(System.Net.Sockets.Socket,System.IO.Stream,System.Int64,System.Action{System.Int64,System.Int64},System.Boolean)">
             <summary>
-            读取socket指定长度数据并写入文件流中
+            读取流并将数据写入socket
             </summary>
-            <param name="fs">支持写入的文件流</param>
-            <param name="receive">指定接收长度</param>
-            <param name="is_response">是否回发进度</param>
-            <param name="stateone">套接字的属性</param>
-        </member>
-        <member name="M:HslCommunication.NetSupport.ReadFromStreamAndWriteSocket(System.IO.FileStream,System.Net.Sockets.Socket,System.Int32)">
-            <summary>
-            读取文件流并将数据写入socket
-            </summary>
-            <param name="fs">文件流</param>
+            <param name="stream">文件流</param>
             <param name="socket">连接的套接字</param>
-            <param name="send_length">要写入的长度</param>
+            <param name="length">返回的文件长度</param>
+            <param name="report">发送的进度报告</param>
+            <param name="reportByPercent"></param>
+            <exception cref="T:System.Net.Sockets.SocketException"></exception>
+            <exception cref="T:System.IO.IOException"></exception>
+            <exception cref="T:System.NotSupportedException"></exception>
+            <exception cref="T:System.ObjectDisposedException"></exception>
+        </member>
+        <member name="M:HslCommunication.NetSupport.CheckSendBytesReceived(System.Net.Sockets.Socket,System.Int64,System.Action{System.Int64,System.Int64},System.Boolean)">
+            <summary>
+            检查数据是否接收完成并报告进度
+            </summary>
+            <param name="socket">套接字</param>
+            <param name="length">对方需要接收的长度</param>
+            <param name="report">报告的委托方法</param>
+            <param name="reportByPercent">是否按照百分比报告进度</param>
+            <exception cref="T:System.Net.Sockets.SocketException"></exception>
+            <exception cref="T:System.ObjectDisposedException"></exception>
         </member>
         <member name="M:HslCommunication.NetSupport.CommandBytes(System.Int32,System.Int32,System.Guid,System.Byte[])">
             <summary>
@@ -3822,7 +3819,7 @@
         </member>
         <member name="P:HslCommunication.NetBase.ConnectTimeout">
             <summary>
-            网络访问中的超时时间，单位：毫秒，默认值2200
+            网络访问中的超时时间，单位：毫秒，默认值5000
             </summary>
         </member>
         <member name="P:HslCommunication.NetBase.KeyToken">
@@ -3866,6 +3863,94 @@
             <summary>
             日志保存类，默认为空
             </summary>
+        </member>
+        <member name="M:HslCommunication.NetBase.CreateSocketAndConnect(System.Net.Sockets.Socket@,System.Net.IPEndPoint,HslCommunication.OperateResult)">
+            <summary>
+            创建socket对象并尝试连接终结点，如果异常，则结束通信
+            </summary>
+            <param name="socket">网络套接字</param>
+            <param name="iPEndPoint">网络终结点</param>
+            <param name="result">结果对象</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:HslCommunication.NetBase.ReceiveBytesFromSocket(System.Net.Sockets.Socket,System.Byte[]@,System.Int32,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.Boolean,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            仅仅接收一定长度的字节数据，如果异常，则结束通信
+            </summary>
+            <param name="socket">套接字</param>
+            <param name="bytes">字节数据</param>
+            <param name="length">长度</param>
+            <param name="result">结果对象</param>
+            <param name="receiveStatus">接收状态</param>
+            <param name="reportByPercent">是否根据百分比报告进度</param>
+            <param name="response">是否回发进度</param>
+            <param name="checkTimeOut">是否进行超时检查</param>
+            <param name="exceptionMessage">假设发生异常，应该携带什么信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetBase.SendBytesToSocket(System.Net.Sockets.Socket,System.Byte[],HslCommunication.OperateResult,System.String)">
+            <summary>
+            仅仅将数据发送到socket对象上去，如果异常，则结束通信
+            </summary>
+            <param name="socket"></param>
+            <param name="send"></param>
+            <param name="result"></param>
+            <param name="exceptionMessage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetBase.CheckRomoteReceived(System.Net.Sockets.Socket,System.Int64,System.Action{System.Int64,System.Int64},HslCommunication.OperateResult,System.String)">
+            <summary>
+            确认对方是否已经接收完成数据，如果异常，则结束通信
+            </summary>
+            <param name="socket"></param>
+            <param name="length"></param>
+            <param name="report"></param>
+            <param name="result"></param>
+            <param name="exceptionMessage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetBase.CheckTokenPermission(System.Net.Sockets.Socket,System.Byte[],System.Guid,HslCommunication.OperateResult)">
+            <summary>
+            检查令牌是否正确，如果不正确，结束网络通信
+            </summary>
+            <param name="socket">套接字</param>
+            <param name="head">头子令</param>
+            <param name="token">令牌</param>
+            <param name="result">结果对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetBase.SendFileStreamToSocket(System.Net.Sockets.Socket,System.String,System.Int64,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            将文件数据发送至套接字，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket"></param>
+            <param name="filename"></param>
+            <param name="filelength"></param>
+            <param name="result"></param>
+            <param name="report"></param>
+            <param name="exceptionMessage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetBase.ReceiveFileSteamFromSocket(System.Net.Sockets.Socket,System.String,System.Int64,System.Action{System.Int64,System.Int64},HslCommunication.OperateResult,System.String)">
+            <summary>
+            从套接字中接收一个文件数据，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket"></param>
+            <param name="filename"></param>
+            <param name="receive"></param>
+            <param name="report"></param>
+            <param name="result"></param>
+            <param name="exceptionMessage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetBase.CombineExceptionString(System.String,System.String)">
+            <summary>
+            获取错误的用于显示的信息
+            </summary>
+            <param name="message"></param>
+            <param name="exception"></param>
+            <returns></returns>
         </member>
         <member name="T:HslCommunication.NetShareBase">
             <summary>
@@ -3911,6 +3996,110 @@
             </summary>
             <param name="ar"></param>
         </member>
+        <member name="M:HslCommunication.NetShareBase.SendBaseAndCheckReceive(System.Net.Sockets.Socket,System.Int32,System.Int32,System.Byte[],HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            [自校验] 发送字节数据并确认对方接收完成数据，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket">网络套接字</param>
+            <param name="headcode">头指令</param>
+            <param name="customer">用户指令</param>
+            <param name="send">发送的数据</param>
+            <param name="result">用于返回的结果</param>
+            <param name="sendReport">发送的进度报告</param>
+            <param name="failedString">失败时存储的额外描述信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetShareBase.SendBytesAndCheckReceive(System.Net.Sockets.Socket,System.Int32,System.Byte[],HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            [自校验] 发送字节数据并确认对方接收完成数据，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket">网络套接字</param>
+            <param name="customer">用户指令</param>
+            <param name="send">发送的数据</param>
+            <param name="result">用于返回的结果</param>
+            <param name="sendReport">发送的进度报告</param>
+            <param name="failedString">异常时记录到日志的附加信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetShareBase.SendStringAndCheckReceive(System.Net.Sockets.Socket,System.Int32,System.String,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            [自校验] 直接发送字符串数据并确认对方接收完成数据，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket">网络套接字</param>
+            <param name="customer">用户指令</param>
+            <param name="send">发送的数据</param>
+            <param name="result">用于返回的结果</param>
+            <param name="sendReport">发送的进度报告</param>
+            <param name="failedString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetShareBase.SendFileAndCheckReceive(System.Net.Sockets.Socket,HslCommunication.HslReadWriteLock,System.String,System.String,System.String,System.String,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            [自校验] 将文件数据发送至套接字，具体发送细节将在继承类中实现，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket">套接字</param>
+            <param name="readWriteLock">读写锁，此操作会获取读需求</param>
+            <param name="filename">文件名称，文件必须存在</param>
+            <param name="servername">远程端的文件名称</param>
+            <param name="filetag">文件的额外标签</param>
+            <param name="fileupload">文件的上传人</param>
+            <param name="result">操作结果对象</param>
+            <param name="sendReport">发送进度报告</param>
+            <param name="failedString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetShareBase.ReceiveAndCheckBytes(System.Net.Sockets.Socket,System.Byte[]@,System.Byte[]@,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            [自校验] 接收一条完整的同步数据，包含头子节和内容字节，基础的数据，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket">套接字</param>
+            <param name="head">头子节</param>
+            <param name="content">内容字节</param>
+            <param name="result">结果</param>
+            <param name="receiveReport">接收进度反馈</param>
+            <param name="failedString">失败时用于显示的字符串</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">result</exception>
+        </member>
+        <member name="M:HslCommunication.NetShareBase.ReceiveStringFromSocket(System.Net.Sockets.Socket,System.Int32@,System.String@,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            [自校验] 从网络中接收一个字符串数据，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket">套接字</param>
+            <param name="customer">接收的用户数据</param>
+            <param name="receive">接收的字节数据</param>
+            <param name="result">结果信息对象</param>
+            <param name="receiveReport"></param>
+            <param name="failedString">失败时记录日志的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetShareBase.ReceiveContentFromSocket(System.Net.Sockets.Socket,System.Int32@,System.Byte[]@,HslCommunication.OperateResult,System.String)">
+            <summary>
+            [自校验] 从网络中接收一串字节数据，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket">套接字</param>
+            <param name="customer">接收的用户数据</param>
+            <param name="data">接收的字节数据</param>
+            <param name="result">结果信息对象</param>
+            <param name="failedString">失败时记录日志的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetShareBase.ReceiveFileFromSocket(System.Net.Sockets.Socket,HslCommunication.HslReadWriteLock,System.String,System.String@,System.Int64@,System.String@,System.String@,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            [自校验] 从网络中接收一个文件，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket"></param>
+            <param name="readWriteLock"></param>
+            <param name="savename"></param>
+            <param name="filename"></param>
+            <param name="size"></param>
+            <param name="filetag"></param>
+            <param name="fileupload"></param>
+            <param name="result"></param>
+            <param name="receiveReport"></param>
+            <param name="failedString"></param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.NetShareBase.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
             <summary>
             数据处理中心，应该继承重写
@@ -3951,6 +4140,86 @@
         <member name="M:HslCommunication.NetServerBase.ServerClose">
             <summary>
             关闭服务器的引擎
+            </summary>
+        </member>
+        <member name="T:HslCommunication.FileServerBase">
+            <summary>
+            文件服务器的基类，提供了对文件的基本操作
+            </summary>
+        </member>
+        <member name="F:HslCommunication.FileServerBase.m_dictionary_files_locks">
+            <summary>
+            所有文件操作的词典锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.FileServerBase.hybirdLock">
+            <summary>
+            词典的锁
+            </summary>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.GetLockFromDictionaryWithFileName(System.String)">
+            <summary>
+            获取当前文件的读写锁，如果没有会自动创建
+            </summary>
+            <param name="filename"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.ReceiveFileFromSocketAndMoveFile(System.Net.Sockets.Socket,HslCommunication.HslReadWriteLock,System.String,System.String,System.String@,System.Int64@,System.String@,System.String@,HslCommunication.OperateResult)">
+            <summary>
+            从网络套接字接收文件并移动到目标的文件夹中，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket"></param>
+            <param name="readWriteLock"></param>
+            <param name="savename"></param>
+            <param name="fileNameNew"></param>
+            <param name="filename"></param>
+            <param name="size"></param>
+            <param name="filetag"></param>
+            <param name="fileupload"></param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.DeleteFileAndCheck(System.Net.Sockets.Socket,HslCommunication.HslReadWriteLock,System.String,HslCommunication.OperateResult)">
+            <summary>
+            删除文件并回发确认信息，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket"></param>
+            <param name="readWriteLock"></param>
+            <param name="fullname"></param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.ServerStart(System.Int32)">
+            <summary>
+            启动文件服务引擎
+            </summary>
+            <param name="port"></param>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.ServerClose">
+            <summary>
+            关闭文件服务引擎
+            </summary>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.PreprocessFolderName(System.String)">
+            <summary>
+            预处理文件夹的名称
+            </summary>
+            <param name="folder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.CheckTwoFolderAndCreate">
+            <summary>
+            检查2个文件夹是否存在，不存在就创建
+            </summary>
+        </member>
+        <member name="P:HslCommunication.FileServerBase.FilesDirectoryPath">
+            <summary>
+            文件所存储的路径
+            </summary>
+        </member>
+        <member name="P:HslCommunication.FileServerBase.FilesDirectoryPathTemp">
+            <summary>
+            用于接收上传文件时的临时文件夹，临时文件使用结束后会被删除
             </summary>
         </member>
         <member name="T:HslCommunication.OperateResult">
@@ -4523,6 +4792,21 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.abstr1">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.Activity_16xLG">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.AddressViewer">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.ai">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
@@ -4548,7 +4832,17 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.asset_progressBar_24x24_on">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.audio">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.AudioRecording">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -4564,6 +4858,11 @@
             </summary>
         </member>
         <member name="P:HslCommunication.Properties.Resources.bmp">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.brackets_Square_16xMD">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -4598,7 +4897,27 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.Class_489">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.ClassIcon">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.Cloud_16xLG">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.conf">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.Copy_6524">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -4628,12 +4947,22 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.Delegate_8339">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.divx">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
         <member name="P:HslCommunication.Properties.Resources.doc">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.docview_xaml_on_16x16">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -4658,7 +4987,22 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.Enum_582">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.eps">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.Event_594">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.Event_594_exp">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -4684,6 +5028,16 @@
             </summary>
         </member>
         <member name="P:HslCommunication.Properties.Resources.gif">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.glasses_16xLG">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.grid_Data_16xLG">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -4748,6 +5102,16 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.lightningBolt_16xLG">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.ListView_687">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.lua">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
@@ -4758,7 +5122,17 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.Method_636">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.mm">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.Module_648">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -4858,6 +5232,11 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.PropertyIcon">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.ps">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
@@ -4918,7 +5297,17 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.Soundfile_461">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.sql">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.Structure_507">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -4953,12 +5342,32 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.TabControl_707">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.Table_748">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.Tag_7213">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.tar">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
         <member name="P:HslCommunication.Properties.Resources.tex">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.Textfile_818_16x">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -4973,12 +5382,27 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.TreeView_713">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.ttf">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
         <member name="P:HslCommunication.Properties.Resources.txt">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.usbcontroller">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.UseCaseDiagramFile_usecasediagram_13447_16x">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -5003,12 +5427,32 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
+        <member name="P:HslCommunication.Properties.Resources.VirtualMachine">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
         <member name="P:HslCommunication.Properties.Resources.vsd">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
         <member name="P:HslCommunication.Properties.Resources.wav">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.WebForm_ASPX__815_16x">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.WebFormTemplate_11274_16x_color">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.WindowsForm_817_16x">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>

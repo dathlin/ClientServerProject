@@ -36,7 +36,7 @@ namespace ClientsLibrary
                 ofd.Multiselect = true;
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    using (FormFileOperate fUpload = new FormFileOperate(CommonHeadCode.KeyToken, new System.Net.IPEndPoint(
+                    using (FormFileOperate fUpload = new FormFileOperate(CommonHeadCode.KeyToken,UserClient.LogNet, new System.Net.IPEndPoint(
                         System.Net.IPAddress.Parse(UserClient.ServerIp), CommonLibrary.CommonLibrary.Port_Update_Remote),
                         ofd.FileNames, "", "", ""))
                     {

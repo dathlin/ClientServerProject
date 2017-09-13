@@ -17,7 +17,7 @@ namespace ClientsLibrary
     /// </summary>
     public class UserPortrait
     {
-        public UserPortrait(string filePath,Action<string> loadPic,Action disPic)
+        public UserPortrait(string filePath, Action<string> loadPic, Action disPic)
         {
             if (!System.IO.Directory.Exists(filePath))
             {
@@ -52,7 +52,7 @@ namespace ClientsLibrary
                     bitmap300.Dispose();
                     bitmap32.Dispose();
 
-                    using (FormFileOperate ffo = new FormFileOperate(CommonHeadCode.KeyToken, new System.Net.IPEndPoint(
+                    using (FormFileOperate ffo = new FormFileOperate(CommonHeadCode.KeyToken,UserClient.LogNet, new System.Net.IPEndPoint(
                         System.Net.IPAddress.Parse(UserClient.ServerIp), CommonLibrary.CommonLibrary.Port_Portrait_Server),
                         new string[]
                         {
@@ -123,11 +123,11 @@ namespace ClientsLibrary
                 }
             }
         }
-        
+
         public void ThreadPoolDownloadSizeLarge()
         {
             string path = FileSavePath;
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.下载大头, UserClient.UserAccount.UserName);
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.下载大头, UserClient.UserAccount.UserName, null, null);
             if (result.IsSuccess)
             {
                 if (result.Content[0] == 'Y')
