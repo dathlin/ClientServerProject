@@ -310,7 +310,7 @@ namespace 软件系统客户端Wpf
             TextBlockSoftCopyright.Text = $"本软件著作权归{CommonLibrary.Resource.StringResouce.SoftCopyRight}所有";
 
             
-
+            // 上次登录为7天以前则清除账户密码
             if ((DateTime.Now - UserClient.JsonSettings.LoginTime).TotalDays < 7)
             {
                 //加载数据

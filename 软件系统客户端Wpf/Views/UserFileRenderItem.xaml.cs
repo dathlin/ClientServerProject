@@ -28,6 +28,12 @@ namespace 软件系统客户端Wpf.Views
         public UserFileRenderItem()
         {
             InitializeComponent();
+
+            fileClient = new FileClient()
+            {
+                KeyToken = CommonLibrary.CommonHeadCode.KeyToken,
+                LogNet = UserClient.LogNet,
+            };
         }
 
         private BitmapImage BitmapToBitmapImage(System.Drawing.Bitmap bitmap)
@@ -89,7 +95,7 @@ namespace 软件系统客户端Wpf.Views
             }
 
             //确认删除
-            OperateResultString result = SimpleFileClient.DeleteFile(UserClient.ServerIp, CommonLibrary.CommonLibrary.Port_Share_File, Hufile.FileName);
+            OperateResultString result = fileClient.DeleteFile(UserClient.ServerIp, CommonLibrary.CommonLibrary.Port_Share_File, Hufile.FileName);
             if(result.IsSuccess)
             {
                 MessageBox.Show("删除成功！");
@@ -120,12 +126,12 @@ namespace 软件系统客户端Wpf.Views
             save_file_name += "\\" + Hufile.FileName;
 
 
-            OperateResultString result = SimpleFileClient.DownloadFile(UserClient.ServerIp, CommonLibrary.CommonLibrary.Port_Share_File, Hufile.FileName,
+            OperateResultString result = fileClient.DownloadFile(UserClient.ServerIp, CommonLibrary.CommonLibrary.Port_Share_File, Hufile.FileName,
                 (m, n) =>
                 {
                     Dispatcher.Invoke(new Action(() =>
                     {
-                        FileDownloadProgress.Value = m * 100d / n;
+                        FileDownloadProgress.Value = m * 100 / n;
                     }));
                 }, save_file_name);
 
@@ -146,5 +152,9 @@ namespace 软件系统客户端Wpf.Views
                 FileDownloadButton.IsEnabled = true;
             }));
         }
+
+
+
+        FileClient fileClient;
     }
 }

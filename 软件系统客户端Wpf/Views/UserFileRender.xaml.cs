@@ -57,6 +57,8 @@ namespace 软件系统客户端Wpf.Views
             }
 
             using (FormSimplyFileUpload upload = new FormSimplyFileUpload(
+                CommonHeadCode.KeyToken,
+                UserClient.LogNet,
                 UserClient.ServerIp,
                 CommonLibrary.CommonLibrary.Port_Share_File,
                 UserClient.UserAccount.UserName))

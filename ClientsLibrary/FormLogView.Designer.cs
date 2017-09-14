@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.logNetAnalysisControl1 = new HslCommunication.LogNet.LogNetAnalysisControl();
             this.userButton16 = new HslCommunication.Controls.UserButton();
             this.userButton17 = new HslCommunication.Controls.UserButton();
             this.userButton15 = new HslCommunication.Controls.UserButton();
@@ -47,18 +46,8 @@
             this.userButton2 = new HslCommunication.Controls.UserButton();
             this.userButton1 = new HslCommunication.Controls.UserButton();
             this.userButton_login = new HslCommunication.Controls.UserButton();
+            this.logNetAnalysisControl1 = new HslCommunication.LogNet.LogNetAnalysisControl();
             this.SuspendLayout();
-            // 
-            // logNetAnalysisControl1
-            // 
-            this.logNetAnalysisControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.logNetAnalysisControl1.Location = new System.Drawing.Point(8, 7);
-            this.logNetAnalysisControl1.Name = "logNetAnalysisControl1";
-            this.logNetAnalysisControl1.Size = new System.Drawing.Size(785, 696);
-            this.logNetAnalysisControl1.TabIndex = 47;
-            this.logNetAnalysisControl1.Load += new System.EventHandler(this.logNetAnalysisControl1_Load);
             // 
             // userButton16
             // 
@@ -329,6 +318,16 @@
             this.userButton_login.TabIndex = 29;
             this.userButton_login.UIText = "网络日志查看";
             this.userButton_login.Click += new System.EventHandler(this.userButton_login_Click);
+            // 
+            // logNetAnalysisControl1
+            // 
+            this.logNetAnalysisControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.logNetAnalysisControl1.Location = new System.Drawing.Point(4, 6);
+            this.logNetAnalysisControl1.Name = "logNetAnalysisControl1";
+            this.logNetAnalysisControl1.Size = new System.Drawing.Size(789, 697);
+            this.logNetAnalysisControl1.TabIndex = 47;
             // 
             // FormLogView
             // 

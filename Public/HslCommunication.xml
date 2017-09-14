@@ -1460,6 +1460,11 @@
             文件保存失败
             </summary>
         </member>
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Directory_Files">
+            <summary>
+            请求文件列表的暗号
+            </summary>
+        </member>
         <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_NoZipped">
             <summary>
             不压缩数据字节
@@ -4221,6 +4226,13 @@
             <summary>
             用于接收上传文件时的临时文件夹，临时文件使用结束后会被删除
             </summary>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.GetDirectoryFiles(System.String)">
+            <summary>
+            获取文件夹的所有文件列表
+            </summary>
+            <param name="segment">额外的片段名称</param>
+            <returns></returns>
         </member>
         <member name="T:HslCommunication.OperateResult">
             <summary>

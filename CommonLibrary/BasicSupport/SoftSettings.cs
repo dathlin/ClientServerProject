@@ -59,7 +59,10 @@ namespace CommonLibrary
         /// <summary>
         /// 系统的所属分厂
         /// </summary>
-        public List<string> SystemFactories { get; set; } = new List<string>();
+        public List<string> SystemFactories { get; set; } = new List<string>()
+        {
+            "分厂示例1","分厂示例2"
+        };
 
 
 
@@ -139,10 +142,7 @@ namespace CommonLibrary
         public string SystemInfo { get; private set; }
 
 
-
-
-
-
+        
         public override string ToSaveString()
         {
             JObject json = new JObject();
@@ -154,13 +154,14 @@ namespace CommonLibrary
             json.Add(nameof(IsThemeDark), new JValue(IsThemeDark));
             return json.ToString();
         }
+
         public override void LoadByString(string content)
         {
             JObject json = JObject.Parse(content);
             string systemInfo = SoftBasic.GetValueFromJsonObject(json, nameof(SystemInfo), "");
             if (systemInfo == SystemInfo)
             {
-                //文件匹配正确
+                //确认账户名及密码是本机的记录，而不是从其他电脑端拷贝过来的
                 LoginName = SoftBasic.GetValueFromJsonObject(json, nameof(LoginName), LoginName);
                 IsNewVersionRunning = SoftBasic.GetValueFromJsonObject(json, nameof(IsNewVersionRunning), IsNewVersionRunning);
                 Password = SoftBasic.GetValueFromJsonObject(json, nameof(Password), Password);
