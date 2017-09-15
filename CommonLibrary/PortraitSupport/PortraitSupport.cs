@@ -17,7 +17,11 @@ namespace CommonLibrary
         /// </summary>
         public const string LargePortrait = "Size_300_.png";
 
-
+        /// <summary>
+        /// 获取小尺寸的头像文件
+        /// </summary>
+        /// <param name="dirPath">目录</param>
+        /// <returns>文件的完整路径</returns>
         public static string GetSmallPortraitFileName(string dirPath)
         {
             string[] files = Directory.GetFiles(dirPath);
@@ -30,6 +34,12 @@ namespace CommonLibrary
             }
             return string.Empty;
         }
+
+        /// <summary>
+        /// 获取大尺寸的头像文件
+        /// </summary>
+        /// <param name="dirPath">目录</param>
+        /// <returns>文件的完整路径</returns>
         public static string GetLargePortraitFileName(string dirPath)
         {
             string[] files = Directory.GetFiles(dirPath);

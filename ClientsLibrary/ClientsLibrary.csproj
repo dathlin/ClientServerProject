@@ -55,22 +55,22 @@
     <Compile Include="FormDownloading.Designer.cs">
       <DependentUpon>FormDownloading.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormLogView.cs">
+    <Compile Include="LogsSupport\FormLogView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLogView.Designer.cs">
+    <Compile Include="LogsSupport\FormLogView.Designer.cs">
       <DependentUpon>FormLogView.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormRegisterAccount.cs">
+    <Compile Include="AccountSupport\FormRegisterAccount.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormRegisterAccount.Designer.cs">
+    <Compile Include="AccountSupport\FormRegisterAccount.Designer.cs">
       <DependentUpon>FormRegisterAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormUpdateRemote.cs">
+    <Compile Include="SoftUpdateSupport\FormUpdateRemote.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormUpdateRemote.Designer.cs">
+    <Compile Include="SoftUpdateSupport\FormUpdateRemote.Designer.cs">
       <DependentUpon>FormUpdateRemote.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,15 +81,16 @@
     <EmbeddedResource Include="FormDownloading.resx">
       <DependentUpon>FormDownloading.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormLogView.resx">
+    <EmbeddedResource Include="LogsSupport\FormLogView.resx">
       <DependentUpon>FormLogView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormRegisterAccount.resx">
+    <EmbeddedResource Include="AccountSupport\FormRegisterAccount.resx">
       <DependentUpon>FormRegisterAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormUpdateRemote.resx">
+    <EmbeddedResource Include="SoftUpdateSupport\FormUpdateRemote.resx">
       <DependentUpon>FormUpdateRemote.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

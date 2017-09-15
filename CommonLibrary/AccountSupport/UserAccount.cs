@@ -11,6 +11,8 @@ namespace CommonLibrary
     /// </summary>
     public class UserAccount
     {
+        #region Public Members
+        
         /// <summary>
         /// 用户名称，该名称唯一
         /// </summary>
@@ -63,6 +65,11 @@ namespace CommonLibrary
         /// 上次登录系统的方式，有winform版，wpf版，web版
         /// </summary>
         public string LastLoginWay { get; set; } = string.Empty;
+
+        #endregion
+
+        #region Static Members
+        
         /// <summary>
         /// 用于存储和传送的名称
         /// </summary>
@@ -76,22 +83,14 @@ namespace CommonLibrary
         /// </summary>
         public static string LoginWayText { get { return "LoginWay"; } }
         /// <summary>
-        /// 深度拷贝当前的账户信息
+        /// 登录系统的唯一设备ID
         /// </summary>
-        /// <typeparam name="T">返回的类型，应该为继承后的类型</typeparam>
-        /// <returns>新的对象</returns>
-        public T DeepCopy<T>() where T : UserAccount
-        {
-            return JObject.FromObject(this).ToObject<T>();
-        }
-        /// <summary>
-        /// 获取账号的用户名
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return UserName;
-        }
+        public static string DeviceUniqueID { get { return "DeviceUniqueID"; } }
+
+        #endregion
+
+        #region Public Method
+
         /// <summary>
         /// 获取本账号的JSON字符串，用于在网络中数据传输
         /// </summary>
@@ -100,10 +99,34 @@ namespace CommonLibrary
         {
             return JObject.FromObject(this).ToString();
         }
+
+        /// <summary>
+        /// 深度拷贝当前的账户信息
+        /// </summary>
+        /// <typeparam name="T">返回的类型，应该为继承后的类型</typeparam>
+        /// <returns>新的对象</returns>
+        public T DeepCopy<T>() where T : UserAccount
+        {
+            return JObject.FromObject(this).ToObject<T>();
+        }
+
+        #endregion
+
+        #region Override Method
+
+        /// <summary>
+        /// 获取账号的用户名
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return UserName;
+        }
+
+        #endregion
+        
     }
-
-
-
+    
     /// <summary>
     /// 账户的等级
     /// </summary>

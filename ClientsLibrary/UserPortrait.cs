@@ -17,6 +17,14 @@ namespace ClientsLibrary
     /// </summary>
     public class UserPortrait
     {
+        #region Constructor
+        
+        /// <summary>
+        /// 实例化一个新的头像管理类对象
+        /// </summary>
+        /// <param name="filePath">头像存储的文件夹路径</param>
+        /// <param name="loadPic">加载图片的方法</param>
+        /// <param name="disPic">加载前的操作</param>
         public UserPortrait(string filePath, Action<string> loadPic, Action disPic)
         {
             if (!System.IO.Directory.Exists(filePath))
@@ -28,11 +36,13 @@ namespace ClientsLibrary
             DisPic = disPic;
         }
 
-        private string FileSavePath { get; set; }
+        #endregion
+        
+        #region Change Portrait
 
-        private Action<string> LoadPic = null;
-        private Action DisPic = null;
-
+        /// <summary>
+        /// 点击更改头像后的操作，打开头像选择对话框，获取到2种分辨率的头像，然后进行上传
+        /// </summary>
         public void ChangePortrait()
         {
             using (FormPortraitSelect fps = new FormPortraitSelect())
@@ -68,7 +78,13 @@ namespace ClientsLibrary
         }
 
 
+        #endregion
 
+        #region Download Portraint
+
+        /// <summary>
+        /// 加载头像信息，检查本地是否有相应的文件，没有则向服务器请求下载新的头像，然后加载，应放到线程池中执行
+        /// </summary>
         public void DownloadUserPortraint()
         {
             string path = FileSavePath;
@@ -109,6 +125,10 @@ namespace ClientsLibrary
             }
         }
 
+        /// <summary>
+        /// 下载小尺寸的头像并使用委托加载它
+        /// </summary>
+        /// <param name="path"></param>
         public void DownloadUserPortraint(string path)
         {
             OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.下载小头, UserClient.UserAccount.UserName);
@@ -124,6 +144,9 @@ namespace ClientsLibrary
             }
         }
 
+        /// <summary>
+        /// 下载大尺寸的头像并打开它，该方法适合线程池
+        /// </summary>
         public void ThreadPoolDownloadSizeLarge()
         {
             string path = FileSavePath;
@@ -136,11 +159,31 @@ namespace ClientsLibrary
                     string path32 = path + @"\" + PortraitSupport.LargePortrait;
                     System.IO.File.WriteAllBytes(path32, data);
                     System.Diagnostics.Process.Start(path32);
+                    data = null;
                 }
             }
             Thread.Sleep(1000);
         }
 
 
+        #endregion
+        
+        #region Private Members
+
+        /// <summary>
+        /// 文件的路径
+        /// </summary>
+        private string FileSavePath { get; set; }
+        /// <summary>
+        /// 加载图片的操作
+        /// </summary>
+        private Action<string> LoadPic = null;
+        /// <summary>
+        /// 加载图片前的操作
+        /// </summary>
+        private Action DisPic = null;
+
+
+        #endregion
     }
 }

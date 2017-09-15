@@ -211,7 +211,8 @@ namespace 软件系统客户端模版
             {
                 { UserAccount.UserNameText, new JValue(textBox_userName.Text) },
                 { UserAccount.PasswordText, new JValue(textBox_password.Text) },
-                { UserAccount.LoginWayText, new JValue("winform") }
+                { UserAccount.LoginWayText, new JValue("winform") },
+                { UserAccount.DeviceUniqueID, new JValue(UserClient.JsonSettings.SystemInfo) }
             };
             result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.账户检查, json.ToString());
             if (result.IsSuccess)

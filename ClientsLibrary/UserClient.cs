@@ -19,34 +19,33 @@ namespace ClientsLibrary
 
 
     /// <summary>
-    /// 一个通用的用户客户端类
+    /// 一个通用的用户客户端类, 包含了一些静态的资源
     /// </summary>
     public class UserClient
     {
+        /// <summary>
+        /// 客户端需要进行本地存储的信息日志
+        /// </summary>
         public static JsonSettings JsonSettings = new JsonSettings();
-
-
+        
 
         /// <summary>
         /// 本软件的当前版本，用来验证更新的关键依据
         /// </summary>
         public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.170914");
-
-
+        
 
         /// <summary>
         /// 服务器的IP地址，默认为127.0.0.1，可用于单机调试，云服务器端：117.48.203.204
         /// </summary>
         public static string ServerIp { get; } = "127.0.0.1";//用于测试的云服务器地址
-
-
+        
 
         /// <summary>
         /// 系统的分厂信息
         /// </summary>
         public static List<string> SystemFactories { get; set; } = new List<string>();
-
-
+        
 
 
         /// <summary>
@@ -54,7 +53,7 @@ namespace ClientsLibrary
         /// </summary>
         public static List<VersionInfo> HistoryVersions { get; } = new List<VersionInfo>
         {
-                //写入所有的历史版本信息，这样就能在更新日志的界面查看到信息
+                // 写入所有的历史版本信息，这样就能在更新日志的界面查看到信息
                 new VersionInfo()
                 {
                     VersionNum=new SystemVersion("1.0.0"),
@@ -65,9 +64,7 @@ namespace ClientsLibrary
                         "3.需要用户自行添加"),
                 },
         };
-
-
-
+        
 
         /// <summary>
         /// 设置或获取系统的公告
@@ -120,7 +117,7 @@ namespace ClientsLibrary
         {
             if (e.ExceptionObject is Exception ex)
             {
-                //使用UDP方法传送会服务器
+                // 使用TCP方法传送会服务器
                 string info = HslCommunication.LogNet.LogNetManagment.GetSaveStringFromException(null, ex);
                 Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.异常消息, info);
             }
