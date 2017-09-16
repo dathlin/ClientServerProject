@@ -2175,6 +2175,19 @@
             <param name="fileSaveName"></param>
             <returns></returns>
         </member>
+        <member name="M:HslCommunication.Enthernet.FileClient.UploadFileAdvanced(System.Net.IPEndPoint,System.String,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
+            <summary>
+            上传文件给文件管理服务器
+            </summary>
+            <param name="iPEndPoint"></param>
+            <param name="fileName">本地完整路径的文件名</param>
+            <param name="serverName">文件名称</param>
+            <param name="factory">工厂大类，第一级大类</param>
+            <param name="group">类别小类，第二级分类</param>
+            <param name="id">标识号类，第三级分类</param>
+            <param name="processReport">汇报进度</param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.Enthernet.FileClient.UploadFile(System.String,System.Int32,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
             <summary>
             上传文件给服务器
@@ -2198,6 +2211,17 @@
             <param name="fileTag">文件的描述</param>
             <param name="fileUpload">文件的上传人</param>
             <param name="processReport">汇报进度</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.FileClient.DownloadPathFileNames(System.Net.IPEndPoint,System.String[]@,System.String,System.String,System.String)">
+            <summary>
+            获取指定路径下的所有的文档
+            </summary>
+            <param name="iPEndPoint"></param>
+            <param name="fileNames"></param>
+            <param name="factory"></param>
+            <param name="group"></param>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:HslCommunication.Enthernet.AdvancedFileServer">
@@ -4252,6 +4276,11 @@
         <member name="P:HslCommunication.OperateResult.ErrorCode">
             <summary>
             具体的错误代码
+            </summary>
+        </member>
+        <member name="P:HslCommunication.OperateResult.Tag">
+            <summary>
+            消息附带的额外信息
             </summary>
         </member>
         <member name="M:HslCommunication.OperateResult.ToMessageShowString">

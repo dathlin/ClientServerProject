@@ -153,9 +153,9 @@ namespace CommonLibrary
                 { nameof(Announcement), new JValue(Announcement) },
                 { nameof(Can_Account_Login), new JValue(Can_Account_Login) },
                 { nameof(Account_Forbidden_Reason), new JValue(Account_Forbidden_Reason) },
-                { nameof(SystemFactories), new JArray(SystemFactories) },
+                { nameof(SystemFactories), new JValue((new JArray(SystemFactories)).ToString()) },
                 { nameof(WhetherToEnableTrustedClientAuthentication),new JValue(WhetherToEnableTrustedClientAuthentication) },
-                { nameof(TrustedClientList),new JArray(TrustedClientList) }
+                { nameof(TrustedClientList),new JValue((new JArray(TrustedClientList)).ToString()) }
             };
             return json.ToString();
         }

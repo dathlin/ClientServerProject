@@ -83,7 +83,7 @@ namespace CommonLibrary
         /// </summary>
         public static int Port_Portrait_Server { get; } = 24672;
         #endregion
-
+        
         /// <summary>
         /// 整个系统的加密解密密码
         /// </summary>
