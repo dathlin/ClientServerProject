@@ -28,13 +28,59 @@ namespace 软件系统客户端Wpf
     /// </summary>
     public partial class LoginWindow : Window
     {
+        #region Constructor
+        
         public LoginWindow()
         {
             InitializeComponent();
 
+            // 加载本地保存的数据
             UserClient.JsonSettings.FileSavePath = AppDomain.CurrentDomain.BaseDirectory + @"JsonSettings.txt";
             UserClient.JsonSettings.LoadByFile();
         }
+
+        #endregion
+
+        #region Window Load
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            WindowToolTip.Opacity = 0;
+            TextBlockSoftName.Text = CommonLibrary.Resource.StringResouce.SoftName;
+            TextBlockSoftVersion.Text = UserClient.CurrentVersion.ToString();
+            TextBlockSoftCopyright.Text = $"本软件著作权归{CommonLibrary.Resource.StringResouce.SoftCopyRight}所有";
+
+
+            // 上次登录为7天以前则清除账户密码
+            if ((DateTime.Now - UserClient.JsonSettings.LoginTime).TotalDays < 7)
+            {
+                //加载数据
+                NameTextBox.Text = UserClient.JsonSettings.LoginName ?? "";
+                PasswordBox.Password = UserClient.JsonSettings.Password ?? "";
+                Remember.IsChecked = UserClient.JsonSettings.Password != "";
+            }
+            //初始化输入焦点
+            if (UserClient.JsonSettings.Password != "") LoginButton.Focus();
+            else if (UserClient.JsonSettings.LoginName != "") PasswordBox.Focus();
+            else NameTextBox.Focus();
+
+
+            // 加载原先保存的主题配色
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"Palette.txt"))
+            {
+                using (StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"Palette.txt", Encoding.UTF8))
+                {
+                    string temp = sr.ReadToEnd();
+                    MaterialDesignThemes.Wpf.Palette obj = JObject.Parse(temp).ToObject<MaterialDesignThemes.Wpf.Palette>();
+                    new PaletteHelper().ReplacePalette(obj);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Login Click
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -66,9 +112,10 @@ namespace 软件系统客户端Wpf
             ThreadAccountLogin.Start();
         }
 
+
+        #endregion
+
         #region 账户验证的逻辑块
-
-
 
         private string UserName = string.Empty;
         private string UserPassword = string.Empty;
@@ -86,182 +133,62 @@ namespace 软件系统客户端Wpf
             //定义委托
             Action<string> message_show = delegate (string message)
             {
-                SetInformationString(message);
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    SetInformationString(message);
+                }));
             };
             Action start_update = delegate
             {
-                //需要该exe支持，否则将无法是实现自动版本控制
-                string update_file_name = AppDomain.CurrentDomain.BaseDirectory + @"软件自动更新.exe";
-                try
+                Dispatcher.Invoke(new Action(() =>
                 {
-                    System.Diagnostics.Process.Start(update_file_name);
-                    Environment.Exit(0);//退出系统
-                }
-                catch
-                {
-                    MessageBox.Show("更新程序启动失败，请检查文件是否丢失，联系管理员获取。");
-                }
+                    //需要该exe支持，否则将无法是实现自动版本控制
+                    string update_file_name = AppDomain.CurrentDomain.BaseDirectory + @"软件自动更新.exe";
+                    try
+                    {
+                        System.Diagnostics.Process.Start(update_file_name);
+                        Environment.Exit(0);//退出系统
+                    }
+                    catch
+                    {
+                        MessageBox.Show("更新程序启动失败，请检查文件是否丢失，联系管理员获取。");
+                    }
+                }));
             };
             Action thread_finish = delegate
             {
-                UISettings(true);
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    UISettings(true);
+                }));
             };
 
-            //延时
-            Thread.Sleep(400);
 
-            //请求指令头数据，该数据需要更具实际情况更改
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.维护检查);
-            if (result.IsSuccess)
+            // 启动密码验证
+            if (AccountLogin.AccountLoginServer(
+                message_show,
+                start_update,
+                thread_finish,
+                UserName,
+                UserPassword,
+                IsChecked,
+                "wpf"))
             {
-                byte[] temp = Encoding.Unicode.GetBytes(result.Content);
-                //例如返回结果为1说明允许登录，0则说明服务器处于维护中，并将信息显示
-                if (result.Content != "1")
+                //启动主窗口
+                Dispatcher.Invoke(new Action(() =>
                 {
-                    Dispatcher.Invoke(message_show, result.Content.Substring(1));
-                    Dispatcher.Invoke(thread_finish);
+                    DialogResult = true;
                     return;
-                }
+                }));
             }
-            else
-            {
-                //访问失败
-                Dispatcher.Invoke(message_show, result.Message);
-                Dispatcher.Invoke(thread_finish);
-                return;
-            }
-
-
-
-            //检查账户
-            Dispatcher.Invoke(message_show, "正在检查账户...");
-
-            //延时
-            Thread.Sleep(400);
-
-            //===================================================================================
-            //   根据实际情况校验，选择数据库校验或是将用户名密码发至服务器校验
-            //   以下展示了服务器校验的方法，如您需要数据库校验，请删除下面并改成SQL访问验证的方式
-
-            //包装数据
-            JObject json = new JObject
-            {
-                { UserAccount.UserNameText, new JValue(UserName) },
-                { UserAccount.PasswordText, new JValue(UserPassword) },
-                { UserAccount.LoginWayText, new JValue("wpf") }
-            };
-            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.账户检查, json.ToString());
-            if (result.IsSuccess)
-            {
-                //服务器应该返回账户的信息
-                UserAccount account = JObject.Parse(result.Content).ToObject<UserAccount>();
-                if (!account.LoginEnable)
-                {
-                    //不允许登录
-                    Dispatcher.Invoke(message_show, account.ForbidMessage);
-                    Dispatcher.Invoke(thread_finish);
-                    return;
-                }
-                UserClient.UserAccount = account;
-            }
-            else
-            {
-                //访问失败
-                Dispatcher.Invoke(message_show, result.Message);
-                Dispatcher.Invoke(thread_finish);
-                return;
-            }
-
-            //登录成功，进行保存用户名称和密码
-            UserClient.JsonSettings.LoginName = UserName;
-            UserClient.JsonSettings.Password = IsChecked ? UserPassword : "";
-            UserClient.JsonSettings.LoginTime = DateTime.Now;
-            UserClient.JsonSettings.SaveToFile();
-
-
-            //版本验证
-            Dispatcher.Invoke(message_show, "正在验证版本...");
-
-            //延时
-            Thread.Sleep(400);
-
-            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.更新检查);
-            if (result.IsSuccess)
-            {
-                //服务器应该返回服务器的版本号
-                SystemVersion sv = new SystemVersion(result.Content);
-                //系统账户跳过低版本检测
-                if (UserClient.UserAccount.UserName != "admin")
-                {
-                    if (UserClient.CurrentVersion != sv)
-                    {
-                        //保存新版本信息
-                        UserClient.JsonSettings.IsNewVersionRunning = true;
-                        UserClient.JsonSettings.SaveToFile();
-                        //和当前系统版本号不一致，启动更新
-                        Dispatcher.Invoke(start_update);
-                        return;
-                    }
-                }
-                else
-                {
-                    if (UserClient.CurrentVersion < sv)
-                    {
-                        //保存新版本信息
-                        UserClient.JsonSettings.IsNewVersionRunning = true;
-                        UserClient.JsonSettings.SaveToFile();
-                        //和当前系统版本号不一致，启动更新
-                        Dispatcher.Invoke(start_update);
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                //访问失败
-                Dispatcher.Invoke(message_show, result.Message);
-                Dispatcher.Invoke(thread_finish);
-                return;
-            }
-
-
-            //================================================================================
-            //验证结束后，根据需要是否下载服务器的数据，或是等到进入主窗口下载也可以
-            //如果有参数决定主窗口的显示方式，那么必要在下面向服务器请求数据
-            //以下展示了初始化参数的功能
-             Dispatcher.Invoke(message_show, "正在下载参数...");
-
-            //延时
-            Thread.Sleep(400);
-
-
-            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.参数下载);
-            if (result.IsSuccess)
-            {
-                //服务器返回初始化的数据，此处进行数据的提取，有可能包含了多个数据
-                json = Newtonsoft.Json.Linq.JObject.Parse(result.Content);
-                //例如公告数据
-                UserClient.Announcement = SoftBasic.GetValueFromJsonObject(json, nameof(UserClient.Announcement), "");
-
-            }
-            else
-            {
-                //访问失败
-                Dispatcher.Invoke(message_show, result.Message);
-                Dispatcher.Invoke(thread_finish);
-                return;
-            }
-
-            //启动主窗口
-            Dispatcher.Invoke(new Action(() =>
-            {
-                DialogResult = true;
-                return;
-            }));
+            
         }
 
 
         #endregion
+
+        #region User Interface
+
 
         private void UISettings(bool enable)
         {
@@ -302,39 +229,7 @@ namespace 软件系统客户端Wpf
             LoginButton.Focus();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            WindowToolTip.Opacity = 0;
-            TextBlockSoftName.Text = CommonLibrary.Resource.StringResouce.SoftName;
-            TextBlockSoftVersion.Text = UserClient.CurrentVersion.ToString();
-            TextBlockSoftCopyright.Text = $"本软件著作权归{CommonLibrary.Resource.StringResouce.SoftCopyRight}所有";
 
-            
-            // 上次登录为7天以前则清除账户密码
-            if ((DateTime.Now - UserClient.JsonSettings.LoginTime).TotalDays < 7)
-            {
-                //加载数据
-                NameTextBox.Text = UserClient.JsonSettings.LoginName ?? "";
-                PasswordBox.Password = UserClient.JsonSettings.Password ?? "";
-                Remember.IsChecked = UserClient.JsonSettings.Password != "";
-            }
-            //初始化输入焦点
-            if (UserClient.JsonSettings.Password != "") LoginButton.Focus();
-            else if (UserClient.JsonSettings.LoginName != "") PasswordBox.Focus();
-            else NameTextBox.Focus();
-
-
-
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"Palette.txt"))
-            {
-                using (StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"Palette.txt", Encoding.UTF8))
-                {
-                    string temp = sr.ReadToEnd();
-                    MaterialDesignThemes.Wpf.Palette obj = JObject.Parse(temp).ToObject<MaterialDesignThemes.Wpf.Palette>();
-                    new PaletteHelper().ReplacePalette(obj);
-                }
-            }
-        }
 
         private void NameTextBox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -345,5 +240,19 @@ namespace 软件系统客户端Wpf
         {
             if (e.Key == Key.Enter) Button_Click(null, new RoutedEventArgs());
         }
+
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            using (FormShowMachineId form = new FormShowMachineId())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        #endregion
+
+
+
     }
 }

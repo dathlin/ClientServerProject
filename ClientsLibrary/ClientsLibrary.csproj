@@ -49,11 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormDownloading.cs">
+    <Compile Include="AccountSupport\AccountLogin.cs" />
+    <Compile Include="BasicSupport\FormDownloading.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDownloading.Designer.cs">
+    <Compile Include="BasicSupport\FormDownloading.Designer.cs">
       <DependentUpon>FormDownloading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BasicSupport\FormShowMachineId.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSupport\FormShowMachineId.Designer.cs">
+      <DependentUpon>FormShowMachineId.cs</DependentUpon>
     </Compile>
     <Compile Include="LogsSupport\FormLogView.cs">
       <SubType>Form</SubType>
@@ -78,8 +85,11 @@
     <Compile Include="UserPortrait.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormDownloading.resx">
+    <EmbeddedResource Include="BasicSupport\FormDownloading.resx">
       <DependentUpon>FormDownloading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BasicSupport\FormShowMachineId.resx">
+      <DependentUpon>FormShowMachineId.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogsSupport\FormLogView.resx">
       <DependentUpon>FormLogView.cs</DependentUpon>

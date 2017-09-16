@@ -35,7 +35,7 @@ namespace 软件系统客户端模版
             this.textBox_userName = new System.Windows.Forms.TextBox();
             this.textBox_password = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.userButton_login = new UserButton();
+            this.userButton_login = new HslCommunication.Controls.UserButton();
             this.label_version = new System.Windows.Forms.Label();
             this.label_copyright = new System.Windows.Forms.Label();
             this.label_status = new System.Windows.Forms.Label();
@@ -106,6 +106,7 @@ namespace 软件系统客户端模版
             // label_version
             // 
             this.label_version.AutoSize = true;
+            this.label_version.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label_version.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_version.ForeColor = System.Drawing.Color.Gray;
             this.label_version.Location = new System.Drawing.Point(1, 176);
@@ -113,6 +114,7 @@ namespace 软件系统客户端模版
             this.label_version.Size = new System.Drawing.Size(44, 17);
             this.label_version.TabIndex = 6;
             this.label_version.Text = "版本：";
+            this.label_version.Click += new System.EventHandler(this.label_version_Click);
             // 
             // label_copyright
             // 

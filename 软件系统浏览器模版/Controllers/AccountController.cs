@@ -44,7 +44,7 @@ namespace 软件系统浏览器模版.Controllers
         public ActionResult Login(FormCollection fc)
         {
             //请求指令头数据，该数据需要更具实际情况更改
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.维护检查);
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.维护检查);
             if (result.IsSuccess)
             {
                 //例如返回结果为1说明允许登录，0则说明服务器处于维护中，并将信息显示

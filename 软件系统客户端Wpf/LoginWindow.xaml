@@ -88,8 +88,8 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Style="{StaticResource Caption}">版本号：</TextBlock>
-            <TextBlock x:Name="TextBlockSoftVersion" Grid.Column="1" Style="{StaticResource Caption}">V1.0.0</TextBlock>
+            <TextBlock Grid.Column="0" Style="{StaticResource Caption}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown">版本号：</TextBlock>
+            <TextBlock x:Name="TextBlockSoftVersion" Grid.Column="1" Style="{StaticResource Caption}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown">V1.0.0</TextBlock>
             <TextBlock x:Name="TextBlockSoftCopyright" Grid.Column="3" Style="{StaticResource Caption}">本软件著作权归某某所有</TextBlock>
         </Grid>
     </Grid>

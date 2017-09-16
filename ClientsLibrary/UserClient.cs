@@ -38,7 +38,7 @@ namespace ClientsLibrary
         /// <summary>
         /// 服务器的IP地址，默认为127.0.0.1，可用于单机调试，云服务器端：117.48.203.204
         /// </summary>
-        public static string ServerIp { get; } = "127.0.0.1";//用于测试的云服务器地址
+        public static string ServerIp { get; } = "117.48.203.204";//用于测试的云服务器地址
         
 
         /// <summary>

@@ -146,193 +146,75 @@ namespace 软件系统客户端模版
         private void ThreadCheckAccount()
         {
             // 定义委托
+
+            // 消息显示委托
             Action<string> message_show = delegate (string message)
-              {
-                  label_status.Text = message;
-              };
+            {
+                if (IsHandleCreated) Invoke(new Action(() =>
+                {
+                    label_status.Text = message;
+                }));
+            };
+            // 启动更新委托
             Action start_update = delegate
             {
-                // 需要该exe支持，否则将无法是实现自动版本控制
-                string update_file_name = Application.StartupPath + @"\软件自动更新.exe";
-                try
+                if (IsHandleCreated) Invoke(new Action(() =>
                 {
-                    System.Diagnostics.Process.Start(update_file_name);
-                    Environment.Exit(0);//退出系统
-                }
-                catch
-                {
-                    MessageBox.Show("更新程序启动失败，请检查文件是否丢失，联系管理员获取。");
-                }
+                    // 需要该exe支持，否则将无法是实现自动版本控制
+                    string update_file_name = Application.StartupPath + @"\软件自动更新.exe";
+                    try
+                    {
+                        System.Diagnostics.Process.Start(update_file_name);
+                        Environment.Exit(0);//退出系统
+                    }
+                    catch
+                    {
+                        MessageBox.Show("更新程序启动失败，请检查文件是否丢失，联系管理员获取。");
+                    }
+                }));
             };
+            // 结束的控件使能委托
             Action thread_finish = delegate
             {
-                UISettings(true);
+                if (IsHandleCreated) Invoke(new Action(() =>
+                {
+                    UISettings(true);
+                }));
             };
 
-            // 延时
-            Thread.Sleep(200);
-
-            // 请求指令头数据，该数据需要更具实际情况更改
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.维护检查);
-            if(result.IsSuccess)
+            // 启动密码验证
+            if(AccountLogin.AccountLoginServer(
+                message_show,
+                start_update,
+                thread_finish,
+                textBox_userName.Text,
+                textBox_password.Text,
+                checkBox_remeber.Checked,
+                "winform"))
             {
-                byte[] temp = Encoding.Unicode.GetBytes(result.Content);
-                // 例如返回结果为1说明允许登录，0则说明服务器处于维护中，并将信息显示
-                if (result.Content != "1")
+                // 启动主窗口
+                if (IsHandleCreated) Invoke(new Action(() =>
                 {
-                    if (IsHandleCreated) Invoke(message_show, result.Content.Substring(1));
-                    if (IsHandleCreated) Invoke(thread_finish);
+                    DialogResult = DialogResult.OK;
                     return;
-                }
+                }));
             }
-            else
-            {
-                // 访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Message);
-                if (IsHandleCreated) Invoke(thread_finish);
-                return;
-            }
-
-            
-
-            // 检查账户
-            if (IsHandleCreated) Invoke(message_show, "正在检查账户...");
-            else return;
-
-            // 延时
-            Thread.Sleep(200);
-
-            //===================================================================================
-            //   根据实际情况校验，选择数据库校验或是将用户名密码发至服务器校验
-            //   以下展示了服务器校验的方法，如您需要数据库校验，请删除下面并改成SQL访问验证的方式
-
-            // 包装数据
-            JObject json = new JObject
-            {
-                { UserAccount.UserNameText, new JValue(textBox_userName.Text) },
-                { UserAccount.PasswordText, new JValue(textBox_password.Text) },
-                { UserAccount.LoginWayText, new JValue("winform") },
-                { UserAccount.DeviceUniqueID, new JValue(UserClient.JsonSettings.SystemInfo) }
-            };
-            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.账户检查, json.ToString());
-            if (result.IsSuccess)
-            {
-                // 服务器应该返回账户的信息
-                UserAccount account = JObject.Parse(result.Content).ToObject<UserAccount>();
-                if(!account.LoginEnable)
-                {
-                    // 不允许登录
-                    if (IsHandleCreated) Invoke(message_show, account.ForbidMessage);
-                    if (IsHandleCreated) Invoke(thread_finish);
-                    return;
-                }
-                UserClient.UserAccount = account;
-            }
-            else
-            {
-                // 访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Message);
-                if (IsHandleCreated) Invoke(thread_finish);
-                return;
-            }
-
-            // 登录成功，进行保存用户名称和密码
-            UserClient.JsonSettings.LoginName = textBox_userName.Text;
-            UserClient.JsonSettings.Password = checkBox_remeber.Checked ? textBox_password.Text : "";
-            UserClient.JsonSettings.LoginTime = DateTime.Now;
-            UserClient.JsonSettings.SaveToFile();
-
-
-            // 版本验证
-            if (IsHandleCreated) Invoke(message_show, "正在验证版本...");
-            else return;
-
-            // 延时
-            Thread.Sleep(200);
-
-            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.更新检查);
-            if (result.IsSuccess)
-            {
-                // 服务器应该返回服务器的版本号
-                SystemVersion sv = new SystemVersion(result.Content);
-                // 系统账户跳过低版本检测，该做法存在一定的风险，需要开发者仔细确认安全隐患
-                if (UserClient.UserAccount.UserName != "admin")
-                {
-                    if (UserClient.CurrentVersion != sv)
-                    {
-                        // 保存新版本信息
-                        UserClient.JsonSettings.IsNewVersionRunning = true;
-                        UserClient.JsonSettings.SaveToFile();
-                        // 和当前系统版本号不一致，启动更新
-                        if (IsHandleCreated) Invoke(start_update);
-                        return;
-                    }
-                }
-                else
-                {
-                    if (UserClient.CurrentVersion < sv)
-                    {
-                        // 保存新版本信息
-                        UserClient.JsonSettings.IsNewVersionRunning = true;
-                        UserClient.JsonSettings.SaveToFile();
-                        // 和当前系统版本号不一致，启动更新
-                        if (IsHandleCreated) Invoke(start_update);
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                // 访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Message);
-                if (IsHandleCreated) Invoke(thread_finish);
-                return;
-            }
-
-
-            //
-            // 验证结束后，根据需要是否下载服务器的数据，或是等到进入主窗口下载也可以
-            // 如果有参数决定主窗口的显示方式，那么必要在下面向服务器请求数据
-            // 以下展示了初始化参数的功能
-
-            if (IsHandleCreated) Invoke(message_show, "正在下载参数...");
-            else return;
-
-            // 延时
-            Thread.Sleep(200);
-
-
-            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.参数下载);
-            if(result.IsSuccess)
-            {
-                // 服务器返回初始化的数据，此处进行数据的提取，有可能包含了多个数据
-                json = JObject.Parse(result.Content);
-                // 例如公告数据
-                UserClient.Announcement = SoftBasic.GetValueFromJsonObject(json, nameof(UserClient.Announcement), "");
-                if (json[nameof(UserClient.SystemFactories)] != null)
-                {
-                    UserClient.SystemFactories = json[nameof(UserClient.SystemFactories)].ToObject<List<string>>();
-                }
-            }
-            else
-            {
-                // 访问失败
-                if (IsHandleCreated) Invoke(message_show, result.Message);
-                if (IsHandleCreated) Invoke(thread_finish);
-                return;
-            }
-
-            // 启动主窗口
-            if (IsHandleCreated) Invoke(new Action(() =>
-            {
-                DialogResult = DialogResult.OK;
-                return;
-            }));
         }
+
 
 
         #endregion
 
+        #region 显示本机ID
+
+        private void label_version_Click(object sender, EventArgs e)
+        {
+            using (FormShowMachineId form = new FormShowMachineId())
+            {
+                form.ShowDialog();
+            }
+        }
+        #endregion
 
     }
 }

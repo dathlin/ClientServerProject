@@ -48,8 +48,7 @@ namespace CommonLibrary
         /// </summary>
         public string Announcement { get; set; } = "测试公告";
         /// <summary>
-        /// 是否允许账户登录
-        /// 超级管理员账户除外
+        /// 是否允许账户登录，超级管理员账户除外
         /// </summary>
         public bool Can_Account_Login { get; set; } = true;
         /// <summary>
