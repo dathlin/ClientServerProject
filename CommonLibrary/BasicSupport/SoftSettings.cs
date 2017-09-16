@@ -38,6 +38,8 @@ namespace CommonLibrary
     /// </summary>
     public class ServerSettings : SoftFileSaveBase
     {
+        #region Public Property
+        
         /// <summary>
         /// 系统的版本号，可以用来验证版本更新的依据
         /// 初始化1.0.0
@@ -56,16 +58,87 @@ namespace CommonLibrary
         /// </summary>
         public string Account_Forbidden_Reason { get; set; } = "系统处于维护中，请稍后登录。";
         /// <summary>
-        /// 系统的所属分厂
+        /// 系统的所有分厂信息
         /// </summary>
         public List<string> SystemFactories { get; set; } = new List<string>()
         {
             "分厂示例1","分厂示例2"
         };
 
+        #endregion
+
+        #region TrustedClientAuthentication
+        
+        /// <summary>
+        /// 是否开启仅信任客户端验证
+        /// </summary>
+        public bool WhetherToEnableTrustedClientAuthentication { get; set; } = false;
+
+        /// <summary>
+        /// 信任的客户端列表
+        /// </summary>
+        public List<string> TrustedClientList { get; set; } = new List<string>();
+
+        /// <summary>
+        /// 列表锁
+        /// </summary>
+        private HslCommunication.SimpleHybirdLock hybirdLock = new HslCommunication.SimpleHybirdLock();
+
+        /// <summary>
+        /// 判断一个客户端的ID能否登录到系统
+        /// </summary>
+        /// <param name="machineId"></param>
+        /// <returns></returns>
+        public bool CanClientLogin(string machineId)
+        {
+            bool result = false;
+            hybirdLock.Enter();
+            result = TrustedClientList.Contains(machineId);
+            hybirdLock.Leave();
+            return result;
+        }
+
+        /// <summary>
+        /// 新增一个客户端ID到信任列表中，新增成功True，原来已经存在False
+        /// </summary>
+        /// <param name="machineId"></param>
+        /// <returns></returns>
+        public bool AddTrustedClient(string machineId)
+        {
+            bool result = false;
+            hybirdLock.Enter();
+            if(!TrustedClientList.Contains(machineId))
+            {
+                TrustedClientList.Add(machineId);
+                result = true;
+            }
+            hybirdLock.Leave();
+            return result;
+        }
+        /// <summary>
+        /// 从信任的列表中删除一个存在的客户端ID
+        /// </summary>
+        /// <param name="machineId"></param>
+        public bool DeleteTrustedClient(string machineId)
+        {
+            bool result = false;
+            hybirdLock.Enter();
+            if (TrustedClientList.Contains(machineId))
+            {
+                TrustedClientList.Remove(machineId);
+                result = true;
+            }
+            hybirdLock.Leave();
+            return result;
+        }
+        
+
+        #endregion
 
 
 
+
+        #region Override Method
 
 
         /// <summary>
@@ -80,7 +153,9 @@ namespace CommonLibrary
                 { nameof(Announcement), new JValue(Announcement) },
                 { nameof(Can_Account_Login), new JValue(Can_Account_Login) },
                 { nameof(Account_Forbidden_Reason), new JValue(Account_Forbidden_Reason) },
-                { nameof(SystemFactories), new JArray(SystemFactories) }
+                { nameof(SystemFactories), new JArray(SystemFactories) },
+                { nameof(WhetherToEnableTrustedClientAuthentication),new JValue(WhetherToEnableTrustedClientAuthentication) },
+                { nameof(TrustedClientList),new JArray(TrustedClientList) }
             };
             return json.ToString();
         }
@@ -91,12 +166,16 @@ namespace CommonLibrary
         public override void LoadByString(string content)
         {
             JObject json = JObject.Parse(content);
-            SystemVersion = new SystemVersion(json.Property(nameof(SystemVersion)).Value.Value<string>());
-            Announcement = json.Property(nameof(Announcement)).Value.Value<string>();
+            SystemVersion = new SystemVersion(SoftBasic.GetValueFromJsonObject(json, nameof(SystemVersion), "1.0.0"));
+            Announcement = SoftBasic.GetValueFromJsonObject(json, nameof(Announcement), Announcement);
             Can_Account_Login = SoftBasic.GetValueFromJsonObject(json, nameof(Can_Account_Login), Can_Account_Login);
             Account_Forbidden_Reason = SoftBasic.GetValueFromJsonObject(json, nameof(Account_Forbidden_Reason), Account_Forbidden_Reason);
             SystemFactories = JArray.Parse(SoftBasic.GetValueFromJsonObject(json, nameof(SystemFactories), "[]")).ToObject<List<string>>();
+            WhetherToEnableTrustedClientAuthentication = SoftBasic.GetValueFromJsonObject(json, nameof(WhetherToEnableTrustedClientAuthentication), false);
+            TrustedClientList = JArray.Parse(SoftBasic.GetValueFromJsonObject(json, nameof(TrustedClientList), "[]")).ToObject<List<string>>();
         }
+
+        #endregion
 
     }
 
@@ -113,6 +192,9 @@ namespace CommonLibrary
         {
             SystemInfo = SoftAuthorize.GetInfo();
         }
+
+
+
         /// <summary>
         /// 指示系统是否是更新后第一次运行
         /// </summary>
@@ -141,7 +223,10 @@ namespace CommonLibrary
         public string SystemInfo { get; private set; }
 
 
-        
+        #region Override Method
+
+
+
         public override string ToSaveString()
         {
             JObject json = new JObject();
@@ -176,10 +261,16 @@ namespace CommonLibrary
         {
             LoadByFile(m => SoftSecurity.MD5Decrypt(m, CommonLibrary.Security));
         }
+        /// <summary>
+        /// 使用指定的加密实现数据加密
+        /// </summary>
         public override void SaveToFile()
         {
             SaveToFile(m => SoftSecurity.MD5Encrypt(m, CommonLibrary.Security));
         }
 
+
+
+        #endregion
     }
 }
