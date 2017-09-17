@@ -62,6 +62,12 @@
     <Compile Include="BasicSupport\FormShowMachineId.Designer.cs">
       <DependentUpon>FormShowMachineId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Configuration\ListConfiguration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Configuration\ListConfiguration.Designer.cs">
+      <DependentUpon>ListConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Configuration\FormConfiguration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BasicSupport\FormShowMachineId.resx">
       <DependentUpon>FormShowMachineId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\ListConfiguration.resx">
+      <DependentUpon>ListConfiguration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\FormConfiguration.resx">
       <DependentUpon>FormConfiguration.cs</DependentUpon>

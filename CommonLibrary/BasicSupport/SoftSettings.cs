@@ -36,7 +36,7 @@ namespace CommonLibrary
     /// <summary>
     /// 服务器的常用参数保存，包含了版本号，公告，是否允许登录，不能登录说明
     /// </summary>
-    public class ServerSettings : SoftFileSaveBase
+    public sealed class ServerSettings : SoftFileSaveBase
     {
         #region Public Property
         
@@ -191,7 +191,7 @@ namespace CommonLibrary
     /// <summary>
     /// 用户客户端存储本地JSON数据的类，包含了所有需要存储的信息
     /// </summary>
-    public class JsonSettings : SoftFileSaveBase
+    public sealed class JsonSettings : SoftFileSaveBase
     {
         #region Constructor
         
