@@ -2132,80 +2132,36 @@
             刷新客户端的文件信息
             </summary>
         </member>
-        <member name="T:HslCommunication.Enthernet.FileClient">
+        <member name="T:HslCommunication.Enthernet.FileClientBase">
             <summary>
-            文件传送中的客户端类
+            文件传输客户端基类
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileClient.DeleteFile(System.String,System.Int32,System.String)">
+        <member name="P:HslCommunication.Enthernet.FileClientBase.ServerIpEndPoint">
+            <summary>
+            服务器端的文件管理引擎终结点
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.FileClientBase.DeleteFileBase(System.String)">
             <summary>
             删除服务器上的文件
             </summary>
-            <param name="serverIp"></param>
-            <param name="serverPort"></param>
-            <param name="fileName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileClient.DeleteFile(System.Net.IPEndPoint,System.String)">
-            <summary>
-            删除服务器上的文件
-            </summary>
-            <param name="iPEndPoint">服务器的终结点</param>
             <param name="fileName">文件的名称</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileClient.DownloadFile(System.String,System.Int32,System.String,System.Action{System.Int64,System.Int64},System.String)">
+        <member name="M:HslCommunication.Enthernet.FileClientBase.DownloadFileBase(System.String,System.Action{System.Int64,System.Int64},System.String)">
             <summary>
-            下载文件信息
+            基础下载文件信息
             </summary>
-            <param name="serverIp"></param>
-            <param name="serverPort"></param>
-            <param name="fileName"></param>
-            <param name="processReport"></param>
-            <param name="fileSaveName"></param>
+            <param name="fileName">服务器的文件名称</param>
+            <param name="processReport">下载的进度报告</param>
+            <param name="fileSaveName">本地保存的文件名称，包含完整路径名</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileClient.DownloadFile(System.Net.IPEndPoint,System.String,System.Action{System.Int64,System.Int64},System.String)">
-            <summary>
-            下载文件信息
-            </summary>
-            <param name="iPEndPoint"></param>
-            <param name="fileName"></param>
-            <param name="processReport"></param>
-            <param name="fileSaveName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileClient.UploadFileAdvanced(System.Net.IPEndPoint,System.String,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
-            <summary>
-            上传文件给文件管理服务器
-            </summary>
-            <param name="iPEndPoint"></param>
-            <param name="fileName">本地完整路径的文件名</param>
-            <param name="serverName">文件名称</param>
-            <param name="factory">工厂大类，第一级大类</param>
-            <param name="group">类别小类，第二级分类</param>
-            <param name="id">标识号类，第三级分类</param>
-            <param name="processReport">汇报进度</param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileClient.UploadFile(System.String,System.Int32,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
+        <member name="M:HslCommunication.Enthernet.FileClientBase.UploadFileBase(System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
             <summary>
             上传文件给服务器
             </summary>
-            <param name="serverIp">服务器的ip地址</param>
-            <param name="serverPort">服务器的端口号</param>
-            <param name="fileName">本地完整路径的文件名</param>
-            <param name="serverName">在服务器保存的文件名，不包含驱动器路径</param>
-            <param name="fileTag"></param>
-            <param name="fileUpload"></param>
-            <param name="processReport">汇报进度</param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileClient.UploadFile(System.Net.IPEndPoint,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
-            <summary>
-            上传文件给服务器
-            </summary>
-            <param name="iPEndPoint">远程终结点</param>
             <param name="fileName">本地完整路径的文件名</param>
             <param name="serverName">在服务器保存的文件名，不包含驱动器路径</param>
             <param name="fileTag">文件的描述</param>
@@ -2213,7 +2169,97 @@
             <param name="processReport">汇报进度</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileClient.DownloadPathFileNames(System.Net.IPEndPoint,System.String[]@,System.String,System.String,System.String)">
+        <member name="T:HslCommunication.Enthernet.SimpleFileClient">
+            <summary>
+            共享文件客户端类，负责共享文件的文件上传，下载，删除等等操作
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.SimpleFileClient.DeleteFile(System.String)">
+            <summary>
+            删除服务器的文件操作
+            </summary>
+            <param name="fileName">文件名称，带后缀</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.SimpleFileClient.DownloadFile(System.String,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            下载服务器的文件到本地的文件操作
+            </summary>
+            <param name="fileName">文件名称，带后缀</param>
+            <param name="processReport">下载的进度报告</param>
+            <param name="fileSaveName">准备本地保存的名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.SimpleFileClient.UploadFile(System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
+            <summary>
+            上传本地的文件到服务器操作
+            </summary>
+            <param name="fileName">本地的完整路径的文件名称</param>
+            <param name="serverName"></param>
+            <param name="fileTag"></param>
+            <param name="fileUpload"></param>
+            <param name="processReport"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HslCommunication.Enthernet.AdvancedFileClient">
+            <summary>
+            负责分类文件传输的客户端，用来上传，下载信息
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.DeleteFile(System.String,System.String,System.String,System.String)">
+            <summary>
+            删除服务器的文件操作
+            </summary>
+            <param name="fileName">文件名称，带后缀</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.DownloadFile(System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            下载服务器的文件到本地的文件操作
+            </summary>
+            <param name="fileName">文件名称，带后缀</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
+            <param name="processReport">下载的进度报告</param>
+            <param name="fileSaveName">准备本地保存的名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.UploadFile(System.String,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
+            <summary>
+            上传本地的文件到服务器操作
+            </summary>
+            <param name="fileName">本地的完整路径的文件名称</param>
+            <param name="serverName">服务器存储的文件名称，带后缀</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
+            <param name="processReport">上传的进度报告</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.TranslateFileName(System.String,System.String,System.String,System.String)">
+            <summary>
+            根据三种分类信息，还原成在服务器的相对路径，包含文件
+            </summary>
+            <param name="fileName">文件名称，包含后缀名</param>
+            <param name="factory">第一类</param>
+            <param name="group">第二类</param>
+            <param name="id">第三类</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.TranslatePathName(System.String,System.String,System.String)">
+            <summary>
+            根据三种分类信息，还原成在服务器的相对路径，仅仅路径
+            </summary>
+            <param name="factory">第一类</param>
+            <param name="group">第二类</param>
+            <param name="id">第三类</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.DownloadPathFileNames(System.Net.IPEndPoint,System.String[]@,System.String,System.String,System.String)">
             <summary>
             获取指定路径下的所有的文档
             </summary>
@@ -2226,7 +2272,7 @@
         </member>
         <member name="T:HslCommunication.Enthernet.AdvancedFileServer">
             <summary>
-            文件传送类服务器，仅仅负责数据传送部分，不负责数据库的存储
+            文件管理类服务器，负责服务器所有分类文件的管理，仅仅负责本地文件的存储
             </summary>
         </member>
         <member name="M:HslCommunication.Enthernet.AdvancedFileServer.ThreadPoolLogin(System.Object)">
@@ -2772,32 +2818,26 @@
             上传或下载的控件
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileOperateControl.#ctor(HslCommunication.LogNet.ILogNet,System.Guid,System.Net.IPEndPoint,System.String,System.String,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.FileOperateControl.#ctor(HslCommunication.Enthernet.AdvancedFileClient,System.String,System.String,System.String,System.String)">
             <summary>
             上传的实例化方法
             </summary>
-            <param name="logNet">日志组件</param>
-            <param name="token">网络令牌</param>
-            <param name="endpoint">服务器的端口地址</param>
-            <param name="filepath">完整的文件路径</param>
+            <param name="advancedFile">客户端文件传送引擎</param>
+            <param name="filepath">完整的包含路径的本地文件路径</param>
             <param name="factory">文件所属的工厂</param>
             <param name="group">文件所属的分类</param>
             <param name="id">文件所属的设备ID</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileOperateControl.#ctor(HslCommunication.LogNet.ILogNet,System.Guid,System.Net.IPEndPoint,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.FileOperateControl.#ctor(HslCommunication.Enthernet.AdvancedFileClient,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             下载的实例化方法
             </summary>
-            <param name="logNet">日志组件</param>
-            <param name="token">网络令牌</param>
-            <param name="endpoint">服务器的端口地址</param>
-            <param name="filepath">服务器的文件路径</param>
+            <param name="advancedFile">客户端文件传送引擎</param>
+            <param name="fileName">服务器的文件名称，包含后缀</param>
+            <param name="factory">文件所属的第一大类</param>
+            <param name="group">文件所属的第二大类</param>
+            <param name="id">文件所属的第三大类</param>
             <param name="savepath">本地保存的路径</param>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileOperateControl.IpEndServer">
-            <summary>
-            服务器地址终结点
-            </summary>
         </member>
         <member name="P:HslCommunication.Enthernet.FileOperateControl.IsOperateFinished">
             <summary>
@@ -2861,26 +2901,25 @@
             用于文件上传或下载的窗口
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.FormFileOperate.#ctor(System.Guid,HslCommunication.LogNet.ILogNet,System.Net.IPEndPoint,System.String[],System.String,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.FormFileOperate.#ctor(HslCommunication.Enthernet.AdvancedFileClient,System.String[],System.String,System.String,System.String)">
             <summary>
             实例化一个文件上传的窗口
             </summary>
-            <param name="token">网络令牌</param>
-            <param name="logNet">日志组件</param>
-            <param name="endpoint">服务器远程地址</param>
+            <param name="advancedFile">客户端的文件引擎</param>
             <param name="files">等待上传的文件数组</param>
-            <param name="factory">工厂大类</param>
-            <param name="group">分类</param>
-            <param name="id">设备序号</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.FormFileOperate.#ctor(System.Guid,HslCommunication.LogNet.ILogNet,System.Net.IPEndPoint,System.String[],System.String)">
+        <member name="M:HslCommunication.Enthernet.FormFileOperate.#ctor(HslCommunication.Enthernet.AdvancedFileClient,System.String[],System.String,System.String,System.String,System.String)">
             <summary>
             实例化一个文件下载的窗口
             </summary>
-            <param name="token">网络令牌</param>
-            <param name="logNet">日志组件</param>
-            <param name="endpoint">服务器的远程地址</param>
+            <param name="advancedFile">客户端的文件传送引擎</param>
             <param name="files">等待下载的文件</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
             <param name="savepath">保存路径</param>
         </member>
         <member name="P:HslCommunication.Enthernet.FormFileOperate.is_down_file">

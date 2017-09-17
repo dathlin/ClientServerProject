@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using HslCommunication;
 using System.Threading;
 using System.IO;
+using System.Net;
 
 namespace 软件系统客户端Wpf.Views
 {
@@ -29,10 +30,11 @@ namespace 软件系统客户端Wpf.Views
         {
             InitializeComponent();
 
-            fileClient = new FileClient()
+            fileClient = new SimpleFileClient()
             {
                 KeyToken = CommonLibrary.CommonHeadCode.KeyToken,
                 LogNet = UserClient.LogNet,
+                ServerIpEndPoint =new IPEndPoint(IPAddress.Parse(UserClient.ServerIp),CommonLibrary.CommonLibrary.Port_Advanced_File_Server)
             };
         }
 
@@ -95,7 +97,7 @@ namespace 软件系统客户端Wpf.Views
             }
 
             //确认删除
-            OperateResultString result = fileClient.DeleteFile(UserClient.ServerIp, CommonLibrary.CommonLibrary.Port_Share_File, Hufile.FileName);
+            OperateResult result = fileClient.DeleteFile(Hufile.FileName);
             if(result.IsSuccess)
             {
                 MessageBox.Show("删除成功！");
@@ -126,7 +128,7 @@ namespace 软件系统客户端Wpf.Views
             save_file_name += "\\" + Hufile.FileName;
 
 
-            OperateResultString result = fileClient.DownloadFile(UserClient.ServerIp, CommonLibrary.CommonLibrary.Port_Share_File, Hufile.FileName,
+            OperateResult result = fileClient.DownloadFile(Hufile.FileName,
                 (m, n) =>
                 {
                     Dispatcher.Invoke(new Action(() =>
@@ -155,6 +157,6 @@ namespace 软件系统客户端Wpf.Views
 
 
 
-        FileClient fileClient;
+        SimpleFileClient fileClient;
     }
 }

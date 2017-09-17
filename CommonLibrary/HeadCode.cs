@@ -19,7 +19,7 @@ namespace CommonLibrary
 
 
         /// <summary>
-        /// 用于同步和异步的网络的身份令牌，提升安全性
+        /// 用于整个网络服务交互的身份令牌，可有效的防止来自网络的攻击，重新生成令牌后就无法更改，否则不支持自动升级
         /// </summary>
         public static Guid KeyToken { get; set; } = new Guid("1275BB9A-14B2-4A96-9673-B0AF0463D474");
 

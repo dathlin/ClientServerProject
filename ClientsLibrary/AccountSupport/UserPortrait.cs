@@ -12,6 +12,16 @@ using System.Windows.Forms;
 
 namespace ClientsLibrary
 {
+
+    /********************************************************************************
+     * 
+     *    时间：2017年9月17日 16:09:05
+     *    用户头像类，负责更换头像，下载头像，以及初始化登录操作
+     * 
+     *********************************************************************************/
+
+
+
     /// <summary>
     /// 头像管理类
     /// </summary>
@@ -62,8 +72,8 @@ namespace ClientsLibrary
                     bitmap300.Dispose();
                     bitmap32.Dispose();
 
-                    using (FormFileOperate ffo = new FormFileOperate(CommonHeadCode.KeyToken,UserClient.LogNet, new System.Net.IPEndPoint(
-                        System.Net.IPAddress.Parse(UserClient.ServerIp), CommonLibrary.CommonLibrary.Port_Portrait_Server),
+                    using (FormFileOperate ffo = new FormFileOperate(
+                        UserClient.Net_File_Client, 
                         new string[]
                         {
                             path300,
@@ -131,6 +141,7 @@ namespace ClientsLibrary
         /// <param name="path"></param>
         public void DownloadUserPortraint(string path)
         {
+
             OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.下载小头, UserClient.UserAccount.UserName);
             if (result.IsSuccess)
             {
@@ -150,24 +161,47 @@ namespace ClientsLibrary
         public void ThreadPoolDownloadSizeLarge()
         {
             string path = FileSavePath;
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.下载大头, UserClient.UserAccount.UserName, null, null);
-            if (result.IsSuccess)
+            string path300 = path + @"\" + PortraitSupport.LargePortrait;
+
+            // 利用客户端文件引擎去下载文件
+            OperateResult operateResult = UserClient.Net_File_Client.DownloadFile(
+                PortraitSupport.LargePortrait,
+                "Files",
+                "Portrait",
+                UserClient.UserAccount.UserName,
+                null,
+                path300
+                );
+
+
+            if(operateResult.IsSuccess)
             {
-                if (result.Content[0] == 'Y')
-                {
-                    byte[] data = Convert.FromBase64String(result.Content.Substring(1));
-                    string path32 = path + @"\" + PortraitSupport.LargePortrait;
-                    System.IO.File.WriteAllBytes(path32, data);
-                    System.Diagnostics.Process.Start(path32);
-                    data = null;
-                }
+                System.Diagnostics.Process.Start(path300);
             }
+
             Thread.Sleep(1000);
         }
 
 
         #endregion
-        
+
+        #region Public Method
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GetLargePortraitFileName()
+        {
+            return FileSavePath + @"\" + PortraitSupport.LargePortrait;
+        }
+
+        public string GetSmallPortraitFileName()
+        {
+            return FileSavePath + @"\" + PortraitSupport.SmallPortrait;
+        }
+
+        #endregion
+
         #region Private Members
 
         /// <summary>

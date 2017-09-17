@@ -79,11 +79,14 @@ namespace CommonLibrary
         /// </summary>
         public static int Port_Udp_Server { get; } = 32566;
         /// <summary>
-        /// 头像管理的服务器端口
+        /// 文件管理的服务器端口
         /// </summary>
-        public static int Port_Portrait_Server { get; } = 24672;
+        public static int Port_Advanced_File_Server { get; } = 24672;
         #endregion
         
+
+
+
         /// <summary>
         /// 整个系统的加密解密密码
         /// </summary>

@@ -5,6 +5,7 @@ using System.Text;
 using HslCommunication.Enthernet;
 using HslCommunication.BasicFramework;
 using CommonLibrary;
+using System.Net;
 
 namespace ClientsLibrary
 {
@@ -48,6 +49,7 @@ namespace ClientsLibrary
         
 
 
+
         /// <summary>
         /// 所有版本更新信息的对象
         /// </summary>
@@ -84,7 +86,7 @@ namespace ClientsLibrary
         /// <summary>
         /// 用于访问服务器数据的网络对象类，必须修改这个端口参数，否则运行失败
         /// </summary>
-        public static NetSimplifyClient Net_simplify_client = new NetSimplifyClient(
+        public static NetSimplifyClient Net_simplify_client { get; set; } = new NetSimplifyClient(
             new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
                 CommonLibrary.CommonLibrary.Port_Second_Net))
         {
@@ -95,11 +97,22 @@ namespace ClientsLibrary
         /// <summary>
         /// 用于使用udp向服务器进行发送即时可丢失数据的对象
         /// </summary>
-        public static NetUdpClient Net_Udp_Client = new NetUdpClient(
+        public static NetUdpClient Net_Udp_Client { get; set; } = new NetUdpClient(
             new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
                 CommonLibrary.CommonLibrary.Port_Udp_Server))
         {
             KeyToken = CommonHeadCode.KeyToken,
+        };
+
+
+        /// <summary>
+        /// 用于特殊用途的文件上传下载操作
+        /// </summary>
+        public static AdvancedFileClient Net_File_Client { get; set; } = new AdvancedFileClient()
+        {
+            KeyToken = CommonHeadCode.KeyToken,
+            LogNet = LogNet,
+            ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), CommonLibrary.CommonLibrary.Port_Advanced_File_Server)
         };
 
         /// <summary>

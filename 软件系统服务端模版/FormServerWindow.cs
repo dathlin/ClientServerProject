@@ -60,6 +60,8 @@ namespace 软件系统服务端模版
 {
     public partial class FormServerWindow : Form
     {
+        #region Constructor
+        
         public FormServerWindow()
         {
             InitializeComponent();
@@ -75,8 +77,8 @@ namespace 软件系统服务端模版
             }
         }
 
-
-
+        #endregion
+        
         #region 窗口属性+窗口方法
 
         /// <summary>
@@ -210,7 +212,6 @@ namespace 软件系统服务端模版
                 Net_Simplify_Server_Initialization();//同步网络初始化
                 Net_Socket_Server_Initialization();//异步网络初始化
                 Net_SoftUpdate_Server_Initialization();//软件更新引擎初始化
-                Net_File_Update_Initialization();//软件异地更新引擎初始化
                 Simple_File_Initiaization();//共享文件引擎初始化
                 Net_File_Portrait_Initialization();//头像文件管理服务
                 Net_Udp_Server_Initialization();//UDP引擎服务初始化
@@ -354,30 +355,45 @@ namespace 软件系统服务端模版
         }
 
         #endregion
+        
+        #region 高级文件引擎管理块，多功能
 
-        #region 软件异地更新文件传送引擎
+
+        /**************************************************************************************
+         * 
+         *    本文件管理器引擎目前主要实现3个大功能
+         *    1. 允许客户端上传服务器的客户端文件，用来提供软件自动更新使用的
+         *    2. 用于管理客户端的头像文件存储服务
+         *    3. 用于管理每个账户的私有文件存储服务
+         * 
+         **************************************************************************************/
+         
+
         /// <summary>
-        /// 用于局域网异地更新服务器的客户端程序的引擎，仅限客户端
+        /// 一个高级的文件管理服务器引擎
         /// </summary>
-        private AdvancedFileServer net_file_update = new AdvancedFileServer();
+        private AdvancedFileServer net_file_Advanced = new AdvancedFileServer();
+
         /// <summary>
-        /// 软件异地更新的初始化，如不需要可以不启动，该功能支持发送客户端文件至服务器实现覆盖更新
+        /// 初始化高级的文件管理引擎
         /// </summary>
-        private void Net_File_Update_Initialization()
+        private void Net_File_Portrait_Initialization()
         {
             try
             {
-                net_file_update.FilesDirectoryPath = Application.StartupPath + @"\ClientFiles";//服务器客户端需要更新的路径，与上述一致
-                net_file_update.FilesDirectoryPathTemp= Application.StartupPath + @"\Temp";
-                net_file_update.LogNet = new LogNetSingle(LogSavePath + @"\update_file_log.txt");
-                net_file_update.KeyToken = CommonHeadCode.KeyToken;
-                net_file_update.ServerStart(CommonLibrary.CommonLibrary.Port_Update_Remote);
+                net_file_Advanced.FilesDirectoryPath = Application.StartupPath;
+                net_file_Advanced.FilesDirectoryPathTemp = Application.StartupPath + @"\Temp";
+                net_file_Advanced.LogNet = new LogNetSingle(LogSavePath + @"\Advanced_file_log.txt");
+                net_file_Advanced.KeyToken = CommonHeadCode.KeyToken;
+                net_file_Advanced.ServerStart(CommonLibrary.CommonLibrary.Port_Advanced_File_Server);
             }
             catch (Exception ex)
             {
                 SoftBasic.ShowExceptionMessage(ex);
             }
         }
+
+
         #endregion
 
         #region 同步数据传送引擎
@@ -615,18 +631,6 @@ namespace 软件系统服务端模版
                     net_simplify_server.SendMessage(state, customer, "Y" + Convert.ToBase64String(System.IO.File.ReadAllBytes(fileName)));
                 }
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.下载大头)
-            {
-                string fileName = Application.StartupPath + @"\Files\Portrait\" + data + @"\" + PortraitSupport.LargePortrait;
-                if (string.IsNullOrEmpty(fileName))
-                {
-                    net_simplify_server.SendMessage(state, customer, "N");
-                }
-                else
-                {
-                    net_simplify_server.SendMessage(state, customer, "Y" + Convert.ToBase64String(System.IO.File.ReadAllBytes(fileName)));
-                }
-            }
             else if (customer == CommonHeadCode.SimplifyHeadCode.上传分厂)
             {
                 try
@@ -776,13 +780,13 @@ namespace 软件系统服务端模版
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.头像日志查看)
             {
-                LogNetSingle logNet = (LogNetSingle)net_file_Portrait.LogNet;
+                LogNetSingle logNet = (LogNetSingle)net_file_Advanced.LogNet;
                 net_simplify_server.SendMessage(state, 0, logNet.GetAllSavedLog());
                 RuntimeLogHelper.WriteInfo("头像日志查看");
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.头像日志清空)
             {
-                if (net_file_Portrait.LogNet is LogNetSingle logNet)
+                if (net_file_Advanced.LogNet is LogNetSingle logNet)
                 {
                     logNet.ClearLog();
                 }
@@ -1358,33 +1362,7 @@ namespace 软件系统服务端模版
 
         #endregion
 
-        #region 头像管理块
 
-        /// <summary>
-        /// 用于用户账户的头像文件保存
-        /// </summary>
-        private AdvancedFileServer net_file_Portrait = new AdvancedFileServer();
-        /// <summary>
-        /// 用户头像管理服务的引擎
-        /// </summary>
-        private void Net_File_Portrait_Initialization()
-        {
-            try
-            {
-                net_file_Portrait.FilesDirectoryPath = Application.StartupPath;
-                net_file_Portrait.FilesDirectoryPathTemp= Application.StartupPath + @"\Temp";
-                net_file_Portrait.LogNet =new LogNetSingle(LogSavePath + @"\Portrait_file_log.txt");
-                net_file_Portrait.KeyToken = CommonHeadCode.KeyToken;
-                net_file_Portrait.ServerStart(CommonLibrary.CommonLibrary.Port_Portrait_Server);
-            }
-            catch (Exception ex)
-            {
-                SoftBasic.ShowExceptionMessage(ex);
-            }
-        }
-
-
-        #endregion
 
 
     }
