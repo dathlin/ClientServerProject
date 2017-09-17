@@ -134,10 +134,7 @@ namespace CommonLibrary
         
 
         #endregion
-
-
-
-
+        
         #region Override Method
 
 
@@ -153,9 +150,9 @@ namespace CommonLibrary
                 { nameof(Announcement), new JValue(Announcement) },
                 { nameof(Can_Account_Login), new JValue(Can_Account_Login) },
                 { nameof(Account_Forbidden_Reason), new JValue(Account_Forbidden_Reason) },
-                { nameof(SystemFactories), new JValue((new JArray(SystemFactories)).ToString()) },
+                { nameof(SystemFactories), new JArray(SystemFactories) },
                 { nameof(WhetherToEnableTrustedClientAuthentication),new JValue(WhetherToEnableTrustedClientAuthentication) },
-                { nameof(TrustedClientList),new JValue((new JArray(TrustedClientList)).ToString()) }
+                { nameof(TrustedClientList),new JArray(TrustedClientList) },
             };
             return json.ToString();
         }
@@ -170,9 +167,20 @@ namespace CommonLibrary
             Announcement = SoftBasic.GetValueFromJsonObject(json, nameof(Announcement), Announcement);
             Can_Account_Login = SoftBasic.GetValueFromJsonObject(json, nameof(Can_Account_Login), Can_Account_Login);
             Account_Forbidden_Reason = SoftBasic.GetValueFromJsonObject(json, nameof(Account_Forbidden_Reason), Account_Forbidden_Reason);
-            SystemFactories = JArray.Parse(SoftBasic.GetValueFromJsonObject(json, nameof(SystemFactories), "[]")).ToObject<List<string>>();
+
+            if (json[nameof(SystemFactories)] != null)
+            {
+                SystemFactories = json[nameof(SystemFactories)].ToObject<List<string>>();
+            }
+
             WhetherToEnableTrustedClientAuthentication = SoftBasic.GetValueFromJsonObject(json, nameof(WhetherToEnableTrustedClientAuthentication), false);
-            TrustedClientList = JArray.Parse(SoftBasic.GetValueFromJsonObject(json, nameof(TrustedClientList), "[]")).ToObject<List<string>>();
+
+            if (json[nameof(TrustedClientList)] != null)
+            {
+                TrustedClientList = json[nameof(TrustedClientList)].ToObject<List<string>>();
+            }
+
+            ;
         }
 
         #endregion
@@ -185,6 +193,8 @@ namespace CommonLibrary
     /// </summary>
     public class JsonSettings : SoftFileSaveBase
     {
+        #region Constructor
+        
         /// <summary>
         /// 实例化一个设置的对象
         /// </summary>
@@ -193,6 +203,9 @@ namespace CommonLibrary
             SystemInfo = SoftAuthorize.GetInfo();
         }
 
+        #endregion
+
+        #region 客户端本地保存的数据
 
 
         /// <summary>
@@ -212,7 +225,7 @@ namespace CommonLibrary
         /// </summary>
         public DateTime LoginTime { get; set; } = DateTime.Now;
         /// <summary>
-        /// 指示系统的主题色是否是深色
+        /// 指示系统的主题色是否是深色，目前只适合于wpf
         /// </summary>
         public bool IsThemeDark { get; set; } = false;
 
@@ -222,6 +235,8 @@ namespace CommonLibrary
         /// </summary>
         public string SystemInfo { get; private set; }
 
+
+        #endregion
 
         #region Override Method
 

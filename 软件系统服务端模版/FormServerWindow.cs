@@ -632,6 +632,7 @@ namespace 软件系统服务端模版
                 try
                 {
                     UserServer.ServerSettings.SystemFactories = JArray.Parse(data).ToObject<List<string>>();
+                    RuntimeLogHelper?.WriteInfo("上传了分厂信息：" + data);
                 }
                 catch (Exception ex)
                 {
