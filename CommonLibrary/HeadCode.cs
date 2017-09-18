@@ -40,6 +40,8 @@ namespace CommonLibrary
             {
                 return (customer >= 10000 && customer < 11000);
             }
+
+
             public static int 维护检查 { get; } =        10000;//10000开始的表明是系统相关的
             public static int 更新检查 { get; } =        10001;
             public static int 账户检查 { get; } =        10002;
@@ -55,12 +57,9 @@ namespace CommonLibrary
             public static int 群发消息 { get; } =        10012;
             public static int 异常消息 { get; } =        10013;
             public static int 性能计数 { get; } =        10014;
-            public static int 请求小头 { get; } =        10015;
-            public static int 下载小头 { get; } =        10016;
-            public static int 请求大头 { get; } =        10017;
-            public static int 下载大头 { get; } =        10018;
-            public static int 请求分厂 { get; } =        10019;
-            public static int 上传分厂 { get; } =        10020;
+            public static int 上传头像MD5 { get; } =     10015;
+            public static int 请求分厂 { get; } =        10016;
+            public static int 上传分厂 { get; } =        10017;
 
 
 

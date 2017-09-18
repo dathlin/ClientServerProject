@@ -102,7 +102,7 @@
                                 <materialDesign:PackIcon Kind="MessageOutline" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="头像更改" x:Name="MenuItem头像更改" Click="MenuItem头像更改_Click">
+                        <MenuItem Header="我的信息" x:Name="MenuItem头像更改" Click="MenuItem我的信息_Click">
                             <MenuItem.Icon>
                                 <materialDesign:PackIcon Kind="AccountConvert" />
                             </MenuItem.Icon>

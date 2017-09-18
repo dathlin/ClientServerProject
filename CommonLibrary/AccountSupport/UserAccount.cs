@@ -65,11 +65,19 @@ namespace CommonLibrary
         /// 上次登录系统的方式，有winform版，wpf版，web版
         /// </summary>
         public string LastLoginWay { get; set; } = string.Empty;
+        /// <summary>
+        /// 小尺寸头像的MD5码
+        /// </summary>
+        public string SmallPortraitMD5 { get; set; } = string.Empty;
+        /// <summary>
+        /// 大尺寸头像的MD5码
+        /// </summary>
+        public string LargePortraitMD5 { get; set; } = string.Empty;
 
         #endregion
 
         #region Static Members
-        
+
         /// <summary>
         /// 用于存储和传送的名称
         /// </summary>
@@ -86,6 +94,14 @@ namespace CommonLibrary
         /// 登录系统的唯一设备ID
         /// </summary>
         public static string DeviceUniqueID { get { return "DeviceUniqueID"; } }
+        /// <summary>
+        /// 小尺寸头像的MD5传送名称
+        /// </summary>
+        public static string SmallPortraitText { get { return "SmallPortrait"; } }
+        /// <summary>
+        /// 大尺寸头像的MD5传送名称
+        /// </summary>
+        public static string LargePortraitText { get { return "LargePortrait"; } }
 
         #endregion
 

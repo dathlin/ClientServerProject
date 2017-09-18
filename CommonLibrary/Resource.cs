@@ -24,6 +24,7 @@ namespace CommonLibrary
             public const string AccountDeleteSuccess = "账户删除：";
             public const string AccountAddSuccess = "账户新增：";
             public const string AccountModifyPassword = "账户更改密码：";
+            public const string AccountUploadPortrait = "账户更改头像：";
         }
     }
 }

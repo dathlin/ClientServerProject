@@ -49,11 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountSupport\AccountDetails.cs">
+    <Compile Include="AccountSupport\FormAccountDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AccountSupport\AccountDetails.Designer.cs">
-      <DependentUpon>AccountDetails.cs</DependentUpon>
+    <Compile Include="AccountSupport\FormAccountDetails.Designer.cs">
+      <DependentUpon>FormAccountDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="AccountSupport\AccountLogin.cs" />
     <Compile Include="BasicSupport\FormDownloading.cs">
@@ -92,6 +92,11 @@
     <Compile Include="AccountSupport\FormRegisterAccount.Designer.cs">
       <DependentUpon>FormRegisterAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SoftUpdateSupport\FormUpdateRemote.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,8 +108,8 @@
     <Compile Include="AccountSupport\UserPortrait.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AccountSupport\AccountDetails.resx">
-      <DependentUpon>AccountDetails.cs</DependentUpon>
+    <EmbeddedResource Include="AccountSupport\FormAccountDetails.resx">
+      <DependentUpon>FormAccountDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BasicSupport\FormDownloading.resx">
       <DependentUpon>FormDownloading.cs</DependentUpon>
@@ -124,10 +129,19 @@
     <EmbeddedResource Include="AccountSupport\FormRegisterAccount.resx">
       <DependentUpon>FormRegisterAccount.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SoftUpdateSupport\FormUpdateRemote.resx">
       <DependentUpon>FormUpdateRemote.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="img\ExtensionManager_vsix_OSReg_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\Flagthread_7317.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

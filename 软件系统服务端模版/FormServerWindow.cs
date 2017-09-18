@@ -599,36 +599,23 @@ namespace 软件系统服务端模版
                 //发送到邮箱
                 SendUserMail("异常记录", "时间：" + DateTime.Now.ToString("O") + Environment.NewLine + data);
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.请求小头)
+            else if (customer == CommonHeadCode.SimplifyHeadCode.上传头像MD5)
             {
-                string fileName = Application.StartupPath + @"\Files\Portrait\" + data + @"\" + PortraitSupport.SmallPortrait;
-                if (string.IsNullOrEmpty(fileName))
+                try
                 {
-                    net_simplify_server.SendMessage(state, customer, "N");
+                    // 此处上传两个头像的MD5数据
+                    JObject json = JObject.Parse(data);
+
+                    string SmallPortraitMD5 = SoftBasic.GetValueFromJsonObject(json, UserAccount.SmallPortraitText, "");
+                    string LargePortraitMD5 = SoftBasic.GetValueFromJsonObject(json, UserAccount.LargePortraitText, "");
+                    string UserName = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, ""); 
+
+                    UserServer.ServerAccounts.UpdatePortraitMD5(UserName, SmallPortraitMD5, LargePortraitMD5);
+                    net_simplify_server.SendMessage(state, customer, "成功");
                 }
-                else
+                catch(Exception ex)
                 {
-                    try
-                    {
-                        net_simplify_server.SendMessage(state, customer, "Y" + SoftBasic.CalculateFileMD5(fileName));
-                    }
-                    catch (Exception ex)
-                    {
-                        net_simplify_server.SendMessage(state, customer, "N");
-                        RuntimeLogHelper.WriteException(null, ex);
-                    }
-                }
-            }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.下载小头)
-            {
-                string fileName = Application.StartupPath + @"\Files\Portrait\" + data + @"\" + PortraitSupport.SmallPortrait;
-                if (string.IsNullOrEmpty(fileName))
-                {
-                    net_simplify_server.SendMessage(state, customer, "N");
-                }
-                else
-                {
-                    net_simplify_server.SendMessage(state, customer, "Y" + Convert.ToBase64String(System.IO.File.ReadAllBytes(fileName)));
+                    net_simplify_server.SendMessage(state, customer, "失败，原因是：" + ex.Message);
                 }
             }
             else if (customer == CommonHeadCode.SimplifyHeadCode.上传分厂)
@@ -808,7 +795,10 @@ namespace 软件系统服务端模版
          * 
          ****************************************************************************************************/
 
-
+        private void DataProcessingWithStartC(AsyncStateOne state, int customer, string data)
+        {
+            // 下面随便扩充
+        }
 
 
         #endregion
@@ -1345,8 +1335,8 @@ namespace 软件系统服务端模版
         /// </summary>
         private void SoftMailInitialization()
         {
-            IsSendMailEnable = false;//先进行关闭
-            SoftMail.MailSystem163.MailSendAddress = "hsl200909@163.com";//作者测试的邮箱地址，实际需要换成你自己的
+            IsSendMailEnable = false;// 先进行关闭
+            SoftMail.MailSystem163.MailSendAddress = "hsl200909@163.com";// 作者测试的邮箱地址，实际需要换成你自己的
         }
 
 

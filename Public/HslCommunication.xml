@@ -2259,11 +2259,10 @@
             <param name="id">第三类</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.DownloadPathFileNames(System.Net.IPEndPoint,System.String[]@,System.String,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.DownloadPathFileNames(System.String[]@,System.String,System.String,System.String)">
             <summary>
             获取指定路径下的所有的文档
             </summary>
-            <param name="iPEndPoint"></param>
             <param name="fileNames"></param>
             <param name="factory"></param>
             <param name="group"></param>

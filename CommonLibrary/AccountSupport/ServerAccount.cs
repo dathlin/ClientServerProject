@@ -29,9 +29,12 @@ namespace CommonLibrary
         }
 
         private List<T> all_list_accounts = new List<T>();
+        
 
-        private object lock_list_accounts = new object();
-
+        /// <summary>
+        /// 一个简单的混合锁，相比Lock速度更快
+        /// </summary>
+        private HslCommunication.SimpleHybirdLock hybirdLock = new HslCommunication.SimpleHybirdLock();
 
         /// <summary>
         /// 更新指定账户的密码
@@ -40,19 +43,43 @@ namespace CommonLibrary
         /// <param name="password"></param>
         public void UpdatePassword(string name, string password)
         {
-            lock (lock_list_accounts)
+            hybirdLock.Enter();
+            for (int i = 0; i < all_list_accounts.Count; i++)
             {
-                for (int i = 0; i < all_list_accounts.Count; i++)
+                if (name == all_list_accounts[i].UserName)
                 {
-                    if (name == all_list_accounts[i].UserName)
-                    {
-                        all_list_accounts[i].Password = password;
-                        ILogNet?.WriteInfo(Resource.StringResouce.AccountModifyPassword + name);
-                        break;
-                    }
+                    all_list_accounts[i].Password = password;
+                    ILogNet?.WriteInfo(Resource.StringResouce.AccountModifyPassword + name);
+                    break;
                 }
             }
+            hybirdLock.Leave();
         }
+
+
+        /// <summary>
+        /// 更新指定账户的大小尺寸的头像MD5码
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="largePortraitMD5">大尺寸头像的MD5</param>
+        /// <param name="smallPortraitMD5">小尺寸头像的MD5</param>
+        public void UpdatePortraitMD5(string name, string smallPortraitMD5, string largePortraitMD5)
+        {
+            hybirdLock.Enter();
+            for (int i = 0; i < all_list_accounts.Count; i++)
+            {
+                if (name == all_list_accounts[i].UserName)
+                {
+                    all_list_accounts[i].SmallPortraitMD5 = smallPortraitMD5;
+                    all_list_accounts[i].LargePortraitMD5 = largePortraitMD5;
+                    ILogNet?.WriteInfo(Resource.StringResouce.AccountModifyPassword + name);
+                    break;
+                }
+            }
+            hybirdLock.Leave();
+        }
+
+
 
         /// <summary>
         /// 筛选特定的账户信息
@@ -91,32 +118,33 @@ namespace CommonLibrary
                 ForbidMessage = "用户名不存在！",
             };
 
-            lock (lock_list_accounts)
+            hybirdLock.Enter();
+            for (int i = 0; i < all_list_accounts.Count; i++)
             {
-                for (int i = 0; i < all_list_accounts.Count; i++)
+                T item = all_list_accounts[i];
+                if (item.UserName == name)
                 {
-                    T item = all_list_accounts[i];
-                    if (item.UserName == name)
+                    if (item.Password != code)
                     {
-                        if (item.Password != code)
-                        {
-                            result.ForbidMessage = "密码错误！";
-                            break;
-                        }
-                        else
-                        {
-                            //说明已经登录成功，需要进行进一步操作
-                            item.LoginFrequency++;
-                            result = item.DeepCopy<T>();
-                            //下面两个数据应该是旧的数据
-                            item.LastLoginIpAddress = ipAddress;
-                            item.LastLoginTime = DateTime.Now;
-                            item.LastLoginWay = way;
-                            break;
-                        }
+                        result.ForbidMessage = "密码错误！";
+                        break;
+                    }
+                    else
+                    {
+                        //说明已经登录成功，需要进行进一步操作
+                        item.LoginFrequency++;
+                        result = item.DeepCopy<T>();
+                        //下面两个数据应该是旧的数据
+                        item.LastLoginIpAddress = ipAddress;
+                        item.LastLoginTime = DateTime.Now;
+                        item.LastLoginWay = way;
+                        break;
                     }
                 }
             }
+
+            hybirdLock.Leave();
+
             return result;
         }
         /// <summary>
@@ -136,19 +164,22 @@ namespace CommonLibrary
         /// <returns>成功True，失败False</returns>
         public bool AddNewAccount(T account)
         {
-            lock (lock_list_accounts)
+            bool result = true;
+            hybirdLock.Enter();
+
+            for (int i = 0; i < all_list_accounts.Count; i++)
             {
-                for (int i = 0; i < all_list_accounts.Count; i++)
+                if (all_list_accounts[i].UserName == account.UserName)
                 {
-                    if (all_list_accounts[i].UserName == account.UserName)
-                    {
-                        return false;
-                    }
+                    result = false;
+                    break;
                 }
-                all_list_accounts.Add(account);
-                ILogNet?.WriteInfo(Resource.StringResouce.AccountAddSuccess + account.UserName);
             }
-            return true;
+            all_list_accounts.Add(account);
+            ILogNet?.WriteInfo(Resource.StringResouce.AccountAddSuccess + account.UserName);
+
+            hybirdLock.Leave();
+            return result;
         }
 
         /// <summary>
@@ -157,18 +188,18 @@ namespace CommonLibrary
         /// <param name="name">需要删除的账户的名称</param>
         public void DeleteAccount(string name)
         {
-            lock (lock_list_accounts)
+            hybirdLock.Enter();
+            for (int i = 0; i < all_list_accounts.Count; i++)
             {
-                for (int i = 0; i < all_list_accounts.Count; i++)
+                if (name == all_list_accounts[i].UserName)
                 {
-                    if (name == all_list_accounts[i].UserName)
-                    {
-                        all_list_accounts.RemoveAt(i);
-                        ILogNet?.WriteInfo(Resource.StringResouce.AccountDeleteSuccess + name);
-                        break;
-                    }
+                    all_list_accounts.RemoveAt(i);
+                    ILogNet?.WriteInfo(Resource.StringResouce.AccountDeleteSuccess + name);
+                    break;
                 }
             }
+
+            hybirdLock.Leave();
         }
 
         /// <summary>
@@ -191,10 +222,9 @@ namespace CommonLibrary
         public string GetAllAccountsJson()
         {
             string result = string.Empty;
-            lock (lock_list_accounts)
-            {
-                result = JArray.FromObject(all_list_accounts).ToString();
-            }
+            hybirdLock.Enter();
+            result = JArray.FromObject(all_list_accounts).ToString();
+            hybirdLock.Leave();
             return result;
         }
 
@@ -204,17 +234,16 @@ namespace CommonLibrary
         /// <param name="json"></param>
         public void LoadAllAccountsJson(string json)
         {
-            lock (lock_list_accounts)
+            hybirdLock.Enter();
+            try
             {
-                try
-                {
-                    all_list_accounts = JArray.Parse(json).ToObject<List<T>>();
-                }
-                catch (Exception ex)
-                {
-                    ILogNet?.WriteException(Resource.StringResouce.AccountLoadFailed, ex);
-                }
+                all_list_accounts = JArray.Parse(json).ToObject<List<T>>();
             }
+            catch (Exception ex)
+            {
+                ILogNet?.WriteException(Resource.StringResouce.AccountLoadFailed, ex);
+            }
+            hybirdLock.Leave();
         }
 
 

@@ -125,7 +125,7 @@ namespace 软件系统客户端模版
             //启动定时器
             TimeTickInitilization();
             //显示头像
-            SoftUserPortrait.DownloadUserPortraint();
+            SoftUserPortrait.LoadUserSmallPortraint();
         }
         private void FormMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -308,6 +308,14 @@ namespace 软件系统客户端模版
         private void 更换头像ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SoftUserPortrait.ChangePortrait();
+        }
+
+        private void 我的信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormAccountDetails form = new FormAccountDetails(SoftUserPortrait))
+            {
+                form.ShowDialog();
+            }
         }
 
         private void 分厂配置ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -665,6 +673,7 @@ namespace 软件系统客户端模版
 
 
         #endregion
-        
+
+       
     }
 }

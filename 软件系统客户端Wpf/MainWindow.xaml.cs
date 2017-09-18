@@ -133,7 +133,8 @@ namespace 软件系统客户端Wpf
             TimeTickInitilization();
             //显示头像
             SoftUserPortraitInitialization();
-            SoftUserPortrait.DownloadUserPortraint();
+            SoftUserPortrait.LoadUserSmallPortraint();
+
             AccountChip.Content = UserClient.UserAccount.UserName;
 
             SetShowRenderControl(UIControl_Home);
@@ -305,9 +306,12 @@ namespace 软件系统客户端Wpf
             UIControls_Chat.ScrollToDown();
         }
 
-        private void MenuItem头像更改_Click(object sender, RoutedEventArgs e)
+        private void MenuItem我的信息_Click(object sender, RoutedEventArgs e)
         {
-            SoftUserPortrait.ChangePortrait();
+            using (FormAccountDetails form = new FormAccountDetails(SoftUserPortrait))
+            {
+                form.ShowDialog();
+            }
         }
 
 
