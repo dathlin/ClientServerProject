@@ -47,9 +47,6 @@ namespace 软件系统客户端模版
         public FormMainWindow()
         {
             InitializeComponent();
-
-            // 处理异常
-            UserClient.LogNet = new LogNetDateTime(Application.StartupPath + @"\Logs", GenerateMode.ByEveryDay);
         }
 
         #region 窗口的属性和方法

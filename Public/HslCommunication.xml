@@ -706,6 +706,13 @@
             <param name="filePath"></param>
             <returns></returns>
         </member>
+        <member name="M:HslCommunication.BasicFramework.SoftBasic.GetSizeDescription(System.Int64)">
+            <summary>
+            从一个字节大小返回带单位的描述
+            </summary>
+            <param name="size"></param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.BasicFramework.SoftBasic.GetEnumValues``1">
             <summary>
             获取一个枚举类型的所有枚举值，可直接应用于组合框数据
@@ -1463,6 +1470,11 @@
         <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Directory_Files">
             <summary>
             请求文件列表的暗号
+            </summary>
+        </member>
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Directories">
+            <summary>
+            请求子文件的列表暗号
             </summary>
         </member>
         <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_NoZipped">
@@ -2264,6 +2276,27 @@
             获取指定路径下的所有的文档
             </summary>
             <param name="fileNames"></param>
+            <param name="factory"></param>
+            <param name="group"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.DownloadPathFolders(System.String[]@,System.String,System.String,System.String)">
+            <summary>
+            获取指定路径下的所有的文档
+            </summary>
+            <param name="folders"></param>
+            <param name="factory"></param>
+            <param name="group"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.DownloadStringArrays(System.String[]@,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            获取指定路径下的所有的文档
+            </summary>
+            <param name="arrays"></param>
+            <param name="protocol"></param>
             <param name="factory"></param>
             <param name="group"></param>
             <param name="id"></param>
@@ -4151,12 +4184,11 @@
             <param name="failedString">失败时记录日志的字符串</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.NetShareBase.ReceiveFileFromSocket(System.Net.Sockets.Socket,HslCommunication.HslReadWriteLock,System.String,System.String@,System.Int64@,System.String@,System.String@,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
+        <member name="M:HslCommunication.NetShareBase.ReceiveFileFromSocket(System.Net.Sockets.Socket,System.String,System.String@,System.Int64@,System.String@,System.String@,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
             <summary>
             [自校验] 从网络中接收一个文件，如果结果异常，则结束通讯
             </summary>
             <param name="socket"></param>
-            <param name="readWriteLock"></param>
             <param name="savename"></param>
             <param name="filename"></param>
             <param name="size"></param>
@@ -4292,6 +4324,13 @@
         <member name="M:HslCommunication.FileServerBase.GetDirectoryFiles(System.String)">
             <summary>
             获取文件夹的所有文件列表
+            </summary>
+            <param name="segment">额外的片段名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.GetDirectories(System.String)">
+            <summary>
+            获取文件夹的所有文件夹列表
             </summary>
             <param name="segment">额外的片段名称</param>
             <returns></returns>

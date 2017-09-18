@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClientsLibrary;
+using HslCommunication.LogNet;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -20,6 +22,8 @@ namespace 软件系统客户端模版
         [STAThread]
         static void Main()
         {
+            // 处理异常
+            UserClient.LogNet = new LogNetDateTime(Application.StartupPath + @"\Logs", GenerateMode.ByEveryDay);
             // 捕获未处理的异常
             AppDomain.CurrentDomain.UnhandledException += ClientsLibrary.UserClient.CurrentDomain_UnhandledException;
             //=====================================================================

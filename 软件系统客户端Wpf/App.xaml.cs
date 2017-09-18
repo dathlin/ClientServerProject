@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClientsLibrary;
+using HslCommunication.LogNet;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -25,6 +27,8 @@ namespace 软件系统客户端Wpf
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            // 处理异常
+            UserClient.LogNet = new LogNetDateTime(AppDomain.CurrentDomain.BaseDirectory + @"\Logs", GenerateMode.ByEveryDay);
             //捕获未处理的异常
             AppDomain.CurrentDomain.UnhandledException += ClientsLibrary.UserClient.CurrentDomain_UnhandledException;
 
