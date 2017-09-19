@@ -6,9 +6,21 @@ using HslCommunication.BasicFramework;
 
 namespace CommonLibrary
 {
-    public class CommonLibrary
+
+
+    /*****************************************************************************************
+     * 
+     *    说明：本界面规定了客户端服务器双方共同遵守的一些协议基础，主要包含了端口号，令牌，密钥
+     *    
+     *    注意：在进行二次开发的时候，必须修改下面的所有参数
+     * 
+     *****************************************************************************************/
+
+        
+
+    public class CommonProtocol
     {
-        static CommonLibrary()
+        static CommonProtocol()
         {
             /**************************************************************************
              * 
@@ -39,7 +51,7 @@ namespace CommonLibrary
 
             /**************************************************************************
              * 
-             *    时间：2017年9月14日 22:06:27      版本号：1.4.0
+             *    时间：2017年9月19日 22:06:27      版本号：1.4.0
              * 
              **************************************************************************/
 
@@ -48,7 +60,20 @@ namespace CommonLibrary
         }
 
 
-        #region 公用端口设计块
+
+        /************************************************************************************************
+         * 
+         *    注意：您在准备二次开发时，应该重新生成一个自己的GUID码
+         * 
+         **************************************************************************************************/
+
+
+        /// <summary>
+        /// 用于整个网络服务交互的身份令牌，可有效的防止来自网络的攻击，重新生成令牌后就无法更改，否则不支持自动升级
+        /// </summary>
+        public static Guid KeyToken { get; set; } = new Guid("1275BB9A-14B2-4A96-9673-B0AF0463D474");
+
+
 
         //======================================================================================
         //    此处的所有的网络端口应该重新指定，防止其他人的项目连接到你的程序上
@@ -82,71 +107,13 @@ namespace CommonLibrary
         /// 文件管理的服务器端口
         /// </summary>
         public static int Port_Advanced_File_Server { get; } = 24672;
-        #endregion
-        
 
 
 
         /// <summary>
         /// 整个系统的加密解密密码
         /// </summary>
-        public const string Security = "qwertyui";
+        public static string Security { get; } = "qwertyui";
     }
 
-
-    /// <summary>
-    /// 选项类，包含了所有的标识和文本的对应关系
-    /// </summary>
-    public class BasicOptions
-    {
-        /// <summary>
-        /// 测试，用于生成数据状态的信息存储
-        /// </summary>
-        public static readonly List<BasicOptions> test = new List<BasicOptions>()
-        {
-            new BasicOptions(0,"测试一"),
-            new BasicOptions(1,"测试二"),
-            new BasicOptions(2,"测试三"),
-        };
-
-
-
-
-
-
-        /// <summary>
-        /// 实例化一个对象
-        /// </summary>
-        public BasicOptions()
-        {
-
-        }
-        /// <summary>
-        /// 根据信息实例化一个选项对象
-        /// </summary>
-        /// <param name="code"></param>
-        /// <param name="des"></param>
-        public BasicOptions(int code, string des)
-        {
-            IntegerCode = code;
-            Description = des;
-        }
-        /// <summary>
-        /// 整数的代号
-        /// </summary>
-        public int IntegerCode { get; set; } = 0;
-        /// <summary>
-        /// 代号描述的文本
-        /// </summary>
-        public string Description { get; set; } = string.Empty;
-        /// <summary>
-        /// 过去描述
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return Description;
-        }
-    }
-    
 }

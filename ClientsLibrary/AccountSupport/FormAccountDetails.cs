@@ -45,7 +45,7 @@ namespace ClientsLibrary
             textBox_UserName.Text = UserClient.UserAccount.UserName;
 
             // 加载头像
-            ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadPoolLoadPortrait), null);
+            ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadPoolLoadLargePortrait), null);
 
             // 加载文件列表
             DownloadUserFileNames();
@@ -93,17 +93,16 @@ namespace ClientsLibrary
                 }
             }
         }
-
-
-
-        private void ThreadPoolLoadPortrait(object obj)
-        {
-            UserPortrait.LoadUserLargePortraint(LoadPortraitByFileName);
-        }
+        
 
         private void pictureBox_UserPortrait_Click(object sender, EventArgs e)
         {
             UserPortrait.ChangePortrait();
+            ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadPoolLoadLargePortrait), null);
+        }
+
+        private void ThreadPoolLoadLargePortrait(object obj)
+        {
             UserPortrait.LoadUserLargePortraint(LoadPortraitByFileName);
         }
 
@@ -185,7 +184,7 @@ namespace ClientsLibrary
                                 "Files",
                                 "Personal",
                                 UserClient.UserAccount.UserName,
-                                folderBrowserDialog.SelectedPath + "\\" + treeNode.Text
+                                folderBrowserDialog.SelectedPath
                                 );
                         download.ShowDialog();
                     }
@@ -197,7 +196,7 @@ namespace ClientsLibrary
         {
             // 删除选中文件
             TreeNode treeNode = treeView1.SelectedNode;
-            if (treeNode.Name != "file_root")
+            if (treeNode.Name != "files_root")
             {
                 using (FormPasswordCheck passwordCheck = new FormPasswordCheck(UserClient.UserAccount.Password))
                 {

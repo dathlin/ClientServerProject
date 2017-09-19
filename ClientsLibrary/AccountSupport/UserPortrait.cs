@@ -75,7 +75,7 @@ namespace ClientsLibrary
                     bitmap32.Dispose();
 
                     using (FormFileOperate ffo = new FormFileOperate(
-                        UserClient.Net_File_Client, 
+                        UserClient.Net_File_Client,
                         new string[]
                         {
                             path300,
@@ -85,41 +85,59 @@ namespace ClientsLibrary
                         ffo.ShowDialog();
                     }
 
-                    // 上传文件MD5码
-                    string SmallPortraitMD5 = SoftBasic.CalculateFileMD5(path32);
-                    string LargePortraitMD5 = SoftBasic.CalculateFileMD5(path300);
-
-                    JObject json = new JObject
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(obj =>
                     {
-                        { UserAccount.UserNameText, new JValue(UserClient.UserAccount.UserName) },
-                        { UserAccount.SmallPortraitText, new JValue(SmallPortraitMD5) },
-                        { UserAccount.LargePortraitText, new JValue(LargePortraitMD5) }
-                    };
+                        // 上传文件MD5码
+                        string SmallPortraitMD5 = ""; SoftBasic.CalculateFileMD5(path32);
+                        string LargePortraitMD5 = ""; SoftBasic.CalculateFileMD5(path300);
 
-                    OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(
-                        CommonHeadCode.SimplifyHeadCode.上传头像MD5,
-                        json.ToString());
-
-                    if(result.IsSuccess)
-                    {
-                        if (result.Content.Substring(0, 2) == "成功")
+                        try
                         {
-                            UserClient.UserAccount.SmallPortraitMD5 = SmallPortraitMD5;
-                            UserClient.UserAccount.LargePortraitMD5 = LargePortraitMD5;
-                            // 成功上传MD5码
-                            LoadUserSmallPortraint();
+                            SmallPortraitMD5 = SoftBasic.CalculateFileMD5(path32);
+                            LargePortraitMD5 = SoftBasic.CalculateFileMD5(path300);
+                        }
+                        catch(Exception ex)
+                        {
+                            UserClient.LogNet.WriteException("获取文件MD5码失败：", ex);
+                            MessageBox.Show("文件信息确认失败，请重新上传！");
+                            return;
+                        }
+
+                        JObject json = new JObject
+                        {
+                            { UserAccount.UserNameText, new JValue(UserClient.UserAccount.UserName) },
+                            { UserAccount.SmallPortraitText, new JValue(SmallPortraitMD5) },
+                            { UserAccount.LargePortraitText, new JValue(LargePortraitMD5) }
+                        };
+
+
+                        OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(
+                            CommonHeadCode.SimplifyHeadCode.上传头像MD5,
+                            json.ToString());
+
+                        if (result.IsSuccess)
+                        {
+                            if (result.Content.Substring(0, 2) == "成功")
+                            {
+                                UserClient.UserAccount.SmallPortraitMD5 = SmallPortraitMD5;
+                                UserClient.UserAccount.LargePortraitMD5 = LargePortraitMD5;
+                                // 成功上传MD5码
+                                LoadUserSmallPortraint();
+                            }
+                            else
+                            {
+                                MessageBox.Show("上传头像失败！原因：" + result.Content);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("上传头像失败！原因：" + result.Content);
+                            MessageBox.Show("上传头像失败！原因：" + result.Message);
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("上传头像失败！原因：" + result.Message);
-                    }
-                    
+
+                    }), null);
+                   
                 }
+                
             }
         }
 

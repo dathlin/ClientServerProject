@@ -6,6 +6,7 @@ using HslCommunication.Enthernet;
 using HslCommunication.BasicFramework;
 using CommonLibrary;
 using System.Net;
+using CommonLibrary;
 
 namespace ClientsLibrary
 {
@@ -37,9 +38,10 @@ namespace ClientsLibrary
         
 
         /// <summary>
-        /// 服务器的IP地址，默认为127.0.0.1，可用于单机调试，云服务器端：117.48.203.204
+        /// 服务器的IP地址，默认为127.0.0.1，可用于单机调试，
+        /// 云服务器端：117.48.203.204，注意，云端为最新版，客户端版本比较旧会调试失败
         /// </summary>
-        public static string ServerIp { get; } = "117.48.203.204";//用于测试的云服务器地址
+        public static string ServerIp { get; } = "127.0.0.1";//用于测试的云服务器地址
         
 
         /// <summary>
@@ -88,9 +90,9 @@ namespace ClientsLibrary
         /// </summary>
         public static NetSimplifyClient Net_simplify_client { get; set; } = new NetSimplifyClient(
             new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
-                CommonLibrary.CommonLibrary.Port_Second_Net))
+                CommonLibrary.CommonProtocol.Port_Second_Net))
         {
-            KeyToken = CommonHeadCode.KeyToken,
+            KeyToken = CommonLibrary.CommonProtocol.KeyToken,
             ConnectTimeout = 5000,
         };
 
@@ -99,9 +101,9 @@ namespace ClientsLibrary
         /// </summary>
         public static NetUdpClient Net_Udp_Client { get; set; } = new NetUdpClient(
             new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
-                CommonLibrary.CommonLibrary.Port_Udp_Server))
+                CommonLibrary.CommonProtocol.Port_Udp_Server))
         {
-            KeyToken = CommonHeadCode.KeyToken,
+            KeyToken = CommonLibrary.CommonProtocol.KeyToken,
         };
 
 
@@ -110,9 +112,9 @@ namespace ClientsLibrary
         /// </summary>
         public static AdvancedFileClient Net_File_Client { get; set; } = new AdvancedFileClient()
         {
-            KeyToken = CommonHeadCode.KeyToken,
+            KeyToken = CommonLibrary.CommonProtocol.KeyToken,
             LogNet = LogNet,
-            ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), CommonLibrary.CommonLibrary.Port_Advanced_File_Server)
+            ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), CommonLibrary.CommonProtocol.Port_Advanced_File_Server)
         };
 
         /// <summary>

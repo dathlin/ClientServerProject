@@ -344,9 +344,9 @@ namespace 软件系统服务端模版
                 net_soft_update_Server.LogNet = new LogNetSingle(LogSavePath + @"\update_log.txt");
                 //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
                 //只放置exe和dll组件，必须放置：软件自动更新.exe
-                net_soft_update_Server.KeyToken = CommonHeadCode.KeyToken;
+                net_soft_update_Server.KeyToken = CommonLibrary.CommonProtocol.KeyToken;
                 net_soft_update_Server.FileUpdatePath = Application.StartupPath + @"\ClientFiles";//客户端文件路径
-                net_soft_update_Server.ServerStart(CommonLibrary.CommonLibrary.Port_Update_Net);
+                net_soft_update_Server.ServerStart(CommonLibrary.CommonProtocol.Port_Update_Net);
             }
             catch (Exception ex)
             {
@@ -384,8 +384,8 @@ namespace 软件系统服务端模版
                 net_file_Advanced.FilesDirectoryPath = Application.StartupPath;
                 net_file_Advanced.FilesDirectoryPathTemp = Application.StartupPath + @"\Temp";
                 net_file_Advanced.LogNet = new LogNetSingle(LogSavePath + @"\Advanced_file_log.txt");
-                net_file_Advanced.KeyToken = CommonHeadCode.KeyToken;
-                net_file_Advanced.ServerStart(CommonLibrary.CommonLibrary.Port_Advanced_File_Server);
+                net_file_Advanced.KeyToken = CommonLibrary.CommonProtocol.KeyToken;
+                net_file_Advanced.ServerStart(CommonLibrary.CommonProtocol.Port_Advanced_File_Server);
             }
             catch (Exception ex)
             {
@@ -408,12 +408,12 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_simplify_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
+                net_simplify_server.KeyToken = CommonLibrary.CommonProtocol.KeyToken;//设置身份令牌
                 net_simplify_server.LogNet = new LogNetSingle(LogSavePath + @"\simplify_log.txt");//日志路径
                 net_simplify_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_simplify_server.ReceiveStringEvent += Net_simplify_server_ReceiveStringEvent;//接收到字符串触发
                 net_simplify_server.ReceivedBytesEvent += Net_simplify_server_ReceivedBytesEvent;//接收到字节触发
-                net_simplify_server.ServerStart(CommonLibrary.CommonLibrary.Port_Second_Net);
+                net_simplify_server.ServerStart(CommonLibrary.CommonProtocol.Port_Second_Net);
                 net_simplify_server.ConnectTimeout = 5200;
             }
             catch (Exception ex)
@@ -815,7 +815,7 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_socket_server.KeyToken = CommonHeadCode.KeyToken;//设置身份令牌
+                net_socket_server.KeyToken = CommonLibrary.CommonProtocol.KeyToken;//设置身份令牌
                 net_socket_server.LogNet =new LogNetSingle(LogSavePath + @"\net_log.txt");
                 net_socket_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_socket_server.FormatClientOnline = "#IP:{0} Name:{1}";//必须为#开头，具体格式可由自身需求确定
@@ -826,7 +826,7 @@ namespace 软件系统服务端模版
                 net_socket_server.MessageAlerts += new HslCommunication.NetBase.IEDelegate<string>(Net_socket_server_MessageAlerts);//服务器产生提示消息触发
                 net_socket_server.AcceptByte += new HslCommunication.NetBase.IEDelegate<AsyncStateOne, int, byte[]>(Net_socket_server_AcceptByte);//服务器接收到字节数据触发
                 net_socket_server.AcceptString += new HslCommunication.NetBase.IEDelegate<AsyncStateOne, int, string>(Net_socket_server_AcceptString);//服务器接收到字符串数据触发
-                net_socket_server.ServerStart(CommonLibrary.CommonLibrary.Port_Main_Net);
+                net_socket_server.ServerStart(CommonLibrary.CommonProtocol.Port_Main_Net);
             }
             catch (Exception ex)
             {
@@ -1075,7 +1075,7 @@ namespace 软件系统服务端模版
                     //文件信息存储路径
                     FileListName = Application.StartupPath + @"\files.txt"
                 };
-                net_simple_file_server.KeyToken = CommonHeadCode.KeyToken;
+                net_simple_file_server.KeyToken = CommonLibrary.CommonProtocol.KeyToken;
                 net_simple_file_server.ReadFromFile();
                 net_simple_file_server.LogNet =new LogNetSingle(LogSavePath + @"\share_file_log.txt");
                 net_simple_file_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
@@ -1083,7 +1083,7 @@ namespace 软件系统服务端模版
                 net_simple_file_server.FilesDirectoryPath = Application.StartupPath + @"\Files";
                 net_simple_file_server.FilesDirectoryPathTemp = Application.StartupPath + @"\Temp";
                 net_simple_file_server.FileChange += Net_simple_file_server_FileChange;
-                net_simple_file_server.ServerStart(CommonLibrary.CommonLibrary.Port_Share_File);
+                net_simple_file_server.ServerStart(CommonLibrary.CommonProtocol.Port_Share_File);
             }
             catch (Exception ex)
             {
@@ -1144,11 +1144,11 @@ namespace 软件系统服务端模版
                 net_udp_server = new NetUdpServer();
                 net_udp_server.LogNet =new LogNetSingle(LogSavePath + @"\udp_log.txt");//日志路径
                 net_udp_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
-                net_udp_server.KeyToken = CommonHeadCode.KeyToken;
+                net_udp_server.KeyToken = CommonLibrary.CommonProtocol.KeyToken;
                 net_udp_server.ReceiveCacheLength = 1024;//单次接收数据的缓冲长度
                 net_udp_server.AcceptByte += Net_udp_server_AcceptByte;//接收到字节数据的时候触发事件
                 net_udp_server.AcceptString += Net_udp_server_AcceptString;//接收到字符串数据的时候触发事件
-                net_udp_server.ServerStart(CommonLibrary.CommonLibrary.Port_Udp_Server);
+                net_udp_server.ServerStart(CommonLibrary.CommonProtocol.Port_Udp_Server);
             }
             catch (Exception ex)
             {

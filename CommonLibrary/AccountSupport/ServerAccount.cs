@@ -72,7 +72,7 @@ namespace CommonLibrary
                 {
                     all_list_accounts[i].SmallPortraitMD5 = smallPortraitMD5;
                     all_list_accounts[i].LargePortraitMD5 = largePortraitMD5;
-                    ILogNet?.WriteInfo(Resource.StringResouce.AccountModifyPassword + name);
+                    ILogNet?.WriteInfo(Resource.StringResouce.AccountUploadPortrait + name);
                     break;
                 }
             }

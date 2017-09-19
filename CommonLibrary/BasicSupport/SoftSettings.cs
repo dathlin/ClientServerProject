@@ -274,14 +274,14 @@ namespace CommonLibrary
         /// </summary>
         public override void LoadByFile()
         {
-            LoadByFile(m => SoftSecurity.MD5Decrypt(m, CommonLibrary.Security));
+            LoadByFile(m => SoftSecurity.MD5Decrypt(m, CommonProtocol.Security));
         }
         /// <summary>
         /// 使用指定的加密实现数据加密
         /// </summary>
         public override void SaveToFile()
         {
-            SaveToFile(m => SoftSecurity.MD5Encrypt(m, CommonLibrary.Security));
+            SaveToFile(m => SoftSecurity.MD5Encrypt(m, CommonProtocol.Security));
         }
 
 

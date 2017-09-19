@@ -398,10 +398,10 @@ namespace 软件系统客户端Wpf
         {
             try
             {
-                net_socket_client.KeyToken = CommonHeadCode.KeyToken;//新增的身份令牌
+                net_socket_client.KeyToken = CommonLibrary.CommonProtocol.KeyToken;//新增的身份令牌
                 net_socket_client.EndPointServer = new System.Net.IPEndPoint(
                     System.Net.IPAddress.Parse(UserClient.ServerIp),
-                    CommonLibrary.CommonLibrary.Port_Main_Net);
+                    CommonLibrary.CommonProtocol.Port_Main_Net);
                 net_socket_client.ClientAlias = $"{UserClient.UserAccount.UserName} ({UserClient.UserAccount.Factory})";//标记客户端在线的名称
                 net_socket_client.ClientStart();
             }
@@ -608,8 +608,9 @@ namespace 软件系统客户端Wpf
         #endregion
 
         #region Udp发送示例
+
         /// <summary>
-        /// 调用该方法并指定参数即可，最长字符串不得
+        /// 调用该方法并指定参数即可，最长字符串不得超过服务器定义的数据
         /// </summary>
         /// <param name="data"></param>
         private void SendServerUdpData(int customer, string data)
@@ -759,6 +760,8 @@ namespace 软件系统客户端Wpf
         }
 
         #endregion
+
+
 
         private void Button_BackMain_Click(object sender, RoutedEventArgs e)
         {

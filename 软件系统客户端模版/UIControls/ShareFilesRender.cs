@@ -34,10 +34,10 @@ namespace 软件系统客户端模版.UIControls
 
             // 上传文件
             using (FormSimplyFileUpload upload = new FormSimplyFileUpload(
-                CommonHeadCode.KeyToken,
+                CommonLibrary.CommonProtocol.KeyToken,
                 UserClient.LogNet,
                 UserClient.ServerIp,
-                CommonLibrary.CommonLibrary.Port_Share_File,
+                CommonLibrary.CommonProtocol.Port_Share_File,
                 UserClient.UserAccount.UserName))
             {
                 upload.ShowDialog();
@@ -71,9 +71,9 @@ namespace 软件系统客户端模版.UIControls
                 foreach(var m in files)
                 {
                     FileItemShow item = new FileItemShow(
-                        CommonHeadCode.KeyToken,
+                        CommonLibrary.CommonProtocol.KeyToken,
                         UserClient.LogNet, UserClient.ServerIp,
-                        CommonLibrary.CommonLibrary.Port_Share_File,
+                        CommonLibrary.CommonProtocol.Port_Share_File,
                         () =>
                         {
                             if (m.UploadName != UserClient.UserAccount.UserName)

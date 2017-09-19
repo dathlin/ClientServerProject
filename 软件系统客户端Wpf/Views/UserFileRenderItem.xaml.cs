@@ -32,9 +32,9 @@ namespace 软件系统客户端Wpf.Views
 
             fileClient = new SimpleFileClient()
             {
-                KeyToken = CommonLibrary.CommonHeadCode.KeyToken,
+                KeyToken = CommonLibrary.CommonProtocol.KeyToken,
                 LogNet = UserClient.LogNet,
-                ServerIpEndPoint =new IPEndPoint(IPAddress.Parse(UserClient.ServerIp),CommonLibrary.CommonLibrary.Port_Advanced_File_Server)
+                ServerIpEndPoint =new IPEndPoint(IPAddress.Parse(UserClient.ServerIp),CommonLibrary.CommonProtocol.Port_Advanced_File_Server)
             };
         }
 
