@@ -29,26 +29,26 @@ namespace ClientsLibrary
         /// 客户端需要进行本地存储的信息日志
         /// </summary>
         public static JsonSettings JsonSettings = new JsonSettings();
-        
+
 
         /// <summary>
         /// 本软件的当前版本，用来验证更新的关键依据
         /// </summary>
         public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.170914");
-        
+
 
         /// <summary>
         /// 服务器的IP地址，默认为127.0.0.1，可用于单机调试，
         /// 云服务器端：117.48.203.204，注意，云端为最新版，客户端版本比较旧会调试失败
         /// </summary>
-        public static string ServerIp { get; } = "127.0.0.1";//用于测试的云服务器地址
-        
+        public static string ServerIp { get; } = "117.48.203.204";//用于测试的云服务器地址
+
 
         /// <summary>
         /// 系统的分厂信息
         /// </summary>
         public static List<string> SystemFactories { get; set; } = new List<string>();
-        
+
 
 
 
@@ -68,7 +68,7 @@ namespace ClientsLibrary
                         "3.需要用户自行添加"),
                 },
         };
-        
+
 
         /// <summary>
         /// 设置或获取系统的公告
@@ -89,10 +89,9 @@ namespace ClientsLibrary
         /// 用于访问服务器数据的网络对象类，必须修改这个端口参数，否则运行失败
         /// </summary>
         public static NetSimplifyClient Net_simplify_client { get; set; } = new NetSimplifyClient(
-            new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
-                CommonLibrary.CommonProtocol.Port_Second_Net))
+            new IPEndPoint(IPAddress.Parse(ServerIp), CommonProtocol.Port_Second_Net))
         {
-            KeyToken = CommonLibrary.CommonProtocol.KeyToken,
+            KeyToken = CommonProtocol.KeyToken,
             ConnectTimeout = 5000,
         };
 
@@ -100,10 +99,9 @@ namespace ClientsLibrary
         /// 用于使用udp向服务器进行发送即时可丢失数据的对象
         /// </summary>
         public static NetUdpClient Net_Udp_Client { get; set; } = new NetUdpClient(
-            new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ServerIp),
-                CommonLibrary.CommonProtocol.Port_Udp_Server))
+            new IPEndPoint(IPAddress.Parse(ServerIp), CommonProtocol.Port_Udp_Server))
         {
-            KeyToken = CommonLibrary.CommonProtocol.KeyToken,
+            KeyToken = CommonProtocol.KeyToken,
         };
 
 
@@ -112,7 +110,7 @@ namespace ClientsLibrary
         /// </summary>
         public static AdvancedFileClient Net_File_Client { get; set; } = new AdvancedFileClient()
         {
-            KeyToken = CommonLibrary.CommonProtocol.KeyToken,
+            KeyToken = CommonProtocol.KeyToken,
             LogNet = LogNet,
             ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), CommonLibrary.CommonProtocol.Port_Advanced_File_Server)
         };

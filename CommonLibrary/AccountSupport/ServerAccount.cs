@@ -49,7 +49,7 @@ namespace CommonLibrary
                 if (name == all_list_accounts[i].UserName)
                 {
                     all_list_accounts[i].Password = password;
-                    ILogNet?.WriteInfo(Resource.StringResouce.AccountModifyPassword + name);
+                    ILogNet?.WriteInfo(SoftResources.StringResouce.AccountModifyPassword + name);
                     break;
                 }
             }
@@ -72,7 +72,7 @@ namespace CommonLibrary
                 {
                     all_list_accounts[i].SmallPortraitMD5 = smallPortraitMD5;
                     all_list_accounts[i].LargePortraitMD5 = largePortraitMD5;
-                    ILogNet?.WriteInfo(Resource.StringResouce.AccountUploadPortrait + name);
+                    ILogNet?.WriteInfo(SoftResources.StringResouce.AccountUploadPortrait + name);
                     break;
                 }
             }
@@ -176,7 +176,7 @@ namespace CommonLibrary
                 }
             }
             all_list_accounts.Add(account);
-            ILogNet?.WriteInfo(Resource.StringResouce.AccountAddSuccess + account.UserName);
+            ILogNet?.WriteInfo(SoftResources.StringResouce.AccountAddSuccess + account.UserName);
 
             hybirdLock.Leave();
             return result;
@@ -194,7 +194,7 @@ namespace CommonLibrary
                 if (name == all_list_accounts[i].UserName)
                 {
                     all_list_accounts.RemoveAt(i);
-                    ILogNet?.WriteInfo(Resource.StringResouce.AccountDeleteSuccess + name);
+                    ILogNet?.WriteInfo(SoftResources.StringResouce.AccountDeleteSuccess + name);
                     break;
                 }
             }
@@ -241,7 +241,7 @@ namespace CommonLibrary
             }
             catch (Exception ex)
             {
-                ILogNet?.WriteException(Resource.StringResouce.AccountLoadFailed, ex);
+                ILogNet?.WriteException(SoftResources.StringResouce.AccountLoadFailed, ex);
             }
             hybirdLock.Leave();
         }

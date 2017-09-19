@@ -11,6 +11,7 @@ using System.Threading;
 using System.Windows.Forms;
 using HslCommunication;
 using HslCommunication.BasicFramework;
+using System.IO;
 
 namespace ClientsLibrary
 {
@@ -154,17 +155,21 @@ namespace ClientsLibrary
                 openFileDialog.Multiselect = true;
                 if(openFileDialog.ShowDialog()==DialogResult.OK)
                 {
-                    FormFileOperate upload = new FormFileOperate(UserClient.Net_File_Client,
-                        openFileDialog.FileNames,
+                    UploadFilesToServer(openFileDialog.FileNames);
+                }
+            }
+        }
+
+        private void UploadFilesToServer(string[] files)
+        {
+            FormFileOperate upload = new FormFileOperate(UserClient.Net_File_Client,
+                        files,
                         "Files",
                         "Personal",
                         UserClient.UserAccount.UserName);
-                    upload.ShowDialog();
-
-                    // 更新文件列表
-                    DownloadUserFileNames();
-                }
-            }
+            upload.ShowDialog();
+            // 更新文件列表
+            DownloadUserFileNames();
         }
 
         private void userButton1_Click(object sender, EventArgs e)
@@ -223,8 +228,65 @@ namespace ClientsLibrary
 
 
 
+
         #endregion
 
+        private void treeView1_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] paths = e.Data.GetData(DataFormats.FileDrop) as string[];
+                if (paths != null)
+                {
+                    List<string> files = new List<string>();
 
+                    try
+                    {
+                        foreach (var m in paths)
+                        {
+                            FileInfo finfo = new FileInfo(m);
+                            if (finfo.Attributes == FileAttributes.Directory)
+                            {
+                                foreach (var n in Directory.GetFiles(m))
+                                {
+                                    files.Add(n);
+                                }
+                            }
+                            else
+                            {
+                                files.Add(m);
+                            }
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        UserClient.LogNet?.WriteException("拖拽文件上传异常：", ex);
+                        SoftBasic.ShowExceptionMessage(ex);
+                        return;
+                    }
+
+                    if (files.Count > 0)
+                    {
+                        Invoke(new Action(() =>
+                        {
+                            UploadFilesToServer(files.ToArray());
+                        }));
+                    }
+                }
+                
+            }
+        }
+
+        private void treeView1_DragEnter(object sender, DragEventArgs e)
+        {
+            if(e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
     }
 }

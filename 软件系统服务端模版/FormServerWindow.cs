@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using HslCommunication.BasicFramework;
 using System.Diagnostics;
 using HslCommunication.LogNet;
+using HslCommunication;
 
 
 /******************************************************************************************
@@ -109,8 +110,8 @@ namespace 软件系统服务端模版
             //加载参数
             UserServer.ServerSettings.LoadByFile();
             toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
-            toolStripStatusLabel1.Text = $"本软件著作权归{Resource.StringResouce.SoftCopyRight}所有";
-            label5.Text = Resource.StringResouce.SoftName;
+            toolStripStatusLabel1.Text = $"本软件著作权归{SoftResources.StringResouce.SoftCopyRight}所有";
+            label5.Text = SoftResources.StringResouce.SoftName;
             //加载账户信息
             UserServer.ServerAccounts.FileSavePath = Application.StartupPath + @"\accounts.txt";
             UserServer.ServerAccounts.LoadByFile();
@@ -264,8 +265,8 @@ namespace 软件系统服务端模版
         private void 关于软件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormAbout fm = new FormAbout(
-                Resource.StringResouce.SoftName, UserServer.ServerSettings.SystemVersion,
-                2017, Resource.StringResouce.SoftCopyRight))
+                SoftResources.StringResouce.SoftName, UserServer.ServerSettings.SystemVersion,
+                2017, SoftResources.StringResouce.SoftCopyRight))
             {
                 fm.ShowDialog();
             }
@@ -427,7 +428,7 @@ namespace 软件系统服务端模版
         /// <param name="state">网络状态</param>
         /// <param name="customer">字节数据，根据实际情况选择是否使用</param>
         /// <param name="data">来自客户端的字节数据</param>
-        private void Net_simplify_server_ReceivedBytesEvent(AsyncStateOne state, int customer, byte[] data)
+        private void Net_simplify_server_ReceivedBytesEvent(AsyncStateOne state, NetHandle customer, byte[] data)
         {
             if(customer==CommonHeadCode.SimplifyHeadCode.性能计数)
             {
@@ -456,7 +457,7 @@ namespace 软件系统服务端模版
         /// <param name="state">客户端的地址</param>
         /// <param name="customer">用于自定义的指令头，可不用，转而使用data来区分</param>
         /// <param name="data">接收到的服务器的数据</param>
-        private void Net_simplify_server_ReceiveStringEvent(AsyncStateOne state, int customer, string data)
+        private void Net_simplify_server_ReceiveStringEvent(AsyncStateOne state, NetHandle customer, string data)
         {
             //必须返回结果，调用SendMessage(object1,[实际数据]);
             if (CommonHeadCode.SimplifyHeadCode.IsCustomerGroupSystem(customer))
@@ -815,18 +816,18 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_socket_server.KeyToken = CommonLibrary.CommonProtocol.KeyToken;//设置身份令牌
+                net_socket_server.KeyToken = CommonProtocol.KeyToken;//设置身份令牌
                 net_socket_server.LogNet =new LogNetSingle(LogSavePath + @"\net_log.txt");
                 net_socket_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_socket_server.FormatClientOnline = "#IP:{0} Name:{1}";//必须为#开头，具体格式可由自身需求确定
                 net_socket_server.IsSaveLogClientLineChange = true;//设置客户端上下线是否记录到日志
-                net_socket_server.ClientOnline += new HslCommunication.NetBase.IEDelegate<AsyncStateOne>(Net_socket_server_ClientOnline);//客户端上线触发
-                net_socket_server.ClientOffline += new HslCommunication.NetBase.IEDelegate<AsyncStateOne, string>(Net_socket_server_ClientOffline);//客户端下线触发，包括异常掉线
-                net_socket_server.AllClientsStatusChange += new HslCommunication.NetBase.IEDelegate<string>(Net_socket_server_AllClientsStatusChange);//客户端上下线变化时触发
-                net_socket_server.MessageAlerts += new HslCommunication.NetBase.IEDelegate<string>(Net_socket_server_MessageAlerts);//服务器产生提示消息触发
-                net_socket_server.AcceptByte += new HslCommunication.NetBase.IEDelegate<AsyncStateOne, int, byte[]>(Net_socket_server_AcceptByte);//服务器接收到字节数据触发
-                net_socket_server.AcceptString += new HslCommunication.NetBase.IEDelegate<AsyncStateOne, int, string>(Net_socket_server_AcceptString);//服务器接收到字符串数据触发
-                net_socket_server.ServerStart(CommonLibrary.CommonProtocol.Port_Main_Net);
+                net_socket_server.ClientOnline += new NetBase.IEDelegate<AsyncStateOne>(Net_socket_server_ClientOnline);//客户端上线触发
+                net_socket_server.ClientOffline += new NetBase.IEDelegate<AsyncStateOne, string>(Net_socket_server_ClientOffline);//客户端下线触发，包括异常掉线
+                net_socket_server.AllClientsStatusChange += new NetBase.IEDelegate<string>(Net_socket_server_AllClientsStatusChange);//客户端上下线变化时触发
+                net_socket_server.MessageAlerts += new NetBase.IEDelegate<string>(Net_socket_server_MessageAlerts);//服务器产生提示消息触发
+                net_socket_server.AcceptByte += new NetBase.IEDelegate<AsyncStateOne, NetHandle, byte[]>(Net_socket_server_AcceptByte);//服务器接收到字节数据触发
+                net_socket_server.AcceptString += new NetBase.IEDelegate<AsyncStateOne, NetHandle, string>(Net_socket_server_AcceptString);//服务器接收到字符串数据触发
+                net_socket_server.ServerStart(CommonProtocol.Port_Main_Net);
             }
             catch (Exception ex)
             {
@@ -846,7 +847,7 @@ namespace 软件系统服务端模版
          ******************************************************************************************************************/
 
 
-        private void Net_socket_server_AcceptString(AsyncStateOne object1, int customer, string data)
+        private void Net_socket_server_AcceptString(AsyncStateOne object1, NetHandle customer, string data)
         {
             //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字符串都会到此处处理
             if (CommonHeadCode.MultiNetHeadCode.IsCustomerGroupSystem(customer))
@@ -863,7 +864,7 @@ namespace 软件系统服务端模版
         /// <param name="state">网络状态</param>
         /// <param name="customer">用户自定义的指令头</param>
         /// <param name="data">字符串数据</param>
-        private void DataProcessingWithStartH(AsyncStateOne state, int customer, string data)
+        private void DataProcessingWithStartH(AsyncStateOne state, NetHandle customer, string data)
         {
             if (customer == CommonHeadCode.MultiNetHeadCode.留言版消息)
             {
@@ -872,7 +873,7 @@ namespace 软件系统服务端模版
         }
 
 
-        private void Net_socket_server_AcceptByte(AsyncStateOne state, int customer, byte[] data)
+        private void Net_socket_server_AcceptByte(AsyncStateOne state, NetHandle customer, byte[] data)
         {
             //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字节数组都会到此处处理
         }
@@ -1156,7 +1157,7 @@ namespace 软件系统服务端模版
             }
         }
 
-        private void Net_udp_server_AcceptString(AsyncStateOne state, int customer, string data)
+        private void Net_udp_server_AcceptString(AsyncStateOne state, NetHandle customer, string data)
         {
             //此处为测试
             Invoke(new Action(() =>
@@ -1165,7 +1166,7 @@ namespace 软件系统服务端模版
             }));
         }
 
-        private void Net_udp_server_AcceptByte(AsyncStateOne state, int customer, byte[] data)
+        private void Net_udp_server_AcceptByte(AsyncStateOne state, NetHandle customer, byte[] data)
         {
             //具体用法参考上面字符串方法
         }

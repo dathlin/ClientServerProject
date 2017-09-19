@@ -228,7 +228,10 @@ namespace CommonLibrary
         /// 指示系统的主题色是否是深色，目前只适合于wpf
         /// </summary>
         public bool IsThemeDark { get; set; } = false;
-
+        /// <summary>
+        /// 本地保存的密码过期天数
+        /// </summary>
+        public int PasswordOverdueDays { get; set; } = 7;
 
         /// <summary>
         /// 当前计算机的机器码，用来判定参数是否是正确的
@@ -251,6 +254,7 @@ namespace CommonLibrary
             json.Add(nameof(SystemInfo), new JValue(SystemInfo));
             json.Add(nameof(LoginTime), new JValue(LoginTime));
             json.Add(nameof(IsThemeDark), new JValue(IsThemeDark));
+            json.Add(nameof(PasswordOverdueDays), new JValue(PasswordOverdueDays));
             return json.ToString();
         }
 
@@ -258,14 +262,17 @@ namespace CommonLibrary
         {
             JObject json = JObject.Parse(content);
             string systemInfo = SoftBasic.GetValueFromJsonObject(json, nameof(SystemInfo), "");
+            // 用户名不会因此更改
+            LoginName = SoftBasic.GetValueFromJsonObject(json, nameof(LoginName), LoginName);
+
             if (systemInfo == SystemInfo)
             {
                 //确认账户名及密码是本机的记录，而不是从其他电脑端拷贝过来的
-                LoginName = SoftBasic.GetValueFromJsonObject(json, nameof(LoginName), LoginName);
                 IsNewVersionRunning = SoftBasic.GetValueFromJsonObject(json, nameof(IsNewVersionRunning), IsNewVersionRunning);
                 Password = SoftBasic.GetValueFromJsonObject(json, nameof(Password), Password);
                 LoginTime = SoftBasic.GetValueFromJsonObject(json, nameof(LoginTime), LoginTime);
                 IsThemeDark = SoftBasic.GetValueFromJsonObject(json, nameof(IsThemeDark), IsThemeDark);
+                PasswordOverdueDays = SoftBasic.GetValueFromJsonObject(json, nameof(PasswordOverdueDays), PasswordOverdueDays);
             }
         }
 

@@ -46,19 +46,21 @@ namespace 软件系统客户端Wpf
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             WindowToolTip.Opacity = 0;
-            TextBlockSoftName.Text = CommonLibrary.Resource.StringResouce.SoftName;
+
+            TextBlockSoftName.Text = SoftResources.StringResouce.SoftName;
             TextBlockSoftVersion.Text = UserClient.CurrentVersion.ToString();
-            TextBlockSoftCopyright.Text = $"本软件著作权归{CommonLibrary.Resource.StringResouce.SoftCopyRight}所有";
+            TextBlockSoftCopyright.Text = $"本软件著作权归{CommonLibrary.SoftResources.StringResouce.SoftCopyRight}所有";
 
 
             // 上次登录为7天以前则清除账户密码
-            if ((DateTime.Now - UserClient.JsonSettings.LoginTime).TotalDays < 7)
+            if ((DateTime.Now - UserClient.JsonSettings.LoginTime).TotalDays < UserClient.JsonSettings.PasswordOverdueDays)
             {
                 //加载数据
                 NameTextBox.Text = UserClient.JsonSettings.LoginName ?? "";
                 PasswordBox.Password = UserClient.JsonSettings.Password ?? "";
                 Remember.IsChecked = UserClient.JsonSettings.Password != "";
             }
+
             //初始化输入焦点
             if (UserClient.JsonSettings.Password != "") LoginButton.Focus();
             else if (UserClient.JsonSettings.LoginName != "") PasswordBox.Focus();

@@ -1392,6 +1392,143 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:HslCommunication.NetHandle">
+            <summary>
+            用于网络传递的信息头，使用上等同于int
+            </summary>
+        </member>
+        <member name="M:HslCommunication.NetHandle.op_Implicit(System.Int32)~HslCommunication.NetHandle">
+            <summary>
+            赋值操作，可以直接赋值int数据
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:HslCommunication.NetHandle.op_Implicit(HslCommunication.NetHandle)~System.Int32">
+            <summary>
+            也可以赋值给int数据
+            </summary>
+            <param name="netHandle"></param>
+        </member>
+        <member name="M:HslCommunication.NetHandle.op_Equality(HslCommunication.NetHandle,HslCommunication.NetHandle)">
+            <summary>
+            判断是否相等
+            </summary>
+            <param name="netHandle1">第一个数</param>
+            <param name="netHandle2">第二个数</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetHandle.op_Inequality(HslCommunication.NetHandle,HslCommunication.NetHandle)">
+            <summary>
+            判断是否不相等
+            </summary>
+            <param name="netHandle1"></param>
+            <param name="netHandle2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetHandle.op_Addition(HslCommunication.NetHandle,HslCommunication.NetHandle)">
+            <summary>
+            两个数值相加
+            </summary>
+            <param name="netHandle1"></param>
+            <param name="netHandle2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetHandle.op_Subtraction(HslCommunication.NetHandle,HslCommunication.NetHandle)">
+            <summary>
+            两个数值相减
+            </summary>
+            <param name="netHandle1"></param>
+            <param name="netHandle2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetHandle.op_LessThan(HslCommunication.NetHandle,HslCommunication.NetHandle)">
+            <summary>
+            判断是否小于另一个数值
+            </summary>
+            <param name="netHandle1"></param>
+            <param name="netHandle2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetHandle.op_GreaterThan(HslCommunication.NetHandle,HslCommunication.NetHandle)">
+            <summary>
+            判断是否大于另一个数值
+            </summary>
+            <param name="netHandle1"></param>
+            <param name="netHandle2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetHandle.#ctor(System.Int32)">
+            <summary>
+            初始化一个暗号对象
+            </summary>
+        </member>
+        <member name="M:HslCommunication.NetHandle.#ctor(System.Byte,System.Byte,System.UInt16)">
+            <summary>
+            根据三个值来初始化暗号对象
+            </summary>
+            <param name="major">主暗号</param>
+            <param name="minor">次暗号</param>
+            <param name="identifier">暗号编号</param>
+        </member>
+        <member name="F:HslCommunication.NetHandle.m_CodeValue">
+            <summary>
+            完整的暗号值
+            </summary>
+        </member>
+        <member name="F:HslCommunication.NetHandle.m_CodeMajor">
+            <summary>
+            主暗号分类0-255
+            </summary>
+        </member>
+        <member name="F:HslCommunication.NetHandle.m_CodeMinor">
+            <summary>
+            次要的暗号分类0-255
+            </summary>
+        </member>
+        <member name="F:HslCommunication.NetHandle.m_CodeIdentifier">
+            <summary>
+            暗号的编号分类0-65535
+            </summary>
+        </member>
+        <member name="P:HslCommunication.NetHandle.CodeValue">
+            <summary>
+            完整的暗号值
+            </summary>
+        </member>
+        <member name="P:HslCommunication.NetHandle.CodeMajor">
+            <summary>
+            主暗号分类0-255
+            </summary>
+        </member>
+        <member name="P:HslCommunication.NetHandle.CodeMinor">
+            <summary>
+            次要的暗号分类0-255
+            </summary>
+        </member>
+        <member name="P:HslCommunication.NetHandle.CodeIdentifier">
+            <summary>
+            暗号的编号分类0-65535
+            </summary>
+        </member>
+        <member name="M:HslCommunication.NetHandle.ToString">
+            <summary>
+            获取完整的暗号数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetHandle.Equals(System.Object)">
+            <summary>
+            判断两个实例是否相同
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetHandle.GetHashCode">
+            <summary>
+            获取哈希值
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HslCommunication.HslCommunicationCode">
             <summary>
             用于本程序集访问通信的暗号说明
@@ -2414,7 +2551,7 @@
             </summary>
             <param name="obj"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetComplexServer.Send(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.String)">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.Send(HslCommunication.Enthernet.AsyncStateOne,HslCommunication.NetHandle,System.String)">
             <summary>
             服务器端用于数据发送文本的方法
             </summary>
@@ -2422,7 +2559,7 @@
             <param name="customer">用户自定义的数据对象，如不需要，赋值为0</param>
             <param name="str">发送的文本</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetComplexServer.Send(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.Send(HslCommunication.Enthernet.AsyncStateOne,HslCommunication.NetHandle,System.Byte[])">
             <summary>
             服务器端用于发送字节的方法
             </summary>
@@ -2430,14 +2567,14 @@
             <param name="customer">用户自定义的数据对象，如不需要，赋值为0</param>
             <param name="bytes">实际发送的数据</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetComplexServer.SendAllClients(System.Int32,System.String)">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.SendAllClients(HslCommunication.NetHandle,System.String)">
             <summary>
             服务端用于发送所有数据到所有的客户端
             </summary>
             <param name="customer">用户自定义的命令头</param>
             <param name="str">需要传送的实际的数据</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetComplexServer.SendAllClients(System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.SendAllClients(HslCommunication.NetHandle,System.Byte[])">
             <summary>
             服务端用于发送所有数据到所有的客户端
             </summary>
@@ -2545,14 +2682,14 @@
             <param name="receive"></param>
             <param name="ex"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetComplexClient.Send(System.Int32,System.String)">
+        <member name="M:HslCommunication.Enthernet.NetComplexClient.Send(HslCommunication.NetHandle,System.String)">
             <summary>
             服务器端用于数据发送文本的方法
             </summary>
             <param name="customer">用户自定义的命令头</param>
             <param name="str">发送的文本</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetComplexClient.Send(System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetComplexClient.Send(HslCommunication.NetHandle,System.Byte[])">
             <summary>
             服务器端用于发送字节的方法
             </summary>
@@ -2585,7 +2722,7 @@
             </summary>
             <param name="end_point">服务器的通信地址</param>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServer(System.Int32,System.String,System.Action{System.Int64,System.Int64},System.Action{System.Int64,System.Int64})">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServer(HslCommunication.NetHandle,System.String,System.Action{System.Int64,System.Int64},System.Action{System.Int64,System.Int64})">
             <summary>
             客户端向服务器进行请求，请求字符串数据
             </summary>
@@ -2595,7 +2732,7 @@
             <param name="receiveStatus">接收数据时的进度报告</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServer(System.Int32,System.Byte[],System.Action{System.Int64,System.Int64},System.Action{System.Int64,System.Int64})">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyClient.ReadFromServer(HslCommunication.NetHandle,System.Byte[],System.Action{System.Int64,System.Int64},System.Action{System.Int64,System.Int64})">
             <summary>
             客户端向服务器进行请求，请求字节数据
             </summary>
@@ -2776,7 +2913,7 @@
             </summary>
             <param name="endpoint"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetUdpClient.SendMessage(System.Int32,System.Byte[])">
+        <member name="M:HslCommunication.Enthernet.NetUdpClient.SendMessage(HslCommunication.NetHandle,System.Byte[])">
             <summary>
             发送字节数据到服务器
             </summary>
@@ -2786,7 +2923,7 @@
             <exception cref="T:System.Net.Sockets.SocketException"></exception>
             <exception cref="T:System.ObjectDisposedException"></exception>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetUdpClient.SendMessage(System.Int32,System.String)">
+        <member name="M:HslCommunication.Enthernet.NetUdpClient.SendMessage(HslCommunication.NetHandle,System.String)">
             <summary>
             发送字符串数据到服务器
             </summary>

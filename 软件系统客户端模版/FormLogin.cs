@@ -42,8 +42,8 @@ namespace 软件系统客户端模版
             UserClient.JsonSettings.LoadByFile();//根据实际实际情况选中解密算法，默认采用DES加密解密算法
 
             label_version.Text = "版本：" + UserClient.CurrentVersion.ToString();
-            label2.Text = CommonLibrary.Resource.StringResouce.SoftName;
-            label_copyright.Text = $"本软件著作权归{CommonLibrary.Resource.StringResouce.SoftCopyRight}所有";
+            label2.Text = CommonLibrary.SoftResources.StringResouce.SoftName;
+            label_copyright.Text = $"本软件著作权归{CommonLibrary.SoftResources.StringResouce.SoftCopyRight}所有";
         }
 
         private void FormLogin_Shown(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace 软件系统客户端模版
             IsWindowShow = true;
 
             //如果七天未登录，账户密码清除
-            if ((DateTime.Now - UserClient.JsonSettings.LoginTime).TotalDays < 7)
+            if ((DateTime.Now - UserClient.JsonSettings.LoginTime).TotalDays < UserClient.JsonSettings.PasswordOverdueDays)
             {
                 //加载数据
                 textBox_userName.Text = UserClient.JsonSettings.LoginName ?? "";
@@ -94,7 +94,6 @@ namespace 软件系统客户端模版
 
         private void userButton_login_Click(object sender, EventArgs e)
         {
-
             label_status.Visible = true;
             //验证输入
             if (string.IsNullOrEmpty(textBox_userName.Text))

@@ -157,7 +157,7 @@ namespace 软件系统客户端Wpf
             Account_address.Text = UserClient.UserAccount.LastLoginIpAddress;
 
             //状态栏设置
-            TextBlock_CopyRight.Text = $"本软件著作权归{Resource.StringResouce.SoftCopyRight}所有";
+            TextBlock_CopyRight.Text = $"本软件著作权归{SoftResources.StringResouce.SoftCopyRight}所有";
 
             //绑定事件，仅执行一次，不能放到show方法里
             net_socket_client.MessageAlerts += Net_socket_client_MessageAlerts;
@@ -322,8 +322,8 @@ namespace 软件系统客户端Wpf
 
         private void MenuItem关于本软件_Click(object sender, RoutedEventArgs e)
         {
-            using (FormAbout fa = new FormAbout(Resource.StringResouce.SoftName,
-                UserClient.CurrentVersion, 2017, Resource.StringResouce.SoftCopyRight))
+            using (FormAbout fa = new FormAbout(SoftResources.StringResouce.SoftName,
+                UserClient.CurrentVersion, 2017, SoftResources.StringResouce.SoftCopyRight))
             {
                 fa.ShowDialog();
             }
@@ -416,7 +416,7 @@ namespace 软件系统客户端Wpf
         /// <param name="state">网络连接对象</param>
         /// <param name="customer">用户自定义的指令头，用来区分数据用途</param>
         /// <param name="data">数据</param>
-        private void Net_socket_client_AcceptString(AsyncStateOne state, int customer, string data)
+        private void Net_socket_client_AcceptString(AsyncStateOne state, NetHandle customer, string data)
         {
             if (customer == CommonHeadCode.MultiNetHeadCode.弹窗新消息)
             {
@@ -482,7 +482,7 @@ namespace 软件系统客户端Wpf
             }
         }
 
-        private void Net_socket_client_AcceptByte(AsyncStateOne object1, int customer, byte[] object2)
+        private void Net_socket_client_AcceptByte(AsyncStateOne object1, NetHandle customer, byte[] object2)
         {
             //接收到服务器发来的字节数据
             if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
@@ -520,16 +520,7 @@ namespace 软件系统客户端Wpf
                 TextBlock_ClientStatus.Text = object1;
             }));
         }
-
-
-
-
-
-
-
-
-
-
+        
 
         #endregion
 

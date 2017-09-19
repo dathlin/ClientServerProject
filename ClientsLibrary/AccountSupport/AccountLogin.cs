@@ -27,15 +27,23 @@ namespace ClientsLibrary
         /// <summary>
         /// 系统统一的登录模型
         /// </summary>
-        /// <param name="message_show"></param>
-        /// <param name="start_update"></param>
-        /// <param name="thread_finish"></param>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
-        /// <param name="remember"></param>
-        /// <param name="clientType"></param>
+        /// <param name="message_show">信息提示方法</param>
+        /// <param name="start_update">启动更新方法</param>
+        /// <param name="thread_finish">线程结束后的复原方法</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="password">密码</param>
+        /// <param name="remember">是否记住登录密码</param>
+        /// <param name="clientType">客户端登录类型</param>
         /// <returns></returns>
-        public static bool AccountLoginServer(Action<string> message_show, Action start_update, Action thread_finish,string userName,string password,bool remember,string clientType)
+        public static bool AccountLoginServer(
+            Action<string> message_show, 
+            Action start_update, 
+            Action thread_finish,
+            string userName,
+            string password,
+            bool remember,
+            string clientType
+            )
         {
             message_show.Invoke("正在维护检查...");
 

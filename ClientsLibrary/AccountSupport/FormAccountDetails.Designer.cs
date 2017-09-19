@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("我的文件（下载中）");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("我的文件（下载中）");
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox_UserPortrait = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -55,10 +55,10 @@
             this.textBox_UserName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.userButton2 = new HslCommunication.Controls.UserButton();
             this.userButton1 = new HslCommunication.Controls.UserButton();
             this.userButton_upload = new HslCommunication.Controls.UserButton();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_UserPortrait)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -331,21 +331,7 @@
             this.groupBox2.Size = new System.Drawing.Size(373, 492);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "个人文件";
-            // 
-            // treeView1
-            // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.treeView1.Location = new System.Drawing.Point(10, 24);
-            this.treeView1.Name = "treeView1";
-            treeNode4.Name = "files_root";
-            treeNode4.Text = "我的文件（下载中）";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
-            this.treeView1.ShowLines = false;
-            this.treeView1.Size = new System.Drawing.Size(353, 429);
-            this.treeView1.TabIndex = 0;
+            this.groupBox2.Text = "个人文件，支持拖拽";
             // 
             // userButton2
             // 
@@ -392,7 +378,24 @@
             this.userButton_upload.UIText = "上传";
             this.userButton_upload.Click += new System.EventHandler(this.userButton_upload_Click);
             // 
-            // AccountDetails
+            // treeView1
+            // 
+            this.treeView1.AllowDrop = true;
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeView1.Location = new System.Drawing.Point(10, 24);
+            this.treeView1.Name = "treeView1";
+            treeNode1.Name = "files_root";
+            treeNode1.Text = "我的文件（下载中）";
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            this.treeView1.ShowLines = false;
+            this.treeView1.Size = new System.Drawing.Size(353, 429);
+            this.treeView1.TabIndex = 0;
+            this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
+            this.treeView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView1_DragEnter);
+            // 
+            // FormAccountDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -404,7 +407,7 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(722, 555);
             this.MinimumSize = new System.Drawing.Size(722, 555);
-            this.Name = "AccountDetails";
+            this.Name = "FormAccountDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AccountDetails";
             this.Load += new System.EventHandler(this.AccountDetails_Load);

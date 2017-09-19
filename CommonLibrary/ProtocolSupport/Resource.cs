@@ -8,7 +8,7 @@ namespace CommonLibrary
     /// <summary>
     /// 所有的数据资源中心
     /// </summary>
-    public class Resource
+    public class SoftResources
     {
         /// <summary>
         /// 字符串资源中心
