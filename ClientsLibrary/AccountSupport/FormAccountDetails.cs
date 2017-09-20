@@ -172,6 +172,15 @@ namespace ClientsLibrary
             DownloadUserFileNames();
         }
 
+        private void treeView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // 双击下载
+            if (e.Button == MouseButtons.Left)
+            {
+                userButton1_Click(null, new EventArgs());
+            }
+        }
+
         private void userButton1_Click(object sender, EventArgs e)
         {
             // 下载选择文件
@@ -288,5 +297,7 @@ namespace ClientsLibrary
                 e.Effect = DragDropEffects.None;
             }
         }
+
+     
     }
 }

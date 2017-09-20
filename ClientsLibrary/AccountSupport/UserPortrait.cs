@@ -70,9 +70,11 @@ namespace ClientsLibrary
                     bitmap300.Save(path300);
                     Bitmap bitmap32 = fps.GetSpecifiedSizeImage(32);
                     bitmap32.Save(path32);
-                    //传送服务器
                     bitmap300.Dispose();
                     bitmap32.Dispose();
+
+                    
+                    // 传送服务器
 
                     using (FormFileOperate ffo = new FormFileOperate(
                         UserClient.Net_File_Client,

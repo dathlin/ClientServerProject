@@ -409,12 +409,12 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_simplify_server.KeyToken = CommonLibrary.CommonProtocol.KeyToken;//设置身份令牌
+                net_simplify_server.KeyToken = CommonProtocol.KeyToken;//设置身份令牌
                 net_simplify_server.LogNet = new LogNetSingle(LogSavePath + @"\simplify_log.txt");//日志路径
                 net_simplify_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_simplify_server.ReceiveStringEvent += Net_simplify_server_ReceiveStringEvent;//接收到字符串触发
                 net_simplify_server.ReceivedBytesEvent += Net_simplify_server_ReceivedBytesEvent;//接收到字节触发
-                net_simplify_server.ServerStart(CommonLibrary.CommonProtocol.Port_Second_Net);
+                net_simplify_server.ServerStart(CommonProtocol.Port_Second_Net);
                 net_simplify_server.ConnectTimeout = 5200;
             }
             catch (Exception ex)
@@ -455,61 +455,70 @@ namespace 软件系统服务端模版
         /// 接收到来自客户端的数据，此处需要放置维护验证，更新验证等等操作
         /// </summary>
         /// <param name="state">客户端的地址</param>
-        /// <param name="customer">用于自定义的指令头，可不用，转而使用data来区分</param>
+        /// <param name="handle">用于自定义的指令头，可不用，转而使用data来区分</param>
         /// <param name="data">接收到的服务器的数据</param>
-        private void Net_simplify_server_ReceiveStringEvent(AsyncStateOne state, NetHandle customer, string data)
+        private void Net_simplify_server_ReceiveStringEvent(AsyncStateOne state, NetHandle handle, string data)
         {
-            //必须返回结果，调用SendMessage(object1,[实际数据]);
-            if (CommonHeadCode.SimplifyHeadCode.IsCustomerGroupSystem(customer))
+
+            /*******************************************************************************************
+             * 
+             *     说明：同步消息处理总站，应该根据不同的消息设置分流到不同的处理方法
+             *     
+             *     注意：处理完成后必须调用 net_simplify_server.SendMessage(state, customer, "处理结果字符串，可以为空");
+             *
+             *******************************************************************************************/
+
+            if (handle.CodeMajor == 1 && handle.CodeMinor == 1)
             {
-                DataProcessingWithStartA(state, customer, data);
+                DataProcessingWithStartA(state, handle, data);
             }
-            else if (CommonHeadCode.SimplifyHeadCode.IsCustomerGroupLogging(customer))
+            else if (handle.CodeMajor == 1 && handle.CodeMinor == 2)
             {
-                DataProcessingWithStartB(state, customer, data);
+                DataProcessingWithStartB(state, handle, data);
             }
             else
             {
-                net_simplify_server.SendMessage(state, customer, data);
+                net_simplify_server.SendMessage(state, handle, data);
             }
         }
 
 
         /****************************************************************************************************
          * 
-         * 
          *    数据处理中心，同步信息中的所有的细节处理均要到此处来处理
          * 
-         * 
          ****************************************************************************************************/
+         
+        #region 1.1.X 系统指令块
+            
         /// <summary>
-        /// A指令块，处理系统基础运行的消息
+        /// 1.1.x指令块，处理系统基础运行的消息
         /// </summary>
         /// <param name="state">网络状态对象</param>
-        /// <param name="customer">用户自定义的指令头</param>
+        /// <param name="handle">用户自定义的指令头</param>
         /// <param name="data">实际的数据</param>
-        private void DataProcessingWithStartA(AsyncStateOne state, int customer, string data)
+        private void DataProcessingWithStartA(AsyncStateOne state, NetHandle handle, string data)
         {
-            if (customer == CommonHeadCode.SimplifyHeadCode.维护检查)
+            if (handle == CommonHeadCode.SimplifyHeadCode.维护检查)
             {
-                net_simplify_server.SendMessage(state, customer,
+                net_simplify_server.SendMessage(state, handle,
                 UserServer.ServerSettings.Can_Account_Login ? "1" : "0" +
                 UserServer.ServerSettings.Account_Forbidden_Reason);
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.更新检查)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.更新检查)
             {
-                net_simplify_server.SendMessage(state, customer, UserServer.ServerSettings.SystemVersion.ToString());
+                net_simplify_server.SendMessage(state, handle, UserServer.ServerSettings.SystemVersion.ToString());
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.参数下载)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.参数下载)
             {
                 JObject json = new JObject
                 {
                     { nameof(UserServer.ServerSettings.Announcement), new JValue(UserServer.ServerSettings.Announcement) },
                     { nameof(UserServer.ServerSettings.SystemFactories), new JArray(UserServer.ServerSettings.SystemFactories) },
                 };
-                net_simplify_server.SendMessage(state, customer, json.ToString());
+                net_simplify_server.SendMessage(state, handle, json.ToString());
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.账户检查)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.账户检查)
             {
                 //此处使用的是组件自带的验证的方式，如果使用SQL数据库，另行验证
                 JObject json = JObject.Parse(data);
@@ -528,27 +537,27 @@ namespace 软件系统服务端模版
                         account.ForbidMessage = "该账户已经登录";
                     }
                 }
-                net_simplify_server.SendMessage(state, customer, JObject.FromObject(account).ToString());
+                net_simplify_server.SendMessage(state, handle, JObject.FromObject(account).ToString());
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.更新公告)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.更新公告)
             {
                 UserServer.ServerSettings.Announcement = data;
                 //通知所有客户端更新公告
-                net_socket_server.SendAllClients(customer, data);
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_socket_server.SendAllClients(handle, data);
+                net_simplify_server.SendMessage(state, handle, "成功");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.获取账户)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.获取账户)
             {
                 //返回服务器的账户信息
-                net_simplify_server.SendMessage(state, customer, UserServer.ServerAccounts.GetAllAccountsJson());
+                net_simplify_server.SendMessage(state, handle, UserServer.ServerAccounts.GetAllAccountsJson());
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.更细账户)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.更细账户)
             {
                 //更新服务器的账户信息
                 UserServer.ServerAccounts.LoadAllAccountsJson(data);
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.密码修改)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.密码修改)
             {
                 //更新服务器的账户密码，此处使用的是组件自带的验证的方式，如果使用SQL数据库，另行验证
                 JObject json = JObject.Parse(data);
@@ -556,9 +565,9 @@ namespace 软件系统服务端模版
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
                 UserServer.ServerAccounts.UpdatePassword(name, password);
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.更新版本)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.更新版本)
             {
                 try
                 {
@@ -567,40 +576,40 @@ namespace 软件系统服务端模版
                     toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
                     //记录数据
                     RuntimeLogHelper.WriteInfo($"更改了版本号：{data}");
-                    net_simplify_server.SendMessage(state, customer, "1");
+                    net_simplify_server.SendMessage(state, handle, "1");
                 }
                 catch
                 {
-                    net_simplify_server.SendMessage(state, customer, "0");
+                    net_simplify_server.SendMessage(state, handle, "0");
                 }
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.注册账号)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.注册账号)
             {
                 bool result = UserServer.ServerAccounts.AddNewAccount(data);
-                net_simplify_server.SendMessage(state, customer, result ? "1" : "0");
+                net_simplify_server.SendMessage(state, handle, result ? "1" : "0");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.请求文件)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.请求文件)
             {
-                net_simplify_server.SendMessage(state, customer, net_simple_file_server.ToJsonString());
+                net_simplify_server.SendMessage(state, handle, net_simple_file_server.ToJsonString());
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.意见反馈)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.意见反馈)
             {
                 AdviceLogHelper.WriteInfo(data);
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.群发消息)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.群发消息)
             {
                 net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.弹窗新消息, data);
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.异常消息)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.异常消息)
             {
                 ClientsLogHelper.WriteFatal(data);
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
                 //发送到邮箱
                 SendUserMail("异常记录", "时间：" + DateTime.Now.ToString("O") + Environment.NewLine + data);
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.上传头像MD5)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.上传头像MD5)
             {
                 try
                 {
@@ -612,14 +621,14 @@ namespace 软件系统服务端模版
                     string UserName = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, ""); 
 
                     UserServer.ServerAccounts.UpdatePortraitMD5(UserName, SmallPortraitMD5, LargePortraitMD5);
-                    net_simplify_server.SendMessage(state, customer, "成功");
+                    net_simplify_server.SendMessage(state, handle, "成功");
                 }
                 catch(Exception ex)
                 {
-                    net_simplify_server.SendMessage(state, customer, "失败，原因是：" + ex.Message);
+                    net_simplify_server.SendMessage(state, handle, "失败，原因是：" + ex.Message);
                 }
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.上传分厂)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.上传分厂)
             {
                 try
                 {
@@ -630,177 +639,185 @@ namespace 软件系统服务端模版
                 {
                     RuntimeLogHelper?.WriteException(null, ex);
                 }
-                net_simplify_server.SendMessage(state, customer, "1");
+                net_simplify_server.SendMessage(state, handle, "1");
             }
             else
             {
-                net_simplify_server.SendMessage(state, customer, data);
+                net_simplify_server.SendMessage(state, handle, data);
             }
         }
+
+
+        #endregion
+        
+        #region 1.2.X 系统日志块
 
         /// <summary>
         /// B指令块，处理日志相关的消息
         /// </summary>
         /// <param name="state">网络状态对象</param>
-        /// <param name="customer">用户自定义的命令头</param>
+        /// <param name="handle">用户自定义的命令头</param>
         /// <param name="data">实际的数据</param>
-        private void DataProcessingWithStartB(AsyncStateOne state, int customer, string data)
+        private void DataProcessingWithStartB(AsyncStateOne state, NetHandle handle, string data)
         {
-            if (customer == CommonHeadCode.SimplifyHeadCode.网络日志查看)
+            if (handle == CommonHeadCode.SimplifyHeadCode.网络日志查看)
             {
                 LogNetSingle logNet = (LogNetSingle)net_socket_server.LogNet;
-                net_simplify_server.SendMessage(state, customer, logNet.GetAllSavedLog());
+                net_simplify_server.SendMessage(state, handle, logNet.GetAllSavedLog());
                 RuntimeLogHelper.WriteInfo("网络日志查看");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.网络日志清空)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.网络日志清空)
             {
                 if (net_socket_server.LogNet is LogNetSingle logNet)
                 {
                     logNet.ClearLog();
                 }
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
                 RuntimeLogHelper.WriteWarn("网络日志清空");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.同步日志查看)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.同步日志查看)
             {
                 LogNetSingle logNet = (LogNetSingle)net_simplify_server.LogNet;
-                net_simplify_server.SendMessage(state, customer, logNet.GetAllSavedLog());
+                net_simplify_server.SendMessage(state, handle, logNet.GetAllSavedLog());
                 RuntimeLogHelper.WriteInfo("同步日志查看");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.同步日志清空)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.同步日志清空)
             {
                 if (net_simplify_server.LogNet is LogNetSingle logNet)
                 {
                     logNet.ClearLog();
                 }
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
                 RuntimeLogHelper.WriteWarn("同步日志清空");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.更新日志查看)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.更新日志查看)
             {
                 LogNetSingle logNet = (LogNetSingle)net_soft_update_Server.LogNet;
-                net_simplify_server.SendMessage(state, customer, logNet.GetAllSavedLog());
+                net_simplify_server.SendMessage(state, handle, logNet.GetAllSavedLog());
                 RuntimeLogHelper.WriteInfo("更新日志查看");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.更新日志清空)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.更新日志清空)
             {
                 if (net_soft_update_Server.LogNet is LogNetSingle logNet)
                 {
                     logNet.ClearLog();
                 }
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
                 RuntimeLogHelper.WriteWarn("更新日志清空");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.运行日志查看)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.运行日志查看)
             {
                 LogNetSingle logNet = (LogNetSingle)RuntimeLogHelper;
-                net_simplify_server.SendMessage(state, customer, logNet.GetAllSavedLog());
+                net_simplify_server.SendMessage(state, handle, logNet.GetAllSavedLog());
                 RuntimeLogHelper.WriteInfo("运行日志查看");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.运行日志清空)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.运行日志清空)
             {
                 if (RuntimeLogHelper is LogNetSingle logNet)
                 {
                     logNet.ClearLog();
                 }
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
                 RuntimeLogHelper.WriteWarn("运行日志清空");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.文件日志查看)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.文件日志查看)
             {
                 LogNetSingle logNet = (LogNetSingle)net_simple_file_server.LogNet;
-                net_simplify_server.SendMessage(state, customer, logNet.GetAllSavedLog());
+                net_simplify_server.SendMessage(state, handle, logNet.GetAllSavedLog());
                 RuntimeLogHelper.WriteInfo("共享文件日志查看");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.文件日志清空)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.文件日志清空)
             {
                 if (net_simple_file_server.LogNet is LogNetSingle logNet)
                 {
                     logNet.ClearLog();
                 }
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
                 RuntimeLogHelper.WriteWarn("共享文件日志清空");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.反馈日志查看)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.反馈日志查看)
             {
                 LogNetSingle logNet = (LogNetSingle)AdviceLogHelper;
-                net_simplify_server.SendMessage(state, customer, logNet.GetAllSavedLog());
+                net_simplify_server.SendMessage(state, handle, logNet.GetAllSavedLog());
                 RuntimeLogHelper.WriteInfo("建议反馈日志查看");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.反馈日志清空)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.反馈日志清空)
             {
                 if (AdviceLogHelper is LogNetSingle logNet)
                 {
                     logNet.ClearLog();
                 }
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
                 RuntimeLogHelper.WriteWarn("建议反馈日志清空");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.UDP日志查看)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.UDP日志查看)
             {
                 LogNetSingle logNet = (LogNetSingle)net_udp_server.LogNet;
                 net_simplify_server.SendMessage(state, 0, logNet.GetAllSavedLog());
                 RuntimeLogHelper.WriteInfo("UDP日志查看");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.UDP日志清空)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.UDP日志清空)
             {
                 if (net_udp_server.LogNet is LogNetSingle logNet)
                 {
                     logNet.ClearLog();
                 }
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
                 RuntimeLogHelper.WriteWarn("UDP日志清空");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.客户端日志查看)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.客户端日志查看)
             {
                 LogNetSingle logNet = ClientsLogHelper as LogNetSingle;
                 net_simplify_server.SendMessage(state, 0, logNet.GetAllSavedLog());
                 RuntimeLogHelper.WriteInfo("客户端日志查看");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.客户端日志清空)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.客户端日志清空)
             {
                 if (ClientsLogHelper is LogNetSingle logNet)
                 {
                     logNet.ClearLog();
                 }
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
                 RuntimeLogHelper.WriteWarn("客户端日志清空");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.头像日志查看)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.头像日志查看)
             {
                 LogNetSingle logNet = (LogNetSingle)net_file_Advanced.LogNet;
                 net_simplify_server.SendMessage(state, 0, logNet.GetAllSavedLog());
                 RuntimeLogHelper.WriteInfo("头像日志查看");
             }
-            else if (customer == CommonHeadCode.SimplifyHeadCode.头像日志清空)
+            else if (handle == CommonHeadCode.SimplifyHeadCode.头像日志清空)
             {
                 if (net_file_Advanced.LogNet is LogNetSingle logNet)
                 {
                     logNet.ClearLog();
                 }
-                net_simplify_server.SendMessage(state, customer, "成功");
+                net_simplify_server.SendMessage(state, handle, "成功");
                 RuntimeLogHelper.WriteWarn("头像日志清空");
             }
             else
             {
-                net_simplify_server.SendMessage(state, customer, data);
+                net_simplify_server.SendMessage(state, handle, data);
             }
         }
 
 
+        #endregion
+
+        #region 1.3.X 自行扩充块
+
         /****************************************************************************************************
-         * 
          * 
          *   您在下面可以自己扩展数据处理的方法，设计原则为运行速度尽可能的快，不要长时间阻塞
          * 
-         * 
          ****************************************************************************************************/
 
-        private void DataProcessingWithStartC(AsyncStateOne state, int customer, string data)
+        private void DataProcessingWithStartC(AsyncStateOne state, NetHandle handle, string data)
         {
-            // 下面随便扩充
-        }
 
+        }
+        
+        #endregion
 
         #endregion
 
@@ -847,17 +864,18 @@ namespace 软件系统服务端模版
          ******************************************************************************************************************/
 
 
-        private void Net_socket_server_AcceptString(AsyncStateOne object1, NetHandle customer, string data)
+        private void Net_socket_server_AcceptString(AsyncStateOne object1, NetHandle handle, string data)
         {
-            //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字符串都会到此处处理
-            if (CommonHeadCode.MultiNetHeadCode.IsCustomerGroupSystem(customer))
+            if (handle.CodeMajor == 2 && handle.CodeMinor == 1)
             {
-                //H类系统指令
-                DataProcessingWithStartH(object1, customer, data);
+                DataProcessingWithStartH(object1, handle, data);
             }
 
         }
 
+
+        #region 2.1.X 指令处理块
+        
         /// <summary>
         /// H开头的处理块
         /// </summary>
@@ -871,6 +889,9 @@ namespace 软件系统服务端模版
                 ChatAddMessage(state.LoginAlias, data);
             }
         }
+
+        
+        #endregion
 
 
         private void Net_socket_server_AcceptByte(AsyncStateOne state, NetHandle customer, byte[] data)

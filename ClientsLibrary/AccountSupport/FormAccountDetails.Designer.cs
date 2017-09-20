@@ -331,7 +331,7 @@
             this.groupBox2.Size = new System.Drawing.Size(373, 492);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "个人文件，支持拖拽";
+            this.groupBox2.Text = "个人文件，支持拖拽上传，双击下载";
             // 
             // userButton2
             // 
@@ -394,6 +394,7 @@
             this.treeView1.TabIndex = 0;
             this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
             this.treeView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView1_DragEnter);
+            this.treeView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDoubleClick);
             // 
             // FormAccountDetails
             // 

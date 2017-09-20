@@ -86,8 +86,8 @@
       <DependentUpon>FormVersionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="BasicSupport\SoftSettings.cs" />
-    <Compile Include="ProtocolSupport\Common.cs" />
-    <Compile Include="ProtocolSupport\HeadCode.cs" />
+    <Compile Include="ProtocolSupport\CommonProtocol.cs" />
+    <Compile Include="ProtocolSupport\CustomerCode.cs" />
     <Compile Include="OrderSupport\ClassGoods.cs" />
     <Compile Include="OrderSupport\ClassOrder.cs" />
     <Compile Include="PortraitSupport\PortraitSupport.cs" />

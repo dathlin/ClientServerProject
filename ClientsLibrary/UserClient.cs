@@ -6,7 +6,6 @@ using HslCommunication.Enthernet;
 using HslCommunication.BasicFramework;
 using CommonLibrary;
 using System.Net;
-using CommonLibrary;
 
 namespace ClientsLibrary
 {
