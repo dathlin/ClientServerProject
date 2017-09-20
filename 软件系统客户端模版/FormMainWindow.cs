@@ -18,9 +18,9 @@ using HslCommunication.LogNet;
 
 /***************************************************************************************
  * 
- *    模版日期    2017-09-02
- *    创建人      胡少林
- *    版权所有    胡少林
+ *    模版日期    2017-09-20
+ *    创建人      Richard.Hu
+ *    版权所有    Richard.Hu
  *    授权说明    模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
  *    说明一      JSON组件引用自james newton-king，遵循MIT授权协议
  *    说明二      文件的图标来源于http://fileicons.chromefans.org/,感谢作者的无私分享
@@ -301,11 +301,7 @@ namespace 软件系统客户端模版
             }
         }
 
-
-        private void 更换头像ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SoftUserPortrait.ChangePortrait();
-        }
+        
 
         private void 我的信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -653,11 +649,39 @@ namespace 软件系统客户端模版
 
         private void SoftUserPortraitInitialization()
         {
-            SoftUserPortrait = new UserPortrait(Application.StartupPath + @"\Portrait\" + UserClient.UserAccount.UserName, m => pictureBox1.LoadAsync(m),null);
+            SoftUserPortrait = new UserPortrait(
+                Application.StartupPath + @"\Portrait\" + UserClient.UserAccount.UserName, 
+                LoadSmallProtraitAsync, UnloadSmallProtrait);
         }
 
-       
-        
+
+        private void LoadSmallProtraitAsync(string fileName)
+        {
+            if (IsHandleCreated && InvokeRequired)
+            {
+                Invoke(new Action(() =>
+                {
+                    LoadSmallProtraitAsync(fileName);
+                }));
+                return;
+            }
+
+            pictureBox1.LoadAsync(fileName);
+        }
+
+        private void UnloadSmallProtrait()
+        {
+            if (IsHandleCreated && InvokeRequired)
+            {
+                Invoke(new Action(() =>
+                {
+                    UnloadSmallProtrait();
+                }));
+                return;
+            }
+
+            pictureBox1.Image = null;
+        }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {

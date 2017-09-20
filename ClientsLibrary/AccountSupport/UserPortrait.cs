@@ -35,17 +35,17 @@ namespace ClientsLibrary
         /// 实例化一个新的头像管理类对象
         /// </summary>
         /// <param name="filePath">头像存储的文件夹路径</param>
-        /// <param name="loadPic">加载图片的方法</param>
-        /// <param name="disPic">加载前的操作</param>
-        public UserPortrait(string filePath, Action<string> loadPic, Action disPic)
+        /// <param name="unloadPicSmall">卸载小头像的委托</param>
+        public UserPortrait(string filePath,Action<string> loadPicSmall, Action unloadPicSmall)
         {
             if (!System.IO.Directory.Exists(filePath))
             {
                 System.IO.Directory.CreateDirectory(filePath);
             }
             FileSavePath = filePath;
-            LoadPic = loadPic;
-            DisPic = disPic;
+
+            m_UnloadPicSmall = unloadPicSmall;
+            m_LoadPicSmall = loadPicSmall;
         }
 
         #endregion
@@ -55,7 +55,9 @@ namespace ClientsLibrary
         /// <summary>
         /// 点击更改头像后的操作，打开头像选择对话框，获取到2种分辨率的头像，然后进行上传
         /// </summary>
-        public void ChangePortrait()
+        /// <param name="loadPic">加载大头像的委托</param>
+        /// <param name="unloadPic">卸载大头像的委托</param>
+        public void ChangePortrait(Action<string> loadPic, Action unloadPic)
         {
             using (FormPortraitSelect fps = new FormPortraitSelect())
             {
@@ -64,14 +66,31 @@ namespace ClientsLibrary
                     string path300 = FileSavePath + @"\" + PortraitSupport.LargePortrait;
                     string path32 = FileSavePath + @"\" + PortraitSupport.SmallPortrait;
 
-                    DisPic?.Invoke();
+                    // 先卸载图片
+                    unloadPic?.Invoke();
+                    m_UnloadPicSmall?.Invoke();
 
                     Bitmap bitmap300 = fps.GetSpecifiedSizeImage(300);
-                    bitmap300.Save(path300);
                     Bitmap bitmap32 = fps.GetSpecifiedSizeImage(32);
-                    bitmap32.Save(path32);
-                    bitmap300.Dispose();
-                    bitmap32.Dispose();
+
+                    try
+                    {
+                        bitmap300.Save(path300);
+                        bitmap32.Save(path32);
+                        bitmap300.Dispose();
+                        bitmap32.Dispose();
+                    }
+                    catch(Exception ex)
+                    {
+                        // 文件被占用的时候无法进行覆盖
+                        UserClient.LogNet?.WriteException("头像保存失败！", ex);
+                        MessageBox.Show("头像保存失败，原因：" + ex.Message);
+
+                        // 加载回旧的文件
+                        loadPic?.Invoke(path300);
+                        m_LoadPicSmall?.Invoke(path32);
+                        return;
+                    }
 
                     
                     // 传送服务器
@@ -123,8 +142,6 @@ namespace ClientsLibrary
                             {
                                 UserClient.UserAccount.SmallPortraitMD5 = SmallPortraitMD5;
                                 UserClient.UserAccount.LargePortraitMD5 = LargePortraitMD5;
-                                // 成功上传MD5码
-                                LoadUserSmallPortraint();
                             }
                             else
                             {
@@ -135,6 +152,10 @@ namespace ClientsLibrary
                         {
                             MessageBox.Show("上传头像失败！原因：" + result.Message);
                         }
+
+                        // 先显示信息
+                        loadPic?.Invoke(path300);
+                        m_LoadPicSmall?.Invoke(path32);
 
                     }), null);
                    
@@ -149,7 +170,7 @@ namespace ClientsLibrary
         #region Load Portraint
 
         /// <summary>
-        /// 加载小尺寸的头像操作，可以放到主线程
+        /// 加载小尺寸的头像操作，需要放置到线程池中
         /// </summary>
         public void LoadUserSmallPortraint()
         {
@@ -165,17 +186,19 @@ namespace ClientsLibrary
             string fileName = FileSavePath + @"\" + PortraitSupport.SmallPortrait;
             if (System.IO.File.Exists(fileName))
             {
+                // 先进行加载
+                m_LoadPicSmall?.Invoke(fileName);
                 // 本地存在文件
                 string currentMd5 = SoftBasic.CalculateFileMD5(fileName);
 
                 // 对比验证
                 if (fileName == currentMd5)
                 {
-                    // 加载本地文件
-                    LoadPic?.Invoke(fileName);
                     return;
                 }
             }
+
+            m_UnloadPicSmall?.Invoke();
 
             // 本地不存在文件或校验失败，需要重新下载
             OperateResult result = UserClient.Net_File_Client.DownloadFile(PortraitSupport.SmallPortrait,
@@ -188,7 +211,7 @@ namespace ClientsLibrary
             if(result.IsSuccess)
             {
                 // 下载成功
-                LoadPic?.Invoke(fileName);
+                m_LoadPicSmall?.Invoke(fileName);
             }
             else
             {
@@ -201,7 +224,7 @@ namespace ClientsLibrary
         /// 加载大尺寸的头像方法，需要放到线程池中操作
         /// </summary>
         /// <param name="largeLoadAction"></param>
-        public void LoadUserLargePortraint(Action<string> largeLoadAction)
+        public void LoadUserLargePortraint(Action<string> largeLoadAction, Action largeUnloadAction)
         {
             // 先获取服务器端的MD5码
             string fileMd5 = UserClient.UserAccount.LargePortraitMD5;
@@ -218,6 +241,8 @@ namespace ClientsLibrary
                 // 本地存在文件，先进行加载，如果运算不一致，再重新加载
                 largeLoadAction?.Invoke(fileName);
                 string currentMd5 = null;
+
+
                 try
                 {
                      currentMd5 = SoftBasic.CalculateFileMD5(fileName);
@@ -234,6 +259,8 @@ namespace ClientsLibrary
                     return;
                 }
             }
+
+            largeUnloadAction?.Invoke();
 
             // 本地不存在文件或校验失败，需要重新下载
             OperateResult result = UserClient.Net_File_Client.DownloadFile(PortraitSupport.LargePortrait,
@@ -253,13 +280,14 @@ namespace ClientsLibrary
                 MessageBox.Show("头像从服务器下载失败，错误原因：" + result.Message);
             }
 
+
         }
 
         #endregion
-        
+
         #region Download Portraint
 
-      
+
         /// <summary>
         /// 下载大尺寸的头像并打开它，该方法适合线程池
         /// </summary>
@@ -335,15 +363,16 @@ namespace ClientsLibrary
         /// 文件的路径
         /// </summary>
         private string FileSavePath { get; set; }
-        /// <summary>
-        /// 加载图片的操作
-        /// </summary>
-        private Action<string> LoadPic = null;
-        /// <summary>
-        /// 加载图片前的操作
-        /// </summary>
-        private Action DisPic = null;
 
+        /// <summary>
+        /// 卸载小头像的委托
+        /// </summary>
+        private Action m_UnloadPicSmall { get; set; }
+
+        /// <summary>
+        /// 加载小头像的委托
+        /// </summary>
+        private Action<string> m_LoadPicSmall { get; set; }
 
         #endregion
     }

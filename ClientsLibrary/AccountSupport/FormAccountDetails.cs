@@ -70,42 +70,47 @@ namespace ClientsLibrary
 
         public UserPortrait UserPortrait { get; }
         
-
-        private void LoadPortraitByFileName(string fileName)
-        {
-            if(IsHandleCreated)
-            {
-                if(InvokeRequired)
-                {
-                    BeginInvoke(new Action(() =>
-                    {
-                        LoadPortraitByFileName(fileName);
-                    }));
-                    return;
-                }
-
-                try
-                {
-                    pictureBox_UserPortrait.LoadAsync(fileName);
-                }
-                catch(Exception ex)
-                {
-                    UserClient.LogNet?.WriteException("加载图片异常！", ex);
-                }
-            }
-        }
-        
+ 
 
         private void pictureBox_UserPortrait_Click(object sender, EventArgs e)
         {
-            UserPortrait.ChangePortrait();
-            ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadPoolLoadLargePortrait), null);
+            UserPortrait.ChangePortrait(LoadLargeProtrait,UnloadLargeProtrait);
         }
 
         private void ThreadPoolLoadLargePortrait(object obj)
         {
-            UserPortrait.LoadUserLargePortraint(LoadPortraitByFileName);
+            Thread.Sleep(200);
+            UserPortrait.LoadUserLargePortraint(LoadLargeProtrait, UnloadLargeProtrait);
         }
+
+        private void UnloadLargeProtrait()
+        {
+            if (IsHandleCreated && InvokeRequired)
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    UnloadLargeProtrait();
+                }));
+                return;
+            }
+
+            pictureBox_UserPortrait.Image = null;
+        }
+
+        private void LoadLargeProtrait(string fileName)
+        {
+            if (IsHandleCreated && InvokeRequired)
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    LoadLargeProtrait(fileName);
+                }));
+                return;
+            }
+
+            pictureBox_UserPortrait.ImageLocation = fileName;
+        }
+
 
         #endregion
 
@@ -240,6 +245,9 @@ namespace ClientsLibrary
 
         #endregion
 
+        #region 文件拖拽上传块
+
+
         private void treeView1_DragDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -298,6 +306,7 @@ namespace ClientsLibrary
             }
         }
 
-     
+
+        #endregion
     }
 }

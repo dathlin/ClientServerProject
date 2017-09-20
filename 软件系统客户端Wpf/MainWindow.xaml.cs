@@ -621,23 +621,32 @@ namespace 软件系统客户端Wpf
         {
             SoftUserPortrait = new UserPortrait(AppDomain.CurrentDomain.BaseDirectory + @"Portrait\" + UserClient.UserAccount.UserName, 
                 m => {
-                    byte[] content = System.IO.File.ReadAllBytes(m);
-                    BitmapImage bi = new BitmapImage();
-                    bi.BeginInit();
-                    bi.StreamSource = new System.IO.MemoryStream(content);
-                    bi.EndInit();
-                    AccountPortrait.Source = bi;
+
+                    if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
+                    {
+                        byte[] content = File.ReadAllBytes(m);
+                        BitmapImage bi = new BitmapImage();
+                        bi.BeginInit();
+                        bi.StreamSource = new MemoryStream(content);
+                        bi.EndInit();
+
+                        AccountPortrait.Source = bi;
+                    }));
                 },
                 ()=>
                 {
-                    AccountPortrait.Source = null;
+                    if (IsWindowShow) Dispatcher.Invoke(new Action(() => {
+                         AccountPortrait.Source = null;
+                    }));
                 });
         }
 
         
+
+        
         private void AccountChip_Click(object sender, RoutedEventArgs e)
         {
-            //点击了头像，请求下载高清版本头像
+            // 点击了头像，请求查看高清版本头像
             using (FormMatterRemind fmr = new FormMatterRemind("正在下载图片", SoftUserPortrait.ThreadPoolDownloadSizeLarge))
             {
                 fmr.ShowDialog();
