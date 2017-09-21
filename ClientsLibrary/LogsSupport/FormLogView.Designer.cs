@@ -61,7 +61,7 @@
             this.userButton16.Name = "userButton16";
             this.userButton16.Size = new System.Drawing.Size(103, 26);
             this.userButton16.TabIndex = 46;
-            this.userButton16.UIText = "头像日志清空";
+            this.userButton16.UIText = "文件日志清空";
             this.userButton16.Click += new System.EventHandler(this.userButton16_Click);
             // 
             // userButton17
@@ -76,7 +76,7 @@
             this.userButton17.Name = "userButton17";
             this.userButton17.Size = new System.Drawing.Size(103, 26);
             this.userButton17.TabIndex = 45;
-            this.userButton17.UIText = "头像日志查看";
+            this.userButton17.UIText = "文件日志查看";
             this.userButton17.Click += new System.EventHandler(this.userButton17_Click);
             // 
             // userButton15

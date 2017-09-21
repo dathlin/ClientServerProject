@@ -34,7 +34,7 @@ namespace 软件系统客户端Wpf.Views
             {
                 KeyToken = CommonLibrary.CommonProtocol.KeyToken,
                 LogNet = UserClient.LogNet,
-                ServerIpEndPoint =new IPEndPoint(IPAddress.Parse(UserClient.ServerIp),CommonLibrary.CommonProtocol.Port_Advanced_File_Server)
+                ServerIpEndPoint =new IPEndPoint(IPAddress.Parse(UserClient.ServerIp),CommonLibrary.CommonProtocol.Port_Share_File)
             };
         }
 
@@ -128,14 +128,17 @@ namespace 软件系统客户端Wpf.Views
             save_file_name += "\\" + Hufile.FileName;
 
 
-            OperateResult result = fileClient.DownloadFile(Hufile.FileName,
+            OperateResult result = fileClient.DownloadFile(
+                Hufile.FileName,
                 (m, n) =>
                 {
                     Dispatcher.Invoke(new Action(() =>
                     {
                         FileDownloadProgress.Value = m * 100 / n;
                     }));
-                }, save_file_name);
+                }, 
+                save_file_name
+                );
 
             Dispatcher.Invoke(new Action(() =>
             {
