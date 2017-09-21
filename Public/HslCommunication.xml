@@ -3354,6 +3354,11 @@
             连接超时用的Socket
             </summary>
         </member>
+        <member name="P:HslCommunication.HslTimeOut.Operator">
+            <summary>
+            用于超时执行的方法
+            </summary>
+        </member>
         <member name="T:HslCommunication.LogNet.ILogNet">
             <summary>
             一个通用的日志接口
@@ -4397,8 +4402,8 @@
             <summary>
             获取当前文件的读写锁，如果没有会自动创建
             </summary>
-            <param name="filename"></param>
-            <returns></returns>
+            <param name="filename">完整的文件路径</param>
+            <returns>读写锁</returns>
         </member>
         <member name="M:HslCommunication.FileServerBase.ReceiveFileFromSocketAndMoveFile(System.Net.Sockets.Socket,HslCommunication.HslReadWriteLock,System.String,System.String,System.String@,System.Int64@,System.String@,System.String@,HslCommunication.OperateResult)">
             <summary>
