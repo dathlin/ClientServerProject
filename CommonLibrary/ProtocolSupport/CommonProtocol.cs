@@ -17,7 +17,9 @@ namespace CommonLibrary
      *****************************************************************************************/
 
         
-
+    /// <summary>
+    /// 客户端服务器共同遵守的配置信息
+    /// </summary>
     public class CommonProtocol
     {
         static CommonProtocol()
@@ -29,8 +31,7 @@ namespace CommonLibrary
              *    发行：发行版将采用主版本加次版本来发行
              * 
              **************************************************************************/
-
-
+             
             /**************************************************************************
              * 
              *    说明：以下是大版本号的发布日期
@@ -42,7 +43,7 @@ namespace CommonLibrary
              * 
              **************************************************************************/
 
-            SoftBasic.FrameworkVersion = new SystemVersion("1.4.5");
+            SoftBasic.FrameworkVersion = new SystemVersion("1.4.6");
 
         }
 

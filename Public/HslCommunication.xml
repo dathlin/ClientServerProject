@@ -2167,6 +2167,11 @@
             文件的后缀名
             </summary>
         </member>
+        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileMappingName">
+            <summary>
+            文件存储的真实映射名称
+            </summary>
+        </member>
         <member name="M:HslCommunication.Enthernet.HslSoftFile.GetTextFromFileSize">
             <summary>
             获取大小
@@ -2234,6 +2239,13 @@
             </summary>
             <param name="filename"></param>
         </member>
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.IsMappingFileExist(System.String)">
+            <summary>
+            判断映射文件名是不是存在于文件列表中
+            </summary>
+            <param name="mappingName"></param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.Enthernet.SimpleFileServer.DownloadTimesAdd(System.String)">
             <summary>
             追加一个文件对象的下载数据
@@ -2252,6 +2264,13 @@
             根据文件名称获取文件类型
             </summary>
             <param name="filename"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.SimpleFileServer.GetHuFileFromMappingName(System.String)">
+            <summary>
+            根据文件名称获取文件类型
+            </summary>
+            <param name="mappingName"></param>
             <returns></returns>
         </member>
         <member name="M:HslCommunication.Enthernet.SimpleFileServer.ToJsonString">
@@ -2504,15 +2523,14 @@
             客户端数组操作的线程混合锁
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetComplexServer.ServerStart(System.Int32)">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.StartInitialization">
             <summary>
-            启动引擎
+            初始化操作
             </summary>
-            <param name="port"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetComplexServer.ServerClose">
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.CloseAction">
             <summary>
-            关闭引擎
+            关闭网络时的操作
             </summary>
         </member>
         <member name="E:HslCommunication.Enthernet.NetComplexServer.MessageAlerts">
@@ -2773,15 +2791,9 @@
             接收字节信息的事件
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.ServerStart(System.Int32)">
+        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.CloseAction">
             <summary>
-            启动服务器的引擎
-            </summary>
-            <param name="port">指定一个端口号</param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.NetSimplifyServer.ServerClose">
-            <summary>
-            关闭引擎
+            关闭网络的操作
             </summary>
         </member>
         <member name="M:HslCommunication.Enthernet.NetSimplifyServer.SendMessage(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.String)">
@@ -2838,17 +2850,6 @@
             系统升级时客户端所在的目录，默认为C:\HslCommunication
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetSoftUpdateServer.ServerStart(System.Int32)">
-            <summary>
-            启动服务器的引擎
-            </summary>
-            <param name="port"></param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.NetSoftUpdateServer.ServerClose">
-            <summary>
-            关闭引擎
-            </summary>
-        </member>
         <member name="M:HslCommunication.Enthernet.NetSoftUpdateServer.ThreadPoolLogin(System.Object)">
             <summary>
             系统的登录方法
@@ -2871,9 +2872,9 @@
             </summary>
             <param name="port"></param>
         </member>
-        <member name="M:HslCommunication.Enthernet.NetUdpServer.ServerClose">
+        <member name="M:HslCommunication.Enthernet.NetUdpServer.CloseAction">
             <summary>
-            关闭引擎
+            关闭引擎的操作
             </summary>
         </member>
         <member name="M:HslCommunication.Enthernet.NetUdpServer.RefreshReceive">
@@ -3955,7 +3956,7 @@
             <exception cref="T:System.ObjectDisposedException"></exception>
             <exception cref="T:System.Security.SecurityException"></exception>
         </member>
-        <member name="M:HslCommunication.NetSupport.WriteStreamFromSocket(System.Net.Sockets.Socket,System.IO.Stream,System.Int64,System.Action{System.Int64,System.Int64},System.Boolean)">
+        <member name="M:HslCommunication.NetSupport.WriteStreamFromSocket(System.Net.Sockets.Socket,System.IO.FileStream,System.Int64,System.Action{System.Int64,System.Int64},System.Boolean)">
             <summary>
             从socket套接字读取数据并写入流中，必然报告进度
             </summary>
@@ -4275,12 +4276,11 @@
             <param name="failedString"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.NetShareBase.SendFileAndCheckReceive(System.Net.Sockets.Socket,HslCommunication.HslReadWriteLock,System.String,System.String,System.String,System.String,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
+        <member name="M:HslCommunication.NetShareBase.SendFileAndCheckReceive(System.Net.Sockets.Socket,System.String,System.String,System.String,System.String,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
             <summary>
             [自校验] 将文件数据发送至套接字，具体发送细节将在继承类中实现，如果结果异常，则结束通讯
             </summary>
             <param name="socket">套接字</param>
-            <param name="readWriteLock">读写锁，此操作会获取读需求</param>
             <param name="filename">文件名称，文件必须存在</param>
             <param name="servername">远程端的文件名称</param>
             <param name="filetag">文件的额外标签</param>
@@ -4311,7 +4311,7 @@
             <param name="customer">接收的用户数据</param>
             <param name="receive">接收的字节数据</param>
             <param name="result">结果信息对象</param>
-            <param name="receiveReport"></param>
+            <param name="receiveReport">接收数据时的进度报告</param>
             <param name="failedString">失败时记录日志的字符串</param>
             <returns></returns>
         </member>
@@ -4330,15 +4330,29 @@
             <summary>
             [自校验] 从网络中接收一个文件，如果结果异常，则结束通讯
             </summary>
-            <param name="socket"></param>
-            <param name="savename"></param>
+            <param name="socket">网络套接字</param>
+            <param name="savename">接收文件后保存的文件名</param>
+            <param name="filename">文件在对方电脑上的文件名</param>
+            <param name="size">文件大小</param>
+            <param name="filetag">文件的标识</param>
+            <param name="fileupload">文件的上传人</param>
+            <param name="result">结果信息对象</param>
+            <param name="receiveReport">接收进度报告</param>
+            <param name="failedString">失败时的记录日志字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetShareBase.DeleteFileByName(System.String)">
+            <summary>
+            删除文件的操作
+            </summary>
             <param name="filename"></param>
-            <param name="size"></param>
-            <param name="filetag"></param>
-            <param name="fileupload"></param>
-            <param name="result"></param>
-            <param name="receiveReport"></param>
-            <param name="failedString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetShareBase.PreprocessFolderName(System.String)">
+            <summary>
+            预处理文件夹的名称，除去文件夹名称最后一个'\'，如果有的话
+            </summary>
+            <param name="folder">文件夹名称</param>
             <returns></returns>
         </member>
         <member name="M:HslCommunication.NetShareBase.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
@@ -4372,11 +4386,21 @@
             </summary>
             <param name="obj">socket对象</param>
         </member>
+        <member name="M:HslCommunication.NetServerBase.StartInitialization">
+            <summary>
+            服务器启动时额外的初始化信息
+            </summary>
+        </member>
         <member name="M:HslCommunication.NetServerBase.ServerStart(System.Int32)">
             <summary>
             启动服务器的引擎
             </summary>
             <param name="port">指定一个端口号</param>
+        </member>
+        <member name="M:HslCommunication.NetServerBase.CloseAction">
+            <summary>
+            服务器关闭的时候需要做的事情
+            </summary>
         </member>
         <member name="M:HslCommunication.NetServerBase.ServerClose">
             <summary>
@@ -4388,7 +4412,7 @@
             文件服务器的基类，提供了对文件的基本操作
             </summary>
         </member>
-        <member name="F:HslCommunication.FileServerBase.m_dictionary_files_locks">
+        <member name="F:HslCommunication.FileServerBase.m_dictionary_files_marks">
             <summary>
             所有文件操作的词典锁
             </summary>
@@ -4398,19 +4422,18 @@
             词典的锁
             </summary>
         </member>
-        <member name="M:HslCommunication.FileServerBase.GetLockFromDictionaryWithFileName(System.String)">
+        <member name="M:HslCommunication.FileServerBase.GetFileMarksFromDictionaryWithFileName(System.String)">
             <summary>
             获取当前文件的读写锁，如果没有会自动创建
             </summary>
             <param name="filename">完整的文件路径</param>
             <returns>读写锁</returns>
         </member>
-        <member name="M:HslCommunication.FileServerBase.ReceiveFileFromSocketAndMoveFile(System.Net.Sockets.Socket,HslCommunication.HslReadWriteLock,System.String,System.String,System.String@,System.Int64@,System.String@,System.String@,HslCommunication.OperateResult)">
+        <member name="M:HslCommunication.FileServerBase.ReceiveFileFromSocketAndMoveFile(System.Net.Sockets.Socket,System.String,System.String,System.String@,System.Int64@,System.String@,System.String@,HslCommunication.OperateResult)">
             <summary>
             从网络套接字接收文件并移动到目标的文件夹中，如果结果异常，则结束通讯
             </summary>
             <param name="socket"></param>
-            <param name="readWriteLock"></param>
             <param name="savename"></param>
             <param name="fileNameNew"></param>
             <param name="filename"></param>
@@ -4420,33 +4443,19 @@
             <param name="result"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.FileServerBase.DeleteFileAndCheck(System.Net.Sockets.Socket,HslCommunication.HslReadWriteLock,System.String,HslCommunication.OperateResult)">
+        <member name="M:HslCommunication.FileServerBase.DeleteFileAndCheck(System.Net.Sockets.Socket,System.String,HslCommunication.OperateResult)">
             <summary>
             删除文件并回发确认信息，如果结果异常，则结束通讯
             </summary>
             <param name="socket"></param>
-            <param name="readWriteLock"></param>
             <param name="fullname"></param>
             <param name="result"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.FileServerBase.ServerStart(System.Int32)">
+        <member name="M:HslCommunication.FileServerBase.StartInitialization">
             <summary>
-            启动文件服务引擎
+            服务器启动时的操作
             </summary>
-            <param name="port"></param>
-        </member>
-        <member name="M:HslCommunication.FileServerBase.ServerClose">
-            <summary>
-            关闭文件服务引擎
-            </summary>
-        </member>
-        <member name="M:HslCommunication.FileServerBase.PreprocessFolderName(System.String)">
-            <summary>
-            预处理文件夹的名称
-            </summary>
-            <param name="folder"></param>
-            <returns></returns>
         </member>
         <member name="M:HslCommunication.FileServerBase.CheckTwoFolderAndCreate">
             <summary>
@@ -4476,6 +4485,38 @@
             </summary>
             <param name="segment">额外的片段名称</param>
             <returns></returns>
+        </member>
+        <member name="T:HslCommunication.FileMarkId">
+            <summary>
+            文件标记对象类
+            </summary>
+        </member>
+        <member name="M:HslCommunication.FileMarkId.#ctor(HslCommunication.LogNet.ILogNet,System.String)">
+            <summary>
+            实例化一个文件标记对象
+            </summary>
+        </member>
+        <member name="M:HslCommunication.FileMarkId.AddOperation(System.Action)">
+            <summary>
+            新增一个文件的操作，可能用于更新文件，新增文件，删除文件
+            </summary>
+            <param name="action"></param>
+        </member>
+        <member name="M:HslCommunication.FileMarkId.CanClear">
+            <summary>
+            指示该对象是否能被清除
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.FileMarkId.EnterReadOperator">
+            <summary>
+            进入文件的读取状态
+            </summary>
+        </member>
+        <member name="M:HslCommunication.FileMarkId.LeaveReadOperator">
+            <summary>
+            离开本次的文件读取状态
+            </summary>
         </member>
         <member name="T:HslCommunication.OperateResult">
             <summary>
