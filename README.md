@@ -232,6 +232,9 @@ using HslCommunication;
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client16.png)
 
+###### 统一的系统配置界面，门牌为【管理员】-【系统配置】
+
+![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client17.png)
 <br />
 
 
