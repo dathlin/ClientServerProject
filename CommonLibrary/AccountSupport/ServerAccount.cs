@@ -13,6 +13,8 @@ namespace CommonLibrary
     /// <typeparam name="T">账户类，该类必须派生自UserAccount类</typeparam>
     public class ServerAccounts<T> : HslCommunication.BasicFramework.SoftFileSaveBase where T : UserAccount, new()
     {
+        #region Constructor
+
         /// <summary>
         /// 初始化构造方法
         /// </summary>
@@ -28,13 +30,19 @@ namespace CommonLibrary
             all_list_accounts.AddRange(accounts);
         }
 
-        private List<T> all_list_accounts = new List<T>();
-        
+        #endregion
 
+        #region Private Member
+
+        private List<T> all_list_accounts = new List<T>();
         /// <summary>
         /// 一个简单的混合锁，相比Lock速度更快
         /// </summary>
         private HslCommunication.SimpleHybirdLock hybirdLock = new HslCommunication.SimpleHybirdLock();
+
+        #endregion
+
+        #region Public Method
 
         /// <summary>
         /// 更新指定账户的密码
@@ -126,15 +134,16 @@ namespace CommonLibrary
                 {
                     if (item.Password != code)
                     {
+                        item.LoginFailedCount++;
                         result.ForbidMessage = "密码错误！";
                         break;
                     }
                     else
                     {
-                        //说明已经登录成功，需要进行进一步操作
+                        // 说明已经登录成功，需要进行进一步操作
                         item.LoginFrequency++;
                         result = item.DeepCopy<T>();
-                        //下面两个数据应该是旧的数据
+                        // 下面两个数据应该是旧的数据
                         item.LastLoginIpAddress = ipAddress;
                         item.LastLoginTime = DateTime.Now;
                         item.LastLoginWay = way;
@@ -161,7 +170,7 @@ namespace CommonLibrary
         /// 新增一个账户，如果账户名称已经存在，则返回False，注册成功返回True
         /// </summary>
         /// <param name="account">账户对象</param>
-        /// <returns>成功True，失败False</returns>
+        /// <returns>成功<c>True</c>，失败<c>False</c></returns>
         public bool AddNewAccount(T account)
         {
             bool result = true;
@@ -246,7 +255,9 @@ namespace CommonLibrary
             hybirdLock.Leave();
         }
 
+        #endregion
 
+        #region Override Method
 
 
 
@@ -280,5 +291,8 @@ namespace CommonLibrary
         {
             SaveToFile(m => m);
         }
+
+
+        #endregion
     }
 }
