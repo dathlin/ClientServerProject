@@ -90,6 +90,7 @@
 
 <ul>
 <li><a href="https://github.com/dathlin/C-S-/blob/master/files/LogReadme.md">简单强大的日志记录功能使用</a></li>
+<li><a href="https://github.com/dathlin/C-S-/blob/master/files/SimplifyNet.md">同步网络数据交互功能使用</a></li>
 <li><a href="https://github.com/dathlin/C-S-/blob/master/files/MelsecReadMe.md">三菱PLC数据读写介绍</a></li>
 <li><a href="https://github.com/dathlin/C-S-/blob/master/files/SiemensReadMe.md">西门子PLC数据读写手册</a></li>
 </ul>
