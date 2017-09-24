@@ -1,6 +1,6 @@
-﻿namespace ClientsLibrary
+﻿namespace ClientsLibrary.Configuration
 {
-    partial class FactoryConfiguration
+    partial class ArrayConfiguration
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -40,6 +40,9 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -48,7 +51,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(509, 404);
+            this.dataGridView1.Size = new System.Drawing.Size(500, 408);
             this.dataGridView1.TabIndex = 0;
             // 
             // Factory
@@ -59,11 +62,12 @@
             // 
             // userButton_login
             // 
+            this.userButton_login.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.userButton_login.BackColor = System.Drawing.Color.Transparent;
             this.userButton_login.CustomerInformation = "";
             this.userButton_login.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton_login.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton_login.Location = new System.Drawing.Point(3, 411);
+            this.userButton_login.Location = new System.Drawing.Point(3, 415);
             this.userButton_login.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton_login.Name = "userButton_login";
             this.userButton_login.Size = new System.Drawing.Size(55, 27);
@@ -73,11 +77,12 @@
             // 
             // userButton1
             // 
+            this.userButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.userButton1.BackColor = System.Drawing.Color.Transparent;
             this.userButton1.CustomerInformation = "";
             this.userButton1.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton1.Location = new System.Drawing.Point(64, 411);
+            this.userButton1.Location = new System.Drawing.Point(64, 415);
             this.userButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton1.Name = "userButton1";
             this.userButton1.Size = new System.Drawing.Size(55, 27);
@@ -87,11 +92,12 @@
             // 
             // userButton2
             // 
+            this.userButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.userButton2.BackColor = System.Drawing.Color.Transparent;
             this.userButton2.CustomerInformation = "";
             this.userButton2.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton2.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton2.Location = new System.Drawing.Point(451, 411);
+            this.userButton2.Location = new System.Drawing.Point(442, 415);
             this.userButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton2.Name = "userButton2";
             this.userButton2.Size = new System.Drawing.Size(55, 27);
@@ -110,7 +116,7 @@
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FactoryConfiguration";
-            this.Size = new System.Drawing.Size(509, 442);
+            this.Size = new System.Drawing.Size(500, 446);
             this.Load += new System.EventHandler(this.FactoryConfiguration_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

@@ -23,6 +23,7 @@ namespace ClientsLibrary
         public FormAccountDetails(UserPortrait userPortrait)
         {
             InitializeComponent();
+            Icon = UserClient.GetFormWindowIcon();
             UserPortrait = userPortrait;
         }
 

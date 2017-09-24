@@ -27,6 +27,8 @@ namespace ClientsLibrary
         public FormUpdateRemote()
         {
             InitializeComponent();
+
+            Icon = UserClient.GetFormWindowIcon();
         }
 
         private void userButton_file_Click(object sender, EventArgs e)

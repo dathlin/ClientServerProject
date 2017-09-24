@@ -62,7 +62,7 @@
                         </MenuItem>
                     
                         <Separator />
-                        <MenuItem Header="分厂配置" x:Name="MenuItem分厂配置" Click="MenuItem分厂配置_Click">
+                        <MenuItem Header="系统配置" x:Name="MenuItem系统配置" Click="MenuItem系统配置_Click">
                             <MenuItem.Icon>
                                 <materialDesign:PackIcon Kind="City" />
                             </MenuItem.Icon>

@@ -17,6 +17,9 @@ namespace ClientsLibrary
         public FormLogView()
         {
             InitializeComponent();
+
+            Icon = UserClient.GetFormWindowIcon();
+
             net_simplify_client = UserClient.Net_simplify_client;
         }
 

@@ -45,10 +45,11 @@
             this.注册账号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.消息发送ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.开发中心ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.分厂配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.系统配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.留言板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.我的信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于本软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更新日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,7 +80,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.panel_main = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.我的信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel_right.SuspendLayout();
@@ -172,7 +172,7 @@
             this.注册账号ToolStripMenuItem,
             this.消息发送ToolStripMenuItem,
             this.开发中心ToolStripMenuItem,
-            this.分厂配置ToolStripMenuItem});
+            this.系统配置ToolStripMenuItem});
             this.管理员ToolStripMenuItem.Image = global::软件系统客户端模版.Properties.Resources.Team_32xLG;
             this.管理员ToolStripMenuItem.Name = "管理员ToolStripMenuItem";
             this.管理员ToolStripMenuItem.Size = new System.Drawing.Size(100, 31);
@@ -227,12 +227,12 @@
             this.开发中心ToolStripMenuItem.Text = "开发中心";
             this.开发中心ToolStripMenuItem.Click += new System.EventHandler(this.开发中心ToolStripMenuItem_Click);
             // 
-            // 分厂配置ToolStripMenuItem
+            // 系统配置ToolStripMenuItem
             // 
-            this.分厂配置ToolStripMenuItem.Name = "分厂配置ToolStripMenuItem";
-            this.分厂配置ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
-            this.分厂配置ToolStripMenuItem.Text = "分厂配置";
-            this.分厂配置ToolStripMenuItem.Click += new System.EventHandler(this.分厂配置ToolStripMenuItem_Click);
+            this.系统配置ToolStripMenuItem.Name = "系统配置ToolStripMenuItem";
+            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.系统配置ToolStripMenuItem.Text = "系统配置";
+            this.系统配置ToolStripMenuItem.Click += new System.EventHandler(this.系统配置ToolStripMenuItem_Click);
             // 
             // 设置ToolStripMenuItem
             // 
@@ -258,6 +258,13 @@
             this.留言板ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.留言板ToolStripMenuItem.Text = "留言板";
             this.留言板ToolStripMenuItem.Click += new System.EventHandler(this.留言板ToolStripMenuItem_Click);
+            // 
+            // 我的信息ToolStripMenuItem
+            // 
+            this.我的信息ToolStripMenuItem.Name = "我的信息ToolStripMenuItem";
+            this.我的信息ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
+            this.我的信息ToolStripMenuItem.Text = "我的信息";
+            this.我的信息ToolStripMenuItem.Click += new System.EventHandler(this.我的信息ToolStripMenuItem_Click);
             // 
             // 关于ToolStripMenuItem
             // 
@@ -559,13 +566,6 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // 我的信息ToolStripMenuItem
-            // 
-            this.我的信息ToolStripMenuItem.Name = "我的信息ToolStripMenuItem";
-            this.我的信息ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
-            this.我的信息ToolStripMenuItem.Text = "我的信息";
-            this.我的信息ToolStripMenuItem.Click += new System.EventHandler(this.我的信息ToolStripMenuItem_Click);
-            // 
             // FormMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -651,7 +651,7 @@
         private System.Windows.Forms.ToolStripMenuItem 消息发送ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 开发中心ToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ToolStripMenuItem 分厂配置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 系统配置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 我的信息ToolStripMenuItem;
     }
 }

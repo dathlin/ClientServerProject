@@ -117,7 +117,7 @@ namespace 软件系统客户端模版
                 注册账号ToolStripMenuItem.Enabled = false;
                 消息发送ToolStripMenuItem.Enabled = false;
                 开发中心ToolStripMenuItem.Enabled = false;
-                分厂配置ToolStripMenuItem.Enabled = false;
+                系统配置ToolStripMenuItem.Enabled = false;
             }
             //启动定时器
             TimeTickInitilization();
@@ -311,15 +311,19 @@ namespace 软件系统客户端模版
             }
         }
 
-        private void 分厂配置ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 系统配置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FormInputAndAction fiaa = new FormInputAndAction(
-                str => UserClient.Net_simplify_client.ReadFromServer(
-                    CommonHeadCode.SimplifyHeadCode.上传分厂, str).IsSuccess, 
-                JArray.FromObject(UserClient.SystemFactories).ToString(), 
-                "请按照JSON格式更新分厂信息，然后提交："))
+            //using (FormInputAndAction fiaa = new FormInputAndAction(
+            //    str => UserClient.Net_simplify_client.ReadFromServer(
+            //        CommonHeadCode.SimplifyHeadCode.上传分厂, str).IsSuccess, 
+            //    JArray.FromObject(UserClient.SystemFactories).ToString(), 
+            //    "请按照JSON格式更新分厂信息，然后提交："))
+            //{
+            //    fiaa.ShowDialog();
+            //}
+            using (FormConfiguration fc = new FormConfiguration())
             {
-                fiaa.ShowDialog();
+                fc.ShowDialog();
             }
         }
 

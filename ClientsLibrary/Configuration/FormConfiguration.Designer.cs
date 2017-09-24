@@ -28,25 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("系统相关");
+            this.panel1 = new System.Windows.Forms.Panel();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Location = new System.Drawing.Point(232, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(573, 525);
+            this.panel1.TabIndex = 1;
+            // 
             // treeView1
             // 
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeView1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.treeView1.Location = new System.Drawing.Point(12, 12);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(199, 507);
-            this.treeView1.TabIndex = 0;
+            treeNode1.Name = "System";
+            treeNode1.Text = "系统相关";
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            this.treeView1.ShowLines = false;
+            this.treeView1.Size = new System.Drawing.Size(199, 525);
+            this.treeView1.TabIndex = 2;
             // 
             // FormConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(801, 533);
+            this.ClientSize = new System.Drawing.Size(812, 549);
             this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
             this.Name = "FormConfiguration";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormConfiguration";
             this.Load += new System.EventHandler(this.FormConfiguration_Load);
             this.ResumeLayout(false);
@@ -54,7 +77,7 @@
         }
 
         #endregion
-
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TreeView treeView1;
     }
 }

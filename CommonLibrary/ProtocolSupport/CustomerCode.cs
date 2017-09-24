@@ -13,7 +13,7 @@ namespace CommonLibrary
      *    
      *    关于 NetHandle：
      *         一个数据结构值，无论实际数据还是用法上等同于int，可以和int数据无缝的转化
-     *         将4个字节的int数据拆分成了三个属性，一个ushort和两个byte，可以分别访问
+     *         本质上将4个字节的int数据拆分成了三个属性，一个ushort和两个byte，可以分别访问
      *         
      *         2个低字节         第二高字节    最高的字节
      *         [byte1][byte2]    [byte3]       [byte4]
@@ -61,17 +61,20 @@ namespace CommonLibrary
             public static NetHandle 上传头像MD5 { get; } =       new NetHandle(1, 1, 00016);
             public static NetHandle 请求分厂 { get; } =          new NetHandle(1, 1, 00017);
             public static NetHandle 上传分厂 { get; } =          new NetHandle(1, 1, 00018);
+            public static NetHandle 请求信任客户端 { get; } =    new NetHandle(1, 1, 00019);
+            public static NetHandle 上传信任客户端 { get; } =    new NetHandle(1, 1, 00020);
+            public static NetHandle 请求一般配置 { get; } =      new NetHandle(1, 1, 00021);
+            public static NetHandle 上传一般配置 { get; } =      new NetHandle(1, 1, 00022);
 
 
 
-            
 
             /*******************************************************************************************
              * 
              *     1.2.* 的指令为日志的请求与查看相关
              *
              *******************************************************************************************/
-            
+
 
             public static NetHandle 网络日志查看 { get; } =          new NetHandle(1, 2, 00001);//1.2.开头的是日志请求和清空
             public static NetHandle 网络日志清空 { get; } =          new NetHandle(1, 2, 00002);

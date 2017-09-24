@@ -25,6 +25,9 @@ namespace ClientsLibrary
         public FormDownloading(int customer,Action<OperateResultString> action)
         {
             InitializeComponent();
+
+            Icon = UserClient.GetFormWindowIcon();
+
             net_cmd = customer;
             DealWithResult = action;
             DoubleBuffered = true;

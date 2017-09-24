@@ -34,9 +34,9 @@ namespace 软件系统客户端Wpf
 
     /***************************************************************************************
      * 
-     *    模版日期    2017-07-11
-     *    创建人      胡少林
-     *    版权所有    胡少林
+     *    模版日期    2017-09-24
+     *    创建人      Richard Hu
+     *    版权所有    Richard Hu
      *    授权说明    模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
      *    说明一      JSON组件引用自james newton-king，遵循MIT授权协议
      *    说明二      主题及各种主件来自:https://github.com/ButchersBoy/MaterialDesignInXamlToolkit
@@ -123,7 +123,7 @@ namespace 软件系统客户端Wpf
                 MenuItem注册账户.IsEnabled = false;
                 MenuItem消息发送.IsEnabled = false;
                 MenuItem开发中心.IsEnabled = false;
-                MenuItem分厂配置.IsEnabled = false;
+                MenuItem系统配置.IsEnabled = false;
             }
 
 
@@ -375,15 +375,11 @@ namespace 软件系统客户端Wpf
         }
 
 
-        private void MenuItem分厂配置_Click(object sender, RoutedEventArgs e)
+        private void MenuItem系统配置_Click(object sender, RoutedEventArgs e)
         {
-            using (FormInputAndAction fiaa = new FormInputAndAction(
-            str => UserClient.Net_simplify_client.ReadFromServer(
-                CommonHeadCode.SimplifyHeadCode.上传分厂, str).IsSuccess,
-            JArray.FromObject(UserClient.SystemFactories).ToString(),
-            "请按照JSON格式更新分厂信息，然后提交："))
+            using (FormConfiguration fc = new FormConfiguration())
             {
-                fiaa.ShowDialog();
+                fc.ShowDialog();
             }
         }
 

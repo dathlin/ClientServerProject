@@ -6,6 +6,8 @@ using HslCommunication.Enthernet;
 using HslCommunication.BasicFramework;
 using CommonLibrary;
 using System.Net;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace ClientsLibrary
 {
@@ -133,6 +135,11 @@ namespace ClientsLibrary
                 string info = HslCommunication.LogNet.LogNetManagment.GetSaveStringFromException(null, ex);
                 Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.异常消息, info);
             }
+        }
+
+        public static Icon GetFormWindowIcon()
+        {
+            return Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
     }
 }

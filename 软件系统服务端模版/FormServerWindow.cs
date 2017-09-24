@@ -526,17 +526,33 @@ namespace 软件系统服务端模版
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
                 string way = SoftBasic.GetValueFromJsonObject(json, UserAccount.LoginWayText, "winform");
+                string machineId= SoftBasic.GetValueFromJsonObject(json, UserAccount.DeviceUniqueID, "ABCDEFHIGKLMN");
+ 
 
-                UserAccount account = UserServer.ServerAccounts.CheckAccount(name, password, state.GetRemoteEndPoint().Address.ToString(), way);
+                 UserAccount account = UserServer.ServerAccounts.CheckAccount(name, password, state.GetRemoteEndPoint().Address.ToString(), way);
                 //检测是否重复登录
                 if (account.LoginEnable)
                 {
-                    if (IsClinetOnline(account.UserName))
+                    if (!UserServer.ServerSettings.AllowUserMultiOnline)
                     {
-                        account.LoginEnable = false;
-                        account.ForbidMessage = "该账户已经登录";
+                        if (IsClinetOnline(account.UserName))
+                        {
+                            account.LoginEnable = false;
+                            account.ForbidMessage = "该账户已经登录";
+                        }
                     }
                 }
+
+                // 检测客户端id是否被授权
+                if(UserServer.ServerSettings.WhetherToEnableTrustedClientAuthentication)
+                {
+                    if(!UserServer.ServerSettings.CanClientLogin(machineId))
+                    {
+                        account.LoginEnable = false;
+                        account.ForbidMessage = "该客户端不再服务器信任列表";
+                    }
+                }
+
                 net_simplify_server.SendMessage(state, handle, JObject.FromObject(account).ToString());
             }
             else if (handle == CommonHeadCode.SimplifyHeadCode.更新公告)
@@ -628,6 +644,10 @@ namespace 软件系统服务端模版
                     net_simplify_server.SendMessage(state, handle, "失败，原因是：" + ex.Message);
                 }
             }
+            else if(handle==CommonHeadCode.SimplifyHeadCode.请求分厂)
+            {
+                net_simplify_server.SendMessage(state, handle, JArray.FromObject(UserServer.ServerSettings.SystemFactories).ToString());
+            }
             else if (handle == CommonHeadCode.SimplifyHeadCode.上传分厂)
             {
                 try
@@ -640,6 +660,36 @@ namespace 软件系统服务端模版
                     RuntimeLogHelper?.WriteException(null, ex);
                 }
                 net_simplify_server.SendMessage(state, handle, "1");
+            }
+            else if (handle == CommonHeadCode.SimplifyHeadCode.请求信任客户端)
+            {
+                JObject json = new JObject
+                {
+                    { "TrustEnable", new JValue(UserServer.ServerSettings.WhetherToEnableTrustedClientAuthentication) },
+                    { "TrustList", new JArray(UserServer.ServerSettings.TrustedClientList) }
+                };
+                net_simplify_server.SendMessage(state, handle, json.ToString());
+            }
+            else if (handle == CommonHeadCode.SimplifyHeadCode.上传信任客户端)
+            {
+                JObject json = JObject.Parse(data);
+                UserServer.ServerSettings.WhetherToEnableTrustedClientAuthentication = json["TrustEnable"].ToObject<bool>();
+                UserServer.ServerSettings.TrustedClientList = json["TrustList"].ToObject<List<string>>();
+                net_simplify_server.SendMessage(state, handle, "成功");
+            }
+            else if (handle == CommonHeadCode.SimplifyHeadCode.请求一般配置)
+            {
+                JObject json = new JObject
+                {
+                    { "AllowUserMulti", new JValue(UserServer.ServerSettings.AllowUserMultiOnline) },
+                };
+                net_simplify_server.SendMessage(state, handle, json.ToString());
+            }
+            else if (handle == CommonHeadCode.SimplifyHeadCode.上传一般配置)
+            {
+                JObject json = JObject.Parse(data);
+                UserServer.ServerSettings.AllowUserMultiOnline = SoftBasic.GetValueFromJsonObject(json, "AllowUserMulti", false);
+                net_simplify_server.SendMessage(state, handle, json.ToString());
             }
             else
             {
@@ -945,6 +995,7 @@ namespace 软件系统服务端模版
         /// 所有在线客户端的信息
         /// </summary>
         private string Net_Socket_All_Clients = string.Empty;
+
         /// <summary>
         /// 用来判断客户端是否已经在线，除了超级管理员，其他的账户不允许重复在线，重复登录的账户予以特殊标记
         /// </summary>

@@ -6,21 +6,31 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using HslCommunication;
 
-namespace ClientsLibrary
+namespace ClientsLibrary.Configuration
 {
-    public partial class FactoryConfiguration : UserControl
+    public partial class ArrayConfiguration : UserControl
     {
-        public FactoryConfiguration(int download,int upload,string headText)
+        #region Constructor
+
+
+        public ArrayConfiguration(int download, int upload, string headText)
         {
             InitializeComponent();
 
-            Download = download;
-            Upload = upload;
-            HeadText = headText;
+            SetInfomation(download, upload, headText);
+
         }
 
-        
+        public ArrayConfiguration()
+        {
+            InitializeComponent();
+
+        }
+
+        #endregion
+
         #region Private Member
 
         private int Download = 0;
@@ -29,13 +39,19 @@ namespace ClientsLibrary
 
         #endregion
 
+        public void SetInfomation(int download, int upload, string headText)
+        {
+            Download = download;
+            Upload = upload;
+            HeadText = headText;
+        }
 
 
         private void FactoryConfiguration_Load(object sender, EventArgs e)
         {
             dataGridView1.Columns[0].HeaderText = HeadText;
 
-            HslCommunication.OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(Download, "");
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(Download, "");
 
             if (result.IsSuccess)
             {
@@ -50,6 +66,7 @@ namespace ClientsLibrary
             else
             {
                 MessageBox.Show(result.Message);
+                userButton2.Enabled = false;
             }
 
         }
@@ -63,22 +80,35 @@ namespace ClientsLibrary
         {
             if (dataGridView1.SelectedRows != null)
             {
-                dataGridView1.Rows.Remove(dataGridView1.SelectedRows[0]);
+                if (dataGridView1.Rows.Count > 0)
+                {
+                    dataGridView1.Rows.Remove(dataGridView1.SelectedRows[0]);
+                }
             }
         }
 
         private void userButton2_Click(object sender, EventArgs e)
         {
             List<string> data = new List<string>();
-            for(int i=0;i<dataGridView1.Rows.Count;i++)
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
-                if(!string.IsNullOrEmpty(dataGridView1.Rows[i].Cells[0].Value.ToString()))
+                if (!string.IsNullOrEmpty(dataGridView1.Rows[i].Cells[0].Value.ToString()))
                 {
                     data.Add(dataGridView1.Rows[i].Cells[0].Value.ToString());
                 }
             }
 
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(Upload,
+                Newtonsoft.Json.Linq.JArray.FromObject(data).ToString());
 
+            if (result.IsSuccess)
+            {
+                MessageBox.Show("修改成功！");
+            }
+            else
+            {
+                MessageBox.Show("修改失败！原因：" + result.Message);
+            }
         }
     }
 }
