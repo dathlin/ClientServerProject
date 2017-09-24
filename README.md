@@ -47,10 +47,11 @@
 
 ## Getting Started
 <ul>
-<li>重新生成<b>CommonLibrary</b>项目</li>
-<li>重新生成<b>ClientsLibrary</b>项目</li>
-<li>重新生成<b>软件系统服务端模版</b>并运行该exe</li>
-<li>选择一个你想调试的客户端版本程序，例如winform就启动<b>软件系统客户端模版</b>项目</li>
+<li>重新生成 <b>CommonLibrary</b> 项目</li>
+<li>请确认 <b>ClientsLibrary</b> 项目文件 <b>UserClient.cs</b> 的类 <b>UserClient</b> 的属性 <b>ServerIp</b> 是否为127.0.0.1，如果不是，请修改</li>
+<li>重新生成 <b>ClientsLibrary</b> 项目</li>
+<li>重新生成 <b>软件系统服务端模版</b> 并运行该exe</li>
+<li>选择一个你想调试的客户端版本程序，例如winform就启动 <b>软件系统客户端模版</b> 项目</li>
 <li>输入一个默认的账户admin,密码123456</li>
 <li>接下来就可以体验所有的功能了</li>
 </ul>
