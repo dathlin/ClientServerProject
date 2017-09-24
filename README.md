@@ -1,14 +1,16 @@
 # C-S架构的服务器客户端模版
 
 ## Summary
-一个基于中小型提炼的C-S开发框架，在大多数的一对多的系统设计中会包含一些常用的重复的功能代码，比如网络通信机制，客户端版本控制，账户控制管理，密码修改，公告管理等等，大多数的中小型系统只是需要到简单的权限管理即可。
+一个基于中小型提炼的C-S开发框架，在大多数的一对多的系统设计中会包含一些常用的重复的功能代码，比如网络通信机制，客户端版本控制，账户控制管理，密码修改，公告管理，服务器配置，各种常用窗口等等，而且大多数的中小型系统只是需要到简单的权限管理即可。
+
 <br />
-本框架包含了三种客户端的模式，第一种常用的winform客户端，第二种为wpf客户端，第三种为asp.net mvc模式，也就是说你可以在winform和wpf客户端上选择一种模式，然后您的系统提供一些功能到asp.net上去，所有的账户模型都是统一的，这样方便一些只需要查看报表用户的人员不需要在部署客户端了。当然，客户端可以提供更加强大的功能。
+本框架包含了三种客户端的模式，第一种常用的winform客户端，第二种为wpf客户端，第三种为asp.net mvc模式，也就是说你可以在winform和wpf客户端上选择一种模式，然后您的系统提供一些功能（诸如报表查看）到asp.net上去，所有的账户模型都是统一的，这样方便一些只需要查看报表用户的人员不需要在部署客户端了。当然，客户端可以提供更加强大的功能。
 
 
 ## Features included
 <ul>
 <li>一个简单的账户管理功能，包含了账户注册，密码修改，客户端登录账户记录,账户注销,账户包含了一些基础信息</li>
+<li>一个简单的客户端登录控制功能，可以手动控制允许哪些客户端进行登录，只需要打开窗口配置一下即可</li>
 <li>一个简单的公告管理功能，允许有权限的账户针对公告进行更改，未来将支持公告更改记录</li>
 <li>一个简单的意见反馈功能，允许客户端反馈软件的意见或是BUG，方便开发人员更改</li>
 <li>一个简单的右下角消息框弹出功能，在公告更改和新发消息的时候可以自由控制</li>
@@ -23,6 +25,7 @@
 <li>提供了一个文件共享平台，大多数的软件系统都会共享一些特殊的文件资料，允许方便的下载，管理，上传</li>
 <li>提供所有账户自身的头像功能，未来还将支持多账户同步</li>
 <li>提供一个简单的开发中心，允许客户端实时监视服务器程序的对象内存使用情况</li>
+<li>客户端提供了一个统一的配置中心，可以用来配置服务器各种参数。</li>
 </ul>
 <ul>
 <li>Wpf版本的客户端程序额外提供了一个主题颜色设置的功能</li>
@@ -62,6 +65,8 @@
 <li>多客户端之间需要进行复杂数据交互的系统</li>
 </ul>
 
+二次开发时需要特别注意的是在项目 **CommonLibrary** -> **ProtocolSupport** -> **CommonProtocol.cs** 中的参数需要根据实际全部修改，注意事项已在文件里说明。
+
 ## Contribute
 如果你也喜欢这个项目，可以点击右上角的star或是fork，如果发现了一些BUG或是需要更改的地方也可以直接发起pull request，当然也可以联系技术支持QQ群来联系我本人，或是发送邮件，具体参考下面。
 
@@ -79,29 +84,27 @@
 </ul>
 
 
-## HslCommunication.dll
-<p>该组件功能提供了一些基础功能类和整个C-S项目的核心网络的支持，除此之外，该组件提供了访问三菱PLC和西门子PLC的数据功能。以下就是该库的子功能说明，您也可以只使用其中一部分的功能类，比如日志功能！</p>
+## About HslCommunication.dll
+<p>本C-S项目的核心组件，该组件功能提供了一些基础功能类和整个C-S项目的网络支持，除此之外，该组件提供了访问三菱PLC和西门子PLC的数据功能。
+以下就是该库的部分子功能说明，您也可以只使用其中一部分的功能类，比如日志功能！完整的功能手册将在近期放出，方便理解整个系统的底层机制。</p>
 
 <ul>
-<li><a href="https://github.com/dathlin/C-S-/blob/master/files/LogReadme.md">简单强大的日志功能使用</a></li>
+<li><a href="https://github.com/dathlin/C-S-/blob/master/files/LogReadme.md">简单强大的日志记录功能使用</a></li>
+<li><a href="https://github.com/dathlin/C-S-/blob/master/files/MelsecReadMe.md">三菱PLC数据读写介绍</a></li>
+<li><a href="https://github.com/dathlin/C-S-/blob/master/files/SiemensReadMe.md">西门子PLC数据读写手册</a></li>
 </ul>
 
 
 <p>本组件支持常规的整数的数据读写，支持位数据读写，也支持字符串数据读写，包括中文，具体使用方式请参照下述手册，目前已经完成了一个三菱PLC高并发访问的类，具体交流可以通过以下方式联系我</p>
 
-<p>如果要使用本组件访问PLC，需要引用命名空间，如下</p>
+<p>如果要使用本组件的功能，需要引用命名空间，如下</p>
 <pre>
 <code>
-using HslCommunication.Profinet;
+using HslCommunication;
 </code>
 </pre>
 
-三菱详细手册：<a href="https://github.com/dathlin/C-S-/blob/master/MelsecReadMe.md">三菱PLC数据读写手册</a>
-
-西门子详细手册：<a href="https://github.com/dathlin/C-S-/blob/master/SiemensReadMe.md">西门子PLC数据读写手册</a>
-
 下载地址：<a href="https://github.com/dathlin/C-S-/raw/master/Public/HslCommunication.dll">单独的组件dll文件</a>
-
 文档地址：<a href="https://github.com/dathlin/C-S-/raw/master/Public/HslCommunication.xml">单独的组件xml注释文件</a>
 
 
@@ -221,9 +224,13 @@ using HslCommunication.Profinet;
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client14.png)
 
-###### 修改账户的头像，门牌为【设备】-【更换头像】
+###### 修改账户的头像，门牌为【设置】-【我的信息】-点击头像
 
 ![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client15.png)
+
+###### 我的账户信息及个人文件，门牌为【设置】-【我的信息】
+
+![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client16.png)
 
 <br />
 
