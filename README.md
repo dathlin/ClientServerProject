@@ -90,10 +90,11 @@
 以下就是该库的部分子功能说明，您也可以只使用其中一部分的功能类，比如日志功能！完整的功能手册将在近期放出，方便理解整个系统的底层机制。</p>
 
 <ul>
-<li><a href="https://github.com/dathlin/C-S-/blob/master/files/LogReadme.md">简单强大的日志记录功能使用</a></li>
-<li><a href="https://github.com/dathlin/C-S-/blob/master/files/SimplifyNet.md">同步网络数据交互功能使用</a></li>
-<li><a href="https://github.com/dathlin/C-S-/blob/master/files/MelsecReadMe.md">三菱PLC数据读写介绍</a></li>
-<li><a href="https://github.com/dathlin/C-S-/blob/master/files/SiemensReadMe.md">西门子PLC数据读写手册</a></li>
+<li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/LogReadme.md">简单强大的日志记录功能使用</a></li>
+<li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/SimplifyNet.md">同步网络数据交互功能使用</a></li>
+<li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/SimplifyFileNet.md">共享文件管理功能使用</a></li>
+<li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/MelsecReadMe.md">三菱PLC数据读写介绍</a></li>
+<li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/SiemensReadMe.md">西门子PLC数据读写手册</a></li>
 </ul>
 
 
@@ -106,8 +107,8 @@ using HslCommunication;
 </code>
 </pre>
 
-下载地址：<a href="https://github.com/dathlin/C-S-/raw/master/Public/HslCommunication.dll">单独的组件dll文件</a>
-文档地址：<a href="https://github.com/dathlin/C-S-/raw/master/Public/HslCommunication.xml">单独的组件xml注释文件</a>
+下载地址：<a href="https://github.com/dathlin/ClientServerProject/raw/master/Public/HslCommunication.dll">单独的组件dll文件</a>
+文档地址：<a href="https://github.com/dathlin/ClientServerProject/raw/master/Public/HslCommunication.xml">单独的组件xml注释文件</a>
 
 
 
@@ -115,7 +116,7 @@ using HslCommunication;
 
 #### 核心架构的设计机制
 
-![](https://github.com/dathlin/C-S-/raw/master/img/Design1.png)  
+![](https://github.com/dathlin/ClientServerProject/raw/master/img/Design1.png)  
 <br />
 
 #### 系统的登录设计
@@ -127,46 +128,46 @@ using HslCommunication;
 <li>上述所有检测通过之后，启动客户端的主界面程序。但凡有一项检测失败，或者参数下载失败，均不允许登录，并且提示相关错误。</li>
 </ol>
 
-![](https://github.com/dathlin/C-S-/raw/master/img/Design2.png)  
+![](https://github.com/dathlin/ClientServerProject/raw/master/img/Design2.png)  
 
 #### 系统的异常处理模型设计
-![](https://github.com/dathlin/C-S-/raw/master/img/Design3.png)  
+![](https://github.com/dathlin/ClientServerProject/raw/master/img/Design3.png)  
 
 #### 系统的账户头像设计
-![](https://github.com/dathlin/C-S-/raw/master/img/Design6.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/img/Design6.png) 
 
 #### 系统的其他工具设计
-![](https://github.com/dathlin/C-S-/raw/master/img/Design4.png)  
+![](https://github.com/dathlin/ClientServerProject/raw/master/img/Design4.png)  
 
 #### 一个基于此模版的示例项目设计模型
-![](https://github.com/dathlin/C-S-/raw/master/img/Design5.png)  
+![](https://github.com/dathlin/ClientServerProject/raw/master/img/Design5.png)  
 
 
 # 服务器端程序界面如下：
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/server.png)  
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统服务端模版/screenshots/server.png)  
 
 ###### 下述服务器端的功能说明均来自服务器的菜单点击
 
 1. 服务器端的版本控制，更新新的版本号，按照实际需求来更新您的版本号，门牌为【设置】-【版本控制】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/server1.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统服务端模版/screenshots/server1.png) 
 
 2. 服务器端的维护状态控制，比如系统维护阶段，不允许所有客户端登录，门牌为【设置】-【维护切换】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/server2.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统服务端模版/screenshots/server2.png) 
 
 3. 消息群发，您也可以在代码中自动触发群发，代码参考此处的手动群发，门牌为【设置】-【消息发送】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/server3.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统服务端模版/screenshots/server3.png) 
 
 4. 账户管理，客户端的界面和这个一致，该管理属于底层的json数据管理，任意更改数据，门牌为【设置】-【账户管理】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/server4.png)
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统服务端模版/screenshots/server4.png)
 
 5. 关于本系统，框架版本号以本github发布的版本号为准，门牌为【关于】-【关于软件】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统服务端模版/screenshots/server5.png)
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统服务端模版/screenshots/server5.png)
 
 6. 一键断开，如遇到紧急情况，或是切换维护之前，可以选择强制关闭所有的客户端。门牌为【设置】-【一键断开】
 
@@ -178,65 +179,65 @@ using HslCommunication;
 
 ###### 登录窗口
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client1.png)  
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client1.png)  
 <br />
 
 ###### 登录主界面（此处点击了关于菜单）
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client2.png)  
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client2.png)  
 
 ###### 更改公告，此处没有设置权限过滤，门牌为【管理员】-【更改公告】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client3.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client3.png) 
 
 ###### 日志查看，本系统集成了非常实用的日志功能，所有的网络组件均支持日志的记录，方便调试。门牌为【管理员】-【日志查看】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client4.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client4.png) 
 
 ###### 远程更新，成功部署本系统后，支持远程客户端的版本更新，此功能应开发人员拥有。门牌为【管理员】-【远程更新】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client5.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client5.png) 
 
 ###### 密码更改，当账户需要更改密码时，需要对密码进行验证。门牌为【设置】-【修改密码】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client6.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client6.png) 
 
 ###### 更新日志，当客户端更新了新的版本后，初次运行程序时就会自动弹出如下窗口，具体的更新内容应该写入到文件中。手动门牌为【关于】-【更新日志】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client7.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client7.png) 
 
 ###### 反馈意见，人性化的软件允许用户支持提交修改建议，功能使用反馈等。门牌为【关于】-【意见反馈】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client8.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client8.png) 
 
 ###### 快速注册账号，支持管理员快速注册账号，该界面允许更改。门牌为【管理员】-【注册账号】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client9.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client9.png) 
 
 ###### 共享文件，本系统支持一个小型的文件共享，包含了上传下载删除过滤。门牌为主界面的【文件数量】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client10.png) 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client12.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client10.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client12.png) 
 
 ###### 本系统集成了一个小型的简单群聊天系统，缓存消息200条。门牌为主界面的【设置】-【留言板】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client13.png)
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client13.png)
 
 ###### 监视服务器的对象内存消耗，门牌为【管理员】-【开发中心】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client14.png)
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client14.png)
 
 ###### 修改账户的头像，门牌为【设置】-【我的信息】-点击头像
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client15.png)
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client15.png)
 
 ###### 我的账户信息及个人文件，门牌为【设置】-【我的信息】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client16.png)
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client16.png)
 
 ###### 统一的系统配置界面，门牌为【管理员】-【系统配置】
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端模版/screenshots/client17.png)
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client17.png)
 <br />
 
 
@@ -244,24 +245,24 @@ using HslCommunication;
 
 ###### 登录窗口
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client1.png)  
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端Wpf/screenshots/client1.png)  
 
 ###### 主窗口，还未实现文件功能
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client2.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端Wpf/screenshots/client2.png) 
 
 ###### 主窗口的暗色主题
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client3.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端Wpf/screenshots/client3.png) 
 
 ###### 主题选择界面
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client4.png)
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端Wpf/screenshots/client4.png)
 
 
 ###### 共享文件界面
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统客户端Wpf/screenshots/client5.png)
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端Wpf/screenshots/client5.png)
 
 ###### 其他功能界面使用了winform的窗口技术，此处不在赘述。
 
@@ -272,11 +273,11 @@ using HslCommunication;
 
 ###### 登录界面，背景图片可以自定义
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统浏览器模版/screenshots/browser1.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统浏览器模版/screenshots/browser1.png) 
 
 ###### 主界面，很多功能还在完善中
 
-![](https://github.com/dathlin/C-S-/raw/master/软件系统浏览器模版/screenshots/browser2.png) 
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统浏览器模版/screenshots/browser2.png) 
 
 
 <br />

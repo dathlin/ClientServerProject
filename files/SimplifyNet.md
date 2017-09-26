@@ -19,13 +19,9 @@ using HslCommunication.Enthernet;
 我们先要在服务器端进行创建网络监听，这样才能让客户端连接到服务器，服务器需要先实例化及初始化代码如下，代码直接在服务器主窗口下面：
 <pre>
 <code>
-        /// <summary>
-        /// 用户同步数据传送的引擎
-        /// </summary>
+        // 用户同步数据传送的引擎
         private NetSimplifyServer net_simplify_server = new NetSimplifyServer(); //实例化
-        /// <summary>
-        /// 同步传送数据的初始化
-        /// </summary>
+        // 同步传送数据的初始化
         private void Net_Simplify_Server_Initialization()
         {
             try
@@ -43,12 +39,13 @@ using HslCommunication.Enthernet;
                 SoftBasic.ShowExceptionMessage(ex);
             }
         }
-        /// <summary>
+
+        /// &lt;summary>
         /// 接收来自客户端的字节数据
-        /// </summary>
-        /// <param name="state">网络状态</param>
-        /// <param name="customer">字节数据，根据实际情况选择是否使用</param>
-        /// <param name="data">来自客户端的字节数据</param>
+        /// &lt;/summary>
+        /// &lt;param name="state">网络状态&lt;/param>
+        /// &lt;param name="customer">字节数据，根据实际情况选择是否使用&lt;/param>
+        /// &lt;param name="data">来自客户端的字节数据&lt;/param>
         private void Net_simplify_server_ReceivedBytesEvent(AsyncStateOne state, NetHandle customer, byte[] data)
         {
             if(customer==1000)
@@ -73,12 +70,12 @@ using HslCommunication.Enthernet;
          ************************************************************************************************/
 
 
-        /// <summary>
+        /// &lt;summary>
         /// 接收到来自客户端的字符串数据，然后将结果发送回客户端，注意：必须回发结果
-        /// </summary>
-        /// <param name="state">客户端的地址</param>
-        /// <param name="handle">用于自定义的指令头</param>
-        /// <param name="data">接收到的服务器的数据</param>
+        /// &lt;/summary>
+        /// &lt;param name="state">客户端的地址&lt;/param>
+        /// &lt;param name="handle">用于自定义的指令头，可不用，转而使用data来区分&lt;/param>
+        /// &lt;param name="data">接收到的服务器的数据v/param>
         private void Net_simplify_server_ReceiveStringEvent(AsyncStateOne state, NetHandle handle, string data)
         {
 
@@ -115,12 +112,13 @@ using HslCommunication.Enthernet;
 服务端的主要代码都在上面的代码段了，也没多少代码，关键是支持的请求多了之后，不停的使用 **if...else** 代码会显得很多很乱，所以此处的 **Nethandle** 这个值类型就是为了解决这个问题而设计的，它本质上是一个 **int** 数据，我们知道一个 **int** 是由4个字节组成，那么byte[0]byte[1]byte[2]byte[3]，那么我可以用byte[3]（最高位）来作为指令大类。byte[2]来作为指令小类，byte[0]和byte[1]组成的 **ushort** 数据来作为指令编号，所以上述的方法 **Net_simplify_server_ReceiveStringEvent** 中的细节可以改成下面：
 <pre>
 <code>
-        /// <summary>
+
+        /// &lt;summary>
         /// 接收到来自客户端的字符串数据，然后将结果发送回客户端，注意：必须回发结果
-        /// </summary>
-        /// <param name="state">客户端的地址</param>
-        /// <param name="handle">用于自定义的指令头</param>
-        /// <param name="data">接收到的服务器的数据</param>
+        /// &lt;/summary>
+        /// &lt;param name="state">客户端的地址&lt;/param>
+        /// &lt;param name="handle">用于自定义的指令头，可不用，转而使用data来区分&lt;/param>
+        /// &lt;param name="data">接收到的服务器的数据&lt;/param>
         private void Net_simplify_server_ReceiveStringEvent(AsyncStateOne state, NetHandle handle, string data)
         {
 
@@ -201,9 +199,7 @@ using HslCommunication.Enthernet;
 客户端的程序相对简单很多，只需要实例化一下就可以使用了，而且该实例化对象的方法是线程安全的，所以在定义成静态对象，在代码的任何地方都可以使用，不需要再重复实例化，如下代码是实例化：
 <pre>
 <code>
-        /// <summary>
         /// 用于访问服务器数据的网络对象类，必须修改这个端口参数，否则运行失败
-        /// </summary>
         public static NetSimplifyClient Net_simplify_client { get; set; } = new NetSimplifyClient(
             new IPEndPoint(IPAddress.Parse("127.0.0.1"), 17432))  // 指定服务器的ip，和服务器设置的端口
         {
