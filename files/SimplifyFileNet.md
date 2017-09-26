@@ -85,7 +85,8 @@ using HslCommunication.Enthernet;
 文件显示使用了组件的文件控件实现的，需要传入相关的信息才可以，这部分和代码结合的比较紧密，以下展示了从服务器请求了一个文件列表后需要进行显示，在panel2中进行动态控件的排版代码：
 <pre>
 <code>
-        private void SetFilesShow(List<HslSoftFile> files)
+        // 该参数来源于服务器，需要先手动向服务器请求，具体请参照CS项目模版：ClientServerProject 
+        private void SetFilesShow(List&lt;HslSoftFile> files)
         {
             panel2.SuspendLayout();
             //清楚panel2中原来的文件控件
