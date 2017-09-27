@@ -45,7 +45,7 @@ namespace 软件系统客户端Wpf
 
     /***************************************************************************************
      * 
-     *    版本说明    最新版以github为准，由于提交更改比较频繁，需要经常查看官网地址:https://github.com/dathlin/C-S-
+     *    版本说明    最新版以github为准，由于提交更改比较频繁，需要经常查看官网地址:https://github.com/dathlin/ClientServerProject 
      *    注意        本代码的相关操作未作密码验证，如有需要，请自行完成
      *    如果        遇到启动调试就退出了，请注释掉App.xaml.cs文件中的指允许启动一个实例的代码
      *    
@@ -394,10 +394,10 @@ namespace 软件系统客户端Wpf
         {
             try
             {
-                net_socket_client.KeyToken = CommonLibrary.CommonProtocol.KeyToken;//新增的身份令牌
+                net_socket_client.KeyToken = CommonProtocol.KeyToken; // 新增的身份令牌
                 net_socket_client.EndPointServer = new System.Net.IPEndPoint(
                     System.Net.IPAddress.Parse(UserClient.ServerIp),
-                    CommonLibrary.CommonProtocol.Port_Main_Net);
+                    CommonProtocol.Port_Main_Net);
                 net_socket_client.ClientAlias = $"{UserClient.UserAccount.UserName} ({UserClient.UserAccount.Factory})";//标记客户端在线的名称
                 net_socket_client.ClientStart();
             }
@@ -597,10 +597,11 @@ namespace 软件系统客户端Wpf
         #region Udp发送示例
 
         /// <summary>
-        /// 调用该方法并指定参数即可，最长字符串不得超过服务器定义的数据
+        /// 调用该方法并指定参数即可，最长字符串不得超过服务器配置的长度，否则无效
         /// </summary>
-        /// <param name="data"></param>
-        private void SendServerUdpData(int customer, string data)
+        /// <param name="customer">指令头</param>
+        /// <param name="data">实际数据</param>
+        private void SendServerUdpData(NetHandle customer, string data)
         {
             //测试发送udp消息
             UserClient.Net_Udp_Client.SendMessage(customer, data);
