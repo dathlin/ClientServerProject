@@ -2117,189 +2117,6 @@
             离开锁
             </summary>
         </member>
-        <member name="T:HslCommunication.Enthernet.HslSoftFile">
-            <summary>
-            用来保存的文件信息类
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileName">
-            <summary>
-            文件的名称
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileSize">
-            <summary>
-            文件的大小
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileTag">
-            <summary>
-            用于用户自定义的标识
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.HslSoftFile.UploadName">
-            <summary>
-            文件的上传人
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.HslSoftFile.UploadDate">
-            <summary>
-            文件的上传日期
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileNote">
-            <summary>
-            文件的描述，说明备注
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.HslSoftFile.FilePath">
-            <summary>
-            文件在服务器的实际存储路径
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileDownloadTimes">
-            <summary>
-            文件被下载的次数
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileExc">
-            <summary>
-            文件的后缀名
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.HslSoftFile.FileMappingName">
-            <summary>
-            文件存储的真实映射名称
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.HslSoftFile.GetTextFromFileSize">
-            <summary>
-            获取大小
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.HslSoftFile.GetFileIcon">
-            <summary>
-            获取文件对象显示图标
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.HslSoftFile.GetFileRenderIcon(System.String)">
-            <summary>
-            根据文件后缀选择需要对应显示的文件图标，包含了二十多种常用文件的图标
-            </summary>
-            <param name="exc">文件的扩展名</param>
-            <returns>图形对象</returns>
-        </member>
-        <member name="T:HslCommunication.Enthernet.SimpleFileServer">
-            <summary>
-            一个简单的共享文件类，配合下载控件和上传窗口一起使用，适用于系统公共的文件管理
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.#ctor">
-            <summary>
-            实例化对象，需要指定存储规则
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.SimpleFileServer.FileListName">
-            <summary>
-            存储文件列表的txt文件名，默认D:\\files.txt
-            </summary>
-        </member>
-        <member name="E:HslCommunication.Enthernet.SimpleFileServer.FileChange">
-            <summary>
-            当服务器文件变化时，有文件删除或是添加时，触发的事件，可以选中通知客户端刷新数据
-            </summary>
-        </member>
-        <member name="F:HslCommunication.Enthernet.SimpleFileServer.files">
-            <summary>
-            文件的列表
-            </summary>
-        </member>
-        <member name="F:HslCommunication.Enthernet.SimpleFileServer.HybirdLockList">
-            <summary>
-            文件列表的混合锁
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.File_Count">
-            <summary>
-            返回所有文件的数量
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.AddNew(HslCommunication.Enthernet.HslSoftFile)">
-            <summary>
-            新增一个文件对象
-            </summary>
-            <param name="file"></param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.DeleteOne(System.String)">
-            <summary>
-            根据文件名称，删除一个文件对象
-            </summary>
-            <param name="filename"></param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.IsMappingFileExist(System.String)">
-            <summary>
-            判断映射文件名是不是存在于文件列表中
-            </summary>
-            <param name="mappingName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.DownloadTimesAdd(System.String)">
-            <summary>
-            追加一个文件对象的下载数据
-            </summary>
-            <param name="filename"></param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.IsFileExsist(System.String)">
-            <summary>
-            判断文件对对象管理中是否存在
-            </summary>
-            <param name="filename"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.GetHuFileFromFileName(System.String)">
-            <summary>
-            根据文件名称获取文件类型
-            </summary>
-            <param name="filename"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.GetHuFileFromMappingName(System.String)">
-            <summary>
-            根据文件名称获取文件类型
-            </summary>
-            <param name="mappingName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.ToJsonString">
-            <summary>
-            获取JSON字符串
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:HslCommunication.Enthernet.SimpleFileServer.AsyncCoordinator">
-            <summary>
-            一个乐观并发模型高性能执行类
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.ReadFromFile">
-            <summary>
-            从文件中加载数据信息
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.ThreadPoolLogin(System.Object)">
-            <summary>
-            请求接入的回调方法
-            </summary>
-            <param name="obj"></param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileServer.OnFileChange">
-            <summary>
-            刷新客户端的文件信息
-            </summary>
-        </member>
         <member name="T:HslCommunication.Enthernet.FileClientBase">
             <summary>
             文件传输客户端基类
@@ -2337,44 +2154,12 @@
             <param name="processReport">汇报进度</param>
             <returns></returns>
         </member>
-        <member name="T:HslCommunication.Enthernet.SimpleFileClient">
+        <member name="T:HslCommunication.Enthernet.IntegrationFileClient">
             <summary>
-            共享文件客户端类，负责共享文件的文件上传，下载，删除等等操作
+            负责分类文件传输的客户端，用来上传，下载文件信息
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileClient.DeleteFile(System.String)">
-            <summary>
-            删除服务器的文件操作
-            </summary>
-            <param name="fileName">文件名称，带后缀</param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileClient.DownloadFile(System.String,System.Action{System.Int64,System.Int64},System.String)">
-            <summary>
-            下载服务器的文件到本地的文件操作
-            </summary>
-            <param name="fileName">文件名称，带后缀</param>
-            <param name="processReport">下载的进度报告</param>
-            <param name="fileSaveName">准备本地保存的名称</param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.SimpleFileClient.UploadFile(System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
-            <summary>
-            上传本地的文件到服务器操作
-            </summary>
-            <param name="fileName">本地的完整路径的文件名称</param>
-            <param name="serverName"></param>
-            <param name="fileTag"></param>
-            <param name="fileUpload"></param>
-            <param name="processReport"></param>
-            <returns></returns>
-        </member>
-        <member name="T:HslCommunication.Enthernet.AdvancedFileClient">
-            <summary>
-            负责分类文件传输的客户端，用来上传，下载信息
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.DeleteFile(System.String,System.String,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.IntegrationFileClient.DeleteFile(System.String,System.String,System.String,System.String)">
             <summary>
             删除服务器的文件操作
             </summary>
@@ -2384,7 +2169,7 @@
             <param name="id">第三大类</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.DownloadFile(System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64},System.String)">
+        <member name="M:HslCommunication.Enthernet.IntegrationFileClient.DownloadFile(System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64},System.String)">
             <summary>
             下载服务器的文件到本地的文件操作
             </summary>
@@ -2396,7 +2181,7 @@
             <param name="fileSaveName">准备本地保存的名称</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.UploadFile(System.String,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
+        <member name="M:HslCommunication.Enthernet.IntegrationFileClient.UploadFile(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
             <summary>
             上传本地的文件到服务器操作
             </summary>
@@ -2405,10 +2190,12 @@
             <param name="factory">第一大类</param>
             <param name="group">第二大类</param>
             <param name="id">第三大类</param>
+            <param name="fileTag">文件的额外描述</param>
+            <param name="fileUpload">文件的上传人</param>
             <param name="processReport">上传的进度报告</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.TranslateFileName(System.String,System.String,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.IntegrationFileClient.TranslateFileName(System.String,System.String,System.String,System.String)">
             <summary>
             根据三种分类信息，还原成在服务器的相对路径，包含文件
             </summary>
@@ -2418,7 +2205,7 @@
             <param name="id">第三类</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.TranslatePathName(System.String,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.IntegrationFileClient.TranslatePathName(System.String,System.String,System.String)">
             <summary>
             根据三种分类信息，还原成在服务器的相对路径，仅仅路径
             </summary>
@@ -2427,17 +2214,17 @@
             <param name="id">第三类</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.DownloadPathFileNames(System.String[]@,System.String,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.IntegrationFileClient.DownloadPathFileNames(HslCommunication.GroupFileItem[]@,System.String,System.String,System.String)">
             <summary>
             获取指定路径下的所有的文档
             </summary>
-            <param name="fileNames"></param>
-            <param name="factory"></param>
-            <param name="group"></param>
-            <param name="id"></param>
+            <param name="fileNames">获取得到的文件合集</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.DownloadPathFolders(System.String[]@,System.String,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.IntegrationFileClient.DownloadPathFolders(System.String[]@,System.String,System.String,System.String)">
             <summary>
             获取指定路径下的所有的文档
             </summary>
@@ -2447,15 +2234,16 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.AdvancedFileClient.DownloadStringArrays(System.String[]@,System.Int32,System.String,System.String,System.String)">
+        <member name="M:HslCommunication.Enthernet.IntegrationFileClient.DownloadStringArrays``1(``0[]@,System.Int32,System.String,System.String,System.String)">
             <summary>
             获取指定路径下的所有的文档
             </summary>
-            <param name="arrays"></param>
-            <param name="protocol"></param>
-            <param name="factory"></param>
-            <param name="group"></param>
-            <param name="id"></param>
+            <param name="arrays">想要获取的队列</param>
+            <param name="protocol">指令</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
+            <typeparam name="T">数组的类型</typeparam>
             <returns></returns>
         </member>
         <member name="T:HslCommunication.Enthernet.AdvancedFileServer">
@@ -2464,6 +2252,79 @@
             </summary>
         </member>
         <member name="M:HslCommunication.Enthernet.AdvancedFileServer.ThreadPoolLogin(System.Object)">
+            <summary>
+            处理数据
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.AdvancedFileServer.StartInitialization">
+            <summary>
+            初始化数据
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.AdvancedFileServer.CheckFolderAndCreate">
+            <summary>
+            检查文件夹
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.AdvancedFileServer.ReceiveFileFromSocketAndMoveFile(System.Net.Sockets.Socket,System.String,System.String,System.String@,System.Int64@,System.String@,System.String@,HslCommunication.OperateResult)">
+            <summary>
+            从网络套接字接收文件并移动到目标的文件夹中，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket"></param>
+            <param name="savename"></param>
+            <param name="fileNameNew"></param>
+            <param name="filename"></param>
+            <param name="size"></param>
+            <param name="filetag"></param>
+            <param name="fileupload"></param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="P:HslCommunication.Enthernet.AdvancedFileServer.FilesDirectoryPathTemp">
+            <summary>
+            用于接收上传文件时的临时文件夹，临时文件使用结束后会被删除
+            </summary>
+        </member>
+        <member name="T:HslCommunication.Enthernet.UltimateFileServer">
+            <summary>
+            终极文件管理服务器，实现所有的文件分类管理，读写分离，不支持直接访问文件名
+            </summary>
+        </member>
+        <member name="F:HslCommunication.Enthernet.UltimateFileServer.m_dictionary_group_marks">
+            <summary>
+            所有文件组操作的词典锁
+            </summary>
+        </member>
+        <member name="F:HslCommunication.Enthernet.UltimateFileServer.hybirdLock">
+            <summary>
+            词典的锁
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Enthernet.UltimateFileServer.GetGroupFromFilePath(System.String)">
+            <summary>
+            获取当前目录的读写锁，如果没有会自动创建
+            </summary>
+            <param name="filePath">相对路径名</param>
+            <returns>读写锁</returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.UltimateFileServer.ReceiveFileFromSocketAndUpdateGroup(System.Net.Sockets.Socket,System.String,HslCommunication.OperateResult)">
+            <summary>
+            从套接字接收文件并保存，更新文件列表
+            </summary>
+            <param name="socket">套接字</param>
+            <param name="savename">保存的文件名</param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.UltimateFileServer.TransformFactFileName(System.String)">
+            <summary>
+            根据文件的显示名称转化为真实存储的名称
+            </summary>
+            <param name="tag">带分类功能的文件夹名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.UltimateFileServer.ThreadPoolLogin(System.Object)">
             <summary>
             处理数据
             </summary>
@@ -2933,240 +2794,6 @@
             <exception cref="T:System.ArgumentNullException"></exception>
             <exception cref="T:System.Net.Sockets.SocketException"></exception>
             <exception cref="T:System.ObjectDisposedException"></exception>
-        </member>
-        <member name="T:HslCommunication.Enthernet.FileItemShow">
-            <summary>
-            文件显示的子控件类
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileItemShow.#ctor(System.Guid,HslCommunication.LogNet.ILogNet,System.String,System.Int32,System.Func{System.Boolean})">
-            <summary>
-            生成一个文件对象的显示控件
-            </summary>
-            <param name="token">令牌</param>
-            <param name="lognet">日志组件</param>
-            <param name="serverIp">服务器的IP地址</param>
-            <param name="serverPort">服务器的端口号</param>
-            <param name="deleteCheck">用户自定义的删除确认委托，可用于验证权限及密码</param>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileItemShow.ServerIp">
-            <summary>
-            服务器的IP地址
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileItemShow.ServerPort">
-            <summary>
-            服务器的端口号
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileItemShow.SetFile(HslCommunication.Enthernet.HslSoftFile,System.Func{System.Boolean})">
-            <summary>
-            设置文件数据
-            </summary>
-            <param name="file">文件的信息对象</param>
-            <param name="deleteEnable">删除控件的使能委托</param>
-        </member>
-        <member name="F:HslCommunication.Enthernet.FileItemShow.components">
-            <summary> 
-            必需的设计器变量。
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileItemShow.Dispose(System.Boolean)">
-            <summary> 
-            清理所有正在使用的资源。
-            </summary>
-            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileItemShow.InitializeComponent">
-            <summary> 
-            设计器支持所需的方法 - 不要修改
-            使用代码编辑器修改此方法的内容。
-            </summary>
-        </member>
-        <member name="T:HslCommunication.Enthernet.FileOperateControl">
-            <summary>
-            上传或下载的控件
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileOperateControl.#ctor(HslCommunication.Enthernet.AdvancedFileClient,System.String,System.String,System.String,System.String)">
-            <summary>
-            上传的实例化方法
-            </summary>
-            <param name="advancedFile">客户端文件传送引擎</param>
-            <param name="filepath">完整的包含路径的本地文件路径</param>
-            <param name="factory">文件所属的工厂</param>
-            <param name="group">文件所属的分类</param>
-            <param name="id">文件所属的设备ID</param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileOperateControl.#ctor(HslCommunication.Enthernet.AdvancedFileClient,System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            下载的实例化方法
-            </summary>
-            <param name="advancedFile">客户端文件传送引擎</param>
-            <param name="fileName">服务器的文件名称，包含后缀</param>
-            <param name="factory">文件所属的第一大类</param>
-            <param name="group">文件所属的第二大类</param>
-            <param name="id">文件所属的第三大类</param>
-            <param name="savepath">本地保存的路径</param>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileOperateControl.IsOperateFinished">
-            <summary>
-            指示本次上传或是下载是否结束
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileOperateControl.FilePath">
-            <summary>
-            文件的原始路径
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileOperateControl.Factory">
-            <summary>
-            文件所属的工厂分类
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileOperateControl.Group">
-            <summary>
-            文件所属的类别
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileOperateControl.Id">
-            <summary>
-            文件所属的特殊ID
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileOperateControl.SavaPathDirectory">
-            <summary>
-            文件保存的路径，文件下载的时候所需的
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileOperateControl.StartUploadFile">
-            <summary>
-            开始上传文件
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileOperateControl.StartDownloadFile">
-            <summary>
-            启动下载文件
-            </summary>
-        </member>
-        <member name="F:HslCommunication.Enthernet.FileOperateControl.components">
-            <summary> 
-            必需的设计器变量。
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileOperateControl.Dispose(System.Boolean)">
-            <summary> 
-            清理所有正在使用的资源。
-            </summary>
-            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileOperateControl.InitializeComponent">
-            <summary> 
-            设计器支持所需的方法 - 不要修改
-            使用代码编辑器修改此方法的内容。
-            </summary>
-        </member>
-        <member name="T:HslCommunication.Enthernet.FormFileOperate">
-            <summary>
-            用于文件上传或下载的窗口
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FormFileOperate.#ctor(HslCommunication.Enthernet.AdvancedFileClient,System.String[],System.String,System.String,System.String)">
-            <summary>
-            实例化一个文件上传的窗口
-            </summary>
-            <param name="advancedFile">客户端的文件引擎</param>
-            <param name="files">等待上传的文件数组</param>
-            <param name="factory">第一大类</param>
-            <param name="group">第二大类</param>
-            <param name="id">第三大类</param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FormFileOperate.#ctor(HslCommunication.Enthernet.AdvancedFileClient,System.String[],System.String,System.String,System.String,System.String)">
-            <summary>
-            实例化一个文件下载的窗口
-            </summary>
-            <param name="advancedFile">客户端的文件传送引擎</param>
-            <param name="files">等待下载的文件</param>
-            <param name="factory">第一大类</param>
-            <param name="group">第二大类</param>
-            <param name="id">第三大类</param>
-            <param name="savepath">保存路径</param>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FormFileOperate.is_down_file">
-            <summary>
-            是否是下载文件操作
-            </summary>
-        </member>
-        <member name="F:HslCommunication.Enthernet.FormFileOperate.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FormFileOperate.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FormFileOperate.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:HslCommunication.Enthernet.FormSimplyFileUpload">
-            <summary>
-            用于文件上传的类
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FormSimplyFileUpload.#ctor(System.Guid,HslCommunication.LogNet.ILogNet,System.String,System.Int32,System.String)">
-            <summary>
-            实例化一个文件上传的窗口
-            </summary>
-            <param name="token">令牌</param>
-            <param name="logNet">日志组件</param>
-            <param name="serverIp">服务器的IP地址</param>
-            <param name="serverPort">服务器的端口号</param>
-            <param name="uploadName">文件上传人的名称</param>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FormSimplyFileUpload.ServerIp">
-            <summary>
-            服务器的IP地址
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FormSimplyFileUpload.ServerPort">
-            <summary>
-            服务器的端口号
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FormSimplyFileUpload.UploadName">
-            <summary>
-            文件长传人的名称
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FormSimplyFileUpload.ReportProgress(System.Int64,System.Int64)">
-            <summary>
-            用于报告进度的方法
-            </summary>
-            <param name="current"></param>
-            <param name="count"></param>
-        </member>
-        <member name="F:HslCommunication.Enthernet.FormSimplyFileUpload.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FormSimplyFileUpload.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FormSimplyFileUpload.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
         </member>
         <member name="T:HslCommunication.Enthernet.AsyncStateBase">
             <summary>
@@ -4429,18 +4056,12 @@
             <param name="filename">完整的文件路径</param>
             <returns>读写锁</returns>
         </member>
-        <member name="M:HslCommunication.FileServerBase.ReceiveFileFromSocketAndMoveFile(System.Net.Sockets.Socket,System.String,System.String,System.String@,System.Int64@,System.String@,System.String@,HslCommunication.OperateResult)">
+        <member name="M:HslCommunication.FileServerBase.MoveFileToNewFile(System.String,System.String)">
             <summary>
-            从网络套接字接收文件并移动到目标的文件夹中，如果结果异常，则结束通讯
+            移动一个文件到新的文件去
             </summary>
-            <param name="socket"></param>
-            <param name="savename"></param>
+            <param name="fileNameOld"></param>
             <param name="fileNameNew"></param>
-            <param name="filename"></param>
-            <param name="size"></param>
-            <param name="filetag"></param>
-            <param name="fileupload"></param>
-            <param name="result"></param>
             <returns></returns>
         </member>
         <member name="M:HslCommunication.FileServerBase.DeleteFileAndCheck(System.Net.Sockets.Socket,System.String,HslCommunication.OperateResult)">
@@ -4457,19 +4078,14 @@
             服务器启动时的操作
             </summary>
         </member>
-        <member name="M:HslCommunication.FileServerBase.CheckTwoFolderAndCreate">
+        <member name="M:HslCommunication.FileServerBase.CheckFolderAndCreate">
             <summary>
-            检查2个文件夹是否存在，不存在就创建
+            检查文件夹是否存在，不存在就创建
             </summary>
         </member>
         <member name="P:HslCommunication.FileServerBase.FilesDirectoryPath">
             <summary>
             文件所存储的路径
-            </summary>
-        </member>
-        <member name="P:HslCommunication.FileServerBase.FilesDirectoryPathTemp">
-            <summary>
-            用于接收上传文件时的临时文件夹，临时文件使用结束后会被删除
             </summary>
         </member>
         <member name="M:HslCommunication.FileServerBase.GetDirectoryFiles(System.String)">
@@ -4486,6 +4102,115 @@
             <param name="segment">额外的片段名称</param>
             <returns></returns>
         </member>
+        <member name="T:HslCommunication.GroupFileContainer">
+            <summary>
+            文件集容器，绑定一个文件夹的文件信息组
+            </summary>
+        </member>
+        <member name="M:HslCommunication.GroupFileContainer.#ctor(HslCommunication.LogNet.ILogNet,System.String)">
+            <summary>
+            实例化一个新的数据管理容器
+            </summary>
+            <param name="logNet">日志记录对象，可以为空</param>
+            <param name="path"></param>
+        </member>
+        <member name="P:HslCommunication.GroupFileContainer.JsonArrayContent">
+            <summary>
+            包含所有文件列表信息的json文本缓存
+            </summary>
+        </member>
+        <member name="P:HslCommunication.GroupFileContainer.FileCount">
+            <summary>
+            获取文件的数量
+            </summary>
+        </member>
+        <member name="E:HslCommunication.GroupFileContainer.FileCountChanged">
+            <summary>
+            当文件数量发生变化的时候触发的事件
+            </summary>
+        </member>
+        <member name="M:HslCommunication.GroupFileContainer.GetCurrentFileMappingName(System.String)">
+            <summary>
+            下载文件时调用
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.GroupFileContainer.UpdateFileMappingName(System.String,System.Int64,System.String,System.String,System.String)">
+            <summary>
+            上传文件时掉用
+            </summary>
+            <param name="fileName">文件名，带后缀，不带任何的路径</param>
+            <param name="fileSize">文件的大小</param>
+            <param name="mappingName">文件映射名称</param>
+            <param name="owner">文件的拥有者</param>
+            <param name="description">文件的额外描述</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.GroupFileContainer.DeleteFile(System.String)">
+            <summary>
+            删除一个文件信息
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.GroupFileContainer.CacheJsonArrayContent">
+            <summary>
+            缓存JSON文本的方法，该机制使用乐观并发模型完成
+            </summary>
+        </member>
+        <member name="M:HslCommunication.GroupFileContainer.GroupFileContainerLoadByPath(System.String)">
+            <summary>
+            从目录进行加载数据，必须实例化的时候加载，加载失败会导致系统异常，旧的文件丢失
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="T:HslCommunication.GroupFileItem">
+            <summary>
+            单个文件的存储
+            </summary>
+        </member>
+        <member name="P:HslCommunication.GroupFileItem.FileName">
+            <summary>
+            文件的名称
+            </summary>
+        </member>
+        <member name="P:HslCommunication.GroupFileItem.FileSize">
+            <summary>
+            文件的大小
+            </summary>
+        </member>
+        <member name="P:HslCommunication.GroupFileItem.MappingName">
+            <summary>
+            文件的映射名称
+            </summary>
+        </member>
+        <member name="P:HslCommunication.GroupFileItem.DownloadTimes">
+            <summary>
+            文件的下载次数
+            </summary>
+        </member>
+        <member name="P:HslCommunication.GroupFileItem.UploadTime">
+            <summary>
+            文件的上传时间
+            </summary>
+        </member>
+        <member name="P:HslCommunication.GroupFileItem.Owner">
+            <summary>
+            文件的上传人，拥有者
+            </summary>
+        </member>
+        <member name="P:HslCommunication.GroupFileItem.Description">
+            <summary>
+            文件的额外描述
+            </summary>
+        </member>
+        <member name="M:HslCommunication.GroupFileItem.GetTextFromFileSize">
+            <summary>
+            获取大小
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HslCommunication.FileMarkId">
             <summary>
             文件标记对象类
@@ -4498,7 +4223,7 @@
         </member>
         <member name="M:HslCommunication.FileMarkId.AddOperation(System.Action)">
             <summary>
-            新增一个文件的操作，可能用于更新文件，新增文件，删除文件
+            新增一个文件的操作，仅仅是删除文件
             </summary>
             <param name="action"></param>
         </member>
@@ -5083,17 +4808,12 @@
               重写当前线程的 CurrentUICulture 属性。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources._7z">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources._class">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.abstr1">
+            <summary>
+              查找 System.Drawing.Bitmap 类型的本地化资源。
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Properties.Resources.abstr11">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -5108,37 +4828,12 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.ai">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.aiff">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.arj">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.asc">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.asp">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.asset_progressBar_24x24_on">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.audio">
+        <member name="P:HslCommunication.Properties.Resources.asset_progressBar_24x24_on1">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -5148,52 +4843,7 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.avi">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.bin">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.bmp">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.brackets_Square_16xMD">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.bz2">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.c">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.cdr">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.cfc">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.cfm">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.chm">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -5213,37 +4863,7 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.conf">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.Copy_6524">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.cpp">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.cs">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.css">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.csv">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.deb">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -5253,47 +4873,12 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.divx">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.doc">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.docview_xaml_on_16x16">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.docx">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.dot">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.eml">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.enc">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.Enum_582">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.eps">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -5308,97 +4893,12 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.exe">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.f4v">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.file">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.flv">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.gif">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.glasses_16xLG">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
         <member name="P:HslCommunication.Properties.Resources.grid_Data_16xLG">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.gz">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.hlp">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.htm">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.html">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.ics">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.image">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.iso">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.jar">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.java">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.jpg">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.js">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.jsp">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -5413,22 +4913,7 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.lua">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.m">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.Method_636">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.mm">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -5438,117 +4923,7 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.mov">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.mp3">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.mpg">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.msi">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.odc">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.odf">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.odg">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.odi">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.odp">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.ods">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.odt">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.ogg">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.pdf">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.perl">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.pgp">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.php">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.pl">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.png">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.ppt">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.PropertyIcon">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.ps">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.psd">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.py">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -5558,87 +4933,12 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.ram">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.rar">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.rb">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.rm">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.rpm">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.rtf">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.ruby">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.sig">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.Soundfile_461">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.sql">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.Structure_507">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.svg">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.swf">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.sxc">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.sxd">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.sxi">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.sxw">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -5658,42 +4958,12 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.tar">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.tex">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.Textfile_818_16x">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.tgz">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.tif">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.TreeView_713">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.ttf">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.txt">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -5708,42 +4978,7 @@
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
         </member>
-        <member name="P:HslCommunication.Properties.Resources.vb">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.vcf">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.vdo">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.video">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
         <member name="P:HslCommunication.Properties.Resources.VirtualMachine">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.vsd">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.wav">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.WebForm_ASPX__815_16x">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>
@@ -5754,41 +4989,6 @@
             </summary>
         </member>
         <member name="P:HslCommunication.Properties.Resources.WindowsForm_817_16x">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.wma">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.xls">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.xml">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.xpi">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.xul">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.xvid">
-            <summary>
-              查找 System.Drawing.Bitmap 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Properties.Resources.zip">
             <summary>
               查找 System.Drawing.Bitmap 类型的本地化资源。
             </summary>

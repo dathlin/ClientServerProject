@@ -102,6 +102,10 @@ namespace CommonLibrary
         /// 大尺寸头像的MD5传送名称
         /// </summary>
         public static string LargePortraitText { get { return "LargePortrait"; } }
+        /// <summary>
+        /// 系统的框架版本，框架版本不一致，由服务器决定是否允许客户端登录
+        /// </summary>
+        public static string FrameworkVersion { get { return "FrameworkVersion"; } }
 
         #endregion
 

@@ -176,6 +176,7 @@ namespace CommonLibrary
             bool result = true;
             hybirdLock.Enter();
 
+            // 账户名重复的时候不允许添加
             for (int i = 0; i < all_list_accounts.Count; i++)
             {
                 if (all_list_accounts[i].UserName == account.UserName)
@@ -184,8 +185,19 @@ namespace CommonLibrary
                     break;
                 }
             }
-            all_list_accounts.Add(account);
-            ILogNet?.WriteInfo(SoftResources.StringResouce.AccountAddSuccess + account.UserName);
+
+            // 账户名为空的时候不允许添加
+            if(string.IsNullOrEmpty(account.UserName))
+            {
+                result = false;
+            }
+
+            // 检测通过后进行添加账户名
+            if (result)
+            {
+                all_list_accounts.Add(account);
+                ILogNet?.WriteInfo(SoftResources.StringResouce.AccountAddSuccess + account.UserName);
+            }
 
             hybirdLock.Leave();
             return result;

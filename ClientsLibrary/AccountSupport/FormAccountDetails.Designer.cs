@@ -55,10 +55,16 @@
             this.textBox_UserName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.userButton2 = new HslCommunication.Controls.UserButton();
-            this.userButton1 = new HslCommunication.Controls.UserButton();
+            this.userButton_delete = new HslCommunication.Controls.UserButton();
+            this.userButton_download = new HslCommunication.Controls.UserButton();
             this.userButton_upload = new HslCommunication.Controls.UserButton();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.textBox_file_name = new System.Windows.Forms.TextBox();
+            this.label_fileName = new System.Windows.Forms.Label();
+            this.textBox_file_size = new System.Windows.Forms.TextBox();
+            this.label_fileSize = new System.Windows.Forms.Label();
+            this.textBox_file_uploadTime = new System.Windows.Forms.TextBox();
+            this.label_uploadTime = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_UserPortrait)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -322,8 +328,14 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox2.Controls.Add(this.userButton2);
-            this.groupBox2.Controls.Add(this.userButton1);
+            this.groupBox2.Controls.Add(this.textBox_file_uploadTime);
+            this.groupBox2.Controls.Add(this.label_uploadTime);
+            this.groupBox2.Controls.Add(this.textBox_file_size);
+            this.groupBox2.Controls.Add(this.label_fileSize);
+            this.groupBox2.Controls.Add(this.textBox_file_name);
+            this.groupBox2.Controls.Add(this.label_fileName);
+            this.groupBox2.Controls.Add(this.userButton_delete);
+            this.groupBox2.Controls.Add(this.userButton_download);
             this.groupBox2.Controls.Add(this.userButton_upload);
             this.groupBox2.Controls.Add(this.treeView1);
             this.groupBox2.Location = new System.Drawing.Point(322, 12);
@@ -333,35 +345,35 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "个人文件，支持拖拽上传，双击下载";
             // 
-            // userButton2
+            // userButton_delete
             // 
-            this.userButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.userButton2.BackColor = System.Drawing.Color.Transparent;
-            this.userButton2.CustomerInformation = "";
-            this.userButton2.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.userButton2.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton2.Location = new System.Drawing.Point(297, 460);
-            this.userButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.userButton2.Name = "userButton2";
-            this.userButton2.Size = new System.Drawing.Size(65, 23);
-            this.userButton2.TabIndex = 10;
-            this.userButton2.UIText = "删除";
-            this.userButton2.Click += new System.EventHandler(this.userButton2_Click);
+            this.userButton_delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.userButton_delete.BackColor = System.Drawing.Color.Transparent;
+            this.userButton_delete.CustomerInformation = "";
+            this.userButton_delete.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton_delete.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton_delete.Location = new System.Drawing.Point(297, 460);
+            this.userButton_delete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton_delete.Name = "userButton_delete";
+            this.userButton_delete.Size = new System.Drawing.Size(65, 23);
+            this.userButton_delete.TabIndex = 10;
+            this.userButton_delete.UIText = "删除";
+            this.userButton_delete.Click += new System.EventHandler(this.userButton2_Click);
             // 
-            // userButton1
+            // userButton_download
             // 
-            this.userButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.userButton1.BackColor = System.Drawing.Color.Transparent;
-            this.userButton1.CustomerInformation = "";
-            this.userButton1.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.userButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton1.Location = new System.Drawing.Point(81, 460);
-            this.userButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.userButton1.Name = "userButton1";
-            this.userButton1.Size = new System.Drawing.Size(65, 23);
-            this.userButton1.TabIndex = 9;
-            this.userButton1.UIText = "下载";
-            this.userButton1.Click += new System.EventHandler(this.userButton1_Click);
+            this.userButton_download.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.userButton_download.BackColor = System.Drawing.Color.Transparent;
+            this.userButton_download.CustomerInformation = "";
+            this.userButton_download.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton_download.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton_download.Location = new System.Drawing.Point(81, 460);
+            this.userButton_download.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton_download.Name = "userButton_download";
+            this.userButton_download.Size = new System.Drawing.Size(65, 23);
+            this.userButton_download.TabIndex = 9;
+            this.userButton_download.UIText = "下载";
+            this.userButton_download.Click += new System.EventHandler(this.userButton1_Click);
             // 
             // userButton_upload
             // 
@@ -390,11 +402,73 @@
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
             this.treeView1.ShowLines = false;
-            this.treeView1.Size = new System.Drawing.Size(353, 429);
+            this.treeView1.Size = new System.Drawing.Size(353, 377);
             this.treeView1.TabIndex = 0;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
             this.treeView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView1_DragEnter);
             this.treeView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDoubleClick);
+            // 
+            // textBox_file_name
+            // 
+            this.textBox_file_name.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_file_name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_file_name.Location = new System.Drawing.Point(66, 405);
+            this.textBox_file_name.Name = "textBox_file_name";
+            this.textBox_file_name.ReadOnly = true;
+            this.textBox_file_name.Size = new System.Drawing.Size(297, 23);
+            this.textBox_file_name.TabIndex = 12;
+            // 
+            // label_fileName
+            // 
+            this.label_fileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_fileName.AutoSize = true;
+            this.label_fileName.Location = new System.Drawing.Point(7, 407);
+            this.label_fileName.Name = "label_fileName";
+            this.label_fileName.Size = new System.Drawing.Size(56, 17);
+            this.label_fileName.TabIndex = 11;
+            this.label_fileName.Text = "文件名：";
+            // 
+            // textBox_file_size
+            // 
+            this.textBox_file_size.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox_file_size.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_file_size.Location = new System.Drawing.Point(66, 432);
+            this.textBox_file_size.Name = "textBox_file_size";
+            this.textBox_file_size.ReadOnly = true;
+            this.textBox_file_size.Size = new System.Drawing.Size(110, 23);
+            this.textBox_file_size.TabIndex = 14;
+            // 
+            // label_fileSize
+            // 
+            this.label_fileSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_fileSize.AutoSize = true;
+            this.label_fileSize.Location = new System.Drawing.Point(7, 434);
+            this.label_fileSize.Name = "label_fileSize";
+            this.label_fileSize.Size = new System.Drawing.Size(44, 17);
+            this.label_fileSize.TabIndex = 13;
+            this.label_fileSize.Text = "大小：";
+            // 
+            // textBox_file_uploadTime
+            // 
+            this.textBox_file_uploadTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox_file_uploadTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_file_uploadTime.Location = new System.Drawing.Point(252, 432);
+            this.textBox_file_uploadTime.Name = "textBox_file_uploadTime";
+            this.textBox_file_uploadTime.ReadOnly = true;
+            this.textBox_file_uploadTime.Size = new System.Drawing.Size(111, 23);
+            this.textBox_file_uploadTime.TabIndex = 16;
+            // 
+            // label_uploadTime
+            // 
+            this.label_uploadTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_uploadTime.AutoSize = true;
+            this.label_uploadTime.Location = new System.Drawing.Point(182, 434);
+            this.label_uploadTime.Name = "label_uploadTime";
+            this.label_uploadTime.Size = new System.Drawing.Size(68, 17);
+            this.label_uploadTime.TabIndex = 15;
+            this.label_uploadTime.Text = "上传日期：";
             // 
             // FormAccountDetails
             // 
@@ -417,6 +491,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_UserPortrait)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -448,10 +523,16 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TreeView treeView1;
-        private HslCommunication.Controls.UserButton userButton2;
-        private HslCommunication.Controls.UserButton userButton1;
+        private HslCommunication.Controls.UserButton userButton_delete;
+        private HslCommunication.Controls.UserButton userButton_download;
         private HslCommunication.Controls.UserButton userButton_upload;
         private System.Windows.Forms.PictureBox pictureBox_UserPortrait;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBox_file_uploadTime;
+        private System.Windows.Forms.Label label_uploadTime;
+        private System.Windows.Forms.TextBox textBox_file_size;
+        private System.Windows.Forms.Label label_fileSize;
+        private System.Windows.Forms.TextBox textBox_file_name;
+        private System.Windows.Forms.Label label_fileName;
     }
 }

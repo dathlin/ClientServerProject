@@ -58,6 +58,10 @@ namespace CommonLibrary
         /// </summary>
         public bool AllowUserMultiOnline { get; set; } = false;
         /// <summary>
+        /// 当框架版本不对的时候，是否允许登录
+        /// </summary>
+        public bool AllowLoginWhenFramewordVersionNotCheck { get; set; } = false;
+        /// <summary>
         /// 不允许登录系统的原因
         /// </summary>
         public string Account_Forbidden_Reason { get; set; } = "系统处于维护中，请稍后登录。";
@@ -158,6 +162,7 @@ namespace CommonLibrary
                 { nameof(SystemFactories), new JArray(SystemFactories) },
                 { nameof(WhetherToEnableTrustedClientAuthentication),new JValue(WhetherToEnableTrustedClientAuthentication) },
                 { nameof(TrustedClientList),new JArray(TrustedClientList) },
+                { nameof(AllowLoginWhenFramewordVersionNotCheck), new JValue(AllowLoginWhenFramewordVersionNotCheck) },
             };
             return json.ToString();
         }
@@ -173,6 +178,9 @@ namespace CommonLibrary
             Can_Account_Login = SoftBasic.GetValueFromJsonObject(json, nameof(Can_Account_Login), Can_Account_Login);
             AllowUserMultiOnline = SoftBasic.GetValueFromJsonObject(json, nameof(AllowUserMultiOnline), AllowUserMultiOnline);
             Account_Forbidden_Reason = SoftBasic.GetValueFromJsonObject(json, nameof(Account_Forbidden_Reason), Account_Forbidden_Reason);
+            AllowLoginWhenFramewordVersionNotCheck = SoftBasic.GetValueFromJsonObject(json, nameof(AllowLoginWhenFramewordVersionNotCheck), AllowLoginWhenFramewordVersionNotCheck);
+
+
 
             if (json[nameof(SystemFactories)] != null)
             {

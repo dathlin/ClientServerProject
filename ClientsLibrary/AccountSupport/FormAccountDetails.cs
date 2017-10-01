@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using HslCommunication;
 using HslCommunication.BasicFramework;
 using System.IO;
+using ClientsLibrary.FileSupport;
 
 namespace ClientsLibrary
 {
@@ -67,12 +68,11 @@ namespace ClientsLibrary
 
         #endregion
 
-        #region 头像加载显示块
+        #region Load Portrait
 
         public UserPortrait UserPortrait { get; }
         
  
-
         private void pictureBox_UserPortrait_Click(object sender, EventArgs e)
         {
             UserPortrait.ChangePortrait(LoadLargeProtrait,UnloadLargeProtrait);
@@ -115,7 +115,7 @@ namespace ClientsLibrary
 
         #endregion
 
-        #region 个人文件管理块
+        #region Download FileNames
 
         public void DownloadUserFileNames()
         {
@@ -125,16 +125,17 @@ namespace ClientsLibrary
 
             // 向服务器请求自身的文件列表
             OperateResult result = UserClient.Net_File_Client.DownloadPathFileNames(
-                out string[] files, "Files", "Personal", UserClient.UserAccount.UserName
+                out GroupFileItem[] files, "Files", "Personal", UserClient.UserAccount.UserName
                 );
 
             if (result.IsSuccess)
             {
                 if (files != null)
                 {
-                    foreach(var m in files)
+                    foreach(var file in files)
                     {
-                        TreeNode node = new TreeNode(m, 1, 1);
+                        TreeNode node = new TreeNode(file.FileName, 1, 1);
+                        node.Tag = file;
                         treeView1.Nodes[0].Nodes.Add(node);
                     }
 
@@ -152,6 +153,11 @@ namespace ClientsLibrary
 
             treeView1.ExpandAll();
         }
+
+
+        #endregion
+
+        #region Upload Support
 
         private void userButton_upload_Click(object sender, EventArgs e)
         {
@@ -177,6 +183,11 @@ namespace ClientsLibrary
             // 更新文件列表
             DownloadUserFileNames();
         }
+
+        #endregion
+        
+        #region Download File Support
+
 
         private void treeView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -212,16 +223,22 @@ namespace ClientsLibrary
             }
         }
 
+        #endregion
+
+        #region Delete File Support
+        
         private void userButton2_Click(object sender, EventArgs e)
         {
             // 删除选中文件
             TreeNode treeNode = treeView1.SelectedNode;
             if (treeNode.Name != "files_root")
             {
+                // 删除文件前要先进行密码验证
                 using (FormPasswordCheck passwordCheck = new FormPasswordCheck(UserClient.UserAccount.Password))
                 {
                     if (passwordCheck.ShowDialog() == DialogResult.OK)
                     {
+                        // 密码验证已经通过
                         OperateResult result = UserClient.Net_File_Client.DeleteFile(
                             treeNode.Text,
                             "Files",
@@ -241,13 +258,9 @@ namespace ClientsLibrary
             }
         }
 
-
-
-
         #endregion
 
-        #region 文件拖拽上传块
-
+        #region Drag File Upload
 
         private void treeView1_DragDrop(object sender, DragEventArgs e)
         {
@@ -307,6 +320,20 @@ namespace ClientsLibrary
             }
         }
 
+
+        #endregion
+
+        #region Tree File Select
+        
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if(e.Node.Tag is GroupFileItem file)
+            {
+                textBox_file_name.Text = file.FileName;
+                textBox_file_size.Text = file.GetTextFromFileSize();
+                textBox_file_uploadTime.Text = file.UploadTime.ToLocalTime().ToShortDateString();
+            }
+        }
 
         #endregion
     }

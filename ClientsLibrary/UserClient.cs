@@ -35,7 +35,7 @@ namespace ClientsLibrary
         /// <summary>
         /// 本软件的当前版本，用来验证更新的关键依据
         /// </summary>
-        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.170914");
+        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.170930");
 
 
         /// <summary>
@@ -61,12 +61,12 @@ namespace ClientsLibrary
                 // 写入所有的历史版本信息，这样就能在更新日志的界面查看到信息
                 new VersionInfo()
                 {
-                    VersionNum=new SystemVersion("1.0.0"),
-                    ReleaseDate=new DateTime(2017,1,1),//该版本发布的日期
-                    UpdateDetails=new StringBuilder(
+                    VersionNum = new SystemVersion("1.0.0"),
+                    ReleaseDate = new DateTime(2017, 10, 1),//该版本发布的日期
+                    UpdateDetails = new StringBuilder(
                         "1.本系统第一版本正式发布使用。"+Environment.NewLine+
                         "2.提供了多客户端用时在线的功能。"+Environment.NewLine+
-                        "3.需要用户自行添加"),
+                        "3.支持个人的文件管理功能。"),
                 },
         };
 
@@ -106,20 +106,37 @@ namespace ClientsLibrary
         };
 
 
+
+
+
+
         /// <summary>
-        /// 用于特殊用途的文件上传下载操作
+        /// 用于绝大部分用途的文件上传下载操作
         /// </summary>
-        public static AdvancedFileClient Net_File_Client { get; set; } = new AdvancedFileClient()
+        public static IntegrationFileClient Net_File_Client { get; set; } = new IntegrationFileClient()
         {
             KeyToken = CommonProtocol.KeyToken,
             LogNet = LogNet,
-            ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), CommonLibrary.CommonProtocol.Port_Advanced_File_Server)
+            ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), CommonProtocol.Port_Ultimate_File_Server)
         };
+
+        /// <summary>
+        /// 目前仅仅用于上传客户端更新文件操作
+        /// </summary>
+        public static IntegrationFileClient Net_Update_Client { get; set; } = new IntegrationFileClient()
+        {
+            KeyToken = CommonProtocol.KeyToken,
+            LogNet = LogNet,
+            ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), CommonProtocol.Port_Advanced_File_Server)
+        };
+
 
         /// <summary>
         /// 客户端的日志纪录对象
         /// </summary>
         public static HslCommunication.LogNet.ILogNet LogNet { get; set; }
+
+
 
 
         /// <summary>
@@ -131,11 +148,13 @@ namespace ClientsLibrary
         {
             if (e.ExceptionObject is Exception ex)
             {
-                // 使用TCP方法传送会服务器
+                // 使用TCP方法传送回服务器
                 string info = HslCommunication.LogNet.LogNetManagment.GetSaveStringFromException(null, ex);
                 Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.异常消息, info);
             }
         }
+
+
 
         public static Icon GetFormWindowIcon()
         {

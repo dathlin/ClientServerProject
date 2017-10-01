@@ -60,11 +60,14 @@ namespace 软件系统客户端Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Constructor
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        #endregion
 
         #region 窗口相关方法
         /// <summary>
@@ -185,8 +188,7 @@ namespace 软件系统客户端Wpf
         }
 
         #endregion
-
-
+        
         #region 菜单逻辑块
 
 
@@ -384,8 +386,7 @@ namespace 软件系统客户端Wpf
         }
 
         #endregion
-
-
+        
         #region 异步网络块
 
         private NetComplexClient net_socket_client = new NetComplexClient();
@@ -519,8 +520,7 @@ namespace 软件系统客户端Wpf
         
 
         #endregion
-
-
+        
         #region 后台计数线程
 
         /*********************************************************************************************
@@ -707,7 +707,7 @@ namespace 软件系统客户端Wpf
             UIControl_Palette = new UserPaletteSelector() { DataContext = new PaletteSelectorViewModel() };
             all_main_render.Add(UIControl_Palette);
 
-            UIControl_Files = new UserFileRender();
+            UIControl_Files = new UserFileRender("ShareFiles", "", "");
             all_main_render.Add(UIControl_Files);
 
         }
@@ -758,6 +758,13 @@ namespace 软件系统客户端Wpf
 
         #endregion
 
+
+
+        /**********************************************************************************************
+         * 
+         *    说明： 以下的两个方法是针对主界面左侧的按钮，用于测试
+         * 
+         **********************************************************************************************/
 
 
         private void Button_BackMain_Click(object sender, RoutedEventArgs e)

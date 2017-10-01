@@ -43,7 +43,7 @@ namespace CommonLibrary
              * 
              **************************************************************************/
 
-            SoftBasic.FrameworkVersion = new SystemVersion("1.4.10");
+            SoftBasic.FrameworkVersion = new SystemVersion("1.5.0");
 
         }
 
@@ -87,7 +87,7 @@ namespace CommonLibrary
         /// <summary>
         /// 共享文件的端口号
         /// </summary>
-        public static int Port_Share_File { get; } = 34261;
+        public static int Port_Ultimate_File_Server { get; } = 34261;
         /// <summary>
         /// 用于UDP传输的端口号
         /// </summary>

@@ -33,8 +33,8 @@ namespace 软件系统客户端模版.UIControls
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.userButton_refresh = new UserButton();
-            this.userButton_upload = new UserButton();
+            this.userButton_refresh = new HslCommunication.Controls.UserButton();
+            this.userButton_upload = new HslCommunication.Controls.UserButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +63,7 @@ namespace 软件系统客户端模版.UIControls
             this.textBox1.Size = new System.Drawing.Size(187, 23);
             this.textBox1.TabIndex = 9;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // label1
             // 

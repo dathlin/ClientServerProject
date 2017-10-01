@@ -33,7 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClientsLibrary">
+    <Reference Include="ClientsLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ClientsLibrary\bin\Debug\ClientsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="CommonLibrary">

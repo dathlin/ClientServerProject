@@ -85,10 +85,11 @@ namespace ClientsLibrary
             // 包装数据
             JObject json = new JObject
             {
-                { UserAccount.UserNameText, new JValue(userName) },
-                { UserAccount.PasswordText, new JValue(password) },
-                { UserAccount.LoginWayText, new JValue(clientType) },
-                { UserAccount.DeviceUniqueID, new JValue(UserClient.JsonSettings.SystemInfo) }
+                { UserAccount.UserNameText, new JValue(userName) },                                    // 用户名
+                { UserAccount.PasswordText, new JValue(password) },                                    // 密码
+                { UserAccount.LoginWayText, new JValue(clientType) },                                  // 登录方式
+                { UserAccount.DeviceUniqueID, new JValue(UserClient.JsonSettings.SystemInfo) },        // 客户端唯一ID
+                { UserAccount.FrameworkVersion, new JValue(SoftBasic.FrameworkVersion.ToString()) }    // 客户端框架版本
             };
             result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.账户检查, json.ToString());
             if (result.IsSuccess)
@@ -125,7 +126,7 @@ namespace ClientsLibrary
             // 延时
             Thread.Sleep(200);
 
-            result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.更新检查);
+            result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更新检查);
             if (result.IsSuccess)
             {
                 // 服务器应该返回服务器的版本号

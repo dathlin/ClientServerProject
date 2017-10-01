@@ -40,6 +40,7 @@ namespace ClientsLibrary.Configuration
             JObject json = new JObject
             {
                 { "AllowUserMulti", new JValue(checkBox1.Checked) },
+                { "AllowFrameLogin", new JValue(checkBox2.Checked) },
             };
 
             OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(

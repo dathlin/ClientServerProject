@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using HslCommunication;
 using HslCommunication.Enthernet;
 using CommonLibrary;
+using ClientsLibrary.FileSupport;
 
 namespace ClientsLibrary
 {
@@ -39,7 +40,7 @@ namespace ClientsLibrary
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     using (FormFileOperate fUpload = new FormFileOperate(
-                        UserClient.Net_File_Client,
+                        UserClient.Net_Update_Client,
                         ofd.FileNames,
                         "ClientFiles", 
                         "", 

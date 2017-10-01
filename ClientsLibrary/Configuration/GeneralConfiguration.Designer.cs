@@ -31,6 +31,7 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.userButton2 = new HslCommunication.Controls.UserButton();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.checkBox2);
             this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -70,6 +72,16 @@
             this.userButton2.TabIndex = 10;
             this.userButton2.UIText = "保存";
             this.userButton2.Click += new System.EventHandler(this.userButton2_Click);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(3, 30);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(231, 21);
+            this.checkBox2.TabIndex = 1;
+            this.checkBox2.Text = "是否允许框架版本不匹配的客户端登录";
+            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // GeneralConfiguration
             // 
@@ -93,5 +105,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Panel panel1;
         private HslCommunication.Controls.UserButton userButton2;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

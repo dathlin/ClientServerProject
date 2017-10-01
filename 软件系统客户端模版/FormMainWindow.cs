@@ -44,12 +44,18 @@ namespace 软件系统客户端模版
 {
     public partial class FormMainWindow : Form
     {
+        #region Constructor
+        
         public FormMainWindow()
         {
             InitializeComponent();
+
+            Icon = UserClient.GetFormWindowIcon();
         }
 
-        #region 窗口的属性和方法
+        #endregion
+
+        #region Load Show Close
         /// <summary>
         /// 指示窗口是否显示的标志
         /// </summary>
@@ -57,8 +63,8 @@ namespace 软件系统客户端模版
 
         private void FormMainWindow_Load(object sender, EventArgs e)
         {
-            //udp测试
-            //SendServerUdpData(0, "载入了窗体");
+            // udp测试
+            // SendServerUdpData(0, "载入了窗体");
 
             //窗口载入
             label_userName.Text = UserClient.UserAccount.UserName;
@@ -69,24 +75,24 @@ namespace 软件系统客户端模版
             label_times.Text = UserClient.UserAccount.LoginFrequency.ToString();
             label_address.Text = UserClient.UserAccount.LastLoginIpAddress;
 
-            //状态栏设置
+            // 状态栏设置
             toolStripStatusLabel_time.Alignment = ToolStripItemAlignment.Right;
             statusStrip1.LayoutStyle = ToolStripLayoutStyle.StackWithOverflow;
             toolStripStatusLabel1.Text = $"本软件著作权归{SoftResources.StringResouce.SoftCopyRight}所有";
 
-            //绑定事件，仅执行一次，不能放到show方法里
+            // 绑定事件，仅执行一次，不能放到show方法里
             net_socket_client.MessageAlerts += Net_socket_client_MessageAlerts;
             net_socket_client.LoginFailed += Net_socket_client_LoginFailed;
             net_socket_client.LoginSuccess += Net_socket_client_LoginSuccess;
             net_socket_client.AcceptByte += Net_socket_client_AcceptByte;
             net_socket_client.AcceptString += Net_socket_client_AcceptString;
-            //启动网络服务
+            // 启动网络服务
             Net_Socket_Client_Initialization();
-            //启动头像
+            // 启动头像
             SoftUserPortraitInitialization();
-
+            // 显示公告
             label_Announcement.Text = UserClient.Announcement;
-
+            // 显示版本
             toolStripStatusLabel_Version.Text = UserClient.CurrentVersion.ToString();
 
             //初始化窗口
@@ -94,13 +100,13 @@ namespace 软件系统客户端模版
         }
         private void FormMainWindow_Shown(object sender, EventArgs e)
         {
-            //窗口显示
+            // 窗口显示
             IsWindowShow = true;
 
-            //udp测试
-            //SendServerUdpData(0, "显示了窗体");
+            // udp测试
+            // SendServerUdpData(0, "显示了窗体");
 
-            //是否显示更新日志，显示前进行判断该版本是否已经显示过了
+            // 是否显示更新日志，显示前进行判断该版本是否已经显示过了
             if (UserClient.JsonSettings.IsNewVersionRunning)
             {
                 UserClient.JsonSettings.IsNewVersionRunning = false;
@@ -108,7 +114,7 @@ namespace 软件系统客户端模版
                 更新日志ToolStripMenuItem_Click(null, new EventArgs());
             }
 
-            //根据权限使能菜单
+            // 根据权限使能菜单
             if (UserClient.UserAccount.Grade < AccountGrade.SuperAdministrator)
             {
                 日志查看ToolStripMenuItem.Enabled = false;
@@ -119,19 +125,19 @@ namespace 软件系统客户端模版
                 开发中心ToolStripMenuItem.Enabled = false;
                 系统配置ToolStripMenuItem.Enabled = false;
             }
-            //启动定时器
+            // 启动定时器
             TimeTickInitilization();
-            //显示头像
+            // 显示头像
             SoftUserPortrait.LoadUserSmallPortraint();
         }
         private void FormMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //窗口关闭
+            // 窗口关闭
             IsWindowShow = false;
-            //通知服务器退出网络服务
+            // 通知服务器退出网络服务
             net_socket_client.ClientClose();
 
-            //等待一秒退出
+            // 等待一秒退出
             using (FormWaitInfomation fwm = new FormWaitInfomation("正在退出程序...", 1000))
             {
                 fwm.ShowDialog();
@@ -141,7 +147,7 @@ namespace 软件系统客户端模版
 
         #endregion
 
-        #region 菜单逻辑块
+        #region Menu Click Event
 
         private void 修改密码ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -172,7 +178,7 @@ namespace 软件系统客户端模版
 
         private void 更新日志ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //更新情况复位
+            // 更新情况复位
             if (UserClient.JsonSettings.IsNewVersionRunning)
             {
                 UserClient.JsonSettings.IsNewVersionRunning = false;
@@ -337,11 +343,11 @@ namespace 软件系统客户端模版
         {
             try
             {
-                net_socket_client.KeyToken = CommonLibrary.CommonProtocol.KeyToken;// 新增的身份令牌
+                net_socket_client.KeyToken = CommonProtocol.KeyToken;// 新增的身份令牌
                 net_socket_client.LogNet = UserClient.LogNet;
                 net_socket_client.EndPointServer = new System.Net.IPEndPoint(
                     System.Net.IPAddress.Parse(UserClient.ServerIp),
-                    CommonLibrary.CommonProtocol.Port_Main_Net);
+                    CommonProtocol.Port_Main_Net);
                 net_socket_client.ClientAlias = $"{UserClient.UserAccount.UserName} ({UserClient.UserAccount.Factory})";//标记客户端在线的名称
                 net_socket_client.ClientStart();
             }
@@ -350,6 +356,7 @@ namespace 软件系统客户端模版
                 SoftBasic.ShowExceptionMessage(ex);
             }
         }
+
         /// <summary>
         /// 接收到服务器的字节数据的回调方法
         /// </summary>
@@ -401,7 +408,7 @@ namespace 软件系统客户端模版
                 chats.ForEach(m => { sb.Append(m + Environment.NewLine); });
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
-                    toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm");
+                    toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm:ss");
                     label_file_count.Text = json["FileCount"].ToObject<int>().ToString();
                     UIControls_Chat.AddChatsHistory(sb.ToString());
                 }));
@@ -424,7 +431,7 @@ namespace 软件系统客户端模版
 
         private void Net_socket_client_AcceptByte(AsyncStateOne object1, NetHandle customer, byte[] object2)
         {
-            //接收到服务器发来的字节数据
+            // 接收到服务器发来的字节数据
             if (IsHandleCreated) Invoke(new Action(() =>
             {
                 MessageBox.Show(customer.ToString());
@@ -433,7 +440,7 @@ namespace 软件系统客户端模版
 
         private void Net_socket_client_LoginSuccess()
         {
-            //登录成功，或重新登录成功的事件，有些数据的初始化可以放在此处
+            // 登录成功，或重新登录成功的事件，有些数据的初始化可以放在此处
             if (IsHandleCreated) Invoke(new Action(() =>
             {
                 toolStripStatusLabel_status.Text = "客户端启动成功";
@@ -442,7 +449,7 @@ namespace 软件系统客户端模版
 
         private void Net_socket_client_LoginFailed(int object1)
         {
-            //登录失败的情况，如果连续三次连接失败，请考虑退出系统
+            // 登录失败的情况，如果连续三次连接失败，请考虑退出系统
             if (object1 > 3)
             {
                 if (IsHandleCreated) Invoke(new Action(() =>
@@ -454,7 +461,7 @@ namespace 软件系统客户端模版
 
         private void Net_socket_client_MessageAlerts(string object1)
         {
-            //信息提示
+            // 信息提示
             if (IsHandleCreated) Invoke(new Action(() =>
             {
                 toolStripStatusLabel_status.Text = object1;
@@ -504,7 +511,7 @@ namespace 软件系统客户端模版
              *
              *******************************************************************************/
 
-            UIControls_Files = new UIControls.ShareFilesRender()
+            UIControls_Files = new UIControls.ShareFilesRender("ShareFiles", "", "")
             {
                 Visible = false,
                 Parent = panel_main,//决定了放在哪个界面显示，此处示例
@@ -522,7 +529,6 @@ namespace 软件系统客户端模版
                 Dock = DockStyle.Fill,
             };
             all_main_render.Add(UIControls_Chat);
-
         }
 
         private void SetShowRenderControl(UserControl control)
@@ -570,7 +576,7 @@ namespace 软件系统客户端模版
         /// <param name="data">实际数据</param>
         private void SendServerUdpData(NetHandle customer, string data)
         {
-            //测试发送udp消息
+            // 测试发送udp消息
             UserClient.Net_Udp_Client.SendMessage(customer, data);
         }
 
@@ -618,27 +624,30 @@ namespace 软件系统客户端模版
                 }
                 second = DateTime.Now.Second;
                 if (IsWindowShow && IsHandleCreated) Invoke(DTimeShow);
-                //每秒钟执行的代码
+                // 每秒钟执行的代码
                 UserClient.DateTimeServer = net_socket_client.ServerTime;
 
                 if (second == 0)
                 {
-                    //每个0秒执行的代码
+                    // 每个0秒执行的代码
                 }
+
                 if (minute != DateTime.Now.Minute)
                 {
                     minute = DateTime.Now.Minute;
-                    //每分钟执行的代码
+                    // 每分钟执行的代码
                 }
+
                 if (hour != DateTime.Now.Hour)
                 {
                     hour = DateTime.Now.Hour;
-                    //每小时执行的代码
+                    // 每小时执行的代码
                 }
+
                 if (day != DateTime.Now.Day)
                 {
                     day = DateTime.Now.Day;
-                    //每天执行的代码
+                    // 每天执行的代码
                 }
             }
         }

@@ -92,6 +92,31 @@
     <Compile Include="Configuration\FormConfiguration.Designer.cs">
       <DependentUpon>FormConfiguration.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileSupport\FileOperateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FileSupport\FileOperateControl.designer.cs">
+      <DependentUpon>FileOperateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileSupport\FileSupport.cs" />
+    <Compile Include="FileSupport\FileItemShow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FileSupport\FileItemShow.Designer.cs">
+      <DependentUpon>FileItemShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileSupport\FormFileOperate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileSupport\FormFileOperate.Designer.cs">
+      <DependentUpon>FormFileOperate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileSupport\FormSimplyFileUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileSupport\FormSimplyFileUpload.designer.cs">
+      <DependentUpon>FormSimplyFileUpload.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogsSupport\FormLogView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +166,18 @@
     <EmbeddedResource Include="Configuration\FormConfiguration.resx">
       <DependentUpon>FormConfiguration.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FileSupport\FileItemShow.resx">
+      <DependentUpon>FileItemShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileSupport\FileOperateControl.resx">
+      <DependentUpon>FileOperateControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileSupport\FormFileOperate.resx">
+      <DependentUpon>FormFileOperate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileSupport\FormSimplyFileUpload.resx">
+      <DependentUpon>FormSimplyFileUpload.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogsSupport\FormLogView.resx">
       <DependentUpon>FormLogView.cs</DependentUpon>
     </EmbeddedResource>
@@ -160,6 +197,325 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\Flagthread_7317.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="img\fileIcon\7z.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\ai.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\aiff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\arj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\asc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\asp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\audio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\avi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\bin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\bmp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\bz2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\cdr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\cfc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\cfm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\chm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\class.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\conf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\cpp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\cs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\css.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\csv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\deb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\divx.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\doc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\docx.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\dot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\eml.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\enc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\eps.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\exe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\f4v.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\flv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\gif.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\gz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\hlp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\htm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\html.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\ics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\iso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\jar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\java.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\jpg.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\js.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\jsp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\lua.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\m.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\mm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\mov.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\mp3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\mpg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\msi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\odc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\odf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\odg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\odi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\odp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\ods.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\odt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\ogg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\pdf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\perl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\pgp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\php.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\pl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\ppt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\ps.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\psd.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\py.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\ram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\rar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\rb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\rm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\rpm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\rtf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\ruby.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\sig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\sql.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\swf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\sxc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\sxd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\sxi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\sxw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\tar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\tex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\tgz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\tif.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\ttf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\txt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\vb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\vcf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\vdo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\vsd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\wav.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\wma.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\xls.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\xml.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\xpi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\xul.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\xvid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fileIcon\zip.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:软件系统客户端Wpf.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="800">
+             d:DesignHeight="400" d:DesignWidth="800" Loaded="UserControl_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -31,7 +31,7 @@
             </Button>
 
             <TextBlock Grid.Column="3" VerticalAlignment="Center" FontSize="15">搜索：</TextBlock>
-            <TextBox Grid.Column="4" Width="200" x:Name="FileSearchFilter" TextChanged="FileSearchFilter_TextChanged"></TextBox>
+            <TextBox Grid.Column="4" Width="200" x:Name="FileSearchFilter" TextChanged="FileSearchFilter_TextChanged" PreviewKeyDown="FileSearchFilter_PreviewKeyDown"></TextBox>
         </Grid>
 
         <Border Grid.Row="1" BorderThickness="0,1,0,0" Margin="0,5,0,0" BorderBrush="{DynamicResource MaterialDesignDivider}">

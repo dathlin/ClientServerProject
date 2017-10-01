@@ -16,19 +16,19 @@ using HslCommunication.LogNet;
 using HslCommunication;
 
 
-/******************************************************************************************
+/********************************************************************************************
  * 
- *    模版日期  2017-09-13
- *    创建人    Richard.Hu
- *    版权所有  Richard.Hu
- *    授权说明  模版仅授权个人使用，如需商用，请联系hsl200909@163.com洽谈
- *    说明      JSON组件引用自james newton-king，遵循MIT授权协议
- *    网络组件  网络组件的版权由Richard.Hu所有
+ *    模版日期    2017-09-30
+ *    创建人      Richard.Hu
+ *    版权所有    Richard.Hu
+ *    授权说明    模版仅授权个人研究学习使用，如需商用，请联系hsl200909@163.com洽谈
+ *    说明        JSON组件引用自james newton-king，遵循MIT授权协议
+ *    网络组件    网络组件的版权由Richard.Hu所有
  *    
  ********************************************************************************************/
 
 
-/******************************************************************************************
+/********************************************************************************************
  * 
  *    注意：本代码的相关操作未作密码验证，如有需要，请自行完成
  *    示例：具体示例参照本页面Form1_FormClosing(object sender, FormClosingEventArgs e)方法
@@ -37,7 +37,7 @@ using HslCommunication;
  ********************************************************************************************/
 
 
-/******************************************************************************************
+/********************************************************************************************
  * 
  *    本项目模版不包含  《软件自动更新.exe》
  *    如需支持部署环境的自动升级  请联系hsl200909@163.com获取
@@ -46,7 +46,7 @@ using HslCommunication;
  ********************************************************************************************/
 
 
-/******************************************************************************************
+/********************************************************************************************
  * 
  *    关于邮件系统：如果你服务器端的程序部署在可上网的计算机上时，可以使用
  *    先进行邮件系统的初始化，指定接收邮件的地址
@@ -67,6 +67,7 @@ namespace 软件系统服务端模版
         {
             InitializeComponent();
 
+
             //捕获所有未处理的异常并进行预处理
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
@@ -80,7 +81,7 @@ namespace 软件系统服务端模版
 
         #endregion
         
-        #region 窗口属性+窗口方法
+        #region Load Show Close
 
         /// <summary>
         /// 指示窗口是否处于显示中
@@ -154,7 +155,8 @@ namespace 软件系统服务端模版
 
         #endregion
 
-        #region 界面基础方法集
+        #region UI Message Add
+
         /// <summary>
         /// 初始化委托
         /// </summary>
@@ -186,8 +188,6 @@ namespace 软件系统服务端模版
             }
         }
 
-
-
         /// <summary>
         /// 一个处理服务器未处理异常的方法，对该方法进行记录，方便以后的分析
         /// </summary>
@@ -205,7 +205,7 @@ namespace 软件系统服务端模版
 
         #endregion
 
-        #region 菜单逻辑块
+        #region Menu Click Event
         private void 启动服务器ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!IsSystemStart)
@@ -213,7 +213,7 @@ namespace 软件系统服务端模版
                 Net_Simplify_Server_Initialization();//同步网络初始化
                 Net_Socket_Server_Initialization();//异步网络初始化
                 Net_SoftUpdate_Server_Initialization();//软件更新引擎初始化
-                Simple_File_Initiaization();//共享文件引擎初始化
+                Ultimate_File_Initiaization();//共享文件引擎初始化
                 Net_File_Portrait_Initialization();//头像文件管理服务
                 Net_Udp_Server_Initialization();//UDP引擎服务初始化
                 启动服务器ToolStripMenuItem.Text = "已启动";
@@ -334,6 +334,7 @@ namespace 软件系统服务端模版
         #endregion
 
         #region 软件更新服务引擎
+
         /// <summary>
         /// 支持软件自动更新的后台服务引擎
         /// </summary>
@@ -345,9 +346,9 @@ namespace 软件系统服务端模版
                 net_soft_update_Server.LogNet = new LogNetSingle(LogSavePath + @"\update_log.txt");
                 //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
                 //只放置exe和dll组件，必须放置：软件自动更新.exe
-                net_soft_update_Server.KeyToken = CommonLibrary.CommonProtocol.KeyToken;
-                net_soft_update_Server.FileUpdatePath = Application.StartupPath + @"\ClientFiles";//客户端文件路径
-                net_soft_update_Server.ServerStart(CommonLibrary.CommonProtocol.Port_Update_Net);
+                net_soft_update_Server.KeyToken = CommonProtocol.KeyToken;
+                net_soft_update_Server.FileUpdatePath = Application.StartupPath + @"\ServerFiles\ClientFiles";//客户端文件路径
+                net_soft_update_Server.ServerStart(CommonProtocol.Port_Update_Net);
             }
             catch (Exception ex)
             {
@@ -357,15 +358,12 @@ namespace 软件系统服务端模版
 
         #endregion
         
-        #region 高级文件引擎管理块，多功能
-
-
+        #region 多文件服务器块
+        
         /**************************************************************************************
          * 
-         *    本文件管理器引擎目前主要实现3个大功能
+         *    本文件管理器引擎目前主要实现1个功能
          *    1. 允许客户端上传服务器的客户端文件，用来提供软件自动更新使用的
-         *    2. 用于管理客户端的头像文件存储服务
-         *    3. 用于管理每个账户的私有文件存储服务
          * 
          **************************************************************************************/
          
@@ -382,11 +380,11 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_file_Advanced.FilesDirectoryPath = Application.StartupPath;
-                net_file_Advanced.FilesDirectoryPathTemp = Application.StartupPath + @"\Temp";
+                net_file_Advanced.FilesDirectoryPath = Application.StartupPath + @"\ServerFiles";
+                net_file_Advanced.FilesDirectoryPathTemp = Application.StartupPath + @"\ServerFiles\Temp";
                 net_file_Advanced.LogNet = new LogNetSingle(LogSavePath + @"\Advanced_file_log.txt");
-                net_file_Advanced.KeyToken = CommonLibrary.CommonProtocol.KeyToken;
-                net_file_Advanced.ServerStart(CommonLibrary.CommonProtocol.Port_Advanced_File_Server);
+                net_file_Advanced.KeyToken = CommonProtocol.KeyToken;
+                net_file_Advanced.ServerStart(CommonProtocol.Port_Advanced_File_Server);
             }
             catch (Exception ex)
             {
@@ -398,6 +396,7 @@ namespace 软件系统服务端模版
         #endregion
 
         #region 同步数据传送引擎
+
         /// <summary>
         /// 用户同步数据传送的引擎
         /// </summary>
@@ -526,11 +525,26 @@ namespace 软件系统服务端模版
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
                 string way = SoftBasic.GetValueFromJsonObject(json, UserAccount.LoginWayText, "winform");
-                string machineId= SoftBasic.GetValueFromJsonObject(json, UserAccount.DeviceUniqueID, "ABCDEFHIGKLMN");
- 
+                string machineId = SoftBasic.GetValueFromJsonObject(json, UserAccount.DeviceUniqueID, "ABCDEFHIGKLMN");
+                string frameworkVersion = SoftBasic.GetValueFromJsonObject(json, UserAccount.FrameworkVersion, "1.0.0");
 
-                 UserAccount account = UserServer.ServerAccounts.CheckAccount(name, password, state.GetRemoteEndPoint().Address.ToString(), way);
-                //检测是否重复登录
+
+                UserAccount account = UserServer.ServerAccounts.CheckAccount(name, password, state.GetRemoteEndPoint().Address.ToString(), way);
+
+
+                // 先判定框架版本是否正确
+                if (!UserServer.ServerSettings.AllowLoginWhenFramewordVersionNotCheck)
+                {
+                    SystemVersion sv = new SystemVersion(frameworkVersion);
+                    if (sv != SoftBasic.FrameworkVersion)
+                    {
+                        account.LoginEnable = false;
+                        account.ForbidMessage = "框架版本检测失败，请更新";
+                        RuntimeLogHelper?.WriteWarn("框架版本验证失败，version:" + frameworkVersion);
+                    }
+                }
+                
+                // 检测是否重复登录
                 if (account.LoginEnable)
                 {
                     if (!UserServer.ServerSettings.AllowUserMultiOnline)
@@ -606,7 +620,7 @@ namespace 软件系统服务端模版
             }
             else if (handle == CommonHeadCode.SimplifyHeadCode.请求文件)
             {
-                net_simplify_server.SendMessage(state, handle, net_simple_file_server.ToJsonString());
+                net_simplify_server.SendMessage(state, handle, ShareFileContainer.JsonArrayContent);
             }
             else if (handle == CommonHeadCode.SimplifyHeadCode.意见反馈)
             {
@@ -682,6 +696,7 @@ namespace 软件系统服务端模版
                 JObject json = new JObject
                 {
                     { "AllowUserMulti", new JValue(UserServer.ServerSettings.AllowUserMultiOnline) },
+                    { "AllowFrameLogin", new JValue(UserServer.ServerSettings.AllowLoginWhenFramewordVersionNotCheck) },
                 };
                 net_simplify_server.SendMessage(state, handle, json.ToString());
             }
@@ -689,6 +704,7 @@ namespace 软件系统服务端模版
             {
                 JObject json = JObject.Parse(data);
                 UserServer.ServerSettings.AllowUserMultiOnline = SoftBasic.GetValueFromJsonObject(json, "AllowUserMulti", false);
+                UserServer.ServerSettings.AllowLoginWhenFramewordVersionNotCheck = SoftBasic.GetValueFromJsonObject(json, "AllowFrameLogin", false);
                 net_simplify_server.SendMessage(state, handle, json.ToString());
             }
             else
@@ -772,13 +788,13 @@ namespace 软件系统服务端模版
             }
             else if (handle == CommonHeadCode.SimplifyHeadCode.文件日志查看)
             {
-                LogNetSingle logNet = (LogNetSingle)net_simple_file_server.LogNet;
+                LogNetSingle logNet = (LogNetSingle)net_ultimate_file_server.LogNet;
                 net_simplify_server.SendMessage(state, handle, logNet.GetAllSavedLog());
                 RuntimeLogHelper.WriteInfo("共享文件日志查看");
             }
             else if (handle == CommonHeadCode.SimplifyHeadCode.文件日志清空)
             {
-                if (net_simple_file_server.LogNet is LogNetSingle logNet)
+                if (net_ultimate_file_server.LogNet is LogNetSingle logNet)
                 {
                     logNet.ClearLog();
                 }
@@ -866,12 +882,20 @@ namespace 软件系统服务端模版
         {
 
         }
-        
+
         #endregion
 
         #endregion
 
         #region 异步数据传送引擎
+
+        /******************************************************************************************************************
+         * 
+         *    说明：    异步网络主要显示的功能是对所有在线客户端的管理能力，并允许群发所有在线客户端消息
+         *    注意：    如果客户端需要向服务器请求数据并明确的需要返回消息，则必须选择同步网络通信
+         * 
+         ******************************************************************************************************************/
+
         /// <summary>
         /// 异步客户端管理引擎，维护所有的客户端在线情况，支持主动发数据到所有的客户端
         /// </summary>
@@ -901,9 +925,7 @@ namespace 软件系统服务端模版
                 SoftBasic.ShowExceptionMessage(ex);
             }
         }
-
-
-
+        
 
         /******************************************************************************************************************
          * 
@@ -961,16 +983,16 @@ namespace 软件系统服务端模版
 
         private void Net_socket_server_ClientOnline(AsyncStateOne object1)
         {
-            //上线后回发一条数据初始化信息
+            // 上线后回发一条数据初始化信息
             JObject json = new JObject
             {
                 { "Time", new JValue(DateTime.Now) },
-                { "FileCount", new JValue(net_simple_file_server.File_Count()) },
+                { "FileCount", new JValue(ShareFileContainer.FileCount) },
                 { "chats", new JValue(Chats_Managment.ToSaveString())}
             };
-            //发送客户端的初始化数据
+            // 发送客户端的初始化数据
             net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据, json.ToString());
-            //触发上下线功能
+            // 触发上下线功能
             UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" + object1.LoginAlias + " 上线");
         }
 
@@ -978,7 +1000,7 @@ namespace 软件系统服务端模版
 
         private void Net_socket_server_AllClientsStatusChange(string data)
         {
-            //此处决定要不要将在线客户端的数据发送所有客户端
+            // 此处决定要不要将在线客户端的数据发送所有客户端
             net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.总在线信息, data);
             Net_Socket_All_Clients = data;
             if (IsWindowShow && IsHandleCreated)
@@ -992,7 +1014,7 @@ namespace 软件系统服务端模版
         }
 
         /// <summary>
-        /// 所有在线客户端的信息
+        /// 所有在线客户端的信息，此处做了一个缓存
         /// </summary>
         private string Net_Socket_All_Clients = string.Empty;
 
@@ -1086,27 +1108,27 @@ namespace 软件系统服务端模版
                 }
                 second = DateTime.Now.Second;
                 if (IsWindowShow && IsHandleCreated) Invoke(DTimeShow);
-                //每秒钟执行的代码
+                // 每秒钟执行的代码
 
                 if (second == 0)
                 {
-                    //每个0秒执行的代码
-                    //net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.时间的推送, DateTime.Now.ToString("O"));
+                    // 每个0秒执行的代码
+                    // net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.时间的推送, DateTime.Now.ToString("O"));
                 }
                 if (minute != DateTime.Now.Minute)
                 {
                     minute = DateTime.Now.Minute;
-                    //每分钟执行的代码
+                    // 每分钟执行的代码
                 }
                 if (hour != DateTime.Now.Hour)
                 {
                     hour = DateTime.Now.Hour;
-                    //每小时执行的代码
+                    // 每小时执行的代码
                 }
                 if (day != DateTime.Now.Day)
                 {
                     day = DateTime.Now.Day;
-                    //每天执行的代码
+                    // 每天执行的代码
                 }
             }
         }
@@ -1131,32 +1153,39 @@ namespace 软件系统服务端模版
 
         #endregion
 
-        #region 共享文件下载块
+        #region Ultimate File Server
+
+
+        /**************************************************************************************
+         * 
+         *    本文件管理器引擎目前主要实现3个大功能
+         *    1. 用于管理客户端的头像文件存储服务
+         *    2. 用于管理每个账户的私有文件存储服务
+         *    3. 用于主界面的共享文件管理
+         * 
+         **************************************************************************************/
+
         /// <summary>
-        /// 共享文件服务器引擎
+        /// 终极文件管理服务器
         /// </summary>
-        private SimpleFileServer net_simple_file_server { get; set; } = null;
+        private UltimateFileServer net_ultimate_file_server { get; set; } = null;
         /// <summary>
-        /// 共享文件服务引擎初始化
+        /// 终极文件管理服务器
         /// </summary>
-        private void Simple_File_Initiaization()
+        private void Ultimate_File_Initiaization()
         {
             try
             {
-                net_simple_file_server = new SimpleFileServer()
-                {
-                    //文件信息存储路径
-                    FileListName = Application.StartupPath + @"\files.txt"
-                };
-                net_simple_file_server.KeyToken = CommonLibrary.CommonProtocol.KeyToken;
-                net_simple_file_server.ReadFromFile();
-                net_simple_file_server.LogNet =new LogNetSingle(LogSavePath + @"\share_file_log.txt");
-                net_simple_file_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
-                //文件存储路径
-                net_simple_file_server.FilesDirectoryPath = Application.StartupPath + @"\Files";
-                net_simple_file_server.FilesDirectoryPathTemp = Application.StartupPath + @"\Temp";
-                net_simple_file_server.FileChange += Net_simple_file_server_FileChange;
-                net_simple_file_server.ServerStart(CommonLibrary.CommonProtocol.Port_Share_File);
+                net_ultimate_file_server = new UltimateFileServer();
+                net_ultimate_file_server.KeyToken = CommonProtocol.KeyToken;
+                net_ultimate_file_server.LogNet =new LogNetSingle(LogSavePath + @"\ultimate_file_log.txt");
+                net_ultimate_file_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
+                net_ultimate_file_server.FilesDirectoryPath = Application.StartupPath + @"\ServerFiles";
+                net_ultimate_file_server.ServerStart(CommonProtocol.Port_Ultimate_File_Server);
+
+                // 共享文件管理器只是终极文件管理器的一个子容器
+                ShareFileContainer = net_ultimate_file_server.GetGroupFromFilePath(Application.StartupPath + @"\ServerFiles\ShareFiles");
+                ShareFileContainer.FileCountChanged += ShareFileContainer_FileCountChanged;
             }
             catch (Exception ex)
             {
@@ -1164,12 +1193,18 @@ namespace 软件系统服务端模版
             }
         }
 
-        private void Net_simple_file_server_FileChange()
+
+        // 以下是共享文件的功能
+
+        private void ShareFileContainer_FileCountChanged(int obj)
         {
             //将文件数据发送给客户端
-            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.文件总数量, net_simple_file_server.File_Count().ToString());
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.文件总数量, ShareFileContainer.FileCount.ToString());
         }
 
+        private GroupFileContainer ShareFileContainer;
+
+       
 
         #endregion
 
@@ -1181,8 +1216,7 @@ namespace 软件系统服务端模版
          *    举例：    AdviceLogHelper.SaveInformation("张三：主界面的颜色稍微调整一下");
          * 
          **********************************************************************************************************/
-
-
+         
 
         /// <summary>
         /// 用来记录一般的事物日志
@@ -1285,7 +1319,7 @@ namespace 软件系统服务端模版
             for (int i = 0; i < 100; i++)
             {
                 int startIndex = i * 42;
-                ushort netState = BitConverter.ToUInt16(object1, startIndex);//为0，说明数据正常，不为0说明网络访问失败或是指令出错
+                ushort netState = BitConverter.ToUInt16(object1, startIndex);// 为0，说明数据正常，不为0说明网络访问失败或是指令出错
 
 
             }
@@ -1311,7 +1345,7 @@ namespace 软件系统服务端模版
              *    示例2    调用 string str = OrderAutoCreate.GetNumericalOrder("KN");//str为 KN201705190000002
              *    注意     默认计数不清空，后面的1，2会一值累加，可以调用900亿亿次，如果需要定期清空，请自行周期调用OrderAutoCreate.ClearNumericalOrder();
              *    提示     如果需要定期清空，在本页面的ThreadTimeTick()方法中清空即可
-             *    性能     一秒钟可以响应请求100万次，并成功存储当前计数值
+             *    性能     一秒钟可以响应请求100万次以上，具体值依据电脑的性能而定，并成功存储当前计数值
              * 
              **********************************************************************************************************/
 
@@ -1364,12 +1398,12 @@ namespace 软件系统服务端模版
 
         #endregion
 
-        #region 系统日志块
+        #region System Log Function
 
 
         /*********************************************************************************************************
          * 
-         *    说明     日志的使用方式分为5个等级，1.DEBUG 2.INFO 3.WARN 4.ERROR 5.FATAL  对应的调用方法不一致
+         *    说明     日志的使用方式分为6个等级，1.DEBUG 2.INFO 3.WARN 4.ERROR 5.FATAL 6.None 对应的调用方法不一致
          *    具体     如果想要调用存储[信息]等级日志，调用 RuntimeLogHelper.WriteInfo("等待存储的信息")
          *    大小     调用10000次存储信息后，日志文件大小在200K左右，需要手动进行情况日志
          *    注意     在存储信息时不要带有一个特殊字符，[\u0002]不可见的标识文本开始字符，会影响日志筛选时的准确性
@@ -1389,11 +1423,11 @@ namespace 软件系统服务端模版
 
         #endregion
 
-        #region 邮件系统块
+        #region Mail Send Function
 
         /******************************************************************************************
          * 
-         *    本邮件系统使用了组件中预设好的中间发送地址，已经内置了两个邮件地址
+         *    本邮件系统使用了组件中预设好的中间发送地址，已经内置了两个邮件地址，一个163邮箱，另一个是QQ邮箱
          *    本处仅仅使用了163网易的邮箱发送
          *    下面提供了两个方法，实现了方便的发送，可以在程序的其他地方进行调用
          *
@@ -1412,12 +1446,19 @@ namespace 软件系统服务端模版
             SoftMail.MailSystem163.MailSendAddress = "hsl200909@163.com";// 作者测试的邮箱地址，实际需要换成你自己的
         }
 
-
+        /// <summary>
+        /// 调用该方法可以直接将异常发送到你的邮箱里，如果服务器连接网络的话
+        /// </summary>
+        /// <param name="ex">异常</param>
         private void SendUserMail(Exception ex)
         {
             if(IsSendMailEnable) SoftMail.MailSystem163.SendMail(ex);
         }
-
+        /// <summary>
+        /// 发送指定的主题和内容到指定的邮箱
+        /// </summary>
+        /// <param name="subject">主题</param>
+        /// <param name="body">内容</param>
         private void SendUserMail(string subject, string body)
         {
             if (IsSendMailEnable) SoftMail.MailSystem163.SendMail(subject, body);
@@ -1425,8 +1466,6 @@ namespace 软件系统服务端模版
 
         #endregion
 
-
-
-
+        
     }
 }
