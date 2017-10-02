@@ -65,7 +65,9 @@ namespace 软件系统浏览器模版.Controllers
             {
                 { UserAccount.UserNameText, new JValue(fc["UserName"]) },
                 { UserAccount.PasswordText, new JValue(fc["UserPassword"]) },
-                { UserAccount.LoginWayText, new JValue("webApp") }
+                { UserAccount.LoginWayText, new JValue("webApp") },
+                { UserAccount.DeviceUniqueID, new JValue(UserClient.JsonSettings.SystemInfo) },        // 客户端唯一ID
+                { UserAccount.FrameworkVersion, new JValue(SoftBasic.FrameworkVersion.ToString()) }    // 客户端框架版本
             };
             result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.账户检查, json.ToString());
             if (result.IsSuccess)

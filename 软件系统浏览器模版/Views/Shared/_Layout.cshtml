@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - @CommonLibrary.Resource.StringResouce.SoftName</title>
+    <title>@ViewBag.Title - @CommonLibrary.SoftResources.StringResouce.SoftName</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink(CommonLibrary.Resource.StringResouce.SoftName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(CommonLibrary.SoftResources.StringResouce.SoftName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -68,7 +68,7 @@
                 }
 
                 <small>
-                    &copy; @year - @CommonLibrary.Resource.StringResouce.SoftName | 本软件著作权归<span>@CommonLibrary.Resource.StringResouce.SoftCopyRight</span>所有
+                    &copy; @year - @CommonLibrary.SoftResources.StringResouce.SoftName | 本软件著作权归<span>@CommonLibrary.SoftResources.StringResouce.SoftCopyRight</span>所有
                     | 服务器版本：V @ClientsLibrary.UserClient.CurrentVersion.ToString()
                 </small>
             </p>
