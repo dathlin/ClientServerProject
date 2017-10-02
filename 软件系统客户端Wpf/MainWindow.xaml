@@ -60,7 +60,12 @@
                                 <materialDesign:PackIcon Kind="AccountPlus" />
                             </MenuItem.Icon>
                         </MenuItem>
-                    
+                        <MenuItem Header="消息发送" x:Name="MenuItem消息发送" Click="MenuItem消息发送_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="MessageTextOutline" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+
                         <Separator />
                         <MenuItem Header="系统配置" x:Name="MenuItem系统配置" Click="MenuItem系统配置_Click">
                             <MenuItem.Icon>
@@ -75,11 +80,6 @@
                         <MenuItem Header="远程更新" x:Name="MenuItem远程更新" Click="MenuItem远程更新_Click">
                             <MenuItem.Icon>
                                 <materialDesign:PackIcon Kind="Rotate3d" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem Header="消息发送" x:Name="MenuItem消息发送" Click="MenuItem消息发送_Click">
-                            <MenuItem.Icon>
-                                <materialDesign:PackIcon Kind="MessageTextOutline" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="开发中心" x:Name="MenuItem开发中心" Click="MenuItem开发中心_Click">

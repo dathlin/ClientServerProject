@@ -115,13 +115,18 @@ namespace 软件系统客户端模版
             }
 
             // 根据权限使能菜单
+            if (UserClient.UserAccount.Grade < AccountGrade.Admin)
+            {
+                更改公告ToolStripMenuItem.Enabled = false;
+                账户管理ToolStripMenuItem.Enabled = false;
+                注册账号ToolStripMenuItem.Enabled = false;
+                消息发送ToolStripMenuItem.Enabled = false;
+            }
+
             if (UserClient.UserAccount.Grade < AccountGrade.SuperAdministrator)
             {
                 日志查看ToolStripMenuItem.Enabled = false;
-                账户管理ToolStripMenuItem.Enabled = false;
                 远程更新ToolStripMenuItem.Enabled = false;
-                注册账号ToolStripMenuItem.Enabled = false;
-                消息发送ToolStripMenuItem.Enabled = false;
                 开发中心ToolStripMenuItem.Enabled = false;
                 系统配置ToolStripMenuItem.Enabled = false;
             }

@@ -14,6 +14,8 @@ namespace ClientsLibrary
         public FormShowMachineId()
         {
             InitializeComponent();
+
+            Icon = UserClient.GetFormWindowIcon();
         }
 
         private void userButton_login_Click(object sender, EventArgs e)

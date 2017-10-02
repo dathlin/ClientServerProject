@@ -117,14 +117,23 @@ namespace 软件系统客户端Wpf
                 MenuItem更新日志_Click(null, new RoutedEventArgs());
             }
 
+
+
+
             //根据权限使能菜单
+            if(UserClient.UserAccount.Grade < AccountGrade.Admin)
+            {
+                MenuItem公告管理.IsEnabled = false;
+                MenuItem账户管理.IsEnabled = false;
+                MenuItem注册账户.IsEnabled = false;
+                MenuItem消息发送.IsEnabled = false;
+            }
+
+
             if (UserClient.UserAccount.Grade < AccountGrade.SuperAdministrator)
             {
                 MenuItem日志查看.IsEnabled = false;
-                MenuItem账户管理.IsEnabled = false;
                 MenuItem远程更新.IsEnabled = false;
-                MenuItem注册账户.IsEnabled = false;
-                MenuItem消息发送.IsEnabled = false;
                 MenuItem开发中心.IsEnabled = false;
                 MenuItem系统配置.IsEnabled = false;
             }

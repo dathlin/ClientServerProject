@@ -1178,7 +1178,7 @@ namespace 软件系统服务端模版
             {
                 net_ultimate_file_server = new UltimateFileServer();
                 net_ultimate_file_server.KeyToken = CommonProtocol.KeyToken;
-                net_ultimate_file_server.LogNet =new LogNetSingle(LogSavePath + @"\ultimate_file_log.txt");
+                net_ultimate_file_server.LogNet = new LogNetSingle(LogSavePath + @"\ultimate_file_log.txt");
                 net_ultimate_file_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_ultimate_file_server.FilesDirectoryPath = Application.StartupPath + @"\ServerFiles";
                 net_ultimate_file_server.ServerStart(CommonProtocol.Port_Ultimate_File_Server);
@@ -1196,10 +1196,10 @@ namespace 软件系统服务端模版
 
         // 以下是共享文件的功能
 
-        private void ShareFileContainer_FileCountChanged(int obj)
+        private void ShareFileContainer_FileCountChanged(int fileCount)
         {
             //将文件数据发送给客户端
-            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.文件总数量, ShareFileContainer.FileCount.ToString());
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.文件总数量, fileCount.ToString());
         }
 
         private GroupFileContainer ShareFileContainer;
