@@ -536,7 +536,7 @@ namespace 软件系统服务端模版
                 if (!UserServer.ServerSettings.AllowLoginWhenFramewordVersionNotCheck)
                 {
                     SystemVersion sv = new SystemVersion(frameworkVersion);
-                    if (sv != SoftBasic.FrameworkVersion)
+                    if (sv < SoftBasic.FrameworkVersion)
                     {
                         account.LoginEnable = false;
                         account.ForbidMessage = "框架版本检测失败，请更新";

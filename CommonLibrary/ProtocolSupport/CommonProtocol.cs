@@ -44,7 +44,7 @@ namespace CommonLibrary
              * 
              **************************************************************************/
 
-            SoftBasic.FrameworkVersion = new SystemVersion("1.5.2");
+            SoftBasic.FrameworkVersion = new SystemVersion("1.5.3");
 
         }
 

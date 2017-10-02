@@ -43,6 +43,9 @@ namespace CommonLibrary
              *
              *******************************************************************************************/
 
+            #region 1.1.X 指令块
+
+
             public static NetHandle 维护检查 { get; } =          new NetHandle(1, 1, 00001);
             public static NetHandle 更新检查 { get; } =          new NetHandle(1, 1, 00002);
             public static NetHandle 参数下载 { get; } =          new NetHandle(1, 1, 00003);
@@ -67,6 +70,7 @@ namespace CommonLibrary
             public static NetHandle 上传一般配置 { get; } =      new NetHandle(1, 1, 00022);
 
 
+            #endregion
 
 
             /*******************************************************************************************
@@ -74,6 +78,9 @@ namespace CommonLibrary
              *     1.2.* 的指令为日志的请求与查看相关
              *
              *******************************************************************************************/
+
+            #region 1.2.X 指令块
+
 
 
             public static NetHandle 网络日志查看 { get; } =          new NetHandle(1, 2, 00001);//1.2.开头的是日志请求和清空
@@ -96,6 +103,7 @@ namespace CommonLibrary
             public static NetHandle 头像日志清空 { get; } =          new NetHandle(1, 2, 00018);
 
 
+            #endregion
 
 
             /**************************************************************************************

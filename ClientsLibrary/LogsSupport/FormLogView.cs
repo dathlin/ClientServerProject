@@ -129,15 +129,15 @@ namespace ClientsLibrary
         {
             ClearFromServer(CommonHeadCode.SimplifyHeadCode.客户端日志清空);
         }
-        private void userButton17_Click(object sender, EventArgs e)
-        {
-            ReadFromServer(CommonHeadCode.SimplifyHeadCode.头像日志查看);
-        }
+        //private void userButton17_Click(object sender, EventArgs e)
+        //{
+        //    ReadFromServer(CommonHeadCode.SimplifyHeadCode.头像日志查看);
+        //}
 
-        private void userButton16_Click(object sender, EventArgs e)
-        {
-            ClearFromServer(CommonHeadCode.SimplifyHeadCode.头像日志清空);
-        }
+        //private void userButton16_Click(object sender, EventArgs e)
+        //{
+        //    ClearFromServer(CommonHeadCode.SimplifyHeadCode.头像日志清空);
+        //}
 
         private void logNetAnalysisControl1_Load(object sender, EventArgs e)
         {

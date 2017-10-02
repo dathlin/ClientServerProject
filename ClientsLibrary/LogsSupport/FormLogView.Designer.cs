@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.userButton16 = new HslCommunication.Controls.UserButton();
-            this.userButton17 = new HslCommunication.Controls.UserButton();
             this.userButton15 = new HslCommunication.Controls.UserButton();
             this.userButton14 = new HslCommunication.Controls.UserButton();
             this.userButton12 = new HslCommunication.Controls.UserButton();
@@ -48,36 +46,6 @@
             this.userButton_login = new HslCommunication.Controls.UserButton();
             this.logNetAnalysisControl1 = new HslCommunication.LogNet.LogNetAnalysisControl();
             this.SuspendLayout();
-            // 
-            // userButton16
-            // 
-            this.userButton16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.userButton16.BackColor = System.Drawing.Color.Transparent;
-            this.userButton16.CustomerInformation = "";
-            this.userButton16.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.userButton16.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton16.Location = new System.Drawing.Point(905, 344);
-            this.userButton16.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.userButton16.Name = "userButton16";
-            this.userButton16.Size = new System.Drawing.Size(103, 26);
-            this.userButton16.TabIndex = 46;
-            this.userButton16.UIText = "文件日志清空";
-            this.userButton16.Click += new System.EventHandler(this.userButton16_Click);
-            // 
-            // userButton17
-            // 
-            this.userButton17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.userButton17.BackColor = System.Drawing.Color.Transparent;
-            this.userButton17.CustomerInformation = "";
-            this.userButton17.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.userButton17.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton17.Location = new System.Drawing.Point(797, 344);
-            this.userButton17.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.userButton17.Name = "userButton17";
-            this.userButton17.Size = new System.Drawing.Size(103, 26);
-            this.userButton17.TabIndex = 45;
-            this.userButton17.UIText = "文件日志查看";
-            this.userButton17.Click += new System.EventHandler(this.userButton17_Click);
             // 
             // userButton15
             // 
@@ -181,7 +149,7 @@
             this.userButton8.Name = "userButton8";
             this.userButton8.Size = new System.Drawing.Size(103, 26);
             this.userButton8.TabIndex = 38;
-            this.userButton8.UIText = "共享文件日志清空";
+            this.userButton8.UIText = "文件日志清空";
             this.userButton8.Click += new System.EventHandler(this.userButton8_Click);
             // 
             // userButton9
@@ -196,7 +164,7 @@
             this.userButton9.Name = "userButton9";
             this.userButton9.Size = new System.Drawing.Size(103, 26);
             this.userButton9.TabIndex = 37;
-            this.userButton9.UIText = "共享文件日志查看";
+            this.userButton9.UIText = "文件日志查看";
             this.userButton9.Click += new System.EventHandler(this.userButton9_Click);
             // 
             // userButton6
@@ -335,8 +303,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1023, 713);
             this.Controls.Add(this.logNetAnalysisControl1);
-            this.Controls.Add(this.userButton16);
-            this.Controls.Add(this.userButton17);
             this.Controls.Add(this.userButton15);
             this.Controls.Add(this.userButton14);
             this.Controls.Add(this.userButton12);
@@ -363,9 +329,6 @@
         }
 
         #endregion
-
-        private HslCommunication.Controls.UserButton userButton16;
-        private HslCommunication.Controls.UserButton userButton17;
         private HslCommunication.Controls.UserButton userButton15;
         private HslCommunication.Controls.UserButton userButton14;
         private HslCommunication.Controls.UserButton userButton12;
