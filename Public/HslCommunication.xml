@@ -2181,6 +2181,18 @@
             <param name="fileSaveName">准备本地保存的名称</param>
             <returns></returns>
         </member>
+        <member name="M:HslCommunication.Enthernet.IntegrationFileClient.DownloadFile(System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64},System.IO.Stream)">
+            <summary>
+            下载服务器的文件到本地的数据流中
+            </summary>
+            <param name="fileName">文件名称，带后缀</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
+            <param name="processReport">下载的进度报告</param>
+            <param name="stream">流数据</param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.Enthernet.IntegrationFileClient.UploadFile(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
             <summary>
             上传本地的文件到服务器操作
@@ -3583,7 +3595,7 @@
             <exception cref="T:System.ObjectDisposedException"></exception>
             <exception cref="T:System.Security.SecurityException"></exception>
         </member>
-        <member name="M:HslCommunication.NetSupport.WriteStreamFromSocket(System.Net.Sockets.Socket,System.IO.FileStream,System.Int64,System.Action{System.Int64,System.Int64},System.Boolean)">
+        <member name="M:HslCommunication.NetSupport.WriteStreamFromSocket(System.Net.Sockets.Socket,System.IO.Stream,System.Int64,System.Action{System.Int64,System.Int64},System.Boolean)">
             <summary>
             从socket套接字读取数据并写入流中，必然报告进度
             </summary>
@@ -3953,12 +3965,40 @@
             <param name="failedString">失败时记录日志的字符串</param>
             <returns></returns>
         </member>
+        <member name="M:HslCommunication.NetShareBase.ReceiveFileHeadFromSocket(System.Net.Sockets.Socket,System.String@,System.Int64@,System.String@,System.String@,HslCommunication.OperateResult,System.String)">
+            <summary>
+            [自校验] 从套接字中接收文件头信息
+            </summary>
+            <param name="socket"></param>
+            <param name="filename"></param>
+            <param name="size"></param>
+            <param name="filetag"></param>
+            <param name="fileupload"></param>
+            <param name="result"></param>
+            <param name="failedString"></param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.NetShareBase.ReceiveFileFromSocket(System.Net.Sockets.Socket,System.String,System.String@,System.Int64@,System.String@,System.String@,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
             <summary>
             [自校验] 从网络中接收一个文件，如果结果异常，则结束通讯
             </summary>
             <param name="socket">网络套接字</param>
             <param name="savename">接收文件后保存的文件名</param>
+            <param name="filename">文件在对方电脑上的文件名</param>
+            <param name="size">文件大小</param>
+            <param name="filetag">文件的标识</param>
+            <param name="fileupload">文件的上传人</param>
+            <param name="result">结果信息对象</param>
+            <param name="receiveReport">接收进度报告</param>
+            <param name="failedString">失败时的记录日志字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetShareBase.ReceiveFileFromSocket(System.Net.Sockets.Socket,System.IO.Stream,System.String@,System.Int64@,System.String@,System.String@,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            [自校验] 从网络中接收一个文件，写入数据流，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket">网络套接字</param>
+            <param name="stream">等待写入的数据流</param>
             <param name="filename">文件在对方电脑上的文件名</param>
             <param name="size">文件大小</param>
             <param name="filetag">文件的标识</param>

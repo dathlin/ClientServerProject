@@ -19,6 +19,8 @@ namespace ClientsLibrary.FileSupport
     /// </summary>
     public partial class FileOperateControl : UserControl
     {
+        #region Constructor
+
         /// <summary>
         /// 上传的实例化方法
         /// </summary>
@@ -37,6 +39,7 @@ namespace ClientsLibrary.FileSupport
             Id = id;
             AdvancedFileClient = advancedFile;
         }
+
 
         /// <summary>
         /// 下载的实例化方法
@@ -61,6 +64,10 @@ namespace ClientsLibrary.FileSupport
         }
 
 
+        #endregion
+
+        #region Load Close
+        
         private void FileOperateControl_Load(object sender, EventArgs e)
         {
             label_filename.Text = FilePath;
@@ -78,36 +85,22 @@ namespace ClientsLibrary.FileSupport
                 button1.Text = "重新上传文件";
             }
         }
-        
+
+        #endregion
+
+        #region Public Property
+
+
         /// <summary>
         /// 指示本次上传或是下载是否结束
         /// </summary>
         public bool IsOperateFinished { get; set; } = false;
 
 
-        private bool Is_down_file { get; set; } = true;
-        /// <summary>
-        /// 文件的原始路径
-        /// </summary>
-        private string FilePath { get; set; } = "";
-        /// <summary>
-        /// 文件所属的工厂分类
-        /// </summary>
-        private string Factory { get; set; } = "";
-        /// <summary>
-        /// 文件所属的类别
-        /// </summary>
-        private string Group { get; set; } = "";
-        /// <summary>
-        /// 文件所属的特殊ID
-        /// </summary>
-        private string Id { get; set; } = "";
-        /// <summary>
-        /// 文件保存的路径，文件下载的时候所需的
-        /// </summary>
-        private string SavaPathDirectory { get; set; } = "";
-        
+        #endregion
 
+        #region Upload Support
+        
         /// <summary>
         /// 开始上传文件
         /// </summary>
@@ -133,27 +126,6 @@ namespace ClientsLibrary.FileSupport
 
             }
         }
-
-        private void WrongTextShow(string text)
-        {
-            if (IsHandleCreated && InvokeRequired)
-            {
-                Invoke(new Action(() =>
-                {
-                    WrongTextShow(text);
-                }));
-                return;
-            }
-
-            label_now_info.Text = text;
-            button1.Visible = true;
-            IsOperateFinished = true;
-            progressBar1.Value = 0;
-        }
-
-
-        IntegrationFileClient AdvancedFileClient = null;
-        
         private void ThreadUploadFile()
         {
             FileInfo finfo = new FileInfo(FilePath);
@@ -175,7 +147,7 @@ namespace ClientsLibrary.FileSupport
                 UserClient.UserAccount.UserName,
                 ReportProgress);
 
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
                 Invoke(new Action(() =>
                 {
@@ -189,6 +161,33 @@ namespace ClientsLibrary.FileSupport
 
             IsOperateFinished = true;
         }
+
+        #endregion
+
+        #region Foundation Methon
+
+
+
+        private void WrongTextShow(string text)
+        {
+            if (IsHandleCreated && InvokeRequired)
+            {
+                Invoke(new Action(() =>
+                {
+                    WrongTextShow(text);
+                }));
+                return;
+            }
+
+            label_now_info.Text = text;
+            button1.Visible = true;
+            IsOperateFinished = true;
+            progressBar1.Value = 0;
+        }
+
+
+        
+
         
 
         private void button1_Click(object sender, EventArgs e)
@@ -225,6 +224,9 @@ namespace ClientsLibrary.FileSupport
             }));
         }
 
+        #endregion
+
+        #region Download Support
 
 
         /// <summary>
@@ -279,10 +281,29 @@ namespace ClientsLibrary.FileSupport
             IsOperateFinished = true;
         }
 
+
+        #endregion
+
+        #region Paint Support
+
+
         private void FileOperateControl_Paint(object sender, PaintEventArgs e)
         {
             // 绘制外观
             e.Graphics.DrawRectangle(Pens.DodgerBlue, new Rectangle(0, 0, Width - 1, Height - 1));
         }
+
+        #endregion
+        
+        #region Private Member
+        private IntegrationFileClient AdvancedFileClient;   // 支持文件操作的
+        private bool Is_down_file = true;                   // 文件是否在下载
+        private string FilePath = "";                       // 文件路径
+        private string Factory = "";                        // 文件所属的工厂分类
+        private string Group = "";                          // 文件所属的类别
+        private string Id = "";                             // 文件所属的特殊ID
+        private string SavaPathDirectory = "";              // 文件保存的路径，文件下载的时候所需的
+        #endregion
+
     }
 }
