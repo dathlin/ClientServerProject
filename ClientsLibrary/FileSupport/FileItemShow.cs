@@ -149,7 +149,7 @@ namespace ClientsLibrary.FileSupport
                 save_file_name
                 );
 
-            Invoke(new Action(() =>
+            if(IsHandleCreated) Invoke(new Action(() =>
             {
                 if(result.IsSuccess)
                 {
