@@ -2127,28 +2127,37 @@
             服务器端的文件管理引擎终结点
             </summary>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileClientBase.DeleteFileBase(System.String)">
+        <member name="M:HslCommunication.Enthernet.FileClientBase.DeleteFileBase(System.String,System.String,System.String,System.String)">
             <summary>
             删除服务器上的文件
             </summary>
             <param name="fileName">文件的名称</param>
+            <param name="factory"></param>
+            <param name="group"></param>
+            <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileClientBase.DownloadFileBase(System.String,System.Action{System.Int64,System.Int64},System.String)">
+        <member name="M:HslCommunication.Enthernet.FileClientBase.DownloadFileBase(System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64},System.String)">
             <summary>
             基础下载文件信息
             </summary>
+            <param name="factory"></param>
+            <param name="group"></param>
+            <param name="id"></param>
             <param name="fileName">服务器的文件名称</param>
             <param name="processReport">下载的进度报告</param>
             <param name="fileSaveName">本地保存的文件名称，包含完整路径名</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileClientBase.UploadFileBase(System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
+        <member name="M:HslCommunication.Enthernet.FileClientBase.UploadFileBase(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
             <summary>
             上传文件给服务器
             </summary>
             <param name="fileName">本地完整路径的文件名</param>
             <param name="serverName">在服务器保存的文件名，不包含驱动器路径</param>
+            <param name="factory"></param>
+            <param name="group"></param>
+            <param name="id"></param>
             <param name="fileTag">文件的描述</param>
             <param name="fileUpload">文件的上传人</param>
             <param name="processReport">汇报进度</param>
@@ -2329,11 +2338,14 @@
             <param name="result"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.UltimateFileServer.TransformFactFileName(System.String)">
+        <member name="M:HslCommunication.Enthernet.UltimateFileServer.TransformFactFileName(System.String,System.String,System.String,System.String)">
             <summary>
             根据文件的显示名称转化为真实存储的名称
             </summary>
-            <param name="tag">带分类功能的文件夹名称</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
+            <param name="fileName">文件显示名称</param>
             <returns></returns>
         </member>
         <member name="M:HslCommunication.Enthernet.UltimateFileServer.ThreadPoolLogin(System.Object)">
@@ -4096,6 +4108,55 @@
             <param name="filename">完整的文件路径</param>
             <returns>读写锁</returns>
         </member>
+        <member name="M:HslCommunication.FileServerBase.ReceiveInformationHead(System.Net.Sockets.Socket,System.Int32@,System.String@,System.String@,System.String@,System.String@,HslCommunication.OperateResult,System.String)">
+            <summary>
+            接收本次操作的信息头数据
+            </summary>
+            <param name="socket">网络套接字</param>
+            <param name="command">命令</param>
+            <param name="fileName">文件名</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
+            <param name="result">结果对象</param>
+            <param name="failedString">失败的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.CreateRandomFileName">
+            <summary>
+            获取一个随机的文件名，由GUID码和随机数字组成
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.ReturnAbsoluteFilePath(System.String,System.String,System.String)">
+            <summary>
+            返回服务器的绝对路径
+            </summary>
+            <param name="factory"></param>
+            <param name="group"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.ReturnAbsoluteFileName(System.String,System.String,System.String,System.String)">
+            <summary>
+            返回服务器的绝对路径
+            </summary>
+            <param name="factory"></param>
+            <param name="group"></param>
+            <param name="id"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.FileServerBase.ReturnRelativeFileName(System.String,System.String,System.String,System.String)">
+            <summary>
+            返回相对路径的名称
+            </summary>
+            <param name="factory"></param>
+            <param name="group"></param>
+            <param name="id"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.FileServerBase.MoveFileToNewFile(System.String,System.String)">
             <summary>
             移动一个文件到新的文件去
@@ -4128,18 +4189,22 @@
             文件所存储的路径
             </summary>
         </member>
-        <member name="M:HslCommunication.FileServerBase.GetDirectoryFiles(System.String)">
+        <member name="M:HslCommunication.FileServerBase.GetDirectoryFiles(System.String,System.String,System.String)">
             <summary>
             获取文件夹的所有文件列表
             </summary>
-            <param name="segment">额外的片段名称</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.FileServerBase.GetDirectories(System.String)">
+        <member name="M:HslCommunication.FileServerBase.GetDirectories(System.String,System.String,System.String)">
             <summary>
             获取文件夹的所有文件夹列表
             </summary>
-            <param name="segment">额外的片段名称</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
             <returns></returns>
         </member>
         <member name="T:HslCommunication.GroupFileContainer">

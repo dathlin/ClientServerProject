@@ -347,7 +347,7 @@ namespace 软件系统服务端模版
                 //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
                 //只放置exe和dll组件，必须放置：软件自动更新.exe
                 net_soft_update_Server.KeyToken = CommonProtocol.KeyToken;
-                net_soft_update_Server.FileUpdatePath = Application.StartupPath + @"\ServerFiles\ClientFiles";//客户端文件路径
+                net_soft_update_Server.FileUpdatePath = Application.StartupPath + @"\AdvancedFiles\ClientFiles";//客户端文件路径
                 net_soft_update_Server.ServerStart(CommonProtocol.Port_Update_Net);
             }
             catch (Exception ex)
@@ -355,43 +355,6 @@ namespace 软件系统服务端模版
                 SoftBasic.ShowExceptionMessage(ex);
             }
         }
-
-        #endregion
-        
-        #region 多文件服务器块
-        
-        /**************************************************************************************
-         * 
-         *    本文件管理器引擎目前主要实现1个功能
-         *    1. 允许客户端上传服务器的客户端文件，用来提供软件自动更新使用的
-         * 
-         **************************************************************************************/
-         
-
-        /// <summary>
-        /// 一个高级的文件管理服务器引擎
-        /// </summary>
-        private AdvancedFileServer net_file_Advanced = new AdvancedFileServer();
-
-        /// <summary>
-        /// 初始化高级的文件管理引擎
-        /// </summary>
-        private void Net_File_Portrait_Initialization()
-        {
-            try
-            {
-                net_file_Advanced.FilesDirectoryPath = Application.StartupPath + @"\ServerFiles";
-                net_file_Advanced.FilesDirectoryPathTemp = Application.StartupPath + @"\ServerFiles\Temp";
-                net_file_Advanced.LogNet = new LogNetSingle(LogSavePath + @"\Advanced_file_log.txt");
-                net_file_Advanced.KeyToken = CommonProtocol.KeyToken;
-                net_file_Advanced.ServerStart(CommonProtocol.Port_Advanced_File_Server);
-            }
-            catch (Exception ex)
-            {
-                SoftBasic.ShowExceptionMessage(ex);
-            }
-        }
-
 
         #endregion
 
@@ -1153,6 +1116,43 @@ namespace 软件系统服务端模版
 
         #endregion
 
+        #region Advanced File Server
+
+        /**************************************************************************************
+         * 
+         *    本文件管理器引擎目前主要实现1个功能
+         *    1. 允许客户端上传服务器的客户端文件，用来提供软件自动更新使用的
+         * 
+         **************************************************************************************/
+
+
+        /// <summary>
+        /// 一个高级的文件管理服务器引擎
+        /// </summary>
+        private AdvancedFileServer net_file_Advanced = new AdvancedFileServer();
+
+        /// <summary>
+        /// 初始化高级的文件管理引擎
+        /// </summary>
+        private void Net_File_Portrait_Initialization()
+        {
+            try
+            {
+                net_file_Advanced.FilesDirectoryPath = Application.StartupPath + @"\AdvancedFiles";
+                net_file_Advanced.FilesDirectoryPathTemp = Application.StartupPath + @"\AdvancedFiles\Temp";
+                net_file_Advanced.LogNet = new LogNetSingle(LogSavePath + @"\Advanced_file_log.txt");
+                net_file_Advanced.KeyToken = CommonProtocol.KeyToken;
+                net_file_Advanced.ServerStart(CommonProtocol.Port_Advanced_File_Server);
+            }
+            catch (Exception ex)
+            {
+                SoftBasic.ShowExceptionMessage(ex);
+            }
+        }
+
+
+        #endregion
+
         #region Ultimate File Server
 
 
@@ -1180,11 +1180,11 @@ namespace 软件系统服务端模版
                 net_ultimate_file_server.KeyToken = CommonProtocol.KeyToken;
                 net_ultimate_file_server.LogNet = new LogNetSingle(LogSavePath + @"\ultimate_file_log.txt");
                 net_ultimate_file_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
-                net_ultimate_file_server.FilesDirectoryPath = Application.StartupPath + @"\ServerFiles";
+                net_ultimate_file_server.FilesDirectoryPath = Application.StartupPath + @"\UltimateFiles";
                 net_ultimate_file_server.ServerStart(CommonProtocol.Port_Ultimate_File_Server);
 
                 // 共享文件管理器只是终极文件管理器的一个子容器
-                ShareFileContainer = net_ultimate_file_server.GetGroupFromFilePath(Application.StartupPath + @"\ServerFiles\ShareFiles");
+                ShareFileContainer = net_ultimate_file_server.GetGroupFromFilePath(Application.StartupPath + @"\UltimateFiles\ShareFiles");
                 ShareFileContainer.FileCountChanged += ShareFileContainer_FileCountChanged;
             }
             catch (Exception ex)

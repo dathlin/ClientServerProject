@@ -98,17 +98,7 @@ namespace CommonLibrary
         {
             return all_list_accounts.Where(selector).ToList();
         }
-
-        /// <summary>
-        /// 将所有账户信息转换成另一种元素，并返回列表
-        /// </summary>
-        /// <typeparam name="TResult">目标类型</typeparam>
-        /// <param name="converter">转换方法</param>
-        /// <returns>转换后的结果列表</returns>
-        public List<TResult> ConvertAll<TResult>(Converter<T, TResult> converter)
-        {
-            return all_list_accounts.ConvertAll(converter);
-        }
+        
 
         /// <summary>
         /// 检查账户信息，并返回账户对象
@@ -210,6 +200,7 @@ namespace CommonLibrary
         public void DeleteAccount(string name)
         {
             hybirdLock.Enter();
+
             for (int i = 0; i < all_list_accounts.Count; i++)
             {
                 if (name == all_list_accounts[i].UserName)
@@ -245,6 +236,19 @@ namespace CommonLibrary
             string result = string.Empty;
             hybirdLock.Enter();
             result = JArray.FromObject(all_list_accounts).ToString();
+            hybirdLock.Leave();
+            return result;
+        }
+
+        /// <summary>
+        /// 获取所有的账户的用户名的JSON字符串
+        /// </summary>
+        /// <returns></returns>
+        public string GetAccountsNamesJson()
+        {
+            string result = string.Empty;
+            hybirdLock.Enter();
+            result = JArray.FromObject(all_list_accounts.ConvertAll(m => m.UserName)).ToString();
             hybirdLock.Leave();
             return result;
         }
