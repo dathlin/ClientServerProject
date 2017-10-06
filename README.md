@@ -59,7 +59,7 @@
 </ul>
 
 ## Quick Experience
-如果觉得下载源代码比较麻烦，又想快速体验客户端功能，那就点击<a href="https://github.com/dathlin/ClientServerProject/blob/master/QuickExperience/软件自动更新.exe">软件自动更新.exe</a>下载程序，放置到任意位置，推荐桌面，双击安装程序，输入默认的账户密码即可体验完整的最新版本的客户端，当服务器的客户端版本更新时，你再打开本程序时也会自动升级。然后桌面的 **软件自动更新.exe** 就可以删除了。此处目前仅仅体验winform程序。
+如果觉得下载源代码比较麻烦，又想快速体验客户端功能，那就点击<a href="https://github.com/dathlin/ClientServerProject/raw/master/QuickExperience/软件自动更新.exe">软件自动更新.exe</a>下载程序，放置到任意位置，推荐桌面，双击安装程序，输入默认的账户密码即可体验完整的最新版本的客户端，当服务器的客户端版本更新时，你再打开本程序时也会自动升级。然后桌面的 **软件自动更新.exe** 就可以删除了。此处目前仅仅体验winform程序。
 
 至于卸载软件，只要删除桌面的快捷方式和安装目录的文件即可，其他位置不会有任何的文件残留。
 
