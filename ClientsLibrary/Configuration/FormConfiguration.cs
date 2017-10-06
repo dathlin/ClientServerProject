@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using CommonLibrary;
 
 namespace ClientsLibrary
 {
@@ -21,15 +22,17 @@ namespace ClientsLibrary
 
         private void FormConfiguration_Load(object sender, EventArgs e)
         {
-            Text = "配置系统的参数";
+            Text = UserLocalization.Localization.SettingsText;
 
 
             treeView1.AfterSelect += TreeView1_AfterSelect;
             TreeNode treeNodeSystem = treeView1.Nodes[0];
+            treeNodeSystem.Text = UserLocalization.Localization.SettingsSystem;
 
-            treeNodeSystem.Nodes.Add("General", "常规配置");
-            treeNodeSystem.Nodes.Add("Factory", "配置分厂信息");
-            treeNodeSystem.Nodes.Add("Client", "客户端信任功能");
+            treeNodeSystem.Nodes.Add("General", UserLocalization.Localization.SettingsGeneral);
+            treeNodeSystem.Nodes.Add("Factory", UserLocalization.Localization.SettingsAccountFactory);
+            treeNodeSystem.Nodes.Add("Client", UserLocalization.Localization.SettingsTrustClient);
+            treeNodeSystem.Nodes.Add("Roles", UserLocalization.Localization.SettingsRoleAssign);
 
             treeNodeSystem.Expand();
         }
@@ -63,6 +66,10 @@ namespace ClientsLibrary
             else if(e.Node.Name == "Client")
             {
                 control = new ClientConfiguration();
+            }
+            else if (e.Node.Name == "Roles")
+            {
+                control = new RolesConfiguration();
             }
             else
             {

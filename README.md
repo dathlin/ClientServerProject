@@ -15,8 +15,10 @@
 <li>一个简单的意见反馈功能，允许客户端反馈软件的意见或是BUG，方便开发人员更改</li>
 <li>一个简单的右下角消息框弹出功能，在公告更改和新发消息的时候可以自由控制</li>
 <li>一个简单的版本日志提示窗口，在新版本更新后就会自动提示显示</li>
+<li>一个简单的角色管理器功能，对每个角色可以配置任意数量的账户名</li>
 </ul>
 <ul>
+<li>服务器端的配置实时保存，以防止服务器电脑突然关机，断电造成的数据丢失问题</li>
 <li>一个完善的网络通信框架，包含一对多控制的tcp网络（服务器对客户端进行控制，并方便的群发数据），单独请求数据的同步网络，udp网络</li>
 <li>完善的自动升级的部署机制，服务器部署新版本后，所有客户端都将一键自动更新</li>
 <li>客户端提供开发人员远程更新服务器程序的能力，方便开发人员的操作</li>
@@ -85,14 +87,13 @@
 </ul>
 
 
-## About HslCommunication.dll
+## HslCommunication.dll
 <p>本C-S项目的核心组件，该组件功能提供了一些基础功能类和整个C-S项目的网络支持，除此之外，该组件提供了访问三菱PLC和西门子PLC的数据功能。
 以下就是该库的部分子功能说明，您也可以只使用其中一部分的功能类，比如日志功能！完整的功能手册将在近期放出，方便理解整个系统的底层机制。</p>
 
 <ul>
 <li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/LogReadme.md">简单强大的日志记录功能使用</a></li>
 <li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/SimplifyNet.md">同步网络数据交互功能使用</a></li>
-<li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/SimplifyFileNet.md">共享文件管理功能使用</a></li>
 <li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/MelsecReadMe.md">三菱PLC数据读写介绍</a></li>
 <li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/SiemensReadMe.md">西门子PLC数据读写手册</a></li>
 </ul>
@@ -129,6 +130,9 @@ using HslCommunication;
 </ol>
 
 ![](https://github.com/dathlin/ClientServerProject/raw/master/img/Design2.png)  
+
+#### 系统的权限角色模型设计
+![](https://github.com/dathlin/ClientServerProject/raw/master/img/Design7.png) 
 
 #### 系统的异常处理模型设计
 ![](https://github.com/dathlin/ClientServerProject/raw/master/img/Design3.png)  

@@ -39,6 +39,8 @@ namespace ClientsLibrary.Configuration
 
         #endregion
 
+
+
         public void SetInfomation(int download, int upload, string headText)
         {
             Download = download;

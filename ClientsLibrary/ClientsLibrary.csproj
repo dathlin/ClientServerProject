@@ -56,11 +56,23 @@
       <DependentUpon>FormAccountDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="AccountSupport\AccountLogin.cs" />
+    <Compile Include="AccountSupport\FormAccountSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountSupport\FormAccountSelect.Designer.cs">
+      <DependentUpon>FormAccountSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="BasicSupport\FormDownloading.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BasicSupport\FormDownloading.Designer.cs">
       <DependentUpon>FormDownloading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BasicSupport\FormGetInputString.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSupport\FormGetInputString.Designer.cs">
+      <DependentUpon>FormGetInputString.cs</DependentUpon>
     </Compile>
     <Compile Include="BasicSupport\FormShowMachineId.cs">
       <SubType>Form</SubType>
@@ -91,6 +103,12 @@
     </Compile>
     <Compile Include="Configuration\FormConfiguration.Designer.cs">
       <DependentUpon>FormConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\RolesConfiguration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Configuration\RolesConfiguration.Designer.cs">
+      <DependentUpon>RolesConfiguration.cs</DependentUpon>
     </Compile>
     <Compile Include="FileSupport\FileOperateControl.cs">
       <SubType>UserControl</SubType>
@@ -148,8 +166,14 @@
     <EmbeddedResource Include="AccountSupport\FormAccountDetails.resx">
       <DependentUpon>FormAccountDetails.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AccountSupport\FormAccountSelect.resx">
+      <DependentUpon>FormAccountSelect.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BasicSupport\FormDownloading.resx">
       <DependentUpon>FormDownloading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BasicSupport\FormGetInputString.resx">
+      <DependentUpon>FormGetInputString.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BasicSupport\FormShowMachineId.resx">
       <DependentUpon>FormShowMachineId.cs</DependentUpon>
@@ -165,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration\FormConfiguration.resx">
       <DependentUpon>FormConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\RolesConfiguration.resx">
+      <DependentUpon>RolesConfiguration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FileSupport\FileItemShow.resx">
       <DependentUpon>FileItemShow.cs</DependentUpon>

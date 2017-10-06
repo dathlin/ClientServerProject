@@ -14,7 +14,12 @@ namespace ClientsLibrary
     /*********************************************************************************
      * 
      *    统一的账户登录模型
-     * 
+     *    包含的功能有
+     *    1、维护状态检查
+     *    2、账户检查
+     *    3、框架版本检查、
+     *    4、系统版本号检查
+     *    5、初始化数据
      * 
      *********************************************************************************/
 
@@ -78,9 +83,11 @@ namespace ClientsLibrary
             // 延时
             Thread.Sleep(200);
 
-            //===================================================================================
+            //=======================================================================================
+            //
             //   根据实际情况校验，选择数据库校验或是将用户名密码发至服务器校验
             //   以下展示了服务器校验的方法，如您需要数据库校验，请删除下面并改成SQL访问验证的方式
+            //   如果还有其他数据一并传到服务器进行验证的，都在下面进行数据包装
 
             // 包装数据
             JObject json = new JObject
@@ -146,6 +153,7 @@ namespace ClientsLibrary
                 }
                 else
                 {
+                    // 超级管理员可以使用超前版本进行登录
                     if (UserClient.CurrentVersion < sv)
                     {
                         // 保存新版本信息
@@ -182,7 +190,7 @@ namespace ClientsLibrary
             {
                 // 服务器返回初始化的数据，此处进行数据的提取，有可能包含了多个数据
                 json = JObject.Parse(result.Content);
-                // 例如公告数据
+                // 例如公告数据和分厂数据
                 UserClient.Announcement = SoftBasic.GetValueFromJsonObject(json, nameof(UserClient.Announcement), "");
                 if (json[nameof(UserClient.SystemFactories)] != null)
                 {

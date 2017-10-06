@@ -28,8 +28,9 @@ namespace 软件系统服务端模版
         /// 所有账户信息的存储对象，具体的账户类可以根据UserAccount进行扩充
         /// </summary>
         public static ServerAccounts<UserAccount> ServerAccounts { get; set; } = new ServerAccounts<UserAccount>(
-            new List<UserAccount>() {
-                //示例：新增一个默认的超级管理员
+            new List<UserAccount>()
+            {
+                // 示例：新增一个默认的超级管理员
                 new UserAccount()
                 {
                     UserName="admin",
@@ -43,7 +44,13 @@ namespace 软件系统服务端模版
                     LoginFrequency=0,
                     LastLoginIpAddress="",
                 }
-            });
+            }
+        );
+
+        /// <summary>
+        /// 角色信息管理器
+        /// </summary>
+        public static RoleAssign ServerRoles { get; set; } = new RoleAssign();
 
     }
 

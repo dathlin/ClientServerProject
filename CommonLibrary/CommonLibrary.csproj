@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountSupport\Attribute.cs" />
     <Compile Include="AccountSupport\FormAccountManage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +66,7 @@
     <Compile Include="AccountSupport\FormPasswordModify.designer.cs">
       <DependentUpon>FormPasswordModify.cs</DependentUpon>
     </Compile>
+    <Compile Include="AccountSupport\RoleAssign.cs" />
     <Compile Include="AccountSupport\ServerAccount.cs" />
     <Compile Include="AccountSupport\UserAccount.cs" />
     <Compile Include="BasicSupport\FormSuper.cs">
@@ -86,6 +88,9 @@
       <DependentUpon>FormVersionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="BasicSupport\SoftSettings.cs" />
+    <Compile Include="LocalizationSupport\ChineseLocalization.cs" />
+    <Compile Include="LocalizationSupport\EnglishLocalization.cs" />
+    <Compile Include="LocalizationSupport\Localization.cs" />
     <Compile Include="ProtocolSupport\CommonProtocol.cs" />
     <Compile Include="ProtocolSupport\CustomerCode.cs" />
     <Compile Include="OrderSupport\ClassGoods.cs" />
@@ -117,6 +122,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

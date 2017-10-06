@@ -18,12 +18,13 @@ using HslCommunication;
 
 /********************************************************************************************
  * 
- *    模版日期    2017-09-30
+ *    模版日期    2017-10-06
  *    创建人      Richard.Hu
  *    版权所有    Richard.Hu
  *    授权说明    模版仅授权个人研究学习使用，如需商用，请联系hsl200909@163.com洽谈
  *    说明        JSON组件引用自james newton-king，遵循MIT授权协议
  *    网络组件    网络组件的版权由Richard.Hu所有
+ *    免责声明    项目许可证为MIT，由于二次开发带来的经济损失，概不负责。
  *    
  ********************************************************************************************/
 
@@ -42,6 +43,7 @@ using HslCommunication;
  *    本项目模版不包含  《软件自动更新.exe》
  *    如需支持部署环境的自动升级  请联系hsl200909@163.com获取
  *    软件自动更新.exe  将绑定IP，端口和软件名称后授权销售，30元人民币一组，永久使用
+ *    软件自动更新的部署提供长期的技术支持
  *
  ********************************************************************************************/
 
@@ -96,47 +98,52 @@ namespace 软件系统服务端模版
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //初始化默认的委托对象
+            // 初始化默认的委托对象
             ActionInitialization();
-            //邮件系统初始化
+            // 邮件系统初始化
             SoftMailInitialization();
-            //初始化日志工具
+            // 初始化日志工具
             RuntimeLogHelper = new LogNetSingle(LogSavePath + @"\log.txt");
-            //初始化反馈信息工具
+            // 初始化反馈信息工具
             AdviceLogHelper = new LogNetSingle(LogSavePath + @"\advice_log.txt");
-            //初始化客户端异常日志工具
+            // 初始化客户端异常日志工具
             ClientsLogHelper = new LogNetSingle(LogSavePath + @"\clients_log.txt");
-            //保存路径初始化
+            // 初始化并加载账户信息
             UserServer.ServerSettings.FileSavePath = Application.StartupPath + @"\settings.txt";
-            //加载参数
             UserServer.ServerSettings.LoadByFile();
+
+            // 初始化并加载角色规则
+            UserServer.ServerRoles.FileSavePath = Application.StartupPath + @"\roles.txt";
+            UserServer.ServerRoles.LoadByFile();
+
+            // 初始化版权信息
             toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
             toolStripStatusLabel1.Text = $"本软件著作权归{SoftResources.StringResouce.SoftCopyRight}所有";
             label5.Text = SoftResources.StringResouce.SoftName;
-            //加载账户信息
+            // 加载账户信息
             UserServer.ServerAccounts.FileSavePath = Application.StartupPath + @"\accounts.txt";
             UserServer.ServerAccounts.LoadByFile();
             UserServer.ServerAccounts.ILogNet = RuntimeLogHelper;
-            //初始化聊天信息
+            // 初始化聊天信息
             ChatInitialization();
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //密码验证的示例，此处关闭窗口验证
+            // 密码验证的示例，此处关闭窗口验证
             using (FormPasswordCheck fpc = new FormPasswordCheck("123456"))
             {
                 if (fpc.ShowDialog() == DialogResult.OK)
                 {
                     IsWindowShow = false;
                     Thread.Sleep(20);
-                    //关闭网络引擎
+                    // 关闭网络引擎
                     net_socket_server.ServerClose();
                     net_simplify_server.ServerClose();
                     net_udp_server.ServerClose();
                 }
                 else
                 {
-                    //取消关闭
+                    // 取消关闭
                     e.Cancel = true;
                 }
             }
@@ -558,6 +565,7 @@ namespace 软件系统服务端模版
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");
                 UserServer.ServerAccounts.UpdatePassword(name, password);
+                UserServer.ServerAccounts.SaveToFile();
                 net_simplify_server.SendMessage(state, handle, "成功");
             }
             else if (handle == CommonHeadCode.SimplifyHeadCode.更新版本)
@@ -579,6 +587,7 @@ namespace 软件系统服务端模版
             else if (handle == CommonHeadCode.SimplifyHeadCode.注册账号)
             {
                 bool result = UserServer.ServerAccounts.AddNewAccount(data);
+                if (result) UserServer.ServerAccounts.SaveToFile();
                 net_simplify_server.SendMessage(state, handle, result ? "1" : "0");
             }
             else if (handle == CommonHeadCode.SimplifyHeadCode.请求文件)
@@ -652,6 +661,7 @@ namespace 软件系统服务端模版
                 JObject json = JObject.Parse(data);
                 UserServer.ServerSettings.WhetherToEnableTrustedClientAuthentication = json["TrustEnable"].ToObject<bool>();
                 UserServer.ServerSettings.TrustedClientList = json["TrustList"].ToObject<List<string>>();
+                UserServer.ServerSettings.SaveToFile();
                 net_simplify_server.SendMessage(state, handle, "成功");
             }
             else if (handle == CommonHeadCode.SimplifyHeadCode.请求一般配置)
@@ -669,6 +679,23 @@ namespace 软件系统服务端模版
                 UserServer.ServerSettings.AllowUserMultiOnline = SoftBasic.GetValueFromJsonObject(json, "AllowUserMulti", false);
                 UserServer.ServerSettings.AllowLoginWhenFramewordVersionNotCheck = SoftBasic.GetValueFromJsonObject(json, "AllowFrameLogin", false);
                 net_simplify_server.SendMessage(state, handle, json.ToString());
+            }
+            else if(handle == CommonHeadCode.SimplifyHeadCode.请求角色配置)
+            {
+                net_simplify_server.SendMessage(state, handle, UserServer.ServerRoles.ToSaveString());
+            }
+            else if(handle == CommonHeadCode.SimplifyHeadCode.上传角色配置)
+            {
+                UserServer.ServerRoles.LoadByString(data);
+                UserServer.ServerRoles.SaveToFile();
+                net_simplify_server.SendMessage(state, handle, "1");
+            }
+            else if (handle == CommonHeadCode.SimplifyHeadCode.检查角色权限)
+            {
+                JObject json = JObject.Parse(data);
+                string name = SoftBasic.GetValueFromJsonObject(json, "Name", "");
+                string role = SoftBasic.GetValueFromJsonObject(json, "Role", "");
+                net_simplify_server.SendMessage(state, handle, UserServer.ServerRoles.IsAllowAccountOperate(role, name).ToString());
             }
             else
             {

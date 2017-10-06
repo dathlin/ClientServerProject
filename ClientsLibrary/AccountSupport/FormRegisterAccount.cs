@@ -14,6 +14,8 @@ namespace ClientsLibrary
 {
     public partial class FormRegisterAccount : Form
     {
+        #region Constructor
+        
         /// <summary>
         /// 实例化对象
         /// </summary>
@@ -32,7 +34,9 @@ namespace ClientsLibrary
             Factories.Add("总公司");
         }
 
-        private List<string> Factories = null;
+        #endregion
+
+        #region Form Load
 
         private void FormRegisterAccount_Load(object sender, EventArgs e)
         {
@@ -47,7 +51,10 @@ namespace ClientsLibrary
             textBox4.Text = (new UserAccount()).ForbidMessage;
         }
 
-        private NetSimplifyClient net_client = null;
+        #endregion
+
+        #region Register Account
+
 
         private void userButton_login_Click(object sender, EventArgs e)
         {
@@ -76,5 +83,14 @@ namespace ClientsLibrary
                 MessageBox.Show("注册失败！");
             }
         }
+
+        #endregion
+
+        #region Private Members
+
+        private List<string> Factories = null;              // 分厂信息
+        private NetSimplifyClient net_client = null;        // 服务器数据交换的通信对象
+
+        #endregion
     }
 }

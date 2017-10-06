@@ -68,6 +68,9 @@ namespace CommonLibrary
             public static NetHandle 上传信任客户端 { get; } =    new NetHandle(1, 1, 00020);
             public static NetHandle 请求一般配置 { get; } =      new NetHandle(1, 1, 00021);
             public static NetHandle 上传一般配置 { get; } =      new NetHandle(1, 1, 00022);
+            public static NetHandle 请求角色配置 { get; } =      new NetHandle(1, 1, 00023);
+            public static NetHandle 上传角色配置 { get; } =      new NetHandle(1, 1, 00024);
+            public static NetHandle 检查角色权限 { get; } =      new NetHandle(1, 1, 00025);
 
 
             #endregion

@@ -8,6 +8,7 @@ using CommonLibrary;
 using System.Net;
 using System.Drawing;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
 
 namespace ClientsLibrary
 {
@@ -35,7 +36,7 @@ namespace ClientsLibrary
         /// <summary>
         /// 本软件的当前版本，用来验证更新的关键依据
         /// </summary>
-        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.170930");
+        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.171006");
 
 
         /// <summary>
@@ -106,6 +107,33 @@ namespace ClientsLibrary
         };
 
 
+        /// <summary>
+        /// 检查当前账户是否有role角色的权限
+        /// </summary>
+        /// <param name="role">角色名称</param>
+        /// <returns></returns>
+        public static bool CheckUserAccountRole(string role)
+        {
+            JObject json = new JObject
+            {
+                { "Name", UserAccount.UserName },
+                { "Role", role }
+            };
+            HslCommunication.OperateResultString result = Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.检查角色权限,
+                json.ToString());
+
+            if(result.IsSuccess)
+            {
+                if(result.Content.ToUpper() == "TRUE")
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
 
 
 
@@ -155,7 +183,10 @@ namespace ClientsLibrary
         }
 
 
-
+        /// <summary>
+        /// 统一的窗体图标显示
+        /// </summary>
+        /// <returns></returns>
         public static Icon GetFormWindowIcon()
         {
             return Icon.ExtractAssociatedIcon(Application.ExecutablePath);

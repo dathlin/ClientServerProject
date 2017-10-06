@@ -52,6 +52,9 @@ namespace ClientsLibrary
 
             // 加载文件列表
             DownloadUserFileNames();
+
+            // 本地化显示
+            UILocalization();
         }
 
         private void AccountDetails_Load(object sender, EventArgs e)
@@ -65,6 +68,32 @@ namespace ClientsLibrary
             treeView1.Nodes[0].ImageIndex = 0;
             treeView1.Nodes[0].SelectedImageIndex = 0;
         }
+
+        #endregion
+
+        #region Localization Support
+
+        /// <summary>
+        /// 本地化显示的操作，还未完成
+        /// </summary>
+        private void UILocalization()
+        {
+            Text = UserLocalization.Localization.AccountDetails;
+            groupBox1.Text = UserLocalization.Localization.AccountDetails;
+            label12.Text = UserLocalization.Localization.AccountPortrait + "：";
+            label1.Text = UserLocalization.Localization.AccountName + "：";
+            label2.Text = UserLocalization.Localization.AccountAlias + "：";
+            label3.Text = UserLocalization.Localization.AccountFactory + "：";
+            label4.Text = UserLocalization.Localization.AccountGrade + "：";
+            label5.Text = UserLocalization.Localization.AccountRegisterTime + "：";
+            label6.Text = UserLocalization.Localization.AccountLoginEnable + "：";
+            label7.Text = UserLocalization.Localization.AccountLoginFrequency + "：";
+            label8.Text = UserLocalization.Localization.AccountLastLoginTime + "：";
+            label9.Text = UserLocalization.Localization.AccountLastLoginIpAddress + "：";
+            label10.Text = UserLocalization.Localization.AccountLastLoginWay + "：";
+            label11.Text = UserLocalization.Localization.AccountLoginFailedCount + "：";
+        }
+
 
         #endregion
 

@@ -55,16 +55,16 @@
             this.textBox_UserName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox_file_uploadTime = new System.Windows.Forms.TextBox();
+            this.label_uploadTime = new System.Windows.Forms.Label();
+            this.textBox_file_size = new System.Windows.Forms.TextBox();
+            this.label_fileSize = new System.Windows.Forms.Label();
+            this.textBox_file_name = new System.Windows.Forms.TextBox();
+            this.label_fileName = new System.Windows.Forms.Label();
             this.userButton_delete = new HslCommunication.Controls.UserButton();
             this.userButton_download = new HslCommunication.Controls.UserButton();
             this.userButton_upload = new HslCommunication.Controls.UserButton();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.textBox_file_name = new System.Windows.Forms.TextBox();
-            this.label_fileName = new System.Windows.Forms.Label();
-            this.textBox_file_size = new System.Windows.Forms.TextBox();
-            this.label_fileSize = new System.Windows.Forms.Label();
-            this.textBox_file_uploadTime = new System.Windows.Forms.TextBox();
-            this.label_uploadTime = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_UserPortrait)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -109,7 +109,7 @@
             // 
             this.pictureBox_UserPortrait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox_UserPortrait.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox_UserPortrait.Location = new System.Drawing.Point(112, 22);
+            this.pictureBox_UserPortrait.Location = new System.Drawing.Point(153, 22);
             this.pictureBox_UserPortrait.Name = "pictureBox_UserPortrait";
             this.pictureBox_UserPortrait.Size = new System.Drawing.Size(136, 136);
             this.pictureBox_UserPortrait.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -129,10 +129,10 @@
             // textBox_LoginFailedCount
             // 
             this.textBox_LoginFailedCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_LoginFailedCount.Location = new System.Drawing.Point(112, 459);
+            this.textBox_LoginFailedCount.Location = new System.Drawing.Point(153, 459);
             this.textBox_LoginFailedCount.Name = "textBox_LoginFailedCount";
             this.textBox_LoginFailedCount.ReadOnly = true;
-            this.textBox_LoginFailedCount.Size = new System.Drawing.Size(177, 23);
+            this.textBox_LoginFailedCount.Size = new System.Drawing.Size(136, 23);
             this.textBox_LoginFailedCount.TabIndex = 21;
             // 
             // label11
@@ -147,10 +147,10 @@
             // textBox_LastLoginWay
             // 
             this.textBox_LastLoginWay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_LastLoginWay.Location = new System.Drawing.Point(112, 428);
+            this.textBox_LastLoginWay.Location = new System.Drawing.Point(153, 428);
             this.textBox_LastLoginWay.Name = "textBox_LastLoginWay";
             this.textBox_LastLoginWay.ReadOnly = true;
-            this.textBox_LastLoginWay.Size = new System.Drawing.Size(177, 23);
+            this.textBox_LastLoginWay.Size = new System.Drawing.Size(136, 23);
             this.textBox_LastLoginWay.TabIndex = 19;
             // 
             // label10
@@ -165,10 +165,10 @@
             // textBox_LastLoginIpAddress
             // 
             this.textBox_LastLoginIpAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_LastLoginIpAddress.Location = new System.Drawing.Point(112, 398);
+            this.textBox_LastLoginIpAddress.Location = new System.Drawing.Point(153, 398);
             this.textBox_LastLoginIpAddress.Name = "textBox_LastLoginIpAddress";
             this.textBox_LastLoginIpAddress.ReadOnly = true;
-            this.textBox_LastLoginIpAddress.Size = new System.Drawing.Size(177, 23);
+            this.textBox_LastLoginIpAddress.Size = new System.Drawing.Size(136, 23);
             this.textBox_LastLoginIpAddress.TabIndex = 17;
             // 
             // label9
@@ -183,10 +183,10 @@
             // textBox_LastLoginTime
             // 
             this.textBox_LastLoginTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_LastLoginTime.Location = new System.Drawing.Point(112, 368);
+            this.textBox_LastLoginTime.Location = new System.Drawing.Point(153, 368);
             this.textBox_LastLoginTime.Name = "textBox_LastLoginTime";
             this.textBox_LastLoginTime.ReadOnly = true;
-            this.textBox_LastLoginTime.Size = new System.Drawing.Size(177, 23);
+            this.textBox_LastLoginTime.Size = new System.Drawing.Size(136, 23);
             this.textBox_LastLoginTime.TabIndex = 15;
             // 
             // label8
@@ -201,10 +201,10 @@
             // textBox_LoginFrequency
             // 
             this.textBox_LoginFrequency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_LoginFrequency.Location = new System.Drawing.Point(112, 338);
+            this.textBox_LoginFrequency.Location = new System.Drawing.Point(153, 338);
             this.textBox_LoginFrequency.Name = "textBox_LoginFrequency";
             this.textBox_LoginFrequency.ReadOnly = true;
-            this.textBox_LoginFrequency.Size = new System.Drawing.Size(177, 23);
+            this.textBox_LoginFrequency.Size = new System.Drawing.Size(136, 23);
             this.textBox_LoginFrequency.TabIndex = 13;
             // 
             // label7
@@ -219,10 +219,10 @@
             // textBox_LoginEnable
             // 
             this.textBox_LoginEnable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_LoginEnable.Location = new System.Drawing.Point(112, 308);
+            this.textBox_LoginEnable.Location = new System.Drawing.Point(153, 308);
             this.textBox_LoginEnable.Name = "textBox_LoginEnable";
             this.textBox_LoginEnable.ReadOnly = true;
-            this.textBox_LoginEnable.Size = new System.Drawing.Size(177, 23);
+            this.textBox_LoginEnable.Size = new System.Drawing.Size(136, 23);
             this.textBox_LoginEnable.TabIndex = 11;
             // 
             // label6
@@ -237,10 +237,10 @@
             // textBox_RegisterTime
             // 
             this.textBox_RegisterTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_RegisterTime.Location = new System.Drawing.Point(112, 279);
+            this.textBox_RegisterTime.Location = new System.Drawing.Point(153, 279);
             this.textBox_RegisterTime.Name = "textBox_RegisterTime";
             this.textBox_RegisterTime.ReadOnly = true;
-            this.textBox_RegisterTime.Size = new System.Drawing.Size(177, 23);
+            this.textBox_RegisterTime.Size = new System.Drawing.Size(136, 23);
             this.textBox_RegisterTime.TabIndex = 9;
             // 
             // label5
@@ -255,10 +255,10 @@
             // textBox_GradeDescription
             // 
             this.textBox_GradeDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_GradeDescription.Location = new System.Drawing.Point(112, 251);
+            this.textBox_GradeDescription.Location = new System.Drawing.Point(153, 251);
             this.textBox_GradeDescription.Name = "textBox_GradeDescription";
             this.textBox_GradeDescription.ReadOnly = true;
-            this.textBox_GradeDescription.Size = new System.Drawing.Size(177, 23);
+            this.textBox_GradeDescription.Size = new System.Drawing.Size(136, 23);
             this.textBox_GradeDescription.TabIndex = 7;
             // 
             // label4
@@ -273,10 +273,10 @@
             // textBox_Factory
             // 
             this.textBox_Factory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_Factory.Location = new System.Drawing.Point(112, 223);
+            this.textBox_Factory.Location = new System.Drawing.Point(153, 223);
             this.textBox_Factory.Name = "textBox_Factory";
             this.textBox_Factory.ReadOnly = true;
-            this.textBox_Factory.Size = new System.Drawing.Size(177, 23);
+            this.textBox_Factory.Size = new System.Drawing.Size(136, 23);
             this.textBox_Factory.TabIndex = 5;
             // 
             // label3
@@ -291,10 +291,10 @@
             // textBox_NameAlias
             // 
             this.textBox_NameAlias.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_NameAlias.Location = new System.Drawing.Point(112, 194);
+            this.textBox_NameAlias.Location = new System.Drawing.Point(153, 194);
             this.textBox_NameAlias.Name = "textBox_NameAlias";
             this.textBox_NameAlias.ReadOnly = true;
-            this.textBox_NameAlias.Size = new System.Drawing.Size(177, 23);
+            this.textBox_NameAlias.Size = new System.Drawing.Size(136, 23);
             this.textBox_NameAlias.TabIndex = 3;
             // 
             // label2
@@ -309,10 +309,10 @@
             // textBox_UserName
             // 
             this.textBox_UserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_UserName.Location = new System.Drawing.Point(112, 164);
+            this.textBox_UserName.Location = new System.Drawing.Point(153, 164);
             this.textBox_UserName.Name = "textBox_UserName";
             this.textBox_UserName.ReadOnly = true;
-            this.textBox_UserName.Size = new System.Drawing.Size(177, 23);
+            this.textBox_UserName.Size = new System.Drawing.Size(136, 23);
             this.textBox_UserName.TabIndex = 1;
             // 
             // label1
@@ -344,6 +344,67 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "个人文件，支持拖拽上传，双击下载";
+            // 
+            // textBox_file_uploadTime
+            // 
+            this.textBox_file_uploadTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox_file_uploadTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_file_uploadTime.Location = new System.Drawing.Point(252, 432);
+            this.textBox_file_uploadTime.Name = "textBox_file_uploadTime";
+            this.textBox_file_uploadTime.ReadOnly = true;
+            this.textBox_file_uploadTime.Size = new System.Drawing.Size(111, 23);
+            this.textBox_file_uploadTime.TabIndex = 16;
+            // 
+            // label_uploadTime
+            // 
+            this.label_uploadTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_uploadTime.AutoSize = true;
+            this.label_uploadTime.Location = new System.Drawing.Point(182, 434);
+            this.label_uploadTime.Name = "label_uploadTime";
+            this.label_uploadTime.Size = new System.Drawing.Size(68, 17);
+            this.label_uploadTime.TabIndex = 15;
+            this.label_uploadTime.Text = "上传日期：";
+            // 
+            // textBox_file_size
+            // 
+            this.textBox_file_size.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox_file_size.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_file_size.Location = new System.Drawing.Point(66, 432);
+            this.textBox_file_size.Name = "textBox_file_size";
+            this.textBox_file_size.ReadOnly = true;
+            this.textBox_file_size.Size = new System.Drawing.Size(110, 23);
+            this.textBox_file_size.TabIndex = 14;
+            // 
+            // label_fileSize
+            // 
+            this.label_fileSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_fileSize.AutoSize = true;
+            this.label_fileSize.Location = new System.Drawing.Point(7, 434);
+            this.label_fileSize.Name = "label_fileSize";
+            this.label_fileSize.Size = new System.Drawing.Size(44, 17);
+            this.label_fileSize.TabIndex = 13;
+            this.label_fileSize.Text = "大小：";
+            // 
+            // textBox_file_name
+            // 
+            this.textBox_file_name.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_file_name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_file_name.Location = new System.Drawing.Point(66, 405);
+            this.textBox_file_name.Name = "textBox_file_name";
+            this.textBox_file_name.ReadOnly = true;
+            this.textBox_file_name.Size = new System.Drawing.Size(297, 23);
+            this.textBox_file_name.TabIndex = 12;
+            // 
+            // label_fileName
+            // 
+            this.label_fileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label_fileName.AutoSize = true;
+            this.label_fileName.Location = new System.Drawing.Point(7, 407);
+            this.label_fileName.Name = "label_fileName";
+            this.label_fileName.Size = new System.Drawing.Size(56, 17);
+            this.label_fileName.TabIndex = 11;
+            this.label_fileName.Text = "文件名：";
             // 
             // userButton_delete
             // 
@@ -408,67 +469,6 @@
             this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
             this.treeView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView1_DragEnter);
             this.treeView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDoubleClick);
-            // 
-            // textBox_file_name
-            // 
-            this.textBox_file_name.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_file_name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_file_name.Location = new System.Drawing.Point(66, 405);
-            this.textBox_file_name.Name = "textBox_file_name";
-            this.textBox_file_name.ReadOnly = true;
-            this.textBox_file_name.Size = new System.Drawing.Size(297, 23);
-            this.textBox_file_name.TabIndex = 12;
-            // 
-            // label_fileName
-            // 
-            this.label_fileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_fileName.AutoSize = true;
-            this.label_fileName.Location = new System.Drawing.Point(7, 407);
-            this.label_fileName.Name = "label_fileName";
-            this.label_fileName.Size = new System.Drawing.Size(56, 17);
-            this.label_fileName.TabIndex = 11;
-            this.label_fileName.Text = "文件名：";
-            // 
-            // textBox_file_size
-            // 
-            this.textBox_file_size.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox_file_size.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_file_size.Location = new System.Drawing.Point(66, 432);
-            this.textBox_file_size.Name = "textBox_file_size";
-            this.textBox_file_size.ReadOnly = true;
-            this.textBox_file_size.Size = new System.Drawing.Size(110, 23);
-            this.textBox_file_size.TabIndex = 14;
-            // 
-            // label_fileSize
-            // 
-            this.label_fileSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_fileSize.AutoSize = true;
-            this.label_fileSize.Location = new System.Drawing.Point(7, 434);
-            this.label_fileSize.Name = "label_fileSize";
-            this.label_fileSize.Size = new System.Drawing.Size(44, 17);
-            this.label_fileSize.TabIndex = 13;
-            this.label_fileSize.Text = "大小：";
-            // 
-            // textBox_file_uploadTime
-            // 
-            this.textBox_file_uploadTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox_file_uploadTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_file_uploadTime.Location = new System.Drawing.Point(252, 432);
-            this.textBox_file_uploadTime.Name = "textBox_file_uploadTime";
-            this.textBox_file_uploadTime.ReadOnly = true;
-            this.textBox_file_uploadTime.Size = new System.Drawing.Size(111, 23);
-            this.textBox_file_uploadTime.TabIndex = 16;
-            // 
-            // label_uploadTime
-            // 
-            this.label_uploadTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label_uploadTime.AutoSize = true;
-            this.label_uploadTime.Location = new System.Drawing.Point(182, 434);
-            this.label_uploadTime.Name = "label_uploadTime";
-            this.label_uploadTime.Size = new System.Drawing.Size(68, 17);
-            this.label_uploadTime.TabIndex = 15;
-            this.label_uploadTime.Text = "上传日期：";
             // 
             // FormAccountDetails
             // 
