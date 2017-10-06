@@ -1315,6 +1315,16 @@
             内部版本号，或者是版本号表示为年月份+内部版本的表示方式
             </summary>
         </member>
+        <member name="M:HslCommunication.BasicFramework.SystemVersion.ToString(System.String)">
+            <summary>
+            根据格式化为支持返回的不同信息的版本号
+            C返回1.0.0.0
+            N返回1.0.0
+            S返回1.0
+            </summary>
+            <param name="format">格式化信息</param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.BasicFramework.SystemVersion.ToString">
             <summary>
             获取版本号的字符串形式

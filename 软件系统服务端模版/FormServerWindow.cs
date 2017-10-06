@@ -272,8 +272,11 @@ namespace 软件系统服务端模版
         private void 关于软件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormAbout fm = new FormAbout(
-                SoftResources.StringResouce.SoftName, UserServer.ServerSettings.SystemVersion,
-                2017, SoftResources.StringResouce.SoftCopyRight))
+                SoftResources.StringResouce.SoftName, 
+                UserServer.ServerSettings.SystemVersion,
+                2017, 
+                SoftResources.StringResouce.SoftCopyRight
+                ))
             {
                 fm.ShowDialog();
             }
