@@ -67,10 +67,10 @@
             this.userButton_login.CustomerInformation = "";
             this.userButton_login.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton_login.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton_login.Location = new System.Drawing.Point(3, 415);
+            this.userButton_login.Location = new System.Drawing.Point(3, 417);
             this.userButton_login.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton_login.Name = "userButton_login";
-            this.userButton_login.Size = new System.Drawing.Size(55, 27);
+            this.userButton_login.Size = new System.Drawing.Size(78, 25);
             this.userButton_login.TabIndex = 7;
             this.userButton_login.UIText = "新增";
             this.userButton_login.Click += new System.EventHandler(this.userButton_login_Click);
@@ -82,10 +82,10 @@
             this.userButton1.CustomerInformation = "";
             this.userButton1.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton1.Location = new System.Drawing.Point(64, 415);
+            this.userButton1.Location = new System.Drawing.Point(87, 417);
             this.userButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton1.Name = "userButton1";
-            this.userButton1.Size = new System.Drawing.Size(55, 27);
+            this.userButton1.Size = new System.Drawing.Size(78, 25);
             this.userButton1.TabIndex = 8;
             this.userButton1.UIText = "删除";
             this.userButton1.Click += new System.EventHandler(this.userButton1_Click);
@@ -97,15 +97,15 @@
             this.userButton2.CustomerInformation = "";
             this.userButton2.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton2.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton2.Location = new System.Drawing.Point(442, 415);
+            this.userButton2.Location = new System.Drawing.Point(419, 417);
             this.userButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton2.Name = "userButton2";
-            this.userButton2.Size = new System.Drawing.Size(55, 27);
+            this.userButton2.Size = new System.Drawing.Size(78, 25);
             this.userButton2.TabIndex = 9;
             this.userButton2.UIText = "保存";
             this.userButton2.Click += new System.EventHandler(this.userButton2_Click);
             // 
-            // FactoryConfiguration
+            // ArrayConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -115,7 +115,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "FactoryConfiguration";
+            this.Name = "ArrayConfiguration";
             this.Size = new System.Drawing.Size(500, 446);
             this.Load += new System.EventHandler(this.FactoryConfiguration_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

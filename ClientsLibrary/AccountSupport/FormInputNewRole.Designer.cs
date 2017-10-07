@@ -122,6 +122,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormInputNewRole";
             this.Load += new System.EventHandler(this.FormInputNewRole_Load);
+            this.Shown += new System.EventHandler(this.FormInputNewRole_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

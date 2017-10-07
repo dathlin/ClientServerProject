@@ -697,8 +697,8 @@ namespace 软件系统服务端模版
             {
                 JObject json = JObject.Parse(data);
                 string name = SoftBasic.GetValueFromJsonObject(json, "Name", "");
-                string role = SoftBasic.GetValueFromJsonObject(json, "Role", "");
-                net_simplify_server.SendMessage(state, handle, UserServer.ServerRoles.IsAllowAccountOperate(role, name).ToString());
+                string roleCode = SoftBasic.GetValueFromJsonObject(json, "Role", "");
+                net_simplify_server.SendMessage(state, handle, UserServer.ServerRoles.IsAllowAccountOperate(roleCode, name).ToString());
             }
             else
             {

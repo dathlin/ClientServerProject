@@ -9,8 +9,49 @@ namespace CommonLibrary
     public class ChineseLocalization : ILocalization
     {
         public string FormateDateTime { get; set; } = "yyyy-MM-dd HH:mm:ss";
-        public string ButtonEnsure { get; set; } = "确认";
+        /// <summary>
+        /// 唯一标识
+        /// </summary>
+        public string GeneralUniqueID { get; set; } = "唯一标识";
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public string GeneralName { get; set; } = "名称";
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string GeneralDescription { get; set; } = "描述";
 
+
+
+        #region 按钮相关
+
+        /// <summary>
+        /// 确认
+        /// </summary>
+        public string ButtonEnsure { get; set; } = "确认";
+        /// <summary>
+        /// 新增
+        /// </summary>
+        public string ButtonAdd { get; set; } = "新增";
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        public string ButtonEdit { get; set; } = "编辑";
+        /// <summary>
+        /// 删除
+        /// </summary>
+        public string ButtonDelete { get; set; } = "删除";
+        /// <summary>
+        /// 保存
+        /// </summary>
+        public string ButtonSave { get; set; } = "保存";
+        /// <summary>
+        /// 取消
+        /// </summary>
+        public string ButtonCancel { get; set; } = "取消";
+
+        #endregion
 
         #region 账户相关
 
@@ -33,9 +74,11 @@ namespace CommonLibrary
         public string AccountPortrait { get; set; } = "头像";
         public string AccountDetails { get; set; } = "账户详细信息";
         public string AccountRegisterTitle { get; set; } = "注册一个新的账户";
-        
+        public string AccountRoleAdd { get; set; } = "角色新增";
+        public string AccountRoleEdit { get; set; } = "角色编辑";
+        public string AccountRoleNameList { get; set; } = "角色名称列表";
+        public string AccountRoleAccountList { get; set; } = "关联账户列表";
         #endregion
-
 
         #region 配置相关
 

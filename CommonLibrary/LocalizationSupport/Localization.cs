@@ -17,10 +17,6 @@ namespace CommonLibrary
     /// </summary>
     public static class UserLocalization
     {
-        /// <summary>
-        /// 默认的语言选项
-        /// </summary>
-        public static ILocalization Localization = new ChineseLocalization();
 
         /// <summary>
         /// 设置系统的语言选项
@@ -30,24 +26,99 @@ namespace CommonLibrary
         {
             if(language.ToLower() == "chinese")
             {
-                Localization = Chinese;
+                localization = Chinese;
             }
             else
             {
-                Localization = English;
+                localization = English;
             }
         }
 
-        private static ILocalization Chinese = new ChineseLocalization();
-        private static ILocalization English = new EnglishLocalization();
+        /// <summary>
+        /// 获取当前指定的语言选项信息
+        /// </summary>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public static ILocalization GetSpecifiedLocalization(string language)
+        {
+            if (language.ToLower() == "chinese")
+            {
+                return Chinese;
+            }
+            else
+            {
+                return English;
+            }
+        }
+
+
+        /// <summary>
+        /// 默认的语言选项
+        /// </summary>
+        public static ILocalization Localization
+        {
+            get { return localization; }
+        }
+
+
+
+        private static ILocalization Chinese = new ChineseLocalization();   // 中文语言
+        private static ILocalization English = new EnglishLocalization();   // 英文语言
+        private static ILocalization localization = Chinese;                // 当前语言
     }
 
+    /// <summary>
+    /// 所有支持的语言必须从本接口继承
+    /// </summary>
     public interface ILocalization
     {
         string FormateDateTime { get; set; }
 
-        string ButtonEnsure { get; set; }
 
+        /// <summary>
+        /// 唯一标识
+        /// </summary>
+        string GeneralUniqueID { get; set;}
+        /// <summary>
+        /// 名称
+        /// </summary>
+        string GeneralName { get; set; }
+        /// <summary>
+        /// 描述
+        /// </summary>
+        string GeneralDescription { get; set; }
+
+        
+
+
+        #region 按钮相关
+
+        /// <summary>
+        /// 确认
+        /// </summary>
+        string ButtonEnsure { get; set; }
+        /// <summary>
+        /// 新增
+        /// </summary>
+        string ButtonAdd { get; set; }
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        string ButtonEdit { get; set; }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        string ButtonDelete { get; set; }
+        /// <summary>
+        /// 保存
+        /// </summary>
+        string ButtonSave { get; set; }
+        /// <summary>
+        /// 取消
+        /// </summary>
+        string ButtonCancel { get; set; }
+
+        #endregion
 
         #region 账户相关
 
@@ -69,6 +140,10 @@ namespace CommonLibrary
         string AccountPortrait { get; set; }
         string AccountDetails { get; set; }
         string AccountRegisterTitle { get; set; }
+        string AccountRoleAdd { get; set; }
+        string AccountRoleEdit { get; set; }
+        string AccountRoleNameList { get; set; } // 角色名称列表
+        string AccountRoleAccountList { get; set; } //关联账户列表
 
         #endregion
 

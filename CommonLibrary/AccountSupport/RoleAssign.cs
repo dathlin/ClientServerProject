@@ -62,18 +62,21 @@ namespace CommonLibrary
         
         #region Public Method
 
-        public bool IsAllowAccountOperate(string role,string name)
+        public bool IsAllowAccountOperate(string roleCode,string name)
         {
             bool result = false;
             hybirdLock.Enter();
 
             for (int i = 0; i < m_roles.Count; i++)
             {
-                if (m_roles[i].RoleName == role)
+                if (m_roles[i].RoleCode == roleCode)
                 {
-                    if(m_roles[i].Accounts.Contains(name))
+                    if (m_roles[i].Accounts != null)
                     {
-                        result = true;
+                        if (m_roles[i].Accounts.Contains(name))
+                        {
+                            result = true;
+                        }
                     }
                 }
             }

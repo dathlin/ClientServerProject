@@ -67,7 +67,7 @@
             this.listBox1.ItemHeight = 17;
             this.listBox1.Location = new System.Drawing.Point(3, 51);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(435, 327);
+            this.listBox1.Size = new System.Drawing.Size(552, 344);
             this.listBox1.TabIndex = 2;
             // 
             // userButton_delete
@@ -77,10 +77,10 @@
             this.userButton_delete.CustomerInformation = "";
             this.userButton_delete.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton_delete.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton_delete.Location = new System.Drawing.Point(444, 51);
+            this.userButton_delete.Location = new System.Drawing.Point(477, 23);
             this.userButton_delete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton_delete.Name = "userButton_delete";
-            this.userButton_delete.Size = new System.Drawing.Size(111, 27);
+            this.userButton_delete.Size = new System.Drawing.Size(78, 25);
             this.userButton_delete.TabIndex = 9;
             this.userButton_delete.UIText = "删除选中项";
             this.userButton_delete.Click += new System.EventHandler(this.userButton_delete_Click);
@@ -89,9 +89,9 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(3, 391);
+            this.textBox1.Location = new System.Drawing.Point(3, 406);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(435, 23);
+            this.textBox1.Size = new System.Drawing.Size(552, 23);
             this.textBox1.TabIndex = 10;
             // 
             // userButton1
@@ -101,10 +101,10 @@
             this.userButton1.CustomerInformation = "";
             this.userButton1.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton1.Location = new System.Drawing.Point(444, 389);
+            this.userButton1.Location = new System.Drawing.Point(98, 436);
             this.userButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton1.Name = "userButton1";
-            this.userButton1.Size = new System.Drawing.Size(111, 27);
+            this.userButton1.Size = new System.Drawing.Size(98, 25);
             this.userButton1.TabIndex = 11;
             this.userButton1.UIText = "添加客户端标识";
             this.userButton1.Click += new System.EventHandler(this.userButton1_Click);
@@ -116,10 +116,10 @@
             this.userButton2.CustomerInformation = "";
             this.userButton2.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton2.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton2.Location = new System.Drawing.Point(444, 354);
+            this.userButton2.Location = new System.Drawing.Point(3, 436);
             this.userButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton2.Name = "userButton2";
-            this.userButton2.Size = new System.Drawing.Size(111, 27);
+            this.userButton2.Size = new System.Drawing.Size(89, 25);
             this.userButton2.TabIndex = 12;
             this.userButton2.UIText = "获取本机标识";
             this.userButton2.Click += new System.EventHandler(this.userButton2_Click);
@@ -131,10 +131,10 @@
             this.userButton3.CustomerInformation = "";
             this.userButton3.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton3.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton3.Location = new System.Drawing.Point(444, 434);
+            this.userButton3.Location = new System.Drawing.Point(477, 436);
             this.userButton3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton3.Name = "userButton3";
-            this.userButton3.Size = new System.Drawing.Size(111, 27);
+            this.userButton3.Size = new System.Drawing.Size(78, 25);
             this.userButton3.TabIndex = 13;
             this.userButton3.UIText = "保存";
             this.userButton3.Click += new System.EventHandler(this.userButton3_Click);

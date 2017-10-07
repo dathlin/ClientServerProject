@@ -110,14 +110,14 @@ namespace ClientsLibrary
         /// <summary>
         /// 检查当前账户是否有role角色的权限
         /// </summary>
-        /// <param name="role">角色名称</param>
+        /// <param name="roleCode">角色名称</param>
         /// <returns></returns>
-        public static bool CheckUserAccountRole(string role)
+        public static bool CheckUserAccountRole(string roleCode)
         {
             JObject json = new JObject
             {
                 { "Name", UserAccount.UserName },
-                { "Role", role }
+                { "Role", roleCode }
             };
             HslCommunication.OperateResultString result = Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.检查角色权限,
                 json.ToString());

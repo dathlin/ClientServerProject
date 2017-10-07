@@ -35,13 +35,13 @@
             this.userButton2 = new HslCommunication.Controls.UserButton();
             this.userButton1 = new HslCommunication.Controls.UserButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.userButton5 = new HslCommunication.Controls.UserButton();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -151,16 +151,57 @@
             this.splitContainer1.SplitterDistance = 264;
             this.splitContainer1.TabIndex = 8;
             // 
+            // textBox2
+            // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.Location = new System.Drawing.Point(71, 396);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(189, 23);
+            this.textBox2.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(2, 399);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 17);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "描述：";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(71, 371);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(189, 23);
+            this.textBox1.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(2, 374);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 17);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "代码：";
+            // 
             // listBox1
             // 
             this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 17;
+            this.listBox1.ItemHeight = 21;
             this.listBox1.Location = new System.Drawing.Point(3, 23);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(257, 327);
+            this.listBox1.Size = new System.Drawing.Size(257, 340);
             this.listBox1.TabIndex = 6;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -169,8 +210,9 @@
             this.listBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 17;
+            this.listBox2.ItemHeight = 21;
             this.listBox2.Location = new System.Drawing.Point(3, 23);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(258, 361);
@@ -190,46 +232,6 @@
             this.userButton5.TabIndex = 7;
             this.userButton5.UIText = "编辑";
             this.userButton5.Click += new System.EventHandler(this.userButton5_Click);
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(2, 367);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 17);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "代码：";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(62, 364);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(198, 23);
-            this.textBox1.TabIndex = 8;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(62, 396);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(198, 23);
-            this.textBox2.TabIndex = 10;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(2, 399);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 17);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "描述：";
             // 
             // RolesConfiguration
             // 

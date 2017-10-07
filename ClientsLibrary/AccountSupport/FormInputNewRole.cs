@@ -28,7 +28,33 @@ namespace ClientsLibrary
 
         #endregion
 
-        #region Form Load
+        #region Localization Support
+
+        /// <summary>
+        /// 本地化显示的操作，还未完成
+        /// </summary>
+        private void UILocalization()
+        {
+            if(m_RoleItem == null)
+            {
+                Text = UserLocalization.Localization.AccountRoleAdd;
+            }
+            else
+            {
+                Text = UserLocalization.Localization.AccountRoleEdit;
+            }
+
+            label1.Text = UserLocalization.Localization.GeneralUniqueID + "：";
+            label2.Text = UserLocalization.Localization.GeneralName + "：";
+            label3.Text = UserLocalization.Localization.GeneralDescription + "：";
+
+            userButton_login.UIText = UserLocalization.Localization.ButtonEnsure;
+        }
+
+
+        #endregion
+
+        #region Form Load Show
 
 
         private void FormInputNewRole_Load(object sender, EventArgs e)
@@ -37,6 +63,11 @@ namespace ClientsLibrary
             {
                 textBox1.Text = Guid.NewGuid().ToString("N");
             }
+        }
+
+        private void FormInputNewRole_Shown(object sender, EventArgs e)
+        {
+            UILocalization();
         }
 
 
@@ -49,7 +80,7 @@ namespace ClientsLibrary
         {
             // 此处是编辑
             m_RoleItem = roleItem;
-
+            
             if (m_RoleItem != null)
             {
                 textBox1.Text = m_RoleItem.RoleCode;
@@ -107,5 +138,7 @@ namespace ClientsLibrary
         }
 
         #endregion
+
+
     }
 }
