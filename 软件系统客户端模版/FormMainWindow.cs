@@ -495,7 +495,10 @@ namespace 软件系统客户端模版
         /// </summary>
         private UIControls.OnlineChatRender UIControls_Chat { get; set; }
 
-
+        /// <summary>
+        /// 主界面
+        /// </summary>
+        private UIControls.RenderMain UIControls_Main { get; set; }
 
 
 
@@ -541,6 +544,15 @@ namespace 软件系统客户端模版
                 Dock = DockStyle.Fill,
             };
             all_main_render.Add(UIControls_Chat);
+
+            UIControls_Main = new UIControls.RenderMain()
+            {
+                Visible = true,
+                Parent = panel_main,//决定了放在哪个界面显示，此处示例
+                Dock = DockStyle.Fill,
+            };
+            all_main_render.Add(UIControls_Main);
+
         }
 
         private void SetShowRenderControl(UserControl control)

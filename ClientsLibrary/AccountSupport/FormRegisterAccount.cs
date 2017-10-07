@@ -49,7 +49,31 @@ namespace ClientsLibrary
             comboBox_factory.DataSource = Factories.ToArray();
 
             textBox4.Text = (new UserAccount()).ForbidMessage;
+
+            UILocalization();
         }
+
+        #endregion
+
+        #region Localization Support
+
+        /// <summary>
+        /// 本地化显示的操作，还未完成
+        /// </summary>
+        private void UILocalization()
+        {
+            Text = UserLocalization.Localization.AccountRegisterTitle;
+
+            label1.Text = UserLocalization.Localization.AccountName + "：";
+            label7.Text = UserLocalization.Localization.AccountAlias + "：";
+            label2.Text = UserLocalization.Localization.AccountPassword + "：";
+            label3.Text = UserLocalization.Localization.AccountFactory + "：";
+            label4.Text = UserLocalization.Localization.AccountGrade + "：";
+            label5.Text = UserLocalization.Localization.AccountLoginEnable + "：";
+            label6.Text = UserLocalization.Localization.AccountForbidMessage + "：";
+
+        }
+
 
         #endregion
 
@@ -61,6 +85,7 @@ namespace ClientsLibrary
             // 点击了注册，先获取数据
             UserAccount account = new UserAccount();
             account.UserName = textBox1.Text;
+            account.NameAlias = textBox3.Text;
             account.Password = textBox2.Text;
             account.Factory = comboBox_factory.SelectedItem.ToString();
             switch (comboBox1.SelectedIndex)

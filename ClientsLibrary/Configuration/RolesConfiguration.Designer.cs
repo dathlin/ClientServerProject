@@ -37,6 +37,11 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
+            this.userButton5 = new HslCommunication.Controls.UserButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -82,7 +87,7 @@
             this.userButton3.CustomerInformation = "";
             this.userButton3.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton3.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton3.Location = new System.Drawing.Point(5, 392);
+            this.userButton3.Location = new System.Drawing.Point(3, 391);
             this.userButton3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton3.Name = "userButton3";
             this.userButton3.Size = new System.Drawing.Size(78, 25);
@@ -97,7 +102,7 @@
             this.userButton2.CustomerInformation = "";
             this.userButton2.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton2.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton2.Location = new System.Drawing.Point(87, 392);
+            this.userButton2.Location = new System.Drawing.Point(168, 427);
             this.userButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton2.Name = "userButton2";
             this.userButton2.Size = new System.Drawing.Size(78, 25);
@@ -112,7 +117,7 @@
             this.userButton1.CustomerInformation = "";
             this.userButton1.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton1.Location = new System.Drawing.Point(3, 392);
+            this.userButton1.Location = new System.Drawing.Point(0, 427);
             this.userButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton1.Name = "userButton1";
             this.userButton1.Size = new System.Drawing.Size(78, 25);
@@ -130,10 +135,12 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.textBox2);
+            this.splitContainer1.Panel1.Controls.Add(this.label4);
+            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.listBox1);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.userButton1);
-            this.splitContainer1.Panel1.Controls.Add(this.userButton2);
             // 
             // splitContainer1.Panel2
             // 
@@ -153,7 +160,7 @@
             this.listBox1.ItemHeight = 17;
             this.listBox1.Location = new System.Drawing.Point(3, 23);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(257, 361);
+            this.listBox1.Size = new System.Drawing.Size(257, 327);
             this.listBox1.TabIndex = 6;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -169,12 +176,70 @@
             this.listBox2.Size = new System.Drawing.Size(258, 361);
             this.listBox2.TabIndex = 7;
             // 
+            // userButton5
+            // 
+            this.userButton5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.userButton5.BackColor = System.Drawing.Color.Transparent;
+            this.userButton5.CustomerInformation = "";
+            this.userButton5.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton5.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton5.Location = new System.Drawing.Point(84, 427);
+            this.userButton5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton5.Name = "userButton5";
+            this.userButton5.Size = new System.Drawing.Size(78, 25);
+            this.userButton5.TabIndex = 7;
+            this.userButton5.UIText = "编辑";
+            this.userButton5.Click += new System.EventHandler(this.userButton5_Click);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(2, 367);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 17);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "代码：";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(62, 364);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(198, 23);
+            this.textBox1.TabIndex = 8;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.Location = new System.Drawing.Point(62, 396);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(198, 23);
+            this.textBox2.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(2, 399);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 17);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "描述：";
+            // 
             // RolesConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.userButton5);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.userButton4);
+            this.Controls.Add(this.userButton1);
+            this.Controls.Add(this.userButton2);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "RolesConfiguration";
@@ -199,5 +264,10 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox2;
+        private HslCommunication.Controls.UserButton userButton5;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label3;
     }
 }

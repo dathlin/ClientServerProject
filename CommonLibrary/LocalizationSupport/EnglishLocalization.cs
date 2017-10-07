@@ -12,6 +12,8 @@ namespace CommonLibrary
 
 
 
+        #region 账户相关
+        
 
         public string AccountSelect { get; set; } = "Select";
 
@@ -30,6 +32,10 @@ namespace CommonLibrary
         public string AccountLastLoginWay { get; set; } = "Login Last Way";
         public string AccountPortrait { get; set; } = "Portrait";
         public string AccountDetails { get; set; } = "Account Details";
+        public string AccountRegisterTitle { get; set; } = "Register a new account";
+
+
+        #endregion
 
 
         #region 配置相关
@@ -40,6 +46,9 @@ namespace CommonLibrary
         public string SettingsAccountFactory { get { return AccountFactory + " List"; } set { } }
         public string SettingsTrustClient { get; set; } = "Trust Client";
         public string SettingsRoleAssign { get; set; } = "Role Assign";
+        public string SettingsRoleAddTitle { get; set; } = "Role Add New";
+        public string SettingsRoleEditTitle { get; set; } = "Role Edit";
+
 
         #endregion
 

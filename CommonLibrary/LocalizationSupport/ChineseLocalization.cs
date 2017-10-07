@@ -12,6 +12,7 @@ namespace CommonLibrary
         public string ButtonEnsure { get; set; } = "确认";
 
 
+        #region 账户相关
 
 
         public string AccountSelect { get; set; } = "选择";
@@ -19,7 +20,7 @@ namespace CommonLibrary
         public string AccountName { get; set; } = "用户名";
         public string AccountAlias { get; set; } = "别名";
         public string AccountPassword { get; set; } = "密码";
-        public string AccountFactory { get; set; } = "部门";  // 可以在此处修改为部门 
+        public string AccountFactory { get; set; } = "分厂";  // 可以在此处修改为部门 
         public string AccountGrade { get; set; } = "权限";
         public string AccountRegisterTime { get; set; } = "注册时间";
         public string AccountLoginEnable { get; set; } = "是否允许登录";
@@ -31,6 +32,9 @@ namespace CommonLibrary
         public string AccountLastLoginWay { get; set; } = "上次登录方式";
         public string AccountPortrait { get; set; } = "头像";
         public string AccountDetails { get; set; } = "账户详细信息";
+        public string AccountRegisterTitle { get; set; } = "注册一个新的账户";
+        
+        #endregion
 
 
         #region 配置相关
@@ -41,6 +45,8 @@ namespace CommonLibrary
         public string SettingsAccountFactory { get { return "配置" + AccountFactory + "信息"; } set { } }
         public string SettingsTrustClient { get; set; } = "信任客户端列表";
         public string SettingsRoleAssign { get; set; } = "配置角色信息";
+        public string SettingsRoleAddTitle { get; set; } = "新增角色信息";
+        public string SettingsRoleEditTitle { get; set; } = "编辑当前角色信息";
 
         #endregion
     }

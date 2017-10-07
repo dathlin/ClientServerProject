@@ -62,6 +62,12 @@
     <Compile Include="AccountSupport\FormAccountSelect.Designer.cs">
       <DependentUpon>FormAccountSelect.cs</DependentUpon>
     </Compile>
+    <Compile Include="AccountSupport\FormInputNewRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountSupport\FormInputNewRole.Designer.cs">
+      <DependentUpon>FormInputNewRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="BasicSupport\FormDownloading.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AccountSupport\FormAccountSelect.resx">
       <DependentUpon>FormAccountSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccountSupport\FormInputNewRole.resx">
+      <DependentUpon>FormInputNewRole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BasicSupport\FormDownloading.resx">
       <DependentUpon>FormDownloading.cs</DependentUpon>

@@ -45,6 +45,8 @@ namespace ClientsLibrary.Configuration
             if(listBox1.SelectedItem is RoleItem role)
             {
                 listBox2.DataSource = role.Accounts;
+                textBox1.Text = role.RoleCode;
+                textBox2.Text = role.Description;
             }
         }
 
@@ -61,13 +63,27 @@ namespace ClientsLibrary.Configuration
             }
         }
 
-        private bool CheckRoleWhetherExisting(string role)
+        private bool CheckRoleWhetherExisting(string roleName)
         {
             foreach(var m in listBox1.Items)
             {
-                if(m.ToString() == role)
+                if(m.ToString() == roleName)
                 {
                     return true;
+                }
+            }
+            return false;
+        }
+        private bool CheckRoleWhetherExisting(RoleItem role, string roleName)
+        {
+            foreach (var m in listBox1.Items)
+            {
+                if (!ReferenceEquals(m, role))
+                {
+                    if (m.ToString() == roleName)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -75,19 +91,46 @@ namespace ClientsLibrary.Configuration
 
         private void userButton1_Click(object sender, EventArgs e)
         {
-            // add a new role
-            using (FormGetInputString form = new FormGetInputString("请输入新的角色名称"))
+            using (FormInputNewRole form = new FormInputNewRole())
             {
+                P1:
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    string role = form.InputString;
-                    if(!CheckRoleWhetherExisting(role))
+                    RoleItem role = form.RoleItem;
+                    if (CheckRoleWhetherExisting(role.RoleName))
                     {
-                        // add
-                        listBox1.Items.Add(new RoleItem()
+                        MessageBox.Show("该角色名称已经存在，不允许添加。");
+                        goto P1;
+                    }
+
+                    // add
+                    listBox1.Items.Add(role);
+                }
+            }
+        }
+
+        private void userButton5_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem is RoleItem role)
+            {
+                // edit
+                using (FormInputNewRole form = new FormInputNewRole())
+                {
+                    P1:
+                    if (form.ShowDialog(role) == DialogResult.OK)
+                    {
+                        if (CheckRoleWhetherExisting(role, form.RoleName))
                         {
-                            RoleName = role
-                        });
+                            MessageBox.Show("该角色名称已经存在，不允许添加。");
+                            goto P1;
+                        }
+
+                        // edit
+                        role.RoleName = form.RoleName;
+                        role.Description = form.RoleDescription;
+
+                        textBox1.Text = role.RoleCode;
+                        textBox2.Text = role.Description;
                     }
                 }
             }
@@ -132,5 +175,6 @@ namespace ClientsLibrary.Configuration
                 MessageBox.Show("上传数据失败："+result.Message);
             }
         }
+
     }
 }

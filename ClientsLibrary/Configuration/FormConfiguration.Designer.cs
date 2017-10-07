@@ -40,7 +40,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Location = new System.Drawing.Point(232, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(573, 525);
+            this.panel1.Size = new System.Drawing.Size(627, 569);
             this.panel1.TabIndex = 1;
             // 
             // treeView1
@@ -55,14 +55,14 @@
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
             this.treeView1.ShowLines = false;
-            this.treeView1.Size = new System.Drawing.Size(199, 525);
+            this.treeView1.Size = new System.Drawing.Size(199, 569);
             this.treeView1.TabIndex = 2;
             // 
             // FormConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 549);
+            this.ClientSize = new System.Drawing.Size(866, 593);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

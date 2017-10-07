@@ -18,7 +18,9 @@ namespace CommonLibrary
      **********************************************************************************/
     
 
-
+    /// <summary>
+    /// 角色分配的管理器
+    /// </summary>
     public class RoleAssign : HslCommunication.BasicFramework.SoftFileSaveBase
     {
         #region Constructor
@@ -92,14 +94,49 @@ namespace CommonLibrary
     }
 
 
+    /// <summary>
+    /// 单个角色对象
+    /// </summary>
     public class RoleItem
     {
+        #region Public Property
+
+
+        /// <summary>
+        /// 角色的唯一代码
+        /// </summary>
+        public string RoleCode { get; set; } = Guid.NewGuid().ToString("N");
+
+        /// <summary>
+        /// 角色名称
+        /// </summary>
         public string RoleName { get; set; }
+
+        /// <summary>
+        /// 角色描述
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// 关联的账户列表
+        /// </summary>
         public List<string> Accounts { get; set; } = new List<string>();
 
+
+        #endregion
+        
+        #region Object Override
+
+        /// <summary>
+        /// 返回对象的字符串标识形式
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return RoleName;
         }
+        
+        #endregion
+
     }
 }

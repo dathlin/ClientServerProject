@@ -43,6 +43,8 @@ namespace ClientsLibrary
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox_factory = new System.Windows.Forms.ComboBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -56,22 +58,22 @@ namespace ClientsLibrary
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(98, 15);
+            this.textBox1.Location = new System.Drawing.Point(129, 15);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(232, 23);
+            this.textBox1.Size = new System.Drawing.Size(201, 23);
             this.textBox1.TabIndex = 1;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(98, 51);
+            this.textBox2.Location = new System.Drawing.Point(129, 83);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(232, 23);
+            this.textBox2.Size = new System.Drawing.Size(201, 23);
             this.textBox2.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 54);
+            this.label2.Location = new System.Drawing.Point(21, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 17);
             this.label2.TabIndex = 2;
@@ -80,7 +82,7 @@ namespace ClientsLibrary
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 90);
+            this.label3.Location = new System.Drawing.Point(21, 122);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 17);
             this.label3.TabIndex = 4;
@@ -89,7 +91,7 @@ namespace ClientsLibrary
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 125);
+            this.label4.Location = new System.Drawing.Point(21, 157);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 17);
             this.label4.TabIndex = 6;
@@ -98,7 +100,7 @@ namespace ClientsLibrary
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(21, 161);
+            this.label5.Location = new System.Drawing.Point(21, 193);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 17);
             this.label5.TabIndex = 8;
@@ -106,15 +108,15 @@ namespace ClientsLibrary
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(98, 192);
+            this.textBox4.Location = new System.Drawing.Point(129, 224);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(232, 23);
+            this.textBox4.Size = new System.Drawing.Size(201, 23);
             this.textBox4.TabIndex = 11;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 195);
+            this.label6.Location = new System.Drawing.Point(21, 227);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 17);
             this.label6.TabIndex = 10;
@@ -126,7 +128,7 @@ namespace ClientsLibrary
             this.userButton_login.CustomerInformation = "";
             this.userButton_login.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton_login.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton_login.Location = new System.Drawing.Point(149, 279);
+            this.userButton_login.Location = new System.Drawing.Point(129, 284);
             this.userButton_login.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.userButton_login.Name = "userButton_login";
             this.userButton_login.Size = new System.Drawing.Size(97, 31);
@@ -138,34 +140,52 @@ namespace ClientsLibrary
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(98, 122);
+            this.comboBox1.Location = new System.Drawing.Point(129, 154);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(232, 25);
+            this.comboBox1.Size = new System.Drawing.Size(201, 25);
             this.comboBox1.TabIndex = 13;
             // 
             // comboBox2
             // 
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(98, 157);
+            this.comboBox2.Location = new System.Drawing.Point(129, 189);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(232, 25);
+            this.comboBox2.Size = new System.Drawing.Size(201, 25);
             this.comboBox2.TabIndex = 14;
             // 
             // comboBox_factory
             // 
             this.comboBox_factory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_factory.FormattingEnabled = true;
-            this.comboBox_factory.Location = new System.Drawing.Point(98, 86);
+            this.comboBox_factory.Location = new System.Drawing.Point(129, 118);
             this.comboBox_factory.Name = "comboBox_factory";
-            this.comboBox_factory.Size = new System.Drawing.Size(232, 25);
+            this.comboBox_factory.Size = new System.Drawing.Size(201, 25);
             this.comboBox_factory.TabIndex = 15;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(129, 48);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(201, 23);
+            this.textBox3.TabIndex = 17;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(21, 51);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 17);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "别名：";
             // 
             // FormRegisterAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 342);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.comboBox_factory);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
@@ -207,5 +227,7 @@ namespace ClientsLibrary
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox_factory;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label7;
     }
 }

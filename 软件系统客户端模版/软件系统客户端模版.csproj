@@ -77,6 +77,12 @@
     <Compile Include="UIControls\OnlineChatRender.Designer.cs">
       <DependentUpon>OnlineChatRender.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIControls\RenderMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\RenderMain.Designer.cs">
+      <DependentUpon>RenderMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIControls\ShareFilesRender.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     </Compile>
     <EmbeddedResource Include="UIControls\OnlineChatRender.resx">
       <DependentUpon>OnlineChatRender.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\RenderMain.resx">
+      <DependentUpon>RenderMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ShareFilesRender.resx">
       <DependentUpon>ShareFilesRender.cs</DependentUpon>

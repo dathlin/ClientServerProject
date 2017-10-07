@@ -68,7 +68,7 @@ namespace CommonLibrary
         string AccountLastLoginWay { get; set; }
         string AccountPortrait { get; set; }
         string AccountDetails { get; set; }
-
+        string AccountRegisterTitle { get; set; }
 
         #endregion
 
@@ -80,6 +80,8 @@ namespace CommonLibrary
         string SettingsAccountFactory { get; set; }
         string SettingsTrustClient { get; set; }
         string SettingsRoleAssign { get; set; }
+        string SettingsRoleAddTitle { get; set; }
+        string SettingsRoleEditTitle { get; set; }
 
         #endregion
 
