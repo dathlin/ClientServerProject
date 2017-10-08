@@ -247,6 +247,11 @@ using HslCommunication;
 ###### 统一的系统配置界面，门牌为【管理员】-【系统配置】
 
 ![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client17.png)
+
+##### 中英文双语支持，目前仅先适配我的信息和系统配置界面
+
+![](https://github.com/dathlin/ClientServerProject/raw/master/软件系统客户端模版/screenshots/client18.png)
+
 <br />
 
 

@@ -101,6 +101,17 @@ namespace CommonLibrary
 
         #endregion
 
+        #region 文件相关
+
+        string FileName { get; set; }
+        string FileSize { get; set; }
+        string FileUploadTime { get; set; }
+        string FileDownloading { get; set; }
+        string FileMy { get; set; }
+        string FileMyListTitle { get; set; }
+
+        #endregion
+
         #region 按钮相关
 
         /// <summary>
@@ -127,6 +138,14 @@ namespace CommonLibrary
         /// 取消
         /// </summary>
         string ButtonCancel { get; set; }
+        /// <summary>
+        /// 上传
+        /// </summary>
+        string ButtonUpload { get; set; }
+        /// <summary>
+        /// 下载
+        /// </summary>
+        string ButtonDownload { get; set; }
         /// <summary>
         /// 删除选中项
         /// </summary>

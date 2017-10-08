@@ -31,6 +31,19 @@ namespace CommonLibrary
 
         #endregion
 
+
+
+        #region 文件相关
+
+        public string FileName { get; set; } = "Name";
+        public string FileSize { get; set; } = "Size";
+        public string FileUploadTime { get; set; } = "Time";
+        public string FileDownloading { get; set; } = "My Cloud Files（downloading）";
+        public string FileMy { get; set; } = "My Cloud Files";
+        public string FileMyListTitle { get; set; } = "Personal files,drag to upload";
+
+        #endregion
+
         #region 按钮相关
 
         /// <summary>
@@ -57,6 +70,14 @@ namespace CommonLibrary
         /// 取消
         /// </summary>
         public string ButtonCancel { get; set; } = "Cancel";
+        /// <summary>
+        /// 上传
+        /// </summary>
+        public string ButtonUpload { get; set; } = "Upload";
+        /// <summary>
+        /// 下载
+        /// </summary>
+        public string ButtonDownload { get; set; } = "Download";
         /// <summary>
         /// 删除选中项
         /// </summary>

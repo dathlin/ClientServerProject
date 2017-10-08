@@ -92,6 +92,14 @@ namespace ClientsLibrary
             label9.Text = UserLocalization.Localization.AccountLastLoginIpAddress + "：";
             label10.Text = UserLocalization.Localization.AccountLastLoginWay + "：";
             label11.Text = UserLocalization.Localization.AccountLoginFailedCount + "：";
+            userButton_upload.UIText = UserLocalization.Localization.ButtonUpload;
+            userButton_download.UIText = UserLocalization.Localization.ButtonDownload;
+            userButton_delete.UIText = UserLocalization.Localization.ButtonDelete;
+
+            groupBox2.Text = UserLocalization.Localization.FileMyListTitle;
+            label_fileName.Text = UserLocalization.Localization.FileName + "：";
+            label_fileSize.Text = UserLocalization.Localization.FileSize + "：";
+            label_uploadTime.Text = UserLocalization.Localization.FileUploadTime + "：";
         }
 
 
@@ -148,7 +156,7 @@ namespace ClientsLibrary
 
         public void DownloadUserFileNames()
         {
-            treeView1.Nodes[0].Text = "我的云端文件（下载中）";
+            treeView1.Nodes[0].Text = UserLocalization.Localization.FileDownloading;
             treeView1.Nodes[0].Nodes.Clear();
             treeView1.Refresh();
 
@@ -168,16 +176,16 @@ namespace ClientsLibrary
                         treeView1.Nodes[0].Nodes.Add(node);
                     }
 
-                    treeView1.Nodes[0].Text = "我的云端文件（" + files.Length + "）";
+                    treeView1.Nodes[0].Text = UserLocalization.Localization.FileMy + "（" + files.Length + "）";
                 }
                 else
                 {
-                    treeView1.Nodes[0].Text = "我的云端文件（NULL）";
+                    treeView1.Nodes[0].Text = UserLocalization.Localization.FileMy + "（NULL）";
                 }
             }
             else
             {
-                treeView1.Nodes[0].Text = "我的云端文件（下载失败）";
+                treeView1.Nodes[0].Text = UserLocalization.Localization + "（下载失败）";
             }
 
             treeView1.ExpandAll();
