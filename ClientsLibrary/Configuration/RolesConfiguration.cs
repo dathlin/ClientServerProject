@@ -37,11 +37,7 @@ namespace ClientsLibrary.Configuration
             if (result.IsSuccess)
             {
                 List<RoleItem> roles = JArray.Parse(result.Content).ToObject<List<RoleItem>>();
-                
-                foreach(var m in roles)
-                {
-                    listBox1.Items.Add(m);
-                }
+                roles.ForEach(m => listBox1.Items.Add(m));
             }
             else
             {
