@@ -87,9 +87,19 @@ namespace CommonLibrary
         /// 描述
         /// </summary>
         string GeneralDescription { get; set; }
+        /// <summary>
+        /// 允许登录列表
+        /// </summary>
+        string GeneralAllowLoginList { get; set; }
 
-        
 
+        #region 复选框
+
+        string CheckBoxAllowUserMulti { get; set; }
+        string CheckBoxAllowFrameLogin { get; set; }
+        string CheckBoxTrustEnable { get; set; }
+
+        #endregion
 
         #region 按钮相关
 
@@ -117,6 +127,18 @@ namespace CommonLibrary
         /// 取消
         /// </summary>
         string ButtonCancel { get; set; }
+        /// <summary>
+        /// 删除选中项
+        /// </summary>
+        string ButtonDeleteSelected { get; set; }
+        /// <summary>
+        /// 获取本机标识
+        /// </summary>
+        string ButtonGetComputerID { get; set; }
+        /// <summary>
+        /// 新增客户端标识
+        /// </summary>
+        string ButtonAddComputerID { get; set; }
 
         #endregion
 
@@ -143,7 +165,7 @@ namespace CommonLibrary
         string AccountRoleAdd { get; set; }
         string AccountRoleEdit { get; set; }
         string AccountRoleNameList { get; set; } // 角色名称列表
-        string AccountRoleAccountList { get; set; } //关联账户列表
+        string AccountRoleAccountList { get; set; } // 关联账户列表
 
         #endregion
 

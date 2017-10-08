@@ -30,9 +30,9 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Factory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userButton_login = new HslCommunication.Controls.UserButton();
-            this.userButton1 = new HslCommunication.Controls.UserButton();
-            this.userButton2 = new HslCommunication.Controls.UserButton();
+            this.userButton_add = new HslCommunication.Controls.UserButton();
+            this.userButton_delete = new HslCommunication.Controls.UserButton();
+            this.userButton_save = new HslCommunication.Controls.UserButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,58 +60,58 @@
             this.Factory.Name = "Factory";
             this.Factory.Width = 400;
             // 
-            // userButton_login
+            // userButton_add
             // 
-            this.userButton_login.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.userButton_login.BackColor = System.Drawing.Color.Transparent;
-            this.userButton_login.CustomerInformation = "";
-            this.userButton_login.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.userButton_login.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton_login.Location = new System.Drawing.Point(3, 417);
-            this.userButton_login.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.userButton_login.Name = "userButton_login";
-            this.userButton_login.Size = new System.Drawing.Size(78, 25);
-            this.userButton_login.TabIndex = 7;
-            this.userButton_login.UIText = "新增";
-            this.userButton_login.Click += new System.EventHandler(this.userButton_login_Click);
+            this.userButton_add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.userButton_add.BackColor = System.Drawing.Color.Transparent;
+            this.userButton_add.CustomerInformation = "";
+            this.userButton_add.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton_add.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton_add.Location = new System.Drawing.Point(3, 417);
+            this.userButton_add.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton_add.Name = "userButton_add";
+            this.userButton_add.Size = new System.Drawing.Size(78, 25);
+            this.userButton_add.TabIndex = 7;
+            this.userButton_add.UIText = "新增";
+            this.userButton_add.Click += new System.EventHandler(this.userButton_Add_Click);
             // 
-            // userButton1
+            // userButton_delete
             // 
-            this.userButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.userButton1.BackColor = System.Drawing.Color.Transparent;
-            this.userButton1.CustomerInformation = "";
-            this.userButton1.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.userButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton1.Location = new System.Drawing.Point(87, 417);
-            this.userButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.userButton1.Name = "userButton1";
-            this.userButton1.Size = new System.Drawing.Size(78, 25);
-            this.userButton1.TabIndex = 8;
-            this.userButton1.UIText = "删除";
-            this.userButton1.Click += new System.EventHandler(this.userButton1_Click);
+            this.userButton_delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.userButton_delete.BackColor = System.Drawing.Color.Transparent;
+            this.userButton_delete.CustomerInformation = "";
+            this.userButton_delete.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton_delete.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton_delete.Location = new System.Drawing.Point(87, 417);
+            this.userButton_delete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton_delete.Name = "userButton_delete";
+            this.userButton_delete.Size = new System.Drawing.Size(78, 25);
+            this.userButton_delete.TabIndex = 8;
+            this.userButton_delete.UIText = "删除";
+            this.userButton_delete.Click += new System.EventHandler(this.userButton1_Click);
             // 
-            // userButton2
+            // userButton_save
             // 
-            this.userButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.userButton2.BackColor = System.Drawing.Color.Transparent;
-            this.userButton2.CustomerInformation = "";
-            this.userButton2.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.userButton2.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton2.Location = new System.Drawing.Point(419, 417);
-            this.userButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.userButton2.Name = "userButton2";
-            this.userButton2.Size = new System.Drawing.Size(78, 25);
-            this.userButton2.TabIndex = 9;
-            this.userButton2.UIText = "保存";
-            this.userButton2.Click += new System.EventHandler(this.userButton2_Click);
+            this.userButton_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.userButton_save.BackColor = System.Drawing.Color.Transparent;
+            this.userButton_save.CustomerInformation = "";
+            this.userButton_save.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userButton_save.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.userButton_save.Location = new System.Drawing.Point(419, 417);
+            this.userButton_save.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.userButton_save.Name = "userButton_save";
+            this.userButton_save.Size = new System.Drawing.Size(78, 25);
+            this.userButton_save.TabIndex = 9;
+            this.userButton_save.UIText = "保存";
+            this.userButton_save.Click += new System.EventHandler(this.userButton2_Click);
             // 
             // ArrayConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.userButton2);
-            this.Controls.Add(this.userButton1);
-            this.Controls.Add(this.userButton_login);
+            this.Controls.Add(this.userButton_save);
+            this.Controls.Add(this.userButton_delete);
+            this.Controls.Add(this.userButton_add);
             this.Controls.Add(this.dataGridView1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -127,8 +127,8 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Factory;
-        private HslCommunication.Controls.UserButton userButton_login;
-        private HslCommunication.Controls.UserButton userButton1;
-        private HslCommunication.Controls.UserButton userButton2;
+        private HslCommunication.Controls.UserButton userButton_add;
+        private HslCommunication.Controls.UserButton userButton_delete;
+        private HslCommunication.Controls.UserButton userButton_save;
     }
 }

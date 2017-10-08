@@ -8,15 +8,24 @@ using System.Text;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using HslCommunication;
+using CommonLibrary;
 
 namespace ClientsLibrary.Configuration
 {
     public partial class ClientConfiguration : UserControl
     {
+        #region Contructor
+
+
         public ClientConfiguration()
         {
             InitializeComponent();
         }
+
+        #endregion
+
+        #region Clients Delete
+
 
         private void userButton_delete_Click(object sender, EventArgs e)
         {
@@ -25,6 +34,11 @@ namespace ClientsLibrary.Configuration
                 listBox1.Items.Remove(listBox1.SelectedItem);
             }
         }
+
+
+        #endregion
+
+
 
         private void userButton2_Click(object sender, EventArgs e)
         {
@@ -61,6 +75,9 @@ namespace ClientsLibrary.Configuration
                 MessageBox.Show("请求服务器失败，请稍后重试！");
                 userButton3.Enabled = false;
             }
+
+            // 本地化
+            UILocalization();
         }
 
         private void userButton3_Click(object sender, EventArgs e)
@@ -92,5 +109,25 @@ namespace ClientsLibrary.Configuration
                 MessageBox.Show("上传失败！");
             }
         }
+
+
+
+        #region Localization Support
+
+        /// <summary>
+        /// 本地化显示的操作，还未完成
+        /// </summary>
+        private void UILocalization()
+        {
+            checkBox1.Text = UserLocalization.Localization.CheckBoxTrustEnable;
+            label1.Text = UserLocalization.Localization.GeneralAllowLoginList;
+            userButton_delete.UIText = UserLocalization.Localization.ButtonDeleteSelected;
+            userButton2.UIText = UserLocalization.Localization.ButtonGetComputerID;
+            userButton1.UIText = UserLocalization.Localization.ButtonAddComputerID;
+            userButton3.UIText = UserLocalization.Localization.ButtonSave;
+        }
+
+
+        #endregion
     }
 }

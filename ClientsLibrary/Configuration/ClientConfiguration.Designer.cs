@@ -77,10 +77,10 @@
             this.userButton_delete.CustomerInformation = "";
             this.userButton_delete.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton_delete.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton_delete.Location = new System.Drawing.Point(477, 23);
+            this.userButton_delete.Location = new System.Drawing.Point(444, 23);
             this.userButton_delete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton_delete.Name = "userButton_delete";
-            this.userButton_delete.Size = new System.Drawing.Size(78, 25);
+            this.userButton_delete.Size = new System.Drawing.Size(111, 25);
             this.userButton_delete.TabIndex = 9;
             this.userButton_delete.UIText = "删除选中项";
             this.userButton_delete.Click += new System.EventHandler(this.userButton_delete_Click);
@@ -96,22 +96,22 @@
             // 
             // userButton1
             // 
-            this.userButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.userButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.userButton1.BackColor = System.Drawing.Color.Transparent;
             this.userButton1.CustomerInformation = "";
             this.userButton1.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.userButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.userButton1.Location = new System.Drawing.Point(98, 436);
+            this.userButton1.Location = new System.Drawing.Point(129, 436);
             this.userButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton1.Name = "userButton1";
-            this.userButton1.Size = new System.Drawing.Size(98, 25);
+            this.userButton1.Size = new System.Drawing.Size(120, 25);
             this.userButton1.TabIndex = 11;
             this.userButton1.UIText = "添加客户端标识";
             this.userButton1.Click += new System.EventHandler(this.userButton1_Click);
             // 
             // userButton2
             // 
-            this.userButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.userButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.userButton2.BackColor = System.Drawing.Color.Transparent;
             this.userButton2.CustomerInformation = "";
             this.userButton2.EnableColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
@@ -119,7 +119,7 @@
             this.userButton2.Location = new System.Drawing.Point(3, 436);
             this.userButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.userButton2.Name = "userButton2";
-            this.userButton2.Size = new System.Drawing.Size(89, 25);
+            this.userButton2.Size = new System.Drawing.Size(120, 25);
             this.userButton2.TabIndex = 12;
             this.userButton2.UIText = "获取本机标识";
             this.userButton2.Click += new System.EventHandler(this.userButton2_Click);

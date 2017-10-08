@@ -20,7 +20,16 @@ namespace CommonLibrary
         /// 描述
         /// </summary>
         public string GeneralDescription { get; set; } = "Descrition";
+        public string GeneralAllowLoginList { get; set; } = "Allow login list";
 
+
+        #region 复选框
+
+        public string CheckBoxAllowUserMulti { get; set; } = "Allow an account to log if online (except admin)";
+        public string CheckBoxAllowFrameLogin { get; set; } = "Allows the client to log in if the framework version does not match";
+        public string CheckBoxTrustEnable { get; set; } = "Enable the specified client login";
+
+        #endregion
 
         #region 按钮相关
 
@@ -48,6 +57,18 @@ namespace CommonLibrary
         /// 取消
         /// </summary>
         public string ButtonCancel { get; set; } = "Cancel";
+        /// <summary>
+        /// 删除选中项
+        /// </summary>
+        public string ButtonDeleteSelected { get; set; } = "Delete Selected";
+        /// <summary>
+        /// 获取本机标识
+        /// </summary>
+        public string ButtonGetComputerID { get; set; } = "Get ComputerID";
+        /// <summary>
+        /// 新增客户端标识
+        /// </summary>
+        public string ButtonAddComputerID { get; set; } = "Add ComputerID";
 
         #endregion
 

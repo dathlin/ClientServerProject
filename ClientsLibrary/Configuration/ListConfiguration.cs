@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using HslCommunication;
+using CommonLibrary;
 
 namespace ClientsLibrary.Configuration
 {
@@ -39,6 +40,7 @@ namespace ClientsLibrary.Configuration
 
         #endregion
 
+        #region Public Method
 
 
         public void SetInfomation(int download, int upload, string headText)
@@ -48,11 +50,16 @@ namespace ClientsLibrary.Configuration
             HeadText = headText;
         }
 
+        #endregion
+
+        #region Control Load
+
 
         private void FactoryConfiguration_Load(object sender, EventArgs e)
         {
             dataGridView1.Columns[0].HeaderText = HeadText;
 
+            // 向服务器请求数据初始化
             OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(Download, "");
 
             if (result.IsSuccess)
@@ -68,15 +75,27 @@ namespace ClientsLibrary.Configuration
             else
             {
                 MessageBox.Show(result.Message);
-                userButton2.Enabled = false;
+                userButton_save.Enabled = false;
             }
 
+            // 本地化支持
+            UILocalization();
         }
 
-        private void userButton_login_Click(object sender, EventArgs e)
+        #endregion
+
+        #region List Add
+
+
+        private void userButton_Add_Click(object sender, EventArgs e)
         {
             dataGridView1.Rows.Add();
         }
+
+        #endregion
+
+        #region List Delete
+
 
         private void userButton1_Click(object sender, EventArgs e)
         {
@@ -88,6 +107,11 @@ namespace ClientsLibrary.Configuration
                 }
             }
         }
+
+        #endregion
+
+        #region Submit
+
 
         private void userButton2_Click(object sender, EventArgs e)
         {
@@ -112,5 +136,23 @@ namespace ClientsLibrary.Configuration
                 MessageBox.Show("修改失败！原因：" + result.Message);
             }
         }
+
+
+        #endregion
+
+        #region Localization Support
+
+        /// <summary>
+        /// 本地化显示的操作，还未完成
+        /// </summary>
+        private void UILocalization()
+        {
+            userButton_add.UIText = UserLocalization.Localization.ButtonAdd;
+            userButton_delete.UIText = UserLocalization.Localization.ButtonDelete;
+            userButton_save.UIText = UserLocalization.Localization.ButtonSave;
+        }
+
+
+        #endregion
     }
 }
