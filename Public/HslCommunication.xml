@@ -1327,7 +1327,7 @@
         </member>
         <member name="M:HslCommunication.BasicFramework.SystemVersion.ToString">
             <summary>
-            获取版本号的字符串形式
+            获取版本号的字符串形式，如果内部版本号为0，则显示时不携带
             </summary>
             <returns></returns>
         </member>
@@ -2885,6 +2885,11 @@
         <member name="P:HslCommunication.Enthernet.AsyncStateOne._Heart_Time">
             <summary>
             心跳验证的时间点
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne.ClientType">
+            <summary>
+            客户端的类型
             </summary>
         </member>
         <member name="F:HslCommunication.Enthernet.AsyncStateOne.UdpEndPoint">

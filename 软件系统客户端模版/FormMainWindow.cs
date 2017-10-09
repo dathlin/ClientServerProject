@@ -355,12 +355,12 @@ namespace 软件系统客户端模版
         {
             try
             {
-                net_socket_client.KeyToken = CommonProtocol.KeyToken;// 新增的身份令牌
+                net_socket_client.KeyToken = CommonProtocol.KeyToken; // 新增的身份令牌
                 net_socket_client.LogNet = UserClient.LogNet;
                 net_socket_client.EndPointServer = new System.Net.IPEndPoint(
                     System.Net.IPAddress.Parse(UserClient.ServerIp),
                     CommonProtocol.Port_Main_Net);
-                net_socket_client.ClientAlias = $"{UserClient.UserAccount.UserName} ({UserClient.UserAccount.Factory})";//标记客户端在线的名称
+                net_socket_client.ClientAlias = UserClient.UserAccount.UserName; // 传入账户名
                 net_socket_client.ClientStart();
             }
             catch (Exception ex)
