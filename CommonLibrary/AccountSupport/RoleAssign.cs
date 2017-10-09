@@ -59,10 +59,16 @@ namespace CommonLibrary
         }
 
         #endregion
-        
+
         #region Public Method
 
-        public bool IsAllowAccountOperate(string roleCode,string name)
+        /// <summary>
+        /// 检测一个账户名是否有当前角色的权限
+        /// </summary>
+        /// <param name="roleCode">角色代号</param>
+        /// <param name="name">用户名</param>
+        /// <returns></returns>
+        public bool IsAllowAccountOperate(string roleCode, string name)
         {
             bool result = false;
             hybirdLock.Enter();
@@ -83,6 +89,30 @@ namespace CommonLibrary
 
             hybirdLock.Leave();
             return result;
+        }
+
+        /// <summary>
+        /// 获取一个用户名的所有角色名称
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public string[] GetRolesByUserName(string name)
+        {
+            List<string> list = new List<string>();
+
+            hybirdLock.Enter();
+
+            for (int i = 0; i < m_roles.Count; i++)
+            {
+                if (m_roles[i].Accounts.Contains(name))
+                {
+                    list.Add(m_roles[i].RoleName);
+                }
+            }
+
+            hybirdLock.Leave();
+
+            return list.ToArray();
         }
 
 

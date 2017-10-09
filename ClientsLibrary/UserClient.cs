@@ -43,7 +43,7 @@ namespace ClientsLibrary
         /// 服务器的IP地址，默认为127.0.0.1，可用于单机调试，
         /// 云服务器端：117.48.203.204，注意，云端为最新版，客户端版本比较旧会调试失败
         /// </summary>
-        public static string ServerIp { get; } = "117.48.203.204";//用于测试的云服务器地址
+        public static string ServerIp { get; } = "117.48.203.204"; // 用于测试的云服务器地址
 
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace ClientsLibrary
                 new VersionInfo()
                 {
                     VersionNum = new SystemVersion("1.0.0"),
-                    ReleaseDate = new DateTime(2017, 10, 1),//该版本发布的日期
+                    ReleaseDate = new DateTime(2017, 10, 1), // 该版本发布的日期
                     UpdateDetails = new StringBuilder(
                         "1.本系统第一版本正式发布使用。"+Environment.NewLine+
                         "2.提供了多客户端用时在线的功能。"+Environment.NewLine+

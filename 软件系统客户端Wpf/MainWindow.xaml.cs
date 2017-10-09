@@ -23,6 +23,7 @@ using System.Threading;
 using 软件系统客户端Wpf.Views;
 using System.Windows.Media.Animation;
 using MaterialDesignThemes.Wpf;
+using CommonLibrary;
 
 namespace 软件系统客户端Wpf
 {
@@ -441,7 +442,18 @@ namespace 软件系统客户端Wpf
             {
                 if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
                 {
-                    ListBox_Onlines.ItemsSource = data.Split('#');
+                    // ListBox_Onlines.ItemsSource = data.Split('#');
+
+                    ClientsOnline.Children.Clear();
+                    NetAccount[] accounts = JArray.Parse(data).ToObject<NetAccount[]>();
+
+                    foreach(var m in accounts)
+                    {
+                        Views.Controls.UserClientRenderItem userClient = new Views.Controls.UserClientRenderItem();
+                        userClient.SetClientRender(m);
+                        ClientsOnline.Children.Add(userClient);
+                    }
+
                 }));
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.关闭客户端)

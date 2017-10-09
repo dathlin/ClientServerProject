@@ -66,6 +66,7 @@
     <Compile Include="AccountSupport\FormPasswordModify.designer.cs">
       <DependentUpon>FormPasswordModify.cs</DependentUpon>
     </Compile>
+    <Compile Include="AccountSupport\NetAccount.cs" />
     <Compile Include="AccountSupport\RoleAssign.cs" />
     <Compile Include="AccountSupport\ServerAccount.cs" />
     <Compile Include="AccountSupport\UserAccount.cs" />

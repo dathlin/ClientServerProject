@@ -383,7 +383,7 @@ namespace 软件系统服务端模版
             {
                 net_simplify_server.KeyToken = CommonProtocol.KeyToken;//设置身份令牌
                 net_simplify_server.LogNet = new LogNetSingle(LogSavePath + @"\simplify_log.txt");//日志路径
-                net_simplify_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
+                net_simplify_server.LogNet.SetMessageDegree(HslMessageDegree.INFO);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_simplify_server.ReceiveStringEvent += Net_simplify_server_ReceiveStringEvent;//接收到字符串触发
                 net_simplify_server.ReceivedBytesEvent += Net_simplify_server_ReceivedBytesEvent;//接收到字节触发
                 net_simplify_server.ServerStart(CommonProtocol.Port_Second_Net);
@@ -971,11 +971,15 @@ namespace 软件系统服务端模版
 
         private void Net_socket_server_ClientOffline(AsyncStateOne object1, string object2)
         {
+            RemoveOnlineClient(object1.LoginAlias);
+
             UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" + object1.LoginAlias + " " + object2);
         }
 
         private void Net_socket_server_ClientOnline(AsyncStateOne object1)
         {
+            AddOnlineClient(object1.LoginAlias, object1._IpEnd_Point.Address.ToString());
+
             // 上线后回发一条数据初始化信息
             JObject json = new JObject
             {
@@ -989,12 +993,67 @@ namespace 软件系统服务端模版
             UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" + object1.LoginAlias + " 上线");
         }
 
+        private List<NetAccount> OnlineClients = new List<NetAccount>();
+        private SimpleHybirdLock hybirdLock = new SimpleHybirdLock();
+
+        private void AddOnlineClient(string userName,string ip)
+        {
+            NetAccount account = new NetAccount();
+            account.UserName = userName;
+            account.Roles = UserServer.ServerRoles.GetRolesByUserName(userName);
+            account.IpAddress = ip;
+            account.Alias = UserServer.ServerAccounts.GetAccountAlias(userName);
+            account.Factory = UserServer.ServerAccounts.GetAccountFactory(userName);
+            account.LoginTime = DateTime.Now;
+
+            hybirdLock.Enter();
+
+            OnlineClients.Add(account);
+
+            hybirdLock.Leave();
+        }
+
+        private void RemoveOnlineClient(string userName)
+        {
+            hybirdLock.Enter();
+
+            int index = -1;
+            for (int i = 0; i < OnlineClients.Count; i++)
+            {
+                if (OnlineClients[i].UserName == userName)
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index >= 0)
+            {
+                OnlineClients.RemoveAt(index);
+            }
+
+            hybirdLock.Leave();
+        }
+
+        private string GetOnlineClientsJson()
+        {
+            string result = string.Empty;
+
+            hybirdLock.Enter();
+
+            result = JArray.FromObject(OnlineClients).ToString();
+
+            hybirdLock.Leave();
+
+            return result;
+        }
+
 
 
         private void Net_socket_server_AllClientsStatusChange(string data)
         {
             // 此处决定要不要将在线客户端的数据发送所有客户端
-            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.总在线信息, data);
+            // net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.总在线信息, data);
             Net_Socket_All_Clients = data;
             if (IsWindowShow && IsHandleCreated)
             {
@@ -1004,6 +1063,8 @@ namespace 软件系统服务端模版
                     label4.Text = net_socket_server.ClientCount.ToString();
                 }));
             }
+
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.总在线信息, GetOnlineClientsJson());
         }
 
         /// <summary>

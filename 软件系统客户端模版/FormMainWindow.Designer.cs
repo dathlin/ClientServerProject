@@ -61,8 +61,6 @@
             this.linkLabel_logout = new System.Windows.Forms.LinkLabel();
             this.label_factory = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.label_address = new System.Windows.Forms.Label();
             this.label_last = new System.Windows.Forms.Label();
             this.label_times = new System.Windows.Forms.Label();
@@ -80,6 +78,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.panel_main = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.netClientOnline1 = new ClientsLibrary.BasicSupport.NetClientOnline();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel_right.SuspendLayout();
@@ -309,13 +308,12 @@
             // panel_right
             // 
             this.panel_right.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_right.Controls.Add(this.netClientOnline1);
             this.panel_right.Controls.Add(this.label_file_count);
             this.panel_right.Controls.Add(this.label8);
             this.panel_right.Controls.Add(this.linkLabel_logout);
             this.panel_right.Controls.Add(this.label_factory);
             this.panel_right.Controls.Add(this.label9);
-            this.panel_right.Controls.Add(this.label7);
-            this.panel_right.Controls.Add(this.listBox1);
             this.panel_right.Controls.Add(this.label_address);
             this.panel_right.Controls.Add(this.label_last);
             this.panel_right.Controls.Add(this.label_times);
@@ -341,7 +339,7 @@
             this.label_file_count.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label_file_count.Location = new System.Drawing.Point(82, 143);
             this.label_file_count.Name = "label_file_count";
-            this.label_file_count.Size = new System.Drawing.Size(129, 17);
+            this.label_file_count.Size = new System.Drawing.Size(137, 17);
             this.label_file_count.TabIndex = 18;
             this.label_file_count.Text = "0";
             this.label_file_count.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -384,29 +382,6 @@
             this.label9.Size = new System.Drawing.Size(68, 17);
             this.label9.TabIndex = 14;
             this.label9.Text = "所属分厂：";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.DimGray;
-            this.label7.Location = new System.Drawing.Point(8, 163);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(104, 17);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "所有在线客户端：";
-            // 
-            // listBox1
-            // 
-            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 17;
-            this.listBox1.Location = new System.Drawing.Point(11, 183);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBox1.Size = new System.Drawing.Size(200, 242);
-            this.listBox1.TabIndex = 12;
             // 
             // label_address
             // 
@@ -566,6 +541,19 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // netClientOnline1
+            // 
+            this.netClientOnline1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.netClientOnline1.AutoScroll = true;
+            this.netClientOnline1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.netClientOnline1.Location = new System.Drawing.Point(5, 164);
+            this.netClientOnline1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.netClientOnline1.Name = "netClientOnline1";
+            this.netClientOnline1.Size = new System.Drawing.Size(214, 250);
+            this.netClientOnline1.TabIndex = 19;
+            // 
             // FormMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -621,8 +609,6 @@
         private System.Windows.Forms.ToolStripMenuItem 账户管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 远程更新ToolStripMenuItem;
         private System.Windows.Forms.Panel panel_right;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label_address;
         private System.Windows.Forms.Label label_last;
         private System.Windows.Forms.Label label_times;
@@ -653,6 +639,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem 系统配置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 我的信息ToolStripMenuItem;
+        private ClientsLibrary.BasicSupport.NetClientOnline netClientOnline1;
     }
 }
 

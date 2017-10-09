@@ -12,6 +12,7 @@ using HslCommunication;
 using CommonLibrary;
 using ClientsLibrary;
 using ClientsLibrary.FileSupport;
+using System.Runtime.InteropServices;
 
 namespace 软件系统客户端模版.UIControls
 {
@@ -95,6 +96,12 @@ namespace 软件系统客户端模版.UIControls
             }
         }
 
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+        }
+        
+
         private void SetFilesShow(List<GroupFileItem> files)
         {
             panel2.SuspendLayout();
@@ -128,6 +135,7 @@ namespace 软件系统客户端模版.UIControls
             }
 
             panel2.ResumeLayout();
+            
         }
 
 

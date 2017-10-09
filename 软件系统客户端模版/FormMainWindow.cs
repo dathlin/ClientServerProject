@@ -389,7 +389,11 @@ namespace 软件系统客户端模版
             {
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
-                    listBox1.DataSource = data.Split('#');
+                    // listBox1.DataSource = data.Split('#');
+
+                    NetAccount[] accounts = JArray.Parse(data).ToObject<NetAccount[]>();
+
+                    netClientOnline1.SetOnlineRender(accounts);
                 }));
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.关闭客户端)

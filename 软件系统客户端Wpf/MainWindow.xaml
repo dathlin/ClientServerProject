@@ -277,7 +277,9 @@
                                                    Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">0</TextBlock>
                                 </Border>
                                 <TextBlock Grid.Row="1" Grid.Column="0">在线信息：</TextBlock>
-                                <ListBox Grid.Row="2" Grid.ColumnSpan="2" x:Name="ListBox_Onlines" FontSize="10.5"></ListBox>
+                                <!--<ListBox Grid.Row="2" Grid.ColumnSpan="2" x:Name="ListBox_Onlines" FontSize="10.5"></ListBox>-->
+                                <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Name="ClientsOnline" Orientation="Vertical"
+                                            Margin="0,4,0,0"></StackPanel>
                             </Grid>
                         </GroupBox>
                     </Grid>

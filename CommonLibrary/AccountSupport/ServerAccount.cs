@@ -227,6 +227,7 @@ namespace CommonLibrary
             return JObject.FromObject(result).ToString();
         }
 
+
         /// <summary>
         /// 获取所有的账户的JSON字符串
         /// </summary>
@@ -236,6 +237,50 @@ namespace CommonLibrary
             string result = string.Empty;
             hybirdLock.Enter();
             result = JArray.FromObject(all_list_accounts).ToString();
+            hybirdLock.Leave();
+            return result;
+        }
+
+        /// <summary>
+        /// 获取账户的别名
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public string GetAccountAlias(string name)
+        {
+            string result = string.Empty;
+            hybirdLock.Enter();
+            
+            for (int i = 0; i < all_list_accounts.Count; i++)
+            {
+                if (name == all_list_accounts[i].UserName)
+                {
+                    result = all_list_accounts[i].NameAlias;
+                }
+            }
+
+            hybirdLock.Leave();
+            return result;
+        }
+
+        /// <summary>
+        /// 获取账户的部门
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public string GetAccountFactory(string name)
+        {
+            string result = string.Empty;
+            hybirdLock.Enter();
+            
+            for (int i = 0; i < all_list_accounts.Count; i++)
+            {
+                if (name == all_list_accounts[i].UserName)
+                {
+                    result = all_list_accounts[i].Factory;
+                }
+            }
+
             hybirdLock.Leave();
             return result;
         }
