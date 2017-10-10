@@ -139,6 +139,9 @@ namespace CommonLibrary
             public static NetHandle 文件总数量 { get; } =          new NetHandle(2, 1, 00005);
             public static NetHandle 初始化数据 { get; } =          new NetHandle(2, 1, 00006);
             public static NetHandle 留言版消息 { get; } =          new NetHandle(2, 1, 00007);
+            public static NetHandle 新用户上线 { get; } =          new NetHandle(2, 1, 00008);
+            public static NetHandle 用户下线 { get; } =            new NetHandle(2, 1, 00009);
+            public static NetHandle 新头像更新 { get; } =          new NetHandle(2, 1, 00010);
 
 
             /**************************************************************************************

@@ -2,6 +2,7 @@
 using CommonLibrary;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,12 +29,20 @@ namespace 软件系统客户端Wpf.Views.Controls
         }
 
 
+        public string UniqueId
+        {
+            get
+            {
+                return netAccount == null ? string.Empty : netAccount.UniqueId;
+            }
+        }
 
 
         public void SetClientRender(NetAccount account)
         {
             if (account != null)
             {
+                netAccount = account;
                 UserName.Text = string.IsNullOrEmpty(account.Alias) ? account.UserName : account.Alias;
                 Factory.Text = $"({account.Factory})";
 
@@ -63,7 +72,13 @@ namespace 软件系统客户端Wpf.Views.Controls
         }
 
 
-
+        public void UpdatePortrait(string userName)
+        {
+            if(netAccount?.UserName == userName)
+            {
+                System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(ThreadPoolLoadPortrait), netAccount);
+            }
+        }
         private void ThreadPoolLoadPortrait(object obj)
         {
             // 向服务器请求小头像
@@ -71,31 +86,19 @@ namespace 软件系统客户端Wpf.Views.Controls
             {
                 try
                 {
-                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                    System.Drawing.Bitmap bitmap = UserPortrait.DownloadSmallPortraint(m_NetAccount.UserName);
+                    MemoryStream ms = new MemoryStream();
+                    bitmap.Save(ms, bitmap.RawFormat);
+                    bitmap.Dispose();
 
-                    HslCommunication.OperateResult result = UserClient.Net_File_Client.DownloadFile(
-                        PortraitSupport.SmallPortrait,
-                        "Files",
-                        "Portrait",
-                        m_NetAccount.UserName,
-                        null,
-                        ms
-                        );
-                    if (result.IsSuccess)
+                    Dispatcher.Invoke(new Action(() =>
                     {
-                        Dispatcher.Invoke(new Action(() =>
-                        {
-                            BitmapImage bi = new BitmapImage();
-                            bi.BeginInit();
-                            bi.StreamSource = ms;
-                            bi.EndInit();
-                            Image1.Source = bi;
-                        }));
-                    }
-                    else
-                    {
-                        MessageBox.Show(result.Message);
-                    }
+                        BitmapImage bi = new BitmapImage();
+                        bi.BeginInit();
+                        bi.StreamSource = ms;
+                        bi.EndInit();
+                        Image1.Source = bi;
+                    }));
                 }
                 catch (Exception ex)
                 {
@@ -103,5 +106,8 @@ namespace 软件系统客户端Wpf.Views.Controls
                 }
             }
         }
+
+
+        private NetAccount netAccount = null;
     }
 }

@@ -39,7 +39,7 @@ using HslCommunication.LogNet;
 /*****************************************************************************************
  * 
  *    权限说明    在进行特定权限操作的业务逻辑时，应该提炼成一个角色，这样可以动态绑定带有这些功能的账户
- *    示例        if (UserClient.CheckUserAccountRole("审计员")) { dosomething(); }// 获取了审计员的角色，名字此处示例
+ *    示例        if (UserClient.CheckUserAccountRole([审计员的GUID码])) { dosomething(); }// 获取了审计员的角色，名字此处示例
  * 
  ******************************************************************************************/
 
@@ -93,10 +93,7 @@ namespace 软件系统客户端模版
             net_socket_client.LoginSuccess += Net_socket_client_LoginSuccess;
             net_socket_client.AcceptByte += Net_socket_client_AcceptByte;
             net_socket_client.AcceptString += Net_socket_client_AcceptString;
-            // 启动网络服务
-            Net_Socket_Client_Initialization();
-            // 启动头像
-            SoftUserPortraitInitialization();
+            
             // 显示公告
             label_Announcement.Text = UserClient.Announcement;
             // 显示版本
@@ -109,7 +106,6 @@ namespace 软件系统客户端模版
         {
             // 窗口显示
             IsWindowShow = true;
-
             // udp测试
             // SendServerUdpData(0, "显示了窗体");
 
@@ -137,6 +133,11 @@ namespace 软件系统客户端模版
                 开发中心ToolStripMenuItem.Enabled = false;
                 系统配置ToolStripMenuItem.Enabled = false;
             }
+            
+            // 启动网络服务
+            Net_Socket_Client_Initialization();
+            // 启动头像
+            SoftUserPortraitInitialization();
             // 启动定时器
             TimeTickInitilization();
             // 显示头像
@@ -387,14 +388,14 @@ namespace 软件系统客户端模版
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.总在线信息)
             {
-                if (IsHandleCreated) Invoke(new Action(() =>
-                {
-                    // listBox1.DataSource = data.Split('#');
+                //if (IsHandleCreated) Invoke(new Action(() =>
+                //{
+                //    // listBox1.DataSource = data.Split('#');
 
-                    NetAccount[] accounts = JArray.Parse(data).ToObject<NetAccount[]>();
+                //    NetAccount[] accounts = JArray.Parse(data).ToObject<NetAccount[]>();
 
-                    netClientOnline1.SetOnlineRender(accounts);
-                }));
+                //    netClientOnline1.SetOnlineRender(accounts);
+                //}));
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.关闭客户端)
             {
@@ -422,11 +423,16 @@ namespace 软件系统客户端模版
                 List<string> chats = JArray.Parse(json["chats"].ToString()).ToObject<List<string>>();
                 StringBuilder sb = new StringBuilder();
                 chats.ForEach(m => { sb.Append(m + Environment.NewLine); });
+
+
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
                     toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm:ss");
                     label_file_count.Text = json["FileCount"].ToObject<int>().ToString();
                     UIControls_Chat.AddChatsHistory(sb.ToString());
+                    
+                    NetAccount[] accounts = JArray.Parse(json["ClientsOnline"].ToString()).ToObject<NetAccount[]>();
+                    netClientOnline1.SetOnlineRender(accounts);
                 }));
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.文件总数量)
@@ -441,6 +447,27 @@ namespace 软件系统客户端模版
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
                     UIControls_Chat?.DealwithReceive(data);
+                }));
+            }
+            else if(customer == CommonHeadCode.MultiNetHeadCode.新用户上线)
+            {
+                if (IsHandleCreated) Invoke(new Action(() =>
+                {
+                    netClientOnline1.ClientOnline(JObject.Parse(data).ToObject<NetAccount>());
+                }));
+            }
+            else if(customer == CommonHeadCode.MultiNetHeadCode.用户下线)
+            {
+                if (IsHandleCreated) Invoke(new Action(() =>
+                {
+                    netClientOnline1.ClinetOffline(data);
+                }));
+            }
+            else if(customer == CommonHeadCode.MultiNetHeadCode.新头像更新)
+            {
+                if (IsHandleCreated) Invoke(new Action(() =>
+                {
+                    netClientOnline1.ClientUpdatePortrait(data);
                 }));
             }
         }
@@ -692,24 +719,23 @@ namespace 软件系统客户端模版
 
         private void SoftUserPortraitInitialization()
         {
-            SoftUserPortrait = new UserPortrait(
-                Application.StartupPath + @"\Portrait\" + UserClient.UserAccount.UserName, 
-                LoadSmallProtraitAsync, UnloadSmallProtrait);
+            SoftUserPortrait = new UserPortrait(Application.StartupPath +
+                @"\Portrait\" + UserClient.UserAccount.UserName, LoadSmallProtraitAsync);
         }
 
 
-        private void LoadSmallProtraitAsync(string fileName)
+        private void LoadSmallProtraitAsync(Bitmap bitmap)
         {
             if (IsHandleCreated && InvokeRequired)
             {
                 Invoke(new Action(() =>
                 {
-                    LoadSmallProtraitAsync(fileName);
+                    LoadSmallProtraitAsync(bitmap);
                 }));
                 return;
             }
 
-            pictureBox1.LoadAsync(fileName);
+            pictureBox1.Image = bitmap;
         }
 
         private void UnloadSmallProtrait()

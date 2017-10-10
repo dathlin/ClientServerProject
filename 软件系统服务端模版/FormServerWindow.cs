@@ -506,16 +506,16 @@ namespace 软件系统服务端模版
 
 
                 // 先判定框架版本是否正确
-                if (!UserServer.ServerSettings.AllowLoginWhenFramewordVersionNotCheck)
-                {
-                    SystemVersion sv = new SystemVersion(frameworkVersion);
-                    if (sv < SoftBasic.FrameworkVersion)
-                    {
-                        account.LoginEnable = false;
-                        account.ForbidMessage = "框架版本检测失败，请更新";
-                        RuntimeLogHelper?.WriteWarn("框架版本验证失败，version:" + frameworkVersion);
-                    }
-                }
+                //if (!UserServer.ServerSettings.AllowLoginWhenFramewordVersionNotCheck)
+                //{
+                //    SystemVersion sv = new SystemVersion(frameworkVersion);
+                //    if (sv < SoftBasic.FrameworkVersion)
+                //    {
+                //        account.LoginEnable = false;
+                //        account.ForbidMessage = "框架版本检测失败，请更新";
+                //        RuntimeLogHelper?.WriteWarn("框架版本验证失败，version:" + frameworkVersion);
+                //    }
+                //}
                 
                 // 检测是否重复登录
                 if (account.LoginEnable)
@@ -627,11 +627,17 @@ namespace 软件系统服务端模版
 
                     UserServer.ServerAccounts.UpdatePortraitMD5(UserName, SmallPortraitMD5, LargePortraitMD5);
                     net_simplify_server.SendMessage(state, handle, "成功");
+
+
+                    // 推送头像更新消息
+                    net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.新头像更新, UserName);
                 }
                 catch(Exception ex)
                 {
                     net_simplify_server.SendMessage(state, handle, "失败，原因是：" + ex.Message);
                 }
+
+
             }
             else if(handle==CommonHeadCode.SimplifyHeadCode.请求分厂)
             {
@@ -971,56 +977,63 @@ namespace 软件系统服务端模版
 
         private void Net_socket_server_ClientOffline(AsyncStateOne object1, string object2)
         {
-            RemoveOnlineClient(object1.LoginAlias);
+            RemoveOnlineClient(object1.ClientUniqueID);
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.用户下线, object1.ClientUniqueID);
 
-            UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" + object1.LoginAlias + " " + object2);
+            UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1.IpAddress + "：" + object1.LoginAlias + " " + object2);
         }
 
         private void Net_socket_server_ClientOnline(AsyncStateOne object1)
         {
-            AddOnlineClient(object1.LoginAlias, object1._IpEnd_Point.Address.ToString());
-
             // 上线后回发一条数据初始化信息
             JObject json = new JObject
             {
                 { "Time", new JValue(DateTime.Now) },
                 { "FileCount", new JValue(ShareFileContainer.FileCount) },
-                { "chats", new JValue(Chats_Managment.ToSaveString())}
+                { "chats", new JValue(Chats_Managment.ToSaveString())},
+                { "ClientsOnline", new JValue(ClientsOnlineCache) }
             };
             // 发送客户端的初始化数据
             net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据, json.ToString());
             // 触发上下线功能
-            UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1._IpEnd_Point.Address.ToString() + "：" + object1.LoginAlias + " 上线");
+            UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1.IpAddress + "：" + object1.LoginAlias + " 上线");
+            
+            NetAccount account = new NetAccount();
+            account.UserName = object1.LoginAlias;
+            account.Roles = UserServer.ServerRoles.GetRolesByUserName(object1.LoginAlias);
+            account.IpAddress = object1.IpAddress;
+            account.Alias = UserServer.ServerAccounts.GetAccountAlias(object1.LoginAlias);
+            account.Factory = UserServer.ServerAccounts.GetAccountFactory(object1.LoginAlias);
+            account.LoginTime = DateTime.Now;
+            account.UniqueId = object1.ClientUniqueID;
+            
+            AddOnlineClient(account);
+
+            Thread.Sleep(100);
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.新用户上线, JObject.FromObject(account).ToString());
+
         }
 
         private List<NetAccount> OnlineClients = new List<NetAccount>();
         private SimpleHybirdLock hybirdLock = new SimpleHybirdLock();
 
-        private void AddOnlineClient(string userName,string ip)
+        private void AddOnlineClient(NetAccount account)
         {
-            NetAccount account = new NetAccount();
-            account.UserName = userName;
-            account.Roles = UserServer.ServerRoles.GetRolesByUserName(userName);
-            account.IpAddress = ip;
-            account.Alias = UserServer.ServerAccounts.GetAccountAlias(userName);
-            account.Factory = UserServer.ServerAccounts.GetAccountFactory(userName);
-            account.LoginTime = DateTime.Now;
-
             hybirdLock.Enter();
-
             OnlineClients.Add(account);
-
+            ClientsOnlineCache = JArray.FromObject(OnlineClients).ToString();
             hybirdLock.Leave();
+            
         }
 
-        private void RemoveOnlineClient(string userName)
+        private void RemoveOnlineClient(string uniqueId)
         {
             hybirdLock.Enter();
 
             int index = -1;
             for (int i = 0; i < OnlineClients.Count; i++)
             {
-                if (OnlineClients[i].UserName == userName)
+                if (OnlineClients[i].UniqueId == uniqueId)
                 {
                     index = i;
                     break;
@@ -1032,21 +1045,12 @@ namespace 软件系统服务端模版
                 OnlineClients.RemoveAt(index);
             }
 
+            ClientsOnlineCache = JArray.FromObject(OnlineClients).ToString();
+
             hybirdLock.Leave();
         }
 
-        private string GetOnlineClientsJson()
-        {
-            string result = string.Empty;
-
-            hybirdLock.Enter();
-
-            result = JArray.FromObject(OnlineClients).ToString();
-
-            hybirdLock.Leave();
-
-            return result;
-        }
+        private string ClientsOnlineCache = "[]";
 
 
 
@@ -1063,8 +1067,6 @@ namespace 软件系统服务端模版
                     label4.Text = net_socket_server.ClientCount.ToString();
                 }));
             }
-
-            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.总在线信息, GetOnlineClientsJson());
         }
 
         /// <summary>
@@ -1359,7 +1361,7 @@ namespace 软件系统服务端模版
             //此处为测试
             Invoke(new Action(() =>
             {
-                textBox1.AppendText($"{DateTime.Now.ToString("MM-dd HH:mm:ss ")}来自IP:{state._IpEnd_Point.Address.ToString()} 内容:{data}{Environment.NewLine}");
+                textBox1.AppendText($"{DateTime.Now.ToString("MM-dd HH:mm:ss ")}来自IP:{state.IpEndPoint.Address.ToString()} 内容:{data}{Environment.NewLine}");
             }));
         }
 

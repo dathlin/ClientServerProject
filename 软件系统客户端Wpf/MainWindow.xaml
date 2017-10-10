@@ -160,7 +160,7 @@
                                 <TextBlock x:Name="TextBlock_Information" Foreground="DodgerBlue"></TextBlock>
                             </StackPanel>
 
-                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" >
                                 <TextBlock>时间：</TextBlock>
                                 <TextBlock x:Name="TextBlock_ServerTime">0000-00-00 00:00:00</TextBlock>
                                 <TextBlock Margin="20,0,0,0">延迟：</TextBlock>
@@ -278,8 +278,12 @@
                                 </Border>
                                 <TextBlock Grid.Row="1" Grid.Column="0">在线信息：</TextBlock>
                                 <!--<ListBox Grid.Row="2" Grid.ColumnSpan="2" x:Name="ListBox_Onlines" FontSize="10.5"></ListBox>-->
-                                <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Name="ClientsOnline" Orientation="Vertical"
-                                            Margin="0,4,0,0"></StackPanel>
+
+                                <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2" >
+                                    <StackPanel Name="ClientsOnline" Orientation="Vertical"
+                                            Margin="0,4,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"></StackPanel>
+                                </ScrollViewer>
                             </Grid>
                         </GroupBox>
                     </Grid>

@@ -252,7 +252,9 @@
   <ItemGroup>
     <None Include="img\Flagthread_7317.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="img\person_1.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="img\fileIcon\7z.png" />
   </ItemGroup>

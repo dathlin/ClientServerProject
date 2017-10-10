@@ -116,7 +116,7 @@ namespace 软件系统客户端Wpf
             //SendServerUdpData(0, "显示了窗体");
 
             //是否显示更新日志，显示前进行判断该版本是否已经显示过了
-            if (UserClient.JsonSettings.IsNewVersionRunning)
+            if (!UserClient.JsonSettings.IsNewVersionRunning)
             {
                 UserClient.JsonSettings.IsNewVersionRunning = false;
                 UserClient.JsonSettings.SaveToFile();
@@ -432,29 +432,29 @@ namespace 软件系统客户端Wpf
         {
             if (customer == CommonHeadCode.MultiNetHeadCode.弹窗新消息)
             {
-                if(IsWindowShow) Dispatcher.Invoke(new Action(() =>
-                {
-                    FormPopup fpp = new FormPopup(data, System.Drawing.Color.DodgerBlue, 10000);
-                    fpp.Show();
-                }));
+                if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
+                 {
+                     FormPopup fpp = new FormPopup(data, System.Drawing.Color.DodgerBlue, 10000);
+                     fpp.Show();
+                 }));
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.总在线信息)
             {
-                if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
-                {
-                    // ListBox_Onlines.ItemsSource = data.Split('#');
+                //if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
+                //{
+                //    // ListBox_Onlines.ItemsSource = data.Split('#');
 
-                    ClientsOnline.Children.Clear();
-                    NetAccount[] accounts = JArray.Parse(data).ToObject<NetAccount[]>();
+                //    ClientsOnline.Children.Clear();
+                //    NetAccount[] accounts = JArray.Parse(data).ToObject<NetAccount[]>();
 
-                    foreach(var m in accounts)
-                    {
-                        Views.Controls.UserClientRenderItem userClient = new Views.Controls.UserClientRenderItem();
-                        userClient.SetClientRender(m);
-                        ClientsOnline.Children.Add(userClient);
-                    }
+                //    foreach(var m in accounts)
+                //    {
+                //        Views.Controls.UserClientRenderItem userClient = new Views.Controls.UserClientRenderItem();
+                //        userClient.SetClientRender(m);
+                //        ClientsOnline.Children.Add(userClient);
+                //    }
 
-                }));
+                //}));
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.关闭客户端)
             {
@@ -482,11 +482,24 @@ namespace 软件系统客户端Wpf
                 List<string> chats = JArray.Parse(json["chats"].ToString()).ToObject<List<string>>();
                 StringBuilder sb = new StringBuilder();
                 chats.ForEach(m => { sb.Append(m + Environment.NewLine); });
+
+
                 if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
                 {
                     TextBlock_ServerTime.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm:ss");
                     TextBlock_FileCount.Text = json["FileCount"].ToObject<int>().ToString();
                     UIControls_Chat.AddChatsHistory(sb.ToString());
+
+
+                    ClientsOnline.Children.Clear();
+                    NetAccount[] accounts = JArray.Parse(json["ClientsOnline"].ToString()).ToObject<NetAccount[]>();
+
+                    foreach (var m in accounts)
+                    {
+                        Views.Controls.UserClientRenderItem userClient = new Views.Controls.UserClientRenderItem();
+                        userClient.SetClientRender(m);
+                        ClientsOnline.Children.Add(userClient);
+                    }
                 }));
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.文件总数量)
@@ -501,6 +514,40 @@ namespace 软件系统客户端Wpf
                 if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
                 {
                     UIControls_Chat?.DealwithReceive(data);
+                }));
+            }
+            else if (customer == CommonHeadCode.MultiNetHeadCode.新用户上线)
+            {
+                if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
+                {
+                    Views.Controls.UserClientRenderItem userClient = new Views.Controls.UserClientRenderItem();
+                    userClient.SetClientRender(JObject.Parse(data).ToObject<NetAccount>());
+                    ClientsOnline.Children.Add(userClient);
+                }));
+            }
+            else if (customer == CommonHeadCode.MultiNetHeadCode.用户下线)
+            {
+                if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
+                {
+                    Views.Controls.UserClientRenderItem item = null;
+                    foreach (Views.Controls.UserClientRenderItem m in ClientsOnline.Children)
+                    {
+                        if(m?.UniqueId == data)
+                        {
+                            item = m;
+                        }
+                    }
+                    if (item != null) ClientsOnline.Children.Remove(item);
+                }));
+            }
+            else if(customer == CommonHeadCode.MultiNetHeadCode.新头像更新)
+            {
+                if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
+                {
+                    foreach (Views.Controls.UserClientRenderItem m in ClientsOnline.Children)
+                    {
+                        m.UpdatePortrait(data);
+                    }
                 }));
             }
         }
@@ -642,26 +689,25 @@ namespace 软件系统客户端Wpf
 
         private void SoftUserPortraitInitialization()
         {
-            SoftUserPortrait = new UserPortrait(AppDomain.CurrentDomain.BaseDirectory + @"Portrait\" + UserClient.UserAccount.UserName, 
-                m => {
+            SoftUserPortrait = new UserPortrait(AppDomain.CurrentDomain.BaseDirectory +
+                @"Portrait\" + UserClient.UserAccount.UserName, ShowSmallPortrait);
+        }
 
-                    if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
-                    {
-                        byte[] content = File.ReadAllBytes(m);
-                        BitmapImage bi = new BitmapImage();
-                        bi.BeginInit();
-                        bi.StreamSource = new MemoryStream(content);
-                        bi.EndInit();
+        private void ShowSmallPortrait(System.Drawing.Bitmap bitmap)
+        {
+            if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
+            {
+                MemoryStream ms = new MemoryStream();
+                bitmap.Save(ms, bitmap.RawFormat);
+                bitmap.Dispose();
 
-                        AccountPortrait.Source = bi;
-                    }));
-                },
-                ()=>
-                {
-                    if (IsWindowShow) Dispatcher.Invoke(new Action(() => {
-                         AccountPortrait.Source = null;
-                    }));
-                });
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = ms;
+                bi.EndInit();
+
+                AccountPortrait.Source = bi;
+            }));
         }
 
         

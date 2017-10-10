@@ -78,6 +78,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.panel_main = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.netClientOnline1 = new ClientsLibrary.BasicSupport.NetClientOnline();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -165,11 +166,12 @@
             // 
             this.管理员ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.更改公告ToolStripMenuItem,
-            this.日志查看ToolStripMenuItem,
             this.账户管理ToolStripMenuItem,
-            this.远程更新ToolStripMenuItem,
             this.注册账号ToolStripMenuItem,
             this.消息发送ToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.远程更新ToolStripMenuItem,
+            this.日志查看ToolStripMenuItem,
             this.开发中心ToolStripMenuItem,
             this.系统配置ToolStripMenuItem});
             this.管理员ToolStripMenuItem.Image = global::软件系统客户端模版.Properties.Resources.Team_32xLG;
@@ -541,12 +543,16 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
+            // 
             // netClientOnline1
             // 
             this.netClientOnline1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.netClientOnline1.AutoScroll = true;
             this.netClientOnline1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.netClientOnline1.Location = new System.Drawing.Point(5, 164);
             this.netClientOnline1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -640,6 +646,7 @@
         private System.Windows.Forms.ToolStripMenuItem 系统配置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 我的信息ToolStripMenuItem;
         private ClientsLibrary.BasicSupport.NetClientOnline netClientOnline1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

@@ -31,21 +31,20 @@ namespace ClientsLibrary
     public class UserPortrait
     {
         #region Constructor
-        
+
         /// <summary>
         /// 实例化一个新的头像管理类对象
         /// </summary>
         /// <param name="filePath">头像存储的文件夹路径</param>
-        /// <param name="unloadPicSmall">卸载小头像的委托</param>
-        public UserPortrait(string filePath,Action<string> loadPicSmall, Action unloadPicSmall)
+        /// <param name="loadPicSmall">加载头像的委托</param>
+        public UserPortrait(string filePath, Action<Bitmap> loadPicSmall)
         {
             if (!System.IO.Directory.Exists(filePath))
             {
                 System.IO.Directory.CreateDirectory(filePath);
             }
             FileSavePath = filePath;
-
-            m_UnloadPicSmall = unloadPicSmall;
+            
             m_LoadPicSmall = loadPicSmall;
         }
 
@@ -69,7 +68,6 @@ namespace ClientsLibrary
 
                     // 先卸载图片
                     unloadPic?.Invoke();
-                    m_UnloadPicSmall?.Invoke();
 
                     Bitmap bitmap300 = fps.GetSpecifiedSizeImage(300);
                     Bitmap bitmap32 = fps.GetSpecifiedSizeImage(32);
@@ -78,8 +76,8 @@ namespace ClientsLibrary
                     {
                         bitmap300.Save(path300);
                         bitmap32.Save(path32);
-                        bitmap300.Dispose();
                         bitmap32.Dispose();
+                        bitmap300.Dispose();
                     }
                     catch(Exception ex)
                     {
@@ -89,7 +87,6 @@ namespace ClientsLibrary
 
                         // 加载回旧的文件
                         loadPic?.Invoke(path300);
-                        m_LoadPicSmall?.Invoke(path32);
                         return;
                     }
 
@@ -110,8 +107,8 @@ namespace ClientsLibrary
                     ThreadPool.QueueUserWorkItem(new WaitCallback(obj =>
                     {
                         // 上传文件MD5码
-                        string SmallPortraitMD5 = ""; SoftBasic.CalculateFileMD5(path32);
-                        string LargePortraitMD5 = ""; SoftBasic.CalculateFileMD5(path300);
+                        string SmallPortraitMD5 = ""; 
+                        string LargePortraitMD5 = ""; 
 
                         try
                         {
@@ -156,8 +153,7 @@ namespace ClientsLibrary
 
                         // 先显示信息
                         loadPic?.Invoke(path300);
-                        m_LoadPicSmall?.Invoke(path32);
-
+                        LoadUserSmallPortraint();
                     }), null);
                    
                 }
@@ -170,54 +166,40 @@ namespace ClientsLibrary
 
         #region Load Portraint
 
+        public static Bitmap DownloadSmallPortraint(string userName)
+        {
+            Bitmap bitmap = null;
+
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+
+            OperateResult result = UserClient.Net_File_Client.DownloadFile(
+                PortraitSupport.SmallPortrait,
+                "Files",
+                "Portrait",
+                userName,
+                null,
+                ms
+                );
+            if (result.IsSuccess)
+            {
+                bitmap = new Bitmap(ms);
+            }
+            else
+            {
+                bitmap = Properties.Resources.person_1;
+            }
+
+            ms.Dispose();
+
+            return bitmap;
+        }
+
         /// <summary>
         /// 加载小尺寸的头像操作，需要放置到线程池中
         /// </summary>
         public void LoadUserSmallPortraint()
         {
-            // 先获取服务器端的MD5码
-            string fileMd5 = UserClient.UserAccount.SmallPortraitMD5;
-            if(string.IsNullOrEmpty(fileMd5))
-            {
-                // 服务器端没有文件，加载结束
-                return;
-            }
-
-            // 获取本地MD5
-            string fileName = FileSavePath + @"\" + PortraitSupport.SmallPortrait;
-            if (System.IO.File.Exists(fileName))
-            {
-                // 先进行加载
-                m_LoadPicSmall?.Invoke(fileName);
-                // 本地存在文件
-                string currentMd5 = SoftBasic.CalculateFileMD5(fileName);
-
-                // 对比验证
-                if (fileName == currentMd5)
-                {
-                    return;
-                }
-            }
-
-            m_UnloadPicSmall?.Invoke();
-
-            // 本地不存在文件或校验失败，需要重新下载
-            OperateResult result = UserClient.Net_File_Client.DownloadFile(PortraitSupport.SmallPortrait,
-                "Files",
-                "Portrait",
-                UserClient.UserAccount.UserName,
-                null,
-                fileName);
-
-            if(result.IsSuccess)
-            {
-                // 下载成功
-                m_LoadPicSmall?.Invoke(fileName);
-            }
-            else
-            {
-                MessageBox.Show("头像从服务器下载失败，错误原因：" + result.Message);
-            }
+            m_LoadPicSmall?.Invoke(DownloadSmallPortraint(UserClient.UserAccount.UserName));
         }
 
 
@@ -364,16 +346,11 @@ namespace ClientsLibrary
         /// 文件的路径
         /// </summary>
         private string FileSavePath { get; set; }
-
-        /// <summary>
-        /// 卸载小头像的委托
-        /// </summary>
-        private Action m_UnloadPicSmall { get; set; }
-
+        
         /// <summary>
         /// 加载小头像的委托
         /// </summary>
-        private Action<string> m_LoadPicSmall { get; set; }
+        private Action<Bitmap> m_LoadPicSmall { get; set; }
 
         #endregion
     }

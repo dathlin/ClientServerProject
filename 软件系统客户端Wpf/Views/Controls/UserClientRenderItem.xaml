@@ -9,7 +9,7 @@
     <Grid HorizontalAlignment="Stretch">
         <materialDesign:Chip HorizontalAlignment="Stretch">
             <materialDesign:Chip.Icon>
-                <Image Name="Image1" />
+                <Image Name="Image1"/>
             </materialDesign:Chip.Icon>
             <materialDesign:Chip.Content>
                 <Grid>

@@ -2872,7 +2872,17 @@
             异步多客户端网络的对象
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.AsyncStateOne._IpEnd_Point">
+        <member name="M:HslCommunication.Enthernet.AsyncStateOne.#ctor">
+            <summary>
+            实例化一个对象
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne.IpAddress">
+            <summary>
+            IP地址
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne.IpEndPoint">
             <summary>
             此连接对象连接的远程客户端
             </summary>
@@ -2882,7 +2892,7 @@
             远程对象的别名
             </summary>
         </member>
-        <member name="P:HslCommunication.Enthernet.AsyncStateOne._Heart_Time">
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne.HeartTime">
             <summary>
             心跳验证的时间点
             </summary>
@@ -2890,6 +2900,11 @@
         <member name="P:HslCommunication.Enthernet.AsyncStateOne.ClientType">
             <summary>
             客户端的类型
+            </summary>
+        </member>
+        <member name="P:HslCommunication.Enthernet.AsyncStateOne.ClientUniqueID">
+            <summary>
+            客户端唯一的标识
             </summary>
         </member>
         <member name="F:HslCommunication.Enthernet.AsyncStateOne.UdpEndPoint">

@@ -723,6 +723,16 @@ namespace ClientsLibrary.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap person_1 {
+            get {
+                object obj = ResourceManager.GetObject("person_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap pgp {
             get {
                 object obj = ResourceManager.GetObject("pgp", resourceCulture);

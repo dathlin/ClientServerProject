@@ -49,11 +49,33 @@ namespace ClientsLibrary.BasicSupport
             ThreadPool.QueueUserWorkItem(ThreadPoolLoadPortrait, null);
         }
 
+        /// <summary>
+        /// 当前网络会话的唯一ID
+        /// </summary>
+        public string UniqueId
+        {
+            get
+            {
+                return m_NetAccount == null ? string.Empty : m_NetAccount.UniqueId;
+            }
+        }
+
+        /// <summary>
+        /// 更新头像
+        /// </summary>
+        /// <param name="userName"></param>
+        public void UpdatePortrait(string userName)
+        {
+            if (m_NetAccount?.UserName == userName)
+            {
+                ThreadPool.QueueUserWorkItem(ThreadPoolLoadPortrait, null);
+            }
+        }
 
         private void ThreadPoolLoadPortrait(object obj)
         {
             // 向服务器请求小头像
-            if(m_NetAccount!=null)
+            if (m_NetAccount != null)
             {
                 try
                 {
@@ -74,7 +96,9 @@ namespace ClientsLibrary.BasicSupport
                     }
                     else
                     {
-                        MessageBox.Show(result.Message);
+                        // 可能网络错误，也可能因为服务器没有头像
+                        // MessageBox.Show(result.Message);
+                        pictureBox1.Image = Properties.Resources.person_1;
                     }
                 }
                 catch (Exception ex)
@@ -89,12 +113,10 @@ namespace ClientsLibrary.BasicSupport
 
         private void NetClientItem_MouseEnter(object sender, EventArgs e)
         {
-            BackColor = Color.AliceBlue;
         }
 
         private void NetClientItem_MouseLeave(object sender, EventArgs e)
         {
-            BackColor = SystemColors.Control;
         }
 
 

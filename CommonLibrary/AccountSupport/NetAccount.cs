@@ -34,5 +34,9 @@ namespace CommonLibrary
         /// 包含的角色名称
         /// </summary>
         public string[] Roles { get; set; }
+        /// <summary>
+        /// 本地连接唯一的身份标识
+        /// </summary>
+        public string UniqueId { get; set; }
     }
 }
