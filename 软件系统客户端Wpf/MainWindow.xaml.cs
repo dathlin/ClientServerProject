@@ -406,6 +406,7 @@ namespace 软件系统客户端Wpf
 
         private NetComplexClient net_socket_client = new NetComplexClient();
 
+
         private void Net_Socket_Client_Initialization()
         {
             try
@@ -489,9 +490,7 @@ namespace 软件系统客户端Wpf
                     TextBlock_ServerTime.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm:ss");
                     TextBlock_FileCount.Text = json["FileCount"].ToObject<int>().ToString();
                     UIControls_Chat.AddChatsHistory(sb.ToString());
-
-
-                    ClientsOnline.Children.Clear();
+                    
                     NetAccount[] accounts = JArray.Parse(json["ClientsOnline"].ToString()).ToObject<NetAccount[]>();
 
                     foreach (var m in accounts)

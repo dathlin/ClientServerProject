@@ -906,17 +906,17 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_socket_server.KeyToken = CommonProtocol.KeyToken;//设置身份令牌
-                net_socket_server.LogNet =new LogNetSingle(LogSavePath + @"\net_log.txt");
-                net_socket_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
-                net_socket_server.FormatClientOnline = "#IP:{0} Name:{1}";//必须为#开头，具体格式可由自身需求确定
-                net_socket_server.IsSaveLogClientLineChange = true;//设置客户端上下线是否记录到日志
-                net_socket_server.ClientOnline += new NetBase.IEDelegate<AsyncStateOne>(Net_socket_server_ClientOnline);//客户端上线触发
-                net_socket_server.ClientOffline += new NetBase.IEDelegate<AsyncStateOne, string>(Net_socket_server_ClientOffline);//客户端下线触发，包括异常掉线
-                net_socket_server.AllClientsStatusChange += new NetBase.IEDelegate<string>(Net_socket_server_AllClientsStatusChange);//客户端上下线变化时触发
-                net_socket_server.MessageAlerts += new NetBase.IEDelegate<string>(Net_socket_server_MessageAlerts);//服务器产生提示消息触发
-                net_socket_server.AcceptByte += new NetBase.IEDelegate<AsyncStateOne, NetHandle, byte[]>(Net_socket_server_AcceptByte);//服务器接收到字节数据触发
-                net_socket_server.AcceptString += new NetBase.IEDelegate<AsyncStateOne, NetHandle, string>(Net_socket_server_AcceptString);//服务器接收到字符串数据触发
+                net_socket_server.KeyToken = CommonProtocol.KeyToken;                                                // 设置身份令牌
+                net_socket_server.LogNet =new LogNetSingle(LogSavePath + @"\net_log.txt");                           // 设置日志存储路径
+                net_socket_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);                                   // 默认debug及以上级别日志均进行存储，根据需要自行选择
+                net_socket_server.FormatClientOnline = "#IP:{0} Name:{1}";                                           // 必须为#开头，具体格式可由自身需求确定
+                net_socket_server.IsSaveLogClientLineChange = true;                                                  // 设置客户端上下线是否记录到日志
+                net_socket_server.ClientOnline += new NetBase.IEDelegate<AsyncStateOne>(Net_socket_server_ClientOnline);// 客户端上线触发
+                net_socket_server.ClientOffline += new NetBase.IEDelegate<AsyncStateOne, string>(Net_socket_server_ClientOffline);// 客户端下线触发，包括异常掉线
+                net_socket_server.AllClientsStatusChange += new NetBase.IEDelegate<string>(Net_socket_server_AllClientsStatusChange);// 客户端上下线变化时触发
+                net_socket_server.MessageAlerts += new NetBase.IEDelegate<string>(Net_socket_server_MessageAlerts);// 服务器产生提示消息触发
+                net_socket_server.AcceptByte += new NetBase.IEDelegate<AsyncStateOne, NetHandle, byte[]>(Net_socket_server_AcceptByte);// 服务器接收到字节数据触发
+                net_socket_server.AcceptString += new NetBase.IEDelegate<AsyncStateOne, NetHandle, string>(Net_socket_server_AcceptString);// 服务器接收到字符串数据触发
                 net_socket_server.ServerStart(CommonProtocol.Port_Main_Net);
             }
             catch (Exception ex)
@@ -985,6 +985,21 @@ namespace 软件系统服务端模版
 
         private void Net_socket_server_ClientOnline(AsyncStateOne object1)
         {
+            NetAccount account = new NetAccount
+            {
+                UserName = object1.LoginAlias,
+                Roles = UserServer.ServerRoles.GetRolesByUserName(object1.LoginAlias),
+                IpAddress = object1.IpAddress,
+                Alias = UserServer.ServerAccounts.GetAccountAlias(object1.LoginAlias),
+                Factory = UserServer.ServerAccounts.GetAccountFactory(object1.LoginAlias),
+                LoginTime = DateTime.Now,
+                UniqueId = object1.ClientUniqueID
+            };
+
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.新用户上线, JObject.FromObject(account).ToString());
+
+            
+            AddOnlineClient(account);
             // 上线后回发一条数据初始化信息
             JObject json = new JObject
             {
@@ -997,21 +1012,6 @@ namespace 软件系统服务端模版
             net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据, json.ToString());
             // 触发上下线功能
             UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1.IpAddress + "：" + object1.LoginAlias + " 上线");
-            
-            NetAccount account = new NetAccount();
-            account.UserName = object1.LoginAlias;
-            account.Roles = UserServer.ServerRoles.GetRolesByUserName(object1.LoginAlias);
-            account.IpAddress = object1.IpAddress;
-            account.Alias = UserServer.ServerAccounts.GetAccountAlias(object1.LoginAlias);
-            account.Factory = UserServer.ServerAccounts.GetAccountFactory(object1.LoginAlias);
-            account.LoginTime = DateTime.Now;
-            account.UniqueId = object1.ClientUniqueID;
-            
-            AddOnlineClient(account);
-
-            Thread.Sleep(100);
-            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.新用户上线, JObject.FromObject(account).ToString());
-
         }
 
         private List<NetAccount> OnlineClients = new List<NetAccount>();

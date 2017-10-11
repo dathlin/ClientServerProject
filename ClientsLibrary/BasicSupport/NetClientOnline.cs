@@ -63,17 +63,18 @@ namespace ClientsLibrary.BasicSupport
 
             if (index >= 0)
             {
+                int offect = MyControls[index].Height + 4;
+                Location_Y -= offect; 
                 MyControls[index].Dispose();
                 MyControls.RemoveAt(index);
 
                 // 重新计算偏移
-
-                Location_Y = 0 - VerticalScroll.Value;
-                for (int i = 0; i < MyControls.Count; i++)
+                
+                for (int i = index; i < MyControls.Count; i++)
                 {
-                    MyControls[i].Location = new Point(2, Location_Y);
-                    Location_Y += MyControls[i].Height + 4;      
+                    MyControls[i].Location = new Point(2, MyControls[i].Location.Y - offect);
                 }
+     
             }
 
             label2.Text = MyControls.Count.ToString();
@@ -85,8 +86,8 @@ namespace ClientsLibrary.BasicSupport
             panel1.Controls.Add(item);
             // 添加显示
             item.SetNetAccount(account);
-            item.Location = new Point(2, Location_Y);                                 // 控件的位置
-            int width = VerticalScroll.Visible ? Width - 4 - SystemInformation.VerticalScrollBarWidth : Width - 4; // 控件的宽度
+            item.Location = new Point(2, Location_Y - panel1.VerticalScroll.Value);                                       // 控件的位置
+            int width = panel1.VerticalScroll.Visible ? Width - 4 - SystemInformation.VerticalScrollBarWidth : Width - 4; // 控件的宽度
             item.Size = new Size(width, item.Size.Height);                            // 控件的大小
             item.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;  // 控件随窗口变化的样式
 
@@ -97,8 +98,6 @@ namespace ClientsLibrary.BasicSupport
         public void SetOnlineRender(NetAccount[] accounts)
         {
             SuspendLayout();
-            //清楚缓存
-            ClearControls();
 
             if (accounts != null)
             {
@@ -106,7 +105,6 @@ namespace ClientsLibrary.BasicSupport
 
                 if (accounts.Length > 0 && Width > 20)
                 {
-                    int Location_Y = 0 - VerticalScroll.Value;
                     //添加子控件
                     foreach (var m in accounts)
                     {
