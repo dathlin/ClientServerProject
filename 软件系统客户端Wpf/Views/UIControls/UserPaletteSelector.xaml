@@ -6,6 +6,7 @@
              xmlns:materialDesignColors="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:local="clr-namespace:软件系统客户端Wpf.Views"
+             xmlns:local1="clr-namespace:软件系统客户端Wpf.Views.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="400" Loaded="UserControl_Loaded">
     <UserControl.Resources>
@@ -84,7 +85,7 @@
     <DockPanel>
         <wpf:Card DockPanel.Dock="Top" Margin="2,0,2,0">
             <DockPanel>
-                <local:Palette DockPanel.Dock="Left" Width="200" />
+                <local1:Palette DockPanel.Dock="Left" Width="200" />
                 <TextBlock Margin="16" TextWrapping="Wrap" VerticalAlignment="Center">这是你当前的主题配色，可以在app.xaml中进行配置和初始化，
                     也可以在运行的时候进行更改。</TextBlock>
             </DockPanel>

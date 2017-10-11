@@ -21,14 +21,18 @@ namespace 软件系统客户端Wpf.Views
     /// </summary>
     public partial class UserChat : UserControl
     {
+        #region Constructor
+        
         public UserChat(Action<string> send)
         {
             InitializeComponent();
             SendString = send;
         }
 
+        #endregion
 
-        private Action<string> SendString = null;
+        #region Add Chat Show
+
 
         public void DealwithReceive(string str)
         {
@@ -41,6 +45,7 @@ namespace 软件系统客户端Wpf.Views
             }
             ScrollToDown();
         }
+
         /// <summary>
         /// 新增聊天的历史记录
         /// </summary>
@@ -62,10 +67,30 @@ namespace 软件系统客户端Wpf.Views
             ScrollToDown();
         }
 
+
+        #endregion
+
+        #region Chat Focus Scroll
+
+
         public void InputFocus()
         {
             //textBox1.Focus();
         }
+
+        /// <summary>
+        /// 光标滚动到最底端
+        /// </summary>
+        public void ScrollToDown()
+        {
+            TextBox_ChatHistory.ScrollToEnd();
+        }
+
+
+        #endregion
+
+        #region Text Send
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -76,27 +101,22 @@ namespace 软件系统客户端Wpf.Views
             }
         }
 
+
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            //按下Enter键后进行发送数据到服务器
-            if (!string.IsNullOrEmpty(TextBox_Send.Text))
+            if (e.Key == Key.Enter)
             {
-                if (e.Key == Key.Enter)
-                {
-                    SendString?.Invoke(TextBox_Send.Text);
-                    TextBox_Send.Text = "";
-                }
+                Button_Click(sender, new RoutedEventArgs());
             }
         }
 
+        #endregion
+
+        #region Private Member
 
 
-        /// <summary>
-        /// 光标滚动到最底端
-        /// </summary>
-        public void ScrollToDown()
-        {
-            TextBox_ChatHistory.ScrollToEnd();
-        }
+        private Action<string> SendString = null;
+
+        #endregion
     }
 }

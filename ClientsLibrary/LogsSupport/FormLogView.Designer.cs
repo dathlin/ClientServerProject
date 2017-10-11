@@ -320,7 +320,6 @@
             this.Controls.Add(this.userButton1);
             this.Controls.Add(this.userButton_login);
             this.Name = "FormLogView";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "日志查看器";
             this.Load += new System.EventHandler(this.FormLogView_Load);

@@ -23,12 +23,20 @@ namespace 软件系统客户端Wpf.Views.Controls
     /// </summary>
     public partial class UserClientRenderItem : UserControl
     {
+        #region Constructor
+        
         public UserClientRenderItem()
         {
             InitializeComponent();
         }
 
+        #endregion
 
+        #region Public Property
+
+        /// <summary>
+        /// 当前会话的唯一ID
+        /// </summary>
         public string UniqueId
         {
             get
@@ -37,6 +45,9 @@ namespace 软件系统客户端Wpf.Views.Controls
             }
         }
 
+        #endregion
+
+        #region Show Client Information
 
         public void SetClientRender(NetAccount account)
         {
@@ -47,17 +58,18 @@ namespace 软件系统客户端Wpf.Views.Controls
                 Factory.Text = $"({account.Factory})";
 
                 Roles.Children.Clear();
-                if(account.Roles?.Length>0)
+
+                if (account.Roles?.Length > 0)
                 {
-                    foreach(var m in account.Roles)
+                    foreach (var m in account.Roles)
                     {
-                        TextBlock block = new TextBlock();
-                        block.Background = Brushes.LightSkyBlue;
-                        block.Foreground = Brushes.Blue;
-                        block.Margin = new Thickness(0, 0, 4, 0);
-
-                        block.Text = m;
-
+                        TextBlock block = new TextBlock
+                        {
+                            Background = Brushes.LightSkyBlue,
+                            Foreground = Brushes.Blue,
+                            Margin = new Thickness(0, 0, 4, 0),
+                            Text = m
+                        };
                         Roles.Children.Add(block);
                     }
                 }
@@ -66,11 +78,14 @@ namespace 软件系统客户端Wpf.Views.Controls
                     Roles.Children.Add(new TextBlock());
                 }
 
+                // 启动线程池去显示头像
                 System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(ThreadPoolLoadPortrait), account);
-
             }
         }
 
+        #endregion
+
+        #region Update Portrait
 
         public void UpdatePortrait(string userName)
         {
@@ -79,6 +94,7 @@ namespace 软件系统客户端Wpf.Views.Controls
                 System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(ThreadPoolLoadPortrait), netAccount);
             }
         }
+
         private void ThreadPoolLoadPortrait(object obj)
         {
             // 向服务器请求小头像
@@ -102,12 +118,17 @@ namespace 软件系统客户端Wpf.Views.Controls
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    UserClient.LogNet?.WriteException("Thread Download Portrait Failed", ex);
                 }
             }
         }
 
+        #endregion
+
+        #region Pricvate Member
 
         private NetAccount netAccount = null;
+
+        #endregion
     }
 }

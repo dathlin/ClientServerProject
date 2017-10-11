@@ -14,6 +14,8 @@ namespace ClientsLibrary
 {
     public partial class FormLogView : Form
     {
+        #region Constructor
+        
         public FormLogView()
         {
             InitializeComponent();
@@ -23,12 +25,25 @@ namespace ClientsLibrary
             net_simplify_client = UserClient.Net_simplify_client;
         }
 
+        #endregion
+
+        #region Window Load
+        
         private void FormLogView_Load(object sender, EventArgs e)
         {
 
         }
 
+        #endregion
+
+        #region Private Member
+        
         private NetSimplifyClient net_simplify_client = null;
+
+        #endregion
+
+        #region Button Click
+
 
         private void ReadFromServer(int head_code)
         {
@@ -129,19 +144,8 @@ namespace ClientsLibrary
         {
             ClearFromServer(CommonHeadCode.SimplifyHeadCode.客户端日志清空);
         }
-        //private void userButton17_Click(object sender, EventArgs e)
-        //{
-        //    ReadFromServer(CommonHeadCode.SimplifyHeadCode.头像日志查看);
-        //}
 
-        //private void userButton16_Click(object sender, EventArgs e)
-        //{
-        //    ClearFromServer(CommonHeadCode.SimplifyHeadCode.头像日志清空);
-        //}
+        #endregion
 
-        private void logNetAnalysisControl1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

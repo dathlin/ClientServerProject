@@ -20,7 +20,7 @@ using System.IO;
 using System.Net;
 using ClientsLibrary.FileSupport;
 
-namespace 软件系统客户端Wpf.Views
+namespace 软件系统客户端Wpf.Views.Controls
 {
     /// <summary>
     /// UserFileRenderItem.xaml 的交互逻辑

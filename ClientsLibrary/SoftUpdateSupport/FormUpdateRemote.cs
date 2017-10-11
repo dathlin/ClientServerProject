@@ -14,23 +14,31 @@ using ClientsLibrary.FileSupport;
 namespace ClientsLibrary
 {
 
-    //=====================================================================================
-    //
-    //    用途：    本窗口用于实现对本系统的客户端进行全面的远程更新的操作。
-    //    第一步：  先将新版本的所有客户端传送到服务器端进行覆盖。
-    //    第二步：  再将版本号传送到服务器进行更新，这样所有的客户端登录后就会自动更新新的版本了
-    //
-    //=====================================================================================
+    /************************************************************************************************
+     *
+     *    用途：    本窗口用于实现对本系统的客户端进行全面的远程更新的操作。
+     *    第一步：  先将新版本的所有客户端传送到服务器端进行覆盖。
+     *    第二步：  再将版本号传送到服务器进行更新，这样所有的客户端登录后就会自动更新新的版本了
+     *
+     **************************************************************************************************/
 
 
     public partial class FormUpdateRemote : Form
     {
+        #region Constructor
+
+
         public FormUpdateRemote()
         {
             InitializeComponent();
 
             Icon = UserClient.GetFormWindowIcon();
         }
+
+        #endregion
+
+        #region Select File And Upload
+
 
         private void userButton_file_Click(object sender, EventArgs e)
         {
@@ -53,6 +61,12 @@ namespace ClientsLibrary
             }
         }
 
+
+        #endregion
+
+        #region Update Version
+
+
         private void userButton_version_Click(object sender, EventArgs e)
         {
             OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更新版本, textBox1.Text);
@@ -66,9 +80,16 @@ namespace ClientsLibrary
             }
         }
 
+
+        #endregion
+
+        #region Form Load
+        
         private void FormUpdateRemote_Load(object sender, EventArgs e)
         {
             textBox1.Text = UserClient.CurrentVersion.ToString();
         }
+
+        #endregion
     }
 }

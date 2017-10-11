@@ -78,23 +78,23 @@
     <Compile Include="Views\Controls\UserClientRenderItem.xaml.cs">
       <DependentUpon>UserClientRenderItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Palette.xaml.cs">
+    <Compile Include="Views\Controls\Palette.xaml.cs">
       <DependentUpon>Palette.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PaletteSelectorViewModel.cs" />
-    <Compile Include="Views\UserChat.xaml.cs">
+    <Compile Include="Views\UIControls\UserChat.xaml.cs">
       <DependentUpon>UserChat.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserFileRender.xaml.cs">
+    <Compile Include="Views\UIControls\UserFileRender.xaml.cs">
       <DependentUpon>UserFileRender.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserFileRenderItem.xaml.cs">
+    <Compile Include="Views\Controls\UserFileRenderItem.xaml.cs">
       <DependentUpon>UserFileRenderItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserHome.xaml.cs">
+    <Compile Include="Views\UIControls\UserHome.xaml.cs">
       <DependentUpon>UserHome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserPaletteSelector.xaml.cs">
+    <Compile Include="Views\UIControls\UserPaletteSelector.xaml.cs">
       <DependentUpon>UserPaletteSelector.xaml</DependentUpon>
     </Compile>
     <Page Include="LoginWindow.xaml">
@@ -120,27 +120,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Palette.xaml">
+    <Page Include="Views\Controls\Palette.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserChat.xaml">
+    <Page Include="Views\UIControls\UserChat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserFileRender.xaml">
+    <Page Include="Views\UIControls\UserFileRender.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserFileRenderItem.xaml">
+    <Page Include="Views\Controls\UserFileRenderItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserHome.xaml">
+    <Page Include="Views\UIControls\UserHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserPaletteSelector.xaml">
+    <Page Include="Views\UIControls\UserPaletteSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

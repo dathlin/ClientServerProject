@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace 软件系统客户端Wpf.Views
+namespace 软件系统客户端Wpf.Views.Controls
 {
     /// <summary>
     /// Palette.xaml 的交互逻辑
