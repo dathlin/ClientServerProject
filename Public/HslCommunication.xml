@@ -2845,13 +2845,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.AsyncStateBase.BytesSizeToString(System.Int32)">
-            <summary>
-            获取指定长度的数据的文本描述
-            </summary>
-            <param name="size"></param>
-            <returns></returns>
-        </member>
         <member name="T:HslCommunication.Enthernet.AsyncStateSend">
             <summary>
             发送数据的异步状态
@@ -2936,75 +2929,6 @@
             <summary>
             清除本次的接收内容
             </summary>
-        </member>
-        <member name="T:HslCommunication.Enthernet.FileStateOne">
-            <summary>
-            用于文件传输的时候的封装对象
-            </summary>
-        </member>
-        <member name="F:HslCommunication.Enthernet.FileStateOne.ReceiveBuffer">
-            <summary>
-            用来缓冲长度的字节
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileStateOne.AlreadyReceivedLength">
-            <summary>
-            已经接收或上传的数据长度，用来判断接收是否完成的依据
-            </summary>
-        </member>
-        <member name="F:HslCommunication.Enthernet.FileStateOne.SendBuffer">
-            <summary>
-            用于发送数据的
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileStateOne.AlreadySendLength">
-            <summary>
-            已经发送的数据长度，用来判定是否发送完成的依据
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileStateOne.WorkSocket">
-            <summary>
-            通信用的socket
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileStateOne.ConnectTime">
-            <summary>
-            套接字的连接时间
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileStateOne.BytesSizeToString(System.Int32)">
-            <summary>
-            获取指定长度的数据的文本描述
-            </summary>
-            <param name="size"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileStateOne.Close">
-            <summary>
-            关闭网络资源
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileStateOne.IsFinishOperate">
-            <summary>
-            指示本操作是否完成，也可能因为意外终止
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileStateOne.FileContentLength">
-            <summary>
-            文件的长度
-            </summary>
-        </member>
-        <member name="P:HslCommunication.Enthernet.FileStateOne.LastReceivedLength">
-            <summary>
-            上次已接收或已上传的长度，用来计算网速
-            </summary>
-        </member>
-        <member name="M:HslCommunication.Enthernet.FileStateOne.RenderInformation(System.Boolean)">
-            <summary>
-            用于显示的消息内容
-            </summary>
-            <param name="is_download"></param>
-            <returns></returns>
         </member>
         <member name="T:HslCommunication.HslTimeOut">
             <summary>
@@ -3881,11 +3805,11 @@
             客户端服务端都拥有的一些方法
             </summary>
         </member>
-        <member name="M:HslCommunication.NetShareBase.SendBytesAsync(System.Net.Sockets.Socket,System.Byte[])">
+        <member name="M:HslCommunication.NetShareBase.SendBytesAsync(HslCommunication.Enthernet.AsyncStateOne,System.Byte[])">
             <summary>
             发送数据的方法
             </summary>
-            <param name="socket">通信用的核心对象</param>
+            <param name="stateOne">通信用的核心对象</param>
             <param name="content"></param>
         </member>
         <member name="M:HslCommunication.NetShareBase.SendCallBack(System.IAsyncResult)">
