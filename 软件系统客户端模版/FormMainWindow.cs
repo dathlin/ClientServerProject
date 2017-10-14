@@ -93,6 +93,7 @@ namespace 软件系统客户端模版
             net_socket_client.LoginSuccess += Net_socket_client_LoginSuccess;
             net_socket_client.AcceptByte += Net_socket_client_AcceptByte;
             net_socket_client.AcceptString += Net_socket_client_AcceptString;
+            net_socket_client.BeforReConnected += Net_socket_client_BeforReConnected;
             
             // 显示公告
             label_Announcement.Text = UserClient.Announcement;
@@ -102,6 +103,8 @@ namespace 软件系统客户端模版
             //初始化窗口
             MainRenderInitialization();
         }
+
+
         private void FormMainWindow_Shown(object sender, EventArgs e)
         {
             // 窗口显示
@@ -489,6 +492,17 @@ namespace 软件系统客户端模版
                 toolStripStatusLabel_status.Text = "客户端启动成功";
             }));
         }
+
+
+        private void Net_socket_client_BeforReConnected()
+        {
+            // 和服务器断开后，重新连接之前操作，清理在线信息
+            if (IsHandleCreated && IsWindowShow) Invoke(new Action(() =>
+            {
+                netClientOnline1.ClearOnlineClients();
+            }));
+        }
+
 
         private void Net_socket_client_LoginFailed(int object1)
         {

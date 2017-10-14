@@ -23,7 +23,6 @@ using System.Threading;
 using 软件系统客户端Wpf.Views;
 using System.Windows.Media.Animation;
 using MaterialDesignThemes.Wpf;
-using CommonLibrary;
 
 namespace 软件系统客户端Wpf
 {
@@ -55,7 +54,7 @@ namespace 软件系统客户端Wpf
     /*****************************************************************************************
      * 
      *    权限说明    在进行特定权限操作的业务逻辑时，应该提炼成一个角色，这样可以动态绑定带有这些功能的账户
-     *    示例        if (UserClient.CheckUserAccountRole("审计员")) { dosomething(); }// 获取了审计员的角色，名字此处示例
+     *    示例        if (UserClient.CheckUserAccountRole("[审计员的GUID码]")) { dosomething(); }// 获取了审计员的角色，名字此处示例
      * 
      ******************************************************************************************/
 
@@ -83,23 +82,24 @@ namespace 软件系统客户端Wpf
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            //窗口激活就触发，不应把初始代码放这里
+            // 窗口激活就触发，不应把初始代码放这里
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             IsWindowShow = false;
 
-            //通知服务器退出网络服务
+            // 通知服务器退出网络服务
             net_socket_client.ClientClose();
+            
 
-            //保存当前的颜色选择
+            // 保存当前的颜色选择
             var p = new PaletteHelper().QueryPalette();
             using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + @"Palette.txt", false, Encoding.UTF8))
             {
                 sw.Write(JObject.FromObject(p).ToString());
             }
-            //等待一秒退出
+            // 等待一秒退出
             using (FormWaitInfomation fwm = new FormWaitInfomation("正在退出程序...", 1000))
             {
                 fwm.ShowDialog();
@@ -183,6 +183,7 @@ namespace 软件系统客户端Wpf
             net_socket_client.LoginSuccess += Net_socket_client_LoginSuccess;
             net_socket_client.AcceptByte += Net_socket_client_AcceptByte;
             net_socket_client.AcceptString += Net_socket_client_AcceptString;
+            net_socket_client.BeforReConnected += Net_socket_client_BeforReConnected;
 
             TextBlock_Announcement.Text = UserClient.Announcement;
 
@@ -194,6 +195,8 @@ namespace 软件系统客户端Wpf
             //加载主题
             new PaletteHelper().SetLightDark(UserClient.JsonSettings.IsThemeDark);
         }
+
+
 
         private void AddStringRenderShow(string str)
         {
@@ -553,25 +556,36 @@ namespace 软件系统客户端Wpf
 
         private void Net_socket_client_AcceptByte(AsyncStateOne object1, NetHandle customer, byte[] object2)
         {
-            //接收到服务器发来的字节数据
+            // 接收到服务器发来的字节数据
             if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
             {
                 MessageBox.Show(customer.ToString());
             }));
         }
 
+
+
         private void Net_socket_client_LoginSuccess()
         {
-            //登录成功，或重新登录成功的事件，有些数据的初始化可以放在此处
+            // 登录成功，或重新登录成功的事件，有些数据的初始化可以放在此处
             if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
             {
                 TextBlock_ClientStatus.Text = "客户端启动成功";
             }));
         }
 
+        private void Net_socket_client_BeforReConnected()
+        {
+            // 和服务器断开，重新连接之前发生的事件，清理已加载资源使用，比如客户端在线信息
+            if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
+            {
+                ClientsOnline.Children?.Clear();
+            }));
+        }
+
         private void Net_socket_client_LoginFailed(int object1)
         {
-            //登录失败的情况，如果连续三次连接失败，请考虑退出系统
+            // 登录失败的情况，如果连续三次连接失败，请考虑退出系统
             if (object1 > 3)
             {
                 if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
@@ -583,7 +597,7 @@ namespace 软件系统客户端Wpf
 
         private void Net_socket_client_MessageAlerts(string object1)
         {
-            //信息提示
+            // 信息提示
             if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
             {
                 TextBlock_ClientStatus.Text = object1;

@@ -2568,6 +2568,11 @@
             服务器的异常，启动，等等一般消息产生的时候，出发此事件
             </summary>
         </member>
+        <member name="E:HslCommunication.Enthernet.NetComplexClient.BeforReConnected">
+            <summary>
+            在客户端断开后并在重连服务器之前触发，用于清理系统资源
+            </summary>
+        </member>
         <member name="E:HslCommunication.Enthernet.NetComplexClient.AcceptString">
             <summary>
             当接收到文本数据的时候,触发此事件

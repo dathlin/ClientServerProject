@@ -28,8 +28,17 @@ namespace ClientsLibrary.BasicSupport
                 MyControls[i].Dispose();
                 MyControls.RemoveAt(i);
             }
+
+            Location_Y = 0;
         }
 
+        /// <summary>
+        /// 清理掉所有的在线信息
+        /// </summary>
+        public void ClearOnlineClients()
+        {
+            ClearControls();
+        }
 
         public void ClientOnline(NetAccount account)
         {

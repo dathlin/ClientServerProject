@@ -36,7 +36,7 @@ namespace ClientsLibrary
         /// <summary>
         /// 本软件的当前版本，用来验证更新的关键依据
         /// </summary>
-        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.171011");
+        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.171013");
 
 
         /// <summary>
