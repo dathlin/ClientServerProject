@@ -58,6 +58,9 @@ namespace 软件系统客户端模版
             InitializeComponent();
 
             Icon = UserClient.GetFormWindowIcon();
+
+            // 初始化头像管理器
+            UserClient.PortraitManager = new UserPortrait(Application.StartupPath + @"\Portrait\" + UserClient.UserAccount.UserName);
         }
 
         #endregion
@@ -139,12 +142,12 @@ namespace 软件系统客户端模版
             
             // 启动网络服务
             Net_Socket_Client_Initialization();
-            // 启动头像
-            SoftUserPortraitInitialization();
             // 启动定时器
             TimeTickInitilization();
+
+            
             // 显示头像
-            SoftUserPortrait.LoadUserSmallPortraint();
+            pictureBox1.Image = UserClient.PortraitManager.GetSmallPortraitByUserName(UserClient.UserAccount.UserName);
         }
         private void FormMainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -327,7 +330,7 @@ namespace 软件系统客户端模版
 
         private void 我的信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (FormAccountDetails form = new FormAccountDetails(SoftUserPortrait))
+            using (FormAccountDetails form = new FormAccountDetails())
             {
                 form.ShowDialog();
             }
@@ -346,6 +349,15 @@ namespace 软件系统客户端模版
             using (FormConfiguration fc = new FormConfiguration())
             {
                 fc.ShowDialog();
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            //点击了头像，请求下载高清版本头像
+            using (FormMatterRemind fmr = new FormMatterRemind("正在下载图片", UserClient.PortraitManager.ThreadPoolDownloadSizeLarge))
+            {
+                fmr.ShowDialog();
             }
         }
 
@@ -468,8 +480,13 @@ namespace 软件系统客户端模版
             }
             else if(customer == CommonHeadCode.MultiNetHeadCode.新头像更新)
             {
+                UserClient.PortraitManager.UpdateSmallPortraitByName(data);
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
+                    if(data == UserClient.UserAccount.UserName)
+                    {
+                        pictureBox1.Image = UserClient.PortraitManager.GetSmallPortraitByUserName(data);
+                    }
                     netClientOnline1.ClientUpdatePortrait(data);
                 }));
             }
@@ -721,59 +738,6 @@ namespace 软件系统客户端模版
             }
         }
 
-
-
-
-        #endregion
-
-        #region 头像图片上传下载块
-
-
-        private UserPortrait SoftUserPortrait { get; set; }
-
-        private void SoftUserPortraitInitialization()
-        {
-            SoftUserPortrait = new UserPortrait(Application.StartupPath +
-                @"\Portrait\" + UserClient.UserAccount.UserName, LoadSmallProtraitAsync);
-        }
-
-
-        private void LoadSmallProtraitAsync(Bitmap bitmap)
-        {
-            if (IsHandleCreated && InvokeRequired)
-            {
-                Invoke(new Action(() =>
-                {
-                    LoadSmallProtraitAsync(bitmap);
-                }));
-                return;
-            }
-
-            pictureBox1.Image = bitmap;
-        }
-
-        private void UnloadSmallProtrait()
-        {
-            if (IsHandleCreated && InvokeRequired)
-            {
-                Invoke(new Action(() =>
-                {
-                    UnloadSmallProtrait();
-                }));
-                return;
-            }
-
-            pictureBox1.Image = null;
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            //点击了头像，请求下载高清版本头像
-            using (FormMatterRemind fmr = new FormMatterRemind("正在下载图片", SoftUserPortrait.ThreadPoolDownloadSizeLarge))
-            {
-                fmr.ShowDialog();
-            }
-        }
 
 
 

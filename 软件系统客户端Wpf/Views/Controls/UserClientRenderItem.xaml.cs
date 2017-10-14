@@ -100,26 +100,11 @@ namespace 软件系统客户端Wpf.Views.Controls
             // 向服务器请求小头像
             if (obj is NetAccount m_NetAccount)
             {
-                try
+                System.Drawing.Bitmap bitmap = UserClient.PortraitManager.GetSmallPortraitByUserName(m_NetAccount.UserName);
+                Dispatcher.Invoke(new Action(() =>
                 {
-                    System.Drawing.Bitmap bitmap = UserPortrait.DownloadSmallPortraint(m_NetAccount.UserName);
-                    MemoryStream ms = new MemoryStream();
-                    bitmap.Save(ms, bitmap.RawFormat);
-                    bitmap.Dispose();
-
-                    Dispatcher.Invoke(new Action(() =>
-                    {
-                        BitmapImage bi = new BitmapImage();
-                        bi.BeginInit();
-                        bi.StreamSource = ms;
-                        bi.EndInit();
-                        Image1.Source = bi;
-                    }));
-                }
-                catch (Exception ex)
-                {
-                    UserClient.LogNet?.WriteException("Thread Download Portrait Failed", ex);
-                }
+                    Image1.Source = AppWpfHelper.TranslateImageToBitmapImage(bitmap);
+                }));
             }
         }
 

@@ -70,6 +70,8 @@ namespace 软件系统客户端Wpf
         public MainWindow()
         {
             InitializeComponent();
+
+            UserClient.PortraitManager = new UserPortrait(AppDomain.CurrentDomain.BaseDirectory);
         }
 
         #endregion
@@ -112,10 +114,10 @@ namespace 软件系统客户端Wpf
             //窗口显示
             IsWindowShow = true;
 
-            //udp测试
-            //SendServerUdpData(0, "显示了窗体");
+            // udp测试
+            // SendServerUdpData(0, "显示了窗体");
 
-            //是否显示更新日志，显示前进行判断该版本是否已经显示过了
+            // 是否显示更新日志，显示前进行判断该版本是否已经显示过了
             if (!UserClient.JsonSettings.IsNewVersionRunning)
             {
                 UserClient.JsonSettings.IsNewVersionRunning = false;
@@ -126,7 +128,7 @@ namespace 软件系统客户端Wpf
 
 
 
-            //根据权限使能菜单
+            // 根据权限使能菜单
             if(UserClient.UserAccount.Grade < AccountGrade.Admin)
             {
                 MenuItem公告管理.IsEnabled = false;
@@ -145,15 +147,15 @@ namespace 软件系统客户端Wpf
             }
 
 
-            //启动网络服务
+            // 启动网络服务
             Net_Socket_Client_Initialization();
-            //启动定时器
+            // 启动定时器
             TimeTickInitilization();
-            //显示头像
-            SoftUserPortraitInitialization();
-            SoftUserPortrait.LoadUserSmallPortraint();
 
+            // 显示名称和加载头像
             AccountChip.Content = UserClient.UserAccount.UserName;
+            AccountPortrait.Source = AppWpfHelper.TranslateImageToBitmapImage(
+                UserClient.PortraitManager.GetSmallPortraitByUserName(UserClient.UserAccount.UserName));
 
             SetShowRenderControl(UIControl_Home);
         }
@@ -328,7 +330,7 @@ namespace 软件系统客户端Wpf
 
         private void MenuItem我的信息_Click(object sender, RoutedEventArgs e)
         {
-            using (FormAccountDetails form = new FormAccountDetails(SoftUserPortrait))
+            using (FormAccountDetails form = new FormAccountDetails())
             {
                 form.ShowDialog();
             }
@@ -403,8 +405,17 @@ namespace 软件系统客户端Wpf
             }
         }
 
+        private void AccountChip_Click(object sender, RoutedEventArgs e)
+        {
+            // 点击了头像，请求查看高清版本头像
+            using (FormMatterRemind fmr = new FormMatterRemind("正在下载图片", UserClient.PortraitManager.ThreadPoolDownloadSizeLarge))
+            {
+                fmr.ShowDialog();
+            }
+        }
+
         #endregion
-        
+
         #region 异步网络块
 
         private NetComplexClient net_socket_client = new NetComplexClient();
@@ -544,8 +555,14 @@ namespace 软件系统客户端Wpf
             }
             else if(customer == CommonHeadCode.MultiNetHeadCode.新头像更新)
             {
+                UserClient.PortraitManager.UpdateSmallPortraitByName(data);
                 if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
                 {
+                    if (data == UserClient.UserAccount.UserName)
+                    {
+                        AccountPortrait.Source = AppWpfHelper.TranslateImageToBitmapImage(
+                            UserClient.PortraitManager.GetSmallPortraitByUserName(data));
+                    }
                     foreach (Views.Controls.UserClientRenderItem m in ClientsOnline.Children)
                     {
                         m.UpdatePortrait(data);
@@ -694,50 +711,7 @@ namespace 软件系统客户端Wpf
         }
 
         #endregion
-
-        #region 头像图片上传下载块
-
-
-        private UserPortrait SoftUserPortrait { get; set; }
-
-        private void SoftUserPortraitInitialization()
-        {
-            SoftUserPortrait = new UserPortrait(AppDomain.CurrentDomain.BaseDirectory +
-                @"Portrait\" + UserClient.UserAccount.UserName, ShowSmallPortrait);
-        }
-
-        private void ShowSmallPortrait(System.Drawing.Bitmap bitmap)
-        {
-            if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
-            {
-                MemoryStream ms = new MemoryStream();
-                bitmap.Save(ms, bitmap.RawFormat);
-                bitmap.Dispose();
-
-                BitmapImage bi = new BitmapImage();
-                bi.BeginInit();
-                bi.StreamSource = ms;
-                bi.EndInit();
-
-                AccountPortrait.Source = bi;
-            }));
-        }
-
         
-
-        
-        private void AccountChip_Click(object sender, RoutedEventArgs e)
-        {
-            // 点击了头像，请求查看高清版本头像
-            using (FormMatterRemind fmr = new FormMatterRemind("正在下载图片", SoftUserPortrait.ThreadPoolDownloadSizeLarge))
-            {
-                fmr.ShowDialog();
-            }
-        }
-
-
-        #endregion
-
         #region 多界面管理块
 
         private List<UserControl> all_main_render = new List<UserControl>();

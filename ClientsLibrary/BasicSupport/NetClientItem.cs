@@ -77,33 +77,14 @@ namespace ClientsLibrary.BasicSupport
             // 向服务器请求小头像
             if (m_NetAccount != null)
             {
-                try
-                {
-                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                Bitmap bitmap = UserClient.PortraitManager.GetSmallPortraitByUserName(m_NetAccount.UserName);
 
-                    HslCommunication.OperateResult result = UserClient.Net_File_Client.DownloadFile(
-                        PortraitSupport.SmallPortrait,
-                        "Files",
-                        "Portrait",
-                        m_NetAccount.UserName,
-                        null,
-                        ms
-                        );
-                    if (result.IsSuccess)
-                    {
-                        Bitmap bitmap = new Bitmap(ms);
-                        pictureBox1.Image = bitmap;
-                    }
-                    else
-                    {
-                        // 可能网络错误，也可能因为服务器没有头像
-                        // MessageBox.Show(result.Message);
-                        pictureBox1.Image = Properties.Resources.person_1;
-                    }
-                }
-                catch (Exception ex)
+                if(IsHandleCreated)
                 {
-                    MessageBox.Show(ex.Message);
+                    Invoke(new Action(() =>
+                    {
+                        pictureBox1.Image = bitmap;
+                    }));
                 }
             }
         }

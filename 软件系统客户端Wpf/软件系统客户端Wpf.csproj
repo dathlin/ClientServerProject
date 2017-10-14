@@ -74,6 +74,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AppWpfHelper.cs" />
     <Compile Include="Views\AnotherCommandImplementation.cs" />
     <Compile Include="Views\Controls\UserClientRenderItem.xaml.cs">
       <DependentUpon>UserClientRenderItem.xaml</DependentUpon>

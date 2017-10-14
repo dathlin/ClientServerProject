@@ -36,7 +36,7 @@ namespace ClientsLibrary
         /// <summary>
         /// 本软件的当前版本，用来验证更新的关键依据
         /// </summary>
-        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.171013");
+        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.171014");
 
 
         /// <summary>
@@ -133,8 +133,10 @@ namespace ClientsLibrary
             return false;
         }
 
-
-
+        /// <summary>
+        /// 头像管理器
+        /// </summary>
+        public static UserPortrait PortraitManager { get; set; }
 
 
 

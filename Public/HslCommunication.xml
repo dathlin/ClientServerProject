@@ -706,6 +706,20 @@
             <param name="filePath"></param>
             <returns></returns>
         </member>
+        <member name="M:HslCommunication.BasicFramework.SoftBasic.CalculateStreamMD5(System.IO.Stream)">
+            <summary>
+            获取数据流的md5码
+            </summary>
+            <param name="stream">数据流，可以是内存流，也可以是文件流</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.BasicFramework.SoftBasic.CalculateStreamMD5(System.Drawing.Bitmap)">
+            <summary>
+            获取内存图片的md5码
+            </summary>
+            <param name="bitmap">内存图片</param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.BasicFramework.SoftBasic.GetSizeDescription(System.Int64)">
             <summary>
             从一个字节大小返回带单位的描述
@@ -2147,23 +2161,23 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileClientBase.DownloadFileBase(System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64},System.String)">
+        <member name="M:HslCommunication.Enthernet.FileClientBase.DownloadFileBase(System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64},System.Object)">
             <summary>
-            基础下载文件信息
+            基础下载信息
             </summary>
             <param name="factory"></param>
             <param name="group"></param>
             <param name="id"></param>
             <param name="fileName">服务器的文件名称</param>
             <param name="processReport">下载的进度报告</param>
-            <param name="fileSaveName">本地保存的文件名称，包含完整路径名</param>
+            <param name="source">数据源信息，决定最终存储到哪里去</param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Enthernet.FileClientBase.UploadFileBase(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
+        <member name="M:HslCommunication.Enthernet.FileClientBase.UploadFileBase(System.Object,System.String,System.String,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
             <summary>
             上传文件给服务器
             </summary>
-            <param name="fileName">本地完整路径的文件名</param>
+            <param name="source">数据源，可以是文件名，也可以是数据流</param>
             <param name="serverName">在服务器保存的文件名，不包含驱动器路径</param>
             <param name="factory"></param>
             <param name="group"></param>
@@ -2212,6 +2226,18 @@
             <param name="stream">流数据</param>
             <returns></returns>
         </member>
+        <member name="M:HslCommunication.Enthernet.IntegrationFileClient.DownloadFile(System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64},System.Drawing.Bitmap@)">
+            <summary>
+            下载服务器的文件到本地的数据流中
+            </summary>
+            <param name="fileName">文件名称，带后缀</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
+            <param name="processReport">下载的进度报告</param>
+            <param name="bitmap">内存文件</param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.Enthernet.IntegrationFileClient.UploadFile(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
             <summary>
             上传本地的文件到服务器操作
@@ -2225,6 +2251,35 @@
             <param name="fileUpload">文件的上传人</param>
             <param name="processReport">上传的进度报告</param>
             <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.IntegrationFileClient.UploadFile(System.IO.Stream,System.String,System.String,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
+            <summary>
+            上传数据流到服务器操作
+            </summary>
+            <param name="stream">数据流内容</param>
+            <param name="serverName">服务器存储的文件名称，带后缀</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
+            <param name="fileTag">文件的额外描述</param>
+            <param name="fileUpload">文件的上传人</param>
+            <param name="processReport">上传的进度报告</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Enthernet.IntegrationFileClient.UploadFile(System.Drawing.Bitmap,System.String,System.String,System.String,System.String,System.String,System.String,System.Action{System.Int64,System.Int64})">
+            <summary>
+            上传内存图片到服务器操作
+            </summary>
+            <param name="bitmap">内存图片，不能为空</param>
+            <param name="serverName">服务器存储的文件名称，带后缀</param>
+            <param name="factory">第一大类</param>
+            <param name="group">第二大类</param>
+            <param name="id">第三大类</param>
+            <param name="fileTag">文件的额外描述</param>
+            <param name="fileUpload">文件的上传人</param>
+            <param name="processReport">上传的进度报告</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:HslCommunication.Enthernet.IntegrationFileClient.TranslateFileName(System.String,System.String,System.String,System.String)">
             <summary>
@@ -3892,6 +3947,20 @@
             </summary>
             <param name="socket">套接字</param>
             <param name="filename">文件名称，文件必须存在</param>
+            <param name="servername">远程端的文件名称</param>
+            <param name="filetag">文件的额外标签</param>
+            <param name="fileupload">文件的上传人</param>
+            <param name="result">操作结果对象</param>
+            <param name="sendReport">发送进度报告</param>
+            <param name="failedString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.NetShareBase.SendFileAndCheckReceive(System.Net.Sockets.Socket,System.IO.Stream,System.String,System.String,System.String,HslCommunication.OperateResult,System.Action{System.Int64,System.Int64},System.String)">
+            <summary>
+            [自校验] 将流数据发送至套接字，具体发送细节将在继承类中实现，如果结果异常，则结束通讯
+            </summary>
+            <param name="socket">套接字</param>
+            <param name="stream">文件名称，文件必须存在</param>
             <param name="servername">远程端的文件名称</param>
             <param name="filetag">文件的额外标签</param>
             <param name="fileupload">文件的上传人</param>

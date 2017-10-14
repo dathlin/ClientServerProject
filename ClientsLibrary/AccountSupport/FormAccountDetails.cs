@@ -13,6 +13,7 @@ using HslCommunication;
 using HslCommunication.BasicFramework;
 using System.IO;
 using ClientsLibrary.FileSupport;
+using Newtonsoft.Json.Linq;
 
 namespace ClientsLibrary
 {
@@ -21,11 +22,10 @@ namespace ClientsLibrary
 
         #region Constructor
 
-        public FormAccountDetails(UserPortrait userPortrait)
+        public FormAccountDetails()
         {
             InitializeComponent();
             Icon = UserClient.GetFormWindowIcon();
-            UserPortrait = userPortrait;
         }
 
         #endregion
@@ -107,47 +107,202 @@ namespace ClientsLibrary
 
         #region Load Portrait
 
-        public UserPortrait UserPortrait { get; }
-        
- 
+
+
         private void pictureBox_UserPortrait_Click(object sender, EventArgs e)
         {
-            UserPortrait.ChangePortrait(LoadLargeProtrait,UnloadLargeProtrait);
+            // UserPortrait.ChangePortrait(LoadLargeProtrait,UnloadLargeProtrait);
+            using (FormPortraitSelect fps = new FormPortraitSelect())
+            {
+                if (fps.ShowDialog() == DialogResult.OK)
+                {
+                    string FileSavePath = Application.StartupPath + @"\Portrait\" + UserClient.UserAccount.UserName;
+
+                    string path300 = FileSavePath + @"\" + PortraitSupport.LargePortrait;
+                    string path32 = FileSavePath + @"\" + PortraitSupport.SmallPortrait;
+                    
+
+                    Bitmap bitmap300 = fps.GetSpecifiedSizeImage(300);
+                    Bitmap bitmap32 = fps.GetSpecifiedSizeImage(32);
+                    
+                    try
+                    {
+                        bitmap300.Save(path300, System.Drawing.Imaging.ImageFormat.Png);
+                        bitmap32.Save(path32, System.Drawing.Imaging.ImageFormat.Png);
+                        bitmap32.Dispose();
+                        bitmap300.Dispose();
+                    }
+                    catch (Exception ex)
+                    {
+                        // 文件被占用的时候无法进行覆盖
+                        UserClient.LogNet?.WriteException("头像保存失败！", ex);
+                        MessageBox.Show("头像保存失败，原因：" + ex.Message);
+
+                        // 加载回旧的文件
+                        pictureBox_UserPortrait.Load(path300);
+                        return;
+                    }
+
+
+                    // 传送服务器
+                    using (FormFileOperate ffo = new FormFileOperate(
+                        UserClient.Net_File_Client,
+                        new string[]
+                        {
+                            path300,
+                            path32
+                        }, "Files", "Portrait", UserClient.UserAccount.UserName))
+                    {
+                        ffo.ShowDialog();
+                    }
+
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(obj =>
+                    {
+                        // 上传文件MD5码
+                        string SmallPortraitMD5 = "";
+                        string LargePortraitMD5 = "";
+
+                        try
+                        {
+                            SmallPortraitMD5 = SoftBasic.CalculateFileMD5(path32);
+                            LargePortraitMD5 = SoftBasic.CalculateFileMD5(path300);
+                        }
+                        catch (Exception ex)
+                        {
+                            UserClient.LogNet.WriteException("获取文件MD5码失败：", ex);
+                            MessageBox.Show("文件信息确认失败，请重新上传！");
+                            return;
+                        }
+
+                        JObject json = new JObject
+                        {
+                            { UserAccount.UserNameText, new JValue(UserClient.UserAccount.UserName) },
+                            { UserAccount.SmallPortraitText, new JValue(SmallPortraitMD5) },
+                            { UserAccount.LargePortraitText, new JValue(LargePortraitMD5) }
+                        };
+
+
+                        OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(
+                            CommonHeadCode.SimplifyHeadCode.上传头像MD5,
+                            json.ToString());
+
+                        if (result.IsSuccess)
+                        {
+                            if (result.Content.Substring(0, 2) == "成功")
+                            {
+                                UserClient.UserAccount.SmallPortraitMD5 = SmallPortraitMD5;
+                                UserClient.UserAccount.LargePortraitMD5 = LargePortraitMD5;
+                            }
+                            else
+                            {
+                                MessageBox.Show("上传头像失败！原因：" + result.Content);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("上传头像失败！原因：" + result.Message);
+                        }
+
+                        // 先显示信息
+                        try
+                        {
+                            pictureBox_UserPortrait.Image = new Bitmap(new System.IO.MemoryStream(File.ReadAllBytes(path300)));
+                        }
+                        catch
+                        {
+
+                        }
+                    }),
+                    null
+                    );
+                }
+
+            }
         }
 
         private void ThreadPoolLoadLargePortrait(object obj)
         {
-            Thread.Sleep(200);
-            UserPortrait.LoadUserLargePortraint(LoadLargeProtrait, UnloadLargeProtrait);
-        }
-
-        private void UnloadLargeProtrait()
-        {
-            if (IsHandleCreated && InvokeRequired)
+            // 先获取服务器端的MD5码
+            string fileServerMd5 = UserClient.UserAccount.LargePortraitMD5;
+            if (string.IsNullOrEmpty(fileServerMd5))
             {
-                BeginInvoke(new Action(() =>
-                {
-                    UnloadLargeProtrait();
-                }));
-                return;
+                return; // 没有文件
             }
 
-            pictureBox_UserPortrait.Image = null;
-        }
-
-        private void LoadLargeProtrait(string fileName)
-        {
-            if (IsHandleCreated && InvokeRequired)
+            string fileName = Application.StartupPath + @"\Portrait\" + UserClient.UserAccount.UserName + @"\" + PortraitSupport.LargePortrait;
+            if(File.Exists(fileName))
             {
-                BeginInvoke(new Action(() =>
+                bool loadSuccess = false;
+                Invoke(new Action(() =>
                 {
-                    LoadLargeProtrait(fileName);
+                    try
+                    {
+                        pictureBox_UserPortrait.Image = new Bitmap(new MemoryStream(File.ReadAllBytes(fileName)));
+                        loadSuccess = true;
+                    }
+                    catch
+                    {
+
+                    }
                 }));
-                return;
+
+                if (!loadSuccess) goto P1; // 加载不成功，直接重新下载
+
+                // 计算md5
+                string md5 = string.Empty;
+
+                try
+                {
+                    md5 = SoftBasic.CalculateFileMD5(fileName);
+                }
+                catch
+                {
+
+                }
+
+                if(md5 == UserClient.UserAccount.LargePortraitMD5)
+                {
+                    return;
+                }
+            }
+            
+            P1:
+            MemoryStream ms = new MemoryStream();
+            OperateResult result = UserClient.Net_File_Client.DownloadFile(
+                PortraitSupport.LargePortrait,
+                "Files",
+                "Portrait",
+                UserClient.UserAccount.UserName, 
+                null,
+                ms
+                );
+
+            if(result.IsSuccess)
+            {
+                if(IsHandleCreated) Invoke(new Action(() =>
+                {
+                    // 下载完成
+                    Bitmap bitmap = new Bitmap(ms);
+                    pictureBox_UserPortrait.Image = bitmap;
+
+                    try
+                    {
+                        bitmap.Save(fileName);
+                    }
+                    catch
+                    {
+
+                    }
+                }));
+            }
+            else
+            {
+                // 下载异常，丢弃
             }
 
-            pictureBox_UserPortrait.ImageLocation = fileName;
+            ms.Dispose();
         }
+        
 
 
         #endregion
