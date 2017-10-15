@@ -16,13 +16,18 @@ namespace ClientsLibrary
     {
         #region Constructor
 
-
-        public FormAccountSelect(List<string> selected = null)
+        /// <summary>
+        /// 实例化一个选择服务器账户的窗口，该窗口可以根据工厂属性或是角色属性来筛选
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <param name="selected"></param>
+        public FormAccountSelect(string condition = null, List<string> selected = null)
         {
             InitializeComponent();
 
             Icon = UserSystem.GetFormWindowIcon();
             m_selected = selected;
+            m_condition = condition;
         }
 
 
@@ -35,7 +40,7 @@ namespace ClientsLibrary
         {
             // 初始化
 
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户, "");
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户, m_condition);
             if (result.IsSuccess)
             {
                 List<UserAccount> accounts = JArray.Parse(result.Content).ToObject<List<UserAccount>>();
@@ -136,6 +141,7 @@ namespace ClientsLibrary
 
         private List<string> m_selected;
         private List<UserAccount> m_result;
+        private string m_condition;
 
         #endregion
 

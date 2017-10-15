@@ -183,9 +183,9 @@ namespace ClientsLibrary.Configuration
             if (listBox1.SelectedItem is RoleItem role)
             {
                 // select account
-                using (FormAccountSelect form = new FormAccountSelect(role.Accounts))
+                using (FormAccountSelect form = new FormAccountSelect(null, role.Accounts))
                 {
-                    if(form.ShowDialog() == DialogResult.OK)
+                    if (form.ShowDialog() == DialogResult.OK)
                     {
                         role.Accounts = form.SelectAccounts.ConvertAll(m => m.UserName);
                         listBox2.DataSource = role.Accounts;
