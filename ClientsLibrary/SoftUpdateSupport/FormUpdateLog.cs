@@ -1,4 +1,5 @@
-﻿using HslCommunication.BasicFramework;
+﻿using CommonLibrary;
+using HslCommunication.BasicFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,13 +9,23 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace CommonLibrary
+namespace ClientsLibrary
 {
+
+    /*******************************************************************************************************************
+     * 
+     *    说明：用来客户端更新软件后进行显示更新信息的窗口
+     * 
+     *****************************************************************************************************************/
+
+
     /// <summary>
     /// 系统更新日志类窗体
     /// </summary>
     public partial class FormUpdateLog : Form
     {
+        #region Constructor
+        
         /// <summary>
         /// 实例化一个更新窗口的对象，用来呈现更新日志
         /// </summary>
@@ -23,8 +34,13 @@ namespace CommonLibrary
         {
             InitializeComponent();
             Versions = versions;
+            Icon = UserSystem.GetFormWindowIcon();
         }
-        private IEnumerable<VersionInfo> Versions = null;
+
+        #endregion
+
+        #region WindowLoad
+
 
         private void FormUpdateLog_Load(object sender, EventArgs e)
         {
@@ -36,6 +52,13 @@ namespace CommonLibrary
             listBox1.SelectedIndexChanged += ListBox1_SelectedIndexChanged;
             ListBox1_SelectedIndexChanged(null, new EventArgs());
         }
+
+
+        #endregion
+
+        #region ListBox Selected
+
+
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem != null)
@@ -57,5 +80,13 @@ namespace CommonLibrary
                 }
             }
         }
+
+        #endregion
+
+        #region Private Members
+
+        private IEnumerable<VersionInfo> Versions = null;     // 所有的版本更新信息
+
+        #endregion
     }
 }

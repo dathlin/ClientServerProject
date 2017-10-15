@@ -24,7 +24,7 @@ namespace ClientsLibrary
         public FormRegisterAccount(string[] factories)
         {
             InitializeComponent();
-            Icon = UserClient.GetFormWindowIcon();
+            Icon = UserSystem.GetFormWindowIcon();
 
             net_client = UserClient.Net_simplify_client;
             Factories = new List<string>(factories);

@@ -71,7 +71,7 @@ namespace 软件系统客户端Wpf
         {
             InitializeComponent();
 
-            UserClient.PortraitManager = new UserPortrait(AppDomain.CurrentDomain.BaseDirectory);
+            UserClient.PortraitManager = new UserPortrait(AppDomain.CurrentDomain.BaseDirectory + @"\Portrait\" + UserClient.UserAccount.UserName);
         }
 
         #endregion
@@ -93,7 +93,6 @@ namespace 软件系统客户端Wpf
 
             // 通知服务器退出网络服务
             net_socket_client.ClientClose();
-            
 
             // 保存当前的颜色选择
             var p = new PaletteHelper().QueryPalette();
@@ -101,6 +100,7 @@ namespace 软件系统客户端Wpf
             {
                 sw.Write(JObject.FromObject(p).ToString());
             }
+
             // 等待一秒退出
             using (FormWaitInfomation fwm = new FormWaitInfomation("正在退出程序...", 1000))
             {
@@ -425,10 +425,10 @@ namespace 软件系统客户端Wpf
         {
             try
             {
-                net_socket_client.KeyToken = CommonProtocol.KeyToken; // 新增的身份令牌
+                net_socket_client.KeyToken = UserSystem.KeyToken; // 新增的身份令牌
                 net_socket_client.EndPointServer = new System.Net.IPEndPoint(
                     System.Net.IPAddress.Parse(UserClient.ServerIp),
-                    CommonProtocol.Port_Main_Net);
+                    UserSystem.Port_Main_Net);
                 net_socket_client.ClientAlias = UserClient.UserAccount.UserName; // 传入账户名
                 net_socket_client.ClientStart();
             }

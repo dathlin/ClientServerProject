@@ -70,17 +70,41 @@
     <Compile Include="AccountSupport\RoleAssign.cs" />
     <Compile Include="AccountSupport\ServerAccount.cs" />
     <Compile Include="AccountSupport\UserAccount.cs" />
+    <Compile Include="BasicSupport\FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSupport\FormAbout.designer.cs">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BasicSupport\FormAboutVersion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSupport\FormAboutVersion.designer.cs">
+      <DependentUpon>FormAboutVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BasicSupport\FormInputAndAction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSupport\FormInputAndAction.designer.cs">
+      <DependentUpon>FormInputAndAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BasicSupport\FormMatterRemind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSupport\FormMatterRemind.designer.cs">
+      <DependentUpon>FormMatterRemind.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BasicSupport\FormPasswordCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSupport\FormPasswordCheck.designer.cs">
+      <DependentUpon>FormPasswordCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="BasicSupport\FormSuper.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BasicSupport\FormSuper.Designer.cs">
       <DependentUpon>FormSuper.cs</DependentUpon>
-    </Compile>
-    <Compile Include="BasicSupport\FormUpdateLog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BasicSupport\FormUpdateLog.designer.cs">
-      <DependentUpon>FormUpdateLog.cs</DependentUpon>
     </Compile>
     <Compile Include="BasicSupport\FormVersionControl.cs">
       <SubType>Form</SubType>
@@ -88,17 +112,23 @@
     <Compile Include="BasicSupport\FormVersionControl.designer.cs">
       <DependentUpon>FormVersionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="BasicSupport\FormWaitInfomation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSupport\FormWaitInfomation.designer.cs">
+      <DependentUpon>FormWaitInfomation.cs</DependentUpon>
+    </Compile>
     <Compile Include="BasicSupport\SoftSettings.cs" />
     <Compile Include="LocalizationSupport\ChineseLocalization.cs" />
     <Compile Include="LocalizationSupport\EnglishLocalization.cs" />
     <Compile Include="LocalizationSupport\Localization.cs" />
-    <Compile Include="ProtocolSupport\CommonProtocol.cs" />
     <Compile Include="ProtocolSupport\CustomerCode.cs" />
     <Compile Include="OrderSupport\ClassGoods.cs" />
     <Compile Include="OrderSupport\ClassOrder.cs" />
     <Compile Include="PortraitSupport\PortraitSupport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProtocolSupport\Resource.cs" />
+    <Compile Include="UserSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AccountSupport\FormAccountManage.resx">
@@ -110,14 +140,29 @@
     <EmbeddedResource Include="AccountSupport\FormPasswordModify.resx">
       <DependentUpon>FormPasswordModify.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BasicSupport\FormAbout.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BasicSupport\FormAboutVersion.resx">
+      <DependentUpon>FormAboutVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BasicSupport\FormInputAndAction.resx">
+      <DependentUpon>FormInputAndAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BasicSupport\FormMatterRemind.resx">
+      <DependentUpon>FormMatterRemind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BasicSupport\FormPasswordCheck.resx">
+      <DependentUpon>FormPasswordCheck.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BasicSupport\FormSuper.resx">
       <DependentUpon>FormSuper.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BasicSupport\FormUpdateLog.resx">
-      <DependentUpon>FormUpdateLog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="BasicSupport\FormVersionControl.resx">
       <DependentUpon>FormVersionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BasicSupport\FormWaitInfomation.resx">
+      <DependentUpon>FormWaitInfomation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

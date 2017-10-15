@@ -84,6 +84,7 @@ namespace CommonLibrary
                             result = true;
                         }
                     }
+                    break;
                 }
             }
 
@@ -113,6 +114,39 @@ namespace CommonLibrary
             hybirdLock.Leave();
 
             return list.ToArray();
+        }
+
+
+        /// <summary>
+        /// 获取一个角色的所有的用户名称
+        /// </summary>
+        /// <param name="roleCode"></param>
+        /// <returns></returns>
+        public string[] GetUsernamesByRolename(string roleCode)
+        {
+            string[] result = null;
+            hybirdLock.Enter();
+
+            for (int i = 0; i < m_roles.Count; i++)
+            {
+                if (m_roles[i].RoleCode == roleCode)
+                {
+                    if (m_roles[i].Accounts != null)
+                    {
+                        result = m_roles[i].Accounts.ToArray();
+                    }
+                    else
+                    {
+                        result = new string[0];
+                    }
+                    break;
+                }
+            }
+
+            hybirdLock.Leave();
+
+            if (result == null) result = new string[0]; // 角色不存在的情况
+            return result;
         }
 
 

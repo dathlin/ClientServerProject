@@ -356,9 +356,9 @@ namespace 软件系统服务端模版
                 net_soft_update_Server.LogNet = new LogNetSingle(LogSavePath + @"\update_log.txt");
                 //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
                 //只放置exe和dll组件，必须放置：软件自动更新.exe
-                net_soft_update_Server.KeyToken = CommonProtocol.KeyToken;
+                net_soft_update_Server.KeyToken = UserSystem.KeyToken;
                 net_soft_update_Server.FileUpdatePath = Application.StartupPath + @"\AdvancedFiles\ClientFiles";//客户端文件路径
-                net_soft_update_Server.ServerStart(CommonProtocol.Port_Update_Net);
+                net_soft_update_Server.ServerStart(UserSystem.Port_Update_Net);
             }
             catch (Exception ex)
             {
@@ -381,12 +381,12 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_simplify_server.KeyToken = CommonProtocol.KeyToken;//设置身份令牌
+                net_simplify_server.KeyToken = UserSystem.KeyToken;//设置身份令牌
                 net_simplify_server.LogNet = new LogNetSingle(LogSavePath + @"\simplify_log.txt");//日志路径
                 net_simplify_server.LogNet.SetMessageDegree(HslMessageDegree.INFO);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_simplify_server.ReceiveStringEvent += Net_simplify_server_ReceiveStringEvent;//接收到字符串触发
                 net_simplify_server.ReceivedBytesEvent += Net_simplify_server_ReceivedBytesEvent;//接收到字节触发
-                net_simplify_server.ServerStart(CommonProtocol.Port_Second_Net);
+                net_simplify_server.ServerStart(UserSystem.Port_Second_Net);
                 net_simplify_server.ConnectTimeout = 5200;
             }
             catch (Exception ex)
@@ -552,7 +552,22 @@ namespace 软件系统服务端模版
             else if (handle == CommonHeadCode.SimplifyHeadCode.获取账户)
             {
                 //返回服务器的账户信息
-                net_simplify_server.SendMessage(state, handle, UserServer.ServerAccounts.GetAllAccountsJson());
+                if (string.IsNullOrEmpty(data))
+                {
+                    // 获取所有账户
+                    net_simplify_server.SendMessage(state, handle, UserServer.ServerAccounts.GetAllAccountsJson());
+                }
+                else if (data.Length < 16)
+                {
+                    // 获取所有分厂器的账户
+                    net_simplify_server.SendMessage(state, handle, UserServer.ServerAccounts.GetAllAccountsJson(data));
+                }
+                else
+                {
+                    // 获取一个角色的所有关联账户
+                    string[] names = UserServer.ServerRoles.GetUsernamesByRolename(data);
+                    net_simplify_server.SendMessage(state, handle, UserServer.ServerAccounts.GetAllAccountsJson(names));
+                }
             }
             else if (handle == CommonHeadCode.SimplifyHeadCode.更细账户)
             {
@@ -906,9 +921,9 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_socket_server.KeyToken = CommonProtocol.KeyToken;                                                // 设置身份令牌
+                net_socket_server.KeyToken = UserSystem.KeyToken;                                                // 设置身份令牌
                 net_socket_server.LogNet =new LogNetSingle(LogSavePath + @"\net_log.txt");                           // 设置日志存储路径
-                net_socket_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);                                   // 默认debug及以上级别日志均进行存储，根据需要自行选择
+                net_socket_server.LogNet.SetMessageDegree(HslMessageDegree.INFO);                                   // 默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_socket_server.FormatClientOnline = "#IP:{0} Name:{1}";                                           // 必须为#开头，具体格式可由自身需求确定
                 net_socket_server.IsSaveLogClientLineChange = true;                                                  // 设置客户端上下线是否记录到日志
                 net_socket_server.ClientOnline += new NetBase.IEDelegate<AsyncStateOne>(Net_socket_server_ClientOnline);// 客户端上线触发
@@ -917,7 +932,7 @@ namespace 软件系统服务端模版
                 net_socket_server.MessageAlerts += new NetBase.IEDelegate<string>(Net_socket_server_MessageAlerts);// 服务器产生提示消息触发
                 net_socket_server.AcceptByte += new NetBase.IEDelegate<AsyncStateOne, NetHandle, byte[]>(Net_socket_server_AcceptByte);// 服务器接收到字节数据触发
                 net_socket_server.AcceptString += new NetBase.IEDelegate<AsyncStateOne, NetHandle, string>(Net_socket_server_AcceptString);// 服务器接收到字符串数据触发
-                net_socket_server.ServerStart(CommonProtocol.Port_Main_Net);
+                net_socket_server.ServerStart(UserSystem.Port_Main_Net);
             }
             catch (Exception ex)
             {
@@ -999,7 +1014,6 @@ namespace 软件系统服务端模版
             net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.新用户上线, JObject.FromObject(account).ToString());
 
             
-            AddOnlineClient(account);
             // 上线后回发一条数据初始化信息
             JObject json = new JObject
             {
@@ -1008,8 +1022,11 @@ namespace 软件系统服务端模版
                 { "chats", new JValue(Chats_Managment.ToSaveString())},
                 { "ClientsOnline", new JValue(ClientsOnlineCache) }
             };
+            
             // 发送客户端的初始化数据
             net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据, json.ToString());
+            // 新增到在线客户端的队列中
+            AddOnlineClient(account);
             // 触发上下线功能
             UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1.IpAddress + "：" + object1.LoginAlias + " 上线");
         }
@@ -1234,8 +1251,8 @@ namespace 软件系统服务端模版
                 net_file_Advanced.FilesDirectoryPath = Application.StartupPath + @"\AdvancedFiles";
                 net_file_Advanced.FilesDirectoryPathTemp = Application.StartupPath + @"\AdvancedFiles\Temp";
                 net_file_Advanced.LogNet = new LogNetSingle(LogSavePath + @"\Advanced_file_log.txt");
-                net_file_Advanced.KeyToken = CommonProtocol.KeyToken;
-                net_file_Advanced.ServerStart(CommonProtocol.Port_Advanced_File_Server);
+                net_file_Advanced.KeyToken = UserSystem.KeyToken;
+                net_file_Advanced.ServerStart(UserSystem.Port_Advanced_File_Server);
             }
             catch (Exception ex)
             {
@@ -1270,11 +1287,11 @@ namespace 软件系统服务端模版
             try
             {
                 net_ultimate_file_server = new UltimateFileServer();
-                net_ultimate_file_server.KeyToken = CommonProtocol.KeyToken;
+                net_ultimate_file_server.KeyToken = UserSystem.KeyToken;
                 net_ultimate_file_server.LogNet = new LogNetSingle(LogSavePath + @"\ultimate_file_log.txt");
                 net_ultimate_file_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_ultimate_file_server.FilesDirectoryPath = Application.StartupPath + @"\UltimateFiles";
-                net_ultimate_file_server.ServerStart(CommonProtocol.Port_Ultimate_File_Server);
+                net_ultimate_file_server.ServerStart(UserSystem.Port_Ultimate_File_Server);
 
                 // 共享文件管理器只是终极文件管理器的一个子容器
                 ShareFileContainer = net_ultimate_file_server.GetGroupFromFilePath(Application.StartupPath + @"\UltimateFiles\ShareFiles");
@@ -1344,11 +1361,11 @@ namespace 软件系统服务端模版
                 net_udp_server = new NetUdpServer();
                 net_udp_server.LogNet =new LogNetSingle(LogSavePath + @"\udp_log.txt");//日志路径
                 net_udp_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
-                net_udp_server.KeyToken = CommonLibrary.CommonProtocol.KeyToken;
+                net_udp_server.KeyToken = CommonLibrary.UserSystem.KeyToken;
                 net_udp_server.ReceiveCacheLength = 1024;//单次接收数据的缓冲长度
                 net_udp_server.AcceptByte += Net_udp_server_AcceptByte;//接收到字节数据的时候触发事件
                 net_udp_server.AcceptString += Net_udp_server_AcceptString;//接收到字符串数据的时候触发事件
-                net_udp_server.ServerStart(CommonLibrary.CommonProtocol.Port_Udp_Server);
+                net_udp_server.ServerStart(UserSystem.Port_Udp_Server);
             }
             catch (Exception ex)
             {

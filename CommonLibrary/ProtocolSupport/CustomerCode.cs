@@ -124,13 +124,14 @@ namespace CommonLibrary
         /// </summary>
         public class MultiNetHeadCode
         {
-            
+
             /*******************************************************************************************
              * 
              *     2.1.* 的指令为异步网络的系统相关指令
              *
              *******************************************************************************************/
 
+            #region 2.1.X 指令块
 
             public static NetHandle 总在线信息 { get; } =          new NetHandle(2, 1, 00001); 
             public static NetHandle 关闭客户端 { get; } =          new NetHandle(2, 1, 00002);
@@ -142,6 +143,9 @@ namespace CommonLibrary
             public static NetHandle 新用户上线 { get; } =          new NetHandle(2, 1, 00008);
             public static NetHandle 用户下线 { get; } =            new NetHandle(2, 1, 00009);
             public static NetHandle 新头像更新 { get; } =          new NetHandle(2, 1, 00010);
+
+
+            #endregion
 
 
             /**************************************************************************************

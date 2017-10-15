@@ -18,47 +18,52 @@
         <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td>账户名</td>
+                <td>@CommonLibrary.UserLocalization.Localization.AccountName</td>
                 <td>@account.UserName</td>
             </tr>
             <tr>
                 <th scope="row">2</th>
-                <td>密码</td>
+                <td>@CommonLibrary.UserLocalization.Localization.AccountPassword</td>
                 <td>********</td>
             </tr>
             <tr>
                 <th scope="row">3</th>
-                <td>分厂</td>
-                <td>@account.Factory</td>
+                <td>@CommonLibrary.UserLocalization.Localization.AccountAlias</td>
+                <td>@account.NameAlias</td>
             </tr>
             <tr>
                 <th scope="row">4</th>
-                <td>权限</td>
-                <td>@CommonLibrary.AccountGrade.GetDescription(account.Grade)</td>
+                <td>@CommonLibrary.UserLocalization.Localization.AccountFactory</td>
+                <td>@account.Factory</td>
             </tr>
             <tr>
                 <th scope="row">5</th>
-                <td>注册时间</td>
-                <td>@account.RegisterTime.ToString()</td>
+                <td>@CommonLibrary.UserLocalization.Localization.AccountGrade</td>
+                <td>@CommonLibrary.AccountGrade.GetDescription(account.Grade)</td>
             </tr>
             <tr>
                 <th scope="row">6</th>
-                <td>登录次数</td>
-                <td>@account.LoginFrequency</td>
+                <td>@CommonLibrary.UserLocalization.Localization.AccountRegisterTime</td>
+                <td>@account.RegisterTime.ToString()</td>
             </tr>
             <tr>
                 <th scope="row">7</th>
-                <td>上次登录时间</td>
-                <td>@account.LastLoginTime</td>
+                <td>@CommonLibrary.UserLocalization.Localization.AccountLoginFrequency</td>
+                <td>@account.LoginFrequency</td>
             </tr>
             <tr>
                 <th scope="row">8</th>
-                <td>上次登录Ip</td>
-                <td>@account.LastLoginIpAddress</td>
+                <td>@CommonLibrary.UserLocalization.Localization.AccountLastLoginTime</td>
+                <td>@account.LastLoginTime</td>
             </tr>
             <tr>
                 <th scope="row">9</th>
-                <td>上次登录方式</td>
+                <td>@CommonLibrary.UserLocalization.Localization.AccountLastLoginIpAddress</td>
+                <td>@account.LastLoginIpAddress</td>
+            </tr>
+            <tr>
+                <th scope="row">10</th>
+                <td>@CommonLibrary.UserLocalization.Localization.AccountLastLoginWay</td>
                 <td>@account.LastLoginWay</td>
             </tr>
         </tbody>

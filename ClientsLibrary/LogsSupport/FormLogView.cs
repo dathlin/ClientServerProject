@@ -20,7 +20,7 @@ namespace ClientsLibrary
         {
             InitializeComponent();
 
-            Icon = UserClient.GetFormWindowIcon();
+            Icon = UserSystem.GetFormWindowIcon();
 
             net_simplify_client = UserClient.Net_simplify_client;
         }

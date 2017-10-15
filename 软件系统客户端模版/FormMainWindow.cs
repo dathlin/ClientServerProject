@@ -57,7 +57,7 @@ namespace 软件系统客户端模版
         {
             InitializeComponent();
 
-            Icon = UserClient.GetFormWindowIcon();
+            Icon = UserSystem.GetFormWindowIcon();
 
             // 初始化头像管理器
             UserClient.PortraitManager = new UserPortrait(Application.StartupPath + @"\Portrait\" + UserClient.UserAccount.UserName);
@@ -371,11 +371,11 @@ namespace 软件系统客户端模版
         {
             try
             {
-                net_socket_client.KeyToken = CommonProtocol.KeyToken; // 新增的身份令牌
+                net_socket_client.KeyToken = UserSystem.KeyToken; // 新增的身份令牌
                 net_socket_client.LogNet = UserClient.LogNet;
                 net_socket_client.EndPointServer = new System.Net.IPEndPoint(
                     System.Net.IPAddress.Parse(UserClient.ServerIp),
-                    CommonProtocol.Port_Main_Net);
+                    UserSystem.Port_Main_Net);
                 net_socket_client.ClientAlias = UserClient.UserAccount.UserName; // 传入账户名
                 net_socket_client.ClientStart();
             }
@@ -445,7 +445,8 @@ namespace 软件系统客户端模版
                     toolStripStatusLabel_time.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm:ss");
                     label_file_count.Text = json["FileCount"].ToObject<int>().ToString();
                     UIControls_Chat.AddChatsHistory(sb.ToString());
-                    
+
+                    UserClient.LogNet?.WriteDebug("Online Clients : " + json["ClientsOnline"].ToString());
                     NetAccount[] accounts = JArray.Parse(json["ClientsOnline"].ToString()).ToObject<NetAccount[]>();
                     netClientOnline1.SetOnlineRender(accounts);
                 }));
@@ -468,6 +469,7 @@ namespace 软件系统客户端模版
             {
                 if (IsHandleCreated) Invoke(new Action(() =>
                 {
+                    UserClient.LogNet?.WriteDebug("Online Event : " + data);
                     netClientOnline1.ClientOnline(JObject.Parse(data).ToObject<NetAccount>());
                 }));
             }

@@ -12,17 +12,24 @@ namespace CommonLibrary
 {
     public partial class FormSuper : Form
     {
+        #region Constructor
+        
         public FormSuper(Func<int[]> getDataFunction)
         {
             InitializeComponent();
             GetDataFunction = getDataFunction;
         }
 
+        #endregion
+
+        #region Form Load Show Close
+        
         private void FormSuper_Load(object sender, EventArgs e)
         {
 
         }
 
+        
         private void FormSuper_Shown(object sender, EventArgs e)
         {
             IsWindowShow = true;
@@ -32,18 +39,19 @@ namespace CommonLibrary
             timer.Start();
         }
 
-        
+
+
 
         private void FormSuper_FormClosing(object sender, FormClosingEventArgs e)
         {
             IsWindowShow = false;
         }
 
-        private Func<int[]> GetDataFunction = null;
 
-        private int[] DataTemp = null;
+        #endregion
 
-        private bool IsWindowShow { get; set; }
+        #region Time Tick
+
 
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -65,7 +73,11 @@ namespace CommonLibrary
             }
         }
 
-        private Timer timer = null;
+
+        #endregion
+
+        #region Button Click
+
 
         private void userButton4_Click(object sender, EventArgs e)
         {
@@ -82,5 +94,16 @@ namespace CommonLibrary
                 MessageBox.Show(sb.ToString());
             }
         }
+
+        #endregion
+
+        #region Private Member
+
+        private Func<int[]> GetDataFunction = null;          // 获取数据的委托
+        private int[] DataTemp = null;                       // 内存数组，真实数据
+        private Timer timer = null;                          // 定时器
+        private bool IsWindowShow = false;                   // 窗体是否显示
+
+        #endregion
     }
 }

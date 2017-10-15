@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
 using HslCommunication.Enthernet;
+using CommonLibrary;
 
 namespace ClientsLibrary.FileSupport
 {
@@ -51,7 +52,7 @@ namespace ClientsLibrary.FileSupport
         /// </summary>
         private void FormInitialization(IntegrationFileClient IntegratedFile, string[] files, string factory, string group, string id)
         {
-            Icon = UserClient.GetFormWindowIcon();     // 设置窗口ICON
+            Icon = UserSystem.GetFormWindowIcon();     // 设置窗口ICON
             Files = files;                             // 设置文件名队列
             Factory = factory;                         // 第一大类
             Group = group;                             // 第二大类

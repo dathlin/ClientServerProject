@@ -6,34 +6,47 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using HslCommunication;
-using CommonLibrary;
 
-namespace ClientsLibrary
+namespace CommonLibrary
 {
     //=============================================================================
     //
     //    时间：2017-03-08 12:41:37
-    //    用于下载数据的提示窗口
+    //    用于耗时操作的提醒
     //
     //=============================================================================
+ 
 
-
-
-
-    public partial class FormDownloading : Form
+    /// <summary>
+    /// 用于稍微耗时事件处理时的消息框提醒
+    /// </summary>
+    public partial class FormMatterRemind : Form
     {
-        public FormDownloading(int customer,Action<OperateResultString> action)
+        #region Constructor
+
+
+        /// <summary>
+        /// 实例化一个耗时处理的对象
+        /// </summary>
+        /// <param name="description">需要显示的文本描述</param>
+        /// <param name="action">需要操作的方法</param>
+        public FormMatterRemind(
+            string description,
+            Action action
+            )
         {
             InitializeComponent();
-
-            Icon = UserSystem.GetFormWindowIcon();
-
-            net_cmd = customer;
+            Description = description;
             DealWithResult = action;
             DoubleBuffered = true;
+            Icon = UserSystem.GetFormWindowIcon();
         }
-        
+
+
+        #endregion
+
+        #region Paint Support
+
 
         private void FormDownloading_Paint(object sender, PaintEventArgs e)
         {
@@ -52,9 +65,10 @@ namespace ClientsLibrary
             e.Graphics.DrawRectangle(Pens.LightGray, new Rectangle(0, 0, Width - 1, Height - 1));
         }
 
-        Pen pen_dash = new Pen(Color.Green);
-        float Pen_Offect = 0;
+        #endregion
 
+        #region Form Load Show
+        
         private void FormDownloading_Load(object sender, EventArgs e)
         {
             pen_dash.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
@@ -64,7 +78,32 @@ namespace ClientsLibrary
             time.Interval = 38;//2017-03-08 13:20:33
             time.Tick += Time_Tick;
 
-            label1.Text = "正在请求数据...";
+            label1.Text = Description;
+        }
+
+        private void FormDownloading_Shown(object sender, EventArgs e)
+        {
+            time.Start();
+            System.Threading.Thread thread = new System.Threading.Thread(ThreadRequestServer);
+            thread.IsBackground = true;
+            thread.Start();
+        }
+
+        #endregion
+
+        #region Time Tick
+
+        private void ThreadRequestServer()
+        {
+            //后台请求数据
+            System.Threading.Thread.Sleep(100);
+            DealWithResult();
+            Invoke(new Action(() =>
+            {
+                time.Stop();
+                System.Threading.Thread.Sleep(20);
+                Dispose();
+            }));
         }
 
         private void Time_Tick(object sender, EventArgs e)
@@ -75,35 +114,19 @@ namespace ClientsLibrary
             Invalidate();//引发重画
         }
 
+        #endregion
+
+        #region Private Members
+
 
         //定时块
         private Timer time = new Timer();
+        private Pen pen_dash = new Pen(Color.Green);
+        private float Pen_Offect = 0;
+        private Action DealWithResult = null;
+        private string Description = string.Empty;
 
-        private void FormDownloading_Shown(object sender, EventArgs e)
-        {
-            time.Start();
-            System.Threading.Thread thread = new System.Threading.Thread(ThreadRequestServer);
-            thread.IsBackground = true;
-            thread.Start();
-        }
 
-        
-        private int net_cmd = 0;
-        private Action<OperateResultString> DealWithResult = null;
-
-        private void ThreadRequestServer()
-        {
-            //后台请求数据
-            System.Threading.Thread.Sleep(100);
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(net_cmd);
-            Invoke(new Action(() =>
-            {
-                DealWithResult(result);
-                time.Stop();
-                System.Threading.Thread.Sleep(20);
-                Dispose();
-            }));
-        }
-           
+        #endregion
     }
 }

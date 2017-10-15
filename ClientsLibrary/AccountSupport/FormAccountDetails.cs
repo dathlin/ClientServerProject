@@ -25,7 +25,7 @@ namespace ClientsLibrary
         public FormAccountDetails()
         {
             InitializeComponent();
-            Icon = UserClient.GetFormWindowIcon();
+            Icon = UserSystem.GetFormWindowIcon();
         }
 
         #endregion

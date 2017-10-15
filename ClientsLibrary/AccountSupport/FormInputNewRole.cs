@@ -23,7 +23,7 @@ namespace ClientsLibrary
         {
             InitializeComponent();
 
-            Icon = UserClient.GetFormWindowIcon();
+            Icon = UserSystem.GetFormWindowIcon();
         }
 
         #endregion

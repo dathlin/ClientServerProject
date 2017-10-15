@@ -55,5 +55,10 @@ namespace CommonLibrary
                     "错误描述：" + ex.Message);
             }
         }
+
+        private void FormVersionControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

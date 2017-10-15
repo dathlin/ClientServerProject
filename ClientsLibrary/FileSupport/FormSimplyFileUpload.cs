@@ -10,6 +10,7 @@ using System.IO;
 using System.Threading;
 using HslCommunication.Enthernet;
 using HslCommunication;
+using CommonLibrary;
 
 namespace ClientsLibrary.FileSupport
 {
@@ -30,7 +31,7 @@ namespace ClientsLibrary.FileSupport
         {
             InitializeComponent();
 
-            Icon = UserClient.GetFormWindowIcon();
+            Icon = UserSystem.GetFormWindowIcon();
             fileItem = new GroupFileItem();
             fileClient = UserClient.Net_File_Client;
             Factory = factory;

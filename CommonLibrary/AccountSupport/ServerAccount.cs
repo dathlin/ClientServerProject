@@ -98,6 +98,8 @@ namespace CommonLibrary
         {
             return all_list_accounts.Where(selector).ToList();
         }
+
+        
         
 
         /// <summary>
@@ -240,6 +242,35 @@ namespace CommonLibrary
             hybirdLock.Leave();
             return result;
         }
+
+        /// <summary>
+        /// 获取所有的账户的JSON字符串
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="factory">获取一个分厂的所有账户</param>
+        public string GetAllAccountsJson(string factory)
+        {
+            string result = string.Empty;
+            hybirdLock.Enter();
+            result = JArray.FromObject(all_list_accounts.Where(m => m.Factory == factory)).ToString();
+            hybirdLock.Leave();
+            return result;
+        }
+
+        /// <summary>
+        /// 获取选定账户的JSON字符串
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="names">选择的用户名</param>
+        public string GetAllAccountsJson(string[] names)
+        {
+            string result = string.Empty;
+            hybirdLock.Enter();
+            result = JArray.FromObject(all_list_accounts.Where(m => names.Contains(m.UserName))).ToString();
+            hybirdLock.Leave();
+            return result;
+        }
+
 
         /// <summary>
         /// 获取账户的别名

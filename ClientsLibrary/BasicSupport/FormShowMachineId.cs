@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +16,7 @@ namespace ClientsLibrary
         {
             InitializeComponent();
 
-            Icon = UserClient.GetFormWindowIcon();
+            Icon = UserSystem.GetFormWindowIcon();
         }
 
         private void userButton_login_Click(object sender, EventArgs e)

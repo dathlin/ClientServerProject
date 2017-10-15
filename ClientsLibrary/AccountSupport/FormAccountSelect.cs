@@ -21,7 +21,7 @@ namespace ClientsLibrary
         {
             InitializeComponent();
 
-            Icon = UserClient.GetFormWindowIcon();
+            Icon = UserSystem.GetFormWindowIcon();
             m_selected = selected;
         }
 
@@ -35,7 +35,7 @@ namespace ClientsLibrary
         {
             // 初始化
 
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.获取账户, "");
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户, "");
             if (result.IsSuccess)
             {
                 List<UserAccount> accounts = JArray.Parse(result.Content).ToObject<List<UserAccount>>();
@@ -68,8 +68,8 @@ namespace ClientsLibrary
             // 本地化
             UILocalization();
 
-            dataGridView1.RowsDefaultCellStyle.SelectionBackColor = dataGridView1.RowsDefaultCellStyle.BackColor;
-            dataGridView1.RowsDefaultCellStyle.SelectionForeColor = dataGridView1.RowsDefaultCellStyle.ForeColor;
+            // dataGridView1.RowsDefaultCellStyle.SelectionBackColor = dataGridView1.RowsDefaultCellStyle.BackColor;
+            // dataGridView1.RowsDefaultCellStyle.SelectionForeColor = dataGridView1.RowsDefaultCellStyle.ForeColor;
         }
 
 

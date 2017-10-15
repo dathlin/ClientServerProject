@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using CommonLibrary;
 
 namespace ClientsLibrary
 {
@@ -20,7 +21,7 @@ namespace ClientsLibrary
         {
             InitializeComponent();
 
-            Icon = UserClient.GetFormWindowIcon();
+            Icon = UserSystem.GetFormWindowIcon();
             Info = info;
             DefaultValue = defaultValue;
             Title = title;

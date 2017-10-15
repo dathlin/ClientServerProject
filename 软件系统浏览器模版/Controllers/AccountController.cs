@@ -275,6 +275,7 @@ namespace 软件系统浏览器模版.Controllers
                 {
                     UserAccount account = new UserAccount();
                     account.UserName = fc["username"];
+                    account.NameAlias = fc["alias"];
                     account.Password = fc["password"];
                     account.Factory = fc["factory"];
                     account.Grade = int.Parse(fc["grade"]);

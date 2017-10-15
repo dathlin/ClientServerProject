@@ -16,7 +16,7 @@ namespace ClientsLibrary
         public FormConfiguration()
         {
             InitializeComponent();
-            Icon = UserClient.GetFormWindowIcon();
+            Icon = UserSystem.GetFormWindowIcon();
         }
         
 

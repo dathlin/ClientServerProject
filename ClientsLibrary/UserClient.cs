@@ -17,6 +17,7 @@ namespace ClientsLibrary
     /***********************************************************************************
      * 
      *    说明：用来存储客户端全局的变量数据，好在任何界面都可以直达数据
+     *          专门放在这下面的数据是需要支持winform和wpf共同访问的
      * 
      * 
      ***********************************************************************************/
@@ -36,7 +37,7 @@ namespace ClientsLibrary
         /// <summary>
         /// 本软件的当前版本，用来验证更新的关键依据
         /// </summary>
-        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.171014");
+        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.171015");
 
 
         /// <summary>
@@ -91,9 +92,9 @@ namespace ClientsLibrary
         /// 用于访问服务器数据的网络对象类，必须修改这个端口参数，否则运行失败
         /// </summary>
         public static NetSimplifyClient Net_simplify_client { get; set; } = new NetSimplifyClient(
-            new IPEndPoint(IPAddress.Parse(ServerIp), CommonProtocol.Port_Second_Net))
+            new IPEndPoint(IPAddress.Parse(ServerIp), UserSystem.Port_Second_Net))
         {
-            KeyToken = CommonProtocol.KeyToken,
+            KeyToken = UserSystem.KeyToken,
             ConnectTimeout = 5000,
         };
 
@@ -101,9 +102,9 @@ namespace ClientsLibrary
         /// 用于使用udp向服务器进行发送即时可丢失数据的对象
         /// </summary>
         public static NetUdpClient Net_Udp_Client { get; set; } = new NetUdpClient(
-            new IPEndPoint(IPAddress.Parse(ServerIp), CommonProtocol.Port_Udp_Server))
+            new IPEndPoint(IPAddress.Parse(ServerIp), UserSystem.Port_Udp_Server))
         {
-            KeyToken = CommonProtocol.KeyToken,
+            KeyToken = UserSystem.KeyToken,
         };
 
 
@@ -145,9 +146,9 @@ namespace ClientsLibrary
         /// </summary>
         public static IntegrationFileClient Net_File_Client { get; set; } = new IntegrationFileClient()
         {
-            KeyToken = CommonProtocol.KeyToken,
+            KeyToken = UserSystem.KeyToken,
             LogNet = LogNet,
-            ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), CommonProtocol.Port_Ultimate_File_Server)
+            ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), UserSystem.Port_Ultimate_File_Server)
         };
 
         /// <summary>
@@ -155,9 +156,9 @@ namespace ClientsLibrary
         /// </summary>
         public static IntegrationFileClient Net_Update_Client { get; set; } = new IntegrationFileClient()
         {
-            KeyToken = CommonProtocol.KeyToken,
+            KeyToken = UserSystem.KeyToken,
             LogNet = LogNet,
-            ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), CommonProtocol.Port_Advanced_File_Server)
+            ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), UserSystem.Port_Advanced_File_Server)
         };
 
 
@@ -183,15 +184,7 @@ namespace ClientsLibrary
                 Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.异常消息, info);
             }
         }
+        
 
-
-        /// <summary>
-        /// 统一的窗体图标显示
-        /// </summary>
-        /// <returns></returns>
-        public static Icon GetFormWindowIcon()
-        {
-            return Icon.ExtractAssociatedIcon(Application.ExecutablePath);
-        }
     }
 }

@@ -53,7 +53,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ClientsLibrary\bin\Debug\ClientsLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="CommonLibrary">
+    <Reference Include="CommonLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CommonLibrary\bin\Debug\CommonLibrary.dll</HintPath>
     </Reference>
     <Reference Include="HslCommunication">

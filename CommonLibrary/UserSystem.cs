@@ -1,28 +1,25 @@
-﻿using System;
+﻿using HslCommunication.BasicFramework;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using HslCommunication.BasicFramework;
+using System.Windows.Forms;
 
 namespace CommonLibrary
 {
-
-
-    /*****************************************************************************************
+    /***********************************************************************************
      * 
-     *    说明：本界面规定了客户端服务器双方共同遵守的一些协议基础，主要包含了端口号，令牌，密钥
-     *    
-     *    注意：在进行二次开发的时候，必须修改下面的所有参数
+     *    说明：用来客户端和服务器都能够直达访问的一些静态资源
+     *          专门放在这下面的数据是需要支持winform和wpf共同访问的
      * 
-     *****************************************************************************************/
+     ***********************************************************************************/
 
-        
-    /// <summary>
-    /// 客户端服务器共同遵守的配置信息
-    /// </summary>
-    public class CommonProtocol
+
+
+    public class UserSystem
     {
-        static CommonProtocol()
+        static UserSystem()
         {
             /**************************************************************************
              * 
@@ -31,7 +28,7 @@ namespace CommonLibrary
              *    发行：发行版将采用主版本加次版本来发行
              * 
              **************************************************************************/
-             
+
             /**************************************************************************
              * 
              *    说明：以下是大版本号的发布日期
@@ -45,7 +42,7 @@ namespace CommonLibrary
              * 
              **************************************************************************/
 
-            SoftBasic.FrameworkVersion = new SystemVersion("1.6.13");
+            SoftBasic.FrameworkVersion = new SystemVersion("1.6.14");
 
         }
 
@@ -72,7 +69,7 @@ namespace CommonLibrary
          *          假设你们的多个项目服务器假设在一台电脑的情况，就绝对要替换下面的端口号
          * 
          ************************************************************************************************/
-         
+
 
         /// <summary>
         /// 主网络端口，此处随机定义了一个数据
@@ -105,6 +102,19 @@ namespace CommonLibrary
         /// 整个系统的加密解密密码
         /// </summary>
         public static string Security { get; } = "qwertyui";
-    }
 
+
+
+        /// <summary>
+        /// 统一的窗体图标显示
+        /// </summary>
+        /// <returns></returns>
+        public static Icon GetFormWindowIcon()
+        {
+            return Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
+
+
+
+    }
 }

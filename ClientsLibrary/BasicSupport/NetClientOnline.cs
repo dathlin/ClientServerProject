@@ -21,6 +21,7 @@ namespace ClientsLibrary.BasicSupport
         {
 
         }
+
         private void ClearControls()
         {
             for (int i = MyControls.Count - 1; i >= 0; i--)

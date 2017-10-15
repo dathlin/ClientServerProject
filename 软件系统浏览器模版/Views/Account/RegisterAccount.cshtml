@@ -23,28 +23,48 @@
             <legend style="font-family:'Microsoft YaHei UI',Arial, Helvetica, sans-serif">注册新的账户<small>如果账户名已存在，会注册失败</small></legend>
             
             <div class="form-group">
-                <label for="username" class="col-lg-2 control-label">用户名：</label>
+                <label for="username" class="col-lg-2 control-label">@CommonLibrary.UserLocalization.Localization.AccountName：</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="username" name="username" placeholder="唯一标志的用户名" required />
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="password" class="col-lg-2 control-label">密码：</label>
+                <label for="password" class="col-lg-2 control-label">@CommonLibrary.UserLocalization.Localization.AccountPassword：</label>
                 <div class="col-lg-10">
                     <input type="password" class="form-control" id="password" name="password" placeholder="用户登录的密码" required />
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="factory" class="col-lg-2 control-label">工厂：</label>
+                <label for="alias" class="col-lg-2 control-label">@CommonLibrary.UserLocalization.Localization.AccountAlias：</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="factory" name="factory" required />
+                    <input type="text" class="form-control" id="alias" name="alias" />
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="factory" class="col-lg-2 control-label">@CommonLibrary.UserLocalization.Localization.AccountFactory：</label>
+                <div class="col-lg-10">
+                    @*<input type="text" class="form-control" id="factory" name="factory" required />*@
+                    <select class="form-control" id="factory" name="factory">
+
+                        @{
+                            string[] factories = Newtonsoft.Json.Linq.JArray.Parse(ClientsLibrary.UserClient.Net_simplify_client.ReadFromServer(
+                                CommonLibrary.CommonHeadCode.SimplifyHeadCode.请求分厂, "").Content).ToObject<string[]>();
+
+                            foreach (var m in factories)
+                            {
+                                <option value="@m">@m</option>
+                            }
+                        }
+                    </select>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="grade" class="col-lg-2 control-label">权限：</label>
+                <label for="grade" class="col-lg-2 control-label">@CommonLibrary.UserLocalization.Localization.AccountGrade：</label>
                 <div class="col-lg-10">
                     <select class="form-control" id="grade" name="grade">
                         <option value="@CommonLibrary.AccountGrade.SuperAdministrator">@CommonLibrary.AccountGrade.GetDescription(CommonLibrary.AccountGrade.SuperAdministrator)</option>
@@ -56,7 +76,7 @@
             </div>
 
             <div class="form-group">
-                <label for="loginEnable" class="col-lg-2 control-label">能否登录：</label>
+                <label for="loginEnable" class="col-lg-2 control-label">@CommonLibrary.UserLocalization.Localization.AccountLoginEnable：</label>
                 <div class="col-lg-10">
                     <select class="form-control" id="loginEnable" name="loginEnable">
                         <option value="True">允许登录</option>
@@ -66,7 +86,7 @@
             </div>
 
             <div class="form-group">
-                <label for="reason" class="col-lg-2 control-label">禁止原因：</label>
+                <label for="reason" class="col-lg-2 control-label">@CommonLibrary.UserLocalization.Localization.AccountForbidMessage：</label>
                 <div class="col-lg-10">
                     <textarea class="form-control" name="reason" id="reason" placeholder="禁止登录的原因，在禁止登录时将会显示这个信息" rows="3"></textarea>
                 </div>

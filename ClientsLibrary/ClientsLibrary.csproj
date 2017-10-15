@@ -170,6 +170,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SoftUpdateSupport\FormUpdateLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SoftUpdateSupport\FormUpdateLog.designer.cs">
+      <DependentUpon>FormUpdateLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="SoftUpdateSupport\FormUpdateRemote.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,6 +247,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SoftUpdateSupport\FormUpdateLog.resx">
+      <DependentUpon>FormUpdateLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SoftUpdateSupport\FormUpdateRemote.resx">
       <DependentUpon>FormUpdateRemote.cs</DependentUpon>
