@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicSupport\NetAccountManager.cs" />
     <Compile Include="FormServerWindow.cs">
       <SubType>Form</SubType>
     </Compile>

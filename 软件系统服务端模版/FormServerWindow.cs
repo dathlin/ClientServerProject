@@ -14,6 +14,7 @@ using HslCommunication.BasicFramework;
 using System.Diagnostics;
 using HslCommunication.LogNet;
 using HslCommunication;
+using 软件系统服务端模版.BasicSupport;
 
 
 /********************************************************************************************
@@ -992,7 +993,7 @@ namespace 软件系统服务端模版
 
         private void Net_socket_server_ClientOffline(AsyncStateOne object1, string object2)
         {
-            RemoveOnlineClient(object1.ClientUniqueID);
+            netAccountManager.RemoveOnlineClient(object1.ClientUniqueID);
             net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.用户下线, object1.ClientUniqueID);
 
             UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1.IpAddress + "：" + object1.LoginAlias + " " + object2);
@@ -1020,55 +1021,16 @@ namespace 软件系统服务端模版
                 { "Time", new JValue(DateTime.Now) },
                 { "FileCount", new JValue(ShareFileContainer.FileCount) },
                 { "chats", new JValue(Chats_Managment.ToSaveString())},
-                { "ClientsOnline", new JValue(ClientsOnlineCache) }
+                { "ClientsOnline", new JValue(netAccountManager.ClientsOnlineCache) }
             };
             
             // 发送客户端的初始化数据
             net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据, json.ToString());
             // 新增到在线客户端的队列中
-            AddOnlineClient(account);
+            netAccountManager.AddOnlineClient(account);
             // 触发上下线功能
             UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1.IpAddress + "：" + object1.LoginAlias + " 上线");
         }
-
-        private List<NetAccount> OnlineClients = new List<NetAccount>();
-        private SimpleHybirdLock hybirdLock = new SimpleHybirdLock();
-
-        private void AddOnlineClient(NetAccount account)
-        {
-            hybirdLock.Enter();
-            OnlineClients.Add(account);
-            ClientsOnlineCache = JArray.FromObject(OnlineClients).ToString();
-            hybirdLock.Leave();
-            
-        }
-
-        private void RemoveOnlineClient(string uniqueId)
-        {
-            hybirdLock.Enter();
-
-            int index = -1;
-            for (int i = 0; i < OnlineClients.Count; i++)
-            {
-                if (OnlineClients[i].UniqueId == uniqueId)
-                {
-                    index = i;
-                    break;
-                }
-            }
-
-            if (index >= 0)
-            {
-                OnlineClients.RemoveAt(index);
-            }
-
-            ClientsOnlineCache = JArray.FromObject(OnlineClients).ToString();
-
-            hybirdLock.Leave();
-        }
-
-        private string ClientsOnlineCache = "[]";
-
 
 
         private void Net_socket_server_AllClientsStatusChange(string data)
@@ -1111,6 +1073,29 @@ namespace 软件系统服务端模版
                 return false;
             }
         }
+
+        /// <summary>
+        /// 发送数据给在线的指定角色客户端
+        /// </summary>
+        /// <param name="handle">信息句柄</param>
+        /// <param name="message">消息</param>
+        /// <param name="roleCode">角色代码</param>
+        private void SendToClientsByRoleCode(NetHandle handle, string message, string roleCode)
+        {
+            foreach (var m in UserServer.ServerRoles.GetUsernamesByRolename(roleCode))
+            {
+                net_socket_server.SendClientByAlias(m, handle, roleCode);
+            }
+        }
+
+        #endregion
+
+        #region 在线客户端管理器
+
+        /// <summary>
+        /// 所有在线客户端的管理器
+        /// </summary>
+        private NetAccountManager netAccountManager { get; set; } = new NetAccountManager();
 
         #endregion
 
