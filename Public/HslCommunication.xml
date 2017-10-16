@@ -1405,6 +1405,11 @@
             发送的数据就是普通的图片数据
             </summary>
         </member>
+        <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_User_Exception">
+            <summary>
+            发送的数据是一条异常的数据，字符串为异常消息
+            </summary>
+        </member>
         <member name="F:HslCommunication.HslCommunicationCode.Hsl_Protocol_File_Download">
             <summary>
             请求文件下载的暗号
@@ -2355,6 +2360,22 @@
             </summary>
             <param name="customer">用户自定义的命令头</param>
             <param name="data">需要群发客户端的字节数据</param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.SendClientByAlias(System.String,HslCommunication.NetHandle,System.String)">
+            <summary>
+            根据客户端设置的别名进行发送消息
+            </summary>
+            <param name="Alias">客户端上线的别名</param>
+            <param name="customer">用户自定义的命令头</param>
+            <param name="str">需要传送的实际的数据</param>
+        </member>
+        <member name="M:HslCommunication.Enthernet.NetComplexServer.SendClientByAlias(System.String,HslCommunication.NetHandle,System.Byte[])">
+            <summary>
+            根据客户端设置的别名进行发送消息
+            </summary>
+            <param name="Alias">客户端上线的别名</param>
+            <param name="customer">用户自定义的命令头</param>
+            <param name="data">需要传送的实际的数据</param>
         </member>
         <member name="M:HslCommunication.Enthernet.NetComplexServer.DataProcessingCenter(HslCommunication.Enthernet.AsyncStateOne,System.Int32,System.Int32,System.Byte[])">
             <summary>
