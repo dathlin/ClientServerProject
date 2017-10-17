@@ -93,6 +93,12 @@ namespace CommonLibrary
         string GeneralAllowLoginList { get; set; }
 
 
+        #region 格式化文本
+
+        string FormateBetweenTwoSize { get; set; }
+
+        #endregion
+
         #region 复选框
 
         string CheckBoxAllowUserMulti { get; set; }

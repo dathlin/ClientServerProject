@@ -23,6 +23,12 @@ namespace CommonLibrary
         public string GeneralAllowLoginList { get; set; } = "Allow login list";
 
 
+        #region 格式化文本
+
+        public string FormateBetweenTwoSize { get; set; } = "Select count should between {0} and {1}";
+
+        #endregion
+
         #region 复选框
 
         public string CheckBoxAllowUserMulti { get; set; } = "Allow an account to log if online (except admin)";

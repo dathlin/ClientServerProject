@@ -183,7 +183,7 @@ namespace ClientsLibrary.Configuration
             if (listBox1.SelectedItem is RoleItem role)
             {
                 // select account
-                using (FormAccountSelect form = new FormAccountSelect(null, role.Accounts))
+                using (FormAccountSelect form = new FormAccountSelect(null, 0, int.MaxValue, role.Accounts))
                 {
                     if (form.ShowDialog() == DialogResult.OK)
                     {

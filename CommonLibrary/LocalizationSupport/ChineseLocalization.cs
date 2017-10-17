@@ -23,6 +23,11 @@ namespace CommonLibrary
         public string GeneralDescription { get; set; } = "描述";
         public string GeneralAllowLoginList { get; set; } = "允许登录列表";
 
+        #region 格式化文本
+
+        public string FormateBetweenTwoSize { get; set; } = "选择的数量范围为 {0} - {1}";
+
+        #endregion
 
         #region 复选框
 
