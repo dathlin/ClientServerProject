@@ -31,6 +31,7 @@ namespace ClientsLibrary.BasicSupport
             }
 
             Location_Y = 0;
+            label2.Text = MyControls.Count.ToString();
         }
 
         /// <summary>
@@ -111,7 +112,6 @@ namespace ClientsLibrary.BasicSupport
 
             if (accounts != null)
             {
-                label2.Text = accounts.Length.ToString();
 
                 if (accounts.Length > 0 && Width > 20)
                 {
@@ -122,8 +122,10 @@ namespace ClientsLibrary.BasicSupport
                     }
                 }
             }
-
+            
             ResumeLayout();
+
+            label2.Text = MyControls.Count.ToString();
         }
 
         private int Location_Y = 0;
