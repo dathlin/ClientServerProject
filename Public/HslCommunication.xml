@@ -4626,9 +4626,23 @@
             <param name="array"></param>
             <returns></returns>
         </member>
+        <member name="M:HslCommunication.Profinet.PlcNetBase.GetBytesFromArray(System.Int32[])">
+            <summary>
+            根据数据的数组返回真实的数据字节
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.Profinet.PlcNetBase.GetBytesFromArray(System.UInt16[])">
             <summary>
             根据数据的数据返回真实的数据字节
+            </summary>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.PlcNetBase.GetBytesFromArray(System.UInt32[])">
+            <summary>
+            根据数据的数组返回真实的数据字节
             </summary>
             <param name="array"></param>
             <returns></returns>
@@ -4805,6 +4819,72 @@
             <param name="address">起始地址，格式为I100，M100，Q100，DB20.100</param>
             <param name="data">写入的数据，长度根据data的长度来指示</param>
             <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.WriteAsciiStringIntoPLC(System.String,System.String)">
+            <summary>
+            向PLC中写入字符串，编码格式为ASCII
+            </summary>
+            <param name="address">要写入的数据地址</param>
+            <param name="data">要写入的实际数据</param>
+            <returns>返回读取结果</returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.WriteAsciiStringIntoPLC(System.String,System.String,System.Int32)">
+            <summary>
+            向PLC中写入指定长度的字符串,超出截断，不够补0，编码格式为ASCII
+            </summary>
+            <param name="address">要写入的数据地址</param>
+            <param name="data">要写入的实际数据</param>
+            <param name="length">指定的字符串长度，必须大于0</param>
+            <returns>返回读取结果</returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.WriteUnicodeStringIntoPLC(System.String,System.String)">
+            <summary>
+            向PLC中写入字符串，编码格式为Unicode
+            </summary>
+            <param name="address">要写入的数据地址</param>
+            <param name="data">要写入的实际数据</param>
+            <returns>返回读取结果</returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.WriteUnicodeStringIntoPLC(System.String,System.String,System.Int32)">
+            <summary>
+            向PLC中写入指定长度的字符串,超出截断，不够补0，编码格式为Unicode
+            </summary>
+            <param name="address">要写入的数据地址</param>
+            <param name="data">要写入的实际数据</param>
+            <param name="length">指定的字符串长度，必须大于0</param>
+            <returns>返回读取结果</returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.WriteIntoPLC(System.String,System.Int16[])">
+            <summary>
+            向PLC中写入short数据，返回值说明
+            </summary>
+            <param name="address">要写入的数据地址</param>
+            <param name="data">要写入的实际数据</param>
+            <returns>返回写入结果</returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.WriteIntoPLC(System.String,System.UInt16[])">
+            <summary>
+            向PLC中写入ushort数据，返回值说明
+            </summary>
+            <param name="address">要写入的数据地址</param>
+            <param name="data">要写入的实际数据</param>
+            <returns>返回写入结果</returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.WriteIntoPLC(System.String,System.Int32[])">
+            <summary>
+            向PLC中写入int数据，返回值说明
+            </summary>
+            <param name="address">要写入的数据地址</param>
+            <param name="data">要写入的实际数据</param>
+            <returns>返回写入结果</returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.WriteIntoPLC(System.String,System.UInt32[])">
+            <summary>
+            向PLC中写入uint数据，返回值说明
+            </summary>
+            <param name="address">要写入的数据地址</param>
+            <param name="data">要写入的实际数据</param>
+            <returns>返回写入结果</returns>
         </member>
         <member name="T:HslCommunication.Properties.Resources">
             <summary>
