@@ -4753,6 +4753,59 @@
             Q寄存器
             </summary>
         </member>
+        <member name="T:HslCommunication.Profinet.SiemensPLCS">
+            <summary>
+            西门子的PLC类型，目前支持的访问类型
+            </summary>
+        </member>
+        <member name="F:HslCommunication.Profinet.SiemensPLCS.S1200">
+            <summary>
+            1200系列
+            </summary>
+        </member>
+        <member name="F:HslCommunication.Profinet.SiemensPLCS.S300">
+            <summary>
+            300系列
+            </summary>
+        </member>
+        <member name="T:HslCommunication.Profinet.SiemensTcpNet">
+            <summary>
+            一个直接使用Tcp协议连接西门子PLC的类，只需要在plc侧配置IP即可，该类在西门子1200上经过测试，1500暂时不支持
+            </summary>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.#ctor(HslCommunication.Profinet.SiemensPLCS)">
+            <summary>
+            实例化一个数据通信的对象，需要指定访问哪种Plc
+            </summary>
+            <param name="siemens"></param>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.AnalysisAddress(System.String,System.Byte@,System.Int32@,System.UInt16@,HslCommunication.OperateResult)">
+            <summary>
+            解析数据地址
+            </summary>
+            <param name="address">数据地址</param>
+            <param name="type">类型</param>
+            <param name="startAddress">其实地址</param>
+            <param name="dbAddress">DB块地址</param>
+            <param name="result">结果数据对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.ReadFromPLC(System.String,System.UInt16)">
+            <summary>
+            从PLC读取数据，地址格式为I100，Q100，DB20.100，M100，以字节为单位
+            </summary>
+            <param name="address">起始地址，格式为I100，M100，Q100，DB20.100</param>
+            <param name="count">读取的数量，以字节为单位</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.WriteIntoPLC(System.String,System.Byte[])">
+            <summary>
+            将数据写入到PLC数据，地址格式为I100，Q100，DB20.100，M100，以字节为单位
+            </summary>
+            <param name="address">起始地址，格式为I100，M100，Q100，DB20.100</param>
+            <param name="data">写入的数据，长度根据data的长度来指示</param>
+            <returns></returns>
+        </member>
         <member name="T:HslCommunication.Properties.Resources">
             <summary>
               一个强类型的资源类，用于查找本地化的字符串等。
