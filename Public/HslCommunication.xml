@@ -4619,32 +4619,36 @@
             <param name="length">最终需要的目标长度</param>
             <returns>处理后的数据</returns>
         </member>
-        <member name="M:HslCommunication.Profinet.PlcNetBase.GetBytesFromArray(System.Int16[])">
+        <member name="M:HslCommunication.Profinet.PlcNetBase.GetBytesFromArray(System.Int16[],System.Boolean)">
             <summary>
             根据数据的数组返回真实的数据字节
             </summary>
             <param name="array"></param>
+            <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Profinet.PlcNetBase.GetBytesFromArray(System.Int32[])">
+        <member name="M:HslCommunication.Profinet.PlcNetBase.GetBytesFromArray(System.Int32[],System.Boolean)">
             <summary>
             根据数据的数组返回真实的数据字节
             </summary>
             <param name="array"></param>
+            <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Profinet.PlcNetBase.GetBytesFromArray(System.UInt16[])">
+        <member name="M:HslCommunication.Profinet.PlcNetBase.GetBytesFromArray(System.UInt16[],System.Boolean)">
             <summary>
             根据数据的数据返回真实的数据字节
             </summary>
             <param name="array"></param>
+            <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:HslCommunication.Profinet.PlcNetBase.GetBytesFromArray(System.UInt32[])">
+        <member name="M:HslCommunication.Profinet.PlcNetBase.GetBytesFromArray(System.UInt32[],System.Boolean)">
             <summary>
             根据数据的数组返回真实的数据字节
             </summary>
             <param name="array"></param>
+            <param name="reverse"></param>
             <returns></returns>
         </member>
         <member name="M:HslCommunication.Profinet.PlcNetBase.GetArrayFromBytes(System.Byte[])">
