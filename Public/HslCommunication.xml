@@ -4649,7 +4649,14 @@
         </member>
         <member name="M:HslCommunication.Profinet.PlcNetBase.GetArrayFromBytes(System.Byte[])">
             <summary>
-            根据底层的数据情况返回转换后的数组
+            根据底层的数据情况返回转换后的short数组
+            </summary>
+            <param name="bytes">真实的数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.PlcNetBase.GetIntArrayFromBytes(System.Byte[])">
+            <summary>
+            根据底层的数据情况返回转换后的int数组
             </summary>
             <param name="bytes">真实的数据</param>
             <returns></returns>
@@ -4885,6 +4892,14 @@
             <param name="address">要写入的数据地址</param>
             <param name="data">要写入的实际数据</param>
             <returns>返回写入结果</returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.WriteIntoPLC(System.String,System.Boolean)">
+            <summary>
+            写入PLC的一个位，例如"M100.6"，"I100.7"，"Q100.0"，"DB20.100.0"，如果只写了"M100"默认为"M100.0
+            </summary>
+            <param name="address"></param>
+            <param name="data"></param>
+            <returns></returns>
         </member>
         <member name="T:HslCommunication.Properties.Resources">
             <summary>
