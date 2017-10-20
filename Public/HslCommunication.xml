@@ -4823,6 +4823,14 @@
             <param name="count">读取的数量，以字节为单位</param>
             <returns></returns>
         </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.ReadFromPLC(System.String[],System.UInt16[])">
+            <summary>
+            一次性从PLC获取所有的数据，按照先后顺序返回一个统一的Buffer，需要按照顺序处理，两个数组长度必须一致
+            </summary>
+            <param name="address">起始地址数组</param>
+            <param name="count">数据长度数组</param>
+            <returns></returns>
+        </member>
         <member name="M:HslCommunication.Profinet.SiemensTcpNet.WriteIntoPLC(System.String,System.Byte[])">
             <summary>
             将数据写入到PLC数据，地址格式为I100，Q100，DB20.100，M100，以字节为单位
@@ -4903,6 +4911,44 @@
             </summary>
             <param name="address"></param>
             <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.GetArrayFromBytes(System.Byte[])">
+            <summary>
+            从返回的西门子数组中获取short数组数据，已经内置高地位转换
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.GetIntArrayFromBytes(System.Byte[])">
+            <summary>
+            从返回的西门子数组中获取int数组数据，已经内置高地位转换
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.GetShortFromBytes(System.Byte[],System.Int32)">
+            <summary>
+            根据索引位转换获取short数据
+            </summary>
+            <param name="content"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.GetFloatFromBytes(System.Byte[],System.Int32)">
+            <summary>
+            根据索引位转换获取float数据
+            </summary>
+            <param name="content"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HslCommunication.Profinet.SiemensTcpNet.GetIntFromBytes(System.Byte[],System.Int32)">
+            <summary>
+            根据索引位转换获取int数据
+            </summary>
+            <param name="content"></param>
+            <param name="index"></param>
             <returns></returns>
         </member>
         <member name="T:HslCommunication.Properties.Resources">
