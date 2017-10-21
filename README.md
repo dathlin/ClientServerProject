@@ -92,7 +92,7 @@
 </ul>
 
 
-## HslCommunication.dll
+## HslCommunication.dll [![NuGet Status](https://img.shields.io/nuget/v/HslCommunication.svg)](https://www.nuget.org/packages/HslCommunication/)
 <p>本C-S项目的核心组件，该组件功能提供了一些基础功能类和整个C-S项目的网络支持，除此之外，该组件提供了访问三菱PLC和西门子PLC的数据功能。
 以下就是该库的部分子功能说明，您也可以只使用其中一部分的功能类，比如日志功能！完整的功能手册将在近期放出，方便理解整个系统的底层机制。</p>
 
