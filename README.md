@@ -97,10 +97,9 @@
 以下就是该库的部分子功能说明，您也可以只使用其中一部分的功能类，比如日志功能！完整的功能手册将在近期放出，方便理解整个系统的底层机制。</p>
 
 <ul>
-<li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/LogReadme.md">简单强大的日志记录功能使用</a></li>
-<li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/SimplifyNet.md">同步网络数据交互功能使用</a></li>
-<li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/MelsecReadMe.md">三菱PLC数据读写介绍</a></li>
-<li><a href="https://github.com/dathlin/ClientServerProject/blob/master/files/SiemensReadMe.md">西门子PLC数据读写手册</a></li>
+<li><a href="http://www.cnblogs.com/dathlin/p/7691693.html">简单强大的日志记录功能使用</a></li>
+<li><a href="http://www.cnblogs.com/dathlin/p/7697782.html">同步网络数据交互功能使用</a></li>
+<li><a href="http://www.cnblogs.com/dathlin/p/7469679.html">三菱和西门子的PLC数据读写介绍</a></li>
 </ul>
 
 
@@ -113,9 +112,13 @@ using HslCommunication;
 </code>
 </pre>
 
-下载地址：<a href="https://github.com/dathlin/ClientServerProject/raw/master/Public/HslCommunication.dll">单独的组件dll文件</a>
-文档地址：<a href="https://github.com/dathlin/ClientServerProject/raw/master/Public/HslCommunication.xml">单独的组件xml注释文件</a>
+在Nuget控制台输入下面的指令即可安装，或者使用VS2017的Nuget包管理器来方便的下载组件，如果不清楚怎么使用Nuget可以参考网上教程。
 
+<pre>
+<code>
+Install-Package HslCommunication
+</code>
+</pre>
 
 
 # 整个系统的架构设计如下

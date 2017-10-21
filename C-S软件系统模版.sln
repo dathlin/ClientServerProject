@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLibrary", "CommonLibrary\CommonLibrary.csproj", "{8C97F322-4306-40FC-AFCF-753384D80046}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientsLibrary", "ClientsLibrary\ClientsLibrary.csproj", "{2063879B-D561-47FF-A0D5-6CEF2B9E4ABD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "软件系统浏览器模版", "软件系统浏览器模版\软件系统浏览器模版.csproj", "{9F528713-4869-4CD2-B76B-38AE5FEE6E7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HslCommunicationNetTestTool", "HslCommunicationNetTestTool\HslCommunicationNetTestTool.csproj", "{1ACA04D4-BBC0-417D-B06C-14EE030239F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,8 +47,15 @@ Global
 		{9F528713-4869-4CD2-B76B-38AE5FEE6E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F528713-4869-4CD2-B76B-38AE5FEE6E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F528713-4869-4CD2-B76B-38AE5FEE6E7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ACA04D4-BBC0-417D-B06C-14EE030239F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ACA04D4-BBC0-417D-B06C-14EE030239F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ACA04D4-BBC0-417D-B06C-14EE030239F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ACA04D4-BBC0-417D-B06C-14EE030239F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF185E57-0FE8-4992-A83A-1905262134CC}
 	EndGlobalSection
 EndGlobal
