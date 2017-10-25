@@ -28,9 +28,7 @@ namespace 软件系统客户端Wpf
 {
 
 
-
-
-
+    
 
     /***************************************************************************************
      * 
@@ -414,6 +412,18 @@ namespace 软件系统客户端Wpf
             }
         }
 
+        private void MenuItem窗口显示_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainPageRight.Visibility != Visibility.Collapsed)
+            {
+                MainPageRight.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MainPageRight.Visibility = Visibility.Visible;
+            }
+        }
+
         #endregion
 
         #region 异步网络块
@@ -448,10 +458,10 @@ namespace 软件系统客户端Wpf
             if (customer == CommonHeadCode.MultiNetHeadCode.弹窗新消息)
             {
                 if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
-                 {
-                     FormPopup fpp = new FormPopup(data, System.Drawing.Color.DodgerBlue, 10000);
-                     fpp.Show();
-                 }));
+                {
+                    FormPopup fpp = new FormPopup(data, System.Drawing.Color.DodgerBlue, 10000);
+                    fpp.Show();
+                }));
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.总在线信息)
             {
@@ -504,7 +514,7 @@ namespace 软件系统客户端Wpf
                     TextBlock_ServerTime.Text = UserClient.DateTimeServer.ToString("yyyy-MM-dd HH:mm:ss");
                     TextBlock_FileCount.Text = json["FileCount"].ToObject<int>().ToString();
                     UIControls_Chat.AddChatsHistory(sb.ToString());
-                    
+
                     NetAccount[] accounts = JArray.Parse(json["ClientsOnline"].ToString()).ToObject<NetAccount[]>();
 
                     foreach (var m in accounts)
@@ -545,7 +555,7 @@ namespace 软件系统客户端Wpf
                     Views.Controls.UserClientRenderItem item = null;
                     foreach (Views.Controls.UserClientRenderItem m in ClientsOnline.Children)
                     {
-                        if(m?.UniqueId == data)
+                        if (m?.UniqueId == data)
                         {
                             item = m;
                         }
@@ -553,7 +563,7 @@ namespace 软件系统客户端Wpf
                     if (item != null) ClientsOnline.Children.Remove(item);
                 }));
             }
-            else if(customer == CommonHeadCode.MultiNetHeadCode.新头像更新)
+            else if (customer == CommonHeadCode.MultiNetHeadCode.新头像更新)
             {
                 UserClient.PortraitManager.UpdateSmallPortraitByName(data);
                 if (IsWindowShow) Dispatcher.Invoke(new Action(() =>

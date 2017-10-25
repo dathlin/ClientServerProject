@@ -112,7 +112,11 @@
                                 <materialDesign:PackIcon Kind="Palette" />
                             </MenuItem.Icon>
                         </MenuItem>
-
+                        <MenuItem Header="窗口显示" x:Name="MenuItem窗口显示" Click="MenuItem窗口显示_Click">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="KeyboardTab" />
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </MenuItem>
                     <MenuItem Header="_关于">
                         <MenuItem.Icon>
@@ -192,8 +196,8 @@
 
             
                 <!--右侧的账户信息和登录消息-->
-                <Grid DockPanel.Dock="Right" Width="230">
-                    <Grid>
+                <Grid DockPanel.Dock="Right">
+                    <Grid Name="MainPageRight" Width="230">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>

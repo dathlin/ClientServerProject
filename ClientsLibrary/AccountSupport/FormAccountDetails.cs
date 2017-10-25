@@ -277,23 +277,22 @@ namespace ClientsLibrary
                 ms
                 );
 
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
-                if(IsHandleCreated) Invoke(new Action(() =>
+                try
                 {
-                    // 下载完成
-                    Bitmap bitmap = new Bitmap(ms);
-                    pictureBox_UserPortrait.Image = bitmap;
-
-                    try
+                    if (IsHandleCreated) Invoke(new Action(() =>
                     {
+                        // 下载完成
+                        Bitmap bitmap = new Bitmap(ms);
+                        pictureBox_UserPortrait.Image = bitmap;
                         bitmap.Save(fileName);
-                    }
-                    catch
-                    {
-
-                    }
-                }));
+                    }));
+                }
+                catch
+                {
+                    // 不知道什么原因 
+                }
             }
             else
             {
