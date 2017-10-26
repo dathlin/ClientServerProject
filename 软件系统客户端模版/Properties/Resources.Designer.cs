@@ -19,7 +19,7 @@ namespace 软件系统客户端模版.Properties {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -73,6 +73,16 @@ namespace 软件系统客户端模版.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Constant_495 {
+            get {
+                object obj = ResourceManager.GetObject("Constant_495", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap PickAxe_32xLG {
             get {
                 object obj = ResourceManager.GetObject("PickAxe_32xLG", resourceCulture);
@@ -86,6 +96,16 @@ namespace 软件系统客户端模版.Properties {
         internal static System.Drawing.Bitmap Team_32xLG {
             get {
                 object obj = ResourceManager.GetObject("Team_32xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap UserProfilenode_8706 {
+            get {
+                object obj = ResourceManager.GetObject("UserProfilenode_8706", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -103,8 +103,11 @@ namespace 软件系统客户端模版
             // 显示版本
             toolStripStatusLabel_Version.Text = UserClient.CurrentVersion.ToString();
 
-            //初始化窗口
+            // 初始化窗口
             MainRenderInitialization();
+
+            // tooltip初始化
+            ToolTipInitialization();
         }
 
 
@@ -161,6 +164,8 @@ namespace 软件系统客户端模版
             {
                 fwm.ShowDialog();
             }
+
+            toolTipSystem?.Dispose();
         }
 
 
@@ -743,8 +748,48 @@ namespace 软件系统客户端模版
 
 
 
+
         #endregion
 
-       
+        #region ToolTip配置
+
+
+        private ToolTip toolTipSystem = null;
+
+        private void ToolTipInitialization()
+        {
+            toolTipSystem = new ToolTip();
+            toolTipSystem.UseFading = true;
+            toolTipSystem.SetToolTip(pictureBox_right_shrink, "隐藏右边的信息栏，显示精简界面。");
+            toolTipSystem.SetToolTip(pictureBox_right_restore, "显示右边的信息栏，隐藏精简界面。");
+            toolTipSystem.SetToolTip(pictureBox_right_profile, "我的账户信息");
+        }
+
+
+        #endregion
+
+        #region User Interface Logic
+        
+        private void pictureBox_right_shrink_Click(object sender, EventArgs e)
+        {
+            // 收缩
+            panel_right.Width = 25;
+            panel_right_mini.Visible = true;
+        }
+
+        private void pictureBox_right_restore_Click(object sender, EventArgs e)
+        {
+            // 复原
+            panel_right.Width = 224;
+            panel_right_mini.Visible = false;
+        }
+
+        private void pictureBox_right_profile_Click(object sender, EventArgs e)
+        {
+            // 点击我的信息
+            我的信息ToolStripMenuItem_Click(sender, e);
+        }
+        
+        #endregion
     }
 }
