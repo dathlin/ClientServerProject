@@ -131,6 +131,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DatabaseSupport\Help.txt" />
+    <None Include="Resources\RolesNode_Valid_Closed.png" />
+    <None Include="Resources\Association.png" />
     <None Include="Resources\UserProfilenode_8706.png" />
     <None Include="Resources\Constant_495.png" />
     <None Include="Resources\ASCube_32xLG.png" />

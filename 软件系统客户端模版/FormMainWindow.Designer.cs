@@ -38,6 +38,7 @@
             this.toolStripStatusLabel_time = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.panel_right = new System.Windows.Forms.Panel();
+            this.panel_right_mini = new System.Windows.Forms.Panel();
             this.netClientOnline1 = new ClientsLibrary.BasicSupport.NetClientOnline();
             this.label_file_count = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -59,7 +60,6 @@
             this.panel_left = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.panel_main = new System.Windows.Forms.Panel();
-            this.panel_right_mini = new System.Windows.Forms.Panel();
             this.linkLabel_logout = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox_right_profile = new System.Windows.Forms.PictureBox();
@@ -84,15 +84,17 @@
             this.更新日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.版本号说明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.意见反馈ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox_right_file = new System.Windows.Forms.PictureBox();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel_right.SuspendLayout();
-            this.panel_left.SuspendLayout();
             this.panel_right_mini.SuspendLayout();
+            this.panel_left.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_right_profile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_right_restore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_right_shrink)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_right_file)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -198,6 +200,17 @@
             this.panel_right.Name = "panel_right";
             this.panel_right.Size = new System.Drawing.Size(224, 419);
             this.panel_right.TabIndex = 2;
+            // 
+            // panel_right_mini
+            // 
+            this.panel_right_mini.Controls.Add(this.pictureBox_right_file);
+            this.panel_right_mini.Controls.Add(this.pictureBox_right_profile);
+            this.panel_right_mini.Controls.Add(this.pictureBox_right_restore);
+            this.panel_right_mini.Location = new System.Drawing.Point(0, 0);
+            this.panel_right_mini.Name = "panel_right_mini";
+            this.panel_right_mini.Size = new System.Drawing.Size(25, 418);
+            this.panel_right_mini.TabIndex = 21;
+            this.panel_right_mini.Visible = false;
             // 
             // netClientOnline1
             // 
@@ -397,16 +410,6 @@
             this.panel_main.Size = new System.Drawing.Size(557, 419);
             this.panel_main.TabIndex = 5;
             // 
-            // panel_right_mini
-            // 
-            this.panel_right_mini.Controls.Add(this.pictureBox_right_profile);
-            this.panel_right_mini.Controls.Add(this.pictureBox_right_restore);
-            this.panel_right_mini.Location = new System.Drawing.Point(0, 0);
-            this.panel_right_mini.Name = "panel_right_mini";
-            this.panel_right_mini.Size = new System.Drawing.Size(25, 418);
-            this.panel_right_mini.TabIndex = 21;
-            this.panel_right_mini.Visible = false;
-            // 
             // linkLabel_logout
             // 
             this.linkLabel_logout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -444,7 +447,7 @@
             // pictureBox_right_restore
             // 
             this.pictureBox_right_restore.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox_right_restore.Image = global::软件系统客户端模版.Properties.Resources.Constant_495;
+            this.pictureBox_right_restore.Image = global::软件系统客户端模版.Properties.Resources.Association;
             this.pictureBox_right_restore.Location = new System.Drawing.Point(3, 4);
             this.pictureBox_right_restore.Name = "pictureBox_right_restore";
             this.pictureBox_right_restore.Size = new System.Drawing.Size(17, 17);
@@ -455,8 +458,8 @@
             // pictureBox_right_shrink
             // 
             this.pictureBox_right_shrink.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox_right_shrink.Image = global::软件系统客户端模版.Properties.Resources.Constant_495;
-            this.pictureBox_right_shrink.Location = new System.Drawing.Point(200, 2);
+            this.pictureBox_right_shrink.Image = global::软件系统客户端模版.Properties.Resources.Association;
+            this.pictureBox_right_shrink.Location = new System.Drawing.Point(201, 4);
             this.pictureBox_right_shrink.Name = "pictureBox_right_shrink";
             this.pictureBox_right_shrink.Size = new System.Drawing.Size(17, 17);
             this.pictureBox_right_shrink.TabIndex = 20;
@@ -613,6 +616,17 @@
             this.意见反馈ToolStripMenuItem.Text = "意见反馈";
             this.意见反馈ToolStripMenuItem.Click += new System.EventHandler(this.意见反馈ToolStripMenuItem_Click);
             // 
+            // pictureBox_right_file
+            // 
+            this.pictureBox_right_file.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_right_file.Image = global::软件系统客户端模版.Properties.Resources.RolesNode_Valid_Closed;
+            this.pictureBox_right_file.Location = new System.Drawing.Point(3, 44);
+            this.pictureBox_right_file.Name = "pictureBox_right_file";
+            this.pictureBox_right_file.Size = new System.Drawing.Size(17, 17);
+            this.pictureBox_right_file.TabIndex = 23;
+            this.pictureBox_right_file.TabStop = false;
+            this.pictureBox_right_file.Click += new System.EventHandler(this.pictureBox_right_file_Click);
+            // 
             // FormMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -640,12 +654,13 @@
             this.menuStrip1.PerformLayout();
             this.panel_right.ResumeLayout(false);
             this.panel_right.PerformLayout();
-            this.panel_left.ResumeLayout(false);
             this.panel_right_mini.ResumeLayout(false);
+            this.panel_left.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_right_profile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_right_restore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_right_shrink)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_right_file)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -709,6 +724,7 @@
         private System.Windows.Forms.PictureBox pictureBox_right_restore;
         private System.Windows.Forms.LinkLabel linkLabel_logout;
         private System.Windows.Forms.PictureBox pictureBox_right_profile;
+        private System.Windows.Forms.PictureBox pictureBox_right_file;
     }
 }
 

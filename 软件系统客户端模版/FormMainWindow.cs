@@ -647,12 +647,7 @@ namespace 软件系统客户端模版
             if (control != null) SetShowRenderControl(control);
         }
 
-        private void label_file_count_Click(object sender, EventArgs e)
-        {
-            //点击查看了共享文件
-            SetShowRenderControl(UIControls_Files);
-            UIControls_Files.UpdateFiles();
-        }
+
 
 
 
@@ -763,6 +758,7 @@ namespace 软件系统客户端模版
             toolTipSystem.SetToolTip(pictureBox_right_shrink, "隐藏右边的信息栏，显示精简界面。");
             toolTipSystem.SetToolTip(pictureBox_right_restore, "显示右边的信息栏，隐藏精简界面。");
             toolTipSystem.SetToolTip(pictureBox_right_profile, "我的账户信息");
+            toolTipSystem.SetToolTip(pictureBox_right_file, "共享文件信息");
         }
 
 
@@ -789,7 +785,21 @@ namespace 软件系统客户端模版
             // 点击我的信息
             我的信息ToolStripMenuItem_Click(sender, e);
         }
-        
+        private void pictureBox_right_file_Click(object sender, EventArgs e)
+        {
+            // 点击共享文件图标
+            label_file_count_Click(sender, e);
+        }
+
+        private void label_file_count_Click(object sender, EventArgs e)
+        {
+            // 点击查看了共享文件
+            SetShowRenderControl(UIControls_Files);
+            UIControls_Files.UpdateFiles();
+        }
+
         #endregion
+
+
     }
 }

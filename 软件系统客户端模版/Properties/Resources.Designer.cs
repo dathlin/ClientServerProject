@@ -73,6 +73,16 @@ namespace 软件系统客户端模版.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Association {
+            get {
+                object obj = ResourceManager.GetObject("Association", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Constant_495 {
             get {
                 object obj = ResourceManager.GetObject("Constant_495", resourceCulture);
@@ -86,6 +96,16 @@ namespace 软件系统客户端模版.Properties {
         internal static System.Drawing.Bitmap PickAxe_32xLG {
             get {
                 object obj = ResourceManager.GetObject("PickAxe_32xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap RolesNode_Valid_Closed {
+            get {
+                object obj = ResourceManager.GetObject("RolesNode_Valid_Closed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
