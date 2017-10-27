@@ -112,11 +112,6 @@
                                 <materialDesign:PackIcon Kind="Palette" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="窗口显示" x:Name="MenuItem窗口显示" Click="MenuItem窗口显示_Click">
-                            <MenuItem.Icon>
-                                <materialDesign:PackIcon Kind="KeyboardTab" />
-                            </MenuItem.Icon>
-                        </MenuItem>
                     </MenuItem>
                     <MenuItem Header="_关于">
                         <MenuItem.Icon>
@@ -197,7 +192,7 @@
             
                 <!--右侧的账户信息和登录消息-->
                 <Grid DockPanel.Dock="Right">
-                    <Grid Name="MainPageRight" Width="230">
+                    <Grid Name="MainPageRight" Width="230" Visibility="Visible">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
@@ -290,6 +285,26 @@
                                 </ScrollViewer>
                             </Grid>
                         </GroupBox>
+                        <!--
+                        <TextBlock Margin="0,9,10,0" HorizontalAlignment="Right" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">>></TextBlock>
+                        -->
+                        <Grid Margin="0,4,4,0" HorizontalAlignment="Right" MouseDown="packIcon_right_shrink_Click" Cursor="Hand" Background="Transparent">
+                            <materialDesign:PackIcon Kind="ChevronDoubleRight"  Width="25" Height="25"
+                                                 Name="packIcon_right_shrink"/>
+                        </Grid>
+                    </Grid>
+                    <Grid Name="MainPageRightMini" Visibility="Collapsed" Width="25">
+                        <StackPanel>
+                            <Grid MouseDown="packIcon_right_restore_Click" Cursor="Hand" Background="Transparent">
+                                <materialDesign:PackIcon Kind="ChevronDoubleLeft" Name="packIcon_right_restore" HorizontalAlignment="Left" Width="25" Height="25"/>
+                            </Grid>
+                            <Grid MouseDown="packIcon_right_profile_MouseDown" Cursor="Hand" Background="Transparent">
+                                <materialDesign:PackIcon Kind="Account" Name="packIcon_right_profile" HorizontalAlignment="Left" Width="25" Height="25"/>
+                            </Grid>
+                            <Grid MouseDown="packIcon_right_file_MouseDown" Cursor="Hand" Background="Transparent">
+                                <materialDesign:PackIcon Kind="FileCloud" Name="packIcon_right_file" MouseDown="packIcon_right_file_MouseDown" HorizontalAlignment="Left" Width="25" Height="25"/>
+                            </Grid>
+                        </StackPanel>
                     </Grid>
                 </Grid>
 

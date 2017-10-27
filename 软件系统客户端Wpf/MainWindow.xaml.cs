@@ -411,18 +411,7 @@ namespace 软件系统客户端Wpf
                 fmr.ShowDialog();
             }
         }
-
-        private void MenuItem窗口显示_Click(object sender, RoutedEventArgs e)
-        {
-            if (MainPageRight.Visibility != Visibility.Collapsed)
-            {
-                MainPageRight.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                MainPageRight.Visibility = Visibility.Visible;
-            }
-        }
+        
 
         #endregion
 
@@ -828,12 +817,16 @@ namespace 软件系统客户端Wpf
         #endregion
 
 
+        #region User Interface
+
 
         /**********************************************************************************************
          * 
          *    说明： 以下的两个方法是针对主界面左侧的按钮，用于测试
          * 
          **********************************************************************************************/
+
+
 
 
         private void Button_BackMain_Click(object sender, RoutedEventArgs e)
@@ -849,7 +842,43 @@ namespace 软件系统客户端Wpf
             await Task.Delay(2000);
             DialogHostWait.IsOpen = false;
         }
+        private void packIcon_right_profile_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // 点击我的信息
+            MenuItem我的信息_Click(sender, null);
+        }
 
+        private void packIcon_right_file_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // 点击共享文件
+            Border_MouseLeftButtonDown(sender, e);
+        }
+        
 
+        private void packIcon_right_shrink_Click(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation doubleAnimation = new DoubleAnimation(
+                25, new Duration(TimeSpan.FromMilliseconds(300)));
+            doubleAnimation.Completed += DoubleAnimation_Completed;
+            MainPageRight.BeginAnimation(WidthProperty, doubleAnimation);
+        }
+
+        private void DoubleAnimation_Completed(object sender, EventArgs e)
+        {
+            MainPageRightMini.Visibility = Visibility.Visible;
+            MainPageRight.Visibility = Visibility.Collapsed;
+        }
+
+        private void packIcon_right_restore_Click(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation doubleAnimation = new DoubleAnimation(
+                25, 230, new Duration(TimeSpan.FromMilliseconds(300)));
+            MainPageRight.Visibility = Visibility.Visible;
+            MainPageRightMini.Visibility = Visibility.Collapsed;
+            MainPageRight.BeginAnimation(WidthProperty, doubleAnimation);
+        }
+
+        
+        #endregion
     }
 }
