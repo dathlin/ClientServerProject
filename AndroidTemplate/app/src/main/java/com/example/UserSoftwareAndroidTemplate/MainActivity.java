@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.HslCommunication.Core.Types.NetHandle;
 import com.example.HslCommunication.Core.Types.OperateResultString;
 import com.example.HslCommunication.Enthernet.NetSimplifyClient;
+import com.example.UserSoftwareAndroidTemplate.CommonLibrary.UserAccount;
+import com.google.gson.Gson;
 
 import java.util.UUID;
 
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             // 在这里进行网络请求相关操作
             Message msg = new Message();
-            OperateResultString result = UserClient.Client.ReadFromServer(new NetHandle(1,2, 15),"",null,null);
+            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(new NetHandle(1,2, 15),"",null,null);
             msg.arg1=1;
             msg.obj = result;
             handler.sendMessage(msg);
@@ -76,6 +78,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 new Thread(networkTask).start();
         }});
+
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserAccount account = new UserAccount();
+                TextView textView = (TextView) findViewById(R.id.textViewMain);
+                textView.setText(new Gson().toJson(account));
+            }
+        });
 
         TextView textView = (TextView) findViewById(R.id.textViewMain);
         textView.setMovementMethod(new ScrollingMovementMethod());

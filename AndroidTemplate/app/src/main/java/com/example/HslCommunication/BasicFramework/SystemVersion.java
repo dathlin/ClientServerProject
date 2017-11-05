@@ -126,31 +126,58 @@ public class SystemVersion {
     }
 
 
-    public boolean IsSameVersion(SystemVersion sv)
-    {
-        if(this.m_MainVersion!=sv.m_MainVersion)
-        {
-            return  false;
-        }
-
-        if(this.m_SecondaryVersion!=sv.m_SecondaryVersion)
-        {
+    public boolean IsSameVersion(SystemVersion sv) {
+        if (this.m_MainVersion != sv.m_MainVersion) {
             return false;
         }
 
-        if(this.m_EditVersion!=sv.m_EditVersion)
-        {
+        if (this.m_SecondaryVersion != sv.m_SecondaryVersion) {
             return false;
         }
 
-        if(this.m_InnerVersion!=sv.m_InnerVersion)
-        {
+        if (this.m_EditVersion != sv.m_EditVersion) {
+            return false;
+        }
+
+        if (this.m_InnerVersion != sv.m_InnerVersion) {
             return false;
         }
 
         return true;
     }
 
+    public boolean IsSmallerThan(SystemVersion sv) {
+        if (this.m_MainVersion < sv.m_MainVersion) {
+            return true;
+        }
+        else if(this.m_MainVersion > sv.m_MainVersion) {
+            return false;
+        }
+
+        if (this.m_SecondaryVersion < sv.m_SecondaryVersion) {
+            return true;
+        }
+        else if (this.m_SecondaryVersion > sv.m_SecondaryVersion) {
+            return false;
+
+        }
+
+        if (this.m_EditVersion < sv.m_EditVersion) {
+            return true;
+        }
+        else if (this.m_EditVersion > sv.m_EditVersion) {
+            return false;
+        }
+
+        if (this.m_InnerVersion < sv.m_InnerVersion) {
+            return true;
+        }
+        else if (this.m_InnerVersion > sv.m_InnerVersion) {
+            return false;
+        }
+
+        return false;
+    }
 
 
 }

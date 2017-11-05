@@ -1,4 +1,4 @@
-package com.example.UserSoftwareAndroidTemplate.CommonHeadCode;
+package com.example.UserSoftwareAndroidTemplate.CommonLibrary;
 
 import com.example.HslCommunication.Core.Types.NetHandle;
 

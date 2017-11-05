@@ -2,7 +2,9 @@ package com.example.UserSoftwareAndroidTemplate;
 
 import com.example.HslCommunication.BasicFramework.SystemVersion;
 import com.example.HslCommunication.Enthernet.NetSimplifyClient;
+import com.example.UserSoftwareAndroidTemplate.CommonLibrary.UserAccount;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -11,7 +13,7 @@ import java.util.UUID;
 
 public class UserClient {
 
-
+    public static SystemVersion FrameworkVersion = new SystemVersion("1.7.5");
     public static SystemVersion CurrentVersion= new SystemVersion("1.0.0.171026");
 
 
@@ -26,8 +28,8 @@ public class UserClient {
 
 
 
-
-
-    public static NetSimplifyClient Client=new NetSimplifyClient(ServerIp,PortSecondary,Token);
-
+    public static List<String> SystemFactories = null; // 分厂
+    public static String Announcement=""; // 公告
+    public static NetSimplifyClient Net_simplify_client=new NetSimplifyClient(ServerIp,PortSecondary,Token);
+    public static UserAccount UserAccount = null;
 }

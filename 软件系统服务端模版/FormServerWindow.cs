@@ -492,7 +492,8 @@ namespace 软件系统服务端模版
             else if (handle == CommonHeadCode.SimplifyHeadCode.账户检查)
             {
                 //此处使用的是组件自带的验证的方式，如果使用SQL数据库，另行验证
-                JObject json = JObject.Parse(data);
+                JObject json = JObject.Parse(data.Trim());
+
                 //提取账户，密码
                 string name = SoftBasic.GetValueFromJsonObject(json, UserAccount.UserNameText, "");
                 string password = SoftBasic.GetValueFromJsonObject(json, UserAccount.PasswordText, "");

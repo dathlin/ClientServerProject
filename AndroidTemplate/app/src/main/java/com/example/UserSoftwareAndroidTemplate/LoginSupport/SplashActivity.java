@@ -5,18 +5,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.HslCommunication.BasicFramework.SystemVersion;
-import com.example.HslCommunication.Core.Types.NetHandle;
 import com.example.HslCommunication.Core.Types.OperateResultString;
-import com.example.UserSoftwareAndroidTemplate.CommonHeadCode.SimplifyHeadCode;
+import com.example.UserSoftwareAndroidTemplate.CommonLibrary.SimplifyHeadCode;
 import com.example.UserSoftwareAndroidTemplate.MainActivity;
 import com.example.UserSoftwareAndroidTemplate.R;
 import com.example.UserSoftwareAndroidTemplate.UserClient;
@@ -54,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Integer result) {
                 if (result > 0) {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                     //intent.setClassName(SplashActivity.this, getString(R.string.));
                     startActivity(intent);
                     finish();
@@ -97,7 +92,7 @@ public class SplashActivity extends AppCompatActivity {
     private int loadingCache() {
 
         // 第一步请求维护状态
-        OperateResultString result=UserClient.Client.ReadFromServer(SimplifyHeadCode.维护检查,"",null,null);
+        OperateResultString result=UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.维护检查,"",null,null);
         if(!result.IsSuccess){
             MessageShow(result.ToMessageShowString());
             return FAILURE;
@@ -117,14 +112,17 @@ public class SplashActivity extends AppCompatActivity {
 
 
         // 第三步检查版本
-        result=UserClient.Client.ReadFromServer(SimplifyHeadCode.维护检查,"",null,null);
+        result=UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.更新检查,"",null,null);
         if(!result.IsSuccess){
             MessageShow(result.ToMessageShowString());
             return FAILURE;
         }
 
         SystemVersion sv=new SystemVersion(result.Content);
-        if(!UserClient.CurrentVersion.IsSameVersion(sv)) return FAILURE;
+        if(!UserClient.CurrentVersion.IsSameVersion(sv)) {
+            MessageShow("版本号校验失败！服务器版本为：" + sv.toString());
+            return FAILURE;
+        }
 
 
         // 下载服务器数据

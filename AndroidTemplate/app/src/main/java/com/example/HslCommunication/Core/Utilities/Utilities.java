@@ -1,5 +1,7 @@
 package com.example.HslCommunication.Core.Utilities;
 
+import com.example.HslCommunication.Log.LogUtil;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -125,15 +127,16 @@ public class Utilities {
             byteArray = str.getBytes("unicode");
         } catch (Exception ex) {
             byteArray = str.getBytes();
+            LogUtil.LogE("string2Byte","unicode编码转换错误",ex);
         }
-
-        for(int i=0;i<byteArray.length;i++)
-        {
-            byte temp=byteArray[i];
-            byteArray[i]=byteArray[i+1];
-            byteArray[i+1] =temp;
-            i++;
-        }
+//
+//        for(int i=0;i<byteArray.length;i++)
+//        {
+//            byte temp=byteArray[i];
+//            byteArray[i]=byteArray[i+1];
+//            byteArray[i+1] =temp;
+//            i++;
+//        }
         return byteArray;
     }
 
