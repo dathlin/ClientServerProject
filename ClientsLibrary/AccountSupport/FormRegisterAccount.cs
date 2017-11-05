@@ -88,6 +88,7 @@ namespace ClientsLibrary
             account.NameAlias = textBox3.Text;
             account.Password = textBox2.Text;
             account.Factory = comboBox_factory.SelectedItem.ToString();
+
             switch (comboBox1.SelectedIndex)
             {
                 case 0: account.Grade = AccountGrade.SuperAdministrator; break;
@@ -95,8 +96,12 @@ namespace ClientsLibrary
                 case 2: account.Grade = AccountGrade.Technology; break;
                 default: account.Grade = AccountGrade.General; break;
             }
+
             account.LoginEnable = comboBox2.SelectedItem.ToString() == "允许";
             account.ForbidMessage = textBox4.Text;
+            account.Phone = textBox5.Text;
+            account.EMail = textBox6.Text;
+
 
             OperateResultString result = net_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.注册账号, account.ToJsonString());
             if (result.IsSuccess && result.Content == "1")

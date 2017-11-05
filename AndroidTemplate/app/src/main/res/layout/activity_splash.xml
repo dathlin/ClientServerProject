@@ -9,14 +9,15 @@
 
     tools:context="com.example.UserSoftwareAndroidTemplate.LoginSupport.SplashActivity">
 
-    <TextView android:id="@+id/copy_right"
+    <TextView
+        android:id="@+id/copy_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dip"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:padding="12dip"
         android:text="by Richard.Hu 出品"
-        android:textSize="11sp"/>
+        android:textSize="11sp" />
     <RelativeLayout android:layout_width="fill_parent"
         android:layout_height="fill_parent">
         <LinearLayout
@@ -30,6 +31,7 @@
                 <ImageView android:id="@+id/jay_studio_icon"
                     android:layout_width="110dip"
                     android:layout_height="130dip"
+                    android:src="@mipmap/ic_launcher"
                     />
                 <ImageView
                     android:layout_width="wrap_content"

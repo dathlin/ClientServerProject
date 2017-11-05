@@ -35,6 +35,14 @@ namespace CommonLibrary
         /// </summary>
         public int Grade { get; set; } = 0;
         /// <summary>
+        /// 用户的手机号
+        /// </summary>
+        public string Phone { get; set; }
+        /// <summary>
+        /// 用户的电子邮件
+        /// </summary>
+        public string EMail { get; set; }
+        /// <summary>
         /// 该用户的注册日期，一旦注册，应该固定
         /// </summary>
         public DateTime RegisterTime { get; set; } = DateTime.Now;
@@ -63,7 +71,7 @@ namespace CommonLibrary
         /// </summary>
         public int LoginFailedCount { get; set; } = 0;
         /// <summary>
-        /// 上次登录系统的方式，有winform版，wpf版，web版
+        /// 上次登录系统的方式，有winform版，wpf版，web版，Android版
         /// </summary>
         public string LastLoginWay { get; set; } = string.Empty;
         /// <summary>
