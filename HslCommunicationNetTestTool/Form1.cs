@@ -153,6 +153,7 @@ namespace HslCommunicationNetTestTool
                     }
 
                     label_timeSpend.Text = (DateTime.Now - start).TotalSeconds.ToString("F3");
+
                 }
                 catch(Exception ex)
                 {

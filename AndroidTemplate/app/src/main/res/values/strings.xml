@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">软件系统安卓端模版</string>
+    <string name="title_activity_splash">SplashActivity</string>
+
+    <string name="title_activity_loading">LoadingActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
