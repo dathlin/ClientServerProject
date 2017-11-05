@@ -1,10 +1,10 @@
 # C-S架构的服务器客户端模版
 
 ## Summary
-一个基于中小型提炼的C-S开发框架，在大多数的一对多的系统设计中会包含一些常用的重复的功能代码，比如网络通信机制，客户端版本控制，账户控制管理，密码修改，公告管理，服务器配置，各种常用窗口等等，而且大多数的中小型系统只是需要到简单的权限管理即可。
+一个基于中小型提炼的C-S开发框架，覆盖电脑端，web端，手机端的全平台系统模版，在大多数的一对多的系统设计中会包含一些常用的重复的功能代码，比如网络通信机制，客户端版本控制，账户控制管理，密码修改，公告管理，服务器配置，各种常用窗口等等，而且大多数的中小型系统只是需要到简单的权限管理即可。
 
 <br />
-本框架包含了三种客户端的模式，第一种常用的winform客户端，第二种为wpf客户端，第三种为asp.net mvc模式，也就是说你可以在winform和wpf客户端上选择一种模式，然后您的系统提供一些功能（诸如报表查看）到asp.net上去，所有的账户模型都是统一的，这样方便一些只需要查看报表用户的人员不需要在部署客户端了。当然，客户端可以提供更加强大的功能。
+本框架包含了四种客户端的模式，第一种常用的winform客户端，第二种为wpf客户端，第三种为asp.net mvc模式，第四种为安卓平台的客户端，也就是说你可以在winform和wpf客户端上选择一种模式，然后您的系统提供一些功能（诸如报表查看）到asp.net上去，然后提供一个手机端使用的Android App，如果服务器假设在云端，所有的人都可以随时随地的进行交互，数据流通，所有的账户模型都是统一的，浏览器还方便一些只需要查看报表用户的人员不需要在部署客户端了。当然，客户端可以提供更加强大的功能。
 
 
 ## Features included
@@ -94,23 +94,9 @@
 
 ## HslCommunication.dll [![NuGet Status](https://img.shields.io/nuget/v/HslCommunication.svg)](https://www.nuget.org/packages/HslCommunication/)
 <p>本C-S项目的核心组件，该组件功能提供了一些基础功能类和整个C-S项目的网络支持，除此之外，该组件提供了访问三菱PLC和西门子PLC的数据功能。
-以下就是该库的部分子功能说明，您也可以只使用其中一部分的功能类，比如日志功能！完整的功能手册将在近期放出，方便理解整个系统的底层机制。</p>
+关于这个库的项目介绍地址如下：</p>
 
-<ul>
-<li><a href="http://www.cnblogs.com/dathlin/p/7691693.html">简单强大的日志记录功能使用</a></li>
-<li><a href="http://www.cnblogs.com/dathlin/p/7697782.html">同步网络数据交互功能使用</a></li>
-<li><a href="http://www.cnblogs.com/dathlin/p/7469679.html">三菱和西门子的PLC数据读写介绍</a></li>
-</ul>
-
-
-<p>本组件支持常规的整数的数据读写，支持位数据读写，也支持字符串数据读写，包括中文，具体使用方式请参照下述手册，目前已经完成了一个三菱PLC高并发访问的类，具体交流可以通过以下方式联系我</p>
-
-<p>如果要使用本组件的功能，需要引用命名空间，如下</p>
-<pre>
-<code>
-using HslCommunication;
-</code>
-</pre>
+[http://www.cnblogs.com/dathlin/p/7703805.html](http://www.cnblogs.com/dathlin/p/7703805.html)
 
 在Nuget控制台输入下面的指令即可安装，或者使用VS2017的Nuget包管理器来方便的下载组件，如果不清楚怎么使用Nuget可以参考网上教程。
 
@@ -299,6 +285,11 @@ Install-Package HslCommunication
 
 <br />
 
+# Android 客户端模版（还在完善中...）
+
+![](https://github.com/dathlin/ClientServerProject/raw/master/img/andriod1.png) 
+
+![](https://github.com/dathlin/ClientServerProject/raw/master/img/andriod2.png) 
 
 <br />
 
