@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
@@ -48,6 +49,24 @@ public class LoginActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         initView();
+
+
+        EditText editText1 = (EditText) findViewById(R.id.login_intput_username);
+
+        SharedPreferences pref = getSharedPreferences(UserClient.SettingsFileName,MODE_PRIVATE);
+
+
+        String name = pref.getString("name","");
+        if("".equals(name))
+        {
+
+        }
+        else {
+
+            editText1.setText(name);
+            EditText editText2 = (EditText) findViewById(R.id.login_intput_password);
+            editText2.setFocusable(true);
+        }
     }
 
 
@@ -152,7 +171,6 @@ public class LoginActivity extends AppCompatActivity {
             else if(msg.arg1 == 2)
             {
                 // 登录成功
-                InterfaceRestore();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -222,6 +240,11 @@ public class LoginActivity extends AppCompatActivity {
             }
             UserClient.UserAccount = account;
             // 保存用户名和密码
+            SharedPreferences.Editor editor = getSharedPreferences(UserClient.SettingsFileName,MODE_PRIVATE).edit();
+            editor.putString("name",UserName);
+            editor.putString("password",UserPassword);
+            editor.putLong("time",System.currentTimeMillis());
+            editor.apply();
 
 
             LogUtil.LogD("loginSystem","开始请求版本检查");

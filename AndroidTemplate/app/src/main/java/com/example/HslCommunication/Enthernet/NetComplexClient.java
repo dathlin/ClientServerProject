@@ -193,7 +193,7 @@ public class NetComplexClient extends NetShareBase {
         // 连接成功，发送数据信息
         if(!SendStringAndCheckReceive(
                 socket,
-                1,
+                2,
                 ClientAlias,
                 result,
                 null,

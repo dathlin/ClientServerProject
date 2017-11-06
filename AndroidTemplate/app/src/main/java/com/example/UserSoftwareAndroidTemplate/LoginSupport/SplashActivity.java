@@ -1,6 +1,7 @@
 package com.example.UserSoftwareAndroidTemplate.LoginSupport;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,10 +12,16 @@ import android.widget.Toast;
 
 import com.example.HslCommunication.BasicFramework.SystemVersion;
 import com.example.HslCommunication.Core.Types.OperateResultString;
+import com.example.HslCommunication.Log.LogUtil;
 import com.example.UserSoftwareAndroidTemplate.CommonLibrary.SimplifyHeadCode;
+import com.example.UserSoftwareAndroidTemplate.CommonLibrary.UserAccount;
 import com.example.UserSoftwareAndroidTemplate.MainActivity;
 import com.example.UserSoftwareAndroidTemplate.R;
 import com.example.UserSoftwareAndroidTemplate.UserClient;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import static com.example.UserSoftwareAndroidTemplate.CommonLibrary.UserAccount.FrameworkVersion;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -49,12 +56,19 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Integer result) {
                 if (result > 0) {
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                    //intent.setClassName(SplashActivity.this, getString(R.string.));
-                    startActivity(intent);
-                    finish();
-                    //两个参数分别表示进入的动画,退出的动画
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    if (result == SUCCESSTWO) {
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        //两个参数分别表示进入的动画,退出的动画
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    } else {
+                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        //两个参数分别表示进入的动画,退出的动画
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    }
                 }
             }
 
@@ -63,10 +77,10 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    private static final int SHOW_TIME_MIN = 3000;
-    private static final int FAILURE = 0; // 失败
-    private static final int SUCCESS = 1; // 成功
-    private static final int OFFLINE = 2; // 如果支持离线阅读，进入离线模式
+    private static final int SHOW_TIME_MIN = 1200;
+    private static final int FAILURE = 0;            // 失败
+    private static final int SUCCESSONE = 1;         // 直接登录
+    private static final int SUCCESSTWO = 2;         // 显示登录窗口
 
 
     private Handler handler=new Handler(){
@@ -91,12 +105,51 @@ public class SplashActivity extends AppCompatActivity {
 
     private int loadingCache() {
 
+        // 检查登录状态
+        SharedPreferences pref = getSharedPreferences(UserClient.SettingsFileName,MODE_PRIVATE);
+        if(pref == null) {
+            return SUCCESSTWO;
+        }
+
+
+        String name = pref.getString("name","");
+        String password = pref.getString("password","");
+        long time = pref.getLong("time",0);
+
+
+        if("".equals(name))
+        {
+            return SUCCESSTWO;
+        }
+
+        if("".equals(password))
+        {
+            return SUCCESSTWO;
+        }
+
+        if((System.currentTimeMillis()-time)/1000/60/60/24>6)
+        {
+            // 七天未登录就放弃
+            return SUCCESSTWO;
+        }
+
+
+        // 直接登录
+        LogUtil.LogD("loginSystem","开始请求维护检查");
+
+
         // 第一步请求维护状态
-        OperateResultString result=UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.维护检查,"",null,null);
-        if(!result.IsSuccess){
+        OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.维护检查, "", null, null);
+        if (!result.IsSuccess) {
             MessageShow(result.ToMessageShowString());
             return FAILURE;
         }
+
+        if (!result.Content.equals("1")) {
+            MessageShow(result.Content.substring(1));
+            return FAILURE;
+        }
+
 
         if(!result.Content.equals("1")) {
             MessageShow(result.Content.substring(1));
@@ -104,31 +157,81 @@ public class SplashActivity extends AppCompatActivity {
         }
 
 
+        LogUtil.LogD("loginSystem","开始请求账户检查");
         // 第二步检查账户
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty(UserAccount.UserNameText, name);
+        jsonObject.addProperty(UserAccount.PasswordText, password);
+        jsonObject.addProperty(UserAccount.LoginWayText, "Andriod");
+        jsonObject.addProperty(UserAccount.DeviceUniqueID, "Missing");
+        jsonObject.addProperty(FrameworkVersion, UserClient.FrameworkVersion.toString());
 
-
-
-
-
-
-        // 第三步检查版本
-        result=UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.更新检查,"",null,null);
-        if(!result.IsSuccess){
+        LogUtil.LogD("loginSystem",jsonObject.toString());
+        result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.账户检查, jsonObject.toString(), null, null);
+        if (!result.IsSuccess) {
             MessageShow(result.ToMessageShowString());
             return FAILURE;
         }
 
-        SystemVersion sv=new SystemVersion(result.Content);
-        if(!UserClient.CurrentVersion.IsSameVersion(sv)) {
-            MessageShow("版本号校验失败！服务器版本为：" + sv.toString());
+        UserAccount account = new Gson().fromJson(result.Content, UserAccount.class);
+        if (!account.LoginEnable) {
+            // 不允许登录
+            MessageShow(account.ForbidMessage);
+            return SUCCESSTWO;
+        }
+        UserClient.UserAccount = account;
+
+
+        LogUtil.LogD("loginSystem","开始请求版本检查");
+        // 第三步检查版本
+        result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.更新检查, "", null, null);
+        if (!result.IsSuccess) {
+            MessageShow(result.ToMessageShowString());
+            return FAILURE;
+        }
+
+        SystemVersion sv = new SystemVersion(result.Content);
+
+        if (account.UserName != "admin") {
+            if (!UserClient.CurrentVersion.IsSameVersion(sv)) {
+                MessageShow("版本号校验失败！服务器版本为：" + sv.toString());
+
+                // 此处应该启动下载更新，这部分的服务以后再完成
+                return FAILURE;
+            }
+        } else {
+            if(UserClient.CurrentVersion.IsSmallerThan(sv))
+            {
+                // 管理员也不允许以低版本登录
+                MessageShow("版本号校验失败！服务器版本为：" + sv.toString());
+                return FAILURE;
+            }
+        }
+
+
+        LogUtil.LogD("loginSystem","开始请求数据下载");
+        // 下载服务器数据
+        result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.参数下载,"",null,null);
+        if (result.IsSuccess) {
+            // 服务器返回初始化的数据，此处进行数据的提取，有可能包含了多个数据
+            JsonBeanPara para = new Gson().fromJson(result.Content, JsonBeanPara.class);
+            // 例如公告数据和分厂数据
+            UserClient.Announcement = para.Announcement;
+            UserClient.SystemFactories = para.SystemFactories;
+        }
+        else
+        {
+            // 访问失败
+            MessageShow(result.ToMessageShowString());
             return FAILURE;
         }
 
 
-        // 下载服务器数据
+        LogUtil.LogD("loginSystem","登录成功");
 
 
-        return SUCCESS;
+
+        return SUCCESSONE;
     }
 
 }
