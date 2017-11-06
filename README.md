@@ -57,6 +57,7 @@
 <li>输入一个默认的账户admin,密码123456</li>
 <li>接下来就可以体验所有的功能了</li>
 </ul>
+安卓端的程序在文件夹AndroidTemplate中，请使用Android Studio打开该文件夹，并修改连接的服务器地址。（该模版还在完善中...）
 
 ## Quick Experience
 如果觉得下载源代码比较麻烦，又想快速体验客户端功能，那就点击<a href="https://github.com/dathlin/ClientServerProject/raw/master/QuickExperience/软件自动更新.exe">软件自动更新.exe</a>下载程序，放置到任意位置，推荐桌面，双击安装程序，输入默认的账户密码即可体验完整的最新版本的客户端，当服务器的客户端版本更新时，你再打开本程序时也会自动升级。然后桌面的 **软件自动更新.exe** 就可以删除了。此处目前仅仅体验winform程序。
