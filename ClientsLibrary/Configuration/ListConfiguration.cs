@@ -60,7 +60,7 @@ namespace ClientsLibrary.Configuration
             dataGridView1.Columns[0].HeaderText = HeadText;
 
             // 向服务器请求数据初始化
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(Download, "");
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(Download, "");
 
             if (result.IsSuccess)
             {
@@ -124,7 +124,7 @@ namespace ClientsLibrary.Configuration
                 }
             }
 
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(Upload,
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(Upload,
                 Newtonsoft.Json.Linq.JArray.FromObject(data).ToString());
 
             if (result.IsSuccess)

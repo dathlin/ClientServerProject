@@ -33,7 +33,7 @@ namespace ClientsLibrary.Configuration
             UILocalization();
             // 初始化
 
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.请求角色配置, "");
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.请求角色配置, "");
             if (result.IsSuccess)
             {
                 List<RoleItem> roles = JArray.Parse(result.Content).ToObject<List<RoleItem>>();
@@ -210,7 +210,7 @@ namespace ClientsLibrary.Configuration
                 }
             }
 
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(
                 CommonHeadCode.SimplifyHeadCode.上传角色配置, JArray.FromObject(roles).ToString());
             if (result.IsSuccess)
             {

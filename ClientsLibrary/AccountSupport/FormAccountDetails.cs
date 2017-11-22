@@ -182,7 +182,7 @@ namespace ClientsLibrary
                         };
 
 
-                        OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(
+                        OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(
                             CommonHeadCode.SimplifyHeadCode.上传头像MD5,
                             json.ToString());
 

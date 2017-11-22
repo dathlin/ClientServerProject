@@ -44,7 +44,7 @@ namespace 软件系统浏览器模版.Controllers
         public ActionResult Login(FormCollection fc)
         {
             //请求指令头数据，该数据需要更具实际情况更改
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.维护检查);
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.维护检查);
             if (result.IsSuccess)
             {
                 //例如返回结果为1说明允许登录，0则说明服务器处于维护中，并将信息显示
@@ -230,7 +230,7 @@ namespace 软件系统浏览器模版.Controllers
                         { UserAccount.PasswordText, inputPassword1 }
                     };
 
-                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.密码修改, json.ToString());
+                OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.密码修改, json.ToString());
                 if (result.IsSuccess)
                 {
                     return PartialViewMessage(MessageBoxStyle.success, "密码修改成功！");
@@ -281,7 +281,7 @@ namespace 软件系统浏览器模版.Controllers
                     account.Grade = int.Parse(fc["grade"]);
                     account.LoginEnable = bool.Parse(fc["loginEnable"]);
                     account.ForbidMessage = fc["reason"];
-                    OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.注册账号, account.ToJsonString());
+                    OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.注册账号, account.ToJsonString());
                     if (result.IsSuccess && result.Content == "1")
                     {
                         return PartialViewMessage(MessageBoxStyle.success, "账户注册成功！");

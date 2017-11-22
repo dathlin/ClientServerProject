@@ -140,7 +140,7 @@ namespace HslCommunicationNetTestTool
                     for (int i = 0; i < count; i++)
                     {
 
-                        OperateResultString resultString = CurrentClient.ReadFromServer(handle, textBox2.Text);
+                        OperateResult<string> resultString = CurrentClient.ReadFromServer(handle, textBox2.Text);
 
                         if (resultString.IsSuccess)
                         {

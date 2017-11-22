@@ -38,7 +38,7 @@ namespace CommonLibrary
         /// <summary>
         /// 一个简单的混合锁，相比Lock速度更快
         /// </summary>
-        private HslCommunication.SimpleHybirdLock hybirdLock = new HslCommunication.SimpleHybirdLock();
+        private HslCommunication.Core.SimpleHybirdLock hybirdLock = new HslCommunication.Core.SimpleHybirdLock();
 
         #endregion
 

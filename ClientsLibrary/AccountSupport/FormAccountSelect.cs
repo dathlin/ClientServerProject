@@ -63,7 +63,7 @@ namespace ClientsLibrary
         {
             // 初始化
 
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户, m_condition);
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户, m_condition);
             if (result.IsSuccess)
             {
                 List<UserAccount> accounts = JArray.Parse(result.Content).ToObject<List<UserAccount>>();

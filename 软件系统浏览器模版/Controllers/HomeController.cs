@@ -105,7 +105,7 @@ namespace 软件系统浏览器模版.Controllers
             if (Request.IsAjaxRequest())
             {
                 //对建议进行保存
-                HslCommunication.OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.意见反馈, UserClient.UserAccount.UserName + ":" + advice);
+                HslCommunication.OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.意见反馈, UserClient.UserAccount.UserName + ":" + advice);
                 if (result.IsSuccess)
                 {
                     return PartialViewMessage(MessageBoxStyle.success, "建议提交成功！");
@@ -154,7 +154,7 @@ namespace 软件系统浏览器模版.Controllers
                 }
 
 
-                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更新公告, announcement);
+                OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更新公告, announcement);
                 if (result.IsSuccess)
                 {
                     UserClient.Announcement = announcement;
@@ -181,7 +181,7 @@ namespace 软件系统浏览器模版.Controllers
         [AuthorizeUser]
         public ActionResult ManagementAccount()
         {
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户);
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户);
             if(result.IsSuccess)
             {
                 ViewData["accounts"] = result.Content;
@@ -210,7 +210,7 @@ namespace 软件系统浏览器模版.Controllers
                 UserAccount account = Session[SessionItemsDescription.UserAccount] as UserAccount;
                 
 
-                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更细账户, Accounts);
+                OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更细账户, Accounts);
                 if (result.IsSuccess)
                 {
                     return PartialViewMessage(MessageBoxStyle.success, "账户更改成功！");
@@ -260,7 +260,7 @@ namespace 软件系统浏览器模版.Controllers
                 }
 
 
-                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.群发消息, SendMessage);
+                OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.群发消息, SendMessage);
                 if (result.IsSuccess)
                 {
                     UserClient.Announcement = SendMessage;

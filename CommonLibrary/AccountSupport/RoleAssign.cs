@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HslCommunication;
 using Newtonsoft.Json.Linq;
+using HslCommunication.Core;
 
 namespace CommonLibrary
 {

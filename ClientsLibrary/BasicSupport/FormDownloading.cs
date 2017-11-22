@@ -23,7 +23,7 @@ namespace ClientsLibrary
 
     public partial class FormDownloading : Form
     {
-        public FormDownloading(int customer,Action<OperateResultString> action)
+        public FormDownloading(int customer,Action<OperateResult<string>> action)
         {
             InitializeComponent();
 
@@ -89,13 +89,13 @@ namespace ClientsLibrary
 
         
         private int net_cmd = 0;
-        private Action<OperateResultString> DealWithResult = null;
+        private Action<OperateResult<string>> DealWithResult = null;
 
         private void ThreadRequestServer()
         {
             //后台请求数据
             System.Threading.Thread.Sleep(100);
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(net_cmd);
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(net_cmd);
             Invoke(new Action(() =>
             {
                 DealWithResult(result);

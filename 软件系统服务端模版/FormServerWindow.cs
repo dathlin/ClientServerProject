@@ -14,6 +14,7 @@ using HslCommunication.BasicFramework;
 using System.Diagnostics;
 using HslCommunication.LogNet;
 using HslCommunication;
+using HslCommunication.Core;
 using 软件系统服务端模版.BasicSupport;
 
 
@@ -929,7 +930,6 @@ namespace 软件系统服务端模版
                 net_socket_server.ClientOnline += new NetBase.IEDelegate<AsyncStateOne>(Net_socket_server_ClientOnline);// 客户端上线触发
                 net_socket_server.ClientOffline += new NetBase.IEDelegate<AsyncStateOne, string>(Net_socket_server_ClientOffline);// 客户端下线触发，包括异常掉线
                 net_socket_server.AllClientsStatusChange += new NetBase.IEDelegate<string>(Net_socket_server_AllClientsStatusChange);// 客户端上下线变化时触发
-                net_socket_server.MessageAlerts += new NetBase.IEDelegate<string>(Net_socket_server_MessageAlerts);// 服务器产生提示消息触发
                 net_socket_server.AcceptByte += new NetBase.IEDelegate<AsyncStateOne, NetHandle, byte[]>(Net_socket_server_AcceptByte);// 服务器接收到字节数据触发
                 net_socket_server.AcceptString += new NetBase.IEDelegate<AsyncStateOne, NetHandle, string>(Net_socket_server_AcceptString);// 服务器接收到字符串数据触发
                 net_socket_server.ServerStart(UserSystem.Port_Main_Net);
@@ -984,11 +984,7 @@ namespace 软件系统服务端模版
         {
             //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字节数组都会到此处处理
         }
-
-        private void Net_socket_server_MessageAlerts(string object1)
-        {
-            UserInterfaceMessageRender(object1 + Environment.NewLine);
-        }
+        
 
         private void Net_socket_server_ClientOffline(AsyncStateOne object1, string object2)
         {

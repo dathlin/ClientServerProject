@@ -223,7 +223,7 @@ namespace 软件系统客户端Wpf
         {
             FormAccountManage fam = new FormAccountManage(() =>
             {
-                OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户);
+                OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.获取账户);
                 if (result.IsSuccess) return result.Content;
                 else return result.ToMessageShowString();
             }, m => UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更细账户, m).IsSuccess);
@@ -275,7 +275,7 @@ namespace 软件系统客户端Wpf
         {
             using (FormSuper fs = new FormSuper(() =>
             {
-                OperateResultBytes result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.性能计数, new byte[0]);
+                OperateResult<byte[]> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.性能计数, new byte[0]);
                 //解析
                 if (result.IsSuccess)
                 {

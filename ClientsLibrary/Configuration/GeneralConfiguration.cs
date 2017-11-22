@@ -32,7 +32,7 @@ namespace ClientsLibrary.Configuration
         {
             // 初始化
 
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.请求信任客户端, "");
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.请求信任客户端, "");
             if (result.IsSuccess)
             {
                 JObject json = JObject.Parse(result.Content);
@@ -61,7 +61,7 @@ namespace ClientsLibrary.Configuration
                 { "AllowFrameLogin", new JValue(checkBox2.Checked) },
             };
 
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(
                 CommonLibrary.CommonHeadCode.SimplifyHeadCode.上传信任客户端, json.ToString());
 
             if (result.IsSuccess)

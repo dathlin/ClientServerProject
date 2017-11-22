@@ -103,7 +103,7 @@ namespace ClientsLibrary
             account.EMail = textBox6.Text;
 
 
-            OperateResultString result = net_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.注册账号, account.ToJsonString());
+            OperateResult<string> result = net_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.注册账号, account.ToJsonString());
             if (result.IsSuccess && result.Content == "1")
             {
                 MessageBox.Show("注册成功！");

@@ -55,7 +55,7 @@ namespace ClientsLibrary
             Thread.Sleep(200);
             
             // 请求指令头数据，该数据需要更具实际情况更改
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.维护检查);
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonLibrary.CommonHeadCode.SimplifyHeadCode.维护检查);
             if (result.IsSuccess)
             {
                 byte[] temp = Encoding.Unicode.GetBytes(result.Content);

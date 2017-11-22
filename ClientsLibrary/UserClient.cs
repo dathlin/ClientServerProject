@@ -120,7 +120,7 @@ namespace ClientsLibrary
                 { "Name", UserAccount.UserName },
                 { "Role", roleCode }
             };
-            HslCommunication.OperateResultString result = Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.检查角色权限,
+            HslCommunication.OperateResult<string> result = Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.检查角色权限,
                 json.ToString());
 
             if(result.IsSuccess)

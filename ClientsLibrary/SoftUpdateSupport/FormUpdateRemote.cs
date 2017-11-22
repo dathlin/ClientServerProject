@@ -69,7 +69,7 @@ namespace ClientsLibrary
 
         private void userButton_version_Click(object sender, EventArgs e)
         {
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更新版本, textBox1.Text);
+            OperateResult<string> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.更新版本, textBox1.Text);
             if (result.IsSuccess && result.Content == "1")
             {
                 MessageBox.Show("更新成功！");

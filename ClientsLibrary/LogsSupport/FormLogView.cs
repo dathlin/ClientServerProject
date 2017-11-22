@@ -47,7 +47,7 @@ namespace ClientsLibrary
 
         private void ReadFromServer(int head_code)
         {
-            OperateResultString result = net_simplify_client.ReadFromServer(head_code);
+            OperateResult<string> result = net_simplify_client.ReadFromServer(head_code);
             if (result.IsSuccess)
             {
                 logNetAnalysisControl1.SetLogNetSource(result.Content);
@@ -60,7 +60,7 @@ namespace ClientsLibrary
 
         private void ClearFromServer(int head_code)
         {
-            OperateResultString result = net_simplify_client.ReadFromServer(head_code);
+            OperateResult<string> result = net_simplify_client.ReadFromServer(head_code);
             if (result.IsSuccess) MessageBox.Show("清除成功");
             else MessageBox.Show(result.ToMessageShowString());
         }

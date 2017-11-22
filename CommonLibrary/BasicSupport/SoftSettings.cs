@@ -90,7 +90,7 @@ namespace CommonLibrary
         /// <summary>
         /// 列表锁
         /// </summary>
-        private HslCommunication.SimpleHybirdLock hybirdLock = new HslCommunication.SimpleHybirdLock();
+        private HslCommunication.Core.SimpleHybirdLock hybirdLock = new HslCommunication.Core.SimpleHybirdLock();
 
         /// <summary>
         /// 判断一个客户端的ID能否登录到系统

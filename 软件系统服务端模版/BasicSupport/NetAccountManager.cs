@@ -1,5 +1,5 @@
 ﻿using CommonLibrary;
-using HslCommunication;
+using HslCommunication.Core;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -73,7 +73,7 @@ namespace 软件系统服务端模版.BasicSupport
 
         private List<NetAccount> OnlineClients = new List<NetAccount>();       // 所有在线客户端的列表
         private SimpleHybirdLock hybirdLock = new SimpleHybirdLock();          // 操作列表的混合锁
-        private string m_ClientsOnlineCache = "[]";                              // 在线客户端的缓存
+        private string m_ClientsOnlineCache = "[]";                            // 在线客户端的缓存
 
         #endregion
     }
