@@ -82,11 +82,11 @@
     <Compile Include="UIControls\RenderMain.Designer.cs">
       <DependentUpon>RenderMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ShareFilesRender.cs">
+    <Compile Include="UIControls\GroupFilesRender.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ShareFilesRender.Designer.cs">
-      <DependentUpon>ShareFilesRender.cs</DependentUpon>
+    <Compile Include="UIControls\GroupFilesRender.Designer.cs">
+      <DependentUpon>GroupFilesRender.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
@@ -110,8 +110,8 @@
     <EmbeddedResource Include="UIControls\RenderMain.resx">
       <DependentUpon>RenderMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ShareFilesRender.resx">
-      <DependentUpon>ShareFilesRender.cs</DependentUpon>
+    <EmbeddedResource Include="UIControls\GroupFilesRender.resx">
+      <DependentUpon>GroupFilesRender.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />

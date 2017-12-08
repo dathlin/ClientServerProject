@@ -45,7 +45,7 @@ namespace 软件系统客户端Wpf.Views
 
         private void Button_FileRefresh_Click(object sender, RoutedEventArgs e)
         {
-            OperateResult result = UserClient.Net_File_Client.DownloadPathFileNames(out GroupFileItem[] files, "ShareFiles", "", "");
+            OperateResult result = UserClient.Net_File_Client.DownloadPathFileNames(out GroupFileItem[] files, m_Factory, m_Group, m_Id);
             if (result.IsSuccess)
             {
                 Cache_Files = new List<GroupFileItem>(files);

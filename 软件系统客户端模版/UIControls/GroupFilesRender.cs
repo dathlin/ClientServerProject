@@ -16,11 +16,11 @@ using System.Runtime.InteropServices;
 
 namespace 软件系统客户端模版.UIControls
 {
-    public partial class ShareFilesRender : UserControl
+    public partial class GroupFilesRender : UserControl
     {
         #region Constructor
         
-        public ShareFilesRender(string factory, string group, string id)
+        public GroupFilesRender(string factory, string group, string id)
         {
             InitializeComponent();
 
@@ -84,7 +84,7 @@ namespace 软件系统客户端模版.UIControls
 
         private void userButton_refresh_Click(object sender, EventArgs e)
         {
-            OperateResult result = UserClient.Net_File_Client.DownloadPathFileNames(out GroupFileItem[] files, "ShareFiles", "", "");
+            OperateResult result = UserClient.Net_File_Client.DownloadPathFileNames(out GroupFileItem[] files, m_Factory, m_Group, m_Id);
             if(result.IsSuccess)
             {
                 Cache_Files = new List<GroupFileItem>(files);

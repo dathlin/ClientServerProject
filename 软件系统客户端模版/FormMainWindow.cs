@@ -557,7 +557,7 @@ namespace 软件系统客户端模版
         /// <summary>
         /// 文件显示的控件
         /// </summary>
-        private UIControls.ShareFilesRender UIControls_Files { get; set; }
+        private UIControls.GroupFilesRender UIControls_Files { get; set; }
 
         /// <summary>
         /// 用于聊天的控件
@@ -595,7 +595,7 @@ namespace 软件系统客户端模版
              *
              *******************************************************************************/
 
-            UIControls_Files = new UIControls.ShareFilesRender("ShareFiles", "", "")
+            UIControls_Files = new UIControls.GroupFilesRender("ShareFiles", "", "")
             {
                 Visible = false,
                 Parent = panel_main,//决定了放在哪个界面显示，此处示例

@@ -2,7 +2,7 @@
 
 namespace 软件系统客户端模版.UIControls
 {
-    partial class ShareFilesRender
+    partial class GroupFilesRender
     {
         /// <summary> 
         /// 必需的设计器变量。

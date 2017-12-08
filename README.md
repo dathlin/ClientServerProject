@@ -74,7 +74,7 @@
 <li>多客户端之间需要进行复杂数据交互的系统</li>
 </ul>
 
-二次开发时需要特别注意的是在项目 **CommonLibrary** -> **ProtocolSupport** -> **CommonProtocol.cs** 中的参数需要根据实际全部修改，注意事项已在文件里说明。
+二次开发时需要特别注意的是在项目 **CommonLibrary** -> **UserSystem.cs** 中的参数需要根据实际全部修改，注意事项已在文件里说明。
 
 ## Contribute
 如果你也喜欢这个项目，可以点击右上角的star或是fork，如果发现了一些BUG或是需要更改的地方也可以直接发起pull request，当然也可以联系技术支持QQ群来联系我本人，或是发送邮件，具体参考下面。
