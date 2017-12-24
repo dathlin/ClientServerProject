@@ -111,6 +111,7 @@ namespace 软件系统服务端模版
             // 初始化并加载账户信息
             UserServer.ServerSettings.FileSavePath = Application.StartupPath + @"\settings.txt";
             UserServer.ServerSettings.LoadByFile();
+            CommonLibrary.DataBaseSupport.SqlServerSupport.ConnectionString = UserServer.ServerSettings.SqlServerStr;
 
             // 初始化并加载角色规则
             UserServer.ServerRoles.FileSavePath = Application.StartupPath + @"\roles.txt";
@@ -487,6 +488,7 @@ namespace 软件系统服务端模版
                 {
                     { nameof(UserServer.ServerSettings.Announcement), new JValue(UserServer.ServerSettings.Announcement) },
                     { nameof(UserServer.ServerSettings.SystemFactories), new JArray(UserServer.ServerSettings.SystemFactories) },
+                    { nameof(UserServer.ServerSettings.SqlServerStr), new JValue(UserServer.ServerSettings.SqlServerStr) },
                 };
                 net_simplify_server.SendMessage(state, handle, json.ToString());
             }

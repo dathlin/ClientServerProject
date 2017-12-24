@@ -50,6 +50,10 @@ namespace CommonLibrary
         /// </summary>
         public string Announcement { get; set; } = "测试公告";
         /// <summary>
+        /// 数据库连接字符串
+        /// </summary>
+        public string SqlServerStr { get; set; } = string.Empty;
+        /// <summary>
         /// 是否允许账户登录，超级管理员账户除外
         /// </summary>
         public bool Can_Account_Login { get; set; } = true;
@@ -163,6 +167,7 @@ namespace CommonLibrary
                 { nameof(WhetherToEnableTrustedClientAuthentication),new JValue(WhetherToEnableTrustedClientAuthentication) },
                 { nameof(TrustedClientList),new JArray(TrustedClientList) },
                 { nameof(AllowLoginWhenFramewordVersionNotCheck), new JValue(AllowLoginWhenFramewordVersionNotCheck) },
+                { nameof(SqlServerStr), new JValue(SqlServerStr) },
             };
             return json.ToString();
         }
@@ -179,7 +184,7 @@ namespace CommonLibrary
             AllowUserMultiOnline = SoftBasic.GetValueFromJsonObject(json, nameof(AllowUserMultiOnline), AllowUserMultiOnline);
             Account_Forbidden_Reason = SoftBasic.GetValueFromJsonObject(json, nameof(Account_Forbidden_Reason), Account_Forbidden_Reason);
             AllowLoginWhenFramewordVersionNotCheck = SoftBasic.GetValueFromJsonObject(json, nameof(AllowLoginWhenFramewordVersionNotCheck), AllowLoginWhenFramewordVersionNotCheck);
-
+            SqlServerStr = SoftBasic.GetValueFromJsonObject(json, nameof(SqlServerStr), SqlServerStr);
 
 
             if (json[nameof(SystemFactories)] != null)

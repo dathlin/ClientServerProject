@@ -118,6 +118,7 @@
       <DependentUpon>FormWaitInfomation.cs</DependentUpon>
     </Compile>
     <Compile Include="BasicSupport\SoftSettings.cs" />
+    <Compile Include="DataBaseSupport\SqlServerSupport.cs" />
     <Compile Include="LocalizationSupport\ChineseLocalization.cs" />
     <Compile Include="LocalizationSupport\EnglishLocalization.cs" />
     <Compile Include="LocalizationSupport\Localization.cs" />

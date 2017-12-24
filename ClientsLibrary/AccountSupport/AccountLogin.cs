@@ -196,6 +196,7 @@ namespace ClientsLibrary
                 {
                     UserClient.SystemFactories = json[nameof(UserClient.SystemFactories)].ToObject<List<string>>();
                 }
+                CommonLibrary.DataBaseSupport.SqlServerSupport.ConnectionString = SoftBasic.GetValueFromJsonObject(json, nameof(ServerSettings.SqlServerStr), "");
             }
             else
             {

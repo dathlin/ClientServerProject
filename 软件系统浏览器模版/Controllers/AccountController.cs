@@ -124,6 +124,7 @@ namespace 软件系统浏览器模版.Controllers
                 json = JObject.Parse(result.Content);
                 //例如公告数据
                 UserClient.Announcement = SoftBasic.GetValueFromJsonObject(json, nameof(UserClient.Announcement), "");
+                CommonLibrary.DataBaseSupport.SqlServerSupport.ConnectionString = SoftBasic.GetValueFromJsonObject(json, nameof(ServerSettings.SqlServerStr), "");
             }
             else
             {
