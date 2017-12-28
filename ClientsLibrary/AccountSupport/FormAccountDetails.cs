@@ -392,6 +392,8 @@ namespace ClientsLibrary
         private void userButton1_Click(object sender, EventArgs e)
         {
             // 下载选择文件
+            if (treeView1.SelectedNode == null) return;
+
             TreeNode treeNode = treeView1.SelectedNode;
             if (treeNode.Name != "files_root")
             {
