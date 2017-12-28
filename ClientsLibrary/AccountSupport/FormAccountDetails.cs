@@ -421,6 +421,8 @@ namespace ClientsLibrary
         private void userButton2_Click(object sender, EventArgs e)
         {
             // 删除选中文件
+            if (treeView1.SelectedNode == null) return;
+
             TreeNode treeNode = treeView1.SelectedNode;
             if (treeNode.Name != "files_root")
             {
