@@ -1,5 +1,8 @@
 # C-S架构的服务器客户端模版
 
+[![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2017-red.svg)](https://www.visualstudio.com/zh-hans/) [![Language](https://img.shields.io/badge/Language-C%23%207.0-orange.svg)](https://blogs.msdn.microsoft.com/dotnet/2016/08/24/whats-new-in-csharp-7-0/) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/dathlin/ClientServerProject/blob/master/LICENSE)
+[![Android Studio](https://img.shields.io/badge/Android%20Studio-2.3-green.svg)](https://www.visualstudio.com/zh-hans/)
+
 ## Summary
 一个基于中小型提炼的C-S开发框架，覆盖电脑端，web端，手机端的全平台系统模版，在大多数的一对多的系统设计中会包含一些常用的重复的功能代码，比如网络通信机制，客户端版本控制，账户控制管理，密码修改，公告管理，服务器配置，各种常用窗口等等，而且大多数的中小型系统只是需要到简单的权限管理即可。
 
