@@ -37,7 +37,7 @@ namespace ClientsLibrary
         /// <summary>
         /// 本软件的当前版本，用来验证更新的关键依据
         /// </summary>
-        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.171026");
+        public static SystemVersion CurrentVersion { get; } = new SystemVersion("1.0.0.180429");
 
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace ClientsLibrary
                 new VersionInfo()
                 {
                     VersionNum = new SystemVersion("1.0.0"),
-                    ReleaseDate = new DateTime(2017, 10, 1), // 该版本发布的日期
+                    ReleaseDate = new DateTime(2018, 5, 1), // 该版本发布的日期
                     UpdateDetails = new StringBuilder(
                         "1.本系统第一版本正式发布使用。"+Environment.NewLine+
                         "2.提供了多客户端用时在线的功能。"+Environment.NewLine+
@@ -91,20 +91,18 @@ namespace ClientsLibrary
         /// <summary>
         /// 用于访问服务器数据的网络对象类，必须修改这个端口参数，否则运行失败
         /// </summary>
-        public static NetSimplifyClient Net_simplify_client { get; set; } = new NetSimplifyClient(
-            new IPEndPoint(IPAddress.Parse(ServerIp), UserSystem.Port_Second_Net))
+        public static NetSimplifyClient Net_simplify_client { get; set; } = new NetSimplifyClient(ServerIp, UserSystem.Port_Second_Net)
         {
-            KeyToken = UserSystem.KeyToken,
-            ConnectTimeout = 5000,
+            Token = UserSystem.KeyToken,
+            ConnectTimeOut = 5000,
         };
 
         /// <summary>
         /// 用于使用udp向服务器进行发送即时可丢失数据的对象
         /// </summary>
-        public static NetUdpClient Net_Udp_Client { get; set; } = new NetUdpClient(
-            new IPEndPoint(IPAddress.Parse(ServerIp), UserSystem.Port_Udp_Server))
+        public static NetUdpClient Net_Udp_Client { get; set; } = new NetUdpClient(ServerIp, UserSystem.Port_Udp_Server)
         {
-            KeyToken = UserSystem.KeyToken,
+            Token = UserSystem.KeyToken,
         };
 
 
@@ -146,7 +144,7 @@ namespace ClientsLibrary
         /// </summary>
         public static IntegrationFileClient Net_File_Client { get; set; } = new IntegrationFileClient()
         {
-            KeyToken = UserSystem.KeyToken,
+            Token = UserSystem.KeyToken,
             LogNet = LogNet,
             ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), UserSystem.Port_Ultimate_File_Server)
         };
@@ -156,7 +154,7 @@ namespace ClientsLibrary
         /// </summary>
         public static IntegrationFileClient Net_Update_Client { get; set; } = new IntegrationFileClient()
         {
-            KeyToken = UserSystem.KeyToken,
+            Token = UserSystem.KeyToken,
             LogNet = LogNet,
             ServerIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerIp), UserSystem.Port_Advanced_File_Server)
         };

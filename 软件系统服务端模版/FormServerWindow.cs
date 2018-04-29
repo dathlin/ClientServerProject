@@ -16,6 +16,7 @@ using HslCommunication.LogNet;
 using HslCommunication;
 using HslCommunication.Core;
 using 软件系统服务端模版.BasicSupport;
+using HslCommunication.Core.Net;
 
 
 /********************************************************************************************
@@ -357,7 +358,7 @@ namespace 软件系统服务端模版
                 net_soft_update_Server.LogNet = new LogNetSingle(LogSavePath + @"\update_log.txt");
                 //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
                 //只放置exe和dll组件，必须放置：软件自动更新.exe
-                net_soft_update_Server.KeyToken = UserSystem.KeyToken;
+                net_soft_update_Server.Token = UserSystem.KeyToken;
                 net_soft_update_Server.FileUpdatePath = Application.StartupPath + @"\AdvancedFiles\ClientFiles";//客户端文件路径
                 net_soft_update_Server.ServerStart(UserSystem.Port_Update_Net);
             }
@@ -382,13 +383,12 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_simplify_server.KeyToken = UserSystem.KeyToken;//设置身份令牌
+                net_simplify_server.Token = UserSystem.KeyToken;//设置身份令牌
                 net_simplify_server.LogNet = new LogNetSingle(LogSavePath + @"\simplify_log.txt");//日志路径
                 net_simplify_server.LogNet.SetMessageDegree(HslMessageDegree.INFO);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_simplify_server.ReceiveStringEvent += Net_simplify_server_ReceiveStringEvent;//接收到字符串触发
                 net_simplify_server.ReceivedBytesEvent += Net_simplify_server_ReceivedBytesEvent;//接收到字节触发
                 net_simplify_server.ServerStart(UserSystem.Port_Second_Net);
-                net_simplify_server.ConnectTimeout = 5200;
             }
             catch (Exception ex)
             {
@@ -398,18 +398,18 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 接收来自客户端的字节数据
         /// </summary>
-        /// <param name="state">网络状态</param>
+        /// <param name="session">网络状态</param>
         /// <param name="customer">字节数据，根据实际情况选择是否使用</param>
         /// <param name="data">来自客户端的字节数据</param>
-        private void Net_simplify_server_ReceivedBytesEvent(AsyncStateOne state, NetHandle customer, byte[] data)
+        private void Net_simplify_server_ReceivedBytesEvent(AppSession session, NetHandle customer, byte[] data)
         {
             if(customer==CommonHeadCode.SimplifyHeadCode.性能计数)
             {
-                net_simplify_server.SendMessage(state, customer, GetPerfomace());
+                net_simplify_server.SendMessage(session, customer, GetPerfomace());
             }
             else
             {
-                net_simplify_server.SendMessage(state, customer, data);
+                net_simplify_server.SendMessage(session, customer, data);
             }
         }
 
@@ -427,10 +427,10 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 接收到来自客户端的数据，此处需要放置维护验证，更新验证等等操作
         /// </summary>
-        /// <param name="state">客户端的地址</param>
+        /// <param name="session">客户端的地址</param>
         /// <param name="handle">用于自定义的指令头，可不用，转而使用data来区分</param>
         /// <param name="data">接收到的服务器的数据</param>
-        private void Net_simplify_server_ReceiveStringEvent(AsyncStateOne state, NetHandle handle, string data)
+        private void Net_simplify_server_ReceiveStringEvent(AppSession session, NetHandle handle, string data)
         {
 
             /*******************************************************************************************
@@ -443,15 +443,15 @@ namespace 软件系统服务端模版
 
             if (handle.CodeMajor == 1 && handle.CodeMinor == 1)
             {
-                DataProcessingWithStartA(state, handle, data);
+                DataProcessingWithStartA(session, handle, data);
             }
             else if (handle.CodeMajor == 1 && handle.CodeMinor == 2)
             {
-                DataProcessingWithStartB(state, handle, data);
+                DataProcessingWithStartB(session, handle, data);
             }
             else
             {
-                net_simplify_server.SendMessage(state, handle, data);
+                net_simplify_server.SendMessage(session, handle, data);
             }
         }
 
@@ -470,7 +470,7 @@ namespace 软件系统服务端模版
         /// <param name="state">网络状态对象</param>
         /// <param name="handle">用户自定义的指令头</param>
         /// <param name="data">实际的数据</param>
-        private void DataProcessingWithStartA(AsyncStateOne state, NetHandle handle, string data)
+        private void DataProcessingWithStartA( AppSession state, NetHandle handle, string data)
         {
             if (handle == CommonHeadCode.SimplifyHeadCode.维护检查)
             {
@@ -505,7 +505,7 @@ namespace 软件系统服务端模版
                 string frameworkVersion = SoftBasic.GetValueFromJsonObject(json, UserAccount.FrameworkVersion, "1.0.0");
 
 
-                UserAccount account = UserServer.ServerAccounts.CheckAccount(name, password, state.GetRemoteEndPoint().Address.ToString(), way);
+                UserAccount account = UserServer.ServerAccounts.CheckAccount(name, password, state.IpEndPoint.Address.ToString(), way);
 
 
                 // 先判定框架版本是否正确
@@ -741,7 +741,7 @@ namespace 软件系统服务端模版
         /// <param name="state">网络状态对象</param>
         /// <param name="handle">用户自定义的命令头</param>
         /// <param name="data">实际的数据</param>
-        private void DataProcessingWithStartB(AsyncStateOne state, NetHandle handle, string data)
+        private void DataProcessingWithStartB( AppSession state, NetHandle handle, string data)
         {
             if (handle == CommonHeadCode.SimplifyHeadCode.网络日志查看)
             {
@@ -895,7 +895,7 @@ namespace 软件系统服务端模版
          * 
          ****************************************************************************************************/
 
-        private void DataProcessingWithStartC(AsyncStateOne state, NetHandle handle, string data)
+        private void DataProcessingWithStartC( AppSession state, NetHandle handle, string data)
         {
 
         }
@@ -924,16 +924,15 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_socket_server.KeyToken = UserSystem.KeyToken;                                                // 设置身份令牌
-                net_socket_server.LogNet =new LogNetSingle(LogSavePath + @"\net_log.txt");                           // 设置日志存储路径
-                net_socket_server.LogNet.SetMessageDegree(HslMessageDegree.INFO);                                   // 默认debug及以上级别日志均进行存储，根据需要自行选择
-                net_socket_server.FormatClientOnline = "#IP:{0} Name:{1}";                                           // 必须为#开头，具体格式可由自身需求确定
-                net_socket_server.IsSaveLogClientLineChange = true;                                                  // 设置客户端上下线是否记录到日志
-                net_socket_server.ClientOnline += new NetBase.IEDelegate<AsyncStateOne>(Net_socket_server_ClientOnline);// 客户端上线触发
-                net_socket_server.ClientOffline += new NetBase.IEDelegate<AsyncStateOne, string>(Net_socket_server_ClientOffline);// 客户端下线触发，包括异常掉线
-                net_socket_server.AllClientsStatusChange += new NetBase.IEDelegate<string>(Net_socket_server_AllClientsStatusChange);// 客户端上下线变化时触发
-                net_socket_server.AcceptByte += new NetBase.IEDelegate<AsyncStateOne, NetHandle, byte[]>(Net_socket_server_AcceptByte);// 服务器接收到字节数据触发
-                net_socket_server.AcceptString += new NetBase.IEDelegate<AsyncStateOne, NetHandle, string>(Net_socket_server_AcceptString);// 服务器接收到字符串数据触发
+                net_socket_server.Token = UserSystem.KeyToken;                                                 // 设置身份令牌
+                net_socket_server.LogNet =new LogNetSingle(LogSavePath + @"\net_log.txt");                     // 设置日志存储路径
+                net_socket_server.LogNet.SetMessageDegree(HslMessageDegree.INFO);                              // 默认debug及以上级别日志均进行存储，根据需要自行选择
+                net_socket_server.IsSaveLogClientLineChange = true;                                            // 设置客户端上下线是否记录到日志
+                net_socket_server.ClientOnline += Net_socket_server_ClientOnline;                              // 客户端上线触发
+                net_socket_server.ClientOffline += Net_socket_server_ClientOffline;                            // 客户端下线触发，包括异常掉线
+                net_socket_server.AllClientsStatusChange += Net_socket_server_AllClientsStatusChange;          // 客户端上下线变化时触发
+                net_socket_server.AcceptByte += Net_socket_server_AcceptByte;                                  // 服务器接收到字节数据触发
+                net_socket_server.AcceptString += Net_socket_server_AcceptString;                              // 服务器接收到字符串数据触发
                 net_socket_server.ServerStart(UserSystem.Port_Main_Net);
             }
             catch (Exception ex)
@@ -952,11 +951,11 @@ namespace 软件系统服务端模版
          ******************************************************************************************************************/
 
 
-        private void Net_socket_server_AcceptString(AsyncStateOne object1, NetHandle handle, string data)
+        private void Net_socket_server_AcceptString(AppSession session, NetHandle handle, string data)
         {
             if (handle.CodeMajor == 2 && handle.CodeMinor == 1)
             {
-                DataProcessingWithStartH(object1, handle, data);
+                DataProcessingWithStartH( session, handle, data);
             }
 
         }
@@ -970,11 +969,11 @@ namespace 软件系统服务端模版
         /// <param name="state">网络状态</param>
         /// <param name="customer">用户自定义的指令头</param>
         /// <param name="data">字符串数据</param>
-        private void DataProcessingWithStartH(AsyncStateOne state, NetHandle customer, string data)
+        private void DataProcessingWithStartH( AppSession session, NetHandle customer, string data)
         {
             if (customer == CommonHeadCode.MultiNetHeadCode.留言版消息)
             {
-                ChatAddMessage(state.LoginAlias, data);
+                ChatAddMessage( session.LoginAlias, data);
             }
         }
 
@@ -982,31 +981,31 @@ namespace 软件系统服务端模版
         #endregion
 
 
-        private void Net_socket_server_AcceptByte(AsyncStateOne state, NetHandle customer, byte[] data)
+        private void Net_socket_server_AcceptByte(AppSession session, NetHandle customer, byte[] data)
         {
             //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字节数组都会到此处处理
         }
         
 
-        private void Net_socket_server_ClientOffline(AsyncStateOne object1, string object2)
+        private void Net_socket_server_ClientOffline(AppSession session, string object2)
         {
-            netAccountManager.RemoveOnlineClient(object1.ClientUniqueID);
-            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.用户下线, object1.ClientUniqueID);
+            netAccountManager.RemoveOnlineClient(session.ClientUniqueID);
+            net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.用户下线, session.ClientUniqueID);
 
-            UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1.IpAddress + "：" + object1.LoginAlias + " " + object2);
+            UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + session.IpAddress + "：" + session.LoginAlias + " " + object2);
         }
 
-        private void Net_socket_server_ClientOnline(AsyncStateOne object1)
+        private void Net_socket_server_ClientOnline(AppSession session)
         {
             NetAccount account = new NetAccount
             {
-                UserName = object1.LoginAlias,
-                Roles = UserServer.ServerRoles.GetRolesByUserName(object1.LoginAlias),
-                IpAddress = object1.IpAddress,
-                Alias = UserServer.ServerAccounts.GetAccountAlias(object1.LoginAlias),
-                Factory = UserServer.ServerAccounts.GetAccountFactory(object1.LoginAlias),
+                UserName = session.LoginAlias,
+                Roles = UserServer.ServerRoles.GetRolesByUserName(session.LoginAlias),
+                IpAddress = session.IpAddress,
+                Alias = UserServer.ServerAccounts.GetAccountAlias(session.LoginAlias),
+                Factory = UserServer.ServerAccounts.GetAccountFactory(session.LoginAlias),
                 LoginTime = DateTime.Now,
-                UniqueId = object1.ClientUniqueID
+                UniqueId = session.ClientUniqueID
             };
 
             net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.新用户上线, JObject.FromObject(account).ToString());
@@ -1022,33 +1021,21 @@ namespace 软件系统服务端模版
             };
             
             // 发送客户端的初始化数据
-            net_socket_server.Send(object1, CommonHeadCode.MultiNetHeadCode.初始化数据, json.ToString());
+            net_socket_server.Send(session, CommonHeadCode.MultiNetHeadCode.初始化数据, json.ToString());
             // 新增到在线客户端的队列中
             netAccountManager.AddOnlineClient(account);
             // 触发上下线功能
-            UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + object1.IpAddress + "：" + object1.LoginAlias + " 上线");
+            UserInterfaceMessageRender(DateTime.Now.ToString("MM-dd HH:mm:ss ") + session.IpAddress + "：" + session.LoginAlias + " 上线");
         }
 
 
-        private void Net_socket_server_AllClientsStatusChange(string data)
+        private void Net_socket_server_AllClientsStatusChange(int count)
         {
             // 此处决定要不要将在线客户端的数据发送所有客户端
-            // net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.总在线信息, data);
-            Net_Socket_All_Clients = data;
-            if (IsWindowShow && IsHandleCreated)
-            {
-                BeginInvoke(new Action(() =>
-                {
-                    listBox1.DataSource = data.Split('#');
-                    label4.Text = net_socket_server.ClientCount.ToString();
-                }));
-            }
+            // net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.总在线信息, netAccountManager.ClientsOnlineCache);
+            
         }
-
-        /// <summary>
-        /// 所有在线客户端的信息，此处做了一个缓存
-        /// </summary>
-        private string Net_Socket_All_Clients = string.Empty;
+        
 
         /// <summary>
         /// 用来判断客户端是否已经在线，除了超级管理员，其他的账户不允许重复在线，重复登录的账户予以特殊标记
@@ -1056,19 +1043,10 @@ namespace 软件系统服务端模版
         /// <returns>该客户端是否在线</returns>
         private bool IsClinetOnline(string userName)
         {
+            // 超级管理员允许重复登录
             if (userName == "admin") return false;
-            if(Net_Socket_All_Clients.Contains($"Name:{userName}#"))
-            {
-                return true;
-            }
-            else if(Net_Socket_All_Clients.EndsWith($"Name:{userName}"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            // 其他的需要检测信息
+            return netAccountManager.IsClientOnline( userName );
         }
 
         /// <summary>
@@ -1214,6 +1192,10 @@ namespace 软件系统服务端模版
          * 
          *    本文件管理器引擎目前主要实现1个功能
          *    1. 允许客户端上传服务器的客户端文件，用来提供软件自动更新使用的
+         *    
+         *    AFS 文件服务器的特点是支持原生的文件上传下载，和你在服务器上看到的本地目录是一致的
+         *    优点：原生，上传的文件可以用于其他操作的识别
+         *    缺点：不支持额外的信息输入
          * 
          **************************************************************************************/
 
@@ -1233,7 +1215,7 @@ namespace 软件系统服务端模版
                 net_file_Advanced.FilesDirectoryPath = Application.StartupPath + @"\AdvancedFiles";
                 net_file_Advanced.FilesDirectoryPathTemp = Application.StartupPath + @"\AdvancedFiles\Temp";
                 net_file_Advanced.LogNet = new LogNetSingle(LogSavePath + @"\Advanced_file_log.txt");
-                net_file_Advanced.KeyToken = UserSystem.KeyToken;
+                net_file_Advanced.Token = UserSystem.KeyToken;
                 net_file_Advanced.ServerStart(UserSystem.Port_Advanced_File_Server);
             }
             catch (Exception ex)
@@ -1254,6 +1236,8 @@ namespace 软件系统服务端模版
          *    1. 用于管理客户端的头像文件存储服务
          *    2. 用于管理每个账户的私有文件存储服务
          *    3. 用于主界面的共享文件管理
+         *    
+         *    UFS文件引擎的特点是支持复杂的额外信息，更彻底的读写分离，缺点是不支持原生访问，需要通过映射表来实现操作。
          * 
          **************************************************************************************/
 
@@ -1269,7 +1253,7 @@ namespace 软件系统服务端模版
             try
             {
                 net_ultimate_file_server = new UltimateFileServer();
-                net_ultimate_file_server.KeyToken = UserSystem.KeyToken;
+                net_ultimate_file_server.Token = UserSystem.KeyToken;
                 net_ultimate_file_server.LogNet = new LogNetSingle(LogSavePath + @"\ultimate_file_log.txt");
                 net_ultimate_file_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_ultimate_file_server.FilesDirectoryPath = Application.StartupPath + @"\UltimateFiles";
@@ -1343,7 +1327,7 @@ namespace 软件系统服务端模版
                 net_udp_server = new NetUdpServer();
                 net_udp_server.LogNet =new LogNetSingle(LogSavePath + @"\udp_log.txt");//日志路径
                 net_udp_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
-                net_udp_server.KeyToken = CommonLibrary.UserSystem.KeyToken;
+                net_udp_server.Token = UserSystem.KeyToken;
                 net_udp_server.ReceiveCacheLength = 1024;//单次接收数据的缓冲长度
                 net_udp_server.AcceptByte += Net_udp_server_AcceptByte;//接收到字节数据的时候触发事件
                 net_udp_server.AcceptString += Net_udp_server_AcceptString;//接收到字符串数据的时候触发事件
@@ -1355,72 +1339,22 @@ namespace 软件系统服务端模版
             }
         }
 
-        private void Net_udp_server_AcceptString(AsyncStateOne state, NetHandle customer, string data)
+        private void Net_udp_server_AcceptString(AppSession session, NetHandle customer, string data)
         {
             //此处为测试
             Invoke(new Action(() =>
             {
-                textBox1.AppendText($"{DateTime.Now.ToString("MM-dd HH:mm:ss ")}来自IP:{state.IpEndPoint.Address.ToString()} 内容:{data}{Environment.NewLine}");
+                textBox1.AppendText($"{DateTime.Now.ToString("MM-dd HH:mm:ss ")}来自IP:{session.IpEndPoint.Address.ToString()} 内容:{data}{Environment.NewLine}");
             }));
         }
 
-        private void Net_udp_server_AcceptByte(AsyncStateOne state, NetHandle customer, byte[] data)
+        private void Net_udp_server_AcceptByte( AppSession session, NetHandle customer, byte[] data)
         {
             //具体用法参考上面字符串方法
         }
 
         #endregion
-
-        #region 访问PLC块示例代码
-
-        /*************************************************************************************************
-         * 
-         *    以下展示一个高性能访问多台PLC数据的类，即使同时访问100台设备，性能也是非常高
-         * 
-         *    该类没有仔细的在现场环境测试过，不保证完全可用
-         * 
-         *************************************************************************************************/
-
-        HslCommunication.Profinet.MelsecNetMultiAsync MelsecMulti { get; set; }
-
-        private void MelsecNetMultiInnitialization()
-        {
-            List<System.Net.IPAddress> IpEndPoints = new List<System.Net.IPAddress>();
-            //增加100台需要访问的三菱设备，指定所有设备IP和端口，注意：顺序很重要
-            for (int i = 1; i < 100; i++)
-            {
-                IpEndPoints.Add(System.Net.IPAddress.Parse("192.168.10." + i));
-            }
-
-            //每隔1秒钟访问一次，读取的地址为D6000-D6019，超时时间为700毫秒，主端口为6000，备用端口为6001
-            MelsecMulti = new HslCommunication.Profinet.MelsecNetMultiAsync(0, 0, HslCommunication.Profinet.MelsecDataType.D, 6000, 20, 700, 1000, IpEndPoints.ToArray(), 6000, 6001);
-            MelsecMulti.OnReceivedData += MelsecMulti_OnReceivedData;//所有机台的数据都返回时触发
-        }
-
-        private void MelsecMulti_OnReceivedData(byte[] object1)
-        {
-            /*********************************************************************************************
-             * 
-             *    正常情况下，一秒触发一次，object1包含了所有机台读取到的数据
-             *    比如每台设备读取D6000开始20个D，如上述指令所示
-             *    那么每台设备数据长度为20*2+2=42个byte，100台设备就是4200字节长度
-             *    也就是说，object1的0-41字节是第一台设备的，以此类推
-             *    每台设备的前两个字节都为0才说明本次数据访问正常，为0x00,0x01说明连接失败，其他说明说明三菱本身的异常
-             * 
-             ********************************************************************************************/
-            for (int i = 0; i < 100; i++)
-            {
-                int startIndex = i * 42;
-                ushort netState = BitConverter.ToUInt16(object1, startIndex);// 为0，说明数据正常，不为0说明网络访问失败或是指令出错
-
-
-            }
-        }
-
-
-
-        #endregion
-
+        
         #region 流水号生成示例代码
 
         private SoftNumericalOrder OrderAutoCreate { get; set; }

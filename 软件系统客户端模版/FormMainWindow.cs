@@ -12,6 +12,7 @@ using System.Threading;
 using HslCommunication;
 using HslCommunication.Enthernet;
 using HslCommunication.BasicFramework;
+using HslCommunication.Core.Net;
 using ClientsLibrary;
 using HslCommunication.LogNet;
 
@@ -376,7 +377,7 @@ namespace 软件系统客户端模版
         {
             try
             {
-                net_socket_client.KeyToken = UserSystem.KeyToken; // 新增的身份令牌
+                net_socket_client.Token = UserSystem.KeyToken; // 新增的身份令牌
                 net_socket_client.LogNet = UserClient.LogNet;
                 net_socket_client.EndPointServer = new System.Net.IPEndPoint(
                     System.Net.IPAddress.Parse(UserClient.ServerIp),
@@ -393,10 +394,10 @@ namespace 软件系统客户端模版
         /// <summary>
         /// 接收到服务器的字节数据的回调方法
         /// </summary>
-        /// <param name="state">网络连接对象</param>
+        /// <param name="session">网络连接对象</param>
         /// <param name="customer">用户自定义的指令头，用来区分数据用途</param>
         /// <param name="data">数据</param>
-        private void Net_socket_client_AcceptString(AsyncStateOne state, NetHandle customer, string data)
+        private void Net_socket_client_AcceptString(AppSession session, NetHandle customer, string data)
         {
             if (customer == CommonHeadCode.MultiNetHeadCode.弹窗新消息)
             {
@@ -499,7 +500,7 @@ namespace 软件系统客户端模版
             }
         }
 
-        private void Net_socket_client_AcceptByte(AsyncStateOne object1, NetHandle customer, byte[] object2)
+        private void Net_socket_client_AcceptByte(AppSession session, NetHandle customer, byte[] object2)
         {
             // 接收到服务器发来的字节数据
             if (IsHandleCreated) Invoke(new Action(() =>

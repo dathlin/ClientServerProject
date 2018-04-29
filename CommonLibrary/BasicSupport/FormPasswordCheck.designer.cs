@@ -64,7 +64,6 @@
             this.ClientSize = new System.Drawing.Size(407, 109);
             this.Controls.Add(this.userButton1);
             this.Controls.Add(this.textBox2);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(423, 148);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(423, 148);

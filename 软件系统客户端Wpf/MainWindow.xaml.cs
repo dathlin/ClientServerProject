@@ -23,6 +23,7 @@ using System.Threading;
 using 软件系统客户端Wpf.Views;
 using System.Windows.Media.Animation;
 using MaterialDesignThemes.Wpf;
+using HslCommunication.Core.Net;
 
 namespace 软件系统客户端Wpf
 {
@@ -424,7 +425,7 @@ namespace 软件系统客户端Wpf
         {
             try
             {
-                net_socket_client.KeyToken = UserSystem.KeyToken; // 新增的身份令牌
+                net_socket_client.Token = UserSystem.KeyToken; // 新增的身份令牌
                 net_socket_client.EndPointServer = new System.Net.IPEndPoint(
                     System.Net.IPAddress.Parse(UserClient.ServerIp),
                     UserSystem.Port_Main_Net);
@@ -439,10 +440,10 @@ namespace 软件系统客户端Wpf
         /// <summary>
         /// 接收到服务器的字节数据的回调方法
         /// </summary>
-        /// <param name="state">网络连接对象</param>
+        /// <param name="session">网络连接对象</param>
         /// <param name="customer">用户自定义的指令头，用来区分数据用途</param>
         /// <param name="data">数据</param>
-        private void Net_socket_client_AcceptString(AsyncStateOne state, NetHandle customer, string data)
+        private void Net_socket_client_AcceptString(AppSession session, NetHandle customer, string data)
         {
             if (customer == CommonHeadCode.MultiNetHeadCode.弹窗新消息)
             {
@@ -454,21 +455,7 @@ namespace 软件系统客户端Wpf
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.总在线信息)
             {
-                //if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
-                //{
-                //    // ListBox_Onlines.ItemsSource = data.Split('#');
-
-                //    ClientsOnline.Children.Clear();
-                //    NetAccount[] accounts = JArray.Parse(data).ToObject<NetAccount[]>();
-
-                //    foreach(var m in accounts)
-                //    {
-                //        Views.Controls.UserClientRenderItem userClient = new Views.Controls.UserClientRenderItem();
-                //        userClient.SetClientRender(m);
-                //        ClientsOnline.Children.Add(userClient);
-                //    }
-
-                //}));
+                
             }
             else if (customer == CommonHeadCode.MultiNetHeadCode.关闭客户端)
             {
@@ -570,7 +557,7 @@ namespace 软件系统客户端Wpf
             }
         }
 
-        private void Net_socket_client_AcceptByte(AsyncStateOne object1, NetHandle customer, byte[] object2)
+        private void Net_socket_client_AcceptByte(AppSession session, NetHandle customer, byte[] object2)
         {
             // 接收到服务器发来的字节数据
             if (IsWindowShow) Dispatcher.Invoke(new Action(() =>
