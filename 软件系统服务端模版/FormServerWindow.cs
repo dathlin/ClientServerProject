@@ -21,7 +21,7 @@ using HslCommunication.Core.Net;
 
 /********************************************************************************************
  * 
- *    模版日期    2017-10-06
+ *    模版日期    2018年5月4日 22:27:58
  *    创建人      Richard.Hu
  *    版权所有    Richard.Hu
  *    授权说明    模版仅授权个人研究学习使用，如需商用，请联系hsl200909@163.com洽谈
@@ -45,6 +45,7 @@ using HslCommunication.Core.Net;
  * 
  *    本项目模版不包含  《软件自动更新.exe》
  *    该exe程序来自另一个开源项目HslCommunication
+ *    地址为：https://github.com/dathlin/HslCommunication
  *
  ********************************************************************************************/
 
@@ -97,38 +98,39 @@ namespace 软件系统服务端模版
 
         private string LogSavePath { get; set; }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load( object sender, EventArgs e )
         {
             // 初始化默认的委托对象
-            ActionInitialization();
+            ActionInitialization( );
             // 邮件系统初始化
-            SoftMailInitialization();
+            SoftMailInitialization( );
             // 初始化日志工具
-            RuntimeLogHelper = new LogNetSingle(LogSavePath + @"\log.txt");
+            RuntimeLogHelper = new LogNetSingle( LogSavePath + @"\log.txt" );
             // 初始化反馈信息工具
-            AdviceLogHelper = new LogNetSingle(LogSavePath + @"\advice_log.txt");
+            AdviceLogHelper = new LogNetSingle( LogSavePath + @"\advice_log.txt" );
             // 初始化客户端异常日志工具
-            ClientsLogHelper = new LogNetSingle(LogSavePath + @"\clients_log.txt");
+            ClientsLogHelper = new LogNetSingle( LogSavePath + @"\clients_log.txt" );
             // 初始化并加载账户信息
             UserServer.ServerSettings.FileSavePath = Application.StartupPath + @"\settings.txt";
-            UserServer.ServerSettings.LoadByFile();
+            UserServer.ServerSettings.LoadByFile( );
             CommonLibrary.DataBaseSupport.SqlServerSupport.ConnectionString = UserServer.ServerSettings.SqlServerStr;
 
             // 初始化并加载角色规则
             UserServer.ServerRoles.FileSavePath = Application.StartupPath + @"\roles.txt";
-            UserServer.ServerRoles.LoadByFile();
+            UserServer.ServerRoles.LoadByFile( );
 
             // 初始化版权信息
-            toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString();
+            toolStripStatusLabel_version.Text = UserServer.ServerSettings.SystemVersion.ToString( );
             toolStripStatusLabel1.Text = $"本软件著作权归{SoftResources.StringResouce.SoftCopyRight}所有";
             label5.Text = SoftResources.StringResouce.SoftName;
             // 加载账户信息
             UserServer.ServerAccounts.FileSavePath = Application.StartupPath + @"\accounts.txt";
-            UserServer.ServerAccounts.LoadByFile();
+            UserServer.ServerAccounts.LoadByFile( );
             UserServer.ServerAccounts.ILogNet = RuntimeLogHelper;
             // 初始化聊天信息
-            ChatInitialization();
+            ChatInitialization( );
         }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             // 密码验证的示例，此处关闭窗口验证
@@ -207,7 +209,7 @@ namespace 软件系统服务端模版
             if (e.ExceptionObject is Exception ex)
             {
                 RuntimeLogHelper.WriteException("UnhandledException:", ex);
-                //发送到自己的EMAIL
+                // 发送到自己的EMAIL
                 SendUserMail(ex);
             }
         }
@@ -215,8 +217,10 @@ namespace 软件系统服务端模版
         #endregion
 
         #region Menu Click Event
+
         private void 启动服务器ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Start Server
             if (!IsSystemStart)
             {
                 Net_Simplify_Server_Initialization();//同步网络初始化
@@ -345,20 +349,25 @@ namespace 软件系统服务端模版
 
         #endregion
 
-        #region 软件更新服务引擎
+        #region Software Auto Update Function
 
         /// <summary>
         /// 支持软件自动更新的后台服务引擎
         /// </summary>
         private NetSoftUpdateServer net_soft_update_Server = new NetSoftUpdateServer();
+
         private void Net_SoftUpdate_Server_Initialization()
         {
             try
             {
                 net_soft_update_Server.LogNet = new LogNetSingle(LogSavePath + @"\update_log.txt");
-                //在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
-                //只放置exe和dll组件，必须放置：软件自动更新.exe
                 net_soft_update_Server.Token = UserSystem.KeyToken;
+
+                // 在服务器的这个路径下，放置客户端运行的所有文件，不要包含settings文件，不要从此处运行
+                // 只放置exe和dll组件，必须放置：软件自动更新.exe
+
+                // In this path of the server, place all files run by the client, do not include the settings file, do not run from here
+                // Only exe and dll components are placed and must be placed: 软件自动更新.exe
                 net_soft_update_Server.FileUpdatePath = Application.StartupPath + @"\AdvancedFiles\ClientFiles";//客户端文件路径
                 net_soft_update_Server.ServerStart(UserSystem.Port_Update_Net);
             }
@@ -376,6 +385,7 @@ namespace 软件系统服务端模版
         /// 用户同步数据传送的引擎
         /// </summary>
         private NetSimplifyServer net_simplify_server = new NetSimplifyServer();
+
         /// <summary>
         /// 同步传送数据的初始化
         /// </summary>
@@ -395,6 +405,7 @@ namespace 软件系统服务端模版
                 SoftBasic.ShowExceptionMessage(ex);
             }
         }
+
         /// <summary>
         /// 接收来自客户端的字节数据
         /// </summary>
@@ -917,6 +928,7 @@ namespace 软件系统服务端模版
         /// 异步客户端管理引擎，维护所有的客户端在线情况，支持主动发数据到所有的客户端
         /// </summary>
         private NetComplexServer net_socket_server = new NetComplexServer();
+
         /// <summary>
         /// 异步传送数据的初始化
         /// </summary>
@@ -983,7 +995,7 @@ namespace 软件系统服务端模版
 
         private void Net_socket_server_AcceptByte(AppSession session, NetHandle customer, byte[] data)
         {
-            //如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字节数组都会到此处处理
+            // 如果此处充斥大量if语句，影响观感，则考虑进行指令头分类操作，客户端异步发送的字节数组都会到此处处理
         }
         
 
@@ -1074,7 +1086,7 @@ namespace 软件系统服务端模版
 
         #endregion
 
-        #region 后台计数线程
+        #region Time Tick Thread
 
         /*********************************************************************************************
          * 
@@ -1098,25 +1110,28 @@ namespace 软件系统服务端模版
             thread.IsBackground = true;
             thread.Start();
         }
+
         /// <summary>
         /// 缓存的上次内存占用
         /// </summary>
         private long GC_Memery { get; set; }
+
         /// <summary>
         /// 程序的内存对象
         /// </summary>
         private long Pm_Memery { get; set; }
 
+
         private void MethodOccurEverySecond()
         {
             long current1 = GC.GetTotalMemory(false);
-            //增加到性能计数
+            // 增加到性能计数
             AddPerfomace(current1);
 
             long current2 = 0;
             toolStripStatusLabel_time.Text = DateTime.Now.ToString();
             label_GC_Memery.Text = current1.ToString();
-            label_Pm_Memery.Text = "备用";//current2.ToString();
+            label_Pm_Memery.Text = "备用";                                  //current2.ToString();
             label_GC_Memery.BackColor = current1 < GC_Memery ? Color.Tomato : SystemColors.Control;
             label_Pm_Memery.BackColor = current2 < Pm_Memery ? Color.Tomato : SystemColors.Control;
             GC_Memery = current1;
@@ -1182,8 +1197,7 @@ namespace 软件系统服务端模版
         }
 
         #endregion
-
-
+        
         #endregion
 
         #region Advanced File Server
@@ -1245,6 +1259,7 @@ namespace 软件系统服务端模版
         /// 终极文件管理服务器
         /// </summary>
         private UltimateFileServer net_ultimate_file_server { get; set; } = null;
+
         /// <summary>
         /// 终极文件管理服务器
         /// </summary>
@@ -1252,12 +1267,12 @@ namespace 软件系统服务端模版
         {
             try
             {
-                net_ultimate_file_server = new UltimateFileServer();
-                net_ultimate_file_server.Token = UserSystem.KeyToken;
-                net_ultimate_file_server.LogNet = new LogNetSingle(LogSavePath + @"\ultimate_file_log.txt");
-                net_ultimate_file_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
-                net_ultimate_file_server.FilesDirectoryPath = Application.StartupPath + @"\UltimateFiles";
-                net_ultimate_file_server.ServerStart(UserSystem.Port_Ultimate_File_Server);
+                net_ultimate_file_server = new UltimateFileServer();                                            // 实例化
+                net_ultimate_file_server.Token = UserSystem.KeyToken;                                           // 设置系统的令牌
+                net_ultimate_file_server.LogNet = new LogNetSingle(LogSavePath + @"\ultimate_file_log.txt");    // 设置日志路径
+                net_ultimate_file_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);                       // 默认debug及以上级别日志均进行存储，根据需要自行选择
+                net_ultimate_file_server.FilesDirectoryPath = Application.StartupPath + @"\UltimateFiles";      // 设置文件根目录
+                net_ultimate_file_server.ServerStart(UserSystem.Port_Ultimate_File_Server);                     // 启动服务
 
                 // 共享文件管理器只是终极文件管理器的一个子容器
                 ShareFileContainer = net_ultimate_file_server.GetGroupFromFilePath(Application.StartupPath + @"\UltimateFiles\ShareFiles");
@@ -1274,17 +1289,18 @@ namespace 软件系统服务端模版
 
         private void ShareFileContainer_FileCountChanged(int fileCount)
         {
-            //将文件数据发送给客户端
+            // 将文件数据发送给客户端
             net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.文件总数量, fileCount.ToString());
         }
 
+        // 主界面的共享文件的容器 [The main interface of the shared file container]
         private GroupFileContainer ShareFileContainer;
 
-       
+
 
         #endregion
 
-        #region 意见反馈块
+        #region Feedback Function
 
         /**********************************************************************************************************
          * 
@@ -1292,7 +1308,7 @@ namespace 软件系统服务端模版
          *    举例：    AdviceLogHelper.SaveInformation("张三：主界面的颜色稍微调整一下");
          * 
          **********************************************************************************************************/
-         
+
 
         /// <summary>
         /// 用来记录一般的事物日志
@@ -1318,6 +1334,9 @@ namespace 软件系统服务端模版
         /// <summary>
         /// 服务器的UDP核心引擎
         /// </summary>
+        /// <remarks>
+        /// A UDP net server, receive data from client
+        /// </remarks>
         private NetUdpServer net_udp_server { get; set; }
 
         private void Net_Udp_Server_Initialization()
@@ -1325,12 +1344,12 @@ namespace 软件系统服务端模版
             try
             {
                 net_udp_server = new NetUdpServer();
-                net_udp_server.LogNet =new LogNetSingle(LogSavePath + @"\udp_log.txt");//日志路径
-                net_udp_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);//默认debug及以上级别日志均进行存储，根据需要自行选择
+                net_udp_server.LogNet =new LogNetSingle(LogSavePath + @"\udp_log.txt");    // 日志路径
+                net_udp_server.LogNet.SetMessageDegree(HslMessageDegree.DEBUG);            // 默认debug及以上级别日志均进行存储，根据需要自行选择
                 net_udp_server.Token = UserSystem.KeyToken;
-                net_udp_server.ReceiveCacheLength = 1024;//单次接收数据的缓冲长度
-                net_udp_server.AcceptByte += Net_udp_server_AcceptByte;//接收到字节数据的时候触发事件
-                net_udp_server.AcceptString += Net_udp_server_AcceptString;//接收到字符串数据的时候触发事件
+                net_udp_server.ReceiveCacheLength = 1024;                                  // 单次接收数据的缓冲长度
+                net_udp_server.AcceptByte += Net_udp_server_AcceptByte;                    // 接收到字节数据的时候触发事件
+                net_udp_server.AcceptString += Net_udp_server_AcceptString;                // 接收到字符串数据的时候触发事件
                 net_udp_server.ServerStart(UserSystem.Port_Udp_Server);
             }
             catch (Exception ex)
@@ -1341,8 +1360,8 @@ namespace 软件系统服务端模版
 
         private void Net_udp_server_AcceptString(AppSession session, NetHandle customer, string data)
         {
-            //此处为测试
-            Invoke(new Action(() =>
+            // 此处为测试 [Just for testing, there is no meaning]
+            Invoke( new Action(() =>
             {
                 textBox1.AppendText($"{DateTime.Now.ToString("MM-dd HH:mm:ss ")}来自IP:{session.IpEndPoint.Address.ToString()} 内容:{data}{Environment.NewLine}");
             }));
@@ -1391,10 +1410,10 @@ namespace 软件系统服务端模版
         {
             Chats_Managment = new SoftMsgQueue<string>()
             {
-                MaxCache = 200,//记录200条临时消息
-                FileSavePath = Application.StartupPath + @"\chats.txt"//设置保存的路径
+                MaxCache = 200,  // 记录200条临时消息
+                FileSavePath = Application.StartupPath + @"\chats.txt"  // 设置保存的路径
             };
-            Chats_Managment.LoadByFile();//加载以前的数据
+            Chats_Managment.LoadByFile();// 加载以前的数据
         }
 
         /// <summary>
@@ -1405,9 +1424,9 @@ namespace 软件系统服务端模版
         private void ChatAddMessage(string user, string message)
         {
             string content = "\u0002" + user + DateTime.Now.ToString(" yyyy-MM-dd HH:mm:ss") + Environment.NewLine + " " + message;
-            //转发所有的客户端，包括发送者
+            // 转发所有的客户端，包括发送者
             net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.留言版消息, content);
-            //添加缓存
+            // 添加缓存
             Chats_Managment.AddNewItem(content);
         }
 
@@ -1441,6 +1460,7 @@ namespace 软件系统服务端模版
         /// 用来记录一般的事物日志
         /// </summary>
         private ILogNet RuntimeLogHelper { get; set; }
+
         /// <summary>
         /// 用来记录客户端的异常日志
         /// </summary>
@@ -1463,26 +1483,37 @@ namespace 软件系统服务端模版
         /// 控制系统是否真的发送邮件到指定地址
         /// </summary>
         private bool IsSendMailEnable { get; set; }
+
+
         /// <summary>
         /// 邮件发送系统的初始方式，所有的参数将在下面进行
         /// </summary>
         private void SoftMailInitialization()
         {
-            IsSendMailEnable = false;// 先进行关闭
-            SoftMail.MailSystem163.MailSendAddress = "hsl200909@163.com";// 作者测试的邮箱地址，实际需要换成你自己的
+            // 先进行关闭 如果想发送设置为True    [If you want to send the setting to True]
+            IsSendMailEnable = false;
+            // 作者测试的邮箱地址，实际需要换成你自己的    [You should replace it with your own email address]
+            SoftMail.MailSystem163.MailSendAddress = "hsl200909@163.com";
         }
 
         /// <summary>
         /// 调用该方法可以直接将异常发送到你的邮箱里，如果服务器连接网络的话
         /// </summary>
+        /// <remarks>
+        /// If the server is connected to the network, calling this method can send the exception directly to your mailbox
+        /// </remarks>
         /// <param name="ex">异常</param>
         private void SendUserMail(Exception ex)
         {
             if(IsSendMailEnable) SoftMail.MailSystem163.SendMail(ex);
         }
+
         /// <summary>
         /// 发送指定的主题和内容到指定的邮箱
         /// </summary>
+        /// <remarks>
+        /// Send the specified topic and content to the specified mailbox
+        /// </remarks>
         /// <param name="subject">主题</param>
         /// <param name="body">内容</param>
         private void SendUserMail(string subject, string body)

@@ -4,10 +4,29 @@
 [![Android Studio](https://img.shields.io/badge/Android%20Studio-2.3-green.svg)](https://www.visualstudio.com/zh-hans/)
 
 ## Summary
-一个基于中小型提炼的C-S开发框架，覆盖电脑端，web端，手机端的全平台系统模版，在大多数的一对多的系统设计中会包含一些常用的重复的功能代码，比如网络通信机制，客户端版本控制，账户控制管理，密码修改，公告管理，服务器配置，各种常用窗口等等，而且大多数的中小型系统只是需要到简单的权限管理即可。
+一个基于中小型提炼的C-S开发框架，覆盖电脑端，web端，手机端的全平台系统模版，在大多数的一对多的系统设计中会包含一些常用的重复的功能代码，
+比如网络通信机制，客户端版本控制，账户控制管理，密码修改，公告管理，服务器配置，各种常用窗口等等，而且大多数的中小型系统只是需要到简单的权限管理即可。
 
 <br />
-本框架包含了四种客户端的模式，第一种常用的winform客户端，第二种为wpf客户端，第三种为asp.net mvc模式，第四种为安卓平台的客户端，也就是说你可以在winform和wpf客户端上选择一种模式，然后您的系统提供一些功能（诸如报表查看）到asp.net上去，然后提供一个手机端使用的Android App，如果服务器假设在云端，所有的人都可以随时随地的进行交互，数据流通，所有的账户模型都是统一的，浏览器还方便一些只需要查看报表用户的人员不需要在部署客户端了。当然，客户端可以提供更加强大的功能。
+本框架包含了四种客户端的模式，第一种常用的winform客户端，第二种为wpf客户端，第三种为asp.net mvc模式，
+第四种为安卓平台的客户端，也就是说你可以在winform和wpf客户端上选择一种模式，然后您的系统提供一些功能（诸如报表查看）到asp.net上去，
+然后提供一个手机端使用的Android App，如果服务器假设在云端，所有的人都可以随时随地的进行交互，数据流通，所有的账户模型都是统一的，
+浏览器还方便一些只需要查看报表用户的人员不需要在部署客户端了。当然，客户端可以提供更加强大的功能。
+
+
+A CS development framework based on small-to-medium sized refining, covering computer-side, web-side, and mobile-side full-platform system templates,
+will include some commonly used repetitive function codes, such as network communication mechanisms, 
+in most one-to-many system designs. Client version control, account control management, password modification, 
+announcement management, server configuration, various common windows, etc., and most small and medium-sized systems 
+just need simple rights management.
+
+
+ This framework contains four client-side modes, the first commonly used winform client, the second is the wpf client, 
+the third is the asp.net mvc mode, and the fourth is the client of the Android platform. You can choose a mode on winform and wpf clients, 
+then your system provides some functions (such as report viewing) to asp.net, and then provide an Android app for mobile phone use, 
+if the server is assumed in the cloud, all People can interact with anytime, anywhere, data flow, all account models are unified, 
+the browser is also convenient for some people who only need to view the report users do not need to deploy the client. Of course, 
+the client can provide more powerful features.
 
 
 ## Features included
