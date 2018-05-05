@@ -115,13 +115,13 @@ the client can provide more powerful features.
 </ul>
 
 
-## HslCommunication.dll [![NuGet Status](https://img.shields.io/nuget/v/HslCommunication.svg)](https://www.nuget.org/packages/HslCommunication/)
+## HslCommunication.dll [![NuGet Status](https://img.shields.io/nuget/v/HslCommunication.svg)](https://www.nuget.org/packages/HslCommunication/) ![NuGet Download](https://img.shields.io/nuget/dt/HslCommunication.svg) 
 <p>本C-S项目的核心组件，该组件功能提供了一些基础功能类和整个C-S项目的网络支持，除此之外，该组件提供了访问三菱PLC，西门子PLC，欧姆龙PLC，Modbus的数据功能。
 关于这个库的项目介绍地址如下：</p>
 
 [http://www.cnblogs.com/dathlin/p/7703805.html](http://www.cnblogs.com/dathlin/p/7703805.html)
 
-在Nuget控制台输入下面的指令即可安装，或者使用VS2017的Nuget包管理器来方便的下载组件，如果不清楚怎么使用Nuget可以参考网上教程。
+在Nuget控制台输入下面的指令即可安装，或者使用VS2017的Nuget包管理器来方便的下载组件，如果不清楚怎么使用NuGet可以参考网上教程。
 
 关于该库的急速体验Demo程序下载地址：
 
@@ -323,6 +323,6 @@ Install-Package HslCommunication
 
 
 # License:
-###### Copyright (c) Richard.Hu. All rights reserved.
-###### Licensed under the MIT License.
-###### WeChat:工业智能软件开发项目组
+##### Copyright (c) Richard.Hu. All rights reserved.
+##### Licensed under the MIT License.
+##### WeChat:工业智能软件开发项目组
