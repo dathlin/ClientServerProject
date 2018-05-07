@@ -69,6 +69,7 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.Color.AliceBlue;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
@@ -294,42 +295,45 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label6.Location = new System.Drawing.Point(564, 37);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 17);
+            this.label6.Size = new System.Drawing.Size(74, 21);
             this.label6.TabIndex = 14;
-            this.label6.Text = "对象内存:";
+            this.label6.Text = "Simplify:";
             // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(564, 58);
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(564, 68);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 17);
+            this.label7.Size = new System.Drawing.Size(51, 21);
             this.label7.TabIndex = 15;
-            this.label7.Text = "进程内存:";
+            this.label7.Text = "Push:";
             // 
             // label_GC_Memery
             // 
             this.label_GC_Memery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_GC_Memery.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label_GC_Memery.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label_GC_Memery.Location = new System.Drawing.Point(629, 37);
+            this.label_GC_Memery.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_GC_Memery.Location = new System.Drawing.Point(648, 37);
             this.label_GC_Memery.Name = "label_GC_Memery";
-            this.label_GC_Memery.Size = new System.Drawing.Size(125, 17);
+            this.label_GC_Memery.Size = new System.Drawing.Size(108, 24);
             this.label_GC_Memery.TabIndex = 16;
             this.label_GC_Memery.Text = "0";
             this.label_GC_Memery.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.label_GC_Memery.Click += new System.EventHandler(this.label_GC_Memery_Click);
             // 
             // label_Pm_Memery
             // 
             this.label_Pm_Memery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label_Pm_Memery.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label_Pm_Memery.Location = new System.Drawing.Point(629, 58);
+            this.label_Pm_Memery.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_Pm_Memery.Location = new System.Drawing.Point(648, 67);
             this.label_Pm_Memery.Name = "label_Pm_Memery";
-            this.label_Pm_Memery.Size = new System.Drawing.Size(125, 17);
+            this.label_Pm_Memery.Size = new System.Drawing.Size(108, 24);
             this.label_Pm_Memery.TabIndex = 17;
             this.label_Pm_Memery.Text = "0";
             this.label_Pm_Memery.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -338,6 +342,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(764, 481);
             this.Controls.Add(this.label_Pm_Memery);
             this.Controls.Add(this.label_GC_Memery);
@@ -396,11 +401,11 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_time;
         private System.Windows.Forms.ToolStripMenuItem 框架作者ToolStripMenuItem;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolStripMenuItem 日志查看ToolStripMenuItem;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label_GC_Memery;
         private System.Windows.Forms.Label label_Pm_Memery;
-        private System.Windows.Forms.ToolStripMenuItem 日志查看ToolStripMenuItem;
     }
 }
 

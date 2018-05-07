@@ -223,13 +223,13 @@ namespace 软件系统服务端模版
             // Start Server
             if (!IsSystemStart)
             {
-                Net_Simplify_Server_Initialization();//同步网络初始化
-                Net_Socket_Server_Initialization();//异步网络初始化
-                Net_SoftUpdate_Server_Initialization();//软件更新引擎初始化
-                Ultimate_File_Initiaization();//共享文件引擎初始化
-                Net_File_Portrait_Initialization();//头像文件管理服务
-                Net_Udp_Server_Initialization();//UDP引擎服务初始化
-                启动服务器ToolStripMenuItem.Text = "已启动";
+                Net_Simplify_Server_Initialization();                              // 同步网络初始化
+                Net_Socket_Server_Initialization();                                // 异步网络初始化
+                Net_SoftUpdate_Server_Initialization();                            // 软件更新引擎初始化
+                Ultimate_File_Initiaization();                                     // 共享文件引擎初始化
+                Net_File_Portrait_Initialization();                                // 头像文件管理服务
+                Net_Udp_Server_Initialization();                                   // UDP引擎服务初始化
+                启动服务器ToolStripMenuItem.Text = "已启动"; 
                 启动服务器ToolStripMenuItem.BackColor = Color.LimeGreen;
                 IsSystemStart = true;
             }
@@ -256,9 +256,9 @@ namespace 软件系统服务端模版
 
         private void 消息发送ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //测试发送字节数据
-            //net_socket_server.SendAllClients(BitConverter.GetBytes(12345678));
-            //将消息群发给所有的客户端，并使用消息弹窗的方式显示
+            // 测试发送字节数据
+            // net_socket_server.SendAllClients(BitConverter.GetBytes(12345678));
+            // 将消息群发给所有的客户端，并使用消息弹窗的方式显示
             using (FormInputAndAction fiaa = new FormInputAndAction(
                 m =>
                 {
@@ -271,7 +271,7 @@ namespace 软件系统服务端模版
 
         private void 一键断开ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //关闭信号发送至所有在线客户端
+            // 关闭信号发送至所有在线客户端
             net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.关闭客户端, "");
         }
 
@@ -296,7 +296,7 @@ namespace 软件系统服务端模版
         }
         private void 账户管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //该部分比较复杂，需要对委托，匿名委托概念比较清晰
+            // 该部分比较复杂，需要对委托，匿名委托概念比较清晰
             using (FormAccountManage fam = new FormAccountManage(() => UserServer.ServerAccounts.GetAllAccountsJson(),
                 m => { UserServer.ServerAccounts.LoadAllAccountsJson(m); return true; }))
             {
@@ -313,29 +313,16 @@ namespace 软件系统服务端模版
         }
         private void MaintenanceInitialization()
         {
-            //维护状态变更
+            // 维护状态变更
             if (UserServer.ServerSettings.Can_Account_Login)
             {
-                label3.Text = "可登录";
+                label3.Text = "可登录";                  // Login Enabled True
                 label3.BackColor = Color.LimeGreen;
             }
             else
             {
-                label3.Text = "维护中";
+                label3.Text = "维护中";                  // Login Enabled False
                 label3.BackColor = Color.Tomato;
-            }
-        }
-
-
-        private void label_GC_Memery_Click(object sender, EventArgs e)
-        {
-            //点击了性能组件
-            using (FormSuper fs = new FormSuper(() =>
-            {
-                return SoftCachePerfomance.GetIntArray();
-            }))
-            {
-                fs.ShowDialog();
             }
         }
 
@@ -412,16 +399,9 @@ namespace 软件系统服务端模版
         /// <param name="session">网络状态</param>
         /// <param name="customer">字节数据，根据实际情况选择是否使用</param>
         /// <param name="data">来自客户端的字节数据</param>
-        private void Net_simplify_server_ReceivedBytesEvent(AppSession session, NetHandle customer, byte[] data)
+        private void Net_simplify_server_ReceivedBytesEvent( AppSession session, NetHandle customer, byte[] data )
         {
-            if(customer==CommonHeadCode.SimplifyHeadCode.性能计数)
-            {
-                net_simplify_server.SendMessage(session, customer, GetPerfomace());
-            }
-            else
-            {
-                net_simplify_server.SendMessage(session, customer, data);
-            }
+            net_simplify_server.SendMessage( session, customer, data );
         }
 
 
@@ -1045,7 +1025,6 @@ namespace 软件系统服务端模版
         {
             // 此处决定要不要将在线客户端的数据发送所有客户端
             // net_socket_server.SendAllClients(CommonHeadCode.MultiNetHeadCode.总在线信息, netAccountManager.ClientsOnlineCache);
-            
         }
         
 
@@ -1084,6 +1063,16 @@ namespace 软件系统服务端模版
         /// </summary>
         private NetAccountManager netAccountManager { get; set; } = new NetAccountManager();
 
+        /// <summary>
+        /// 现在所有的在线客户端
+        /// </summary>
+        private void RenderOnlineAccount( )
+        {
+            string[] buffer = netAccountManager.GetOnlineInformation( );
+            label4.Text = buffer.Length.ToString( );
+            listBox1.DataSource = buffer;
+        }
+
         #endregion
 
         #region Time Tick Thread
@@ -1111,31 +1100,12 @@ namespace 软件系统服务端模版
             thread.Start();
         }
 
-        /// <summary>
-        /// 缓存的上次内存占用
-        /// </summary>
-        private long GC_Memery { get; set; }
-
-        /// <summary>
-        /// 程序的内存对象
-        /// </summary>
-        private long Pm_Memery { get; set; }
 
 
-        private void MethodOccurEverySecond()
+        private void MethodOccurEverySecond( )
         {
-            long current1 = GC.GetTotalMemory(false);
-            // 增加到性能计数
-            AddPerfomace(current1);
-
-            long current2 = 0;
-            toolStripStatusLabel_time.Text = DateTime.Now.ToString();
-            label_GC_Memery.Text = current1.ToString();
-            label_Pm_Memery.Text = "备用";                                  //current2.ToString();
-            label_GC_Memery.BackColor = current1 < GC_Memery ? Color.Tomato : SystemColors.Control;
-            label_Pm_Memery.BackColor = current2 < Pm_Memery ? Color.Tomato : SystemColors.Control;
-            GC_Memery = current1;
-            Pm_Memery = current2;
+            toolStripStatusLabel_time.Text = DateTime.Now.ToString( );
+            RenderOnlineAccount( );
         }
 
 
@@ -1180,23 +1150,6 @@ namespace 软件系统服务端模版
                 }
             }
         }
-
-
-        #region 服务器内存性能缓存小模块
-
-        private SoftCacheArrayInt SoftCachePerfomance = new SoftCacheArrayInt(500, 0);
-
-        private void AddPerfomace(long value)
-        {
-            SoftCachePerfomance.AddValue((int)value);//虽然存在不安全隐患，但是几乎不可能大于20亿
-        }
-
-        private byte[] GetPerfomace()
-        {
-            return SoftCachePerfomance.GetAllData();
-        }
-
-        #endregion
         
         #endregion
 

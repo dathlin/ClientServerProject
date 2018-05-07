@@ -40,6 +40,27 @@ namespace 软件系统服务端模版.BasicSupport
 
         #region Public Method
 
+        /// <summary>
+        /// 获取所有在线客户端的信息
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetOnlineInformation()
+        {
+            string[] result = null;
+
+            hybirdLock.Enter( );
+            result = new string[OnlineClients.Count];
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = OnlineClients[i].ToString( );
+            }
+
+            hybirdLock.Leave( );
+
+            return result;
+        }
+
 
         /// <summary>
         /// 新增一个在线的客户端
