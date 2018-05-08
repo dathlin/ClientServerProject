@@ -40,11 +40,12 @@ namespace CommonLibrary
              *    时间：2017年10月1日 16:00:13      版本号：1.5.0
              *    时间：2017年10月6日 19:23:09      版本号：1.6.0
              *    时间：2017年10月21日 11:55:41     版本号：1.7.0
+             *    时间：2018年5月8日 11:09:16       版本号：1.8.0
              * 
              **************************************************************************/
 
 
-            SoftBasic.FrameworkVersion = new SystemVersion("1.7.14");
+            SoftBasic.FrameworkVersion = new SystemVersion("1.8.0");
 
         }
 
@@ -53,6 +54,7 @@ namespace CommonLibrary
         /************************************************************************************************
          * 
          *    注意：您在准备二次开发时，应该重新生成一个自己的GUID码
+         *    Note: When you are preparing for secondary development, you should regenerate your own GUID code
          * 
          ************************************************************************************************/
 
@@ -77,27 +79,36 @@ namespace CommonLibrary
         /// 主网络端口，此处随机定义了一个数据
         /// </summary>
         public static int Port_Main_Net { get; } = 17652;
+
         /// <summary>
         /// 同步网络访问的端口，此处随机定义了一个数据
         /// </summary>
         public static int Port_Second_Net { get; } = 14568;
+
         /// <summary>
         /// 用于软件系统更新的端口，此处随机定义了一个数据
         /// </summary>
         public static int Port_Update_Net { get; } = 17538;
+
         /// <summary>
         /// 共享文件的端口号
         /// </summary>
         public static int Port_Ultimate_File_Server { get; } = 34261;
+
         /// <summary>
         /// 用于UDP传输的端口号
         /// </summary>
         public static int Port_Udp_Server { get; } = 32566;
+
         /// <summary>
         /// 用于服务器版本更新的端口
         /// </summary>
         public static int Port_Advanced_File_Server { get; } = 24672;
 
+        /// <summary>
+        /// 用于实时数据推送的消息网络
+        /// </summary>
+        public static int Port_Push_Server { get; } = 14574;
 
 
         /// <summary>

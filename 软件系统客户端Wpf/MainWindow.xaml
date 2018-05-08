@@ -82,11 +82,6 @@
                                 <materialDesign:PackIcon Kind="Rotate3d" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="开发中心" x:Name="MenuItem开发中心" Click="MenuItem开发中心_Click">
-                            <MenuItem.Icon>
-                                <materialDesign:PackIcon Kind="Security" />
-                            </MenuItem.Icon>
-                        </MenuItem>
                     </MenuItem>
                     <MenuItem Header="_设置">
                         <MenuItem.Icon>

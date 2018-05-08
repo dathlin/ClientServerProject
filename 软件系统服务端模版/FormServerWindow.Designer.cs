@@ -61,8 +61,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label_GC_Memery = new System.Windows.Forms.Label();
-            this.label_Pm_Memery = new System.Windows.Forms.Label();
+            this.label_Count_Simplify = new System.Windows.Forms.Label();
+            this.label_Count_Push = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -313,30 +313,30 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "Push:";
             // 
-            // label_GC_Memery
+            // label_Count_Simplify
             // 
-            this.label_GC_Memery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_GC_Memery.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label_GC_Memery.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label_GC_Memery.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_GC_Memery.Location = new System.Drawing.Point(648, 37);
-            this.label_GC_Memery.Name = "label_GC_Memery";
-            this.label_GC_Memery.Size = new System.Drawing.Size(108, 24);
-            this.label_GC_Memery.TabIndex = 16;
-            this.label_GC_Memery.Text = "0";
-            this.label_GC_Memery.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label_Count_Simplify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_Count_Simplify.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_Count_Simplify.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label_Count_Simplify.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_Count_Simplify.Location = new System.Drawing.Point(648, 37);
+            this.label_Count_Simplify.Name = "label_Count_Simplify";
+            this.label_Count_Simplify.Size = new System.Drawing.Size(108, 24);
+            this.label_Count_Simplify.TabIndex = 16;
+            this.label_Count_Simplify.Text = "0";
+            this.label_Count_Simplify.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label_Pm_Memery
+            // label_Count_Push
             // 
-            this.label_Pm_Memery.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_Pm_Memery.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label_Pm_Memery.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_Pm_Memery.Location = new System.Drawing.Point(648, 67);
-            this.label_Pm_Memery.Name = "label_Pm_Memery";
-            this.label_Pm_Memery.Size = new System.Drawing.Size(108, 24);
-            this.label_Pm_Memery.TabIndex = 17;
-            this.label_Pm_Memery.Text = "0";
-            this.label_Pm_Memery.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label_Count_Push.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_Count_Push.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_Count_Push.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_Count_Push.Location = new System.Drawing.Point(648, 67);
+            this.label_Count_Push.Name = "label_Count_Push";
+            this.label_Count_Push.Size = new System.Drawing.Size(108, 24);
+            this.label_Count_Push.TabIndex = 17;
+            this.label_Count_Push.Text = "0";
+            this.label_Count_Push.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // FormServerWindow
             // 
@@ -344,8 +344,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(764, 481);
-            this.Controls.Add(this.label_Pm_Memery);
-            this.Controls.Add(this.label_GC_Memery);
+            this.Controls.Add(this.label_Count_Push);
+            this.Controls.Add(this.label_Count_Simplify);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -404,8 +404,8 @@
         private System.Windows.Forms.ToolStripMenuItem 日志查看ToolStripMenuItem;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label_GC_Memery;
-        private System.Windows.Forms.Label label_Pm_Memery;
+        private System.Windows.Forms.Label label_Count_Simplify;
+        private System.Windows.Forms.Label label_Count_Push;
     }
 }
 

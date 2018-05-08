@@ -229,6 +229,7 @@ namespace 软件系统服务端模版
                 Ultimate_File_Initiaization();                                     // 共享文件引擎初始化
                 Net_File_Portrait_Initialization();                                // 头像文件管理服务
                 Net_Udp_Server_Initialization();                                   // UDP引擎服务初始化
+                Net_Push_Server_Initialization( );                                 // 推送网络引擎初始化
                 启动服务器ToolStripMenuItem.Text = "已启动"; 
                 启动服务器ToolStripMenuItem.BackColor = Color.LimeGreen;
                 IsSystemStart = true;
@@ -1075,6 +1076,28 @@ namespace 软件系统服务端模版
 
         #endregion
 
+        #region Push Net [ 推送网络 ]
+
+        private NetPushServer pushServer;
+
+
+        private void Net_Push_Server_Initialization( )
+        {
+            try
+            {
+                pushServer = new NetPushServer( );
+                pushServer.Token = UserSystem.KeyToken;
+                pushServer.LogNet = RuntimeLogHelper;
+                pushServer.ServerStart( UserSystem.Port_Push_Server );
+            }
+            catch(Exception ex)
+            {
+                SoftBasic.ShowExceptionMessage( ex );
+            }
+        }
+
+        #endregion
+
         #region Time Tick Thread
 
         /*********************************************************************************************
@@ -1092,7 +1115,7 @@ namespace 软件系统服务端模版
         {
             toolStripStatusLabel_time.Alignment = ToolStripItemAlignment.Right;
             statusStrip1.LayoutStyle = ToolStripLayoutStyle.StackWithOverflow;
-            toolStripStatusLabel_time.ForeColor = Color.Purple;//紫色
+            toolStripStatusLabel_time.ForeColor = Color.Purple;                      // 紫色
 
 
             Thread thread = new Thread(new ThreadStart(ThreadTimeTick));
@@ -1106,12 +1129,14 @@ namespace 软件系统服务端模版
         {
             toolStripStatusLabel_time.Text = DateTime.Now.ToString( );
             RenderOnlineAccount( );
+            if (net_simplify_server != null) label_Count_Simplify.Text = net_simplify_server.ClientCount.ToString( );
+            if (pushServer != null) label_Count_Push.Text = pushServer.OnlineCount.ToString( );
         }
 
 
         public void ThreadTimeTick()
         {
-            Thread.Sleep(300);//加一个微小的延时
+            Thread.Sleep(300);                // 加一个微小的延时
             int second = DateTime.Now.Second - 1;
             int minute = -1;
             int hour = -1;

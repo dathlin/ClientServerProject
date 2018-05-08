@@ -141,7 +141,6 @@ namespace 软件系统客户端Wpf
             {
                 MenuItem日志查看.IsEnabled = false;
                 MenuItem远程更新.IsEnabled = false;
-                MenuItem开发中心.IsEnabled = false;
                 MenuItem系统配置.IsEnabled = false;
             }
 
@@ -271,32 +270,7 @@ namespace 软件系统客户端Wpf
                 fiaa.ShowDialog();
             }
         }
-
-        private void MenuItem开发中心_Click(object sender, RoutedEventArgs e)
-        {
-            using (FormSuper fs = new FormSuper(() =>
-            {
-                OperateResult<byte[]> result = UserClient.Net_simplify_client.ReadFromServer(CommonHeadCode.SimplifyHeadCode.性能计数, new byte[0]);
-                //解析
-                if (result.IsSuccess)
-                {
-                    int[] data = new int[result.Content.Length / 4];
-                    for (int i = 0; i < data.Length; i++)
-                    {
-                        data[i] = BitConverter.ToInt32(result.Content, i * 4);
-                    }
-                    return data;
-                }
-                else
-                {
-                    return null;
-                }
-
-            }))
-            {
-                fs.ShowDialog();
-            }
-        }
+        
 
         private void MenuItem密码更改_Click(object sender, RoutedEventArgs e)
         {

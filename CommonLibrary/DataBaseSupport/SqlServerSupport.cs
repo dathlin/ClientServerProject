@@ -10,6 +10,19 @@ namespace CommonLibrary.DataBaseSupport
     /// </summary>
     public class SqlServerSupport
     {
+        #region Constructor
+
+        /// <summary>
+        /// 实例化一个默认的构造函数
+        /// </summary>
+        public SqlServerSupport( )
+        {
+
+        }
+
+        #endregion
+
+
         /// <summary>
         /// 数据库的连接字符串，该信息应来源于服务器保存的连接字符串
         /// </summary>
