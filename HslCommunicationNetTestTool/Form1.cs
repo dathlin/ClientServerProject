@@ -46,11 +46,11 @@ namespace HslCommunicationNetTestTool
                     string name = $"{m.IpAddress} [{m.IpPort}]";
                     TreeNode node = new TreeNode(name);
                     node.Tag = new HslCommunication.Enthernet.NetSimplifyClient(
-                        new System.Net.IPEndPoint(System.Net.IPAddress.Parse(m.IpAddress),
-                        int.Parse(m.IpPort)))
+                        m.IpAddress,
+                        int.Parse(m.IpPort))
                     {
-                        ConnectTimeout = int.Parse(m.TimeOut),
-                        KeyToken = new Guid(m.Token),
+                        ConnectTimeOut = int.Parse(m.TimeOut),
+                        Token = new Guid(m.Token),
                     };
                     node.ToolTipText = m.Guid;
 

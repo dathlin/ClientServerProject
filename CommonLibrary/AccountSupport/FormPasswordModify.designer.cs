@@ -33,10 +33,10 @@ namespace CommonLibrary
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.userButton1 = new UserButton();
+            this.userButton1 = new HslCommunication.Controls.UserButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.userButton2 = new UserButton();
+            this.userButton2 = new HslCommunication.Controls.UserButton();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -157,6 +157,7 @@ namespace CommonLibrary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(396, 407);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.userButton1);

@@ -25,8 +25,10 @@ namespace ClientsLibrary.BasicSupport
                 // 绘制角色名称
                 if (m_NetAccount.Roles?.Length > 0)
                 {
+                    e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+                    e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                     int m_x = 45;
-                    int m_y = 20;
+                    int m_y = 22;
 
                     for (int i = 0; i < m_NetAccount.Roles.Length; i++)
                     {
@@ -100,6 +102,9 @@ namespace ClientsLibrary.BasicSupport
         {
         }
 
+        private void NetClientItem_Load( object sender, EventArgs e )
+        {
 
+        }
     }
 }

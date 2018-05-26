@@ -128,6 +128,7 @@
             // 
             // textBox_LoginFailedCount
             // 
+            this.textBox_LoginFailedCount.BackColor = System.Drawing.Color.White;
             this.textBox_LoginFailedCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_LoginFailedCount.Location = new System.Drawing.Point(153, 459);
             this.textBox_LoginFailedCount.Name = "textBox_LoginFailedCount";
@@ -146,6 +147,7 @@
             // 
             // textBox_LastLoginWay
             // 
+            this.textBox_LastLoginWay.BackColor = System.Drawing.Color.White;
             this.textBox_LastLoginWay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_LastLoginWay.Location = new System.Drawing.Point(153, 428);
             this.textBox_LastLoginWay.Name = "textBox_LastLoginWay";
@@ -164,6 +166,7 @@
             // 
             // textBox_LastLoginIpAddress
             // 
+            this.textBox_LastLoginIpAddress.BackColor = System.Drawing.Color.White;
             this.textBox_LastLoginIpAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_LastLoginIpAddress.Location = new System.Drawing.Point(153, 398);
             this.textBox_LastLoginIpAddress.Name = "textBox_LastLoginIpAddress";
@@ -182,6 +185,7 @@
             // 
             // textBox_LastLoginTime
             // 
+            this.textBox_LastLoginTime.BackColor = System.Drawing.Color.White;
             this.textBox_LastLoginTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_LastLoginTime.Location = new System.Drawing.Point(153, 368);
             this.textBox_LastLoginTime.Name = "textBox_LastLoginTime";
@@ -200,6 +204,7 @@
             // 
             // textBox_LoginFrequency
             // 
+            this.textBox_LoginFrequency.BackColor = System.Drawing.Color.White;
             this.textBox_LoginFrequency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_LoginFrequency.Location = new System.Drawing.Point(153, 338);
             this.textBox_LoginFrequency.Name = "textBox_LoginFrequency";
@@ -218,6 +223,7 @@
             // 
             // textBox_LoginEnable
             // 
+            this.textBox_LoginEnable.BackColor = System.Drawing.Color.White;
             this.textBox_LoginEnable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_LoginEnable.Location = new System.Drawing.Point(153, 308);
             this.textBox_LoginEnable.Name = "textBox_LoginEnable";
@@ -236,6 +242,7 @@
             // 
             // textBox_RegisterTime
             // 
+            this.textBox_RegisterTime.BackColor = System.Drawing.Color.White;
             this.textBox_RegisterTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_RegisterTime.Location = new System.Drawing.Point(153, 279);
             this.textBox_RegisterTime.Name = "textBox_RegisterTime";
@@ -254,6 +261,7 @@
             // 
             // textBox_GradeDescription
             // 
+            this.textBox_GradeDescription.BackColor = System.Drawing.Color.White;
             this.textBox_GradeDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_GradeDescription.Location = new System.Drawing.Point(153, 251);
             this.textBox_GradeDescription.Name = "textBox_GradeDescription";
@@ -272,6 +280,7 @@
             // 
             // textBox_Factory
             // 
+            this.textBox_Factory.BackColor = System.Drawing.Color.White;
             this.textBox_Factory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_Factory.Location = new System.Drawing.Point(153, 223);
             this.textBox_Factory.Name = "textBox_Factory";
@@ -290,6 +299,7 @@
             // 
             // textBox_NameAlias
             // 
+            this.textBox_NameAlias.BackColor = System.Drawing.Color.White;
             this.textBox_NameAlias.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_NameAlias.Location = new System.Drawing.Point(153, 194);
             this.textBox_NameAlias.Name = "textBox_NameAlias";
@@ -308,6 +318,7 @@
             // 
             // textBox_UserName
             // 
+            this.textBox_UserName.BackColor = System.Drawing.Color.White;
             this.textBox_UserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_UserName.Location = new System.Drawing.Point(153, 164);
             this.textBox_UserName.Name = "textBox_UserName";
@@ -348,6 +359,7 @@
             // textBox_file_uploadTime
             // 
             this.textBox_file_uploadTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox_file_uploadTime.BackColor = System.Drawing.Color.White;
             this.textBox_file_uploadTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_file_uploadTime.Location = new System.Drawing.Point(252, 432);
             this.textBox_file_uploadTime.Name = "textBox_file_uploadTime";
@@ -368,6 +380,7 @@
             // textBox_file_size
             // 
             this.textBox_file_size.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox_file_size.BackColor = System.Drawing.Color.White;
             this.textBox_file_size.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_file_size.Location = new System.Drawing.Point(66, 432);
             this.textBox_file_size.Name = "textBox_file_size";
@@ -389,6 +402,7 @@
             // 
             this.textBox_file_name.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_file_name.BackColor = System.Drawing.Color.White;
             this.textBox_file_name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox_file_name.Location = new System.Drawing.Point(66, 405);
             this.textBox_file_name.Name = "textBox_file_name";
@@ -474,6 +488,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(706, 516);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

@@ -159,7 +159,7 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.menuStrip1.BackColor = System.Drawing.Color.AliceBlue;
             this.menuStrip1.Font = new System.Drawing.Font("Microsoft YaHei UI", 15F);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.管理员ToolStripMenuItem,
@@ -190,54 +190,54 @@
             // 更改公告ToolStripMenuItem
             // 
             this.更改公告ToolStripMenuItem.Name = "更改公告ToolStripMenuItem";
-            this.更改公告ToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
+            this.更改公告ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.更改公告ToolStripMenuItem.Text = "更改公告";
             this.更改公告ToolStripMenuItem.Click += new System.EventHandler(this.更改公告ToolStripMenuItem_Click);
             // 
             // 账户管理ToolStripMenuItem
             // 
             this.账户管理ToolStripMenuItem.Name = "账户管理ToolStripMenuItem";
-            this.账户管理ToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
+            this.账户管理ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.账户管理ToolStripMenuItem.Text = "账户管理";
             this.账户管理ToolStripMenuItem.Click += new System.EventHandler(this.账户管理ToolStripMenuItem_Click);
             // 
             // 注册账号ToolStripMenuItem
             // 
             this.注册账号ToolStripMenuItem.Name = "注册账号ToolStripMenuItem";
-            this.注册账号ToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
+            this.注册账号ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.注册账号ToolStripMenuItem.Text = "注册账号";
             this.注册账号ToolStripMenuItem.Click += new System.EventHandler(this.注册账号ToolStripMenuItem_Click);
             // 
             // 消息发送ToolStripMenuItem
             // 
             this.消息发送ToolStripMenuItem.Name = "消息发送ToolStripMenuItem";
-            this.消息发送ToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
+            this.消息发送ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.消息发送ToolStripMenuItem.Text = "消息发送";
             this.消息发送ToolStripMenuItem.Click += new System.EventHandler(this.消息发送ToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
             // 
             // 远程更新ToolStripMenuItem
             // 
             this.远程更新ToolStripMenuItem.Name = "远程更新ToolStripMenuItem";
-            this.远程更新ToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
+            this.远程更新ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.远程更新ToolStripMenuItem.Text = "远程更新";
             this.远程更新ToolStripMenuItem.Click += new System.EventHandler(this.远程更新ToolStripMenuItem_Click);
             // 
             // 日志查看ToolStripMenuItem
             // 
             this.日志查看ToolStripMenuItem.Name = "日志查看ToolStripMenuItem";
-            this.日志查看ToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
+            this.日志查看ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.日志查看ToolStripMenuItem.Text = "日志查看";
             this.日志查看ToolStripMenuItem.Click += new System.EventHandler(this.日志查看ToolStripMenuItem_Click);
             // 
             // 系统配置ToolStripMenuItem
             // 
             this.系统配置ToolStripMenuItem.Name = "系统配置ToolStripMenuItem";
-            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(180, 32);
+            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(164, 32);
             this.系统配置ToolStripMenuItem.Text = "系统配置";
             this.系统配置ToolStripMenuItem.Click += new System.EventHandler(this.系统配置ToolStripMenuItem_Click);
             // 
@@ -622,6 +622,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(921, 476);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel_main);

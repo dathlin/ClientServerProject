@@ -219,6 +219,7 @@ namespace ClientsLibrary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(382, 394);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label9);

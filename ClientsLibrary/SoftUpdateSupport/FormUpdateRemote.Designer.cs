@@ -31,10 +31,10 @@ namespace ClientsLibrary
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.userButton_file = new UserButton();
+            this.userButton_file = new HslCommunication.Controls.UserButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.userButton_version = new UserButton();
+            this.userButton_version = new HslCommunication.Controls.UserButton();
             this.SuspendLayout();
             // 
             // label1
@@ -96,6 +96,7 @@ namespace ClientsLibrary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(569, 311);
             this.Controls.Add(this.userButton_version);
             this.Controls.Add(this.label2);

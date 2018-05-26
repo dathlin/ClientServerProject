@@ -30,11 +30,11 @@ namespace CommonLibrary
         /// </summary>
         private void InitializeComponent()
         {
-            this.userButton1 = new UserButton();
-            this.userButton2 = new UserButton();
+            this.userButton1 = new HslCommunication.Controls.UserButton();
+            this.userButton2 = new HslCommunication.Controls.UserButton();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.userButton3 = new UserButton();
+            this.userButton3 = new HslCommunication.Controls.UserButton();
             this.SuspendLayout();
             // 
             // userButton1
@@ -100,6 +100,7 @@ namespace CommonLibrary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(435, 209);
             this.Controls.Add(this.userButton3);
             this.Controls.Add(this.textBox1);

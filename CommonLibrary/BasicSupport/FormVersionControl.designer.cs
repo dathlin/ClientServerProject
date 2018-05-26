@@ -88,6 +88,7 @@ namespace CommonLibrary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(397, 158);
             this.Controls.Add(this.userButton1);
             this.Controls.Add(this.textBox2);

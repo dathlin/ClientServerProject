@@ -114,15 +114,16 @@ namespace 软件系统客户端模版.UIControls
             this.panel2.Size = new System.Drawing.Size(706, 427);
             this.panel2.TabIndex = 1;
             // 
-            // ShareFilesRender
+            // GroupFilesRender
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "ShareFilesRender";
+            this.Name = "GroupFilesRender";
             this.Size = new System.Drawing.Size(706, 462);
             this.Load += new System.EventHandler(this.ShareFilesRender_Load);
             this.panel1.ResumeLayout(false);

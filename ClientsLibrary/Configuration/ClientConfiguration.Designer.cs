@@ -143,6 +143,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.Controls.Add(this.userButton3);
             this.Controls.Add(this.userButton2);
             this.Controls.Add(this.userButton1);

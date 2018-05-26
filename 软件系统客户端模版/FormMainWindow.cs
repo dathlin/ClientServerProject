@@ -140,7 +140,6 @@ namespace 软件系统客户端模版
             {
                 日志查看ToolStripMenuItem.Enabled = false;
                 远程更新ToolStripMenuItem.Enabled = false;
-                开发中心ToolStripMenuItem.Enabled = false;
                 系统配置ToolStripMenuItem.Enabled = false;
             }
             

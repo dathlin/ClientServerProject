@@ -32,8 +32,8 @@ namespace CommonLibrary
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.userButton2 = new UserButton();
-            this.userButton1 = new UserButton();
+            this.userButton2 = new HslCommunication.Controls.UserButton();
+            this.userButton1 = new HslCommunication.Controls.UserButton();
             this.SuspendLayout();
             // 
             // textBox1
@@ -91,6 +91,7 @@ namespace CommonLibrary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(564, 471);
             this.Controls.Add(this.userButton2);
             this.Controls.Add(this.userButton1);

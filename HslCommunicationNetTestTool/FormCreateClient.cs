@@ -27,10 +27,10 @@ namespace HslCommunicationNetTestTool
             try
             {
                 Client = new HslCommunication.Enthernet.NetSimplifyClient(
-                    new System.Net.IPEndPoint(System.Net.IPAddress.Parse(textBox1.Text), int.Parse(textBox2.Text)))
+                    textBox1.Text, int.Parse(textBox2.Text))
                 {
-                    KeyToken = new Guid(textBox3.Text),
-                    ConnectTimeout = int.Parse(textBox4.Text),
+                    Token = new Guid(textBox3.Text),
+                    ConnectTimeOut = int.Parse(textBox4.Text),
                 };
 
                 IpAddress = textBox1.Text;
