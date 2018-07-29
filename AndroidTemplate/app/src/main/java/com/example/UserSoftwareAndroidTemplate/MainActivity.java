@@ -13,15 +13,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.HslCommunication.Core.Types.NetHandle;
-import com.example.HslCommunication.Core.Types.OperateResultString;
-import com.example.HslCommunication.Enthernet.NetSimplifyClient;
+import com.example.UserSoftwareAndroidTemplate.CommonLibrary.SimplifyHeadCode;
 import com.example.UserSoftwareAndroidTemplate.CommonLibrary.UserAccount;
 import com.example.UserSoftwareAndroidTemplate.LoginSupport.LoginActivity;
 import com.example.UserSoftwareAndroidTemplate.LoginSupport.SplashActivity;
 import com.google.gson.Gson;
 
 import java.util.UUID;
+
+import HslCommunication.Core.Net.NetHandle;
+import HslCommunication.Core.Types.OperateResultExOne;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             if (msg.arg1 == 1) {
 
                 // 说明是一个网络的请求访问
-                OperateResultString result = (OperateResultString) msg.obj;
+                OperateResultExOne<String> result = (OperateResultExOne<String>) msg.obj;
                 if (result.IsSuccess) {
                     TextView textView = (TextView) findViewById(R.id.textViewMain);
                     textView.setText(result.Content);
@@ -60,9 +61,10 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             // 在这里进行网络请求相关操作
             Message msg = new Message();
-            OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(new NetHandle(1,2, 15),"",null,null);
+                OperateResultExOne<String> result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.获取账户,"");
+
+                msg.obj = result;
             msg.arg1=1;
-            msg.obj = result;
             handler.sendMessage(msg);
         }
     };

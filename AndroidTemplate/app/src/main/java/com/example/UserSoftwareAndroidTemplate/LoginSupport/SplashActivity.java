@@ -10,16 +10,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.HslCommunication.BasicFramework.SystemVersion;
-import com.example.HslCommunication.Core.Types.OperateResultString;
-import com.example.HslCommunication.Log.LogUtil;
 import com.example.UserSoftwareAndroidTemplate.CommonLibrary.SimplifyHeadCode;
 import com.example.UserSoftwareAndroidTemplate.CommonLibrary.UserAccount;
+import com.example.UserSoftwareAndroidTemplate.LogUtil;
 import com.example.UserSoftwareAndroidTemplate.MainActivity;
 import com.example.UserSoftwareAndroidTemplate.R;
 import com.example.UserSoftwareAndroidTemplate.UserClient;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
+import HslCommunication.BasicFramework.SystemVersion;
+import HslCommunication.Core.Types.OperateResultExOne;
 
 import static com.example.UserSoftwareAndroidTemplate.CommonLibrary.UserAccount.FrameworkVersion;
 
@@ -139,7 +140,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
         // 第一步请求维护状态
-        OperateResultString result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.维护检查, "", null, null);
+        OperateResultExOne<String> result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.维护检查, "");
         if (!result.IsSuccess) {
             MessageShow(result.ToMessageShowString());
             return FAILURE;
@@ -167,7 +168,7 @@ public class SplashActivity extends AppCompatActivity {
         jsonObject.addProperty(FrameworkVersion, UserClient.FrameworkVersion.toString());
 
         LogUtil.LogD("loginSystem",jsonObject.toString());
-        result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.账户检查, jsonObject.toString(), null, null);
+        result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.账户检查, jsonObject.toString());
         if (!result.IsSuccess) {
             MessageShow(result.ToMessageShowString());
             return FAILURE;
@@ -184,7 +185,7 @@ public class SplashActivity extends AppCompatActivity {
 
         LogUtil.LogD("loginSystem","开始请求版本检查");
         // 第三步检查版本
-        result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.更新检查, "", null, null);
+        result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.更新检查, "");
         if (!result.IsSuccess) {
             MessageShow(result.ToMessageShowString());
             return FAILURE;
@@ -211,7 +212,7 @@ public class SplashActivity extends AppCompatActivity {
 
         LogUtil.LogD("loginSystem","开始请求数据下载");
         // 下载服务器数据
-        result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.参数下载,"",null,null);
+        result = UserClient.Net_simplify_client.ReadFromServer(SimplifyHeadCode.参数下载,"");
         if (result.IsSuccess) {
             // 服务器返回初始化的数据，此处进行数据的提取，有可能包含了多个数据
             JsonBeanPara para = new Gson().fromJson(result.Content, JsonBeanPara.class);

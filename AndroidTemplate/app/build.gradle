@@ -2,6 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
+    sourceSets{
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     defaultConfig {
         applicationId "com.example.UserSoftwareAndroidTemplate"
         minSdkVersion 19
@@ -16,7 +21,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '27.0.0'
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -29,4 +34,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation files('libs/HslCommunication.jar')
 }

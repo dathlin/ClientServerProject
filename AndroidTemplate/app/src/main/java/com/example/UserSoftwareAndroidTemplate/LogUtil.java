@@ -1,14 +1,8 @@
-package com.example.HslCommunication.Log;
+package com.example.UserSoftwareAndroidTemplate;
 
 import android.util.Log;
 
-/**
- * Created by hsl20 on 2017/11/4.
- * 一个扩展的日志工具，用来实现对记录日志的特殊处理，屏蔽操作
- */
-
 public class LogUtil {
-
     public static final int VerBose = 1;
 
     public static final int Debug = 2;
@@ -23,9 +17,9 @@ public class LogUtil {
 
     public static int Level = VerBose;
 
-    /*
+    /**
         记录零碎的日志
-     */
+     **/
     public static void LogV(String tag, String msg) {
         if (Level <= VerBose) Log.v(tag, msg);
     }
@@ -64,5 +58,4 @@ public class LogUtil {
     public static void LogE(String tag, String msg, Exception ex) {
         if (Level <= Error) Log.e(tag, msg, ex);
     }
-
 }

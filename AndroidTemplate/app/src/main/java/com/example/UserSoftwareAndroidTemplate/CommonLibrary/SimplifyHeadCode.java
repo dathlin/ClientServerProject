@@ -1,6 +1,7 @@
 package com.example.UserSoftwareAndroidTemplate.CommonLibrary;
 
-import com.example.HslCommunication.Core.Types.NetHandle;
+
+import HslCommunication.Core.Net.NetHandle;
 
 /**
  * Created by hsl20 on 2017/11/5.
